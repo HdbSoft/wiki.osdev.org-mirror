@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Creating an Operating System - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Creating_an_Operating_System", "wgTitle": "Creating an Operating System", "wgCurRevisionId": 20656, "wgArticleId": 3353, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Creating_an_Operating_System action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Creating an Operating System</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Creating_an_Operating_System#mw-head">navigation</a>,
+					<a href="Creating_an_Operating_System#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Welcome to operating systems development! This tutorial will document the process of creating a new operating system from the baby steps to creating a self-hosting operating system. The path is long and hard, but also fun and rewarding. As you progress through the stages, you will slowly begin to diverge from the tutorial as you make your own decisions about the design of your operating system and you no longer need this guide. If you create a non-Unix-like operating system, you will diverge earlier and will have to fill in the missing gaps yourself.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Creating_an_Operating_System#Phase_0:_Introduction"><span class="tocnumber">1</span> <span class="toctext">Phase 0: Introduction</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Creating_an_Operating_System#Welcome_to_Operating_Systems_Development"><span class="tocnumber">1.1</span> <span class="toctext">Welcome to Operating Systems Development</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Creating_an_Operating_System#Building_the_latest_GCC"><span class="tocnumber">1.2</span> <span class="toctext">Building the latest GCC</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="Creating_an_Operating_System#Phase_I:_Beginning"><span class="tocnumber">2</span> <span class="toctext">Phase I: Beginning</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Creating_an_Operating_System#Setting_up_a_Cross-Toolchain"><span class="tocnumber">2.1</span> <span class="toctext">Setting up a Cross-Toolchain</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Creating_an_Operating_System#Creating_a_Hello_World_kernel"><span class="tocnumber">2.2</span> <span class="toctext">Creating a Hello World kernel</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Creating_an_Operating_System#Setting_up_a_Project"><span class="tocnumber">2.3</span> <span class="toctext">Setting up a Project</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Creating_an_Operating_System#Calling_Global_Constructors"><span class="tocnumber">2.4</span> <span class="toctext">Calling Global Constructors</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Creating_an_Operating_System#Terminal_Support"><span class="tocnumber">2.5</span> <span class="toctext">Terminal Support</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Creating_an_Operating_System#Stack_Smash_Protector"><span class="tocnumber">2.6</span> <span class="toctext">Stack Smash Protector</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="Creating_an_Operating_System#Multiboot"><span class="tocnumber">2.7</span> <span class="toctext">Multiboot</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="Creating_an_Operating_System#Global_Descriptor_Table"><span class="tocnumber">2.8</span> <span class="toctext">Global Descriptor Table</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Creating_an_Operating_System#Memory_Management"><span class="tocnumber">2.9</span> <span class="toctext">Memory Management</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="Creating_an_Operating_System#Interrupts"><span class="tocnumber">2.10</span> <span class="toctext">Interrupts</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="Creating_an_Operating_System#Multithreaded_Kernel"><span class="tocnumber">2.11</span> <span class="toctext">Multithreaded Kernel</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="Creating_an_Operating_System#Keyboard"><span class="tocnumber">2.12</span> <span class="toctext">Keyboard</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="Creating_an_Operating_System#Internal_Kernel_Debugger"><span class="tocnumber">2.13</span> <span class="toctext">Internal Kernel Debugger</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="Creating_an_Operating_System#Filesystem_Support"><span class="tocnumber">2.14</span> <span class="toctext">Filesystem Support</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-19"><a href="Creating_an_Operating_System#Phase_II:_User-Space"><span class="tocnumber">3</span> <span class="toctext">Phase II: User-Space</span></a>
+<ul>
+<li class="toclevel-2 tocsection-20"><a href="Creating_an_Operating_System#User-Space"><span class="tocnumber">3.1</span> <span class="toctext">User-Space</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="Creating_an_Operating_System#Program_Loading"><span class="tocnumber">3.2</span> <span class="toctext">Program Loading</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="Creating_an_Operating_System#System_Calls"><span class="tocnumber">3.3</span> <span class="toctext">System Calls</span></a></li>
+<li class="toclevel-2 tocsection-23"><a href="Creating_an_Operating_System#OS_Specific_Toolchain"><span class="tocnumber">3.4</span> <span class="toctext">OS Specific Toolchain</span></a></li>
+<li class="toclevel-2 tocsection-24"><a href="Creating_an_Operating_System#Creating_a_C_Library"><span class="tocnumber">3.5</span> <span class="toctext">Creating a C Library</span></a></li>
+<li class="toclevel-2 tocsection-25"><a href="Creating_an_Operating_System#Fork_and_Execute"><span class="tocnumber">3.6</span> <span class="toctext">Fork and Execute</span></a></li>
+<li class="toclevel-2 tocsection-26"><a href="Creating_an_Operating_System#Shell"><span class="tocnumber">3.7</span> <span class="toctext">Shell</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-27"><a href="Creating_an_Operating_System#Phase_III:_Extending_your_Operating_System"><span class="tocnumber">4</span> <span class="toctext">Phase III: Extending your Operating System</span></a>
+<ul>
+<li class="toclevel-2 tocsection-28"><a href="Creating_an_Operating_System#Time"><span class="tocnumber">4.1</span> <span class="toctext">Time</span></a></li>
+<li class="toclevel-2 tocsection-29"><a href="Creating_an_Operating_System#Threads"><span class="tocnumber">4.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-30"><a href="Creating_an_Operating_System#Thread_Local_Storage"><span class="tocnumber">4.3</span> <span class="toctext">Thread Local Storage</span></a></li>
+<li class="toclevel-2 tocsection-31"><a href="Creating_an_Operating_System#Symmetric_Multiprocessing"><span class="tocnumber">4.4</span> <span class="toctext">Symmetric Multiprocessing</span></a></li>
+<li class="toclevel-2 tocsection-32"><a href="Creating_an_Operating_System#Secondary_Storage"><span class="tocnumber">4.5</span> <span class="toctext">Secondary Storage</span></a></li>
+<li class="toclevel-2 tocsection-33"><a href="Creating_an_Operating_System#Real_Filesystems"><span class="tocnumber">4.6</span> <span class="toctext">Real Filesystems</span></a></li>
+<li class="toclevel-2 tocsection-34"><a href="Creating_an_Operating_System#Graphics"><span class="tocnumber">4.7</span> <span class="toctext">Graphics</span></a></li>
+<li class="toclevel-2 tocsection-35"><a href="Creating_an_Operating_System#User_Interface"><span class="tocnumber">4.8</span> <span class="toctext">User Interface</span></a></li>
+<li class="toclevel-2 tocsection-36"><a href="Creating_an_Operating_System#Networking"><span class="tocnumber">4.9</span> <span class="toctext">Networking</span></a></li>
+<li class="toclevel-2 tocsection-37"><a href="Creating_an_Operating_System#Sound"><span class="tocnumber">4.10</span> <span class="toctext">Sound</span></a></li>
+<li class="toclevel-2 tocsection-38"><a href="Creating_an_Operating_System#Universal_Serial_Bus"><span class="tocnumber">4.11</span> <span class="toctext">Universal Serial Bus</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-39"><a href="Creating_an_Operating_System#Phase_IV:_Bootstrapping"><span class="tocnumber">5</span> <span class="toctext">Phase IV: Bootstrapping</span></a>
+<ul>
+<li class="toclevel-2 tocsection-40"><a href="Creating_an_Operating_System#Porting_Software"><span class="tocnumber">5.1</span> <span class="toctext">Porting Software</span></a></li>
+<li class="toclevel-2 tocsection-41"><a href="Creating_an_Operating_System#Porting_GCC"><span class="tocnumber">5.2</span> <span class="toctext">Porting GCC</span></a></li>
+<li class="toclevel-2 tocsection-42"><a href="Creating_an_Operating_System#Compiling_your_OS_under_your_OS"><span class="tocnumber">5.3</span> <span class="toctext">Compiling your OS under your OS</span></a></li>
+<li class="toclevel-2 tocsection-43"><a href="Creating_an_Operating_System#Fully_Self-hosting"><span class="tocnumber">5.4</span> <span class="toctext">Fully Self-hosting</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-44"><a href="Creating_an_Operating_System#Phase_V:_Profit"><span class="tocnumber">6</span> <span class="toctext">Phase V: Profit</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Phase_0:_Introduction"> Phase 0: Introduction </span></h2>
+<h3> <span class="mw-headline" id="Welcome_to_Operating_Systems_Development"> Welcome to Operating Systems Development </span></h3>
+<dl><dd><i>Main article:</i> <a href="Introduction" title="Introduction">Introduction</a>
+</dd></dl>
+<p>You should consult all the basic documentation before starting writing an operating system.
+</p>
+<h3> <span class="mw-headline" id="Building_the_latest_GCC"> Building the latest GCC </span></h3>
+<dl><dd><i>Main article:</i> <a href="Building_GCC" title="Building GCC">Building GCC</a>
+</dd></dl>
+<p>You may wish to upgrade your system compiler to the latest version before you start out with operating systems development and build the cross-compiler.
+</p>
+<h2> <span class="mw-headline" id="Phase_I:_Beginning"> Phase I: Beginning </span></h2>
+<p>In this phase we will set up a toolchain and create a basic kernel that will become the core of the new operating system.
+</p>
+<h3> <span class="mw-headline" id="Setting_up_a_Cross-Toolchain"> Setting up a Cross-Toolchain </span></h3>
+<dl><dd><i>Main article:</i> <a href="GCC_Cross_Compiler" title="GCC Cross Compiler" class="mw-redirect">GCC Cross Compiler</a>
+</dd></dl>
+<p>The first thing you will like to do is set up a cross-compiler for your operating system. The compiler on your local system is not able to produce programs for your operating system because it hasn't been invented yet. At first you would like to do is create a compiler that produces executables that will run directly on your target hardware.
+</p>
+<h3> <span class="mw-headline" id="Creating_a_Hello_World_kernel"> Creating a Hello World kernel </span></h3>
+<dl><dd><i>Main article:</i> <a href="Bare_Bones" title="Bare Bones">Bare Bones</a>
+</dd><dd><i>See also <a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare Bones for other platforms</a></i>
+</dd></dl>
+<p>Your next task is to make a simple hello world kernel that is able to start up, print a message to the output device and then loop endlessly. While simple and useless, it will serve as a great example and starting point for a real system, as well as confirm that your testing environment works correctly.
+</p>
+<h3> <span class="mw-headline" id="Setting_up_a_Project"> Setting up a Project </span></h3>
+<dl><dd><i>Main article:</i> <a href="Meaty_Skeleton" title="Meaty Skeleton">Meaty Skeleton</a>
+</dd></dl>
+<p>With a basic working example, your next task is to set up a build infrastructure using whatever build system you see fit. Be careful in your choices of technology, GNU Make is easier to port than Python.
+</p>
+<h3> <span class="mw-headline" id="Calling_Global_Constructors"> Calling Global Constructors </span></h3>
+<dl><dd><i>Main article:</i> <a href="Calling_Global_Constructors" title="Calling Global Constructors">Calling Global Constructors</a>
+</dd></dl>
+<p>The compiler expects you to perform various program initialization tasks, such as calling the constructors on global C++ objects. Normally you would use a <tt>kernel_early_main</tt> function to set up the minimal kernel features, then perform all these initialization tasks, and then jump to the actual <tt>kernel_main</tt> function.
+</p>
+<h3> <span class="mw-headline" id="Terminal_Support"> Terminal Support </span></h3>
+<dl><dd><i>Main article:</i> <a href="http://wiki.osdev.org/index.php?title=Printf&amp;action=edit&amp;redlink=1" class="new" title="Printf (page does not exist)">printf</a>
+</dd></dl>
+<p>You will often need to debug your operating system. Your very best friend is a printf function that is able to print strings and integers to the screen onto a terminal-like buffer. It is crucial to add a printf function to your kernel early on as you will certainly need it later for debugging.
+</p>
+<h3> <span class="mw-headline" id="Stack_Smash_Protector"> Stack Smash Protector </span></h3>
+<dl><dd><i>Main article:</i> <a href="Stack_Smashing_Protector" title="Stack Smashing Protector">Stack Smashing Protector</a>
+</dd></dl>
+<p>Early is not too soon to think about security and robustness. You can take advantage of the optional stack smash protector offered by modern compilers that detect stack buffer overruns rather than behaving unexpectedly (or nothing happening, if unlucky).
+</p>
+<h3> <span class="mw-headline" id="Multiboot"> Multiboot </span></h3>
+<dl><dd><i>Main article:</i> <a href="Multiboot" title="Multiboot">Multiboot</a>
+</dd></dl>
+<p>It's useful to know what features and information the bootloader offers the kernel, as this may help you get memory maps, set video modes, and even kernel symbol tables.
+</p>
+<h3> <span class="mw-headline" id="Global_Descriptor_Table"> Global Descriptor Table </span></h3>
+<dl><dd><i>Main article:</i> <a href="Global_Descriptor_Table" title="Global Descriptor Table">Global Descriptor Table</a>
+</dd></dl>
+<p>The Global Descriptor Table is an important part of the processor state and it should as such be one of the first things that are initialized. It probably makes a lot of sense to set up it even prior to kernel_early.
+</p>
+<h3> <span class="mw-headline" id="Memory_Management"> Memory Management </span></h3>
+<dl><dd><i>Main article:</i> <a href="Memory_Management" title="Memory Management" class="mw-redirect">Memory Management</a>
+</dd></dl>
+<p>Memory allocation and management is one of the most basic functions in an operating system. You need to keep track of physical page frames, what ranges of virtual memory are used, and implementing a heap (malloc, free) upon it for internal kernel use.
+</p>
+<h3> <span class="mw-headline" id="Interrupts"> Interrupts </span></h3>
+<dl><dd><i>Main article:</i> <a href="Interrupts" title="Interrupts">Interrupts</a>
+</dd></dl>
+<p>Your kernel needs to handle asynchronous events sent by the hardware to function properly.
+</p>
+<h3> <span class="mw-headline" id="Multithreaded_Kernel"> Multithreaded Kernel </span></h3>
+<dl><dd><i>Main article:</i> <a href="http://wiki.osdev.org/index.php?title=Multithreaded_Kernel&amp;action=edit&amp;redlink=1" class="new" title="Multithreaded Kernel (page does not exist)">Multithreaded Kernel</a>
+</dd></dl>
+<p>It is best to go multithreaded early in the development of your kernel or you'll end up rewriting parts of your kernel. We'll certainly need this when we add processes later on.
+</p>
+<h3> <span class="mw-headline" id="Keyboard"> Keyboard </span></h3>
+<dl><dd><i>Main article:</i> <a href="Keyboard" title="Keyboard" class="mw-redirect">Keyboard</a>
+</dd></dl>
+<p>Your operating system will certainly need support for reading input from the computer operator so it can adapt its behavior to his wishes.
+</p>
+<h3> <span class="mw-headline" id="Internal_Kernel_Debugger"> Internal Kernel Debugger </span></h3>
+<dl><dd><i>Main article:</i> <a href="http://wiki.osdev.org/index.php?title=Internal_Kernel_Debugger&amp;action=edit&amp;redlink=1" class="new" title="Internal Kernel Debugger (page does not exist)">Internal Kernel Debugger</a>
+</dd></dl>
+<p>It is very useful for a multithreaded kernel to have built-in debugging facilities early on. You could have a magic key that stops the entire kernel and dumps the user to a mini-kernel with a command line interface for debugging. It could know the data structures used by the scheduler to list all the threads and perform call traces.
+</p>
+<h3> <span class="mw-headline" id="Filesystem_Support"> Filesystem Support </span></h3>
+<dl><dd><i>Main articles: <a href="Filesystem" title="Filesystem" class="mw-redirect">Filesystem</a>, <a href="Initrd" title="Initrd">Initialization Ramdisk</a></i>
+</dd></dl>
+<p>It'll be useful to have support for filesystems early on and transferring files onto your operating system using a initialization ramdisk.
+</p>
+<h2> <span class="mw-headline" id="Phase_II:_User-Space"> Phase II: User-Space </span></h2>
+<p>In this phase we'll expand your operating system into user-space and add support for programs, which is enough for your project to qualify as a small operating system. You need to work on system calls, program loading, memory management and rework parts of your system early in this phase.
+</p>
+<h3> <span class="mw-headline" id="User-Space"> User-Space </span></h3>
+<dl><dd><i>Main article:</i> <a href="http://wiki.osdev.org/index.php?title=User-Space&amp;action=edit&amp;redlink=1" class="new" title="User-Space (page does not exist)">User-Space</a>
+</dd></dl>
+<p>Your procesessor has until now run in kernel mode, where the code is able to do everything. Processes are normally run with no permissions at all, except being able to execute code and use its designated memory. The first part of implementing user-space is switching the processor to user mode.
+</p>
+<h3> <span class="mw-headline" id="Program_Loading"> Program Loading </span></h3>
+<dl><dd><i>Main article:</i> <a href="http://wiki.osdev.org/index.php?title=Program_Loading&amp;action=edit&amp;redlink=1" class="new" title="Program Loading (page does not exist)">Program Loading</a>
+</dd></dl>
+<p>The first task you will need to complete is loading a program into memory. This involves parsing the program headers, allocating memory at the right virtual addresses and copying the contents of the segments to the right virtual addresses.
+</p>
+<h3> <span class="mw-headline" id="System_Calls"> System Calls </span></h3>
+<dl><dd><i>Main article:</i> <a href="System_Calls" title="System Calls">System Calls</a>
+</dd></dl>
+<p>You are now able to load programs into memory and switch to use mode. Processes communicate with the kernel using system calls, which is the next feature you will want to add.
+</p>
+<h3> <span class="mw-headline" id="OS_Specific_Toolchain"> OS Specific Toolchain </span></h3>
+<dl><dd><i>Main article:</i> <a href="OS_Specific_Toolchain" title="OS Specific Toolchain">OS Specific Toolchain</a>
+</dd></dl>
+<p>As your operating system is now becoming a real operating system, it is time to treat it as such. We'll like to teach the cross-compiler about your operating system and its conventions, so we can easily cross-compile programs.
+</p>
+<h3> <span class="mw-headline" id="Creating_a_C_Library"> Creating a C Library </span></h3>
+<dl><dd><i>Main article:</i> <a href="Creating_a_C_Library" title="Creating a C Library">Creating a C Library</a>
+</dd></dl>
+<p>At this point, you can decide to use an existing C library or write your own C library. If you go the custom route, you will want to set up some basic features that the cross-compiler needs for libgcc. With this in place, you can now easily cross-compile programs.
+</p>
+<h3> <span class="mw-headline" id="Fork_and_Execute"> Fork and Execute </span></h3>
+<dl><dd><i>Main article:</i> <a href="http://wiki.osdev.org/index.php?title=Fork&amp;action=edit&amp;redlink=1" class="new" title="Fork (page does not exist)">Fork</a>
+</dd></dl>
+<p>With basic program loading in place, we are almost ready to create a multitasking operating system. The missing primitives is allowing a process to create new processes. The standard Unix primitive is fork, which allows a process to create a perfect copy of itself. This copy is then able to call the program loader and replace its own memory with that of another program image.
+</p>
+<h3> <span class="mw-headline" id="Shell"> Shell </span></h3>
+<dl><dd><i>Main article:</i> <a href="Shell" title="Shell" class="mw-redirect">Shell</a>
+</dd></dl>
+<p>This is a very exciting point in your operating system. It is able to run programs and create new processes. So far, the behavior of the system has possibly been determined when it was compiled. By writing a shell, you can run multiple programs and decide which one to run at runtime. This is the point where you reach the level that many newcomers dream of: a basic operating system with a working command line.
+</p>
+<h2> <span class="mw-headline" id="Phase_III:_Extending_your_Operating_System"> Phase III: Extending your Operating System </span></h2>
+<p>With these basic features in place, you can now start writing your operating system and all its wonderful features. You'll add games, editors, test programs, command line utilties, drivers and whatever you can imagine. Your skill and imagination is the limit here. You can delay many of these features until later in your operating system and make then in almost any order.
+</p>
+<h3> <span class="mw-headline" id="Time"> Time </span></h3>
+<dl><dd><i>Main article:</i> <a href="Time" title="Time" class="mw-redirect">Time</a>
+</dd></dl>
+<p>Time is a complicated concept in computing, however modern operating systems are expected to have functions for converting timestamps to parsed time and back, as well as providing system clocks (real time, monotonic time, user CPU time, ..) and timers on these clocks with events happening on expiration.
+</p>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<dl><dd><i>Main article:</i> <a href="Thread" title="Thread">Thread</a>
+</dd></dl>
+<p>Operating systems should expose a threading API such as pthreads.
+</p>
+<h3> <span class="mw-headline" id="Thread_Local_Storage"> Thread Local Storage </span></h3>
+<dl><dd><i>Main article:</i> <a href="Thread_Local_Storage" title="Thread Local Storage">Thread Local Storage</a>
+</dd></dl>
+<p>Thread local variables require runtime support.
+</p>
+<h3> <span class="mw-headline" id="Symmetric_Multiprocessing"> Symmetric Multiprocessing </span></h3>
+<dl><dd><i>Main article:</i> <a href="SMP" title="SMP" class="mw-redirect">SMP</a>
+</dd></dl>
+<p>It's a very good idea to add support for multiple CPUs to your kernel early on, or you will likely need to redo a lot of your kernel because it wasn't SMP-ready in many places.
+</p>
+<h3> <span class="mw-headline" id="Secondary_Storage"> Secondary Storage </span></h3>
+<dl><dd><i>Main article:</i> <a href="http://wiki.osdev.org/index.php?title=Secondary&amp;action=edit&amp;redlink=1" class="new" title="Secondary (page does not exist)">Secondary</a>
+</dd></dl>
+<p>You will likely want to support common block devices such as harddisks, cdroms, floppies, and whatever storage devices your operating system needs support for.
+</p>
+<h3> <span class="mw-headline" id="Real_Filesystems"> Real Filesystems </span></h3>
+<dl><dd><i>Main article:</i> <a href="File_Systems" title="File Systems">File Systems</a>
+</dd></dl>
+<p>It's a good idea to add proper filesystem support early on.
+</p>
+<h3> <span class="mw-headline" id="Graphics"> Graphics </span></h3>
+<dl><dd><i>Main article:</i> <a href="How_do_I_set_a_graphics_mode" title="How do I set a graphics mode">How do I set a graphics mode</a>
+</dd></dl>
+<p>Real operating systems don't operate in the basic text mode, but have bitmapped graphics. Writing real graphics drivers is a bunch of work, although some virtual machines offer some useful shortcuts.
+</p>
+<h3> <span class="mw-headline" id="User_Interface"> User Interface </span></h3>
+<dl><dd><i>Main articles</i>: <a href="User_Interface" title="User Interface">User Interface</a>, <a href="Compositing" title="Compositing">Compositing</a>
+</dd></dl>
+<p>You will certainly need to impress the operating systems development community with your flashy graphics and usable user-interface.
+</p>
+<h3> <span class="mw-headline" id="Networking"> Networking </span></h3>
+<dl><dd><i>Main article:</i> <a href="Networking" title="Networking" class="mw-redirect">Networking</a>
+</dd></dl>
+<p>The uses for networking support are obvious, so you will likely want to do this.
+</p>
+<h3> <span class="mw-headline" id="Sound"> Sound </span></h3>
+<dl><dd><i>Main article:</i> <a href="Sound" title="Sound">Sound</a>
+</dd></dl>
+<p>Sound is an important part of the computing experience and depending on your needs, you may well wish to support sound on common hardware.
+</p>
+<h3> <span class="mw-headline" id="Universal_Serial_Bus"> Universal Serial Bus </span></h3>
+<dl><dd><i>Main article:</i> <a href="USB" title="USB" class="mw-redirect">USB</a>
+</dd></dl>
+<p>If you need to communicate with modern peripherals, you will likely need a USB stack and support for the various common USB controllers.
+</p>
+<h2> <span class="mw-headline" id="Phase_IV:_Bootstrapping"> Phase IV: Bootstrapping </span></h2>
+<p>You now have your basic operating system in place and you are ready to move onto the next level. In this phase, we will start porting software onto your operating system such that you can become self-hosting. You already begun your effort toward being self-hosting when you set up your OS-specific toolchain and it pays off now.
+</p>
+<h3> <span class="mw-headline" id="Porting_Software"> Porting Software </span></h3>
+<dl><dd><i>Main article:</i> <a href="Cross-Porting_Software" title="Cross-Porting Software">Cross-Porting Software</a>
+</dd></dl>
+<p>While not all pieces of software is easy to port, most Unix software comes with a autoconf-generated configure script. You can provide these scripts with the --host=mycpu-myos option and if your operating system offers the needed features, you can cross-compile the software onto your operating system. You already met examples of how to port software when setting up the OS-specific toolchain. While the difficulity of cross-compiling software differs greatly, you will like be using the same process for adapting new packages.
+</p>
+<h3> <span class="mw-headline" id="Porting_GCC"> Porting GCC </span></h3>
+<dl><dd><i>Main article:</i> <a href="Porting_GCC_to_your_OS" title="Porting GCC to your OS">Porting GCC to your OS</a>
+</dd></dl>
+<p>You already began the work porting binutils and gcc when you set up the OS-specific toolchain. We'll finish the process and cross-compile them onto your operating system such that it can compile the C hello world program.
+</p>
+<h3> <span class="mw-headline" id="Compiling_your_OS_under_your_OS"> Compiling your OS under your OS </span></h3>
+<p>The next task is to port your entire build system. You may need to port GNU Make, port some command line utilites (coreutils) or write your own, port a real shell or finish yours and more. You may also need to fix a number of bugs in your operating system such that the compiler runs correctly. You will need to deal with how to transfer the newly compiled version onto permanent storage such that a reboot of the computer will run the next version. Your operating system will now quality as self-compiling.
+</p>
+<h3> <span class="mw-headline" id="Fully_Self-hosting"> Fully Self-hosting </span></h3>
+<p>Now that you can build your entire operating system under your operating system, you also need to be able to do the rest. You need to be able to also build your compiler under your operating system. You need to be able to develop under your operating system, so you'll port your favorite text editor or write one. You need networking so you can release the newest version (build on itself) onto the internet. You'll port lots of programs, libraries, games, and whatever else you desire, such that the entire development process can happen on your operating system. You can now uninstall your original operating system and replace it with your new glorious operating system.
+</p>
+<h2> <span class="mw-headline" id="Phase_V:_Profit"> Phase V: Profit </span></h2>
+<p>You have now successfully created a real operating system that is fully self-hosting and the envy of the entire operating systems development community. You have ported quake, have OpenGL programs, a working browser, a thriving community of contributors, and much success. You can now start over and develop the next operating system from your own operating system.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 434/1000000
+Post-expand include size: 1247/2097152 bytes
+Template argument size: 465/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3353-0!*!0!!en!*!* and timestamp 20180121032736 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Creating_an_Operating_System&amp;oldid=20656">http://wiki.osdev.org/index.php?title=Creating_an_Operating_System&amp;oldid=20656</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Creating_an_Operating_System" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Creating_an_Operating_System"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Creating_an_Operating_System&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Creating_an_Operating_System#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Creating_an_Operating_System" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Creating_an_Operating_System&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Creating_an_Operating_System&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Creating_an_Operating_System#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Creating_an_Operating_Systskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Creating_an_Operating_System" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Creating_an_Operating_System" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Creating_an_Operating_System&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Creating_an_Operating_System&amp;oldid=20656" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 April 2017, at 08:52.</li>
+											<li id="footer-info-viewcount">This page has been accessed 23,863 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

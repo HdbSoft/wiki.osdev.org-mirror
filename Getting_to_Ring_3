@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Getting to Ring 3 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Getting_to_Ring_3", "wgTitle": "Getting to Ring 3", "wgCurRevisionId": 19137, "wgArticleId": 2603, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "Tutorials", "X86 CPU"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Getting_to_Ring_3 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Getting to Ring 3</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Getting_to_Ring_3#mw-head">navigation</a>,
+					<a href="Getting_to_Ring_3#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>As fun as making a kernel is, eventually we have to get outside the kernel into userspace. This involves getting from ring 0 to ring 3. I am sure all of us wish we could just make a GDT entry and - poof - ring 3 works, but Intel wants us to pull our hair out at least a little with their <a href="Task_State_Segment" title="Task State Segment">Task State Segment</a>. So, in order to get to ring 3 we must do the following:
+</p>
+<ul><li> Get 2 new GDT entries (at least) configured for ring 3.
+<ul><li> These entries are needed for the user's code and data segments (one each)
+</li></ul>
+</li><li> Set up a barebones TSS with an ESP0 stack.
+<ul><li> When an interrupt(be it fault, IRQ, or software interrupt) happens while the CPU is in user mode the CPU needs to know where the kernel stack is located, this location is stored in the ESP0 entry of the TSS.
+</li></ul>
+</li><li> Set up an IDT entry for ring 3 system call interrupts (optional, actually).
+<ul><li> System calls are the way user code requests the kernel to do IO and process management. For more information see <a href="System_Calls" title="System Calls">System Calls</a>
+</li></ul>
+</li></ul>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Getting_to_Ring_3#Requirements"><span class="tocnumber">1</span> <span class="toctext">Requirements</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Getting_to_Ring_3#GDT"><span class="tocnumber">2</span> <span class="toctext">GDT</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Getting_to_Ring_3#The_TSS"><span class="tocnumber">3</span> <span class="toctext">The TSS</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Getting_to_Ring_3#Entering_Ring_3"><span class="tocnumber">4</span> <span class="toctext">Entering Ring 3</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Getting_to_Ring_3#Multitasking_considerations"><span class="tocnumber">5</span> <span class="toctext">Multitasking considerations</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Requirements"> Requirements </span></h2>
+<p>I'm not going to go through making a whole kernel that can get to ring 3. I will assume you have a decent and usable ring 0 GDT and IDT, along with being able to handle IRQs properly. I also assume you will be multitasking, and so will cover switching ring 3&gt;ring 0(switch task)&gt;ring 3.
+</p>
+<h2> <span class="mw-headline" id="GDT"> GDT </span></h2>
+<p>This is my GDT struct I will be using(it's split into bit-fields)
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> gdt_entry_bits
+<span class="br0">&#123;</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> limit_low<span class="sy0">:</span><span class="nu0">16</span><span class="sy0">;</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> base_low <span class="sy0">:</span> <span class="nu0">24</span><span class="sy0">;</span>
+     <span class="co1">//attribute byte split into bitfields</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> accessed <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> read_write <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//readable for code, writable for data</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> conforming_expand_down <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//conforming for code, expand down for data</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> code <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//1 for code, 0 for data</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> always_1 <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//should be 1 for everything but TSS and LDT</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> DPL <span class="sy0">:</span><span class="nu0">2</span><span class="sy0">;</span> <span class="co1">//priviledge level</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> present <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>
+     <span class="co1">//and now into granularity</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> limit_high <span class="sy0">:</span><span class="nu0">4</span><span class="sy0">;</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> available <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> always_0 <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//should always be 0</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> big <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//32bit opcodes for code, uint32_t stack for data</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> gran <span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//1 to use 4k page addressing, 0 for byte addressing</span>
+	<span class="kw4">unsigned</span> <span class="kw4">int</span> base_high <span class="sy0">:</span><span class="nu0">8</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> __packed<span class="sy0">;</span> <span class="co1">//or __attribute__((packed))</span></pre></div></div>
+<p>We will be doing a simple setup, and I will assume you will later implement paging in your OS, so we will use only 2 ring 3 segments both with base of 0 and limit of 0xFFFFFFFF so we will setup our two GDT segments like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">//....insert your ring 0 segments here or whatever</span>
+gdt_entry_bits <span class="sy0">*</span>code<span class="sy0">;</span>
+gdt_entry_bits <span class="sy0">*</span>data<span class="sy0">;</span>
+<span class="co1">//I assume your ring 0 segments are in gdt[1] and gdt[2] (0 is null segment)</span>
+code<span class="sy0">=</span><span class="br0">&#40;</span><span class="kw4">void</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>gdt<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">//gdt is a static array of gdt_entry_bits or equivalent</span>
+data<span class="sy0">=</span><span class="br0">&#40;</span><span class="kw4">void</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>gdt<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">;</span>
+code<span class="sy0">-&gt;</span>limit_low<span class="sy0">=</span><span class="nu12">0xFFFF</span><span class="sy0">;</span>
+code<span class="sy0">-&gt;</span>base_low<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+code<span class="sy0">-&gt;</span>accessed<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+code<span class="sy0">-&gt;</span>read_write<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//make it readable for code segments</span>
+code<span class="sy0">-&gt;</span>conforming<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="co1">//don't worry about this.. </span>
+code<span class="sy0">-&gt;</span>code<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//this is to signal its a code segment</span>
+code<span class="sy0">-&gt;</span>always_1<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+code<span class="sy0">-&gt;</span>DPL<span class="sy0">=</span><span class="nu0">3</span><span class="sy0">;</span> <span class="co1">//set it to ring 3</span>
+code<span class="sy0">-&gt;</span>present<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+code<span class="sy0">-&gt;</span>limit_high<span class="sy0">=</span><span class="nu12">0xF</span><span class="sy0">;</span>
+code<span class="sy0">-&gt;</span>available<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+code<span class="sy0">-&gt;</span>always_0<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+code<span class="sy0">-&gt;</span>big<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//signal it's 32 bits</span>
+code<span class="sy0">-&gt;</span>gran<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//use 4k page addressing</span>
+code<span class="sy0">-&gt;</span>base_high<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+<span class="sy0">*</span>data<span class="sy0">=*</span>code<span class="sy0">;</span> <span class="co1">//copy it all over, cause most of it is the same</span>
+data<span class="sy0">-&gt;</span>code<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="co1">//signal it's not code; so it's data.</span>
+&#160;
+install_tss<span class="br0">&#40;</span><span class="sy0">&amp;</span>gdt<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//we'll implement this function later... </span>
+&#160;
+<span class="co1">//...go on to install GDT segments and such</span>
+<span class="co1">//after those are installed we'll tell the CPU where our TSS is:</span>
+flush_tss<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//implement this later</span></pre></div></div>
+<p>Ok, so now we have our two user mode segments. Now technically, we can get to user mode right now with these two segments. The problem is we can't get back to ring 0 for system calls or faults or even IRQs. That is where the TSS comes in.
+</p>
+<h2> <span class="mw-headline" id="The_TSS"> The TSS </span></h2>
+<p>The TSS can be used for multitasking, though it is recommended to use software multitasking for these reasons:
+</p>
+<ul><li> Software task switching is faster(usually)
+</li><li> When you port your OS to a different CPU, it won't have the TSS, so you'll have to implement software task switching anyway
+</li><li> x86 64bit mode does not allow you to use the TSS for task switching.
+</li></ul>
+<p>Since we will be using the software multitasking approach, the TSS will contain a lot of junk we don't need. Here is the structure of the TSS
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">// A struct describing a Task State Segment.</span>
+<span class="kw4">struct</span> tss_entry_struct
+<span class="br0">&#123;</span>
+   <span class="kw4">uint32_t</span> prev_tss<span class="sy0">;</span>   <span class="co1">// The previous TSS - if we used hardware task switching this would form a linked list.</span>
+   <span class="kw4">uint32_t</span> esp0<span class="sy0">;</span>       <span class="co1">// The stack pointer to load when we change to kernel mode.</span>
+   <span class="kw4">uint32_t</span> ss0<span class="sy0">;</span>        <span class="co1">// The stack segment to load when we change to kernel mode.</span>
+   <span class="kw4">uint32_t</span> esp1<span class="sy0">;</span>       <span class="co1">// everything below here is unusued now.. </span>
+   <span class="kw4">uint32_t</span> ss1<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> esp2<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> ss2<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> cr3<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> eip<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> eflags<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> eax<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> ecx<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> edx<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> ebx<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> esp<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> ebp<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> esi<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> edi<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> es<span class="sy0">;</span>         
+   <span class="kw4">uint32_t</span> cs<span class="sy0">;</span>        
+   <span class="kw4">uint32_t</span> ss<span class="sy0">;</span>        
+   <span class="kw4">uint32_t</span> ds<span class="sy0">;</span>        
+   <span class="kw4">uint32_t</span> fs<span class="sy0">;</span>       
+   <span class="kw4">uint32_t</span> gs<span class="sy0">;</span>         
+   <span class="kw4">uint32_t</span> ldt<span class="sy0">;</span>      
+   <span class="kw4">uint16_t</span> trap<span class="sy0">;</span>
+   <span class="kw4">uint16_t</span> iomap_base<span class="sy0">;</span>
+<span class="br0">&#125;</span> __packed<span class="sy0">;</span>
+&#160;
+<span class="kw4">typedef</span> <span class="kw4">struct</span> tss_entry_struct tss_entry_t<span class="sy0">;</span></pre></div></div>
+<p>As you can see.. a lot of wasted crap you don't need. But, intel demands it be used, so... 
+Basically what we want to do to setup this TSS structure is give it an initial esp0 stack and setup the segments to point to our kernel segments, and really that's it.. so we can do something like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="coMULTI">/**Ok, this is going to be hackish, but we will salvage the gdt_entry_bits struct to form our TSS descriptor
+So some of these names of the fields will actually be different.. maybe I'll fix this later..**/</span>
+tss_entry_t tss_entry<span class="sy0">;</span>
+&#160;
+<span class="kw4">void</span> write_tss<span class="br0">&#40;</span>gdt_entry_bits <span class="sy0">*</span>g<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+   <span class="co1">// Firstly, let's compute the base and limit of our entry into the GDT.</span>
+   <span class="kw4">uint32_t</span> base <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span>tss_entry<span class="sy0">;</span>
+   <span class="kw4">uint32_t</span> limit <span class="sy0">=</span> <span class="kw4">sizeof</span><span class="br0">&#40;</span>tss_entry<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+   <span class="co1">// Now, add our TSS descriptor's address to the GDT.</span>
+   g<span class="sy0">-&gt;</span>limit_low<span class="sy0">=</span>limit<span class="sy0">&amp;</span><span class="nu12">0xFFFF</span><span class="sy0">;</span>
+   g<span class="sy0">-&gt;</span>base_low<span class="sy0">=</span>base<span class="sy0">&amp;</span><span class="nu12">0xFFFFFF</span><span class="sy0">;</span> <span class="co1">//isolate bottom 24 bits</span>
+   g<span class="sy0">-&gt;</span>accessed<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//This indicates it's a TSS and not a LDT. This is a changed meaning</span>
+   g<span class="sy0">-&gt;</span>read_write<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="co1">//This indicates if the TSS is busy or not. 0 for not busy</span>
+   g<span class="sy0">-&gt;</span>conforming_expand_down<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="co1">//always 0 for TSS</span>
+   g<span class="sy0">-&gt;</span>code<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//For TSS this is 1 for 32bit usage, or 0 for 16bit.</span>
+   g<span class="sy0">-&gt;</span>always_1<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="co1">//indicate it is a TSS</span>
+   g<span class="sy0">-&gt;</span>DPL<span class="sy0">=</span><span class="nu0">3</span><span class="sy0">;</span> <span class="co1">//same meaning</span>
+   g<span class="sy0">-&gt;</span>present<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> <span class="co1">//same meaning</span>
+   g<span class="sy0">-&gt;</span>limit_high<span class="sy0">=</span><span class="br0">&#40;</span>limit<span class="sy0">&amp;</span><span class="nu12">0xF0000</span><span class="br0">&#41;</span><span class="sy0">&gt;&gt;</span><span class="nu0">16</span><span class="sy0">;</span> <span class="co1">//isolate top nibble</span>
+   g<span class="sy0">-&gt;</span>available<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+   g<span class="sy0">-&gt;</span>always_0<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="co1">//same thing</span>
+   g<span class="sy0">-&gt;</span>big<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="co1">//should leave zero according to manuals. No effect</span>
+   g<span class="sy0">-&gt;</span>gran<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="co1">//so that our computed GDT limit is in bytes, not pages</span>
+   g<span class="sy0">-&gt;</span>base_high<span class="sy0">=</span><span class="br0">&#40;</span>base<span class="sy0">&amp;</span><span class="nu12">0xFF000000</span><span class="br0">&#41;</span><span class="sy0">&gt;&gt;</span><span class="nu0">24</span><span class="sy0">;</span> <span class="co1">//isolate top byte.</span>
+&#160;
+   <span class="co1">// Ensure the TSS is initially zero'd.</span>
+   <span class="kw3">memset</span><span class="br0">&#40;</span><span class="sy0">&amp;</span>tss_entry<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">&#40;</span>tss_entry<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+   tss_entry.<span class="me1">ss0</span>  <span class="sy0">=</span> REPLACE_KERNEL_DATA_SEGMENT<span class="sy0">;</span>  <span class="co1">// Set the kernel stack segment.</span>
+   tss_entry.<span class="me1">esp0</span> <span class="sy0">=</span> REPLACE_KERNEL_STACK_ADDRESS<span class="sy0">;</span> <span class="co1">// Set the kernel stack pointer.</span>
+   <span class="co1">//note that CS is loaded from the IDT entry and should be the regular kernel code segment</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> set_kernel_stack<span class="br0">&#40;</span><span class="kw4">uint32_t</span> stack<span class="br0">&#41;</span> <span class="co1">//this will update the ESP0 stack used when an interrupt occurs</span>
+<span class="br0">&#123;</span>
+   tss_entry.<span class="me1">esp0</span> <span class="sy0">=</span> stack<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>Now, I know you may spend a while looking at that atrocious code..but I do believe it works. Oh, and here is our flush_tss function: (in yasm/nasm syntax)
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">GLOBAL tss_flush   <span class="co1">; Allows our C code to call tss_flush().</span>
+tss_flush<span class="sy0">:</span>
+   <span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="nu0">0x2B</span>      <span class="co1">; Load the index of our TSS structure - The index is</span>
+                     <span class="co1">; 0x28, as it is the 5th selector and each is 8 bytes</span>
+                     <span class="co1">; long, but we set the bottom two bits (making 0x2B)</span>
+                     <span class="co1">; so that it has an RPL of 3, not zero.</span>
+   <span class="kw1">ltr</span> <span class="kw3">ax</span>            <span class="co1">; Load 0x2B into the task state register.</span>
+   <span class="kw1">ret</span></pre></div></div>
+<p>Ok, so now we are just about ready to do some ring 3 fun stuff!!
+</p>
+<h2> <span class="mw-headline" id="Entering_Ring_3"> Entering Ring 3 </span></h2>
+<p>Ok, the x86 is really a tricky CPU. The only way to get to ring 3 is to fool the processor into thinking it was already in ring 3 to start with. We effectively do this using an iret. I'll give you a simple example on how to execute something as ring 3:(yasm/nasm syntax)
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">GLOBAL _jump_usermode <span class="co1">;you may need to remove this _ to work right.. </span>
+<span class="kw4">EXTERN</span> _test_user_function
+_jump_usermode<span class="sy0">:</span>
+     <span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span><span class="nu0">0x23</span>
+     <span class="kw1">mov</span> <span class="kw3">ds</span><span class="sy0">,</span><span class="kw3">ax</span>
+     <span class="kw1">mov</span> <span class="kw3">es</span><span class="sy0">,</span><span class="kw3">ax</span> 
+     <span class="kw1">mov</span> <span class="kw3">fs</span><span class="sy0">,</span><span class="kw3">ax</span> 
+     <span class="kw1">mov</span> <span class="kw3">gs</span><span class="sy0">,</span><span class="kw3">ax</span> <span class="co1">;we don't need to worry about SS. it's handled by iret</span>
+&#160;
+     <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="kw3">esp</span>
+     <span class="kw1">push</span> <span class="nu0">0x23</span> <span class="co1">;user data segment with bottom 2 bits set for ring 3</span>
+     <span class="kw1">push</span> <span class="kw3">eax</span> <span class="co1">;push our current stack just for the heck of it</span>
+     <span class="kw1">pushf</span>
+     <span class="kw1">push</span> <span class="nu0">0x1B</span><span class="co1">;&#160;;user code segment with bottom 2 bits set for ring 3</span>
+     <span class="kw1">push</span> _test_user_function <span class="co1">;may need to remove the _ for this to work right </span>
+     <span class="kw1">iret</span>
+<span class="co1">;end</span></pre></div></div>
+<p>Now then, this will call the C function test_user_function and it will be operating in user mode! There is no easy way of getting back to ring 0(excluding IRQs) except for by setting up a task switching system, which you really should have in place to properly appreciate ring 3 in the first place.. But if you would like to test things out in user mode, just have the test_user_function execute a cli or other privileged instruction and you'll be pleased by a GPF. I won't give you source examples on implementing this into your task switching system, as these vary a lot by operating system.
+</p>
+<h2> <span class="mw-headline" id="Multitasking_considerations"> Multitasking considerations </span></h2>
+<p>There are a lot of subtle things with user mode and task switching that you may not realize at first. First: Whenever a system call interrupt happens, the first thing that happens is the CPU changes to ESP0 stack. Then, it will push all the system information. So when you enter the interrupt handler, your working off of the ESP0 stack. This could become a problem with 2 ring 3 tasks going if all you do is merely push context info and change esp. Think about it. you will change the esp, which is the esp0 stack, to the other tasks esp, which is the same esp0 stack. So, what you must do is change the ESP0 stack(along with the interrupt pushed ESP stack) on each task switch, or you'll end up overwriting yourself.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 86/1000000
+Post-expand include size: 347/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2603-0!*!0!!en!2!* and timestamp 20180121035611 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Getting_to_Ring_3&amp;oldid=19137">http://wiki.osdev.org/index.php?title=Getting_to_Ring_3&amp;oldid=19137</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:Tutorials" title="Category:Tutorials">Tutorials</a></li><li><a href="Category:X86_CPU" title="Category:X86 CPU">X86 CPU</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Getting_to_Ring_3" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Getting_to_Ring_3"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Getting_to_Ring_3"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Getting_to_Ring_3#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Getting_to_Ring_3" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Getting_to_Ring_3&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Getting_to_Ring_3&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Getting_to_Ring_3#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Getting_to_Ring_3" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Getting_to_Ring_3" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Getting_to_Ring_3&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Getting_to_Ring_3&amp;oldid=19137" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 May 2016, at 05:24.</li>
+											<li id="footer-info-viewcount">This page has been accessed 38,311 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.036 secs. -->
+	</body>
+</html>

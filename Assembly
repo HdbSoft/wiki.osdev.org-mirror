@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Assembly - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Assembly", "wgTitle": "Assembly", "wgCurRevisionId": 20850, "wgArticleId": 1425, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Assembly", "Languages"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Assembly action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Assembly</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Assembly#mw-head">navigation</a>,
+					<a href="Assembly#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Down to the very core of computers, every signal sent to any part of the machine is a series of electrical pulses. If the electrical pulse is high, for example 5 volts, that means a binary 1 digit is sent. If the electrical pulse is low, for example 0 volts, that means a binary 0 digit is sent. Put 4 binary digits together and you get a nibble. Put 8 together, you get a byte. Put 16 together, you get a word. Computers understand commands in such segments, but humans would rather not. So, they developed a better way of viewing such information and that was with hexadecimal. First of all, it didn't take 16 characters to show one command and in general, it became more convenient to remember commands like:
+</p>
+<pre>90 - No Operation
+CC - Break
+E9 - 16 bit jump
+CD - Interrupt
+etc.
+</pre>
+<p>But soon, it was understood that such codes needed to be user friendly, so they invented assembly code. With assembly code, you can do any operation with special codes that made sense. For example, JMP jumped, INT interrupted, NOP did no operation, etc.
+</p><p>An assembler is the program that reads an assembly file (usually .asm) and converts it to a binary executable. This is very much akin to a compiler generating a executable program. However, assemblers are considered separately from compilers because compilers hide the low-level details of your system, while assemblers expose you to these details.
+</p><p>The source code written for any assembler is defined to be "Assembly language". But that doesn't mean much, since each assembler may require different source code for exactly the same program on an exactly identical platform.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Assembly#Assembly_Syntax"><span class="tocnumber">1</span> <span class="toctext">Assembly Syntax</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Assembly#Intel_Syntax"><span class="tocnumber">1.1</span> <span class="toctext">Intel Syntax</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Assembly#AT.26T_Syntax"><span class="tocnumber">1.2</span> <span class="toctext">AT&amp;T Syntax</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="Assembly#See_Also"><span class="tocnumber">2</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Assembly#Articles"><span class="tocnumber">2.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Assembly#External_Links"><span class="tocnumber">2.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Assembly_Syntax"> Assembly Syntax </span></h2>
+<p>In assembly, every instruction (or operation/operator/opcode) is followed by a comma-separated list of parameters (or operands). These operands can be either immediate values (i.e. numbers such as 1, 2, <a href="Hexadecimal_Notation" title="Hexadecimal Notation">0x</a>16, 0101<a href="Binary_Notation" title="Binary Notation">b</a>), or registers, or a memory location. For example,
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">123</span></pre></div></div>
+<p>The instruction is mov, the operands are eax and 123. Here eax is a register and 123 is an immediate value.
+</p><p>There are two main different syntax for assembly: the Intel syntax, and the AT&amp;T syntax.
+</p>
+<h3> <span class="mw-headline" id="Intel_Syntax"> Intel Syntax </span></h3>
+<p>Generally speaking, the first operand of an operation is the destination operand, and the other operand (or operands) is the source operand. For example:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">123</span></pre></div></div>
+<p>The mov instruction takes a value from the source operand, and places it in the destination operand, so the value 123 would be placed into the register eax. The original Intel syntax is that of the Intel ASM386 assembler (later licensed out to RadiSys but which eventually died off). Since then, many assemblers invented many variations of it. Also, it is used in most online assembly tutorials because the majority of those tutorials were written when <a href="TASM" title="TASM">TASM</a> (which uses the Intel syntax) was the dominant assembler.
+</p>
+<h3> <span class="mw-headline" id="AT.26T_Syntax"> AT&amp;T Syntax </span></h3>
+<p>AT&amp;T syntax is the reverse of Intel syntax. The data operated on moves from left to right. Here is the same statement as above in AT&amp;T syntax.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> $<span class="nu0">123</span><span class="sy0">,</span> <span class="sy0">%</span><span class="kw3">eax</span></pre></div></div>
+<p>There are also some other differences with operands:
+</p>
+<ul><li> Literal values such as 123 are prefixed with '$' (see example above).
+</li><li> Memory locations have no prefix: mov 123,&#160;%eax. Moves the value stored at 123 to eax.
+</li><li> Registers are prefixed with '%'
+</li><li> When using a register as a pointer, it is put in parenthesis: mov (%eax),&#160;%ebx. Moves the value stored at the pointer stored in eax to ebx.
+</li><li> When using a statement with memory locations (with no register present), a suffix is needed after the instruction. For example: movl $123, 123. The 'l' (stands for long) is needed to tell the assembler that the values are 32 bits.
+</li><li> Pointers can be offset by constants by prefixing them: 4(%eax) points to 4+%eax.
+</li><li> Pointers can be offset by another register by writing them as: (%eax,%ebx) points to&#160;%eax+%ebx
+</li><li> Finally you can combine it all and throw in a scale if you want: 4(%eax,%ebx,2) would be 4+%eax+%ebx*2
+</li></ul>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Category:Assemblers" title="Category:Assemblers">Assemblers</a>
+</li><li> <a href="Inline_Assembly" title="Inline Assembly">Inline Assembly</a>
+</li><li> <a href="Opcode_syntax" title="Opcode syntax">Opcode syntax</a> for more detail on AT&amp;T syntax differences
+</li><li> <a href="Learning_80x86_Assembly" title="Learning 80x86 Assembly">Learning 80x86 Assembly</a>: list of freely available online resources to help with learning 80x86 assembly language programming
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.gnu.org/software/binutils/">GNU Binutils</a> - An open source collection of software including the GNU assembler (gas)
+</li><li> <a rel="nofollow" class="external text" href="http://sourceware.org/binutils/docs/as">gas manual</a> - Official manual for the GNU assembler (gas)
+</li><li> <a rel="nofollow" class="external text" href="http://www.nasm.us/">NASM</a> - Official site of Netwide Assembler:NASM
+</li><li> <a href="http://en.wikibooks.org/wiki/X86_Assembly" class="extiw" title="wikibooks:X86 Assembly">x86_Assembly</a> - A wikibook on writing assembly for x86 based PCs
+</li><li> <a rel="nofollow" class="external text" href="http://www.plantation-productions.com/Webster/www.artofasm.com/index.html">The Art of Assembly Language Programming</a>, online book, 16-bit DOS edition. (Later editions focus on a high-level assembler dialect created by the author.)
+</li><li> <a rel="nofollow" class="external text" href="http://www.drpaulcarter.com/pcasm/">PC ASM</a>, online book, 32 bit protected mode assembly on x86
+</li><li> <a rel="nofollow" class="external text" href="http://ref.x86asm.net">x86 Opcode and Instruction Reference</a>, a database of the instructions and opcodes as free viewable, searchable, and downloadable XML files. They also sell a hardcopy version.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 71/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1425-0!*!0!!en!*!* and timestamp 20180121031250 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Assembly&amp;oldid=20850">http://wiki.osdev.org/index.php?title=Assembly&amp;oldid=20850</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Assembly" title="Category:Assembly">Assembly</a></li><li><a href="Category:Languages" title="Category:Languages">Languages</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Assembly" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Assembly"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Assembly"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Assembly#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Assembly" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Assembly&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Assembly&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Assembly#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Assembly" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Assembly" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Assembly&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Assembly&amp;oldid=20850" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Assembler" title="Assembler">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 June 2017, at 04:29.</li>
+											<li id="footer-info-viewcount">This page has been accessed 147,365 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Assembly" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Assembly" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Assembly&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Assembly&amp;oldid=20850" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Assembler" title="Assembler">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 June 2017, at 04:29.</li>
+											<li id="footer-info-viewcount">This page has been accessed 147,365 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

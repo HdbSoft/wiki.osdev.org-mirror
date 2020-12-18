@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Pascal Bare Bones - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Pascal_Bare_Bones", "wgTitle": "Pascal Bare Bones", "wgCurRevisionId": 18338, "wgArticleId": 3055, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 2 Tutorials", "Bare bones tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-pascal {line-height: normal;}
+.source-pascal li, .source-pascal pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for pascal
+ * CSS class: source-pascal, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.pascal.source-pascal .de1, .pascal.source-pascal .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.pascal.source-pascal  {font-family:monospace;}
+.pascal.source-pascal .imp {font-weight: bold; color: red;}
+.pascal.source-pascal li, .pascal.source-pascal .li1 {font-weight: normal; vertical-align:top;}
+.pascal.source-pascal .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.pascal.source-pascal .li2 {font-weight: bold; vertical-align:top;}
+.pascal.source-pascal .kw1 {color: #000000; font-weight: bold;}
+.pascal.source-pascal .kw2 {color: #000000; font-weight: bold;}
+.pascal.source-pascal .kw3 {color: #000066;}
+.pascal.source-pascal .kw4 {color: #000066; font-weight: bold;}
+.pascal.source-pascal .co1 {color: #666666; font-style: italic;}
+.pascal.source-pascal .coMULTI {color: #666666; font-style: italic;}
+.pascal.source-pascal .es0 {color: #000099; font-weight: bold;}
+.pascal.source-pascal .es_h {color: #000099; font-weight: bold;}
+.pascal.source-pascal .br0 {color: #009900;}
+.pascal.source-pascal .sy0 {color: #339933;}
+.pascal.source-pascal .st0 {color: #ff0000;}
+.pascal.source-pascal .st_h {color: #ff0000;}
+.pascal.source-pascal .nu0 {color: #cc66cc;}
+.pascal.source-pascal .me1 {color: #0066ee;}
+.pascal.source-pascal .ln-xtra, .pascal.source-pascal li.ln-xtra, .pascal.source-pascal div.ln-xtra {background-color: #ffc;}
+.pascal.source-pascal span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Pascal_Bare_Bones action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Pascal Bare Bones</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Pascal_Bare_Bones#mw-head">navigation</a>,
+					<a href="Pascal_Bare_Bones#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a><br />Medium</td></tr></table>
+<p>Credit flies to De Deyn Kim for the freepascal, public domain version of BareBones.
+</p><p>Tools needed to build the project:
+</p>
+<ul><li> FPC (You'll need the i386 version as that's the architecture we're targeting)
+</li><li> NASM
+</li><li> binutils(ld) built for <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">32-bit elf support</a>
+</li></ul>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Pascal_Bare_Bones#stub.asm"><span class="tocnumber">1</span> <span class="toctext">stub.asm</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Pascal_Bare_Bones#kernel.pas"><span class="tocnumber">2</span> <span class="toctext">kernel.pas</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Pascal_Bare_Bones#console.pas"><span class="tocnumber">3</span> <span class="toctext">console.pas</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Pascal_Bare_Bones#multiboot.pas"><span class="tocnumber">4</span> <span class="toctext">multiboot.pas</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Pascal_Bare_Bones#system.pas"><span class="tocnumber">5</span> <span class="toctext">system.pas</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Pascal_Bare_Bones#Linker_script"><span class="tocnumber">6</span> <span class="toctext">Linker script</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Pascal_Bare_Bones#Compiling_and_Linking_the_modules"><span class="tocnumber">7</span> <span class="toctext">Compiling and Linking the modules</span></a></li>
+</ul>
+</td></tr></table>
+<h3> <span class="mw-headline" id="stub.asm"> stub.asm </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">;/////////////////////////////////////////////////////////</span>
+<span class="co1">;//                                                     //</span>
+<span class="co1">;//               Freepascal barebone OS                //</span>
+<span class="co1">;//                      stub.asm                       //</span>
+<span class="co1">;//                                                     //</span>
+<span class="co1">;/////////////////////////////////////////////////////////</span>
+<span class="co1">;//</span>
+<span class="co1">;//     By:             De Deyn Kim &lt;kimdedeyn@skynet.be&gt;</span>
+<span class="co1">;//     License:        Public domain</span>
+<span class="co1">;//</span>
+&#160;
+<span class="co1">;</span>
+<span class="co1">; Kernel stub</span>
+<span class="co1">;</span>
+&#160;
+<span class="co1">;</span>
+<span class="co1">; We are in 32bits protected mode</span>
+<span class="co1">;</span>
+<span class="br0">&#91;</span>bits <span class="nu0">32</span><span class="br0">&#93;</span>
+&#160;
+<span class="co1">;</span>
+<span class="co1">; Export entrypoint</span>
+<span class="co1">;</span>
+<span class="br0">&#91;</span>global kstart<span class="br0">&#93;</span>
+&#160;
+<span class="co1">;</span>
+<span class="co1">; Import kernel entrypoint</span>
+<span class="co1">;</span>
+<span class="br0">&#91;</span><span class="kw4">extern</span> kmain<span class="br0">&#93;</span>
+&#160;
+<span class="co1">;</span>
+<span class="co1">; Posible multiboot header flags</span>
+<span class="co1">;</span>
+MULTIBOOT_MODULE_ALIGN         <span class="kw4"> equ</span>     <span class="nu0">1</span>&lt;&lt;<span class="nu0">0</span>
+MULTIBOOT_MEMORY_MAP           <span class="kw4"> equ</span>     <span class="nu0">1</span>&lt;&lt;<span class="nu0">1</span>
+MULTIBOOT_GRAPHICS_FIELDS      <span class="kw4"> equ</span>     <span class="nu0">1</span>&lt;&lt;<span class="nu0">2</span>
+MULTIBOOT_ADDRESS_FIELDS       <span class="kw4"> equ</span>     <span class="nu0">1</span>&lt;&lt;<span class="nu0">16</span>
+&#160;
+<span class="co1">;</span>
+<span class="co1">; Multiboot header defines</span>
+<span class="co1">;</span>
+MULTIBOOT_HEADER_MAGIC         <span class="kw4"> equ</span>     <span class="nu0">0x1BADB002</span>
+MULTIBOOT_HEADER_FLAGS         <span class="kw4"> equ</span>     MULTIBOOT_MODULE_ALIGN | MULTIBOOT_MEMORY_MAP
+MULTIBOOT_HEADER_CHECKSUM      <span class="kw4"> equ</span>     <span class="sy0">-</span><span class="br0">&#40;</span>MULTIBOOT_HEADER_MAGIC <span class="sy0">+</span> MULTIBOOT_HEADER_FLAGS<span class="br0">&#41;</span>
+&#160;
+<span class="co1">;</span>
+<span class="co1">; Kernel stack size</span>
+<span class="co1">;</span>
+KERNEL_STACKSIZE               <span class="kw4"> equ</span>     <span class="nu0">0x4000</span>
+&#160;
+section <span class="sy0">.</span>text
+&#160;
+<span class="co1">;</span>
+<span class="co1">; Multiboot header</span>
+<span class="co1">;</span>
+<span class="kw4">align</span> <span class="nu0">4</span>
+<span class="kw4">dd</span> MULTIBOOT_HEADER_MAGIC
+<span class="kw4">dd</span> MULTIBOOT_HEADER_FLAGS
+<span class="kw4">dd</span> MULTIBOOT_HEADER_CHECKSUM
+&#160;
+<span class="co1">;</span>
+<span class="co1">; Entrypoint</span>
+<span class="co1">;</span>
+kstart<span class="sy0">:</span>
+        <span class="kw1">mov</span> <span class="kw3">esp</span><span class="sy0">,</span> KERNEL_STACK<span class="sy0">+</span>KERNEL_STACKSIZE  <span class="co1">;Create kernel stack</span>
+        <span class="kw1">push</span> <span class="kw3">eax</span>                                <span class="co1">;Multiboot magic number</span>
+        <span class="kw1">push</span> <span class="kw3">ebx</span>                                <span class="co1">;Multiboot info</span>
+        <span class="kw1">call</span> kmain                              <span class="co1">;Call kernel entrypoint</span>
+        <span class="kw1">cli</span>                                     <span class="co1">;Clear interrupts</span>
+        <span class="kw1">hlt</span>                                     <span class="co1">;Halt machine</span>
+&#160;
+section <span class="sy0">.</span>bss
+&#160;
+<span class="co1">;</span>
+<span class="co1">; Kernel stack location</span>
+<span class="co1">;</span>
+<span class="kw4">align</span> <span class="nu0">32</span>
+KERNEL_STACK<span class="sy0">:</span>
+        resb KERNEL_STACKSIZE</pre></div></div>
+<h3> <span class="mw-headline" id="kernel.pas"> kernel.pas </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="pascal source-pascal"><pre class="de1"><span class="coMULTI">{
+/////////////////////////////////////////////////////////
+//                                                     //
+//               Freepascal barebone OS                //
+//                      kernel.pas                     //
+//                                                     //
+/////////////////////////////////////////////////////////
+//
+//      By:             De Deyn Kim &lt;kimdedeyn@skynet.be&gt;
+//      License:        Public domain
+//
+}</span>
+&#160;
+<span class="kw1">unit</span> kernel;
+&#160;
+<span class="kw1">interface</span>
+&#160;
+<span class="kw1">uses</span>
+        multiboot<span class="sy0">,</span>
+        console;
+&#160;
+<span class="kw1">procedure</span> kmain<span class="br0">&#40;</span>mbinfo<span class="sy0">:</span> Pmultiboot_info_t; mbmagic<span class="sy0">:</span> DWORD<span class="br0">&#41;</span>; <span class="kw1">stdcall</span>;
+&#160;
+<span class="kw1">implementation</span>
+&#160;
+<span class="kw1">procedure</span> kmain<span class="br0">&#40;</span>mbinfo<span class="sy0">:</span> Pmultiboot_info_t; mbmagic<span class="sy0">:</span> DWORD<span class="br0">&#41;</span>; <span class="kw1">stdcall</span>; <span class="br0">&#91;</span><span class="kw1">public</span><span class="sy0">,</span> alias<span class="sy0">:</span> <span class="st_h">'kmain'</span><span class="br0">&#93;</span>;
+<span class="kw1">begin</span>
+        kclearscreen<span class="br0">&#40;</span><span class="br0">&#41;</span>;
+        kwritestr<span class="br0">&#40;</span><span class="st_h">'Freepascal barebone OS booted!'</span><span class="br0">&#41;</span>;
+        xpos <span class="sy0">:=</span> <span class="nu0">0</span>;
+        ypos <span class="sy0">+=</span> <span class="nu0">1</span>;
+&#160;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>mbmagic &lt;&gt; MULTIBOOT_BOOTLOADER_MAGIC<span class="br0">&#41;</span> <span class="kw1">then</span>
+        <span class="kw1">begin</span>
+                kwritestr<span class="br0">&#40;</span><span class="st_h">'Halting system, a multiboot-compliant boot loader needed!'</span><span class="br0">&#41;</span>;
+                <span class="kw1">asm</span>
+                        cli
+                        hlt
+                <span class="kw1">end</span>;
+        <span class="kw1">end</span>
+        <span class="kw1">else</span>
+        <span class="kw1">begin</span>
+                kwritestr<span class="br0">&#40;</span><span class="st_h">'Booted by a multiboot-compliant boot loader!'</span><span class="br0">&#41;</span>;
+                xpos <span class="sy0">:=</span> <span class="nu0">0</span>;
+                ypos <span class="sy0">+=</span> <span class="nu0">2</span>;
+                kwritestr<span class="br0">&#40;</span><span class="st_h">'Multiboot information:'</span><span class="br0">&#41;</span>;
+                xpos <span class="sy0">:=</span> <span class="nu0">0</span>;
+                ypos <span class="sy0">+=</span> <span class="nu0">2</span>;
+                kwritestr<span class="br0">&#40;</span><span class="st_h">'                       Lower memory  = '</span><span class="br0">&#41;</span>;
+                kwriteint<span class="br0">&#40;</span>mbinfo^.<span class="me1">mem_lower</span><span class="br0">&#41;</span>;
+                kwritestr<span class="br0">&#40;</span><span class="st_h">'KB'</span><span class="br0">&#41;</span>;
+                xpos <span class="sy0">:=</span> <span class="nu0">0</span>;
+                ypos <span class="sy0">+=</span> <span class="nu0">1</span>;
+                kwritestr<span class="br0">&#40;</span><span class="st_h">'                       Higher memory = '</span><span class="br0">&#41;</span>;
+                kwriteint<span class="br0">&#40;</span>mbinfo^.<span class="me1">mem_upper</span><span class="br0">&#41;</span>;
+                kwritestr<span class="br0">&#40;</span><span class="st_h">'KB'</span><span class="br0">&#41;</span>;
+                xpos <span class="sy0">:=</span> <span class="nu0">0</span>;
+                ypos <span class="sy0">+=</span> <span class="nu0">1</span>;
+                kwritestr<span class="br0">&#40;</span><span class="st_h">'                       Total memory  = '</span><span class="br0">&#41;</span>;
+                kwriteint<span class="br0">&#40;</span><span class="br0">&#40;</span><span class="br0">&#40;</span>mbinfo^.<span class="me1">mem_upper</span> <span class="sy0">+</span> <span class="nu0">1000</span><span class="br0">&#41;</span> <span class="kw1">div</span> <span class="nu0">1024</span><span class="br0">&#41;</span> <span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span>;
+                kwritestr<span class="br0">&#40;</span><span class="st_h">'MB'</span><span class="br0">&#41;</span>;
+        <span class="kw1">end</span>;
+&#160;
+        <span class="kw1">asm</span>
+                @loop<span class="sy0">:</span>
+                jmp @loop
+        <span class="kw1">end</span>;
+<span class="kw1">end</span>;
+&#160;
+<span class="kw1">end</span>.</pre></div></div>
+<h3> <span class="mw-headline" id="console.pas"> console.pas </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="pascal source-pascal"><pre class="de1"><span class="coMULTI">{
+/////////////////////////////////////////////////////////
+//                                                     //
+//               Freepascal barebone OS                //
+//                       console.pas                   //
+//                                                     //
+/////////////////////////////////////////////////////////
+//
+//      By:             De Deyn Kim &lt;kimdedeyn@skynet.be&gt;
+//      License:        Public domain
+//
+}</span>
+&#160;
+<span class="kw1">unit</span> console;
+&#160;
+<span class="kw1">interface</span>
+&#160;
+<span class="kw1">var</span>
+        xpos<span class="sy0">:</span> <span class="kw4">Integer</span> <span class="sy0">=</span> <span class="nu0">0</span>;
+        ypos<span class="sy0">:</span> <span class="kw4">Integer</span> <span class="sy0">=</span> <span class="nu0">0</span>;
+&#160;
+<span class="kw1">procedure</span> kclearscreen<span class="br0">&#40;</span><span class="br0">&#41;</span>;
+<span class="kw1">procedure</span> kwritechr<span class="br0">&#40;</span>c<span class="sy0">:</span> <span class="kw4">Char</span><span class="br0">&#41;</span>;
+<span class="kw1">procedure</span> kwritestr<span class="br0">&#40;</span>s<span class="sy0">:</span> PChar<span class="br0">&#41;</span>;
+<span class="kw1">procedure</span> kwriteint<span class="br0">&#40;</span>i<span class="sy0">:</span> <span class="kw4">Integer</span><span class="br0">&#41;</span>;
+<span class="kw1">procedure</span> kwritedword<span class="br0">&#40;</span>i<span class="sy0">:</span> DWORD<span class="br0">&#41;</span>;
+&#160;
+<span class="kw1">implementation</span>
+&#160;
+<span class="kw1">var</span>
+        vidmem<span class="sy0">:</span> PChar <span class="sy0">=</span> PChar<span class="br0">&#40;</span>$b8000<span class="br0">&#41;</span>;
+&#160;
+<span class="kw1">procedure</span> kclearscreen<span class="br0">&#40;</span><span class="br0">&#41;</span>; <span class="br0">&#91;</span><span class="kw1">public</span><span class="sy0">,</span> alias<span class="sy0">:</span> <span class="st_h">'kclearscreen'</span><span class="br0">&#93;</span>;
+<span class="kw1">var</span>
+        i<span class="sy0">:</span> <span class="kw4">Integer</span>;
+<span class="kw1">begin</span>
+        <span class="kw1">for</span> i <span class="sy0">:=</span> <span class="nu0">0</span> <span class="kw1">to</span> <span class="nu0">3999</span> <span class="kw1">do</span>
+                vidmem<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">:=</span> #<span class="nu0">0</span>;
+<span class="kw1">end</span>;
+&#160;
+<span class="kw1">procedure</span> kwritechr<span class="br0">&#40;</span>c<span class="sy0">:</span> <span class="kw4">Char</span><span class="br0">&#41;</span>; <span class="br0">&#91;</span><span class="kw1">public</span><span class="sy0">,</span> alias<span class="sy0">:</span> <span class="st_h">'kwritechr'</span><span class="br0">&#93;</span>;
+<span class="kw1">var</span>
+        offset<span class="sy0">:</span> <span class="kw4">Integer</span>;
+<span class="kw1">begin</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>ypos &gt; <span class="nu0">24</span><span class="br0">&#41;</span> <span class="kw1">then</span>
+                ypos <span class="sy0">:=</span> <span class="nu0">0</span>;
+&#160;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>xpos &gt; <span class="nu0">79</span><span class="br0">&#41;</span> <span class="kw1">then</span>
+                xpos <span class="sy0">:=</span> <span class="nu0">0</span>;
+&#160;
+        offset <span class="sy0">:=</span> <span class="br0">&#40;</span>xpos <span class="kw1">shl</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="br0">&#40;</span>ypos <span class="sy0">*</span> <span class="nu0">160</span><span class="br0">&#41;</span>;
+        vidmem<span class="br0">&#91;</span>offset<span class="br0">&#93;</span> <span class="sy0">:=</span> c;
+        offset <span class="sy0">+=</span> <span class="nu0">1</span>;
+        vidmem<span class="br0">&#91;</span>offset<span class="br0">&#93;</span> <span class="sy0">:=</span> #<span class="nu0">7</span>;
+        offset <span class="sy0">+=</span> <span class="nu0">1</span>;
+&#160;
+        xpos <span class="sy0">:=</span> <span class="br0">&#40;</span>offset <span class="kw1">mod</span> <span class="nu0">160</span><span class="br0">&#41;</span>;
+        ypos <span class="sy0">:=</span> <span class="br0">&#40;</span>offset <span class="sy0">-</span> xpos<span class="br0">&#41;</span> <span class="kw1">div</span> <span class="nu0">160</span>;
+        xpos <span class="sy0">:=</span> xpos <span class="kw1">shr</span> <span class="nu0">1</span>;
+<span class="kw1">end</span>;
+&#160;
+<span class="kw1">procedure</span> kwritestr<span class="br0">&#40;</span>s<span class="sy0">:</span> PChar<span class="br0">&#41;</span>; <span class="br0">&#91;</span><span class="kw1">public</span><span class="sy0">,</span> alias<span class="sy0">:</span> <span class="st_h">'kwritestr'</span><span class="br0">&#93;</span>;
+<span class="kw1">var</span>
+        offset<span class="sy0">,</span> i<span class="sy0">:</span> <span class="kw4">Integer</span>;
+<span class="kw1">begin</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>ypos &gt; <span class="nu0">24</span><span class="br0">&#41;</span> <span class="kw1">then</span>
+                ypos <span class="sy0">:=</span> <span class="nu0">0</span>;
+&#160;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>xpos &gt; <span class="nu0">79</span><span class="br0">&#41;</span> <span class="kw1">then</span>
+                xpos <span class="sy0">:=</span> <span class="nu0">0</span>;
+&#160;
+        offset <span class="sy0">:=</span> <span class="br0">&#40;</span>xpos <span class="kw1">shl</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="br0">&#40;</span>ypos <span class="sy0">*</span> <span class="nu0">160</span><span class="br0">&#41;</span>;
+        i <span class="sy0">:=</span> <span class="nu0">0</span>;
+&#160;
+        <span class="kw1">while</span> <span class="br0">&#40;</span>s<span class="br0">&#91;</span>i<span class="br0">&#93;</span> &lt;&gt; <span class="kw4">Char</span><span class="br0">&#40;</span>$0<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw1">do</span>
+        <span class="kw1">begin</span>
+                vidmem<span class="br0">&#91;</span>offset<span class="br0">&#93;</span> <span class="sy0">:=</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span>;
+                offset <span class="sy0">+=</span> <span class="nu0">1</span>;
+                vidmem<span class="br0">&#91;</span>offset<span class="br0">&#93;</span> <span class="sy0">:=</span> #<span class="nu0">7</span>;
+                offset <span class="sy0">+=</span> <span class="nu0">1</span>;
+                i <span class="sy0">+=</span> <span class="nu0">1</span>;
+        <span class="kw1">end</span>;
+&#160;
+        xpos <span class="sy0">:=</span> <span class="br0">&#40;</span>offset <span class="kw1">mod</span> <span class="nu0">160</span><span class="br0">&#41;</span>;
+        ypos <span class="sy0">:=</span> <span class="br0">&#40;</span>offset <span class="sy0">-</span> xpos<span class="br0">&#41;</span> <span class="kw1">div</span> <span class="nu0">160</span>;
+        xpos <span class="sy0">:=</span> xpos <span class="kw1">shr</span> <span class="nu0">1</span>;
+<span class="kw1">end</span>;
+&#160;
+<span class="kw1">procedure</span> kwriteint<span class="br0">&#40;</span>i<span class="sy0">:</span> <span class="kw4">Integer</span><span class="br0">&#41;</span>; <span class="br0">&#91;</span><span class="kw1">public</span><span class="sy0">,</span> alias<span class="sy0">:</span> <span class="st_h">'kwriteint'</span><span class="br0">&#93;</span>;
+<span class="kw1">var</span>
+        buffer<span class="sy0">:</span> <span class="kw4">array</span> <span class="br0">&#91;</span><span class="nu0">0</span>..<span class="nu0">11</span><span class="br0">&#93;</span> <span class="kw1">of</span> <span class="kw4">Char</span>;
+        str<span class="sy0">:</span> PChar;
+        digit<span class="sy0">:</span> DWORD;
+        minus<span class="sy0">:</span> <span class="kw4">Boolean</span>;
+<span class="kw1">begin</span>
+        str <span class="sy0">:=</span> @buffer<span class="br0">&#91;</span><span class="nu0">11</span><span class="br0">&#93;</span>;
+        str^ <span class="sy0">:=</span> #<span class="nu0">0</span>;
+&#160;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i &lt; <span class="nu0">0</span><span class="br0">&#41;</span> <span class="kw1">then</span>
+        <span class="kw1">begin</span>
+                digit <span class="sy0">:=</span> <span class="sy0">-</span>i;
+                minus <span class="sy0">:=</span> <span class="kw2">True</span>;
+        <span class="kw1">end</span>
+        <span class="kw1">else</span>
+        <span class="kw1">begin</span>
+                digit <span class="sy0">:=</span> i;
+                minus <span class="sy0">:=</span> <span class="kw2">False</span>;
+        <span class="kw1">end</span>;
+&#160;
+        <span class="kw1">repeat</span>
+                Dec<span class="br0">&#40;</span>str<span class="br0">&#41;</span>;
+                str^ <span class="sy0">:=</span> <span class="kw4">Char</span><span class="br0">&#40;</span><span class="br0">&#40;</span>digit <span class="kw1">mod</span> <span class="nu0">10</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="kw4">Byte</span><span class="br0">&#40;</span><span class="st_h">'0'</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+                digit <span class="sy0">:=</span> digit <span class="kw1">div</span> <span class="nu0">10</span>;
+        <span class="kw1">until</span> <span class="br0">&#40;</span>digit <span class="sy0">=</span> <span class="nu0">0</span><span class="br0">&#41;</span>;
+&#160;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>minus<span class="br0">&#41;</span> <span class="kw1">then</span>
+        <span class="kw1">begin</span>
+                Dec<span class="br0">&#40;</span>str<span class="br0">&#41;</span>;
+                str^ <span class="sy0">:=</span> <span class="st_h">'-'</span>;
+        <span class="kw1">end</span>;
+&#160;
+        kwritestr<span class="br0">&#40;</span>str<span class="br0">&#41;</span>;
+<span class="kw1">end</span>;
+&#160;
+<span class="kw1">procedure</span> kwritedword<span class="br0">&#40;</span>i<span class="sy0">:</span> DWORD<span class="br0">&#41;</span>; <span class="br0">&#91;</span><span class="kw1">public</span><span class="sy0">,</span> alias<span class="sy0">:</span> <span class="st_h">'kwritedword'</span><span class="br0">&#93;</span>;
+<span class="kw1">var</span>
+        buffer<span class="sy0">:</span> <span class="kw4">array</span> <span class="br0">&#91;</span><span class="nu0">0</span>..<span class="nu0">11</span><span class="br0">&#93;</span> <span class="kw1">of</span> <span class="kw4">Char</span>;
+        str<span class="sy0">:</span> PChar;
+        digit<span class="sy0">:</span> DWORD;
+<span class="kw1">begin</span>
+        <span class="kw1">for</span> digit <span class="sy0">:=</span> <span class="nu0">0</span> <span class="kw1">to</span> <span class="nu0">10</span> <span class="kw1">do</span>
+                buffer<span class="br0">&#91;</span>digit<span class="br0">&#93;</span> <span class="sy0">:=</span> <span class="st_h">'0'</span>;
+&#160;
+        str <span class="sy0">:=</span> @buffer<span class="br0">&#91;</span><span class="nu0">11</span><span class="br0">&#93;</span>;
+        str^ <span class="sy0">:=</span> #<span class="nu0">0</span>;
+&#160;
+        digit <span class="sy0">:=</span> i;
+        <span class="kw1">repeat</span>
+                Dec<span class="br0">&#40;</span>str<span class="br0">&#41;</span>;
+                str^ <span class="sy0">:=</span> <span class="kw4">Char</span><span class="br0">&#40;</span><span class="br0">&#40;</span>digit <span class="kw1">mod</span> <span class="nu0">10</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="kw4">Byte</span><span class="br0">&#40;</span><span class="st_h">'0'</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+                digit <span class="sy0">:=</span> digit <span class="kw1">div</span> <span class="nu0">10</span>;
+        <span class="kw1">until</span> <span class="br0">&#40;</span>digit <span class="sy0">=</span> <span class="nu0">0</span><span class="br0">&#41;</span>;
+&#160;
+        kwritestr<span class="br0">&#40;</span>@Buffer<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>;
+<span class="kw1">end</span>;
+&#160;
+<span class="kw1">end</span>.</pre></div></div>
+<h3> <span class="mw-headline" id="multiboot.pas"> multiboot.pas </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="pascal source-pascal"><pre class="de1"><span class="kw1">unit</span> multiboot;
+&#160;
+<span class="kw1">interface</span>
+&#160;
+<span class="kw1">const</span>
+        KERNEL_STACKSIZE <span class="sy0">=</span> $4000;
+&#160;
+        MULTIBOOT_BOOTLOADER_MAGIC <span class="sy0">=</span> $2BADB002;
+&#160;
+<span class="kw1">type</span>
+        Pelf_section_header_table_t <span class="sy0">=</span> ^elf_section_header_table_t;
+        elf_section_header_table_t <span class="sy0">=</span> <span class="kw4">packed</span> <span class="kw4">record</span>
+          num<span class="sy0">:</span> DWORD;
+          size<span class="sy0">:</span> DWORD;
+          addr<span class="sy0">:</span> DWORD;
+          shndx<span class="sy0">:</span> DWORD;
+        <span class="kw1">end</span>;
+&#160;
+        Pmultiboot_info_t <span class="sy0">=</span> ^multiboot_info_t;
+        multiboot_info_t <span class="sy0">=</span> <span class="kw4">packed</span> <span class="kw4">record</span>
+          flags<span class="sy0">:</span> DWORD;
+          mem_lower<span class="sy0">:</span> DWORD; <span class="coMULTI">{ Amount of memory available below 1mb }</span>
+          mem_upper<span class="sy0">:</span> DWORD; <span class="coMULTI">{ Amount of memory available above 1mb }</span>
+          boot_device<span class="sy0">:</span> DWORD;
+          cmdline<span class="sy0">:</span> DWORD;
+          mods_count<span class="sy0">:</span> DWORD;
+          mods_addr<span class="sy0">:</span> DWORD;
+          elf_sec<span class="sy0">:</span> elf_section_header_table_t;
+          mmap_length<span class="sy0">:</span> DWORD;
+          mmap_addr<span class="sy0">:</span> DWORD;
+        <span class="kw1">end</span>;
+&#160;
+        Pmodule_t <span class="sy0">=</span> ^module_t;
+        module_t <span class="sy0">=</span> <span class="kw4">packed</span> <span class="kw4">record</span>
+          mod_start<span class="sy0">:</span> DWORD;
+          mod_end<span class="sy0">:</span> DWORD;
+          <span class="kw1">name</span><span class="sy0">:</span> DWORD;
+          reserved<span class="sy0">:</span> DWORD;
+        <span class="kw1">end</span>;
+&#160;
+        Pmemory_map_t <span class="sy0">=</span> ^memory_map_t;
+        memory_map_t <span class="sy0">=</span> <span class="kw4">packed</span> <span class="kw4">record</span>
+          size<span class="sy0">:</span> DWORD;
+          <span class="coMULTI">{ You can declare these two as a single qword if your compiler supports it }</span>
+          base_addr_low<span class="sy0">:</span> DWORD;
+          base_addr_high<span class="sy0">:</span> DWORD;
+          <span class="coMULTI">{ And again, these can be made into one qword variable. }</span>
+          length_low<span class="sy0">:</span> DWORD;
+          length_high<span class="sy0">:</span> DWORD;
+          mtype<span class="sy0">:</span> DWORD;
+        <span class="kw1">end</span>;
+&#160;
+<span class="kw1">implementation</span>
+&#160;
+<span class="kw1">end</span>.</pre></div></div>
+<h3> <span class="mw-headline" id="system.pas"> system.pas </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="pascal source-pascal"><pre class="de1"><span class="kw1">unit</span> system;
+&#160;
+<span class="kw1">interface</span>
+&#160;
+<span class="kw1">type</span>
+ cardinal <span class="sy0">=</span> <span class="nu0">0</span>..$FFFFFFFF;
+ hresult <span class="sy0">=</span> cardinal;
+ dword <span class="sy0">=</span> cardinal;
+ <span class="kw4">integer</span> <span class="sy0">=</span> <span class="kw4">longint</span>;
+&#160;
+ pchar <span class="sy0">=</span> ^char;
+&#160;
+<span class="kw1">implementation</span>
+&#160;
+<span class="kw1">end</span>.</pre></div></div>
+<h3> <span class="mw-headline" id="Linker_script"> Linker script </span></h3>
+<p>linker.script
+</p>
+<pre>
+ENTRY(kstart)
+SECTIONS
+{
+  .text  0x100000&#160;:
+  {
+    text = .; _text = .; __text = .;
+    *(.text)
+    . = ALIGN(4096);
+  }
+  .data &#160;:
+  {
+    data = .; _data = .; __data = .;
+    *(.data)
+    kimage_text = .;
+    LONG(text);
+    kimage_data = .;
+    LONG(data);
+    kimage_bss = .;
+    LONG(bss);
+    kimage_end = .;
+    LONG(end);
+    . = ALIGN(4096);
+  }
+  .bss &#160;:
+  {
+    bss = .; _bss = .; __bss = .;
+    *(.bss)
+    . = ALIGN(4096);
+  }
+  end = .; _end = .; __end = .;
+}
+</pre>
+<h3> <span class="mw-headline" id="Compiling_and_Linking_the_modules"> Compiling and Linking the modules </span></h3>
+<p>Assemble stub.asm with:
+</p>
+<pre>nasm -f elf stub.asm -o stub.o
+</pre>
+<p>The Pascal modules with:
+</p>
+<pre>fpc -Aelf -n -O3 -Op3 -Si -Sc -Sg -Xd -CX -XXs -Rintel -Tlinux kernel.pas
+</pre>
+<ul><li> -Aelf - instructs the internal fpc assembler to output an ELF object.;
+</li><li> -n - ignores fpc.cfg;
+</li><li> -O3 - perform level 3 optimizations;
+</li><li> -Op3 - tune code for PentiumPro / P-II / Cyrix 6x86 / K6 (TM);
+</li><li> -Si - enable C++ style INLINE keyword;
+</li><li> -Sc - enable C style operators;
+</li><li> -Sg - enable support for labels;
+</li><li> -Xd - tells the compiler to forget the standard library path;
+</li><li> -CX - tells the compiler to create smartlinkable units
+</li><li> -XXs - tells the compiler to do smartlinking (-XX) and debugging symbols stripping (-Xs)
+</li><li> -Rintel - sets the inline assembly syntax to intel style;
+</li><li> -Tlinux - specifies that the target operating system is Linux. (Don't even ask!)
+</li></ul>
+<p>Then link the whole thing with:
+</p>
+<pre>i386-elf-ld --gc-sections -s -Tlinker.script -o kernel.obj stub.o kernel.o multiboot.o system.o console.o
+</pre>
+<ul><li> --gc-sections -s, in combination with -CX -XXs above, eliminates RTTI symbols from resulting binary
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 180/1000000
+Post-expand include size: 342/2097152 bytes
+Template argument size: 52/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3055-0!*!0!!en!2!* and timestamp 20180121040016 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Pascal_Bare_Bones&amp;oldid=18338">http://wiki.osdev.org/index.php?title=Pascal_Bare_Bones&amp;oldid=18338</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_2_Tutorials" title="Category:Level 2 Tutorials">Level 2 Tutorials</a></li><li><a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Pascal_Bare_Bones" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Pascal_Bare_Bones"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Pascal_Bare_Bones&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Pascal_Bare_Bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Pascal_Bare_Bones" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Pascal_Bare_Bones&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Pascal_Bare_Bones&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Pascal_Bare_Bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Pascal_Bare_Bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Pascal_Bare_Bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Pascal_Bare_Bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Pascal_Bare_Bones&amp;oldid=18338" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 15 September 2015, at 02:10.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,900 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</askins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Pascal_Bare_Bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Pascal_Bare_Bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Pascal_Bare_Bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Pascal_Bare_Bones&amp;oldid=18338" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 15 September 2015, at 02:10.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,900 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

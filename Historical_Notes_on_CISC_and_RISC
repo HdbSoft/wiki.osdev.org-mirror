@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Historical Notes on CISC and RISC - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Historical_Notes_on_CISC_and_RISC", "wgTitle": "Historical Notes on CISC and RISC", "wgCurRevisionId": 20628, "wgArticleId": 3850, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Historical_Notes_on_CISC_and_RISC action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Historical Notes on CISC and RISC</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Historical_Notes_on_CISC_and_RISC#mw-head">navigation</a>,
+					<a href="Historical_Notes_on_CISC_and_RISC#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>(<b>NB</b>: I originally wrote this for some of the other students in an assembly language class I took in Fall 2006, and posted shortly oafterwards to a <a rel="nofollow" class="external text" href="http://forums.devshed.com/programming-languages-139/assembly-historical-notes-cisc-vs-risc-427110.html">thread on DevShed</a>. While it is not about OS-dev <i>per se</i>, it may help clarify some of the puzzling aspects of assembly language for some members. - <a href="http://wiki.osdev.org/User:Schol-r-lea" title="User:Schol-r-lea">User:schol-r-lea</a>)
+</p><p>It is somewhat ironic that many Assembly language instructors today have found it easier to teach assembly programming in a RISC architecture such as MIPS or ARM, rather than in the ubiquitous but far more complex x86 PC system: historically, it was the CISC (Complex Instruction Set Computer) designs which are generally associated with extensive assembly language programming, while the RISC (Reduced Instruction Set Computer) designs are explicitly intended to make compiling code from a high-level language easier, with the expectation that assembly language would be rarely used except for in the operating system.
+</p><p>To understand why and how this reversal came about, you need to know a bit of history. When stored-program computers based on the Von Neumann architecture were first being developed in the late 1940s and early 1950s, the size and complexity of the hardware (which was much more diverse than today, using such disparate technologies as mercury delay lines, CRT-phosphor memories, magnetic drums, wire and tape recorders, ferromagnetic cores, and the ever-present vacuum tubes) meant that the hardware capacities were extremely limited; it was not uncommon for even a large machine to have only one or two registers and a main memory of a few thousand words (which varied in size from machine to machine). The instruction sets were equally constrained, and often had special-purpose instructions for connecting to the peripherals, taking up the already small instruction space. 
+</p><p>For example, the 18-bit Lincoln Labs TX-0 (one of the first transistor-based systems designed) had a grand total of four primary instructions (though one of these was a kind of escape code that told it to use the following word as an instruction from a different group of special-purpose operations) and two registers, X and Y. Many of these designs had what would today be considered poorly developed instruction sets, full of special cases, lacking useful instructions<sup><a href="Historical_Notes_on_CISC_and_RISC#oisc" title="Historical Notes on CISC and RISC">1</a></sup>, and including instructions that were of little use. 
+</p><p>Generally speaking, these early designs had only a single special-purpose register, called the accumulator, on which it could perform most of the common operations such as addition or subtraction; the other operand, if any, usually was either in main memory, or in another special-purpose register called the source, and the result would remain in the accumulator (hence the name).
+</p><p>As the designers began to develop more effective architectural principles based on the success and failures of earlier efforts, hardware became smaller and less expensive, which in turn allowed for greater freedom in the CPU design, so the complexity of the systems grew; by 1966, the PDP-6, a typical design of the time, had sixteen 36-bit general-purpose registers, plus a stack register and frame register. The instruction sets became more complex as well; since a significant percentage of programming even into the 1970s was done in assembly language, it was thought that the instruction sets should be 'rich', that is, they should have a special instruction for nearly every common operation the programmer would want to use. 
+</p><p>This culminated with the 32-bit VAX-11 series of minicomputers and mainframes, which had 256 primary instructions, including ones for polynomial evaluation, trigonometric functions, and CRC calculation. Many of these instructions had multiple addressing modes, so that they could operate on registers, on main memory, or some combination thereof; while this increased the convenience of assembly programming, it also meant that there were several special cases the programmer had to be aware of, and it complicated the CPU design substantially.
+</p><p>To provide these instructions, designers began to use 'microcode', which was a set of what could be called firmware-encoded macro instructions that would be handled by the CPU itself. The complex instructions would get broken down into simpler instructions internally, which the programmers wouldn't need to be aware of, and executed as if they were a fixed part of the hardware. Such instructions would often take several system clock cycles to run, and in most processors, there was no pipelining in the modern sense - the system would have to wait until the each instruction was finished before it began processing the next one.
+</p><p>About the time the VAX was being designed, four other things were happening that would change this attitude. First, high-level languages were becoming the primary method of programming, meaning that the baroque instruction sets of the then-current CPUs were becoming unnecessary. 
+</p><p>Second, assembly language programmers were noting that in the majority of programs, whether in assembly or in a compiled language, only a handful of instructions were being used: few programs needed a CRC instruction, and hardly any programmers were familiar enough with the entire VAX instruction set to know that the instruction existed and how to use it. A side aspect of this is that the more complex instruction sets were increasingly difficult to learn and to teach. 
+</p><p>Third, computer hardware design had advanced to the point where graduate courses in CPU design were being offered; such courses naturally enough stuck to very simple and regular designs, which they found actually outperformed comparable complex systems (though professionally-constructed CPUs often used techniques which were patented or trade secrets, skewing the results when comparing the student designs to the commercial ones). They especially noted that the operations that worked directly on memory were generally slower than if one instead loaded the values into registers, performed several operations on those registers, and then stored the results back into memory. 
+</p><p>Finally, the advent of single chip microprocessors meant that it would soon be possible to mass-produce inexpensive computers for a fraction of the cost of minis and mainframes. Early on, these were limited by the capabilities of the hardware in much the same ways the first generation of CPUs were (and some of the design mistakes of the first generation were repeated as well), but the technology soon grew beyond anyone's expectations, and in some ways, beyond the abilities of the designers to predict what they would later need to support.
+</p><p>This last part had some major repercussions, especially regarding some of the design decisions as microprocessors became more powerful. Chief amongst these was the decision by Intel to try and extend the 8-bit <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Intel_8080">8080</a> design into a new 16-bit design, the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Intel_8086">8086</a>; they bent over backwards to make the CPU as familiar as possible to programmers of the older chip, with the result that the design ended up with some unnecessary complications and limitations, especially in how it addresses larger sections of memory<sup><a href="Historical_Notes_on_CISC_and_RISC#segmentation" title="Historical Notes on CISC and RISC">2</a></sup> Also, because the designers had given the system only a small number of registers, most of the operations have several complicated addressing modes to avoid running out of registers.
+</p><p>The fact that this processor was selected for the IBM PC, which would soon become the dominant platform, meant that these weaknesses were of critical importance to millions of users. This was further exacerbated when they extended the design still further with the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Intel_80286">80286</a>, which now needed a separate 'protected mode' to access its full abilities while retaining 'normal mode' for backwards compatibility. Some of the design flaws were resolved in the next design, the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Intel_80386">80386</a>, but at the cost of exponentially increasing complexity both of the chip itself and of assembly programming for it.
+</p><p>Meanwhile, other chip designers were going in other directions. One, Motorola, started over with a classic 'big' design, the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Motorola_68000">Motorola 68000</a>, which resembled a scaled-down version of the VAX in many ways, with 16 general-purpose registers and a complicated instruction set. This would become the CPU for several successful workstations, as well as the original <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Macintosh">Apple Macintosh</a>, <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Atari_ST">Atari ST</a>, and <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Amiga">Commodore Amiga</a> home computer lines. Later design extensions would complicate this, though not to the extent that the 80x86 design would be.
+</p><p>Still, it was growing clear that the complex instruction sets were growing counter-productive. Thus, many chip designers decided to go in the opposite direction: minimal instruction sets, no microcoding, load/store architectures with few if any operations working on memory directly, large register sets which could be used to avoid accessing main memory whenever possible, and an emphasis on supporting high-level languages rather than assembly programing. This new idea, which was called RISC (reduced instruction set computer), would be the basis several new CPU designs, including the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/MIPS_instruction_set">MIPS</a> (and it's successor the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/DLX">DLX</a>), the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/SPARC">Sun SPARC</a>, the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/ARM_architecture">Acorn ARM</a>, the IBM <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/IBM_POWER_microprocessors">POWER</a> architecture<sup><a href="Historical_Notes_on_CISC_and_RISC#powerpc" title="Historical Notes on CISC and RISC">3</a></sup>, and the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/DEC_Alpha">DEC Alpha</a>. Of these, all but the Alpha remain in use today for certain specialized areas of use, and the ARM in particular has become the <i>de facto</i> standard for mobile computing, though for the most part the domination by the Windows-x86 system has forced them out of the market for home and business systems.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Historical_Notes_on_CISC_and_RISC#Footnotes"><span class="tocnumber">1</span> <span class="toctext">Footnotes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Historical_Notes_on_CISC_and_RISC#oisc"><span class="tocnumber">1.1</span> <span class="toctext">oisc</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Historical_Notes_on_CISC_and_RISC#segmentation"><span class="tocnumber">1.2</span> <span class="toctext">segmentation</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Historical_Notes_on_CISC_and_RISC#powerpc"><span class="tocnumber">1.3</span> <span class="toctext">powerpc</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Footnotes"> Footnotes </span></h2>
+<h3> <span class="mw-headline" id="oisc">oisc</span></h3>
+<p>In principle, only a single operation, 'subtract two memory values and branch if the result is negative' (or several variants on this) is sufficient to allow a Random Access Machine to perform all Turing-computable calculations). There are even (simulated) machines which are designed on this principle, such as the OISC. In practice, of course, such a system would be both tedious and wasteful, especially for the more commonly used operations such as integer arithmetic.
+</p>
+<h3> <span class="mw-headline" id="segmentation">segmentation</span></h3>
+<p>The specific issue is the use of 'memory segmentation', which was intended to provide a 20-bit address space while still only using 16-bit addressing for most purposes. It worked by having a separate set of segment registers, which pointed to 64K regions overlapping each other at 16-byte intervals. The addresses are formed by taking the segment address and a 16-bit offset, which are equivalent to the 8080's addresses, adding the two values with a 4-bit displacement to get the 20-bit address. Most instructions could use one of the segment registers as a default value for code or data, and use just the offsets in the instruction stream. The particular overlap was set at 4 bits because using more than 20 address pins was determined to be prohibitively expensive at the time, and would make the Dual-Inline Package design too large. It was assumed that a 1 MiB address space would be sufficient for a CPU meant as a microcontroller with a limited design lifespan rather than a general-purpose system that would be in use 40 years later. This segmentation system persists as 'Real mode' even in current x86 models.
+</p>
+<h3> <span class="mw-headline" id="powerpc">powerpc</span></h3>
+<p>used in modified form as the PowerPC, which was used in Macintoshen from 1994 to 2006 and in some IBM OS/2 systems from 1992 to 1996. The POWER architecture itself is primarily used in larger multiprocessor systems such as <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)">Deep Blue</a> and <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Watson_(computer)">Watson</a>.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 28/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3850-0!*!0!!en!*!* and timestamp 20180121054246 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Historical_Notes_on_CISC_and_RISC&amp;oldid=20628">http://wiki.osdev.org/index.php?title=Historical_Notes_on_CISC_and_RISC&amp;oldid=20628</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Historical_Notes_on_CISC_and_RISC" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Historical_Notes_on_CISC_and_RISC"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Historical_Notes_on_CISC_and_RISC&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Historical_Notes_on_CISC_and_RISC#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Historical_Notes_on_CISC_and_RISC" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Historical_Notes_on_CISC_and_RISC&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Historical_Notes_on_CISC_and_RISC&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Historical_Notes_on_CISC_and_RISC#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Historical_Notes_on_CISC_and_RISC" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Historical_Notes_on_CISC_and_RISC" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Historical_Notes_on_CISC_and_RISC&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Historical_Notes_on_CISC_and_RISC&amp;oldid=20628" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 March 2017, at 09:54.</li>
+											<li id="footer-info-viewcount">This page has been accessed 8,393 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint"skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Historical_Notes_on_CISC_and_RISC" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Historical_Notes_on_CISC_and_RISC" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Historical_Notes_on_CISC_and_RISC&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Historical_Notes_on_CISC_and_RISC&amp;oldid=20628" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 March 2017, at 09:54.</li>
+											<li id="footer-info-viewcount">This page has been accessed 8,393 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

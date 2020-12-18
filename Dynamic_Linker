@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Dynamic Linker - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Dynamic_Linker", "wgTitle": "Dynamic Linker", "wgCurRevisionId": 20066, "wgArticleId": 4000, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Dynamic_Linker action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Dynamic Linker</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Dynamic_Linker#mw-head">navigation</a>,
+					<a href="Dynamic_Linker#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Sooner or later you'll reach the point where you want shared libraries. Here we won't discuss the difference between static and dynamic linking, you should be already familiar with that.
+</p><p>This article is about <a href="ELF" title="ELF">ELF</a> on x86_64 architecture, but can be easily adopted to other systems as the concepts are similar.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Dynamic_Linker#Home_work"><span class="tocnumber">1</span> <span class="toctext">Home work</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Dynamic_Linker#Memory_Layout"><span class="tocnumber">1.1</span> <span class="toctext">Memory Layout</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Dynamic_Linker#Segment_Local_Calls"><span class="tocnumber">1.2</span> <span class="toctext">Segment Local Calls</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Dynamic_Linker#Inter-segment_Calls"><span class="tocnumber">1.3</span> <span class="toctext">Inter-segment Calls</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Dynamic_Linker#Implementing_a_dynamic_linker"><span class="tocnumber">2</span> <span class="toctext">Implementing a dynamic linker</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Dynamic_Linker#Locating_the_GOT"><span class="tocnumber">2.1</span> <span class="toctext">Locating the GOT</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Dynamic_Linker#What.27s_in_the_GOT.3F"><span class="tocnumber">2.2</span> <span class="toctext">What's in the GOT?</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Dynamic_Linker#Where_are_my_libraries.3F"><span class="tocnumber">2.3</span> <span class="toctext">Where are my libraries?</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Dynamic_Linker#Symbol_look_up"><span class="tocnumber">2.4</span> <span class="toctext">Symbol look up</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="Dynamic_Linker#Gimme_code.21"><span class="tocnumber">3</span> <span class="toctext">Gimme code!</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Dynamic_Linker#Summary"><span class="tocnumber">4</span> <span class="toctext">Summary</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Home_work"> Home work </span></h2>
+<h3> <span class="mw-headline" id="Memory_Layout"> Memory Layout </span></h3>
+<p>I suppose you have created a new, empty address space, and you've already loaded the executable in it. I also assume that you've loaded the libc shared library after the executable's segment. And now you're stuck, because you don't know how to call printf from the executable.
+</p><p>As your executable was loaded by you, you should know the virtual address of ELF magic bytes in the memory. Use that for start.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">Elf64_Ehdr <span class="sy0">*</span>ehdr <span class="sy0">=</span> <span class="br0">&#40;</span>Elf64_Ehdr <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>ptr<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>kmemcmp<span class="br0">&#40;</span>ehdr<span class="sy0">-&gt;</span>e_ident<span class="sy0">,</span> ELFMAG<span class="sy0">,</span>SELFMAG<span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span>
+   ehdr<span class="sy0">-&gt;</span>e_ident<span class="br0">&#91;</span>EI_CLASS<span class="br0">&#93;</span> <span class="sy0">==</span> ELFCLASS64 <span class="sy0">&amp;&amp;</span>
+   ehdr<span class="sy0">-&gt;</span>e_ident<span class="br0">&#91;</span>EI_DATA<span class="br0">&#93;</span> <span class="sy0">==</span> ELFDATA2LSB <span class="sy0">&amp;&amp;</span>
+   ehdr<span class="sy0">-&gt;</span>e_type <span class="sy0">==</span> ET_EXEC <span class="sy0">&amp;&amp;</span> ehdr<span class="sy0">-&gt;</span>e_shnum <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+   <span class="co1">// We have a valid image with sections</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>First we check the magic bytes and the format of the ELF64. As an extra, we also check whether it's executable and has a non-empty section table (we'll going to need it).
+</p><p>Now let's see what the GNU toolchain does for us to find printf.
+</p>
+<h3> <span class="mw-headline" id="Segment_Local_Calls"> Segment Local Calls </span></h3>
+<p>In order to figure that out, first we should know how a segment local call works. For that we'll use a very minimal source.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> localfunction<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">int</span> main<span class="br0">&#40;</span><span class="kw4">int</span><span class="sy0">,</span><span class="kw4">char</span><span class="sy0">**</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    localfunction<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>That compiles to:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">$ objdump <span class="re5">-d</span> <span class="kw3">test</span>
+000000000020016f <span class="sy0">&lt;</span>localfunction<span class="sy0">&gt;</span>:
+  20016f:	<span class="nu0">55</span>                   	push   <span class="sy0">%</span>rbp
+  <span class="nu0">200170</span>:	<span class="nu0">48</span> <span class="nu0">89</span> e5             	mov    <span class="sy0">%</span>rsp,<span class="sy0">%</span>rbp
+  <span class="nu0">200173</span>:	<span class="nu0">90</span>                   	<span class="kw2">nop</span>
+  <span class="nu0">200174</span>:	5d                   	pop    <span class="sy0">%</span>rbp
+  <span class="nu0">200175</span>:	c3                   	retq   
+&#160;
+0000000000200176 <span class="sy0">&lt;</span>main<span class="sy0">&gt;</span>:
+  <span class="nu0">200176</span>:	<span class="nu0">55</span>                   	push   <span class="sy0">%</span>rbp
+  <span class="nu0">200177</span>:	<span class="nu0">48</span> <span class="nu0">89</span> e5             	mov    <span class="sy0">%</span>rsp,<span class="sy0">%</span>rbp
+  20017a:	b8 00 00 00 00       	mov    <span class="re4">$0</span>x0,<span class="sy0">%</span>eax
+  20017f:	e8 eb ff ff ff       	callq  20016f <span class="sy0">&lt;</span>localfunction<span class="sy0">&gt;</span>
+  <span class="nu0">200184</span>:	<span class="nu0">90</span>                   	<span class="kw2">nop</span>
+  <span class="nu0">200185</span>:	5d                   	pop    <span class="sy0">%</span>rbp
+  <span class="nu0">200186</span>:	c3                   	retq</pre></div></div>
+<p>That's trivial, a rip relative addressing is used at 20017f.
+</p>
+<h3> <span class="mw-headline" id="Inter-segment_Calls"> Inter-segment Calls </span></h3>
+<p>Now let's modify the source a bit to use a libc call:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="kw4">int</span><span class="sy0">,</span><span class="kw4">char</span><span class="sy0">**</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw3">printf</span><span class="br0">&#40;</span><span class="st0">&quot;Hello World&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>Compile and see what's generated.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">000000000020016f <span class="sy0">&lt;</span>main<span class="sy0">&gt;</span>:
+  20016f:	<span class="nu0">55</span>                   	push   <span class="sy0">%</span>rbp
+  <span class="nu0">200170</span>:	<span class="nu0">48</span> <span class="nu0">89</span> e5             	mov    <span class="sy0">%</span>rsp,<span class="sy0">%</span>rbp
+  <span class="nu0">200173</span>:	<span class="nu0">48</span> 8d 3d b6 01 00 00 	lea    0x1b6<span class="br0">&#40;</span><span class="sy0">%</span>rip<span class="br0">&#41;</span>,<span class="sy0">%</span>rdi        <span class="co0"># 200330 &lt;_DYNAMIC+0x110&gt;</span>
+  20017a:	b8 00 00 00 00       	mov    <span class="re4">$0</span>x0,<span class="sy0">%</span>eax
+  20017f:	e8 8c 00 00 00       	callq  <span class="nu0">200210</span> <span class="sy0">&lt;</span><span class="kw3">printf</span><span class="sy0">@</span>plt<span class="sy0">&gt;</span>
+  <span class="nu0">200184</span>:	<span class="nu0">90</span>                   	<span class="kw2">nop</span>
+  <span class="nu0">200185</span>:	5d                   	pop    <span class="sy0">%</span>rbp
+  <span class="nu0">200186</span>:	c3                   	retq   
+&#160;
+0000000000200200 <span class="sy0">&lt;</span><span class="kw3">printf</span><span class="sy0">@</span>plt-0x10<span class="sy0">&gt;</span>:
+  <span class="nu0">200200</span>:	ff <span class="nu0">35</span> 4a 0e 00 00    	pushq  0xe4a<span class="br0">&#40;</span><span class="sy0">%</span>rip<span class="br0">&#41;</span>        <span class="co0"># 201050 &lt;_GLOBAL_OFFSET_TABLE_+0x8&gt;</span>
+  <span class="nu0">200206</span>:	ff <span class="nu0">25</span> 4c 0e 00 00    	jmpq   <span class="sy0">*</span>0xe4c<span class="br0">&#40;</span><span class="sy0">%</span>rip<span class="br0">&#41;</span>        <span class="co0"># 201058 &lt;_GLOBAL_OFFSET_TABLE_+0x10&gt;</span>
+  20020c:	0f 1f <span class="nu0">40</span> 00          	nopl   0x0<span class="br0">&#40;</span><span class="sy0">%</span>rax<span class="br0">&#41;</span>
+&#160;
+0000000000200210 <span class="sy0">&lt;</span><span class="kw3">printf</span><span class="sy0">@</span>plt<span class="sy0">&gt;</span>:
+  <span class="nu0">200210</span>:	ff <span class="nu0">25</span> 4a 0e 00 00    	jmpq   <span class="sy0">*</span>0xe4a<span class="br0">&#40;</span><span class="sy0">%</span>rip<span class="br0">&#41;</span>        <span class="co0"># 201060 &lt;_GLOBAL_OFFSET_TABLE_+0x18&gt;</span>
+  <span class="nu0">200216</span>:	<span class="nu0">68</span> 00 00 00 00       	pushq  <span class="re4">$0</span>x0
+  20021b:	e9 e0 ff ff ff       	jmpq   <span class="nu0">200200</span> <span class="sy0">&lt;</span>main+0x91<span class="sy0">&gt;</span></pre></div></div>
+<p>What? Two more local functions? What happened here? The GNU toolchain has a concept for lazy run-time linking. That means the address is not resolved until it's referenced. To achieve that, it needs helper functions (generated to the .plt section in the text segment).
+</p><p>When the CPU executes this code, it will first call a normal local function at 20017f. That function is one of the helpers and it's purpose is to load an address from GOT+0x18 and jump to it. By default, the value points to the next instruction, which saves 0 to stack and calls the other helper function at 200200. That one is the reference resolver, and it's job is the replace the address in GOT with a relocated address.
+</p><p>Because the resolver function is not known at link time, it's address is also in GOT at 0x10. What's more it can receive one argument, stored at GOT+0x8. We can also spot that at 200206 the instruction is a jump and not a call, so resolver never returns to this helper, instead it should jump to the relocated address.
+</p>
+<h2> <span class="mw-headline" id="Implementing_a_dynamic_linker"> Implementing a dynamic linker </span></h2>
+<p>All that disassembly teach us two things about the dynamic linker:
+</p>
+<pre>1. it has to locate and write the GOT
+2. it has two parts: load time linker and a run time resolver.
+</pre>
+<p>The first part runs before the thread get's started and saves the second part's address and argument into GOT. On the other hand second part runs when the thread is already running, and saves relocated addresses into GOT. As you can see, both parts require the address of GOT. To save resources, one should not locate the GOT twice: this is where the resolver's argument came in.
+</p><p>To proceed we'll have to locate the GOT in memory and figure out what entries it has.
+</p>
+<h3> <span class="mw-headline" id="Locating_the_GOT"> Locating the GOT </span></h3>
+<p>Time to peek on what's in the object file.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">$ readelf <span class="re5">-a</span> <span class="kw3">test</span>
+Section Headers:
+  <span class="br0">&#91;</span>Nr<span class="br0">&#93;</span> Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  <span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span> <span class="st_h">'.got.plt'</span>        PROGBITS         0000000000201048  00001048
+       0000000000000020  0000000000000008  WA       <span class="nu0">0</span>     <span class="nu0">0</span>     <span class="nu0">8</span>
+&#160;
+Symbol table .symtab contains <span class="nu0">23</span> entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+    <span class="nu0">15</span>: 0000000000201048     <span class="nu0">0</span> OBJECT  LOCAL  DEFAULT   <span class="nu0">10</span> _GLOBAL_OFFSET_TABLE_</pre></div></div>
+<p>Symbol table shows that the GOT is at 201048. We can also see the same value in the section headers at '.got.plt'. That means we don't have to resolve symbols in order to get GOT's address which simplifies the first part. We can also learn that the GOT is 32 (0x20) bytes long in our example.
+</p>
+<h3> <span class="mw-headline" id="What.27s_in_the_GOT.3F"> What's in the GOT? </span></h3>
+<p>We already know that
+</p>
+<pre>1. GOT+0x0 entry is unused
+2. GOT+0x8 is an argument to second part
+3. GOT+0x10 is function reference to second part
+</pre>
+<p>But what about the rest, starting at 201060 in our example? Here we have only one reference so it's obvious, but what if we have more references? How should we know which symbol is associated to which entry?
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">$ readelf <span class="re5">-a</span> <span class="kw3">test</span>
+Section Headers:
+  <span class="br0">&#91;</span>Nr<span class="br0">&#93;</span> Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  <span class="br0">&#91;</span> <span class="nu0">4</span><span class="br0">&#93;</span> <span class="st_h">'.rela.plt'</span>       RELA             00000000002001e8  000001e8
+       0000000000000018  0000000000000018  AI       <span class="nu0">2</span>    <span class="nu0">10</span>     <span class="nu0">8</span>
+&#160;
+Relocation section .rela.plt at offset 0x1e8 contains <span class="nu0">1</span> entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000201060  000100000007 R_X86_64_JUMP_SLO 0000000000000000 <span class="kw3">printf</span> + <span class="nu0">0</span></pre></div></div>
+<p>How convenient that another table is also recorded in the section headers. It's called '.rela.plt' and describes exactly that. 
+</p>
+<h3> <span class="mw-headline" id="Where_are_my_libraries.3F"> Where are my libraries? </span></h3>
+<p>So far we assumed that shared libraries are already loaded. It's the case with libc, but how do we know what other shared libraries the executable wants?
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">$ readelf <span class="re5">-a</span> <span class="kw3">test</span>
+Section Headers:
+  <span class="br0">&#91;</span>Nr<span class="br0">&#93;</span> Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  <span class="br0">&#91;</span> <span class="nu0">6</span><span class="br0">&#93;</span> <span class="st_h">'.dynamic'</span>        DYNAMIC          0000000000200220  00000220
+       0000000000000110  0000000000000010  WA       <span class="nu0">3</span>     <span class="nu0">0</span>     <span class="nu0">8</span>
+&#160;
+Dynamic section at offset 0x220 contains <span class="nu0">12</span> entries:
+  Tag        Type                         Name<span class="sy0">/</span>Value
+ 0x0000000000000001 <span class="br0">&#40;</span>NEEDED<span class="br0">&#41;</span>             Shared library: <span class="br0">&#91;</span>libc.so<span class="br0">&#93;</span></pre></div></div>
+<p>Not surprising that the answer lies in the section header again. There's a table pointer called '.dynamic'. That table has several records, but what we really interested in is the ones marked by "NEEDED".
+</p>
+<h3> <span class="mw-headline" id="Symbol_look_up"> Symbol look up </span></h3>
+<p>To find out printf's address we should locate it's symbol first in the shared library.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">$ readelf <span class="re5">-a</span> libc.so 
+Section Headers:
+  <span class="br0">&#91;</span>Nr<span class="br0">&#93;</span> Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  <span class="br0">&#91;</span> <span class="nu0">2</span><span class="br0">&#93;</span> <span class="st_h">'.dynsym'</span>         DYNSYM           0000000100000218  00000218
+       00000000000003c0  0000000000000018   A       <span class="nu0">3</span>     <span class="nu0">1</span>     <span class="nu0">8</span>
+  <span class="br0">&#91;</span> <span class="nu0">3</span><span class="br0">&#93;</span> <span class="st_h">'.dynstr'</span>         STRTAB           00000001000005d8  000005d8
+       0000000000000124  0000000000000000   A       <span class="nu0">0</span>     <span class="nu0">0</span>     <span class="nu0">1</span>
+&#160;
+Symbol table .dynsym contains <span class="nu0">40</span> entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     <span class="nu0">8</span>: 0000000100000175    <span class="nu0">93</span> FUNC    GLOBAL DEFAULT    <span class="nu0">1</span> <span class="kw3">printf</span></pre></div></div>
+<p>Bingo! It is 100000175 in our example.
+</p>
+<h2> <span class="mw-headline" id="Gimme_code.21"> Gimme code! </span></h2>
+<p>I've put all the above together in a very simple example, see <a rel="nofollow" class="external text" href="https://github.com/bztsrc/osz/blob/master/tools/elftool.c">elftool.c</a> on github.
+</p><p>When I run it on the executable it gives:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">$ <span class="kw2">gcc</span> elftool.c <span class="re5">-o</span> elftool
+$ .<span class="sy0">/</span>elftool <span class="re5">-d</span> mytestelf.o
+Stringtable 000003f0 <span class="br0">&#40;</span><span class="nu0">118</span> bytes<span class="br0">&#41;</span>, symbols 000002b8 <span class="br0">&#40;</span><span class="nu0">312</span> bytes, one entry <span class="nu0">24</span><span class="br0">&#41;</span>
+&#160;
+<span class="re5">---</span> IMPORT <span class="re5">---</span>
+Dynamic 00001e20 <span class="br0">&#40;</span><span class="nu0">464</span> bytes, one entry <span class="nu0">16</span><span class="br0">&#41;</span>:
+  <span class="nu0">0</span>. <span class="sy0">/</span>lib<span class="sy0">/</span>libc.so.6
+&#160;
+GOT 00002000 <span class="br0">&#40;</span><span class="nu0">104</span> bytes<span class="br0">&#41;</span>, Rela 000004d0 <span class="br0">&#40;</span><span class="nu0">240</span> bytes, one entry <span class="nu0">24</span><span class="br0">&#41;</span>:
+  <span class="nu0">0</span>. 00602018 +<span class="nu0">0</span> puts
+  <span class="nu0">1</span>. 00602020 +<span class="nu0">0</span> fread
+  <span class="nu0">2</span>. 00602028 +<span class="nu0">0</span> fclose
+  <span class="nu0">3</span>. 00602030 +<span class="nu0">0</span> <span class="kw3">printf</span>
+  <span class="nu0">4</span>. 00602038 +<span class="nu0">0</span> strcmp
+  <span class="nu0">5</span>. 00602040 +<span class="nu0">0</span> ftell
+  <span class="nu0">6</span>. 00602048 +<span class="nu0">0</span> malloc
+  <span class="nu0">7</span>. 00602050 +<span class="nu0">0</span> fseek
+  <span class="nu0">8</span>. 00602058 +<span class="nu0">0</span> fopen
+  <span class="nu0">9</span>. 00602060 +<span class="nu0">0</span> <span class="kw3">exit</span>
+&#160;
+<span class="re5">---</span> EXPORT <span class="re5">---</span></pre></div></div>
+<p>As you can see here we have an import section, but nothing to be exported. Now let's see a shared library!
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">$ .<span class="sy0">/</span>elftool <span class="re5">-d</span> <span class="sy0">/</span>lib<span class="sy0">/</span>libc.so.6
+Stringtable 00011038 <span class="br0">&#40;</span><span class="nu0">23041</span> bytes<span class="br0">&#41;</span>, symbols 00003d90 <span class="br0">&#40;</span><span class="nu0">53928</span> bytes, one entry <span class="nu0">24</span><span class="br0">&#41;</span>
+&#160;
+<span class="re5">---</span> IMPORT <span class="re5">---</span>
+Dynamic 00197b60 <span class="br0">&#40;</span><span class="nu0">496</span> bytes, one entry <span class="nu0">16</span><span class="br0">&#41;</span>:
+  <span class="nu0">0</span>. <span class="sy0">/</span>lib<span class="sy0">/</span>ld-linux-x86-<span class="nu0">64</span>.so.2
+&#160;
+GOT 00198000 <span class="br0">&#40;</span><span class="nu0">88</span> bytes<span class="br0">&#41;</span>, Rela 0001f760 <span class="br0">&#40;</span><span class="nu0">192</span> bytes, one entry <span class="nu0">24</span><span class="br0">&#41;</span>:
+  <span class="nu0">0</span>. 00398050 +844d0 
+  <span class="nu0">1</span>. 00398048 +a8560 
+  <span class="nu0">2</span>. 00398040 +7ff80 
+  <span class="nu0">3</span>. 00398038 +867c0 
+  <span class="nu0">4</span>. 00398030 +823f0 
+  <span class="nu0">5</span>. 00398028 +<span class="nu0">82780</span> 
+  <span class="nu0">6</span>. 00398020 +a8640 
+  <span class="nu0">7</span>. 00398018 +83b50 
+&#160;
+<span class="re5">---</span> EXPORT <span class="re5">---</span>
+  <span class="nu0">8</span>. 0008e850 __strspn_c1
+  <span class="nu0">9</span>. 0006aad0 putwchar
+ <span class="nu0">10</span>. 000f8640 __gethostname_chk
+ <span class="nu0">11</span>. 0008e870 __strspn_c2
+ <span class="nu0">12</span>. 0010f210 setrpcent
+ <span class="nu0">13</span>. 0009eda0 __wcstod_l
+ <span class="nu0">14</span>. 0008e8a0 __strspn_c3
+ <span class="nu0">15</span>. 000e8d10 epoll_create
+ <span class="nu0">16</span>. 000d1b50 sched_get_priority_min
+ <span class="nu0">17</span>. 000f8660 __getdomainname_chk
+ <span class="nu0">18</span>. 000e8f20 klogctl
+ <span class="nu0">19</span>. 0002c380 __tolower_l
+ <span class="nu0">20</span>. 0004f440 dprintf
+ <span class="nu0">21</span>. 000b8e00 setuid
+ <span class="nu0">22</span>. 000a3d20 __wcscoll_l
+... lot <span class="kw2">more</span> lines to come ...</pre></div></div>
+<p>This time it has hell a lot of functions to export, and also it imports the dynamic linker of Linux with addend offsets in the GOT.
+</p>
+<h2> <span class="mw-headline" id="Summary"> Summary </span></h2>
+<p>To summarize a dynamic linker should be look like:
+</p>
+<pre>1. load-time linker
+  1.1. locates GOT by '.got.plt' section, and saves that address in GOT+0x8
+  1.2. stores second part's address at GOT+0x10
+  1.3. reads '.dynamic' section to load shared libraries
+2. run-time reference resolver
+  2.1. it's called by a helper
+  2.2. that helper places index-0x18 and the address of GOT as arguments on the stack
+  2.3. it has to locate '.rela.plt' to get the symbol for the reference
+  2.4. the symbol is looked up in the shared library's '.dynsym' section to get relocated address
+  2.5. that relocated address has to be saved in the GOT (index and base on the stack)
+  2.6. clean up stack, restore registers and jump to the relocated address
+</pre>
+<p>That's all, hope it helps somebody! Good luck with implementing your own dynamic linker!
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 156/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4000-0!*!0!!en!*!* and timestamp 20180121074122 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Dynamic_Linker&amp;oldid=20066">http://wiki.osdev.org/index.php?title=Dynamic_Linker&amp;oldid=20066</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Dynamic_Linker" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Dynamic_Linker"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Dynamic_Linker&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Dynamic_Linker#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Dynamic_Linker" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Dynamic_Linker&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Dynamic_Linker&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Dynamic_Linker#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Dynamic_Linker" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Dynamic_Linker" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Dynamic_Linker&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Dynamic_Linker&amp;oldid=20066" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 December 2016, at 14:55.</li>
+											<li id="footer-info-viewcount">This page has been accessed 1,821 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

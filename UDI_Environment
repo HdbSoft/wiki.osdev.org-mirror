@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>UDI Environment - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "UDI_Environment", "wgTitle": "UDI Environment", "wgCurRevisionId": 22107, "wgArticleId": 4255, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-UDI_Environment action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">UDI Environment</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="UDI_Environment#mw-head">navigation</a>,
+					<a href="UDI_Environment#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="UDI_Environment#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="UDI_Environment#Development"><span class="tocnumber">2</span> <span class="toctext">Development</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="UDI_Environment#Interfaces"><span class="tocnumber">3</span> <span class="toctext">Interfaces</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="UDI_Environment#Fundamental_Types"><span class="tocnumber">3.1</span> <span class="toctext">Fundamental Types</span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="UDI_Environment#Specific-length_Types"><span class="tocnumber">3.1.1</span> <span class="toctext">Specific-length Types</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="UDI_Environment#Abstract_Types"><span class="tocnumber">3.1.2</span> <span class="toctext">Abstract Types</span></a>
+<ul>
+<li class="toclevel-4 tocsection-7"><a href="UDI_Environment#Size_Type"><span class="tocnumber">3.1.2.1</span> <span class="toctext">Size Type</span></a></li>
+<li class="toclevel-4 tocsection-8"><a href="UDI_Environment#Index_Type"><span class="tocnumber">3.1.2.2</span> <span class="toctext">Index Type</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-9"><a href="UDI_Environment#Opaque_Types"><span class="tocnumber">3.1.3</span> <span class="toctext">Opaque Types</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="UDI_Environment#Self-contained_Opaque_Types"><span class="tocnumber">3.1.4</span> <span class="toctext">Self-contained Opaque Types</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-11"><a href="UDI_Environment#Semi-Opaque_Types"><span class="tocnumber">3.2</span> <span class="toctext">Semi-Opaque Types</span></a>
+<ul>
+<li class="toclevel-3 tocsection-12"><a href="UDI_Environment#Control_Blocks"><span class="tocnumber">3.2.1</span> <span class="toctext">Control Blocks</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="UDI_Environment#Buffers"><span class="tocnumber">3.2.2</span> <span class="toctext">Buffers</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-14"><a href="UDI_Environment#Structures_with_Fixed-binary_representation"><span class="tocnumber">3.3</span> <span class="toctext">Structures with Fixed-binary representation</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="UDI_Environment#Commonly_Used_Derived_Types"><span class="tocnumber">3.4</span> <span class="toctext">Commonly Used Derived Types</span></a>
+<ul>
+<li class="toclevel-3 tocsection-16"><a href="UDI_Environment#UDI_Status"><span class="tocnumber">3.4.1</span> <span class="toctext">UDI Status</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>The UDI Environment is described, by the definition in the real documentation, as a description and its corresponding implementation of all interfaces provided to UDI-compliant drivers which include the system services, implicit scheduling and synchronization, and inter-module communication infrastructure. The environment is the means by which the Uniform Driver Interface provides a software and hardware independent nature to its drivers. The UDI specs provide a complete environment for the development of compliant driver.
+</p><p>The drivers use the services of the UDI environment by <b>service calls</b>. These are implemented as functions which are <b>exported to all UDI driver instances</b>. This makes them common to all UDI drivers. The environment must provide two types of service calls - asynchronous and synchronous.
+</p>
+<h2> <span class="mw-headline" id="Development"> Development </span></h2>
+<p>UDI environments are generally tied to the OS and are more platform-dependent. They can be developed by looking into the UDI specifications. The UDI environment must implement some <b>core services</b> and <b>utility functions</b>. For source code compatibility, the interface must be compacted into two header files - <b>udi.h</b> and <b>udi_physio.h</b> (see Physical I/O Specifications).
+</p>
+<h2> <span class="mw-headline" id="Interfaces"> Interfaces </span></h2>
+<h3> <span class="mw-headline" id="Fundamental_Types"> Fundamental Types </span></h3>
+<p>The UDI environment provides utility functions &amp; <b>types</b>.
+</p><p>The fundamental types given by UDI are -
+</p>
+<h4> <span class="mw-headline" id="Specific-length_Types"> Specific-length Types </span></h4>
+<p>The Uniform Driver Interface declares specific-length types for use in arithmetic and logical operations. They have fixed lengths that don't change between different platforms.
+</p><p>1. <b>typedef unsigned char udi_ubit8_t</b>
+</p><p>2. <b>typedef unsigned short udi_ubit16_t</b>
+</p><p>3. <b>typedef unsigned int udi_ubit32_t </b>
+</p><p>4. <b>typedef char udi_sbit8_t</b>
+</p><p>5. <b>typedef short udi_sbit16_t</b>
+</p><p>6. <b>typedef int udi_sbit32_t</b>
+</p><p>7. <b>typedef udi_ubit8_t udi_boolean_t</b>
+</p><p>Driver must use these types at least while passing arguments and returning variables. They can <b>internally use the ISO C types</b> because that doesn't affect compatibility. For example, the long type is useful for getting the most optimized type for the architecture.
+</p>
+<h4> <span class="mw-headline" id="Abstract_Types"> Abstract Types </span></h4>
+<p>These are <b>integral types</b> whose size is defined by the implementation. By keeping the size of these types abstract, the Uniform Driver Interface is able to maintain source portability between different platforms and also allow drivers to adapt to newer architectures. Specifically, for binary portability, their size is defined by the corresponding ABI specification.
+</p>
+<h5> <span class="mw-headline" id="Size_Type"> Size Type </span></h5>
+<p>This type is used for referring to the size to any <b>buffer</b> or <b>object</b>. It can also store offsets in buffers and memory itself. It is flexible and can <b>represent different ranges in different domains</b> which means that its size can change between different domains. That is why it is a <b>non-transferable</b> variable across domain boundaries.
+</p><p>It must have at least 16 bits in size, for following guidelines.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="sy0">&lt;</span>INTEGRAL TYPE<span class="sy0">&gt;</span> udi_size_t<span class="sy0">;</span></pre></div></div>
+<h5> <span class="mw-headline" id="Index_Type"> Index Type </span></h5>
+<p>This is <b>used by the driver</b> to access indices of object stored in an array. It holds values in the range 0 to 255 (is zero-based) for the driver. As indices to environment object are global for the driver, it is transferable across domain boundaries.
+</p><p>I think is type need not have a 1 byte size as the UDI environment <b>may encrypt</b> the index to hide it from the driver (information presented in this statement is not guaranteed).
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="sy0">&lt;</span>INTEGRAL TYPE<span class="sy0">&gt;</span> udi_index_t<span class="sy0">;</span></pre></div></div>
+<p><b>i) Control Block Index</b>
+</p><p>The index type can be used to refer to a control that was registered through <b>udi_cb_init_t</b> structure. It can be used for allocating control blocks and getting hold of scratch space sizes and configuring other properties of UDI control blocks.
+</p><p>Note that zero is a invalid value currently, and is reserved for future usage.
+</p><p><b>ii) Metalanguage Index</b>
+</p><p>The index type can also be used for holding metalanguage indices. It can be used for figuring out the metalanguages used by a driver. These indexes as associated with <b>meta</b> declarations in Static Driver Properties. These are of importance while the UDI Build System compiles and bundles the drivers.
+</p><p><b>iii) Ops Index</b>
+</p><p>It can also be used to point to a channel operations vector by using the <b>udi_ops_init_t</b> function. It can be used to anchor channels and set default channel types by the driver.
+</p><p>Zero is a reserved value here also, and is booked for future usage.
+</p><p><b>iv) Region Index</b>
+</p><p>A region-index is used to refer to a driver-defined region and is used for manipulating attributes of regions created by or on behalf of the driver instance.
+</p><p>The zero value refers to the <b>primary region</b> of the driver while other values refer to <b>secondary regions</b>.
+</p>
+<h4> <span class="mw-headline" id="Opaque_Types"> Opaque Types </span></h4>
+<p>These types are not for direct access by drivers. They are essentially handles (like in Windows NT, just relating man) which are passed to service calls to refer to actual objects. They are used to protect system data and prevent malicious code from corrupt valuable data. The size of these handles are specified in the ABI bindings, so these handles have the size of long on IA32/64 architectures.
+</p><p>A rather simple implementation will use just the address of the object in the handle. But for better security, determined projects could use a value that is the result of the operation between the ID given to a UDI driver and a index into a handle table. After undoing the effect of that operation, the environment will get the address of the object by accessing a handle table.
+</p><p>Each <b>opaque handle type</b> will have a corresponding <b>null</b> value. It is used for referring to null objects that don't really exist. This value need not be zero and thus the <b>UDI_HANDLE_IS_NULL macro</b> is provided for testing whether the handle carries a null value. null handles are not to be passed to service calls and will be treated as invalid operands. Also, the driver should never expect to receive a null value from a returning service call.
+</p><p>These handles may or may not be transferable depending on the object being referred to.
+</p><p><b>i) Channels &amp; udi_channel_t</b>
+</p>
+<b>File</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#include &quot;udi.h&quot;;</span></pre></div></div>
+<b>Declaration</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="sy0">&lt;</span>HANDLE<span class="sy0">&gt;</span> udi_channel_t<span class="sy0">;</span></pre></div></div>
+<b>NullHandle</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define UDI_NULL_CHANNEL &lt;NULL HANDLE VALUE&gt;</span></pre></div></div>
+<p><b>udi_channel_t</b> is used to refer to UDI Channels (described on another page) and are <b>transferrable opaque handles</b>. They are used for bi-directional communication between different drivers and with the environment.
+</p><p><b>ii) Buffer Path Routing Handle &amp; udi_buf_path_t</b>
+</p>
+<b>File</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#include &quot;udi.h&quot;;</span></pre></div></div>
+<b>Declaration</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="sy0">&lt;</span>HANDLE<span class="sy0">&gt;</span> udi_buf_path_t<span class="sy0">;</span></pre></div></div>
+<b>NullHandle</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define UDI_NULL_BUF_PATH &lt;NULL HANDLE VALUE&gt;</span></pre></div></div>
+<p>All UDI buffers are associated with buffer path handles. They indicate destinations for incoming data and are explicitly allocated by the driver. They are <b>not transferable between regions</b>.
+</p><p><b>iii) Origin Handles &amp; udi_origin_handle_t</b>
+</p>
+<b>File</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#include &quot;udi.h&quot;;</span></pre></div></div>
+<b>Declaration</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="sy0">&lt;</span>HANDLE<span class="sy0">&gt;</span> udi_origin_handle_t<span class="sy0">;</span></pre></div></div>
+<b>NullHandle</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define UDI_NULL_ORIGIN &lt;NULL HANDLE VALUE&gt;</span></pre></div></div>
+<p>Environments should use <b>origin handles</b> to hold information about origination of user requests. UDI drivers are responsible for copying the origin handle from received control blocks into control blocks generated on behalf of that control block. This is used by the environment to track quota usage, resource distribution, etc. in the system.
+</p><p>The UDI_NULL_ORIGIN may be set for the origin of any control block instead of copying it from another source, but drivers can't allocate or delete origin handles on their own. They are <b>transferable opaque handles</b>.
+</p>
+<h4> <span class="mw-headline" id="Self-contained_Opaque_Types"> Self-contained Opaque Types </span></h4>
+<p>These are special opaque-like types that can be interpreted by the environment implementation only, but they are stored locally and have value semantics. Normal opaque handles have reference semantics but here the case is different. Assignment will make a copy of the whole object.
+</p><p>These are <b>not transferable between regions</b>.
+</p><p><b>i) Timestamp Type</b> - This is used to refer to a point in time and is relative to a starting point that is implementation defined. The driver cannot make use of it on its own and it is for determining relative differences in time. The implementation should use the <b>kernel-timestamp</b> maintained by the kernel for scheduling use. It should be able to do so effectively by mapping the time variable in user-space itself.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="sy0">&lt;</span>OPAQUE TYPE<span class="sy0">&gt;</span> udi_timestamp_t<span class="sy0">;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Semi-Opaque_Types"> Semi-Opaque Types </span></h3>
+<p>UDI also levers the advantages of object that have a driver-visible part and implementation-dependent part too. The visible part is a C structure and is kept with a pointer by the driver.
+</p><p>These are allocated by the environment because the driver ain't knowing what the size of the object is.
+</p>
+<h4> <span class="mw-headline" id="Control_Blocks"> Control Blocks </span></h4>
+<p>The Uniform Driver Interface provides a _control block_ type to provide a context for asynchronous service calls and channel operations. These are semi-opaque object and are <b>transferable</b>.
+</p><p>They will be discussed on another page.
+</p>
+<h4> <span class="mw-headline" id="Buffers"> Buffers </span></h4>
+<p>UDI also provides a buffer type for storing object and protocol data in dynamic memory on the fly. They need to be logically continuous and any machine or OS differences need to hidden. This should not be hard to implement - all you need is a large &amp; small memory allocator.
+</p><p>We'll have another page on UDI buffer 'management'.
+</p>
+<h3> <span class="mw-headline" id="Structures_with_Fixed-binary_representation"> Structures with Fixed-binary representation </span></h3>
+<p>Driver usually don't need to be concern with the binary representation of bits or endian-ness of the number while operating in software-defined data structures. But hardware-defined structures have a <b>fixed endian-ness</b> which causes architectural dependencies in binary files if not taken care of. That is why UDI also provides functions in the environment for the drivers to store and manipulate hardware-defined types with specified binary representation. Drivers have to follow certain rules while declaring C hardware-defined structs.
+</p>
+<h3> <span class="mw-headline" id="Commonly_Used_Derived_Types"> Commonly Used Derived Types </span></h3>
+<p>These types are not fundamental and are derived from other UDI types, but are not implementation dependent.
+</p>
+<h4> <span class="mw-headline" id="UDI_Status"> UDI Status </span></h4>
+<p>This type is used for providing a uniform method of reporting status or error within the I/O system.
+</p>
+<b>File</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#include &lt;udi.h&gt;</span></pre></div></div>
+<b>Declaration</b> - <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> udi_ubit32_t udi_status_t<span class="sy0">;</span></pre></div></div>
+<p><b>MaskValues &amp; Flags</b> -
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define UDI_STATUS_CODE_MASK               0x0000FFFF</span>
+<span class="co2">#define UDI_STAT_META_SPECIFIC             0x00008000</span>
+<span class="co2">#define UDI_SPECIFIC_STATUS_MASK           0x00007FFF</span>
+<span class="co2">#define UDI_CORRELATE_OFFSET               0x16</span>
+<span class="co2">#define UDI_CORRELATE_MASK                 0xFFFF0000</span></pre></div></div>
+<p><b>StatusValues</b> -
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define UDI_OK                             0  // request was successfully completed without any errors</span>
+<span class="co2">#define UDI_STAT_NOT_SUPPORTED             1  // this operation is not supported or given parameters are not handled by the environment</span>
+<span class="co2">#define UDI_STAT_NOT_UNDERSTOOD            2  // parameters given exceed a range or don't make sense in this context, used in channel operations</span>
+<span class="co2">#define UDI_STAT_INVALID_STATE             3  // request understand and supported, but parameters don't make sense here; for channel operations</span>
+<span class="co2">#define UDI_STAT_MISTAKEN_IDENTITY         4  // request is implemented and understood, but not applicable for the device or object concerned</span>
+<span class="co2">#define UDI_STAT_ABORTED                   5  // operation was successfully aborted on requesting cancellation</span>
+<span class="co2">#define UDI_STAT_TIMEOUT                   6  // operation timeout passed due to which it was aborted</span>
+<span class="co2">#define UDI_STAT_BUSY                      7  // the device or object concerned is being used by another process or is busy</span>
+<span class="co2">#define UDI_STAT_RESOURCE_UNAVAIL          8  // the system cannot provide anymore resources for the given request</span>
+<span class="co2">#define UDI_STAT_HW_PROBLEM                9  // system has detected a hardware problem due to which the request could not execute</span>
+<span class="co2">#define UDI_STAT_NOT_RESPONDING            10 // device is not present or not responding</span>
+<span class="co2">#define UDI_STAT_DATA_UNDERRUN             11 // data transfer from device is less than required or expected</span>
+<span class="co2">#define UDI_STAT_DATA_OVERRUN              12 // data transfer from device is more than required or expected</span>
+<span class="co2">#define UDI_STAT_DATA_ERROR                13 // data transfer error occurred from device</span>
+<span class="co2">#define UDI_STAT_PARENT_DRV_ERROR          14 // parent device has faced an error due to this request failing</span>
+<span class="co2">#define UDI_STAT_CANNOT_BIND               15 // driver tried to bind with its parent, but was denied; also used by the parent to indicate denying</span>
+<span class="co2">#define UDI_STAT_CANNOT_BIND_EXCL          16 // driver cannot bind exclusively to the parent as another child is already bound</span>
+<span class="co2">#define UDI_STAT_TOO_MANY_PARENTS          17 // this device cannot bind with the parent as the parent already has maximum supported children</span>
+<span class="co2">#define UDI_STAT_INVALID_PARENT            18 // the parent-binding request cannot execute as meta-language of parent is not supported by driver</span>
+<span class="co2">#define UDI_STAT_TERMINATED                19 // request ended abruptly due to termination of the region without notice</span>
+<span class="co2">#define UDI_STAT_ATTR_MISMATCH             20 // the driver has been given a custom attribute that it cannot apply on its device</span></pre></div></div>
+<p>UDI Status is a 32-bit type composed of two separate 16-bit values as seen in the two different sets of macros given. They are '<b>status code'</b> field and a '<b>correlation field'</b>.
+</p><p>When a error must be signaled then the driver must put an proper status code and assign it to the <b>udi_status_t</b> variable. The correlation field must be 0 for new errors. It is to be set for errors that are derived from other errors or which have meta-language specific semantics.
+</p><p>The STATUS_CODE_MASK is used for filtering out the correlation field and getting out the status field. The UDI_STAT_META_SPECIFIC macro is used for telling that the <b>status code used is not of the common status codes given and is meta-language specific</b>. Those are not defined here, not.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 200/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4255-0!*!*!!en!*!* and timestamp 20180121080159 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=UDI_Environment&amp;oldid=22107">http://wiki.osdev.org/index.php?title=UDI_Environment&amp;oldid=22107</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=UDI_Environment" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="UDI_Environment"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:UDI_Environment"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="UDI_Environment#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="UDI_Environment" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=UDI_Environment&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=UDI_Environment&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="UDI_Environment#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/UDI_Environment" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/UDI_Environment" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=UDI_Environment&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/UDI_Environment" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/UDI_Environment" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=UDI_Environment&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=UDI_Environment&amp;oldid=22107" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 18 January 2018, at 07:30.</li>
+											<li id="footer-info-viewcount">This page has been accessed 99 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.153 secs. -->
+	</body>
+</html>

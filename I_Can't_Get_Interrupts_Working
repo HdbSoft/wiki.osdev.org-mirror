@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>I Can't Get Interrupts Working - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "I_Can\'t_Get_Interrupts_Working", "wgTitle": "I Can\'t Get Interrupts Working", "wgCurRevisionId": 20245, "wgArticleId": 1939, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Troubleshooting", "FAQ", "Interrupts"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-I_Can_t_Get_Interrupts_Working action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">I Can't Get Interrupts Working</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="I_Can't_Get_Interrupts_Working#mw-head">navigation</a>,
+					<a href="I_Can't_Get_Interrupts_Working#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>This page is a sort of TroubleShooting manual to help you getting through common interrupts framework problems encountered by guests and members of the <a href="http://forum.osdev.org/viewforum.php?f=1" class="extiw" title="forum:1">forum</a>
+</p><p>Make sure you collected enough information about your own situation (for instance running your code in Bochs).
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="I_Can't_Get_Interrupts_Working#ISR_problems"><span class="tocnumber">1</span> <span class="toctext">ISR problems</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="I_Can't_Get_Interrupts_Working#My_handler_doesn.27t_get_called.3F.21_.28Assembly.29"><span class="tocnumber">1.1</span> <span class="toctext">My handler doesn't get called?! (Assembly)</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="I_Can't_Get_Interrupts_Working#My_Handler_doesn.27t_get_called_.28C.29.3F.21"><span class="tocnumber">1.2</span> <span class="toctext">My Handler doesn't get called (C)?!</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="I_Can't_Get_Interrupts_Working#My_handler_is_called_but_it_doesn.27t_return_.21.3F"><span class="tocnumber">1.3</span> <span class="toctext">My handler is called but it doesn't return&#160;!?</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="I_Can't_Get_Interrupts_Working#IRQ_problems"><span class="tocnumber">2</span> <span class="toctext">IRQ problems</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="I_Can't_Get_Interrupts_Working#I.27m_receiving_EXC9_instead_of_IRQ1_when_striking_a_key.3F.21"><span class="tocnumber">2.1</span> <span class="toctext">I'm receiving EXC9 instead of IRQ1 when striking a key?!</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="I_Can't_Get_Interrupts_Working#I.27m_receiving_a_double_fault_after_enabling_interrupts"><span class="tocnumber">2.2</span> <span class="toctext">I'm receiving a double fault after enabling interrupts</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="I_Can't_Get_Interrupts_Working#I.27m_not_receiving_any_IRQ"><span class="tocnumber">2.3</span> <span class="toctext">I'm not receiving any IRQ</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="I_Can't_Get_Interrupts_Working#I_can_only_receive_one_IRQ"><span class="tocnumber">2.4</span> <span class="toctext">I can only receive one IRQ</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="I_Can't_Get_Interrupts_Working#When_I_try_to_enable_the_PIT.2C_the_keyboard_doesn.27t_work_anymore"><span class="tocnumber">2.5</span> <span class="toctext">When I try to enable the PIT, the keyboard doesn't work anymore</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="I_Can't_Get_Interrupts_Working#I_keep_getting_an_IRQ7_for_no_apparent_reason"><span class="tocnumber">2.6</span> <span class="toctext">I keep getting an IRQ7 for no apparent reason</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="I_Can't_Get_Interrupts_Working#what_does_.22shift_operator_may_only_be_applied_to_scalar_values.22_mean.3F"><span class="tocnumber">2.7</span> <span class="toctext">what does "shift operator may only be applied to scalar values" mean?</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="I_Can't_Get_Interrupts_Working#Assembly_Examples"><span class="tocnumber">3</span> <span class="toctext">Assembly Examples</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="I_Can't_Get_Interrupts_Working#NASM"><span class="tocnumber">3.1</span> <span class="toctext">NASM</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="I_Can't_Get_Interrupts_Working#GNU_Assembler"><span class="tocnumber">3.2</span> <span class="toctext">GNU Assembler</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="I_Can't_Get_Interrupts_Working#Problems_with_IDTs"><span class="tocnumber">4</span> <span class="toctext">Problems with IDTs</span></a></li>
+<li class="toclevel-1 tocsection-17"><a href="I_Can't_Get_Interrupts_Working#Problems"><span class="tocnumber">5</span> <span class="toctext">Problems</span></a></li>
+<li class="toclevel-1 tocsection-18"><a href="I_Can't_Get_Interrupts_Working#IDT_problems_in_Assembly"><span class="tocnumber">6</span> <span class="toctext">IDT problems in Assembly</span></a>
+<ul>
+<li class="toclevel-2 tocsection-19"><a href="I_Can't_Get_Interrupts_Working#FASM_notice"><span class="tocnumber">6.1</span> <span class="toctext">FASM notice</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-20"><a href="I_Can't_Get_Interrupts_Working#See_also"><span class="tocnumber">7</span> <span class="toctext">See also</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="ISR_problems"> ISR problems </span></h2>
+<h3> <span class="mw-headline" id="My_handler_doesn.27t_get_called.3F.21_.28Assembly.29"> My handler doesn't get called?! (Assembly) </span></h3>
+<p>For this test, you need to call the interrupt yourself, by software. Don't try to get <a href="IRQ" title="IRQ" class="mw-redirect">IRQ</a> handled right from the start before you're sure your IDT setup is correct. You need to have:
+</p>
+<ul><li> your IDT loaded and filled properly.
+</li><li> your IDT's <i>linear</i> address loaded in a structure together with the table's size (in bytes, IIRC). Be especially cautious if you have a <a href="Higher_Half_Kernel" title="Higher Half Kernel">Higher Half Kernel</a> design or did not set up <a href="Identity_Paging" title="Identity Paging">identity paging</a>.
+</li><li> a valid Code selector and offset in the <a href="Descriptors" title="Descriptors">descriptor</a>, proper type, etc.
+</li><li> a handling code at the defined offset.
+</li></ul>
+<p><i> see <a href="I_Can't_Get_Interrupts_Working#Assembly_Examples">test code</a> below </i>
+</p>
+<h3> <span class="mw-headline" id="My_Handler_doesn.27t_get_called_.28C.29.3F.21"> My Handler doesn't get called (C)?! </span></h3>
+<p>If you're programming the IDT setup in C, make sure the IDTR structure has been correctly understood by your compiler. As Intel's 6 bytes structures infringe most compiler's packing rules, you'll need to use either <i>bitfields</i> or <i>packing pragmas</i>. Use <tt>sizeof()</tt> and <tt>OFFSETOF()</tt> macros to make sure the expected definition is used (a runtime test would be fine)
+</p>
+<h3> <span class="mw-headline" id="My_handler_is_called_but_it_doesn.27t_return_.21.3F"> My handler is called but it doesn't return&#160;!? </span></h3>
+<p>Try to run it in the Bochs and see if you get any exception report. Program all your exception to have the same kind of behavior as <a href="I_Can't_Get_Interrupts_Working#Assembly_Example">the example</a>, but displaying a character indicating the fault. Exceptions occurring at the end of an interrupt handler are usually due to a wrong stack operation within the handler.
+</p>
+<ul><li> don't try to return from an exception (unless you solved its cause). Returning from a division by zero, for instance, makes no sense at all
+</li><li> pops everything you push, but no more
+</li><li> make sure you didn't forget the CPU-pushed error code (for exceptions 8,10 and 14 at least)
+</li><li> make sure your handler doesn't trash unexpected registers. For exceptions and hardware IRQ handlers, no registers *at all* should be modified.
+</li></ul>
+<p>Another common source of error at this point comes from mis implementation of ISR in C. Check the InterruptServiceRoutines page for enlightenment ...
+</p>
+<h2> <span class="mw-headline" id="IRQ_problems"> IRQ problems </span></h2>
+<p>Now that you're sure an interrupt can be called and can return, you're ready to enable hardware interrupts. As a first step, you're suggested to enable the _keyboard handler only_, as you'll have almost complete control of what it does.
+Use the mask feature of the PIC to enable/disable some handlers.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">   outb<span class="br0">&#40;</span><span class="nu12">0x21</span><span class="sy0">,</span><span class="nu12">0xfd</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   outb<span class="br0">&#40;</span><span class="nu12">0xa1</span><span class="sy0">,</span><span class="nu12">0xff</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   enable<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// asm(&quot;sti&quot;);</span></pre></div></div>
+<h3> <span class="mw-headline" id="I.27m_receiving_EXC9_instead_of_IRQ1_when_striking_a_key.3F.21"> I'm receiving EXC9 instead of IRQ1 when striking a key?! </span></h3>
+<p>You missed the PIC vector reprogramming step. Check <a href="PIC" title="PIC" class="mw-redirect">Can I remap the PIC?</a> page. Note that if you remap the PIC vectors out of the IDT you'll get a GPF exception instead of any interrupt.
+</p>
+<h3> <span class="mw-headline" id="I.27m_receiving_a_double_fault_after_enabling_interrupts"> I'm receiving a double fault after enabling interrupts </span></h3>
+<p>May be a different symptom for the same error as above, this time caused by a timer interrupt calling vector 8. May also be caused if you've enabled interrupts in protected mode but haven't got an interrupt handler defined for whatever vector you've remapped the timer to, as the timer interrupt will come soon after enabling interrupts and cause a fault unless you've got a handler for it or you've masked it.
+</p>
+<h3> <span class="mw-headline" id="I.27m_not_receiving_any_IRQ"> I'm not receiving any IRQ </span></h3>
+<p>Make sure you <a href="I_Can't_Get_Interrupts_Working#ISR_problems">receive software interrupts</a> first. Also make sure you enabled the IRQ of your interest on the PIC mask and that you enabled the cascading line (bit #2 of the master) if you're waiting for a slave IRQ.
+</p>
+<h3> <span class="mw-headline" id="I_can_only_receive_one_IRQ"> I can only receive one IRQ </span></h3>
+Each IRQ needs to be acknowledged to the PIC manually by sending an EOI. You need to have <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> outb<span class="br0">&#40;</span><span class="nu12">0x20</span><span class="sy0">,</span><span class="nu12">0x20</span><span class="br0">&#41;</span></pre></div></div> within any master handler and any <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> outb<span class="br0">&#40;</span><span class="nu12">0x20</span><span class="sy0">,</span><span class="nu12">0x20</span><span class="br0">&#41;</span><span class="sy0">;</span> outb<span class="br0">&#40;</span><span class="nu12">0xa0</span><span class="sy0">,</span><span class="nu12">0x20</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div> within any slave handler.<br /><br />
+When handling the keyboard IRQ, make sure that you read the byte the keyboard sends you. The interrupt might not trigger again until it has been read: <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">unsigned</span> <span class="kw4">char</span> scan_code <span class="sy0">=</span> inb<span class="br0">&#40;</span><span class="nu12">0x60</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+Also, if you are following the barebones tutorial, be sure that your main function doesn't exit too soon (because when it does, it disables interrupts). A common solution to make sure it doesn't exit prematurely is to add <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw1">for</span><span class="br0">&#40;</span><span class="sy0">;;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    asm<span class="br0">&#40;</span><span class="st0">&quot;hlt&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="br0">&#125;</span></pre></div></div>
+<p>to the end of your main kernel function. The <i>for</i> loop is necessary because execution continues after the CPU receives an interrupt.
+</p>
+<h3> <span class="mw-headline" id="When_I_try_to_enable_the_PIT.2C_the_keyboard_doesn.27t_work_anymore"> When I try to enable the PIT, the keyboard doesn't work anymore </span></h3>
+<p>A common mistake is that people reload the mask with <tt>0xFE</tt> when they want to add timer, but doing this actually enables <i>only</i> the timer and disables the keyboard (bit #1 of 0xFE is set!) The correct value for enabling <i>both</i> keyboard and timer is 0xFC.
+</p>
+<h3> <span class="mw-headline" id="I_keep_getting_an_IRQ7_for_no_apparent_reason"> I keep getting an IRQ7 for no apparent reason </span></h3>
+This is a known problem that cannot be prevented from happening, although there is a workaround.  When any IRQ7 is received, simply read the In-Service Register <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> outb<span class="br0">&#40;</span><span class="nu12">0x20</span><span class="sy0">,</span> <span class="nu12">0x0B</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="kw4">unsigned</span> <span class="kw4">char</span> irr <span class="sy0">=</span> inb<span class="br0">&#40;</span><span class="nu12">0x20</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div> and check if bit 7 <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">irr <span class="sy0">&amp;</span> <span class="nu12">0x80</span></pre></div></div> is set. If it isn't, then return from the interrupt without sending an EOI.
+<p>For more information, including a more detailed explanation, see Brendan's post in <a href="http://forum.osdev.org/viewtopic.php?t=11379" class="extiw" title="topic:11379">this thread</a>.
+</p><p><br />
+</p>
+<h3> <span class="mw-headline" id="what_does_.22shift_operator_may_only_be_applied_to_scalar_values.22_mean.3F"> what does "shift operator may only be applied to scalar values" mean? </span></h3>
+<p>You're trying to load a 16-bits field (a part of the IDT descriptor) with a reference to a 32-bit label that is subject to relocation. Try to replace
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> isr_label<span class="sy0">:</span>
+    <span class="kw1">iret</span>
+ bad_stuff <span class="kw4">dw</span> isr_label &amp; <span class="nu0">0xFFFF</span>
+           <span class="kw4">dw</span> <span class="nu0">0xdead</span>
+           <span class="kw4">dw</span> <span class="nu0">0xbeef</span>
+           <span class="kw4">dw</span> isr_label &gt;&gt; <span class="nu0">16</span></pre></div></div>
+<p>by something that extracts a 'pure value' from the address (e.g. the difference of two addresses are a pure value and <tt>$$</tt> means to NASM the start of the section)
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> <span class="sy0">%</span>define BASE_OF_SECTION SOME_CONSTANT_YOU_SHOULD_KNOW
+isr_label<span class="sy0">:</span>
+   <span class="kw1">iret</span>
+ good_stuff <span class="kw4">dw</span> <span class="br0">&#40;</span>BASE_OF_SECTION <span class="sy0">+</span> isr_label <span class="sy0">-</span> $$<span class="br0">&#41;</span> &amp; <span class="nu0">0xFFFF</span>
+            <span class="kw4">dw</span> <span class="nu0">0xcafe</span>
+            <span class="kw4">dw</span> <span class="nu0">0xbabe</span>
+            <span class="kw4">dw</span> <span class="br0">&#40;</span>BASE_OF_SECTION <span class="sy0">+</span> isr_label <span class="sy0">-</span> $$<span class="br0">&#41;</span> &gt;&gt; <span class="nu0">16</span></pre></div></div>
+The role of <pre>BASE_OF_SECTION</pre> is to adjust the pure offset to the real situation (usually as defined in your linker script), e.g. if your kernel get loaded at 1MB, you'll set it to 0x100000 to keep the CPU happy.
+<h2> <span class="mw-headline" id="Assembly_Examples">Assembly Examples</span></h2>
+<h3> <span class="mw-headline" id="NASM">NASM</span></h3>
+<p>This example is made for x86 CPUs running in IA32 mode (32-bit).
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> int_handler<span class="sy0">:</span>
+    <span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span> LINEAR_DATA_SELECTOR
+    <span class="kw1">mov</span> <span class="kw3">gs</span><span class="sy0">,</span> <span class="kw3">ax</span>
+    <span class="kw1">mov</span> <span class="kw5">dword</span> <span class="br0">&#91;</span><span class="kw3">gs</span><span class="sy0">:</span><span class="nu0">0xB8000</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="st0">')&#160;: '</span>
+    <span class="kw1">hlt</span>
+&#160;
+ idt<span class="sy0">:</span>
+    resd <span class="nu0">50</span><span class="sy0">*</span><span class="nu0">2</span>
+&#160;
+ idtr<span class="sy0">:</span>
+    <span class="kw4">dw</span> <span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">*</span><span class="nu0">8</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span>
+    <span class="kw4">dd</span> LINEAR_ADDRESS<span class="br0">&#40;</span>idt<span class="br0">&#41;</span>
+&#160;
+ test1<span class="sy0">:</span>
+    <span class="kw1">lidt</span> <span class="br0">&#91;</span>idtr<span class="br0">&#93;</span>
+    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span>int_handler
+    <span class="kw1">mov</span> <span class="br0">&#91;</span>idt<span class="sy0">+</span><span class="nu0">49</span><span class="sy0">*</span><span class="nu0">8</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="kw3">ax</span>
+    <span class="kw1">mov</span> <span class="kw5">word</span> <span class="br0">&#91;</span>idt<span class="sy0">+</span><span class="nu0">49</span><span class="sy0">*</span><span class="nu0">8</span><span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">,</span>CODE_SELECTOR
+    <span class="kw1">mov</span> <span class="kw5">word</span> <span class="br0">&#91;</span>idt<span class="sy0">+</span><span class="nu0">49</span><span class="sy0">*</span><span class="nu0">8</span><span class="sy0">+</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="nu0">0x8E00</span>
+    <span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="nu0">16</span>
+    <span class="kw1">mov</span> <span class="br0">&#91;</span>idt<span class="sy0">+</span><span class="nu0">49</span><span class="sy0">*</span><span class="nu0">8</span><span class="sy0">+</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="kw3">ax</span>
+    <span class="kw1">int</span> <span class="nu0">49</span></pre></div></div>
+<p>should display a smiley on the top-left corner ... then the CPU is halted indefinitely.
+</p>
+<h3> <span class="mw-headline" id="GNU_Assembler">GNU Assembler</span></h3>
+<p>This example sets up an interrupt handler in long mode.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="sy0">.</span>text
+int_handler<span class="sy0">:</span>
+    movq $<span class="nu0">0x123abc</span><span class="sy0">,</span> <span class="nu0">0x0</span> <span class="sy0">//</span> <span class="kw4">this</span> places magic value <span class="st0">&quot;0x123abc&quot;</span> <span class="kw5">at</span> the beginning of <span class="kw5">memory</span>
+    <span class="kw1">hlt</span>
+&#160;
+<span class="sy0">.</span>p2align <span class="nu0">4</span>
+idt<span class="sy0">:</span>
+    <span class="sy0">.</span>skip <span class="nu0">50</span><span class="sy0">*</span><span class="nu0">16</span>
+&#160;
+  idtr<span class="sy0">:</span>
+    <span class="sy0">.</span><span class="kw4">short</span> <span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">*</span><span class="nu0">16</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span>
+    <span class="sy0">.</span>quad idt
+&#160;
+<span class="sy0">.</span>globl do_test
+do_test<span class="sy0">:</span>
+    <span class="kw1">lidt</span> idtr
+    movq $int_handler<span class="sy0">,</span> <span class="sy0">%</span><span class="kw3">rax</span>
+    <span class="kw1">mov</span> <span class="sy0">%</span><span class="kw3">ax</span><span class="sy0">,</span> idt<span class="sy0">+</span><span class="nu0">49</span><span class="sy0">*</span><span class="nu0">16</span>
+    movw $<span class="nu0">0x20</span><span class="sy0">,</span> idt<span class="sy0">+</span><span class="nu0">49</span><span class="sy0">*</span><span class="nu0">16</span><span class="sy0">+</span><span class="nu0">2</span> <span class="sy0">//</span> replace <span class="nu0">0x20</span> with your <span class="kw4">code</span> section selector
+    movw $<span class="nu0">0x8e00</span><span class="sy0">,</span> idt<span class="sy0">+</span><span class="nu0">49</span><span class="sy0">*</span><span class="nu0">16</span><span class="sy0">+</span><span class="nu0">4</span>
+    <span class="kw1">shr</span> $<span class="nu0">16</span><span class="sy0">,</span> <span class="sy0">%</span><span class="kw3">rax</span>
+    <span class="kw1">mov</span> <span class="sy0">%</span><span class="kw3">ax</span><span class="sy0">,</span> idt<span class="sy0">+</span><span class="nu0">49</span><span class="sy0">*</span><span class="nu0">16</span><span class="sy0">+</span><span class="nu0">6</span>
+    <span class="kw1">shr</span> $<span class="nu0">16</span><span class="sy0">,</span> <span class="sy0">%</span><span class="kw3">rax</span>
+    <span class="kw1">mov</span> <span class="sy0">%</span><span class="kw3">rax</span><span class="sy0">,</span> idt<span class="sy0">+</span><span class="nu0">49</span><span class="sy0">*</span><span class="nu0">16</span><span class="sy0">+</span><span class="nu0">8</span>
+    <span class="kw1">int</span> $<span class="nu0">49</span></pre></div></div>
+<p>This example differs from the previous one: it will not touch the screen, but will write the value "0x123abc" to 0x0 memory address and halt. It may be useful when there's no screen or BIOS available.
+</p>
+<h2> <span class="mw-headline" id="Problems_with_IDTs"> Problems with IDTs </span></h2>
+<p>Many of us while OS dev'ing will encounter a problem with IDT's. Here are some solved problems with IDT's
+</p><p>This is for solved problems. The unsolved ones can be found here on the 
+<a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?f=1&amp;t=24805">Forum</a>
+</p>
+<h2> <span class="mw-headline" id="Problems">Problems</span></h2>
+<p>Please post <i><b>Completed</b></i> problems here.
+</p><p>First of all, check your GDT.
+</p><p>Keyboard handlers need to actually read the scancode from port 0x60—it's not enough to just have the handler print something to indicate success and then send EOI. The symptoms are identical to forgetting to send EOI.
+</p>
+<h2> <span class="mw-headline" id="IDT_problems_in_Assembly"> IDT problems in Assembly </span></h2>
+<p>Make sure the structure is correct and you are using linear addresses.
+</p>
+<h3> <span class="mw-headline" id="FASM_notice"> FASM notice </span></h3>
+<p>Since FASM doesn't accept the normal way as described above, I will describe it.
+FASM does, however, support shl and shr, so to describe the higher part of an ISR address, we just use <i>label shl 0x10</i> where label is the name of the ISR.
+To define the higher part, we need to write a little more, since fasm use 64 bit, before compiling.  
+This means that IF we just shl and shr, it will be that same as before. 
+This is how we are supposed to do: (label shl 0x30) shr 0x30
+Here is a little example, so you can see how it works:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> idt<span class="sy0">:</span>
+  <span class="kw4">dw</span>  <span class="br0">&#40;</span><span class="br0">&#40;</span>isr1 <span class="kw1">shl</span> <span class="nu0">0x30</span><span class="br0">&#41;</span> <span class="kw1">shr</span> <span class="nu0">0x30</span><span class="br0">&#41;</span>        <span class="co1">; the low part of the address</span>
+  <span class="kw4">dw</span>   <span class="nu0">0x8</span>    <span class="co1">; selector</span>
+  <span class="kw4">db</span>   <span class="nu0">0</span>
+  <span class="kw4">db</span>   <span class="nu0">010001110b</span>  <span class="co1">; type</span>
+  <span class="kw4">dw</span> <span class="br0">&#40;</span>isr1 <span class="kw1">shr</span> <span class="nu0">0x10</span><span class="br0">&#41;</span> the <span class="kw4">high</span> part of the address
+&#160;
+ isr1<span class="sy0">:</span>
+  <span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span><span class="nu0">0xdead</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_also"> See also </span></h2>
+<ul><li><a href="IDT" title="IDT" class="mw-redirect">IDT</a>
+</li></ul>
+<ul><li><a href="IDT_problems" title="IDT problems" class="mw-redirect">IDT problems</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 237/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1939-0!*!0!!en!*!* and timestamp 20180121041553 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=I_Can%27t_Get_Interrupts_Working&amp;oldid=20245">http://wiki.osdev.org/index.php?title=I_Can%27t_Get_Interrupts_Working&amp;oldid=20245</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Troubleshooting" title="Category:Troubleshooting">Troubleshooting</a></li><li><a href="Category:FAQ" title="Category:FAQ">FAQ</a></li><li><a href="Category:Interrupts" title="Category:Interrupts">Interrupts</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=I_Can%27t_Get_Interrupts_Working" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="I_Can't_Get_Interrupts_Working"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:I_Can%27t_Get_Interrupts_Working&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="I_Can't_Get_Interrupts_Working#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="I_Can't_Get_Interrupts_Working" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=I_Can%27t_Get_Interrupts_Working&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=I_Can%27t_Get_Interrupts_Working&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="I_Can't_Get_Interrupts_Working#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/I_Can%27t_Get_Interrupts_Working" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/I_Can%27t_Get_Interrupts_Working" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=I_Can%27t_Get_Interrupts_Working&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=I_Can%27t_Get_Interrupts_Working&amp;oldid=20245" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 January 2017, at 19:41.</li>
+											<li id="footer-info-viewcount">This page has been accessed 90,708 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/I_Can%27t_Get_Interrupts_Working" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/I_Can%27t_Get_Interrupts_Working" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=I_Can%27t_Get_Interrupts_Working&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=I_Can%27t_Get_Interrupts_Working&amp;oldid=20245" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 January 2017, at 19:41.</li>
+											<li id="footer-info-viewcount">This page has been accessed 90,708 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

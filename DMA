@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ISA DMA - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="ISA_DMA" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ISA_DMA", "wgTitle": "ISA DMA", "wgCurRevisionId": 14073, "wgArticleId": 1467, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Storage"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ISA_DMA action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ISA DMA</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=DMA&amp;redirect=no" title="DMA">DMA</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="DMA#mw-head">navigation</a>,
+					<a href="DMA#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><dl><dt>The main points about ISA DMA are</dt><dd>
+</dd></dl>
+<ul><li> ISA DMA is not the same thing as PCI Busmastering DMA;
+</li><li> ISA DMA channels 1, 2 and 3 are available for 8 bit transfers to ISA peripherals;
+</li><li> ISA DMA channels 5, 6 and 7 are available for 16 bit transfers to ISA peripherals;
+</li><li> Transfers must not cross physical 64 KB boundaries and must never be bigger than 64 KB;
+</li><li> Transfers must be physically contiguous, and can only target the lowest 16 MB of physical memory;
+</li><li> ISA DMA is slow - theoretically 4.77 MB/second, but more like 400 KB/second due to ISA bus protocols;
+</li><li> ISA DMA frees up CPU resources, but adds an extremely heavy load to the memory bus;
+</li><li> Very few devices currently use ISA DMA -- only internal floppies, some embedded sound chips, some parallel ports, and some serial ports.
+</li></ul>
+<p>Notes:
+</p>
+<ul><li> Sound Blaster and Sound Blaster PRO only support 8 bit DMA;
+</li><li> Sound Blaster 16+ supports both;
+</li><li> Floppy disk controllers only support 8 bit DMA and are hardwired to use DMA Channel 2.
+</li></ul>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="DMA#There_Is_More_Than_One_Kind_of_DMA_on_a_PC"><span class="tocnumber">1</span> <span class="toctext">There Is More Than One Kind of DMA on a PC</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="DMA#ISA_DMA_Background"><span class="tocnumber">2</span> <span class="toctext">ISA DMA Background</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="DMA#Technical_Details"><span class="tocnumber">3</span> <span class="toctext">Technical Details</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="DMA#Programming_Details"><span class="tocnumber">4</span> <span class="toctext">Programming Details</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="DMA#16_bit_issues"><span class="tocnumber">4.1</span> <span class="toctext">16 bit issues</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="DMA#Physical_Memory_vs._Paging"><span class="tocnumber">4.2</span> <span class="toctext">Physical Memory vs. Paging</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="DMA#Buffer_Size"><span class="tocnumber">4.3</span> <span class="toctext">Buffer Size</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="DMA#The_Flip-Flop"><span class="tocnumber">4.4</span> <span class="toctext">The Flip-Flop</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="DMA#Masking_DRQ"><span class="tocnumber">4.5</span> <span class="toctext">Masking DRQ</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="DMA#Transfer_Length"><span class="tocnumber">4.6</span> <span class="toctext">Transfer Length</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="DMA#Interrupt_on_Completion"><span class="tocnumber">4.7</span> <span class="toctext">Interrupt on Completion</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="DMA#The_Registers"><span class="tocnumber">4.8</span> <span class="toctext">The Registers</span></a>
+<ul>
+<li class="toclevel-3 tocsection-13"><a href="DMA#Useful_Registers"><span class="tocnumber">4.8.1</span> <span class="toctext">Useful Registers</span></a></li>
+<li class="toclevel-3 tocsection-14"><a href="DMA#The_Other_Registers"><span class="tocnumber">4.8.2</span> <span class="toctext">The Other Registers</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="DMA#Examples"><span class="tocnumber">5</span> <span class="toctext">Examples</span></a>
+<ul>
+<li class="toclevel-2 tocsection-16"><a href="DMA#Floppy_Disk_DMA_Initialization"><span class="tocnumber">5.1</span> <span class="toctext">Floppy Disk DMA Initialization</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-17"><a href="DMA#References"><span class="tocnumber">6</span> <span class="toctext">References</span></a>
+<ul>
+<li class="toclevel-2 tocsection-18"><a href="DMA#Articles"><span class="tocnumber">6.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="DMA#External_Links"><span class="tocnumber">6.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="There_Is_More_Than_One_Kind_of_DMA_on_a_PC"> There Is More Than One Kind of DMA on a PC </span></h2>
+<p>Modern PCI controllers always have their own 'Busmastering DMA', which is far better than ISA DMA. Even USB floppy drives send their DMA
+data using PCI Busmastering, through the PCI USB controller.
+PCI Busmasters can access memory with 32 bit addressing. Newer PCI cards are starting to support 64 bit addressing (although at the moment most
+don't). Typically PCI cards use 'scatter-gather' bus mastering, where one page is used as a directory of data pages. This almost completely overcomes
+the "physical memory only" limitation of all forms of DMA.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="ISA_DMA_Background"> ISA DMA Background </span></h2>
+<p><b>ISA DMA</b> (<i>Industry Standard Architecture Direct Memory Access</i>), like ISA itself, is an appendix for modern PCs. It is used by the
+internal floppy disk controller, ISA sound cards, ISA network cards, and parallel ports (if they support ECP mode). Whilst interrupt, keyboard
+and timer interface circuits have obvious and relevant uses, the ISA DMA controller and its programming interface are still well and truly stuck in the
+1970s where they were first designed.
+</p><p>The idea behind DMA is that you can set up a 'channel' with an address pointing into memory and the length of the data to be transferred. Once set up, the
+CPU can tell the peripheral owning the channel to do whatever it is supposed to do (e.g. read a sector). Then the CPU can go do something else.
+When the memory bus isn't being used by the CPU, the DMA chip takes over and transfers data between the peripheral and memory without involving the CPU. When
+the transfer is complete (e.g. an entire sector has been sent to the floppy drive) the DMA chip then signals that it is finished. The DMA chip can even
+signal if it has run out of data, allowing the system to locate the next block of data to transfer on the same DMA transaction.
+DMA can improve the speed of a system quite a bit and was borrowed by Intel (who designed the DMA controller chip) from the old 1960s mainframes which had
+DMA channels for all devices (CPUs weren't all on a single chip and very slow back then).
+</p><p>Of course all good ideas can have downsides and while Intel can't really be blamed for what is about to be described, IBM certainly can.
+</p><p>In the beginning there was a PC, but the PC was slow. IBM looked down from the heavens and said "Slap on a DMA controller -- that should speed it up." IBM's
+heart was in the right place; its collective brains were elsewhere as the DMA controller never met the needs of the system. The PC/AT standard contains 2
+Intel 8237A DMA chips, connected as Master/Slave. The second chip is Master, and its first line (Channel 4) is used by the first chip, which is Slave. (This
+is unlike the interrupt controller, where the first chip is Master.) The 8237A was designed for the old 8080 8-bit processor and this is probably the main
+reason for so many DMA problems. The 8088 and 8086 processors chosen by IBM for its PC were too advanced for the DMA controller.
+</p><p>Previously it was mentioned that a DMA controller is able to signal completion and even ask for more information. Unfortunately this would make expansion
+slots too big, so IBM left all of the connections to the DMA chips off. The only time you know when a transfer is complete is for a peripheral to signal an
+interrupt. This implies that all peripherals using an ISA DMA channel are limited to no more than 64 KB transfers for fear of upsetting the DMA controller.
+</p><p>Even with the PC/AT, IBM began bypassing the ISA DMA used in the PC/XT and used <a href="ATA_PIO_Mode" title="ATA PIO Mode">ATA PIO Mode</a> for the hard disk. This
+was because of the 64 KB limitations outlined above and the fact that the 286 processor could perform 16 bit transactions at 6 MHz. Even the ISA bus could
+run at a speed of up to 12 MHz, far faster than the 4.77 MHz the DMA controller was running at.
+</p><p>Expansion card designers were also upset with DMA's lack of capabilities, noticeably 'Hard-Card' hard disk expansion card manufacturers who depended on the
+speed of data transfer.
+</p><p>To get around the limitations of the 'on board' DMA controller, expansion card manufacturers began to put their own DMA controllers on their expansion
+cards. They functioned exactly the same way as the 'on board' DMA, 'stealing memory bus cycles' when the processor wasn't looking and thus improving the
+performance of the system as a whole. These "ISA Bus Masters" are still usually limited to the lower 16 MiB of memory, but do not have the 4.77 MHz issue.
+This trend continued through the creation of the PCI bus, which eventually entirely replaced the ISA bus in PCs.
+</p>
+<h2> <span class="mw-headline" id="Technical_Details"> Technical Details </span></h2>
+<p>Each 8237 DMA chip has 4 DMA channels. DMA0-DMA3 on the first chip and DMA4-DMA7 on the second. The first DMA controller is wired up for 8 bit transfers,
+while the second is wired up for 16 bit transfers. On some tutorials or other wiki articles, you will sometimes see the <b>second</b> DMA chip (channels 4 to 7) labeled as the "<b>master</b>" controller, and the first (channels 0 to 3) called the "slave". This is highly confusing, and these terms will not be used again, here.
+</p><p>DMA Channel 0 is unavailable as it was used for a short time for DRAM memory refresh, and remains reserved because of this (even though modern computers
+don't use it). DMA channel 4 cannot be used for peripherals because it is used for cascading the other DMA controller.
+</p><p>The internal address registers of the DMA controller are only 16 bits. In order to extend this, IBM added one <i>external</i> "page register" byte per channel,
+allowing access to 16 MB of memory (24 bits total). If a DMA transfer crosses a 64 KB boundary, the internal address register wraps around to zero,
+and the external page register is <b>not</b> incremented. The DMA controller will happily continue the transfer with whatever data it finds at
+the new address.
+</p><p>ISA-based DMA controllers are specified to run at 4.77 MHz. <b>No exceptions</b>. If the "front-side" (memory) bus of a system runs at 133 MHz, it will be
+artificially slowed down to 4.77 MHz when transferring each ISA DMA byte/word. This includes EISA and PS/2 32-bit
+controllers, even though these controllers have an extra page register (which allows a 4 GiB addressing space)
+and the ability to do 32 bit transfers. (These DMA controllers exist only on EISA and MCA systems, which are now obsolete and are not further
+described here.)
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="Programming_Details"> Programming Details </span></h2>
+<h3> <span class="mw-headline" id="16_bit_issues"> 16 bit issues </span></h3>
+<p>The 16 bit channels (5, 6, and 7) have a special addressing scheme to handle the way they increment addresses. The internal registers increment by 1,
+but the memory address needs to be incremented by 2 between each access. The solution is that the "start address" that the CPU stores in the DMA controller
+needs to be shifted right by 1 bit. On each memory access, this internal 16 bit address value is incremented by one, then that value is taken and shifted
+one bit to the left (clearing the lower bit) before being used as an address. The external "page register" addressing byte is then appended in the normal
+way. It is important to note that the upper bit of the internal address is <b>lost</b> when it is shifted left -- it is not ORed into the page register byte.
+This prevents DMA transfers bigger than 64 KB from working even though they should be technically possible for 16 bit channels, because the address register
+will effectively wrap around to zero without incrementing the page register byte.
+</p>
+<h3> <span class="mw-headline" id="Physical_Memory_vs._Paging"> Physical Memory vs. Paging </span></h3>
+<p>Paged memory mapping is exclusively controlled by the CPU. The whole point of DMA is to bypass the CPU. Therefore, no DMA can ever access any virtual
+memory addresses. All DMA is always done on physical memory addresses only. ISA DMA has a 16 MB physical address limit.
+</p><p>Since DMA runs independently of the CPU, it is important that an OS allocates a block of contiguous physical memory for the DMA transfer in
+a way that prevents that memory from being used for any other purpose, or swapped out, until the DMA transfer is complete.
+</p><p>Note: VM86 mode does not use <i>physical</i> addressing. The memory addresses are <i>fake</i>. In VM86 mode the OS must emulate any DMA transactions on
+behalf of an application.
+</p>
+<h3> <span class="mw-headline" id="Buffer_Size"> Buffer Size </span></h3>
+<p>A typical 1.44 MB floppy disk can easily transfer 36 sectors of data in a single transfer. This is only 18 KB. The biggest internal floppy with
+worst-case formatting may be able to transfer 84 sectors at once. This is still only 42 KB. A Soundblaster card may run best with a 64 KB buffer. It
+is never necessary to try to double-buffer ISA DMA transfers, because they are so slow anyway. There are at most 6 usable DMA channels, and it is not
+necessary to allocate a full 64 KB to each of them. Putting all of this together, any OS should be easily able to allocate all the ISA DMA physical
+memory that it needs from a 256 KB pool, or even only half of that.
+</p>
+<h3> <span class="mw-headline" id="The_Flip-Flop"> The Flip-Flop </span></h3>
+<p>Many devices on a PC (e.g. ATA disk drives) use 8 bit IO Ports to receive 16 bit values. This is done using a flip-flop. The device expects the low
+byte first. As soon as it receives a byte, the flip-flop changes state and then the device expects the high byte. When the high byte is received,
+the flip-flop changes state again, and the device expects a new low byte. Usually, each 16 bit 'register' will have its own flip-flop, but the ISA
+DMA controller has a problem regarding this.
+</p><p>On a 8237 chip, there is <b>only one</b> flip-flop. And there are eight of the 16 bit registers. And there can be up to three device drivers all competing
+for the use of that one flip-flop simultaneously.
+</p><p>This creates two serious problems. One is "contention issues". The other is that it is difficult to be sure what state the flip-flop is currently in.
+The standard solution for dealing with the flip-flop state issue is to reset the flip-flop to "low byte" state every single time you want to use it, just
+so you can be certain it is in the proper state before sending bytes. There are only two solutions to "contention": either use a <a href="http://wiki.osdev.org/index.php?title=Lock&amp;action=edit&amp;redlink=1" class="new" title="Lock (page does not exist)">lock</a>, or allow only
+one ISA DMA driver, so that contention is impossible.
+</p>
+<h3> <span class="mw-headline" id="Masking_DRQ"> Masking DRQ </span></h3>
+<p>Setting up a DMA transfer always requires setting up both "ends" of the transfer. That is, whichever peripheral owns the DMA channel needs to be told
+to transfer a block of data via DMA. And the DMA controller needs to be told the memory address, the transfer length, perhaps a transfer "mode", and
+a transfer direction (read or write). So, one of these two things always needs to be done <i>first</i> -- and it is usually the peripheral that has a long
+latency time before being ready to transfer the first byte. If you set up the peripheral first, however, its first DMA request signal (often called
+DRQ) may arrive while you are in the middle of setting up the DMA controller.
+</p><p>The answer is to mask DRQ for a particular channel while you are initializing the DMA controller. There are three ways of temporarily disabling channels
+described below.
+</p>
+<h3> <span class="mw-headline" id="Transfer_Length"> Transfer Length </span></h3>
+<p>The value that gets stored into each Count Register is always the transfer length (either bytes or words) <b>minus 1</b>. If you forget to subtract
+the one, you will get an error on your transfer.
+</p>
+<h3> <span class="mw-headline" id="Interrupt_on_Completion"> Interrupt on Completion </span></h3>
+<p>As implemented in a PC, the DMA controller can not send interrupts. Hopefully, whichever peripheral "owns" each DMA channel will send the CPU an
+interrupt when a transfer completes. However, some peripherals may <b>not</b> send an interrupt if a transfer fails with an error. As always, timeouts
+are important.
+</p>
+<h3> <span class="mw-headline" id="The_Registers"> The Registers </span></h3>
+<p>The master and slave DMA controllers are very similar, so (to save space) both of them have been combined into the following table. Please try
+not to let this confuse you.
+Note: for Address and Count Registers on channels 5 to 7, see <a href="DMA#16_bit_issues">16 bit issues</a> above.
+</p><p>Each 8237A has 18 registers, addressed via the I/O Port bus:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th>Channels 0-3
+</th>
+<th>Channels 4-7
+</th>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td></tr>
+<tr>
+<th>IO Port
+</th>
+<th>IO Port
+</th>
+<th>Size
+</th>
+<th>Read or Write
+</th>
+<th>Function
+</th></tr>
+<tr>
+<td>0x00
+</td>
+<td>0xC0
+</td>
+<td>Word
+</td>
+<td>W
+</td>
+<td>Start Address Register channel 0/4 (unusable)
+</td></tr>
+<tr>
+<td>0x01
+</td>
+<td>0xC2
+</td>
+<td>Word
+</td>
+<td>W
+</td>
+<td>Count Register channel 0/4 (unusable)
+</td></tr>
+<tr>
+<td>0x02
+</td>
+<td>0xC4
+</td>
+<td>Word
+</td>
+<td>W
+</td>
+<td>Start Address Register channel 1/5
+</td></tr>
+<tr>
+<td>0x03
+</td>
+<td>0xC6
+</td>
+<td>Word
+</td>
+<td>W
+</td>
+<td>Count Register channel 1/5
+</td></tr>
+<tr>
+<td>0x04
+</td>
+<td>0xC8
+</td>
+<td>Word
+</td>
+<td>W
+</td>
+<td>Start Address Register channel 2/6
+</td></tr>
+<tr>
+<td>0x05
+</td>
+<td>0xCA
+</td>
+<td>Word
+</td>
+<td>W
+</td>
+<td>Count Register channel 2/6
+</td></tr>
+<tr>
+<td>0x06
+</td>
+<td>0xCC
+</td>
+<td>Word
+</td>
+<td>W
+</td>
+<td>Start Address Register channel 3/7
+</td></tr>
+<tr>
+<td>0x07
+</td>
+<td>0xCE
+</td>
+<td>Word
+</td>
+<td>W
+</td>
+<td>Count Register channel 3/7
+</td></tr>
+<tr>
+<td>0x08
+</td>
+<td>0xD0
+</td>
+<td>Byte
+</td>
+<td>R
+</td>
+<td>Status Register
+</td></tr>
+<tr>
+<td>0x08
+</td>
+<td>0xD0
+</td>
+<td>Byte
+</td>
+<td>W
+</td>
+<td>Command Register
+</td></tr>
+<tr>
+<td>0x09
+</td>
+<td>0xD2
+</td>
+<td>Byte
+</td>
+<td>W
+</td>
+<td>Request Register
+</td></tr>
+<tr>
+<td>0x0A
+</td>
+<td>0xD4
+</td>
+<td>Byte
+</td>
+<td>W
+</td>
+<td>Single Channel Mask Register
+</td></tr>
+<tr>
+<td>0x0B
+</td>
+<td>0xD6
+</td>
+<td>Byte
+</td>
+<td>W
+</td>
+<td>Mode Register
+</td></tr>
+<tr>
+<td>0x0C
+</td>
+<td>0xD8
+</td>
+<td>Byte
+</td>
+<td>W
+</td>
+<td>Flip-Flop Reset Register
+</td></tr>
+<tr>
+<td>0x0D
+</td>
+<td>0xDA
+</td>
+<td>Byte
+</td>
+<td>R
+</td>
+<td>Intermediate Register
+</td></tr>
+<tr>
+<td>0x0D
+</td>
+<td>0xDA
+</td>
+<td>Byte
+</td>
+<td>W
+</td>
+<td>Master Reset Register
+</td></tr>
+<tr>
+<td>0x0E
+</td>
+<td>0xDC
+</td>
+<td>Byte
+</td>
+<td>W
+</td>
+<td>Mask Reset Register
+</td></tr>
+<tr>
+<td>0x0F
+</td>
+<td>0xDE
+</td>
+<td>Byte
+</td>
+<td>RW
+</td>
+<td>MultiChannel Mask Register (reading is undocumented, but it works!)
+</td></tr>
+</table>
+<p>Each Channel also has an external R/W Page Address Register that contains the upper 8 bits of the 24 bit transfer memory address:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>0x87
+</td>
+<td>Channel 0 Page Address Register (unusable)
+</td></tr>
+<tr>
+<td>0x83
+</td>
+<td>Channel 1 Page Address Register
+</td></tr>
+<tr>
+<td>0x81
+</td>
+<td>Channel 2 Page Address Register
+</td></tr>
+<tr>
+<td>0x82
+</td>
+<td>Channel 3 Page Address Register
+</td></tr>
+<tr>
+<td>0x8F
+</td>
+<td>Channel 4 Page Address Register (unusable)
+</td></tr>
+<tr>
+<td>0x8B
+</td>
+<td>Channel 5 Page Address Register
+</td></tr>
+<tr>
+<td>0x89
+</td>
+<td>Channel 6 Page Address Register
+</td></tr>
+<tr>
+<td>0x8A
+</td>
+<td>Channel 7 Page Address Register
+</td></tr>
+</table>
+<h4> <span class="mw-headline" id="Useful_Registers"> Useful Registers </span></h4>
+<dl><dt>Single Channel Mask Registers 0x0A and 0xD4 (Write)
+</dt></dl>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>Bit 7
+</td>
+<td>Bit 6
+</td>
+<td>Bit 5
+</td>
+<td>Bit 4
+</td>
+<td>Bit 3
+</td>
+<td>Bit 2
+</td>
+<td>Bit 1
+</td>
+<td>Bit 0
+</td></tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>MASK_ON
+</td>
+<td>SEL 1
+</td>
+<td>SEL 0
+</td></tr></table>
+<p><br />
+These registers are used to mask (or unmask) DRQ for a single channel only, on either the master or slave DMA chip.
+That is, if you do not want to figure out the mask states of all the other channels, you can mask/unmask DRQ for one channel at a time.
+Use the SEL 0 and 1 bits to select the channel, and the MASK_ON bit to set or clear masking for it.
+Note that masking DMA channel 4 will mask 7, 6, 5 and 4 due to cascading.
+</p><p><br />
+</p>
+<dl><dt>MultiChannel Mask Registers 0x0F and 0xDE (Read and Write)
+</dt></dl>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>Bit 7
+</td>
+<td>Bit 6
+</td>
+<td>Bit 5
+</td>
+<td>Bit 4
+</td>
+<td>Bit 3
+</td>
+<td>Bit 2
+</td>
+<td>Bit 1
+</td>
+<td>Bit 0
+</td></tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>MASK3
+</td>
+<td>MASK2
+</td>
+<td>MASK1
+</td>
+<td>MASK0
+</td></tr></table>
+<p>Setting the appropriate bits to 0 or 1 allows you to unmask or mask (respectively) DRQ for those channels. Using this register means that your driver needs
+to know the desired mask states of <i>all</i> the channels at that moment. There are several ways to do this, but one is simply to read this register, first.
+Note that masking DMA channel 4 will mask 7, 6, 5 and 4 due to cascading.
+</p><p><br />
+</p>
+<dl><dt>DMA Mode Registers 0x0B and 0xD6 (Write)
+</dt></dl>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>Bit 7
+</td>
+<td>Bit 6
+</td>
+<td>Bit 5
+</td>
+<td>Bit 4
+</td>
+<td>Bit 3
+</td>
+<td>Bit 2
+</td>
+<td>Bit 1
+</td>
+<td>Bit 0
+</td></tr>
+<tr>
+<td>MOD1
+</td>
+<td>MOD0
+</td>
+<td>DOWN
+</td>
+<td>AUTO
+</td>
+<td>TRA1
+</td>
+<td>TRA0
+</td>
+<td>SEL1
+</td>
+<td>SEL0
+</td></tr></table>
+<p>Setting this register is a little tricky as it depends highly on the peripheral you are programming the DMA controller for. However, the
+driver for the peripheral is the entity that needs to set this register, and it should know what mode the peripheral needs.
+</p>
+<ul><li> <b>SEL0</b> and <b>SEL1</b> select the channel you want to change;
+</li><li> <b>TRA0</b> and <b>TRA1</b> selects the transfer type;
+<ul><li> 0b00 runs a self test of the controller;
+</li><li> 0b01 Peripheral is writing to memory;
+</li><li> 0b10 Peripheral is reading from memory;
+</li><li> 0b11 invalid.
+</li></ul>
+</li><li> <b>AUTO</b>: When this bit is set, after a transfer has completed the channel resets itself to the address and count values you programmed into it. This is great for floppy transfers. Read in a track - the values set themselves up for reading again immediately. For writing you'd only need to alter the transfer mode - not the addresses. Some expansion cards do not support auto-init DMA such as Sound Blaster 1.x. These devices will crash if used with auto-init DMA. Sound Blaster 2.0 and later do support auto-init DMA.
+</li><li> <b>DOWN</b>: Reverses the memory order of the data, when set. Memory is accessed from high addresses down to low addresses (the address is decremented between each transfer).
+</li><li> <b>MOD0</b> and <b>MOD1</b>: This is where some problems can arise based on the peripheral the DMA controller is attached to. The DMA controller has several modes:
+<ul><li> 0b00 = Transfer on Demand;
+</li><li> 0b01 = Single DMA Transfer;
+</li><li> 0b10 = Block DMA Transfer;
+</li><li> 0b11 = Cascade Mode (use to cascade another DMA controller).
+</li></ul>
+</li></ul>
+<p>Single transfer mode is good for peripherals than cannot cache a lot of data at once.
+Non-82077AA Floppy controllers, Sound Blaster, and Sound Blaster Pro should use Single Transfer DMA Mode.
+</p><p>Block transfer mode is good for peripherals that can buffer entire blocks of information. An example of this is a hard disk controller board.
+</p><p>Demand transfer mode is good for peripherals that start and stop intermittently such as a tape drive. The drive can read a whole load of information for as
+long as it can and the suspend the transfer to move to another section of the tape. Newer floppy controllers also work well with demand transfer because
+they have FIFO buffers to store information being read and written (but you need to set up the FIFO properly). The peripheral controls the flow, and as
+the information flow is uninterrupted, performance can be gained. CPUs in these later computers generally have caches and can continue working
+uninterrupted during a demand DMA transfer. Older computers will slow down as their CPUs wait for the memory bus to become available.
+</p>
+<dl><dt>Flip-Flop Reset Registers 0x0C and 0xD8 (Write)
+</dt><dt>Master Reset Registers 0x0D and 0xDA (Write)
+</dt><dt>Mask Reset Registers 0x0E and 0xDC (Write)
+</dt></dl>
+<p>Send any value to the Reset registers to activate them.
+Master Reset sets Flip-Flop low, clears Status, and sets all Mask bits ON.
+Mask Reset sets all Mask bits OFF.
+</p><p>The following statement from the previous wiki article needs to be verified on real hardware, because it is likely to be wrong: "The Reset Flip-Flop command
+must be sent <i>before any</i> 16 bit transaction. The flip-flop <i>does not reset</i> after the DMA controller has received the second byte."
+</p><p><br />
+</p>
+<h4> <span class="mw-headline" id="The_Other_Registers"> The Other Registers </span></h4>
+<dl><dt>Status Registers 0x08 and 0xD0	(Read)
+</dt></dl>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>Bit 7
+</td>
+<td>Bit 6
+</td>
+<td>Bit 5
+</td>
+<td>Bit 4
+</td>
+<td>Bit 3
+</td>
+<td>Bit 2
+</td>
+<td>Bit 1
+</td>
+<td>Bit 0
+</td></tr>
+<tr>
+<td>REQ3
+</td>
+<td>REQ2
+</td>
+<td>REQ1
+</td>
+<td>REQ0
+</td>
+<td>TC3
+</td>
+<td>TC2
+</td>
+<td>TC1
+</td>
+<td>TC0
+</td></tr></table>
+<ul><li> REQ3-0: When set: DMA Request Pending.
+</li><li> TC3-0: When set: Transfer Complete.
+</li><li> Reading this register will clear the TC bits.
+</li></ul>
+<p>This register isn't very important in light of the fact that the 8237 can't send an IRQ to tell you that it has finished. Usually there is no need to poll
+this register as the peripheral (at the other end of the DMA) will send an interrupt when a transaction has completed.
+</p><p><br />
+</p>
+<dl><dt>Command Registers 0x08 and 0xD0 (Write)
+</dt></dl>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>Bit 7
+</td>
+<td>Bit 6
+</td>
+<td>Bit 5
+</td>
+<td>Bit 4
+</td>
+<td>Bit 3
+</td>
+<td>Bit 2
+</td>
+<td>Bit 1
+</td>
+<td>Bit 0
+</td></tr>
+<tr>
+<td>DACKP
+</td>
+<td>DRQP
+</td>
+<td>EXTW
+</td>
+<td>PRIO
+</td>
+<td>COMP
+</td>
+<td>COND
+</td>
+<td>ADHE
+</td>
+<td>MMT
+</td></tr></table>
+<p>This register really shows how incompatible the 8237 is with the PC hardware.
+</p>
+<ul><li> Let's start with EXTW and COMP. These increase the speed of DMA transfer by 25% be removing one of the clock cycles. Does it work? No.
+</li><li> PRIO. When zeroed, this allows DMA priorities to be rotated allowing freedom and liberty for all peripherals that share the data bus. Does it work? No.
+</li><li> MMT and ADHE. Did you know that the IBM PC could do memory to memory transfers since 1981? That's right, hardware sprites, hardware frame buffering from one location to another. Does it work? No.
+</li><li> COND. Hooray the only bit in the control register that does something useful. Setting this bit disables the DMA controller. This is one way to set up multiple DMA channels without masking each and every channel.
+</li></ul>
+<dl><dt>Request Registers 0x09 and 0xD2 (Write)
+</dt></dl>
+<p>Used for memory to memory transfers and setting up priority rotation -- absolutely useless.
+</p>
+<dl><dt>"Intermediate" Registers 0x0D and 0xDA (Read)
+</dt></dl>
+<p>Never implemented on PCs. Useless.
+</p>
+<h2> <span class="mw-headline" id="Examples"> Examples </span></h2>
+<h3> <span class="mw-headline" id="Floppy_Disk_DMA_Initialization"> Floppy Disk DMA Initialization </span></h3>
+<p>You need only implement 1 to 3 tiny routines to perform a DMA transfer. This example is the Floppy Drive controller (probably the most common followed by SoundBlaster).
+</p><p>Note: the following code is not optimal, because there is an OUT to the same IO port twice (in two places). This causes an extra delay on the IO Port
+bus. Real code should separate the two "out 0x4" and "out 0x5" calls with an "out" to some other port.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">initialize_floppy_DMA<span class="sy0">:</span>
+<span class="co1">; set DMA channel 2 to transfer data from 0x1000 - 0x33ff in memory</span>
+<span class="co1">; paging must map this _physical_ memory elsewhere and _pin_ it from paging to disk!</span>
+<span class="co1">; set the counter to 0x23ff, the length of a track on a 1.44 MiB floppy - 1 (assuming 512 byte sectors)</span>
+<span class="co1">; transfer length = counter + 1</span>
+    <span class="kw1">out</span> <span class="nu0">0x0a</span><span class="sy0">,</span> <span class="nu0">0x06</span>      <span class="co1">; mask DMA channel 2 and 0 (assuming 0 is already masked)</span>
+    <span class="kw1">out</span> <span class="nu0">0x0c</span><span class="sy0">,</span> <span class="nu0">0xFF</span>      <span class="co1">; reset the master flip-flop</span>
+    <span class="kw1">out</span> <span class="nu0">0x04</span><span class="sy0">,</span> <span class="nu0">0</span>         <span class="co1">; address to 0 (low byte)</span>
+    <span class="kw1">out</span> <span class="nu0">0x04</span><span class="sy0">,</span> <span class="nu0">0x10</span>      <span class="co1">; address to 0x10 (high byte)</span>
+    <span class="kw1">out</span> <span class="nu0">0x0c</span><span class="sy0">,</span> <span class="nu0">0xFF</span>      <span class="co1">; reset the master flip-flop (again!!!)</span>
+    <span class="kw1">out</span> <span class="nu0">0x05</span><span class="sy0">,</span> <span class="nu0">0xFF</span>      <span class="co1">; count to 0x23ff (low byte)</span>
+    <span class="kw1">out</span> <span class="nu0">0x05</span><span class="sy0">,</span> <span class="nu0">0x23</span>      <span class="co1">; count to 0x23ff (high byte),</span>
+    <span class="kw1">out</span> <span class="nu0">0x81</span><span class="sy0">,</span> <span class="nu0">0</span>         <span class="co1">; external page register to 0 for total address of 00 10 00</span>
+    <span class="kw1">out</span> <span class="nu0">0x0a</span><span class="sy0">,</span> <span class="nu0">0x02</span>      <span class="co1">; unmask DMA channel 2</span>
+    <span class="kw1">ret</span></pre></div></div>
+<p>Once you have set up your start address and transfer length you do not need to touch it again, if you are using autoinit. Once reading or writing
+is selected, you don't need to change that, either. To <i>change</i> selecting reading or writing you use the mode register.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">prepare_for_floppy_DMA_write<span class="sy0">:</span>
+    <span class="kw1">out</span> <span class="nu0">0x0a</span><span class="sy0">,</span> <span class="nu0">0x06</span>      <span class="co1">; mask DMA channel 2 and 0 (assuming 0 is already masked)</span>
+    <span class="kw1">out</span> <span class="nu0">0x0b</span><span class="sy0">,</span> <span class="nu0">0x5A</span>      <span class="co1">; 01011010</span>
+                        <span class="co1">; single transfer, address increment, autoinit, write, channel2)</span>
+    <span class="kw1">out</span> <span class="nu0">0x0a</span><span class="sy0">,</span> <span class="nu0">0x02</span>      <span class="co1">; unmask DMA channel 2</span>
+    <span class="kw1">ret</span>
+&#160;
+prepare_for_floppy_DMA_read<span class="sy0">:</span>
+    <span class="kw1">out</span> <span class="nu0">0x0a</span><span class="sy0">,</span> <span class="nu0">0x06</span>      <span class="co1">; mask DMA channel 2 and 0 (assuming 0 is already masked)</span>
+    <span class="kw1">out</span> <span class="nu0">0x0b</span><span class="sy0">,</span> <span class="nu0">0x56</span>      <span class="co1">; 01010110</span>
+                        <span class="co1">; single transfer, address increment, autoinit, read, channel2)</span>
+    <span class="kw1">out</span> <span class="nu0">0x0a</span><span class="sy0">,</span> <span class="nu0">0x02</span>      <span class="co1">; unmask DMA channel 2</span>
+    <span class="kw1">ret</span></pre></div></div>
+<p>Some hardware, as well as VirtualPC do not support autoinit. You may want to set the Mode registers to 0x4A and 0x46 in the above routines, instead.
+</p><p>The above routines use single transfer mode for compatibility, but during the initialization of your floppy driver if you detect an "advanced" floppy
+controller (using the Version command), "demand transfer" should be used to reduce overhead.
+</p>
+<h2> <span class="mw-headline" id="References"> References </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Floppy_Disk_Controller" title="Floppy Disk Controller">Floppy Disk Controller</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.intel-assembler.it/PORTALE/4/231466_8237A_DMA.pdf">Intel 8237A datasheet</a>
+</li><li><a rel="nofollow" class="external free" href="http://bos.asmhackers.net/docs/dma/docs/">http://bos.asmhackers.net/docs/dma/docs/</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 144/1000000
+Post-expand include size: 1134/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1467-0!*!0!!en!*!* and timestamp 20180121064140 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ISA_DMA&amp;oldid=14073">http://wiki.osdev.org/index.php?title=ISA_DMA&amp;oldid=14073</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Storage" title="Category:Storage">Storage</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ISA_DMA" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ISA_DMA"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:ISA_DMA"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="DMA#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ISA_DMA" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ISA_DMA&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ISA_DMA&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="DMA#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ISA_DMA" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ISA_DMA" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ISA_DMA&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ISA_DMA&amp;oldid=14073" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/DMA" title="DMA">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 2 November 2012, at 21:44.</li>
+											<li id="footer-info-viewcount">This page has been accessed 97,651 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.041 secs. -->
+	</body>
+</html>

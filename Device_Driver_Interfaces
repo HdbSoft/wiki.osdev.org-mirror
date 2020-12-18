@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Device Management - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="Device_Management" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Device_Management", "wgTitle": "Device Management", "wgCurRevisionId": 15242, "wgArticleId": 2355, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Kernel", "Drivers", "Driver Interfaces"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Device_Management action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Device Management</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=Device_Driver_Interfaces&amp;redirect=no" title="Device Driver Interfaces">Device Driver Interfaces</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Device_Driver_Interfaces#mw-head">navigation</a>,
+					<a href="Device_Driver_Interfaces#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>All modern operating systems have a subsystem called the device manager. The device manager is responsible for detecting and managing devices, performing power management, and exposing devices to userspace. Since the device manager is a crucial part of any operating system, it's important to make sure it's well designed.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Device_Driver_Interfaces#Device_Drivers"><span class="tocnumber">1</span> <span class="toctext">Device Drivers</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Device_Driver_Interfaces#Device_Detection"><span class="tocnumber">2</span> <span class="toctext">Device Detection</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Device_Driver_Interfaces#IPC"><span class="tocnumber">3</span> <span class="toctext">IPC</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Device_Driver_Interfaces#Asynchronous_I.2FO"><span class="tocnumber">4</span> <span class="toctext">Asynchronous I/O</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Device_Driver_Interfaces#Power_Management"><span class="tocnumber">5</span> <span class="toctext">Power Management</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Device_Driver_Interfaces#Userspace_Exposure"><span class="tocnumber">6</span> <span class="toctext">Userspace Exposure</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Device_Driver_Interfaces#Existing_Driver_Interfaces"><span class="tocnumber">7</span> <span class="toctext">Existing Driver Interfaces</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="Device_Driver_Interfaces#Uniform_Driver_Interface"><span class="tocnumber">7.1</span> <span class="toctext">Uniform Driver Interface</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Device_Driver_Interfaces#Extensible_Driver_Interface"><span class="tocnumber">7.2</span> <span class="toctext">Extensible Driver Interface</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="Device_Driver_Interfaces#See_Also"><span class="tocnumber">8</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="Device_Driver_Interfaces#External_Links"><span class="tocnumber">8.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Device_Drivers">Device Drivers</span></h2>
+<p>Device drivers allow user applications to communicate with a system's devices. They provide a high-level abstraction of the hardware to user applications while handling the low-level device-specific I/O and interrupts. Device drivers can be implemented as loadable kernel modules (for a <a href="Monolithic_Kernel" title="Monolithic Kernel">Monolithic Kernel</a>) or user-mode servers (for <a href="Microkernel" title="Microkernel">Microkernels</a>).
+</p>
+<h2> <span class="mw-headline" id="Device_Detection">Device Detection</span></h2>
+<p>The main role of the device manager is detecting devices on the system. Usually, devices are organized in a tree structure, with devices enumerating their children. Device detection should begin with a "root bus driver". On x86 systems, the root bus driver would use <a href="ACPI" title="ACPI">ACPI</a>. The root bus driver sits at the root of the device tree. It detects the buses present on the system as well as devices directly connected to the motherboard. Each bus is then recursively enumerated, with its children continuing to enumerate their children until the bottom of the device tree is reached.
+</p><p>Each device that is detected should contain a list of resources for the device to use. Examples of resources are I/O, memory, IRQs, DMA channels, and configuration space. Devices are assigned resources by their parent devices. Devices should just use the resources they're given, which provides support for having the same device driver work on different machines where the resource assignments may be different, but the programming interface is otherwise the same.
+</p><p>Drivers are loaded for each device that's found. When a device is detected, the device manager finds the device's driver. If not loaded already, the device manager loads the driver. It then calls the driver to initialize that device.
+</p><p>How the device manager matches a device to a device driver is an important choice. The way devices are identified is very bus specific. On <a href="PCI" title="PCI">PCI</a>, a device is identified through a combination of its vendor and device IDs. <a href="USB" title="USB" class="mw-redirect">USB</a> has the same scheme as PCI, using a vendor and product ID. <a href="ACPI" title="ACPI">ACPI</a> uses PNP IDs to identify devices in the ACPI namespace. With this information, it's possible to build a database using matching IDs to drivers. This information is best stored in a separate file.
+</p>
+<h2> <span class="mw-headline" id="IPC">IPC</span></h2>
+<p>The device manager needs to implement some form of IPC between it and device drivers. IPC will be used by the device manager to send I/O requests to device drivers, and by drivers to respond to these requests. It is usually implemented with messages that contain data about the request, such as the I/O function code, buffer pointer, device offset, and buffer length. To respond to these I/O requests, every device driver needs dispatch functions used to handle each I/O function code. Each device needs a queue of these IPC messages for it to handle. On Windows NT, this IPC is done with I/O Request Packets.
+</p>
+<h2> <span class="mw-headline" id="Asynchronous_I.2FO">Asynchronous I/O</span></h2>
+<p>There are two main types of I/O: synchronous I/O and asynchronous I/O. Synchronous I/O sends an I/O request and then puts the current thread to sleep until the I/O completes. Asynchronous I/O just sends the I/O request and then returns. I/O completion is reported asynchronously using a callback. Asynchronous I/O improves the efficiency of the system by allowing allowing for the program execution to continue while I/O is performed. It also allows for multiple I/O requests to be started and then handled in the order they complete, not the order they execute. However, this comes at the cost of making programming more complex than using synchronous I/O.
+</p><p>Internally, an operating system should use asynchronous I/O for all of its I/O requests. I/O requests are sent to drivers, and then the function that sent them immediately returns. Eventually, the I/O request will be handled. Once it completes, it returns through the driver stack and finally notifies the application of I/O completion. It can do this using callbacks, signals, or completion queues.
+</p><p>Synchronous I/O can simply be implemented as a special case of asychronous I/O. Just like with asynchronous I/O, an I/O request is sent to the driver, but instead of returning, the thread goes to sleep. Once the I/O completion event is queued, the thread will wake up and execute the callback before returning.
+</p>
+<h2> <span class="mw-headline" id="Power_Management">Power Management</span></h2>
+<p>The device manager also performs power management. Power management is a feature of hardware that allows for the power consumption of the system and devices to be controlled. Each device managed by the device manager should provide functions to set their power state. For power management support, all systems require a power management driver that controls the system power. On x86, this is done through <a href="ACPI" title="ACPI">ACPI</a>. Each device also needs to support power management.
+</p><p>The device manager needs to respond to power management events. Power management events can come from two sources: the user or the system. User-generated power management events are created by user mode applications. They are system-wide events for shutting down, rebooting, hibernating, or putting the system to sleep. When the device manager receives a system-wide power management event, it sets the power state of the system.
+</p><p>System-generated power management events are events that come from the system hardware. Examples of system-generated power management events are plugging/unplugging an AC adapter or closing/opening the lid of a laptop. The device manager takes the appropriate action in response to the event.
+</p>
+<h2> <span class="mw-headline" id="Userspace_Exposure">Userspace Exposure</span></h2>
+<p>Once the kernel interfaces for device drivers are complete, one also needs to figure out how to expose devices to userspace. Most Unix-based operating systems expose devices through the filesystem tree. When devices are placed in the filesystem tree, there is a directory (usually /dev) containing special files that represent devices. The advantage of placing devices in the filesystem tree is that devices can be treated as files, meaning they can be read from or written to. Windows NT does not expose devices through the filesystem tree. Instead, there is an internal namespace of objects, through which devices can be found and accessed similarly to files.
+</p><p>No matter how devices are exposed, the functions that are provided for devices must be decided on as well. Both Unix-based operating systems and Windows NT treat devices like files, meaning their functions are open(), close(), read(), and write(). However, it was soon realized that this API would not be adequate for device functions that don't fit into these functions, like setting the graphics mode of a video card. For this purpose, a new syscall called ioctl() was developed, that allows a device to have special functions. However, this is by no means the only way to call device functions.
+</p>
+<h2> <span class="mw-headline" id="Existing_Driver_Interfaces">Existing Driver Interfaces</span></h2>
+<p>An operating system doesn't need to implement its own driver interface. A few driver interfaces have already been programmed with the intent of being integrated into operating systems. These driver interfaces can be implemented instead of a native driver interface, on top of a native driver interface, or along with a native driver interface.
+</p>
+<h3> <span class="mw-headline" id="Uniform_Driver_Interface">Uniform Driver Interface</span></h3>
+<dl><dd><i>Main article:</i> <a href="Uniform_Driver_Interface" title="Uniform Driver Interface">Uniform Driver Interface</a>
+</dd></dl>
+<p>Project UDI is a driver interface intended to be binary portable or source portable when running on different CPU architectures. It is not very widespread (however, neither are EDI or CDI); for example, due to philosophical concerns, Linux did not embrace UDI. However, several members of the community are striving to popularize UDI again since it would be of a huge benefit to hobby operating systems. You are strongly encouraged to participate by implenting a UDI environment and writing drivers.
+</p>
+<h3> <span class="mw-headline" id="Extensible_Driver_Interface">Extensible Driver Interface</span></h3>
+<dl><dd><i>Main article:</i> <a href="Extensible_Driver_Interface" title="Extensible Driver Interface">Extensible Driver Interface</a>
+</dd></dl>
+<p>EDI is a driver interface intended to be source code portable and fairly simple in implementation (also, limited in functionality), so that hobby small hobby OSes may share driver code base.
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://www.osdever.net/tutorials/view/device-management">Tim Robinson's Device Management Tutorial</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 81/1000000
+Post-expand include size: 97/2097152 bytes
+Template argument size: 51/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2355-0!*!0!!en!*!* and timestamp 20180121034956 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Device_Management&amp;oldid=15242">http://wiki.osdev.org/index.php?title=Device_Management&amp;oldid=15242</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Kernel" title="Category:Kernel">Kernel</a></li><li><a href="Category:Drivers" title="Category:Drivers">Drivers</a></li><li><a href="Category:Driver_Interfaces" title="Category:Driver Interfaces">Driver Interfaces</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Device_Management" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Device_Management"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Device_Management"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Device_Driver_Interfaces#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Device_Management" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Device_Management&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Device_Management&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Device_Driver_Interfaces#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Device_Management" title="A list of all wiki skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Device_Management" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Device_Management" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Device_Management&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Device_Management&amp;oldid=15242" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 2 October 2013, at 19:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 44,701 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.037 secs. -->
+	</body>
+</html>

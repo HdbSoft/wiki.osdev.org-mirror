@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>SFS - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "SFS", "wgTitle": "SFS", "wgCurRevisionId": 18725, "wgArticleId": 2212, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Filesystems"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-SFS action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">SFS</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="SFS#mw-head">navigation</a>,
+					<a href="SFS#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="File_Systems" title="File Systems">Filesystems</a></th></tr><tr><th>Virtual Filesystems</th></tr><tr><td><div>
+<p><a href="VFS" title="VFS">VFS</a><br />
+</p>
+</div></td></tr><tr><th>Disk Filesystems</th></tr><tr><td><div>
+<p><a href="FAT" title="FAT">FAT</a> <a href="FAT12" title="FAT12" class="mw-redirect">12</a>/<a href="FAT16" title="FAT16" class="mw-redirect">16</a>/<a href="FAT32" title="FAT32" class="mw-redirect">32</a>, <a href="VFAT" title="VFAT" class="mw-redirect">VFAT</a><br />
+<a href="Ext2" title="Ext2">Ext 2</a>/<a href="Ext3" title="Ext3">3</a>/<a href="Ext4" title="Ext4">4</a><br />
+<a href="LEAN" title="LEAN">LEAN</a><br />
+<a href="HPFS" title="HPFS">HPFS</a><br />
+<a href="NTFS" title="NTFS">NTFS</a><br />
+<a href="HFS" title="HFS">HFS</a><br />
+<a href="HFS+" title="HFS+">HFS+</a><br />
+<a href="MFS" title="MFS">MFS</a><br />
+<a href="ReiserFS" title="ReiserFS">ReiserFS</a><br />
+<a href="FFS_(Amiga)" title="FFS (Amiga)">FFS (Amiga)</a><br />
+<a href="FFS_(BSD)" title="FFS (BSD)" class="mw-redirect">FFS (BSD)</a>/<a href="UFS" title="UFS">UFS</a><br />
+<a href="BeFS" title="BeFS">BeFS</a><br />
+<a href="BFS" title="BFS">BFS</a><br />
+<a href="XFS" title="XFS">XFS</a><br />
+<strong class="selflink">SFS</strong><br />
+<a href="ZFS" title="ZFS">ZFS</a><br />
+<a href="USTAR" title="USTAR">USTAR</a><br />
+</p>
+</div></td></tr><tr><th>CD/DVD Filesystems</th></tr><tr><td><div>
+<p><a href="ISO_9660" title="ISO 9660">ISO 9660</a><br />
+<a href="Joliet" title="Joliet">Joliet</a><br />
+<a href="UDF" title="UDF">UDF</a><br />
+</p>
+</div></td></tr><tr><th><a href="Category:Network_Filesystems" title="Category:Network Filesystems">Network Filesystems</a></th></tr><tr><td><div>
+<p><a href="NFS" title="NFS">NFS</a><br />
+<a href="RFS" title="RFS">RFS</a><br />
+<a href="AFS" title="AFS">AFS</a><br />
+</p>
+</div></td></tr><tr><th>Flash Filesystems</th></tr><tr><td><div>
+<p><a href="JFFS2" title="JFFS2">JFFS2</a><br />
+<a href="YAFFS" title="YAFFS">YAFFS</a><br />
+</p>
+</div></td></tr></table>
+<p>There are several filesystems existing that are abbreviated <b>SFS</b>, but the one discussed here is the <b>Simple File System</b>  by Brendan Trotter, designed to be very easy to implement. It has a minimal set of features. Officially it is still in its draft stage, but hasn't changed for some time.
+</p><p>SFS is designed to be used as a simple filesystem for use on floppy disks and other removable media to transfer data between computers.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="SFS#Format_Details"><span class="tocnumber">1</span> <span class="toctext">Format Details</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="SFS#Layout"><span class="tocnumber">1.1</span> <span class="toctext">Layout</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="SFS#Super-block"><span class="tocnumber">1.2</span> <span class="toctext">Super-block</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="SFS#Reserved_Area"><span class="tocnumber">1.3</span> <span class="toctext">Reserved Area</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="SFS#Data_Area"><span class="tocnumber">1.4</span> <span class="toctext">Data Area</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="SFS#Free_Area"><span class="tocnumber">1.5</span> <span class="toctext">Free Area</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="SFS#Index_Area"><span class="tocnumber">1.6</span> <span class="toctext">Index Area</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="SFS#Embedding"><span class="tocnumber">1.7</span> <span class="toctext">Embedding</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="SFS#Information_Formatting"><span class="tocnumber">2</span> <span class="toctext">Information Formatting</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="SFS#Timestamps"><span class="tocnumber">2.1</span> <span class="toctext">Timestamps</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="SFS#Names"><span class="tocnumber">2.2</span> <span class="toctext">Names</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="SFS#See_Also"><span class="tocnumber">3</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="SFS#Threads"><span class="tocnumber">3.1</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="SFS#External_Links"><span class="tocnumber">3.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Format_Details"> Format Details </span></h2>
+<h3> <span class="mw-headline" id="Layout"> Layout </span></h3>
+<p>There are five key areas in a SimpleFS partition: The Super-block, Reserved Area, Data Area, Free Area and Index Area.
+</p>
+<h3> <span class="mw-headline" id="Super-block"> Super-block </span></h3>
+<p>The Super-block is located in the first sector of a disk or partition. For floppy disks that means it is contained in the boot sector. The superblock contains structural information about the partition. The SFS data of the super-block is located at offset 0x0194 and is 58 bytes long, leaving space for boot code and a partition table.
+</p>
+<table>
+
+<tr>
+<th> Offset
+</th>
+<th> Size
+</th>
+<th> Contents
+</th></tr>
+<tr>
+<td> 0x0194
+</td>
+<td> 8
+</td>
+<td> Last alteration time of super-block values (Data size or Index Size)
+</td></tr>
+<tr>
+<td> 0x019C
+</td>
+<td> 8
+</td>
+<td> Size of Data Area in blocks
+</td></tr>
+<tr>
+<td> 0x01A4
+</td>
+<td> 8
+</td>
+<td> Size of Index Area in <u>bytes</u>
+</td></tr>
+<tr>
+<td> 0x01AC
+</td>
+<td> 3
+</td>
+<td> Magic number (0x534653 'SFS')
+</td></tr>
+<tr>
+<td> 0x01AF
+</td>
+<td> 1
+</td>
+<td> Version number in BCD (0x10 = 1.0)
+</td></tr>
+<tr>
+<td> 0x01B0
+</td>
+<td> 8
+</td>
+<td> Total number of blocks in volume
+</td></tr>
+<tr>
+<td> 0x01B8
+</td>
+<td> 4
+</td>
+<td> Size of Reserved Area and Super-block in blocks
+</td></tr>
+<tr>
+<td> 0x01BC
+</td>
+<td> 1
+</td>
+<td> Block size given by <i>BytesPerBlock = 2<sup>(BlockSize + 7)</sup></i>
+</td></tr>
+<tr>
+<td> 0x01BD
+</td>
+<td> 1
+</td>
+<td> Checksum of bytes between 0x1AC and 0x1BC such that the lower 8 bits are zero
+</td></tr></table>
+<h3> <span class="mw-headline" id="Reserved_Area"> Reserved Area </span></h3>
+<p>The reserved area is a segment of disk that is untouched by drivers conforming to the current specification. This allows ancillary information or data such as a kernel image or a small EXT2/FAT partition to be stored on the same volume.
+</p>
+<h3> <span class="mw-headline" id="Data_Area"> Data Area </span></h3>
+<p>The Data Area contains file data and starts at the end of the Reserved Area. The files in the data area can only occupy sequential areas as there is no way of linking chains of blocks for a single file.
+</p>
+<h3> <span class="mw-headline" id="Free_Area"> Free Area </span></h3>
+<p>The Free Area is the currently unused space in the volume that can be used by either the Data Area growing downwards or the Index Area growing upwards.
+</p>
+<h3> <span class="mw-headline" id="Index_Area"> Index Area </span></h3>
+<p><i>Note: Because the Index Area is situated at the end of the disk the offsets are referred to in an opposite fashion to what is typical. So, the first entry is actually the closest to the end of the disk</i>
+</p><p>The Index Area contains the tracking information for the Data Area and is made of a variable number of 64 byte entries extending from the end of the volume towards the beginning.
+The entries in the Index Area follow a few simple rules.
+The "first" (at the end of the disk) entry must be a Volume Identifier entry, this is used to detect if a disk has been swapped when auto-detection is unavailable. The "last" (closest to the start of the disk) must be a Starting Marker entry, this is used for file-system recovery if the super-block is damaged.
+Continuation entries are used to allow longer file names than can be placed in a single directory or file entry and immediately precede their respective file/directory entry.
+</p>
+<h3> <span class="mw-headline" id="Embedding"> Embedding </span></h3>
+<p>The GUID currently in use for GPT partitions is 4ebf0e06-11bf-450c-1a06-534653534653
+</p>
+<h2> <span class="mw-headline" id="Information_Formatting"> Information Formatting </span></h2>
+<h3> <span class="mw-headline" id="Timestamps"> Timestamps </span></h3>
+<p>All SFS timestamps are 64-bit signed values that count the number of 1/65536<sup>ths</sup> of a second before or after the UNIX Epoch (1<sup>st</sup> of January 1970) and are in UTC.
+</p>
+<h3> <span class="mw-headline" id="Names"> Names </span></h3>
+<p>Name Strings in SFS are in UTF-8 and must be null terminated. Characters can include any character in the ranges 0x20-0x7E and 0xA1-0xFF excluding a double quote ("), asterisk (*), colon (:), less than or greater then sign (&lt; or &gt;), question mark (?) or backward slash (\). The forwards slash (/) is admissible only as a path separator. 
+Note that UTF-8 means that the characters above 0x80 take up multiple bytes rather than one, which could confuse ASCII based systems.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<ul><li> <a href="http://forum.osdev.org/viewtopic.php?t=11833" class="extiw" title="topic:11833">SFS Review thread</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="https://www.d-rift.nl/combuster/vdisk/sfs.html">Official Specification</a> (<a rel="nofollow" class="external text" href="https://web.archive.org/web/20090923015653/http://dimensionalrift.homelinux.net/combuster/vdisk/sfs.html">web.archive.org</a>)
+</li><li> <a rel="nofollow" class="external text" href="https://www.d-rift.nl/combuster/vdisk/">A windows utility for SFS images</a> (<a rel="nofollow" class="external text" href="https://web.archive.org/web/20111111113756/http://dimensionalrift.homelinux.net/combuster/vdisk/">web.archive.org</a>)
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 400/1000000
+Post-expand include size: 3186/2097152 bytes
+Template argument size: 2331/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2212-0!*!0!!en!*!* and timestamp 20180121064016 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=SFS&amp;oldid=18725">http://wiki.osdev.org/index.php?title=SFS&amp;oldid=18725</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Filesystems" title="Category:Filesystems">Filesystems</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=SFS" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="SFS"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:SFS"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="SFS#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="SFS" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=SFS&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=SFS&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="SFS#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/SFS" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/SFS" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=SFS&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=SFS&amp;oldid=18725" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/SFS" title="SFS">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 December 2015, at 03:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 46,759 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/SFS" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/SFS" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=SFS&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=SFS&amp;oldid=18725" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/SFS" title="SFS">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 December 2015, at 03:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 46,759 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

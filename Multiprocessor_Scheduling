@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Multiprocessor Scheduling - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Multiprocessor_Scheduling", "wgTitle": "Multiprocessor Scheduling", "wgCurRevisionId": 22069, "wgArticleId": 1888, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Processes and Threads", "Stubs", "Synchronization"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Multiprocessor_Scheduling action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Multiprocessor Scheduling</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Multiprocessor_Scheduling#mw-head">navigation</a>,
+					<a href="Multiprocessor_Scheduling#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=Multiprocessor_Scheduling&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Multiprocessor_Scheduling#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Multiprocessor_Scheduling#Scheduler_Activations"><span class="tocnumber">2</span> <span class="toctext">Scheduler Activations</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Multiprocessor_Scheduling#Scheduling_with_each_CPU_assigned_with_its_own_run-queue"><span class="tocnumber">3</span> <span class="toctext">Scheduling with each CPU assigned with its own run-queue</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Multiprocessor_Scheduling#Task_Balancing_or_Run-queue_Balancing"><span class="tocnumber">4</span> <span class="toctext">Task Balancing or Run-queue Balancing</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Multiprocessor_Scheduling#Other_facts_..."><span class="tocnumber">5</span> <span class="toctext">Other facts ...</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Multiprocessor_Scheduling#A_simple_method"><span class="tocnumber">6</span> <span class="toctext">A simple method</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Multiprocessor_Scheduling#See_Also"><span class="tocnumber">7</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="Multiprocessor_Scheduling#Articles"><span class="tocnumber">7.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Multiprocessor_Scheduling#Forum_Threads"><span class="tocnumber">7.2</span> <span class="toctext">Forum Threads</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Multiprocessor_Scheduling#External_Links"><span class="tocnumber">7.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p><a href="Scheduling_Algorithms" title="Scheduling Algorithms">Scheduling Algorithms</a> can get tricky when more than one CPU is involved, and with Intel's Hyperthreading technology (one complex CPU appearing as multiple CPUs), MultiProcessors OSdev'ing come to the hobbyist as well...
+</p><p>All of a sudden, the details of the CPU architecture become even more important than with single processor systems. How is the Memory Management Unit (MMU) designed? Some CPUs are able to hold page tables for more than one process in their Translation Lookaside Buffer (TLB) - it would benefit the system performance if the same process would always run on the same CPU, instead of a different one each time it is scheduled.
+</p><p>Another issue is multithreading. On a single-CPU system, multithreading (i.e., more than one control flow in a single address space) is a fine thing, and if done right can greatly benefit a system's performance. But on a multiprocessor system, there are even greater benefits to win - while at the same time it gets harder to achieve them.
+</p>
+<h2> <span class="mw-headline" id="Scheduler_Activations"> Scheduler Activations </span></h2>
+<p>Scheduler activations are a mechanism that give the benefits of user-level threads while being implemented in the kernel and providing kernel-thread functionality. The kernel-level scheduler schedules tasks or processes out of which any task could dispatch a process-scheduler. Whenever that task will be selected and dispatched by the system-wide task scheduler in the kernel, it will execute the process scheduler in user-space. Th e process-level scheduler will have a structure of user-level threads which can be created, paused, waited, and destroyed in user-mode itself. 'm' number of tasks can refer to the process scheduler (as there are 'm' no. of kernel threads in the M:N model) and that scheduler will hold 'n' number of user-level threads. This allows super-fast management of threads in user-space without any context switches.
+</p><p>Process-level scheduling will be particularly useful for processes which have threads which have a short lifespan, e.g. input &amp; output threads. It will also be helpful when a considerable number of threads are sleeping or waiting on others. Those dependencies could be resolved in user-space itself.
+</p><p>This model can be extended in multi-processor systems by having separate run-queues for each kernel-thread. It is just like how the linux kernel maintains separate task queues on each CPU in the system. This reduces concurrency overhead in the process scheduler and allows lock-less scheduling algorithms. But it will induce higher levels of complexity.
+</p>
+<h2> <span class="mw-headline" id="Scheduling_with_each_CPU_assigned_with_its_own_run-queue"> Scheduling with each CPU assigned with its own run-queue </span></h2>
+<p>Traditional scheduling techniques use one data structure to hold all the tasks in the system. This is many costs and disadvantages which bring down the efficiency and output of the whole operating system, namely -
+</p><p>1. <b>Synchronization Overhead</b> - When each CPU will access the <i>global run queue</i> of tasks in the system, they will have to lock specific parts of the data structure, if not the whole, and that synchronization will greatly impact parallelism in the system.
+</p><p>2. <b>Caching &amp; TLB Usage</b> - If each CPU uses the same data structure, then all tasks will keep jumping from one CPU to the other. This means the tasks will never get the opportunity to fill the cache and TLB with its own code &amp; data. In modern processors, efficient usage of L1, L2, L3 &amp; L4 cache is crucial for best performance and reduction in TLB flushing speeds execution in virtual memory.
+</p><p>To overcome these limitations, each CPU is assigned its own run queue which it accesses without acquiring any lock. Operations on the run queues can be done by turning interrupts off to avoid the <i>run queue balancer</i> (we'll introduce this a bit later) from accessing the run queue while the real-scheduler is using it.
+</p>
+<h2> <span class="mw-headline" id="Task_Balancing_or_Run-queue_Balancing"> Task Balancing or Run-queue Balancing  </span></h2>
+<p>All multi-processor schedulers suffer from load imbalances between different processors in the system. This means that one processor could be heavily bombarded with tasks while another could be taking a nap (bit joking). This inconsistency is solved the kernel's task balancer. Whenever the task balancer runs (at specific intervals of kernel-time) to balance tasks between two domains of CPUs, it transfers tasks from the heavily loaded one to the less loaded one. It could execute one the heavily loaded processor, less loaded processor, or both depending on its implementation. <i>It takes tasks from heavily-loaded processors and assigns them to a idle or less-loaded processor in the system. It will access the task queues (it can also take sleeping tasks) of both processors. For lock-less multiprocessor schedulers, the interrupts should be turned off (unless already in an interrupt context, where the next interrupt is queued until the IRET executes) while accessing the run-queue for any operation like adding or removing tasks from it.</i>
+</p>
+<h2> <span class="mw-headline" id="Other_facts_..."> Other facts ... </span></h2>
+<p>One thing that I have read on the subject is that some threads may be *pinned* on a specific CPU while other threads will execute on the first available CPU. This can make sense, for instance, to make the GUI server's main thread 'resident' on a CPU to achieve high responsiveness (other threads that want to interact with the GUI can do so without incurring a context switch penalty&#160;:)
+</p><p>Pinning a thread to a CPU also helps the CPU's cache. If a thread is jumping between CPUs each time it is run, it never gets chance to fill either CPU's cache with code or data: it might run for a moment, and load some instructions from main memory, then get preempted. Next time it is scheduled, it might be running on a different CPU, where it would need to load the cache all over again. If the scheduler can assign each thread its own favourite CPU, it can help increase cache performance. Of course, if two threads with the same favourite CPU want to run at the same time on a dual processor system, one of them will have to take the 'wrong' CPU.
+</p><p>System V (iirc) had a nice synchronization tool (a sort of smart spinlock) for multiprocessors that allowed a thread to busy-wait for a resource as long as the resource holder was active on another CPU and to enter the SLEEP state when the holder wasn't running. This has been proved in papers (which i lost the references) that this method pays and leads to better performances than always entering the SLEEP state when a resource was busy.
+</p>
+<h2> <span class="mw-headline" id="A_simple_method"> A simple method </span></h2>
+<p>One simple way of multiprocessor scheduling is to assign each CPU it's own scheduler. Then when you load a thread it is assigned to a certain CPU. This deals with pinning, but you would have to keep the workloads balanced after thread termination.
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles">Articles</span></h3>
+<ul><li><a href="Multiprocessing" title="Multiprocessing">Multiprocessing</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Forum_Threads">Forum Threads</span></h3>
+<ul><li><a href="http://forum.osdev.org/viewtopic.php?t=9699" class="extiw" title="topic:9699">SMP Compatibility</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://www.intel.com/design/pentium/datashts/242016.htm">Multiprocessor Specification</a>
+</li><li><a rel="nofollow" class="external text" href="http://doc.cat-v.org/plan_9/4th_edition/papers/sleep">Process Sleep and Wakeup on a Shared-memory Multiprocessor</a>, describes the approach taken in <a rel="nofollow" class="external text" href="http://plan9.cat-v.org">Plan 9 from Bell Labs</a>. Paper written by <a rel="nofollow" class="external text" href="http://genius.cat-v.org/rob-pike/">Rob Pike</a>, <a rel="nofollow" class="external text" href="http://genius.cat-v.org/ken-thompson/">Ken Thompson</a> and others.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 64/1000000
+Post-expand include size: 501/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1888-0!*!0!!en!2!* and timestamp 20180121055010 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Multiprocessor_Scheduling&amp;oldid=22069">http://wiki.osdev.org/index.php?title=Multiprocessor_Scheduling&amp;oldid=22069</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Processes_and_Threads" title="Category:Processes and Threads">Processes and Threads</a></li><li><a href="Category:Stubs" title="Category:Stubs">Stubs</a></li><li><a href="Category:Synchronization" title="Category:Synchronization">Synchronization</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Multiprocessor_Scheduling" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Multiprocessor_Scheduling"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Multiprocessor_Scheduling&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Multiprocessor_Scheduling#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Multiprocessor_Scheduling" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Multiprocessor_Scheduling&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Multiprocessor_Scheduling&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Multiprocessor_Scheduling#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Multiprocessor_Scheduling" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Multiprocessor_Scheduling" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Multiprocessor_Scheduling&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Multiprocessor_Scheduling&amp;oldid=22069" title="Permanent link to this revision of the skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Multiprocessor_Scheduling" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Multiprocessor_Scheduling" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Multiprocessor_Scheduling&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Multiprocessor_Scheduling&amp;oldid=22069" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 13 January 2018, at 10:40.</li>
+											<li id="footer-info-viewcount">This page has been accessed 37,597 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.043 secs. -->
+	</body>
+</html>

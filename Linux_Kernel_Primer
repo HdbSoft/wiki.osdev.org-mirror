@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Linux Kernel Primer - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Linux_Kernel_Primer", "wgTitle": "Linux Kernel Primer", "wgCurRevisionId": 21468, "wgArticleId": 2209, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Kernel"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Linux_Kernel_Primer action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Linux Kernel Primer</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Linux_Kernel_Primer#mw-head">navigation</a>,
+					<a href="Linux_Kernel_Primer#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Linux_Kernel_Primer#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Linux_Kernel_Primer#Obtaining_the_Source"><span class="tocnumber">2</span> <span class="toctext">Obtaining the Source</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Linux_Kernel_Primer#Version_Numbers"><span class="tocnumber">3</span> <span class="toctext">Version Numbers</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Linux_Kernel_Primer#Browsing_and_Using_The_Source"><span class="tocnumber">4</span> <span class="toctext">Browsing and Using The Source</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Linux_Kernel_Primer#Important_Source_Files"><span class="tocnumber">5</span> <span class="toctext">Important Source Files</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Linux_Kernel_Primer#Finding_what_you_are_looking_for"><span class="tocnumber">6</span> <span class="toctext">Finding what you are looking for</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Linux_Kernel_Primer#Resources"><span class="tocnumber">7</span> <span class="toctext">Resources</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>The Linux kernel source is an excellent case study for a modern, used, and tested operating system design.  It was not, however, created as a teaching tool. The source is often not commented and provides very little hand holding.  That said, there are a great many places and things to learn.  A full description of the linux kernel source could span multiple books.
+</p>
+<h2> <span class="mw-headline" id="Obtaining_the_Source"> Obtaining the Source  </span></h2>
+<p><a rel="nofollow" class="external free" href="http://www.kernel.org">http://www.kernel.org</a> is the major source for all that is the linux kernel source code.
+<a rel="nofollow" class="external free" href="http://lxr.free-electrons.com">http://lxr.free-electrons.com</a> lets you browse the source online. It also has a very nice search engine.
+</p>
+<h2> <span class="mw-headline" id="Version_Numbers"> Version Numbers </span></h2>
+<p>Basic history of the major functional changes:
+</p>
+<ul><li> 1.0 and prior - x86 only, a.out binary format
+</li><li> 1.2 - adds support for a few more CPU types, ELF binary format, modules
+</li><li> 2.0 - adds SMP support
+</li></ul>
+<p>At 2.2 functionality reached a point where improvements became much more iterative.  The 2.2 kernel implements most of the major features required of a modern kernel.  Using anything below 2.2 as a reference or basis for a fork could easily result in serious architectural challenges for your derived code or design. Core improvements to the kernel have been made after 2.2, and the kernel developers had good reason for them.
+</p><p>The size of the kernel can be attributed to the plethora of file systems, device drivers, architecture supports, and kernel services and features.  While 2.6 is a massive code base, removing the non-core parts reduces the size. Drivers take up over 100MB, non-i386 architectures, around 50MB, file systems, around 20MB. As a general rule, you won't need to venture into the various subsystems and drivers that you are not using.
+</p>
+<h2> <span class="mw-headline" id="Browsing_and_Using_The_Source"> Browsing and Using The Source </span></h2>
+<p>It's better to not try and follow the whole of the Linux kernel source as a single process flow.  Different architectures start in different ways, but the generic portions can be found in init/.  Keep in mind that an operating system kernel is very different from a user space program - the kernel is responding and servicing to user space requests.
+</p><p>Instead of trying to figure out a process flow for the entire kernel, try to figure out what's going on for a single event or system call. System calls can easily be found by searching the code for functions beginning with "sys_".  These generally have descriptive names that correspond to the kernel requirements for a C library call.
+</p><p>Looking at a driver source in Linux can tell you a great deal about a given piece of hardware functionality. Keep in mind that the Linux kernel source isn't always "correct" about how it handles specific hardware.  Many drivers were written with little or no documentation or standards information.  
+</p><p>Unless you modify large portions of your kernel to use the same names and conventions of the Linux kernel, Linux kernel source is not easily ported away from Linux.  Also, the source is GPL, so your kernel source is going to require proper licensing if you use anything.  There are some exceptions to this rule, mostly in code shared between projects located in the Linux kernel tree.
+</p><p>The amount of infrastructure in Linux for basic system tasks - interrupt handlers, virtual memory, swap, block io - will make a lot of that code difficult to read if you are just starting.  It might be better to read other tutorials here before looking at how a "real" kernel does things, so that you can recognize what is infrastructure setup and what is required to perform a given task.  The interesting side effect is that big picture kernel logic, obscured in other small example kernels, becomes very clear in Linux.  The scheduler algorithm, for instance, is fairly visible and easy to read in a single source file with little of the task swapping details obscuring how it works.
+</p><p>As the Linux kernel already provides tested mechanisms for many different tasks, creating a kernel module can allow you test your own kernel code.  The downside to attempting this is that you'll have to figure out how to "play nicely" with the portions of Linux you are trying to use...
+</p>
+<h2> <span class="mw-headline" id="Important_Source_Files"> Important Source Files </span></h2>
+<p>This list is by no means complete. These files provide common functionality likely to be required in any operating system kernel.
+</p><p><br />
+</p>
+<ul><li> Locking, Synchronization
+<ul><li> kernel/mutex.c, include/linux/mutex.h - kernel space mutex implementation
+</li><li> kernel/futex.c - kernel level support for 'fast' userspace mutual exclusion
+</li><li> kernel/spinlock.c, include/linux/spinlock.h - kernel spinlock implementation
+</li></ul>
+</li><li> Block devices
+<ul><li> block/elevator.c - support for the various IO scheduling algorithms
+</li><li> block/noop-iosched.c - the easiest to read and understand IO scheduler (noop)
+</li><li> block/ll_rw_blk.c - where block requests meet a block device queue
+</li></ul>
+</li><li> File system
+<ul><li> fs/read_write.c - read, write system calls
+</li><li> fs/file.c - management of file handles
+</li><li> fs/inode.c - functionality for inodes (file information structs, sometimes like kernel file handles)
+</li><li> fs/open.c - contains several of the major file operations 
+</li><li> fs/cramfs/inode.c, fs/cramfs/uncompress.c - a very small filesystem with easy to read/find code* 
+</li></ul>
+</li><li> Process Management
+<ul><li> kernel/sched.c - the linux scheduler, schedule() is the function to look at here
+</li><li> kernel/workqueue.c - a workqueue that provides a means for doing work
+</li><li> arch/i386/kernel/process.c - large portion of process handling for x86
+</li></ul>
+</li><li> Binary formats
+<ul><li> fs/binfmt_elf.c - ELF loading
+</li></ul>
+</li><li> Memory Management:
+<ul><li> mm/slab.c - slab allocator, also home for kmalloc
+</li><li> mm/vmalloc.c - virtual contiguous memory allocator
+</li><li> mm/page_alloc.c - buddy allocation
+</li></ul>
+</li></ul>
+<h2> <span class="mw-headline" id="Finding_what_you_are_looking_for"> Finding what you are looking for </span></h2>
+<p>The arch/ directory contains architecture dependent files.  If you want to learn about x86 development, the best place to look is arch/i386. Most any hardware specific functionality is contained in drivers/.  Keep in mind that things like PCI are used by multiple architectures, and so they are located under drivers/ as well.  Sound and Networking are treated differently and reside under their own directory sound/ and net/ with drivers in subdirectories there.  Core kernel functionality lives in kernel/, and lib/.
+</p><p>There is "Documentation" in the Documentation directory.  This directory is not what you think it is.  It is more of a collection of tidbits of knowledge than any decent information on the kernel.
+</p>
+<h2> <span class="mw-headline" id="Resources"> Resources </span></h2>
+<p>Websites:
+</p>
+<ul><li> <a rel="nofollow" class="external free" href="https://kernelnewbies.org/">https://kernelnewbies.org/</a> - guides for new Linux kernel developers
+</li></ul>
+<ul><li> <a rel="nofollow" class="external free" href="http://www.tldp.org/HOWTO/KernelAnalysis-HOWTO.html">http://www.tldp.org/HOWTO/KernelAnalysis-HOWTO.html</a> - guide to the Linux kernel organized by subsystems
+</li></ul>
+<ul><li> <a rel="nofollow" class="external free" href="https://syscalls.kernelgrok.com/">https://syscalls.kernelgrok.com/</a> - a reference list of Linux syscalls
+</li></ul>
+<p>Books:
+</p>
+<ul><li> Linux Kernel Development, by Robert Love - a very decent 'overview' book of the Linux kernel.  It doesn't go into too much detail, but provides enough of a big picture and detail view to really get started on a Linux kernel project.
+</li></ul>
+<ul><li> Understanding the Linux Kernel, David Bovet - more detailed than Linux Kernel Development.  If you want to do more work than browsing the kernel, this has more of the detail required.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 34/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2209-0!*!*!!en!*!* and timestamp 20180121080147 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Linux_Kernel_Primer&amp;oldid=21468">http://wiki.osdev.org/index.php?title=Linux_Kernel_Primer&amp;oldid=21468</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Kernel" title="Category:Kernel">Kernel</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Linux_Kernel_Primer" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Linux_Kernel_Primer"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Linux_Kernel_Primer&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Linux_Kernel_Primer#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Linux_Kernel_Primer" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Linux_Kernel_Primer&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Linux_Kernel_Primer&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Linux_Kernel_Primer#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Linux_Kernel_Primer" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Linux_Kernel_Primer" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Linux_Kernel_Primer&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Linux_Kernel_Primer&amp;oldid=21468" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 September 2017, at 13:29.</li>
+											<li id="footer-info-viewcount">This page has been accessed 25,790 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></scskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Linux_Kernel_Primer" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Linux_Kernel_Primer" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Linux_Kernel_Primer&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Linux_Kernel_Primer&amp;oldid=21468" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 September 2017, at 13:29.</li>
+											<li id="footer-info-viewcount">This page has been accessed 25,790 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.042 secs. -->
+	</body>
+</html>

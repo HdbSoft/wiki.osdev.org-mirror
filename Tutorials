@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Tutorials - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Tutorials", "wgTitle": "Tutorials", "wgCurRevisionId": 21762, "wgArticleId": 2348, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Tutorials action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Tutorials</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Tutorials#mw-head">navigation</a>,
+					<a href="Tutorials#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>There are several OS development related tutorials on this wiki. This page is an overview of tutorials that are around, sorted by subject area and difficulty.
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> - Tutorials that are either very basic or easy to follow. Try these first.
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> - Tutorials on somewhat harder subjects, but still good to do. It may be a good idea to do some easier stuff first.
+</p><p><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a> - Tutorials on advanced subjects. Not recommended for beginners.
+</p><p><a href="File:Difficulty_4.png" class="image"><img alt="Difficulty 4.png" src="images/a/a3/Difficulty_4.png" width="46" height="14" /></a> - Tutorials on very difficult subjects. A master class. Good luck!
+</p><p><a href="File:Difficulty_0.png" class="image"><img alt="Difficulty 0.png" src="images/5/59/Difficulty_0.png" width="46" height="14" /></a> - Not rated yet.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Tutorials#Kernel_Basics"><span class="tocnumber">1</span> <span class="toctext">Kernel Basics</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Tutorials#Bare_Bones"><span class="tocnumber">1.1</span> <span class="toctext">Bare Bones</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Tutorials#Babysteps"><span class="tocnumber">1.2</span> <span class="toctext">Babysteps</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Tutorials#Other_kernels"><span class="tocnumber">1.3</span> <span class="toctext">Other kernels</span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="Tutorials#Third_Party_Tutorials"><span class="tocnumber">1.3.1</span> <span class="toctext">Third Party Tutorials</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="Tutorials#Basics"><span class="tocnumber">2</span> <span class="toctext">Basics</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Tutorials#Memory_Management"><span class="tocnumber">3</span> <span class="toctext">Memory Management</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Tutorials#Processes_and_Threads"><span class="tocnumber">4</span> <span class="toctext">Processes and Threads</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Tutorials#Graphics_.26_Video"><span class="tocnumber">5</span> <span class="toctext">Graphics &amp; Video</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Tutorials#Booting"><span class="tocnumber">6</span> <span class="toctext">Booting</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Tutorials#Building"><span class="tocnumber">7</span> <span class="toctext">Building</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="Tutorials#Compilers"><span class="tocnumber">8</span> <span class="toctext">Compilers</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="Tutorials#Executable_File_Formats"><span class="tocnumber">9</span> <span class="toctext">Executable File Formats</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="Tutorials#Porting_Software"><span class="tocnumber">10</span> <span class="toctext">Porting Software</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Kernel_Basics"> Kernel Basics </span></h2>
+<h3> <span class="mw-headline" id="Bare_Bones"> Bare Bones </span></h3>
+<p>These are "bare bones" tutorials that will land you with a basic kernel that's safe enough to use as a starting point for your own.
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Bare_Bones" title="Bare Bones">Bare Bones</a> - Write a basic 32-bit kernel in C for x86
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="http://wiki.osdev.org/User:Zesterer/Bare_Bones" title="User:Zesterer/Bare Bones">User:Zesterer/Bare Bones</a> - Write a basic 32-bit kernel in C for x86 (improved tutorial by zesterer)
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Meaty_Skeleton" title="Meaty Skeleton">Meaty Skeleton</a> - Template operating system
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Higher_Half_x86_Bare_Bones" title="Higher Half x86 Bare Bones">Higher Half x86 Bare Bones</a> - A tutorial that shows how to write a <a href="Higher_Half_Kernel" title="Higher Half Kernel">higher half kernel</a>
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Setting_Up_Long_Mode" title="Setting Up Long Mode">Setting Up Long Mode</a> - Switching to long mode
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Creating_a_64-bit_kernel" title="Creating a 64-bit kernel">Creating a 64-bit kernel</a> - An introduction to 64-bit kernels
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Real_mode_assembly_bare_bones" title="Real mode assembly bare bones" class="mw-redirect">Real mode assembly bare bones</a> - A tutorial series on writing a basic assembly language kernel
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Pascal_Bare_Bones" title="Pascal Bare Bones">Pascal Bare Bones</a> - A basic kernel in Pascal
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Ada_Bare_bones" title="Ada Bare bones">Ada Bare bones</a> - A tutorial on writing a basic kernel in Ada
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="FreeBasic_Bare_Bones" title="FreeBasic Bare Bones">FreeBasic Bare Bones</a> - A basic kernel in FreeBasic
+</p><p>We also have bare bones for other platforms
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="GameBoy_Advance_Barebones" title="GameBoy Advance Barebones">GameBoy Advance Barebones</a> - A tutorial on writing a basic GBA kernel
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Sparc_Barebones" title="Sparc Barebones">Sparc Barebones</a> - A basic kernel for SparcStations
+</p>
+<h3> <span class="mw-headline" id="Babysteps"> Babysteps </span></h3>
+<p>How to create a basic kernel in assembly <br />
+<a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Babystep1" title="Babystep1">Babystep1</a> - Your first boot sector.
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Babystep2" title="Babystep2">Babystep2</a> - Writing a message using the BIOS.
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Babystep3" title="Babystep3">Babystep3</a> - A look at machine code
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Babystep4" title="Babystep4">Babystep4</a> - Printing to the screen without the BIOS
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Babystep5" title="Babystep5">Babystep5</a> - Interrupts
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Babystep6" title="Babystep6">Babystep6</a> - Entering protected mode
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Babystep7" title="Babystep7">Babystep7</a> - Unreal Mode
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Babystep8" title="Babystep8">Babystep8</a> - 32-bit printing
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Real_mode_assembly_appendix_A" title="Real mode assembly appendix A">Appendix A</a> - Additional information
+</p>
+<h3> <span class="mw-headline" id="Other_kernels"> Other kernels </span></h3>
+<p>These tutorials cover alternate kernel designs. These are mainly for developers using a language not covered elsewhere, or design approaches that are significantly different from those given in the Babysteps and Bare Bones tutorials.
+</p><p><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a> A <a href="Java_Primer" title="Java Primer">Java Primer</a> on dealing with languages in general and Java in particular that would normally be unsuitable for OS development.
+</p>
+<h4> <span class="mw-headline" id="Third_Party_Tutorials"> Third Party Tutorials </span></h4>
+<p>This section covers tutorials unrelated to the wiki and forum. Given the sheer number of tutorials around, there is no way to have a comprehensive list of them, so this is limited to the ones which come up most often in discussions. They are listed here because most of these focus primarily on the early steps in OS development.
+</p><p>Also, there is a staggeringly wide variation in the quality of them, and since these are not part of the wiki itself, there is no way for the wiki authors to ensure that bugs are fixed or updates made. 
+</p><p>While these are included for reference purposes, because they are frequently mentioned, it is recommended that anyone following the tutorials on the wiki take the third-party tutorials as supplemental rather than suggested.
+</p><p><a href="File:Difficulty_0.png" class="image"><img alt="Difficulty 0.png" src="images/5/59/Difficulty_0.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="http://jamesmolloy.co.uk/tutorial_html/">James A. Molloy's Kernel Tutorials</a> - one of the more popular tutorials in the past, it has a number of <a href="James_Molloy's_Tutorial_Known_Bugs" title="James Molloy's Tutorial Known Bugs">known issues</a>, and does not seem to be actively updating.
+</p><p><a href="File:Difficulty_0.png" class="image"><img alt="Difficulty 0.png" src="images/5/59/Difficulty_0.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="http://www.brokenthorn.com/Resources/OSDevIndex.html">BrokenThorn Operating System Development Series</a> - Like the James Molloy series, this is a very well-known tutorial series, but one which is very dated and has a large number of <a href="http://wiki.osdev.org/index.php?title=Brokenthorn%27s_Known_Bugs&amp;action=edit&amp;redlink=1" class="new" title="Brokenthorn's Known Bugs (page does not exist)">known flaws</a> that have not been corrected.
+</p><p><a href="File:Difficulty_0.png" class="image"><img alt="Difficulty 0.png" src="images/5/59/Difficulty_0.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="http://www.osdever.net/tutorials/view/brans-kernel-development-tutorial">Bran's Kernel Tutorial</a> - a very dated, but still often referenced, tutorial from the now-moribund "Bona Fide OS Development" site. Like JAM and BrokenThorn, the code examples have many <a href="Bran's_Known_Bugs" title="Bran's Known Bugs">known problems</a>, and much of the material is long out of date.
+</p><p><a href="File:Difficulty_0.png" class="image"><img alt="Difficulty 0.png" src="images/5/59/Difficulty_0.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="http://mikeos.sourceforge.net/write-your-own-os.html">How to write a simple operating system</a> by Mike Saunders - this is the starting point for those following the MikeOS project, an x86 real-mode system written in assembly language. and focuses on the aspects needed to get going with developing for MikeOS.
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="https://www.youtube.com/playlist?list=PLKbvCgwMcH7BX6Z8Bk1EuFwDa0WGkMnrz">FlingOS Getting Started video series</a> - A third party series of video tutorials giving a practical start to writing your first OS (aimed at x86, full examples available in each of ASM, C and C#)
+</p><p><a href="File:Difficulty_0.png" class="image"><img alt="Difficulty 0.png" src="images/5/59/Difficulty_0.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="https://github.com/littleosbook/littleosbook">The Little OS Book</a> - a third-party OS demonstrator hosted on GitHub. Goes through periods of updating, and known bugs which haven't yet been fixed are listed in the repo.
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf">Writing a Simple Operating System — From Scratch</a> (PDF) - A 2010 tutorial based on course material from a class on operating systems at the University of Birmingham, UK, written by Dr. Nicholas Blundell, the original course instructor. The tutorial was written as supplemental material for students to review before the course, and according Blundell, <i>"is not intended as a replacement but rather as a stepping stone to excellent work such as the Minix project"</i>.
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="https://www.osnews.com/story.php/1482/So_You_Want_to_Write_an_Operating_System">So, You Want to Write an Operating System</a> and <a rel="nofollow" class="external text" href="https://www.osnews.com/story.php/1532/">Climbing the Kernel Mountain</a> - a now-ancient series of articles from the OS News website, begun in 2002, these were many older developers' introductions to OS dev. They are well-written, but have only cursory coverage of the details, and are primarily of only historical interest today. This is included solely because they are referenced in many older posts in the forum. Note that the author later wrote a <a rel="nofollow" class="external text" href="https://www.osnews.com/story/8162">follow-up</a> in which he argued against developing a new kernel at all.
+</p>
+<h2> <span class="mw-headline" id="Basics"> Basics </span></h2>
+<p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="GDT_Tutorial" title="GDT Tutorial">GDT Tutorial</a> - A guide about the <a href="GDT" title="GDT" class="mw-redirect">GDT</a>
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Creating_A_Shell" title="Creating A Shell">Creating A Shell</a> - A tutorial on how to write a <a href="Shell" title="Shell" class="mw-redirect">shell</a>
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Going_Further_on_x86" title="Going Further on x86">Going Further on x86</a> - A guide that shall cover the basics of kernel internals
+</p><p><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a> <a href="http://wiki.osdev.org/User:Johnburger/Demo" title="User:Johnburger/Demo">DEMO</a> - A tutorial, in code and prose, on some fundamentals of the '386 (and above) and the PC platform, as an assembly language <a href="http://wiki.osdev.org/User:Johnburger/Demo" title="User:Johnburger/Demo">DEMO</a>
+</p>
+<h2> <span class="mw-headline" id="Memory_Management"> Memory Management </span></h2>
+<p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Setting_Up_Paging" title="Setting Up Paging">Setting Up Paging</a> - A tutorial that deals with setting up and maintaining a system with paging enabled
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Setting_Up_Paging_With_PAE" title="Setting Up Paging With PAE">Setting Up Paging With PAE</a> - As above, but with PAE enabled
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Writing_a_memory_manager" title="Writing a memory manager">Writing a memory manager</a> - A tutorial on how to handle the RAM in a computer.
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Writing_A_Page_Frame_Allocator" title="Writing A Page Frame Allocator">Writing A Page Frame Allocator</a> - How to write a simple page frame allocator
+</p>
+<h2> <span class="mw-headline" id="Processes_and_Threads"> Processes and Threads </span></h2>
+<p><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a> <a href="Kernel_Multitasking" title="Kernel Multitasking">Kernel Multitasking</a> - How to create a kernel-space multitasking system.
+</p><p><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="http://xarnze.com/article/Entering%20User%20Mode">Getting to User Mode</a>- How to context switch into user mode.
+</p>
+<h2> <span class="mw-headline" id="Graphics_.26_Video"> Graphics &amp; Video </span></h2>
+<p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Double_Buffering" title="Double Buffering">Double Buffering</a> - A handy way to prevent artifacts.
+</p>
+<h2> <span class="mw-headline" id="Booting"> Booting </span></h2>
+<p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Bootable_CD" title="Bootable CD">Bootable CD</a> - A tutorial that explains how to create a bootable CD
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Bootable_El-Torito_CD_with_GRUB_Legacy" title="Bootable El-Torito CD with GRUB Legacy">Bootable El-Torito CD with GRUB Legacy</a> - A tutorial that explains how to create a bootable GRUB CD
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Rolling_Your_Own_Bootloader" title="Rolling Your Own Bootloader">Rolling Your Own Bootloader</a> - Describes what steps to take when writing a bootloader.
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Babystep1" title="Babystep1">Writing a bootloader</a> - A basic tutorial on creating a bootloader
+</p><p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Uefi.inc" title="Uefi.inc">Writing a bootloader for UEFI</a> - A basic tutorial on creating a bootloader utilising UEFI
+</p><p><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a> <a href="Writing_GRUB_Modules" title="Writing GRUB Modules">Writing GRUB Modules</a> - A tutorial on writing modules that add custom functionality to GRUB.
+</p>
+<h2> <span class="mw-headline" id="Building"> Building </span></h2>
+<p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="Makefile" title="Makefile">Makefile</a> - A guided demonstration of how Makefiles can be used
+</p><p><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a> <a href="OS_Specific_Toolchain" title="OS Specific Toolchain">OS Specific Toolchain</a> - A guide on adapting GCC and Binutils to a platform
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="CMake_Build_System" title="CMake Build System">CMake Build System</a> - A guide demonstrating adapting KitWare's CMake Build System for building an operating system.
+</p>
+<h2> <span class="mw-headline" id="Compilers"> Compilers </span></h2>
+<p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a> - A guide that helps build GCC targeting a different platform
+</p><p><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a> <a href="GDC_Cross-Compiler" title="GDC Cross-Compiler">GDC Cross-Compiler</a> - Same as the previous, but this time for the D programming language.
+</p>
+<h2> <span class="mw-headline" id="Executable_File_Formats"> Executable File Formats </span></h2>
+<p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="ELF_Tutorial" title="ELF Tutorial">ELF Tutorial</a> - A guide that details the process of loading ELF executables.
+</p><p><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a> <a rel="nofollow" class="external text" href="https://web.archive.org/web/20140130143820/http://robinhoksbergen.com/papers/howto_elf.html">Manually Creating an ELF Executable</a> - A guide that demonstrates how ELF binaries work, and how to build one from scratch using only a hex editor.
+</p>
+<h2> <span class="mw-headline" id="Porting_Software"> Porting Software </span></h2>
+<p><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a> <a href="Porting_Newlib" title="Porting Newlib">Porting Newlib</a> - A guide on porting a common C library to another operating system
+</p><p><a href="File:Difficulty_0.png" class="image"><img alt="Difficulty 0.png" src="images/5/59/Difficulty_0.png" width="46" height="14" /></a> <a href="Libsupcxx" title="Libsupcxx">Using Libsupc++</a> - A guide on porting libsupc++ to get more out of the features of C++
+</p><p><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a> <a href="Porting_Python" title="Porting Python">Porting Python</a> - A guide on porting python to another operating system
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 521/1000000
+Post-expand include size: 1612/2097152 bytes
+Template argument size: 55/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2348-0!*!0!!en!2!* and timestamp 20180121031231 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Tutorials&amp;oldid=21762">http://wiki.osdev.org/index.php?title=Tutorials&amp;oldid=21762</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Tutorials" title="Category:Tutorials">Tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Tutorials" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Tutorials"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Tutorials"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Tutorials#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Tutorials" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Tutorials&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Tutorials&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Tutorials#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Tutorials" title="A list of all wiki pages that link here [j]" accesskey="j">What links herskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Tutorials" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Tutorials" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Tutorials&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Tutorials&amp;oldid=21762" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 26 November 2017, at 04:59.</li>
+											<li id="footer-info-viewcount">This page has been accessed 341,195 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

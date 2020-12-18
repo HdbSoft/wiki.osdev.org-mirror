@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Symmetric Multiprocessing - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="Symmetric_Multiprocessing" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Symmetric_Multiprocessing", "wgTitle": "Symmetric Multiprocessing", "wgCurRevisionId": 18332, "wgArticleId": 1910, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Stubs", "X86 CPU", "Multiprocessing"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Symmetric_Multiprocessing action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Symmetric Multiprocessing</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=SMP&amp;redirect=no" title="SMP">SMP</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="SMP#mw-head">navigation</a>,
+					<a href="SMP#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=Symmetric_Multiprocessing&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p><b>Symmetric Multiprocessing</b> (or <b>SMP</b>) is one method of having multiple processors in one computer system. In an SMP system (as opposed to a <a href="http://wiki.osdev.org/index.php?title=NUMA&amp;action=edit&amp;redlink=1" class="new" title="NUMA (page does not exist)">NUMA</a> system) all logical cores are able to see the entire memory for the system. Note that SMP and NUMA are not mutually exclusive however; as <a href="http://wiki.osdev.org/index.php?title=User:Brendan&amp;action=edit&amp;redlink=1" class="new" title="User:Brendan (page does not exist)">Brendan</a> has pointed out on the forums, Intel's <a href="IA32_Architecture_Family#Core_i7_Series" title="IA32 Architecture Family">Core i7</a> implements both SMP and NUMA, as well as hyper-threading.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="SMP#Initialisation_of_an_old_SMP_system"><span class="tocnumber">1</span> <span class="toctext">Initialisation of an old SMP system</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="SMP#Finding_information_using_MP_Table"><span class="tocnumber">2</span> <span class="toctext">Finding information using MP Table</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="SMP#Finding_information_using_ACPI"><span class="tocnumber">3</span> <span class="toctext">Finding information using ACPI</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="SMP#AP_startup"><span class="tocnumber">4</span> <span class="toctext">AP startup</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="SMP#Startup_Sequence"><span class="tocnumber">4.1</span> <span class="toctext">Startup Sequence</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="SMP#Timing"><span class="tocnumber">4.2</span> <span class="toctext">Timing</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="SMP#Sending_IPIs"><span class="tocnumber">4.3</span> <span class="toctext">Sending IPIs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="SMP#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="SMP#Articles"><span class="tocnumber">5.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="SMP#Threads"><span class="tocnumber">5.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="SMP#External_Links"><span class="tocnumber">5.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Initialisation_of_an_old_SMP_system">Initialisation of an old SMP system</span></h2>
+<p>The startup sequence is different for different CPUs. Intel's system programmer's manual (section 7.5.4) contains the initialization protocol for Intel Xeon processors, and doesn't cover older CPUs. For the generic "all CPU types" algorithm, see Intel's Multi-processor Specification.
+</p><p>For 80486 (with an external 8249DX local APIC), you must use an INIT IPI followed by an "INIT level de-assert" IPI without any SIPI's. This means you can't tell them where to start executing (the vector part of a SIPI) and they always start executing BIOS code. In this case you set the BIOS's CMOS reset value to "warm start with far jump" (i.e. set CMOS location 0x0F to the value 10) so that the BIOS will do a <tt>jmp far ~[0:0x0469]</tt>", and then put the segment &amp; offset of your AP entry point at 0x0469.
+</p><p>The "INIT level de-assert" IPI isn't supported on newer CPUs (Pentium 4 and Intel Xeon), and AFAIK it is ignored completely on these CPUs.
+</p><p>For newer CPUs (P6, Pentium 4) one SIPI is enough, but I'm not sure if older Intel CPUs (Pentium) or CPUs from other manufacturers need a second SIPI or not. It's also possible that the second SIPI is there in case there's a delivery failure for the first SIPI (bus noise, etc).
+</p><p>I normally send the first SIPI and then wait to see if the AP CPU increases a "number of started CPUs" counter. If it doesn't increase this counter within a few milli-seconds, then I send the second SIPI. This is different to Intel's generic algorithm (which has a 200 micro-second delay between SIPIs), but trying to find a time source capable of accurately measuring a 200 micro-second delay during early boot isn't so easy. I've also found that on real hardware, if the delay between SIPIs is too long (and you don't use my method) an AP CPU can run the OS's early AP startup code twice (which in my case would lead to the OS thinking there's twice as many AP CPUs as there are).
+</p><p>You can broadcast these signals across the bus to start every device that is present. However by doing so you might also enable the processors that were disabled on purpose (because they were defective).
+</p>
+<h2> <span class="mw-headline" id="Finding_information_using_MP_Table">Finding information using MP Table</span></h2>
+<p>You may want to use newer ACPI instead of MP Table. If so, please see the next section.
+</p><p>Some information (which may not be present on newer machines) dedicated for multiprocessing is available. First one must find the MP Floating Pointer Structure. It is aligned on a 16 byte boundary, and contains a signature at the start "_MP_" or 0x5F504D5F. The OS must search in the EBDA, the BIOS ROM space, and last kilobyte of "base memory"; the size of base memory is specified in a 2 byte value at 0x413 in kilobytes, minus 1K.
+Here is what the structure looks like:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> mp_floating_pointer_structure <span class="br0">&#123;</span>
+    <span class="kw4">char</span> signature<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw4">uint32_t</span> configuration_table<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> length<span class="sy0">;</span> <span class="co1">// In 16 bytes (e.g. 1 = 16 bytes, 2 = 32 bytes)</span>
+    <span class="kw4">uint8_t</span> mp_specification_revision<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> checksum<span class="sy0">;</span> <span class="co1">// This value should make all bytes in the table equal 0 when added together</span>
+    <span class="kw4">uint8_t</span> default_configuration<span class="sy0">;</span> <span class="co1">// If this is not zero then configuration_table should be </span>
+                                   <span class="co1">// ignored and a default configuration should be loaded instead</span>
+    <span class="kw4">uint32_t</span> features<span class="sy0">;</span> <span class="co1">// If bit 7 is then the IMCR is present and PIC mode is being used, otherwise </span>
+                       <span class="co1">// virtual wire mode is; all other bits are reserved</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>Here is what the configuration table, pointed to by the floating pointer structure looks like:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> mp_configuration_table <span class="br0">&#123;</span>
+    <span class="kw4">char</span> signature<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// &quot;PCMP&quot;</span>
+    <span class="kw4">uint16_t</span> length<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> mp_specification_revision<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> checksum<span class="sy0">;</span> <span class="co1">// Again, the byte should be all bytes in the table add up to 0</span>
+    <span class="kw4">char</span> oem_id<span class="br0">&#91;</span><span class="nu0">8</span><span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw4">char</span> product_id<span class="br0">&#91;</span><span class="nu0">12</span><span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw4">uint32_t</span> oem_table<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> oem_table_size<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> entry_count<span class="sy0">;</span> <span class="co1">// This value represents how many entries are following this table</span>
+    <span class="kw4">uint32_t</span> lapic_address<span class="sy0">;</span> <span class="co1">// This is the memory mapped address of the local APICs </span>
+    <span class="kw4">uint16_t</span> extended_table_length<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> extended_table_checksum<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> reserved<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>After the configuration table, there are entry_count entries describing more information about the system, then after that there is an extended table. The entries are either 20 bytes to represent a processor, or 8 bytes for something else. Here are what the processor and IO APIC entries look like.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">&#160;
+<span class="kw4">struct</span> entry_processor <span class="br0">&#123;</span>
+    <span class="kw4">uint8_t</span> type<span class="sy0">;</span> <span class="co1">// Always 0</span>
+    <span class="kw4">uint8_t</span> local_apic_id<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> local_apic_version<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> flags<span class="sy0">;</span> <span class="co1">// If bit 0 is clear then the processor must be ignored</span>
+                   <span class="co1">// If bit 1 is set then the processor is the bootstrap processor</span>
+    <span class="kw4">uint32_t</span> signature<span class="sy0">;</span>
+    <span class="kw4">uint32_t</span> feature_flags<span class="sy0">;</span>
+    <span class="kw4">uint64_t</span> reserved<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>Here is an IO APIC entry.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> entry_io_apic <span class="br0">&#123;</span>
+    <span class="kw4">uint8_t</span> type<span class="sy0">;</span> <span class="co1">// Always 2</span>
+    <span class="kw4">uint8_t</span> id<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> version<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> flags<span class="sy0">;</span> <span class="co1">// If bit 0 is set then the entry should be ignored</span>
+    <span class="kw4">uint32_t</span> address<span class="sy0">;</span> <span class="co1">// The memory mapped address of the IO APIC is memory</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>For more information, see <a rel="nofollow" class="external free" href="http://www.intel.com/design/pentium/datashts/24201606.pdf">http://www.intel.com/design/pentium/datashts/24201606.pdf</a>, chapter 4.
+</p>
+<h2> <span class="mw-headline" id="Finding_information_using_ACPI">Finding information using ACPI</span></h2>
+<p>You should be able to find a <a href="MADT" title="MADT">MADT</a>(APIC) table in <a href="ACPI" title="ACPI">ACPI</a>. The table have a list of local-APICs, number of which should be consistent with number of cores on your processor. Details of these table are not listed here, but you can find them easily on this wiki.
+</p>
+<h2> <span class="mw-headline" id="AP_startup">AP startup</span></h2>
+<p>After you've gathered the information, you'll need to disable the PIC and prepare for I/O APIC. You also need to setup BSP's local APIC.
+Then, startup the APs using SIPIs.
+</p>
+<h3> <span class="mw-headline" id="Startup_Sequence">Startup Sequence</span></h3>
+<p>The MP specification contains a standard method to start an AP, however it is not recommended to be used, as it contains very precise timings, which, if done incorrectly, can lead to several problems. Brendan offers an alternative method, which should be done for each AP <b>individually</b>. First send an init IPI and wait 10 milliseconds. Then send a SIPI, and poll for a flag to be set by the AP's trampoline code with a timeout of 1 millisecond. If the timeout was reached, send another SIPI, and poll for the same flag, but this time with a timeout of 1 second. If the AP managed to set the flag, the BSP should set another flag to allow the AP to continue (probably to wait for the scheduler to have a process it needs executing).
+</p>
+<h3> <span class="mw-headline" id="Timing">Timing</span></h3>
+<p>The easiest method for the timings is to use the PIT's mode 0. Write 0x30 to IO port 0x43 (select mode 0 for counter 0), then write your count value to 0x40, LSB first (e.g. write 0xA9 then 0x4 for a millisecond). To check if counter has finished, write 0xE2 to IO port 0x43, then read a status byte from port 0x40. If the 7th bit is set, then it has finished.
+</p>
+<h3> <span class="mw-headline" id="Sending_IPIs">Sending IPIs</span></h3>
+<p>IPIs are sent through the BSP's LAPIC. Find the LAPIC base address from the MP tables or ACPI tables, then you can write 32-bit words to base + 0x300 and base + 0x310 to send IPIs. For a init IPI or startup IPI, you must first write the target LAPIC ID into bits 24-27 of base + 0x310. Then, for an init IPI, write 0x00004500 to base + 0x300. For a SIPI, write 0x00004600, ored with the page number at which you want to AP to start executing, to base + 0x300. For more information, see <a rel="nofollow" class="external free" href="APIC#Local_APIC_registers">http://wiki.osdev.org/APIC#Local_APIC_registers</a>.
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles">Articles</span></h3>
+<ul><li><a href="Multiprocessing" title="Multiprocessing">Multiprocessing</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Threads">Threads</span></h3>
+<ul><li><a href="http://forum.osdev.org/viewtopic.php?t=11564" class="extiw" title="topic:11564">init-SIPI</a>
+</li><li><a href="http://forum.osdev.org/viewtopic.php?t=28674" class="extiw" title="topic:28674">full "AP CPU startup" sequence</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://download.intel.com/design/archives/processors/pro/docs/24201606.pdf">Intel Multiprocessor Specification</a>
+</li><li><a rel="nofollow" class="external text" href="http://www.osdever.net/tutorials/view/multiprocessing-support-for-hobby-oses-explained">Multiprocessing Support for Hobby OSes Explained at BonaFide</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 113/1000000
+Post-expand include size: 501/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1910-0!*!0!!en!2!* and timestamp 20180121053714 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Symmetric_Multiprocessing&amp;oldid=18332">http://wiki.osdev.org/index.php?title=Symmetric_Multiprocessing&amp;oldid=18332</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Stubs" title="Category:Stubs">Stubs</a></li><li><a href="Category:X86_CPU" title="Category:X86 CPU">X86 CPU</a></li><li><a href="Category:Multiprocessing" title="Category:Multiprocessing">Multiprocessing</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Symmetric_Multiprocessing" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Symmetric_Multiprocessing"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Symmetric_Multiprocessing"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="SMP#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Symmetric_Multiprocessing" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Symmetric_Multiprocessing&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Symmetric_Multiprocessing&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="SMP#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Symmetric_Multiprocessing" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Symmetric_Multiprocessing" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Symmetric_Multiprocessing&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Symmetric_Multiprocessing&amp;oldid=18332" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 5 September 2015, at 02:16.</li>
+											<li id="footer-info-viewcount">This page has been accessed 35,230 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vectoskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Symmetric_Multiprocessing" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Symmetric_Multiprocessing" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Symmetric_Multiprocessing&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Symmetric_Multiprocessing&amp;oldid=18332" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 5 September 2015, at 02:16.</li>
+											<li id="footer-info-viewcount">This page has been accessed 35,230 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.042 secs. -->
+	</body>
+</html>

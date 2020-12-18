@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Writing GRUB Modules - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Writing_GRUB_Modules", "wgTitle": "Writing GRUB Modules", "wgCurRevisionId": 21583, "wgArticleId": 3639, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 3 Tutorials", "Bootloaders"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Writing_GRUB_Modules action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Writing GRUB Modules</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Writing_GRUB_Modules#mw-head">navigation</a>,
+					<a href="Writing_GRUB_Modules#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a><br />Advanced</td></tr></table>
+<p>The whole architecture of <a href="GRUB" title="GRUB">GRUB</a> changed as of version 2. The big new feature is modules. This lead to the elimination of Stage 1.5. It also means it is easier for you to put lot of cool functionality into your bootloader. You can now add support for new executable formats, filesystems, video drivers, kernel boot protocols, and so on.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Writing_GRUB_Modules#Modules"><span class="tocnumber">1</span> <span class="toctext">Modules</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Writing_GRUB_Modules#Header_files"><span class="tocnumber">1.1</span> <span class="toctext">Header files</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Writing_GRUB_Modules#Special_Sections"><span class="tocnumber">1.2</span> <span class="toctext">Special Sections</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Writing_GRUB_Modules#Initialization"><span class="tocnumber">1.3</span> <span class="toctext">Initialization</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Writing_GRUB_Modules#Functions"><span class="tocnumber">1.4</span> <span class="toctext">Functions</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Writing_GRUB_Modules#Building"><span class="tocnumber">1.5</span> <span class="toctext">Building</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Writing_GRUB_Modules#Loading"><span class="tocnumber">1.6</span> <span class="toctext">Loading</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="Writing_GRUB_Modules#External_Links"><span class="tocnumber">2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Modules"> Modules </span></h2>
+<p>GRUB modules are relocatable ELF32 binaries. They have the extension .mod.
+</p>
+<h3> <span class="mw-headline" id="Header_files"> Header files </span></h3>
+<p>All the standard GRUB header files from the source distribution can be included.  If you are building out-of-tree and have not configured the source for your system, then these can still be used with a few modifications:
+</p>
+<ul><li> define GRUB_MACHINE_PCBIOS to be 1
+</li><li> define GRUB_UTIL
+</li><li> define GRUB_FILE to be something appriopriate
+</li><li> provide include/grub/cpu/memory.h to typedef grub_phys_addr_t to something appropriate (e.g. intptr_t)
+</li></ul>
+<h3> <span class="mw-headline" id="Special_Sections"> Special Sections </span></h3>
+<p>Each module is required to contain three special pieces of information: the module name, the dependencies of the module (i.e. which other modules need to be loaded prior to this one) and the licence of the module.  For GRUB 2, the licence is required to be GPL otherwise it will not be loaded.  These need to be placed in special sections within the module.  The following piece of code (GCC specific) at module scope will achieve the required functionality:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">char</span> modname<span class="br0">&#91;</span><span class="br0">&#93;</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>section<span class="br0">&#40;</span><span class="st0">&quot;.modname&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">=</span> <span class="st0">&quot;mymodule&quot;</span><span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/* Example dependencies */</span>
+<span class="kw4">char</span> moddeps<span class="br0">&#91;</span><span class="br0">&#93;</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>section<span class="br0">&#40;</span><span class="st0">&quot;.moddeps&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">=</span> <span class="st0">&quot;relocator<span class="es5">\0</span>video<span class="es5">\0</span>vbe<span class="es5">\0</span>multiboot<span class="es5">\0</span>gfxterm&quot;</span><span class="sy0">;</span>
+&#160;
+GRUB_MOD_LICENSE<span class="br0">&#40;</span><span class="st0">&quot;GPLv3+&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Initialization"> Initialization </span></h3>
+<p>You need to provide initialization and finalization functions for your module.  These are called when the module is loaded/unloaded, and should register the commands that the module provides along with any other resources it requires.  A short example is:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">static</span> grub_extcmd_t cmd<span class="sy0">;</span>
+&#160;
+GRUB_MOD_INIT<span class="br0">&#40;</span>mymodule<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    cmd <span class="sy0">=</span> grub_register_extcmd<span class="br0">&#40;</span><span class="st0">&quot;mycommand&quot;</span> <span class="coMULTI">/* name of the command */</span><span class="sy0">,</span>
+            grub_cmd_mycommand <span class="coMULTI">/* function to call when the command is run */</span><span class="sy0">,</span>
+            <span class="nu0">0</span> <span class="coMULTI">/* flags */</span><span class="sy0">,</span>
+            <span class="nu0">0</span> <span class="coMULTI">/* summary */</span><span class="sy0">,</span>
+            N_<span class="br0">&#40;</span><span class="st0">&quot;In-depth description of this command&quot;</span><span class="br0">&#41;</span> <span class="coMULTI">/* description */</span><span class="sy0">,</span>
+            <span class="nu0">0</span> <span class="coMULTI">/* argument parser */</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+GRUB_MOD_FINI<span class="br0">&#40;</span>mymodule<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    grub_unregister_extcmd<span class="br0">&#40;</span>cmd<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>See the GRUB source/example modules for more information about the other options here.
+</p>
+<h3> <span class="mw-headline" id="Functions"> Functions </span></h3>
+<p>Some useful functions exposed by grub are given below.  Note that there are implementations of typical libc/POSIX functions often prefixed by grub_ in the grub include directory.  Some may require additional modules to be loaded first - GRUB will highlight this when you try and insmod a module that contains functionality that is not currently loaded.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> EXPORT_FUNC<span class="br0">&#40;</span><span class="br0">&#41;</span> grub_printf<span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span><span class="sy0">*</span> func<span class="sy0">,</span> ...<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">//Very similar to standard printf()</span>
+<span class="kw4">void</span> <span class="sy0">*</span>grub_malloc<span class="br0">&#40;</span>grub_size_t size<span class="br0">&#41;</span><span class="sy0">;</span>         <span class="co1">// grub's malloc function - memory allocated by this will</span>
+                                             <span class="co1">//  not necessarily be accessible to your kernel.  See the</span>
+                                             <span class="co1">//  relocator module if this is the functionality you need.</span>
+grub_extcmd_t grub_register_extcmd <span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span> <span class="sy0">*</span> name<span class="sy0">,</span> grub_extcmd_func_t func<span class="sy0">,</span> 
+    grub_command_flags_t flags<span class="sy0">,</span> <span class="kw4">const</span> <span class="kw4">char</span> <span class="sy0">*</span> summary<span class="sy0">,</span> <span class="kw4">const</span> <span class="kw4">char</span> <span class="sy0">*</span> description<span class="sy0">,</span> 
+    <span class="kw4">const</span> <span class="kw4">struct</span> grub_arg_option <span class="sy0">*</span> parser<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">//Registers a command on the GRUB command line</span>
+grub_fs_register <span class="br0">&#40;</span><span class="kw4">struct</span> grub_fs<span class="sy0">*</span> fs<span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">//Registers a filesystem with GRUB (grub_fs is a set of function pointers)</span>
+grub_err_t grub_video_set_mode<span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span> <span class="sy0">*</span>modestring<span class="sy0">,</span> <span class="kw4">unsigned</span> modemask<span class="sy0">,</span> <span class="kw4">unsigned</span> modevalue<span class="br0">&#41;</span><span class="sy0">;</span>
+                                             <span class="co1">// Attempt to set a video mode.</span>
+                                             <span class="co1">//  e.g. grub_video_set_mode(&quot;1024x768x32,auto&quot;, 0, 0);</span></pre></div></div>
+<h3> <span class="mw-headline" id="Building"> Building </span></h3>
+<p>Modules are object files. You therefore need to use GCC (i686-elf recommended) to build your C files, then use ld's -r option to combine your object files (if necessary). the final output needs to be named .mod.
+</p><p>A particular register calling convention is used by GRUB, such that the first three parameters are passed in eax, edx and ecx then on the stack, and the callee cleans the stack.  If you use C and the GRUB build system to handle building your module then this is handled for you.  If you build 'out-of-tree' without first configuring GRUB to build for your system, however, then the following GCC flags will be required for compilation (includes the #defines listed above):
+</p>
+<pre>
+GRUBCFLAGS = -Os -DGRUB_MACHINE_PCBIOS=1 -falign-jumps=1 -falign-loops=1 -falign-functions=1 \ 
+    -mno-mmx -mno-sse -mno-sse2 -mno-3dnow -m32 -fno-stack-protector -mno-stack-arg-probe \
+    -mrtd -mregparm=3 -DGRUB_UTIL -ffreestanding -DGRUB_FILE=__FILE__
+</pre>
+<h3> <span class="mw-headline" id="Loading"> Loading </span></h3>
+<p>Modules can be loaded with the insmod command, from the GRUB configuration file. For filesystem modules, this allows your OS to be booted from your FS, but requires a recognized format for your module. To solve this, you will need to add your module to core.img using grub-mkimage, which can be installed using grub-setup, or possibly grub-install (which is a shell script wrapper to mkimage and setup).
+</p>
+<h2> <span class="mw-headline" id="External_Links"> External Links </span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://blog.fpmurphy.com/2010/06/grub2-modules.html?output=pdf">A tutorial by fpmurphy</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 193/1000000
+Post-expand include size: 372/2097152 bytes
+Template argument size: 84/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3639-0!*!0!!en!2!* and timestamp 20180121080030 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Writing_GRUB_Modules&amp;oldid=21583">http://wiki.osdev.org/index.php?title=Writing_GRUB_Modules&amp;oldid=21583</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_3_Tutorials" title="Category:Level 3 Tutorials">Level 3 Tutorials</a></li><li><a href="Category:Bootloaders" title="Category:Bootloaders">Bootloaders</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Writing_GRUB_Modules" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Writing_GRUB_Modules"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Writing_GRUB_Modules&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Writing_GRUB_Modules#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Writing_GRUB_Modules" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Writing_GRUB_Modules&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Writing_GRUB_Modules&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Writing_GRUB_Modules#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Writing_GRUB_Modules" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Writing_GRUB_Modules" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Writing_GRUB_Modules&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Writing_GRUB_Modules&amp;oldid=21583" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 September 2017, at 08:03.</li>
+											<li id="footer-info-viewcount">This page has been accessed 10,032 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&askins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Writing_GRUB_Modules" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Writing_GRUB_Modules" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Writing_GRUB_Modules&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Writing_GRUB_Modules&amp;oldid=21583" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 September 2017, at 08:03.</li>
+											<li id="footer-info-viewcount">This page has been accessed 10,032 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.098 secs. -->
+	</body>
+</html>

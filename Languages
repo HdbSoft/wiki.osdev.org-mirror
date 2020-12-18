@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Languages - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Languages", "wgTitle": "Languages", "wgCurRevisionId": 21761, "wgArticleId": 1680, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Languages", "OS Development", "FAQ"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Languages action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Languages</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Languages#mw-head">navigation</a>,
+					<a href="Languages#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>There are <a href="Category:Languages" title="Category:Languages">many</a> <b>programming languages</b>, some more suited for OS development and kernel writing than others. This page will discuss it in depth.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Languages#History"><span class="tocnumber">1</span> <span class="toctext">History</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Languages#Warning"><span class="tocnumber">2</span> <span class="toctext">Warning</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Languages#Can_I_use_language_XYZ.3F"><span class="tocnumber">3</span> <span class="toctext">Can I use language XYZ?</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Languages#Can.27t_I_write_a_compiler_for_XYZ.3F"><span class="tocnumber">4</span> <span class="toctext">Can't I write a compiler for XYZ?</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Languages#But_I_heard_of_an_OS_written_in_language_XYZ.2C_isn.27t_it_interpreted.3F"><span class="tocnumber">5</span> <span class="toctext">But I heard of an OS written in language XYZ, isn't it interpreted?</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="History"> History </span></h2>
+<p>Early operating systems were written entirely in the <a href="Assembly" title="Assembly">Assembly</a> language dialect of their respective CPU, and it remains an option for current developers willing to put in the time and effort to use it. Even when an OS is written primarily in a high-level language, there are still parts that can only be done in assembly. A significant sub-set of OS devs choose to work exclusively in assembly, and at least some work in machine language directly (though this is rare today).
+</p><p>Many high-level languages have been used for OS development in the past, including <a href="C" title="C">C</a>, Forth, Lisp, <a href="CSharp" title="CSharp" class="mw-redirect">C#</a>, <a href="C++" title="C++">C++</a>, Modula-2, Ada, Bliss, Smalltalk, and PL/1. However, not all languages as are suited for OS development, and in many languages other than C, a fair amount of Assembly development is required in order to provide the appropriate runtime environment supporting the language's abstractions. Languages such as C, Modula-2, Ada, Bliss, PL/M, and XPL have all been designed specifically for the purpose of low-level systems programming, either in OS dev or embedded systems, while languages such as Forth incorporate the necessary low-level features even when they weren't intended specifically for this purpose.
+</p>
+<h2> <span class="mw-headline" id="Warning"> Warning </span></h2>
+<p>Not all languages are suited for low-level system programming, have no suitable low-level development tools available, or require specific runtime support, a problem C does not suffer from. Also, the vast majority of OS related resources (like tutorials, and how-to examples, including this Wiki except where noted otherwise) assume C as the primary development language, so an OS developer should at least be able to read C code.
+</p><p>Using a language other than C entails a good deal of extra effort. But there are <a href="Alta_Lang" title="Alta Lang">some developers</a> who are willing to put in that effort in order to suit the development of their OSes to their ways of thinking (for example: <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Programming_paradigm">programming paradigms</a>).
+</p><p>On the other hand, attempting to write an OS in interpreted or bytecode languages like Perl or Java is prohibitively challenging, and therefore less likely to lead to a success story. There are research projects about it, of course, but nothing that has completely changed the way we write kernels so far. And trying to write it in HTML would just be proof that you have much to learn.
+</p><p>So, you're warned. And now you should make a choice, hopefully, the informed choice.
+</p>
+<h2> <span class="mw-headline" id="Can_I_use_language_XYZ.3F"> Can I use language XYZ? </span></h2>
+<dl><dt> If you'd like to know if your favourite language is suited for OSDeving, just consider the most important principle - there should be a way of doing low level things in your language.
+</dt></dl>
+<p>Also before you start it worth to answer the following questions: 
+</p>
+<ul><li> Can you cope with datastructures having a specific bits &amp; bytes arrangement (mandatory for e.g. MMU structures and alike things)? Or do you have corresponding tools?
+</li><li> Can you take control of memory allocation/freeing? Or can you at least subdivide a large chunk of memory in smaller chunks that other functions can use transparently (necessary for any sort of memory management)? And the important consequence here is - do you have some kind of support of your personal memory manager in your language?
+</li><li> Are you able to build a self-sufficient run-time library to support language features you'll need?
+</li><li> Can you easily interface XYZ with some assembly code (yes, you'll have <i>some</i>, at least in the run-time library you'll have to write)?
+</li><li> If XYZ fits the other points and is an interpreted language, can you invoke code coming from raw data bytes with XYZ, i.e. jump at a specific address and continue execution there (this will be mandatory for loading and running programs)?
+</li></ul>
+<p>If any of those question turns out to "whoops, no, I cannot do that with language XYZ", then chances are that XYZ will be of no help for OS development. This particular problem has often been circumvented by modifying the language and writing new compilers.
+</p>
+<h2> <span class="mw-headline" id="Can.27t_I_write_a_compiler_for_XYZ.3F"> Can't I write a compiler for XYZ? </span></h2>
+<p>A compiler is one of the few things in software that are of a similar complexity to operating systems. As you are already planning to write an OS, deciding to do a compiler also is like finding new ways to forge metals in order to build a better car. Still, there are <a href="Alta_Lang" title="Alta Lang">some OSDevers</a> who think themselves up to the challenge. The canonical starting point is the "Dragon Book" (<i>Compilers - Principles, Techniques, and Tools</i> located on the <a href="Books" title="Books">Books</a> page).
+</p><p>This does not mean you can afford to ignore C and Assembly, however; indeed, Assembly can be much more important to the code generation step of compilation than it is to OS development (unless you are eschewing high-level languages entirely), and for compiler designers a solid grasp of the target language is a must. Also, as has already been stated, most of the information about OS dev is oriented towards C developers, and a solid ability to at least read C is necessary unless you intend to work wholly alone.
+</p><p>Also, consider this: what language will you write your compiler in? Assembly is clunky, so your choices are C, or your favorite language, XYZ. If you use the latter, how will bootstrap yourself? If you use the former, you'll need to port libc and GCC -- you <i>do</i> want to be self-hosting... right?
+</p>
+<h2> <span class="mw-headline" id="But_I_heard_of_an_OS_written_in_language_XYZ.2C_isn.27t_it_interpreted.3F"> But I heard of an OS written in language XYZ, isn't it interpreted? </span></h2>
+<p>This is a red herring.  There is no such thing as an "interpreted language".  A language can be implemented using some kind of interpreter or compiler, you would have to check the specific details of that project to know whether it is suitable.
+</p><p>You may from time to time hear of operating systems written in languages which are usually interpreted, or which used an interpreter of some sort: JavaOS, <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Genera_%28operating_system%29">Genera</a> (the Symbolics Lisp Machine OS), Pilot-OS (the system for the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Xerox_Alto">Xerox Alto</a> and <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Xerox_Star">Star</a> workstations, written mostly in Smalltalk-80), UCSD Pascal, the various Forth systems, etc. Most of these fall into one of three categories&#160;: 
+</p>
+<ul><li> The operating system runs in a low-level interpreter, written in Assembly or some systems language like C, which is what actually interacts with the hardware. In effect, the 'operating system' is just an application running on top of another, lower-level OS. Pilot-OS, UCSD Pascal, and some Java OSes work like this, though they also have some modules which are compiled to native code as well (see below).
+</li></ul>
+<ul><li> All or part of the code has been compiled to native code. This may involve using a sub-set of the language with reduced runtime requirements (e.g., <a rel="nofollow" class="external text" href="http://www.citeulike.org/user/hamish/article/201596">Pre-Scheme</a>, or <a rel="nofollow" class="external text" href="http://www.squeak.org/features/vm.html">Slang</a> - while they have not been used for OS development to date, they do demonstrate this sort of low-level implementation language which can be used this way).
+<ul><li> <b>Forth</b>-based operating systems are a special case of this. While Forth is usually described as an interpreted language, the <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Threaded_code">threaded-code interpreters</a> many FORTH systems use work differently from most other interpreters; in effect, the interpreter walks through the various Forth 'words' that the code is comprised of until it reaches the low-level words that are implemented in assembly or compiled code, which is what actually gets executed. Furthermore, Forth systems incorporate a special sort of assembler, which produces code specifically meant to be used by the interpreter; also, commonly used 'words' can be compiled into native code as needed. Finally, many embedded Forth systems use special-purpose hardware (see below) to support the language.
+</li></ul>
+</li></ul>
+<ul><li> The system ran on specialized hardware and microcode, which acted as hardwired 'interpreter' for it's primary language, or for the portable bytecode which it normally used. This type of system includes the SOAR (Smalltalk On A RISC), the Recursiv System, The Lillith Modula-2 System, and the Burroughs 6500 (a mainframe designed for running Algol-60 in the 1960s). The system programming techniques for these cannot work on stock hardware. For example: 
+<ul><li> The <b><a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/MIT_CADR">MIT CADR</a> Lisp machine architecture</b> had an extensive instruction set with hardware support for certain high-level operations such as type-tag checking and GC.  It had a <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Tagged_architecture">tagged architecture</a> meaning that a portion of the 36-bit addressing word was designated for type information.  Typically these machines had a variety of compilers including one for the system language Lisp which was capable of taking advantage of the additional instruction set.
+</li><li> The <b>Rekursiv Single-Board Computer</b> had hardware support for a writable instruction set (that is, you could dynamically add microcode instructions) and associative memory dispatch tables for supporting object-oriented programming.
+</li></ul>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 41/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1680-0!*!0!!en!*!* and timestamp 20180121034653 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Languages&amp;oldid=21761">http://wiki.osdev.org/index.php?title=Languages&amp;oldid=21761</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Languages" title="Category:Languages">Languages</a></li><li><a href="Category:OS_Development" title="Category:OS Development">OS Development</a></li><li><a href="Category:FAQ" title="Category:FAQ">FAQ</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Languages" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Languages"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Languages&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Languages#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Languages" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Languages&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Languages&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Languages#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Languages" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Languages" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Languages&amp;printable=yes" rel="alternate">Printable version</skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Languages" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Languages" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Languages&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Languages&amp;oldid=21761" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 25 November 2017, at 18:37.</li>
+											<li id="footer-info-viewcount">This page has been accessed 146,169 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.051 secs. -->
+	</body>
+</html>

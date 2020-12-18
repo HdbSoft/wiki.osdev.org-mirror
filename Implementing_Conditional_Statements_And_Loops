@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>CompilerDev/Implementing Conditional Statements And Loops - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="CompilerDev/Implementing_Conditional_Statements_And_Loops" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "CompilerDev/Implementing_Conditional_Statements_And_Loops", "wgTitle": "CompilerDev/Implementing Conditional Statements And Loops", "wgCurRevisionId": 20696, "wgArticleId": 3986, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-CompilerDev_Implementing_Conditional_Statements_And_Loops action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">CompilerDev/Implementing Conditional Statements And Loops</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=Implementing_Conditional_Statements_And_Loops&amp;redirect=no" title="Implementing Conditional Statements And Loops">Implementing Conditional Statements And Loops</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Implementing_Conditional_Statements_And_Loops#mw-head">navigation</a>,
+					<a href="Implementing_Conditional_Statements_And_Loops#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Implementing_Conditional_Statements_And_Loops#General_Concepts"><span class="tocnumber">1</span> <span class="toctext">General Concepts</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Implementing_Conditional_Statements_And_Loops#General_Conditional_Statements"><span class="tocnumber">1.1</span> <span class="toctext">General Conditional Statements</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="Implementing_Conditional_Statements_And_Loops#If"><span class="tocnumber">1.1.1</span> <span class="toctext">If</span></a>
+<ul>
+<li class="toclevel-4 tocsection-4"><a href="Implementing_Conditional_Statements_And_Loops#Compound_Boolean_Conditionals"><span class="tocnumber">1.1.1.1</span> <span class="toctext">Compound Boolean Conditionals</span></a></li>
+<li class="toclevel-4 tocsection-5"><a href="Implementing_Conditional_Statements_And_Loops#Basic_Optimizations"><span class="tocnumber">1.1.1.2</span> <span class="toctext">Basic Optimizations</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-6"><a href="Implementing_Conditional_Statements_And_Loops#Definite_Loops"><span class="tocnumber">1.2</span> <span class="toctext">Definite Loops</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h1> <span class="mw-headline" id="General_Concepts"> General Concepts </span></h1>
+<p>For a conventional instruction set architecture such as x86, ARM, 8051, MIPS, or most other CPU types in widespread use at this time (2016), conditional statements such as <b>if</b>/<b>elsif</b>/<b>else</b>, and loop constructs such as <b>for</b> or <b>while</b>, are generally implemented through a combination of tests, conditional jumps/branches (jz, beq, etc.) and unconditional branches (jmp, bra, j, etc.). While some common ISAs have special-purpose instructions for repetition or looping (e.g., the <b>REP</b> and <b>LOOP</b> instructions on the x86), few compilers use them due to the added work of determining where they can be applied.
+</p><p>Examples below are given for <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/X86_assembly_language">Intel x86-64</a>, <a href="ARM_Overview" title="ARM Overview"> ARM</a>, and <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/MIPS_instruction_set">MIPS R2000 assembly language</a> instruction sets. It is assumed that the compiler produces assembly language; for compilers that generate an <a href="Executable_Formats" title="Executable Formats"> Executable File</a> directly, the compiler must handle the housekeeping (e.g., tracking branch targets) that would otherwise be done by the assembler.
+</p>
+<h2> <span class="mw-headline" id="General_Conditional_Statements"> General Conditional Statements </span></h2>
+<h3> <span class="mw-headline" id="If"> If </span></h3>
+<p>A naive implementation of a basic <b>if</b> statement will generally consist of a conditional branch to the code for the when the condition is true (the <i>consequent</i>), an unconditional branch past the end of the consequent, and the consequent itself:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> b<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="coMULTI">/* do something */</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>The generated code (assuming that <b>a</b> and <b>b</b> are in the appropriate registers already) might look like:
+</p>
+<table>
+<tr>
+<th> x86-64
+</th>
+<th> ARM
+</th>
+<th> MIPS
+</th>
+<caption>
+</caption>
+<td><pre>
+    cmp rax, rbx
+    je main.if0.true
+    jmp main.if0.end
+main.if0.true:
+   &#160;;;; consequent
+main.if0.end:
+</pre>
+</td>
+<td><pre>
+    teq r0, r1
+    beq main.if0.true
+    b main.if0.end
+main.if0.true:
+   &#160;;;; consequent
+main.if0.end:    
+</pre>
+</td>
+<td><pre>
+    beq $t0, $t1, main.if0.true
+    j main.if0.end
+main.if0.true:
+    ### consequent
+main.if0.end:
+</pre>
+</td></tr></table>
+<p>Note that the compiler has to generate a unique label or target table listing for each of the branch targets; the simplest implementation of this is to keep a count of the labels, and assign them a separate label name with the count appended to it. For the sake of readability, the example code uses a local label with the function name (main, in this case), the type of expression, and the count of the expressions of this type. 
+</p><p>Thus, for nested <b>if</b>s, such as
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> b<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>b <span class="sy0">&lt;=</span> c<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="coMULTI">/* do the inner clause */</span>
+    <span class="br0">&#125;</span>
+    <span class="coMULTI">/* do the rest of the outer clause */</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p><br />
+it might produce:
+</p>
+<table>
+<tr>
+<th> x86-64
+</th>
+<th> ARM
+</th>
+<th> MIPS
+</th>
+<caption>
+</caption>
+<td><pre>    cmp rax, rbx
+    je main.if1.true
+    jmp main.if1.end
+main.if1.true:
+    cmp rbx, rcx
+    jle main.if2.true
+    jmp main.if2.end
+main.if2.true:
+   &#160;;;; do the inner clause
+main.if2.end:
+   &#160;;;; do the rest of the outer clause
+main.if1.end:
+</pre>
+</td>
+<td><pre>
+</pre>
+</td>
+<td><pre>    bge $t0, $t1, main.if1.true
+    j main.if1.end
+main.if2.true:
+    blt $t0, $t2, main.if2.true
+    j main.if2.end
+main.if2.true:
+   &#160;;;; consequent for inner conditional
+main.if2.end:
+   &#160;;;; remaining code
+main.if1.end:</pre>
+</td></tr></table>
+<h4> <span class="mw-headline" id="Compound_Boolean_Conditionals"> Compound Boolean Conditionals </span></h4>
+<p>For compound conditionals, such as logical AND or logical OR, there naive implementation would be to first perform the tests, then use the logical ligatures to produce a testable outcome. 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="br0">&#40;</span>a <span class="sy0">&lt;=</span> b <span class="sy0">&amp;&amp;</span> b <span class="sy0">&lt;</span> c<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="coMULTI">/* do something */</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>it could naively generate 
+</p>
+<table>
+<tr>
+<th> x86-64
+</th>
+<th> ARM
+</th>
+<th> MIPS
+</th>
+<caption>
+</caption>
+<td><pre>
+</pre>
+</td>
+<td><pre>
+</pre>
+</td>
+<td><pre>
+    ble $t0, $t1, main.if3.and0.left.true
+    clear $t3
+    j main.if3.and0.right
+main.if3.and0.left.true:
+    move $t3, 1
+    j main.if3.and0.right
+main.if3.and0.right:
+    ble $t0, $t1, main.if3.and0.right.true
+    clear $t3
+    j main.if3.and0.test
+main.if3.and0.right.true:
+    move $t3, 1    
+    j main.if3.and0.test
+main.if3.and0.test:    
+    and $t3, $t3, $t4
+    not $t5, $t3
+    bnez $t5, main.if3.true
+    j main.if3.end
+main.if3.true:
+   &#160;;;; consequent
+main.if3.end:</pre>
+</td></tr></table>
+<p><br />
+While this is a literal translation of the condition, it is clearly less than optimal.
+</p>
+<h4> <span class="mw-headline" id="Basic_Optimizations"> Basic Optimizations </span></h4>
+<p>An obvious, and reasonably simple, optimization of this is to negate or reverse the condition, thus eliminating the need for the unconditional branch:
+</p>
+<table>
+<tr>
+<th> x86-64
+</th>
+<th> ARM
+</th>
+<th> MIPS
+</th>
+<caption>
+</caption>
+<td><pre>
+    cmp rax, rbx
+    jne main.if0.end
+   &#160;;;; consequent
+main.if0.end:
+</pre>
+</td>
+<td><pre>
+    teq r0, r1
+    bne main.if0.end
+   &#160;;;; consequent
+main.if0.end:    
+</pre>
+</td>
+<td><pre>
+    bne $t0, $t1, main.if4.end
+   &#160;;;; consequent
+main.if4.end:</pre>
+</td></tr></table>
+<p>Similarly, for nested <b>if</b>s where the inner <b>if</b> is the first or last clause of the outer loop, then it can remove an extraneous labels:
+</p>
+<table>
+<tr>
+<th> x86-64
+</th>
+<th> ARM
+</th>
+<th> MIPS
+</th>
+<caption>
+</caption>
+<td><pre>
+    cmp rax, rbx
+    jne main.if1.end
+   &#160;;;; if(rax == rbx)
+      cmp rbx, rcx
+      jg main.if2.end
+     &#160;;;; if(rbx &lt;= rcx)
+     &#160;;;; do the inner clause
+main.if2.end:
+   &#160;;;; do the rest of the outer clause
+main.if1.end:
+</pre>
+</td>
+<td><pre>
+</pre>
+</td>
+<td><pre>
+    blt $t0, $t1, main.if5.end
+    bge $t0, $t2, main.if6.end
+   &#160;;;; inner consequent
+main.if6.end:
+   &#160;;;; remaining code of outer consequent
+main.if2.end:</pre>
+</td></tr></table>
+<p><br />
+For these simple cases, since the mapping of a given operator to its inverse is fixed (e.g., to implement 'less than' you would always substitute 'greater than or equal'), the only change needed is that the code for the test be issued fro the inverse. 
+</p><p>Optimizing compound conditionals is a bit trickier, as you would need to consider which operations invert which other ones, and how to apply things like de Morgan's Law. However, it is still reasonable for most compilers to perform certain eliminations, such as replacing separate tests with short-circuiting branches. In the case of an <b>AND'<i>, one can start by short-circuiting the first test to the end of the </i></b><i>and</i> part conditional, so that the second test only gets checked if the first is true. For the <b>NOT</b>, you can get the right result simply by <i>not</i> inverting the final case:
+</p><p>However, with a little more effort, a better solution might be possible, if we keep a table of boolean functions and their inverses, and are willing to perform a simple analysis of the order of operations.
+</p>
+<h2> <span class="mw-headline" id="Definite_Loops"> Definite Loops </span></h2>
+<p>The naive implementation of a definite loop is a conditional branch at the start of the loop and an unconditional branch back to that conditional branch at the end of the loop, which is also the naive implementation of an explicit for loop. An example in MIPS assembly code (using pseudo-instructions) might be:
+</p>
+<table>
+<tr>
+<th> x86-64
+</th>
+<th> ARM
+</th>
+<th> MIPS
+</th>
+<caption>
+</caption>
+<td><pre>
+        xor rcx, rcx
+        mov rbx, for_loop_count
+for0.start:
+       &#160;; if rcx is greater than or equal 
+       &#160;; to rbx, jump past the loop
+        cmp rcx, rbx
+        jge for1.end
+       &#160;;;  body of the loop here
+        inc rcx
+        jmp for0.start
+for0.end:</pre>
+</td>
+<td><pre>        mov r0, #0                 
+        mov r1, #for_loop_count    
+for0.start:
+       &#160;; if r1 is greater than or equal 
+       &#160;; to r0, jump past the loop     
+        cmp r0, r1
+        bge for1.end       
+       &#160;;;  body of the loop here
+        add r0, r0, #1
+        b for0.start
+for0.end:</pre>
+</td>
+<td><pre>        clear $t0                 
+        move $t1, for_loop_count    
+for0.start:
+       &#160;; if t1 is greater than or equal 
+       &#160;; to t0, jump past the loop     
+        bge $t0, $t1, for1.end        
+       &#160;;;  body of the loop here
+        addi $t0, $t0, 1
+        bra for0.start
+for0.end</pre>
+</td></tr></table>
+<p>However, even a naive compiler will usually do <i>loop inversion</i> by using an unconditional branch, followed by the loop label, followed by the body, and then put the loop condition as the target of the original unconditional branch with the condition inverted: 
+</p>
+<table>
+<tr>
+<th> x86-64
+</th>
+<th> ARM
+</th>
+<th> MIPS
+</th>
+<caption>
+</caption>
+<td><pre>
+</pre>
+</td>
+<td><pre>
+</pre>
+</td>
+<td><pre>   clear $t0
+        move $t1, for_loop_count    
+        bra for1.test
+for1.start:
+       &#160;;;  body of the loop here
+        addi $t0, $t0, 1
+for1.test:
+       &#160;; if t1 is less than to t0, 
+       &#160;; jump past the loop
+        blt $t0, $t1, for1.start         
+for1.end</pre>
+</td></tr></table>
+<p>This means that after the loop entry, the loop has just the unconditional branch, making it faster. For a hand-coded recursive descent compiler, this becomes simply a matter of changing the order in which the parsing-emitting functions are called.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 213/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3986-0!*!0!!en!*!* and timestamp 20180121052845 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=CompilerDev/Implementing_Conditional_Statements_And_Loops&amp;oldid=20696">http://wiki.osdev.org/index.php?title=CompilerDev/Implementing_Conditional_Statements_And_Loops&amp;oldid=20696</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=CompilerDev%2FImplementing_Conditional_Statements_And_Loops" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="CompilerDev/Implementing_Conditional_Statements_And_Loops"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:CompilerDev/Implementing_Conditional_Statements_And_Loops"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Implementing_Conditional_Statements_And_Loops#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="CompilerDev/Implementing_Conditional_Statements_And_Loops" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=CompilerDev/Implementing_Conditional_Statements_And_Loops&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=CompilerDev/Implementing_Conditional_Statements_And_Loops&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Implementing_Conditional_Statements_And_Loops#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/CompilerDev/Implementing_Conditional_Statements_And_Loops" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/CompilerDev/Implementing_Conditional_Statements_And_Loops" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=CompilerDev/Implementing_Conditional_Statements_And_Loops&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=CompilerDev/Implementing_Conditional_Statements_And_Lskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/CompilerDev/Implementing_Conditional_Statements_And_Loops" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/CompilerDev/Implementing_Conditional_Statements_And_Loops" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=CompilerDev/Implementing_Conditional_Statements_And_Loops&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=CompilerDev/Implementing_Conditional_Statements_And_Loops&amp;oldid=20696" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 12 April 2017, at 07:46.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,144 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.036 secs. -->
+	</body>
+</html>

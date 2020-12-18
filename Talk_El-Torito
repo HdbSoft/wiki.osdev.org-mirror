@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Talk:El-Torito - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "Talk", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 1, "wgPageName": "Talk:El-Torito", "wgTitle": "El-Torito", "wgCurRevisionId": 15345, "wgArticleId": 3024, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-1 ns-talk page-Talk_El-Torito action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Talk:El-Torito</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Talk:El-Torito#mw-head">navigation</a>,
+					<a href="Talk:El-Torito#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><h2> <span class="mw-headline" id="2k_limitation_somewhere.3F"> 2k limitation somewhere? </span></h2>
+<p>Could someone please explain where the "2k" comes from under "What's Next?" in the sentence:
+"you can start reading the file system, in the 2k that you have available in your boot sector."
+</p><p>Is the El-Torito standard limited to loading boot sectors no larger than 2KiB? --<a href="http://wiki.osdev.org/User:Messiahandrw" title="User:Messiahandrw" class="mw-redirect">MessiahAndrw</a> 10:48, 27 July 2011 (UTC)
+</p>
+<dl><dd>If you follow the link to <a href="Bootable_El-Torito_CD_with_GRUB_Legacy" title="Bootable El-Torito CD with GRUB Legacy">Bootable El-Torito CD with GRUB Legacy</a>, you will find the `genisoimage` option `-boot-load-size 4` (also used in this article) explained as follows: "<i>Specifies the number of 512-bytes sectors to load. Four 512-byte sectors (2048 bytes) is one CD sector and is the number supported by most BIOS.</i>" (Had to look it up myself, but there.&#160;;-) ) -- <a href="http://wiki.osdev.org/User:Solar" title="User:Solar">Solar</a> 12:13, 27 July 2011 (UTC)
+</dd></dl>
+<p>I discovered this through experimentation (I'm trying to boot directly into my kernel using El-Torito rather than via a bootloader). I'm editing the article now to explain this. --<a href="http://wiki.osdev.org/User:Messiahandrw" title="User:Messiahandrw" class="mw-redirect">MessiahAndrw</a> 14:20, 27 July 2011 (UTC)
+</p><p>2K sectors come from the ISO9660 specification - see <a rel="nofollow" class="external free" href="http://en.wikipedia.org/wiki/Iso9660#Specifications">http://en.wikipedia.org/wiki/Iso9660#Specifications</a>.
+</p><p>The basic of storage is a Frame of 24 bytes, and a Sector is defined as 98 Frames.  This gives 2352 usable bytes per Sector.  Because CDs store their data in 1 single spiral, it is impossible to calculate the exact start of every single sector given the technology at the time (It is better now).  As a result, all Sectors must have alignment data so the CD reader can precicely locate the start of the sector given a rough approximation from a calculation.  In addition, CDs damage very easily, so they have always had error correcting data written into the sector so the sector can still be recovered correctly if damaged a little.  As a result, ISO9660 splits the 2352 usable bytes per sector into 12 bytes of alignment/synchronisation data, followed by 2048 bytes of regular data, followed by 288 bytes of error detecting and correcting codes.  <a href="http://wiki.osdev.org/index.php?title=User:Andyhhp&amp;action=edit&amp;redlink=1" class="new" title="User:Andyhhp (page does not exist)">Andyhhp</a> 00:20, 29 July 2011 (UTC)
+</p>
+<h2> <span class="mw-headline" id="Proposals_for_enhancements"> Proposals for enhancements </span></h2>
+<p>I am the developer of xorriso, which produces bootable
+ISO 9660 images. Here are some proposals after reading
+this wiki page.
+I am ready to implement them here. But first i ask
+whether such changes would be appreciated.
+</p>
+<hr />
+<p>The examples about floppy emulation and Legacy GRUB are
+quite antique, meanwhile.
+</p><p>GRUB2 script grub-mkrescue should be mentioned:
+<a rel="nofollow" class="external free" href="http://www.gnu.org/software/grub/manual/html_node/Making-a-GRUB-bootable-CD_002dROM.html#Making-a-GRUB-bootable-CD_002dROM">http://www.gnu.org/software/grub/manual/html_node/Making-a-GRUB-bootable-CD_002dROM.html#Making-a-GRUB-bootable-CD_002dROM</a>
+</p><p>Bootloader ISOLINUX should be mentioned:
+<a rel="nofollow" class="external free" href="http://www.syslinux.org/wiki/index.php/ISOLINUX">http://www.syslinux.org/wiki/index.php/ISOLINUX</a>
+Probably
+<a rel="nofollow" class="external free" href="SysLinux">http://wiki.osdev.org/SysLinux</a>
+should get a sibling for the ISOLINUX aspects of SYSLINUX.
+</p>
+<hr />
+<p>"Writing an El-Torito Boot Sector"
+</p><p>This headline does not match the object which is described.
+"El-Torito Boot Sector" would normally be the El-Torito
+Boot Record, which is a ECMA-119 Volume Descriptor.
+The description rather applies to the boot image,
+which is the blob pointed to by an entry of the
+El-Torito Boot Catalog.
+With BIOS, that blob is the first stage of a boot loader.
+With EFI, the blob is a FAT filesystem image (but not an
+emulated floppy).
+</p><p>The structure of El-Torito Volume Descriptor, Boot Catalog,
+and boot images should be described, in order to clarify
+the possibilities of multiple boot images for e.g. BIOS
+and EFI.
+I.e. Boot Record points to Boot Catalog which lists the
+available boot images.
+</p><p>Further one should mention that ISO images can carry
+MBR and GPT for booting the image from hard-disk-like
+devices (e.g. USB sticks).
+</p><p>Example of combined BIOS and EFI via El-Torito,
+MBR, and GPT as was done for debian-7.1.0-amd64-netinst.iso:
+</p>
+<pre> xorriso -as mkisofs
+ ...
+ -c isolinux/boot.cat
+ -b isolinux/isolinux.bin
+ -no-emul-boot -boot-load-size 4 -boot-info-table
+ -isohybrid-mbr syslinux/usr/lib/syslinux/isohdpfx.bin
+ -eltorito-alt-boot
+ -e boot/grub/efi.img
+ -no-emul-boot -isohybrid-gpt-basdat
+ ...
+ boot1
+ ...
+</pre>
+<p>Option -eltorito-alt-boot separates the settings
+for the BIOS boot image from those for the EFI
+boot image.
+The files isolinux/isolinux.bin and boot/grub/efi.img
+get into the ISO image from source directory ./boot1.
+File syslinux/usr/lib/syslinux/isohdpfx.bin is copied
+directly from the SYSLINUX installation into the ISO
+image. It contains the MBR template.
+Option -isohybrid-gpt-basdat announces the FAT image
+boot/grub/efi.img as GPT partition.
+</p><p>See <a rel="nofollow" class="external free" href="http://www.gnu.org/software/xorriso/man_1_xorrisofs.html">http://www.gnu.org/software/xorriso/man_1_xorrisofs.html</a>
+</p><p>Description on byte level:
+<a rel="nofollow" class="external free" href="http://bazaar.launchpad.net/~libburnia-team/libisofs/scdbackup/view/head:/doc/boot_sectors.txt">http://bazaar.launchpad.net/~libburnia-team/libisofs/scdbackup/view/head:/doc/boot_sectors.txt</a>
+</p>
+<hr />
+<p>The boot information table does not belong to El Torito.
+It is rather part of boot loader specifications,
+possibly invented for ISOLINUX.
+</p>
+<hr />
+<pre> -boot-info-table-o [IsoFile.iso]
+</pre>
+<p>must rather be
+</p>
+<pre> -boot-info-table [-o IsoFile.iso]
+</pre>
+<p>or more safely for the terminal
+</p>
+<pre> -boot-info-table -o IsoFile.iso
+</pre>
+<hr />
+<p>Maybe one should explain the relations of mkisofs, genisoimage,
+other clones, and the mkisofs emulation of xorriso.
+I would volunteer to try this as unbiasedly as possible for
+one of the competitors.
+</p><p><a href="http://wiki.osdev.org/User:Scdbackup" title="User:Scdbackup">Scdbackup</a> 02:36, 15 October 2013 (CDT)
+</p>
+<dl><dd> After trying to apply smaller changes i decided to propose a re-write of large
+</dd><dd> parts of the text. See my user page <a href="http://wiki.osdev.org/User:Scdbackup" title="User:Scdbackup">User:Scdbackup</a>.
+</dd><dd> If no objections arise within a few days, i will put it on the article page.
+</dd><dd>
+</dd><dd> <a href="http://wiki.osdev.org/User:Scdbackup" title="User:Scdbackup">Scdbackup</a> 13:03, 18 October 2013 (CDT)
+</dd></dl>
+<dl><dd><dl><dd> The re-written parts are now in the article. Review would be appreciated.
+</dd><dd> <a href="http://wiki.osdev.org/User:Scdbackup" title="User:Scdbackup">Scdbackup</a> 05:51, 20 October 2013 (CDT)
+</dd></dl>
+</dd></dl>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 19/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3024-0!*!0!!*!*!* and timestamp 20180121080148 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Talk:El-Torito&amp;oldid=15345">http://wiki.osdev.org/index.php?title=Talk:El-Torito&amp;oldid=15345</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Talk%3AEl-Torito" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main"><span><a href="El-Torito"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="selected"><span><a href="Talk:El-Torito"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Talk:El-Torito#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Talk:El-Torito" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Talk:El-Torito&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Talk:El-Torito&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Talk:El-Torito#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Talk:El-Torito" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Talk:El-Torito" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Talk:El-Torito&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Talk:El-Torito&amp;oldid=15345" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 October 2013, at 04:51.</li>
+											<li id="fskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Talk:El-Torito" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Talk:El-Torito" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Talk:El-Torito&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Talk:El-Torito&amp;oldid=15345" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 October 2013, at 04:51.</li>
+											<li id="footer-info-viewcount">This page has been accessed 3,805 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.057 secs. -->
+	</body>
+</html>

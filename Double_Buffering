@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Double Buffering - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Double_Buffering", "wgTitle": "Double Buffering", "wgCurRevisionId": 20840, "wgArticleId": 2489, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 1 Tutorials", "Video"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-cpp {line-height: normal;}
+.source-cpp li, .source-cpp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cpp
+ * CSS class: source-cpp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cpp.source-cpp .de1, .cpp.source-cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp.source-cpp  {font-family:monospace;}
+.cpp.source-cpp .imp {font-weight: bold; color: red;}
+.cpp.source-cpp li, .cpp.source-cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp.source-cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp.source-cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp.source-cpp .kw1 {color: #0000ff;}
+.cpp.source-cpp .kw2 {color: #0000ff;}
+.cpp.source-cpp .kw3 {color: #0000dd;}
+.cpp.source-cpp .kw4 {color: #0000ff;}
+.cpp.source-cpp .co1 {color: #666666;}
+.cpp.source-cpp .co2 {color: #339900;}
+.cpp.source-cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp.source-cpp .es0 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es1 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es2 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es3 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es4 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es5 {color: #006699; font-weight: bold;}
+.cpp.source-cpp .br0 {color: #008000;}
+.cpp.source-cpp .sy0 {color: #008000;}
+.cpp.source-cpp .sy1 {color: #000080;}
+.cpp.source-cpp .sy2 {color: #000040;}
+.cpp.source-cpp .sy3 {color: #000040;}
+.cpp.source-cpp .sy4 {color: #008080;}
+.cpp.source-cpp .st0 {color: #FF0000;}
+.cpp.source-cpp .nu0 {color: #0000dd;}
+.cpp.source-cpp .nu6 {color: #208080;}
+.cpp.source-cpp .nu8 {color: #208080;}
+.cpp.source-cpp .nu12 {color: #208080;}
+.cpp.source-cpp .nu16 {color:#800080;}
+.cpp.source-cpp .nu17 {color:#800080;}
+.cpp.source-cpp .nu18 {color:#800080;}
+.cpp.source-cpp .nu19 {color:#800080;}
+.cpp.source-cpp .me1 {color: #007788;}
+.cpp.source-cpp .me2 {color: #007788;}
+.cpp.source-cpp .ln-xtra, .cpp.source-cpp li.ln-xtra, .cpp.source-cpp div.ln-xtra {background-color: #ffc;}
+.cpp.source-cpp span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Double_Buffering action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Double Buffering</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Double_Buffering#mw-head">navigation</a>,
+					<a href="Double_Buffering#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a><br />Beginner</td></tr></table>
+<p>Double-buffering is a term that is well known throughout the graphics industry. Most applications (primarily games) seldom work without it as it has many advantages over single-buffering (but also has a few disadvantages).
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Double_Buffering#What_Is_It.3F"><span class="tocnumber">1</span> <span class="toctext">What Is It?</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Double_Buffering#The_Buffers"><span class="tocnumber">1.1</span> <span class="toctext">The Buffers</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Double_Buffering#Where_To_Write_To"><span class="tocnumber">1.2</span> <span class="toctext">Where To Write To</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Double_Buffering#What_Actually_Is_Seen"><span class="tocnumber">1.3</span> <span class="toctext">What Actually Is Seen</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Double_Buffering#Important_Note"><span class="tocnumber">1.4</span> <span class="toctext">Important Note</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Double_Buffering#Example"><span class="tocnumber">1.5</span> <span class="toctext">Example</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="Double_Buffering#Advantages"><span class="tocnumber">2</span> <span class="toctext">Advantages</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Double_Buffering#Disadvantages"><span class="tocnumber">3</span> <span class="toctext">Disadvantages</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="Double_Buffering#Memory_requirement"><span class="tocnumber">3.1</span> <span class="toctext">Memory requirement</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Double_Buffering#Speed"><span class="tocnumber">3.2</span> <span class="toctext">Speed</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="Double_Buffering#Tearing"><span class="tocnumber">3.3</span> <span class="toctext">Tearing</span></a>
+<ul>
+<li class="toclevel-3 tocsection-12"><a href="Double_Buffering#Vertical_Synchronization"><span class="tocnumber">3.3.1</span> <span class="toctext">Vertical Synchronization</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="Double_Buffering#Triple_buffering"><span class="tocnumber">3.3.2</span> <span class="toctext">Triple buffering</span></a></li>
+<li class="toclevel-3 tocsection-14"><a href="Double_Buffering#Something_unique.3F"><span class="tocnumber">3.3.3</span> <span class="toctext">Something unique?</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="Double_Buffering#Examples"><span class="tocnumber">4</span> <span class="toctext">Examples</span></a>
+<ul>
+<li class="toclevel-2 tocsection-16"><a href="Double_Buffering#Buffer_creation"><span class="tocnumber">4.1</span> <span class="toctext">Buffer creation</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="Double_Buffering#Double_buffering"><span class="tocnumber">4.2</span> <span class="toctext">Double buffering</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="What_Is_It.3F"> What Is It? </span></h2>
+<h4> <span class="mw-headline" id="The_Buffers"> The Buffers </span></h4>
+<p>Double-buffering possibly sounds harder than it actually is. In theory, you have a buffer A and a buffer B, which are usually respectively called the front-and back-buffer. On single-buffered displays, you draw straight to video memory, so suppose video memory is located at address <code>0xB8000</code> (like console video memory is), you just start modifying values starting from this address (as you probably know) to show characters on the screen. If you would do this with double-buffering (which isn't a very good idea with console video memory, by the way), <code>0xB8000</code> would represent buffer A (the front-buffer) whilst buffer B is created and allocated by your favourite <code>malloc</code> function (or <code>new[]</code> operator).
+</p>
+<h4> <span class="mw-headline" id="Where_To_Write_To"> Where To Write To </span></h4>
+<p>Instead of writing directly to console video memory (at <code>0xB8000</code>), you write everything to the address where Buffer B is located. The process of drawing characters is exactly the same as before, except you're now writing to another memory address.
+When you're done drawing, you copy the contents of the back buffer (buffer B) to the front buffer (buffer A). This process is commonly called 'swapping the buffers', though swapping isn't interpreted as switching the contents around, but more of in 'switching the order of the buffers'. By 'swapping the buffers', the back buffer is now seen by the user and carries the same pixel values as the front buffer. The back buffer can then be freely modified again until ready to be then swapped again.
+</p>
+<h4> <span class="mw-headline" id="What_Actually_Is_Seen"> What Actually Is Seen </span></h4>
+<p>When using double-buffering, the user is looking at Buffer A while you're drawing to Buffer B. When using single-buffering, the user is looking at buffer A at the same time you're modifying that buffer. So that means the user doesn't see any pixels being modified at the moments he or she is looking at the screen. He or she will notice the changes as soon as you swap the buffers.
+</p>
+<h4> <span class="mw-headline" id="Important_Note"> Important Note </span></h4>
+<p>I used console video memory as an example here, as practically every OS developer knows how to use this, but it is still not recommended to use double-buffering on a console display, as it is practically useless and wastes memory (unless you're using some kind of game loop for your OS). Double-buffering can be very useful when you're building your own GUI though. On console displays, you usually also don't need double-buffering since there are no problems with artifacts.
+</p>
+<h4> <span class="mw-headline" id="Example"> Example </span></h4>
+<p>For example, without double buffering consider a simple game rendering like the following:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> run<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">while</span><span class="br0">&#40;</span>running<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="coMULTI">/* update input */</span>
+&#160;
+        <span class="coMULTI">/* update game logic */</span>
+&#160;
+        clear_screen<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        draw_background<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        draw_levels<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        draw_picksup<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        draw_characters<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>Now imagine if each of those functions drew directly to the frame buffer. The video card and monitor may update just after you have drawn the background, or it may update just after you have cleared the screen. More likely, you're going to end up with a combination of effects with resulting in your screen flickering and seeing through objects.
+</p><p>Now imagine if each of these functions drew to a secondary buffer the size of the frame buffer. Each time you modify a pixel it won't be writing directly to the video card. Instead, after <code>draw_characters()</code> you would call:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw3">memcpy</span><span class="br0">&#40;</span>framebuffer<span class="sy0">,</span> backbuffer<span class="sy0">,</span> width <span class="sy0">*</span> height <span class="sy0">*</span> bytesperpixel<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>so the final image in its entirety is sent to the frame buffer, not just parts of it.
+</p>
+<h2> <span class="mw-headline" id="Advantages"> Advantages </span></h2>
+<p>Now why would you want to use double-buffering over single buffering in e.g. your GUI, games, or video displays? Well, the main advantages of double-buffering are:
+</p>
+<ul><li> The user does not see every pixel modification (so if the same pixel gets modified 5 times, the user will only see the last one). This helps preventing 'flickering' (or screen flashes).
+</li><li> Double-buffering usually takes care of artifacts you or the user might be experiencing.
+</li><li> Writing to video memory is only performed once, on the buffer swap, instead of repeatedly for every pixel of which some might be overlapped later and might be invisible.
+</li></ul>
+<h2> <span class="mw-headline" id="Disadvantages"> Disadvantages </span></h2>
+<p>Even though double-buffering is useful, it also has negative characteristics. Each is listed with an explanation and a possible solution.
+</p>
+<h3> <span class="mw-headline" id="Memory_requirement"> Memory requirement </span></h3>
+<p>You need to create a second buffer with the same size of the video memory (and for large displays such as 1280x1024x32 this can be an expensive cost).
+</p><p>This is more of an issue on embedded and older systems with limited memory. In the example of 1280x1024x32, this would mean your application or video driver would need to allocate an extra 5 megabytes, which isn't an expensive once off cost in a modern system that has between several hundred megabytes to several gigabytes of memory.
+</p><p>Also, virtually every modern desktop computer has a dedicated graphics accelerator card which has its own inbuilt memory. While older graphics cards may only have 8MB, many newer high-end models can have close to several gigabytes. This is more than sufficient to store the back buffer in, as well as being optimized for this purpose. An OS should allow the video driver to allocate and manage the double buffer since each graphics vendor will usually have their own implementation.
+</p><p>Note that the buffer doesn't always have to have the same size as the video memory, there are also other ways to do double-buffering, for one you could also have some sort of fast run-length encoded compression system. Then again, that would have an extra performance cost if not done efficiently.
+</p><p>You don't have to double buffer the entire screen. For example, if only part of the screen is constantly updating (the output of a media program or a video game) then only that section of the screen needs to be double buffered and the rest of the screen can be drawn directly to the front buffer. This method saves both memory and performance.
+</p>
+<h3> <span class="mw-headline" id="Speed"> Speed </span></h3>
+<p>You need to copy the back buffer to the front buffer every time the buffer needs to be swapped (in games with a frame-rate of 30, 30 times each second). So better make sure your <code>memcpy</code> and other memory functions are optimized!
+</p><p>However, some graphics cards have the ability to specify the address in memory where the buffer used for rendering is stored. If you're redrawing the entire scene each frame (which is often the case when rendering video or 3D), you simply need to swap two pointers (the pointer to the buffer you're drawing to, and the pointer to the buffer being drawn on screen).
+</p>
+<h3> <span class="mw-headline" id="Tearing"> Tearing </span></h3>
+<p>Tearing (<a rel="nofollow" class="external text" href="http://www.nhancer.com/help/images/VSync.jpg">example image</a>) is an artifact when the buffer is being updated while the graphics card and monitor are midway through updating the screen. The side effect is that parts of multiple frames end up being sent to the monitor at the same time. Tearing is most noticeable at animation at extremely high frame rates (100fps+) with low refresh rates (60Hz) and less noticeable vice versa, though it happens whenever the refresh rate does not match the frame rate.
+</p><p>Tearing can usually be ignored in general applications (office suites, web browsers, terminals) since the entire screen isn't constantly being updated. However, it still occurs, for example dragging a window around fast in a window manager that does not account for tearing (<a rel="nofollow" class="external text" href="http://yfrog.com/j1nouveauwindowmovep">example</a>).
+</p>
+<h4> <span class="mw-headline" id="Vertical_Synchronization"> Vertical Synchronization </span></h4>
+<p><a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Vertical_synchronization">Vertical synchronization</a>, more commonly known as v-sync, is when the frame rate is synchronized to match the vertical refresh rate of the screen. This means the double buffer is copied to screen's buffer in a small period between frames known as the <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Vertical_blanking_interval">vertical blanking interval</a>. By updating the screen's buffer between frames, you ensure that only full frames are shown at a time.
+</p><p>To aid in synchronizing, virtually all video cards since the first home computers have the capability to enable an interrupt at the beginning of each vertical blanking interval (known as VBLANK).
+</p><p>An example of vertical synchronization is as follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cpp source-cpp"><pre class="de1"><span class="coMULTI">/* handle VBLANK, called by the interrupt handler */</span>
+<span class="kw4">void</span> vga_handleVBlank<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>vga_framerendered<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw3">memcpy</span><span class="br0">&#40;</span>vga_screen, vga_backbuffer, vga_width <span class="sy2">*</span> vga_depth <span class="sy2">*</span> vga_bytesperpixel<span class="br0">&#41;</span><span class="sy4">;</span>
+        vga_framerendered <span class="sy1">=</span> <span class="kw2">false</span><span class="sy4">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/* called when you finish drawing to the double buffer */</span>
+<span class="kw4">void</span> vga_sync<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    vga_framerendered <span class="sy1">=</span> <span class="nu0">1</span><span class="sy4">;</span>
+&#160;
+    <span class="coMULTI">/* stick in a loop until the interrupt is fired */</span>
+    <span class="kw1">while</span><span class="br0">&#40;</span>vga_framerendered<span class="br0">&#41;</span><span class="sy4">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>There is no reason you HAVE to synchronize, another method could be you place a spinlock on the buffer, if you fail to acquire the lock simply skip that frame until you do. This may work fine in a video game where you redraw the frame over and over again so if you miss drawing something to the screen it will be redrawn on the following frame, but in a modern multitasking GUI environment this is unacceptable.
+</p><p>In a GUI environment synchronization becomes somewhat more complex. For example see below.
+</p><p>Unrelated, there is also a horizontal blanking interval, which is rarely utilized. The HBLANK interrupt fires when the display has finished drawing a line. This was used by some early systems to load in a new colour palettes per-line, enabling a wider range of colours on screen at once than the hardware was designed for. HBLANK synchronization is considered depreciated on modern hardware as displays operating over digital connectors such as DVI can receive the entire frame at once, rather than line by line with a blanking interval in-between. Modern video card may emulate HBLANK with DVI displays to a varying degree, mostly to remain compatible with legacy VGA software, however don't assume it'll be available or reliable in every video mode.
+</p>
+<h4> <span class="mw-headline" id="Triple_buffering"> Triple buffering </span></h4>
+<p><a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Triple_buffering">Triple buffering</a> is when three or more buffers are being used, at the cost of more memory to store these buffers in.
+</p><p>In a real-time application (such as a game) utilizing triple buffering there are two back buffers and one front buffer. The system renders one frame to one back buffer, the next frame the other back buffer, the next frame to the original back buffer, etc, constantly interchanging between the two. When the VBLANK interrupt fires, the last frame fully rendered is copied to the front buffer (done efficiently, this can be a case of testing one value and swapping two pointers inside the interrupt handler without any locking).
+</p><p>In a system already utilizing double buffering, triple buffering is simple to implement. In most cases it can be added to the video driver without the underlying system requiring any modifications.
+</p><p>If losing a few MBs of memory is not an issue then triple buffering provides several advantages. First off, there is no need to synchronize frames, so the drawing algorithm can run as often and as fast as it can. Secondly, some real time applications <em>must</em> perform a consistent number of update cycles each second, in which case synchronizing with the refresh rate (which will cause the program to slow down to the speed of the monitor) or skipping frames (the time it takes to execute a single update will not be consistent; some will render frames, some won't) is not an option.
+</p>
+<h4> <span class="mw-headline" id="Something_unique.3F"> Something unique? </span></h4>
+<p>In GUI applications, where multiple programs are rendering to multiple front and back buffers each at their own speed you need to be somewhat creative.
+</p><p>For example, a method that will work is: each window could consist of a double buffer (or a single buffer that is updated on a redraw/paint event), as well as a double buffer for the entire screen. That way each program can draw on its back buffer and send it its own front buffer when it has finished drawing (either swapping pointers or <code>memcpy</code>) as often as it wants (wrapping a lock around the back buffer), then when the GUI has detected the back buffer has changed, it copies the window's front buffer (locking it temporarily) into the screen's back buffer, then when the VBLANK fires the screen's back buffer is copied to the front buffer if the screen's back buffer has changed.
+</p><p>Ultimately, if memory was not an issue then the best system would be to triple buffer each window and the entire desktop, allowing every window, the desktop manager, and the video card to update at it's own speed. In some GUIs each window is allowed to draw directly to the desktop's back buffer. For example in early versions of Windows programs drew directly to the desktop's back buffer, this meant that all windows overlapping that window also had to be redrawn. The disadvantage of this is that if an application doesn't respond to a redraw request straight away then you can get a visual artefact (<a rel="nofollow" class="external text" href="http://i.msdn.microsoft.com/dynimg/IC405533.png">example</a>).
+</p><p>Each window manager usually has its own method. But like mentioned above, tearing is a relatively minor issue in most general GUI programs that can often be overlooked, since you will be dealing with text and images that won't be updating. Therefore, if the front buffer is in the middle of outputting to the monitor while copying the next frame to it, you might notice a slight flicker that lasts for all but 1 monitor refresh (which is no less than 1/60th of a second on most monitors).
+</p>
+<h2> <span class="mw-headline" id="Examples"> Examples </span></h2>
+<p>Articles with all theory are boring, so here are some examples of how to use double-buffering.
+</p>
+<h4> <span class="mw-headline" id="Buffer_creation"> Buffer creation </span></h4>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="coMULTI">/* Supposing the display is 800x600 with 32 bpp (meaning 32/8 = 4 bytes per pixel). */</span>
+<span class="kw4">uint8_t</span> <span class="sy0">*</span>BackBuffer <span class="sy0">=</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="kw3">malloc</span><span class="br0">&#40;</span><span class="nu0">800</span> <span class="sy0">*</span> <span class="nu0">600</span> <span class="sy0">*</span> <span class="nu0">4</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>This implementation absorbs the same amount of memory the real video memory does, in this case, 800 * 600 * 4 = 1920000 bytes = about 1,83 MB. While using single-buffering needs 1,83 MB of RAM with our video resolution (only the display itself), double-buffering would require 2 * 1,83 MB = about 3,66 MB. The higher the resolution, the more memory is required. There are of course implementations that can use up less than that with special techniques, but for some OS developers, high resolutions, and especially with double-buffering, are expensive features.
+</p><p>If 3,66MB does not seem like much then if you imagine a video playing program that implements triple buffering running on a modern 1920x1080@32bpp LCD display, then the total amount of video memory to store the 3 buffers would be 24,47MB. Fortunately, as display resolution increased so does memory, so using 25MB of memory on a modern computer to play a video may be acceptable.
+</p>
+<h4> <span class="mw-headline" id="Double_buffering"> Double buffering </span></h4>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">uint8_t</span> <span class="sy0">*</span> VidMem<span class="sy0">;</span>
+<span class="kw4">uint8_t</span> <span class="sy0">*</span> BackBuffer<span class="sy0">;</span>
+&#160;
+<span class="kw4">unsigned</span> <span class="kw4">short</span> ScrW<span class="sy0">,</span> ScrH<span class="sy0">;</span>
+<span class="kw4">unsigned</span> <span class="kw4">char</span> Bpp<span class="sy0">,</span> PixelStride<span class="sy0">;</span>
+<span class="kw4">int</span> Pitch<span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/*
+ * Initializes video, creates a back buffer, changes video modes.
+ * Remember that you need some kind of memory allocation!
+ */</span>
+<span class="kw4">void</span> InitVideo<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">short</span> ScreenWidth<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">short</span> ScreenHeight<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">char</span> BitsPerPixel<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+        <span class="coMULTI">/* Convert bits per pixel into bytes per pixel. Take care of 15-bit modes as well */</span>
+        PixelStride <span class="sy0">=</span> <span class="br0">&#40;</span>BitsPerPixel <span class="sy0">|</span> <span class="nu0">7</span><span class="br0">&#41;</span> <span class="sy0">&gt;&gt;</span> <span class="nu0">3</span><span class="sy0">;</span>
+        <span class="coMULTI">/* The pitch is the amount of bytes between the start of each row. This isn't always bytes * width. */</span>
+        <span class="coMULTI">/* This should work for the basic 16 and 32 bpp modes (but not 24) */</span>
+        Pitch <span class="sy0">=</span> ScrenWidth <span class="sy0">*</span> PixelStride<span class="sy0">;</span>
+&#160;
+	<span class="coMULTI">/* Warning: 0xEEEEEEE servces as an example, you should fill in the address of your video memory here. */</span>
+	VidMem <span class="sy0">=</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>byte <span class="sy0">*</span><span class="br0">&#41;</span> <span class="nu12">0xEEEEEEE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	BackBuffer <span class="sy0">=</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>byte <span class="sy0">*</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="kw3">malloc</span><span class="br0">&#40;</span>ScreenHeight <span class="sy0">*</span> Pitch<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+	ScrW <span class="sy0">=</span> ScreenWidth<span class="sy0">;</span>
+	ScrH <span class="sy0">=</span> ScreenHeight<span class="sy0">;</span>
+	Bpp <span class="sy0">=</span> BitsPerPixel<span class="sy0">;</span>
+&#160;
+	<span class="coMULTI">/* Switch resolutions if needed... */</span>
+	<span class="coMULTI">/* Do some more stuff... */</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/*
+ * Draws a pixel onto the backbuffer.
+ */</span>
+<span class="kw4">void</span> SetPixel<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">short</span> X<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">short</span> Y<span class="sy0">,</span> <span class="kw4">unsigned</span> Colour<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>	
+        <span class="kw4">int</span> offset <span class="sy0">=</span> X <span class="sy0">*</span> PixelStride <span class="sy0">+</span> Y <span class="sy0">*</span> Pitch<span class="sy0">;</span>
+&#160;
+        <span class="coMULTI">/* Put a pixel onto the back buffer here. */</span>
+	<span class="coMULTI">/* Remember to write to the BACK buffer instead of the FRONT buffer (the front buffer represents your video memory). */</span>
+        <span class="coMULTI">/* Take care of writing exactly PixelStride bytes as well */</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/*
+ * Swaps the back and front buffer.
+ * Most commonly done by simply copying the back buffer to the front buffer.
+ */</span>
+<span class="kw4">void</span> SwapBuffers<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="coMULTI">/* Copy the contents of the back buffer to the front buffer. */</span>
+	<span class="kw3">memcpy</span><span class="br0">&#40;</span>VidMem<span class="sy0">,</span> BackBuffer<span class="sy0">,</span> ScrH <span class="sy0">*</span> Pitch<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/*
+ * An example of how to use these functions.
+ */</span>
+<span class="kw4">void</span> ProgramLoop<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw1">while</span><span class="br0">&#40;</span>Program_Is_Running<span class="br0">&#41;</span>
+	<span class="br0">&#123;</span>
+		<span class="coMULTI">/* Handle events, update window coordinates and other things, ... */</span>
+&#160;
+		<span class="coMULTI">/*
+		 * You should probably implement some sort of FillScreen or FillRect function,
+		 * or something that clears the back buffer before drawing. Setting the entire
+		 * back buffer to 0 (black) will suffice for a basic system.
+		 */</span>
+		<span class="kw3">memset</span><span class="br0">&#40;</span>Backbuffer<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> ScrH <span class="sy0">*</span> Pitch<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+		<span class="coMULTI">/* Draw everything: a GUI, windows, other things. This example puts 2 white pixels on the screen. */</span>
+		SetPixel<span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span> <span class="nu0">50</span><span class="sy0">,</span> <span class="nu12">0xFFFFFF</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		SetPixel<span class="br0">&#40;</span><span class="nu0">25</span><span class="sy0">,</span> <span class="nu0">25</span><span class="sy0">,</span> <span class="nu12">0xFFFFFF</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+		<span class="coMULTI">/* When done drawing, swap the buffers and let the user see what you've drawn. */</span>
+		SwapBuffers<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>I believe this example is mostly clear. As there are too many different ways of changing video modes or putting pixels, I'm going to let you fill that in yourself. If you want more information, you can go to the <a href="GUI" title="GUI">GUI</a> or the <a href="Drawing_In_Protected_Mode" title="Drawing In Protected Mode">Drawing In Protected Mode</a> pages.
+</p><p>Note also that the above code might be very 'irregular'. As you know, there is no limit on the drawing, so it is possibly that the first draw takes 30 milliseconds, while the second draw takes 40 milliseconds or the first few seconds, you have a frame-rate of 100 frames per second whilst the next couple of seconds, you have a frame-rate of only 20 frames per second. Because of this, drawing times are usually capped. In the most common GUIs (such as the one in Windows), this is not really of any importance, since only parts of the screen are redrawn if they are 'invalidated' (usually referred to as 'Invalidated rectangles'), but in games, the screen is being constantly redrawn, usually up to 60 times per second. Today's APIs usually clamp this value to the screen refresh rate, this is why they usually have values such as '60' or '75'. Normally, a frame-rate of 25 to 30 suffices to have a 'smooth' display.
+</p><p>I've used some sort of loop here (it looks like a game loop), but remember that most GUIs on most OSes do not work with game loops, they usually work with some sort of invalidation system. Meaning a control is redrawn only if it is invalidated, which happens on occasions such as moving or resizing the control.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 187/1000000
+Post-expand include size: 340/2097152 bytes
+Template argument size: 44/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2489-0!*!0!!en!2!* and timestamp 20180121042555 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Double_Buffering&amp;oldid=20840">http://wiki.osdev.org/index.php?title=Double_Buffering&amp;oldid=20840</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_1_Tutorials" title="Category:Level 1 Tutorials">Level 1 Tutorials</a></li><li><a href="Category:Video" title="Category:Video">Video</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Double_Buffering" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Double_Buffering"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Double_Buffering"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Double_Buffering#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Double_Buffering" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Double_Buffering&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Double_Buffering&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Double_Buffering#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Double_Buffering" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Double_Buffering" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Double_Buffering&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Double_Buffering&skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Double_Buffering" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Double_Buffering" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Double_Buffering&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Double_Buffering&amp;oldid=20840" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Double_Buffering" title="Double Buffering">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 June 2017, at 03:44.</li>
+											<li id="footer-info-viewcount">This page has been accessed 66,168 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.035 secs. -->
+	</body>
+</html>

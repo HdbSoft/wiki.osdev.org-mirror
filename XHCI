@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>eXtensible Host Controller Interface - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="EXtensible_Host_Controller_Interface" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "EXtensible_Host_Controller_Interface", "wgTitle": "EXtensible Host Controller Interface", "wgCurRevisionId": 17287, "wgArticleId": 3309, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["USB"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-EXtensible_Host_Controller_Interface action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">eXtensible Host Controller Interface</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=XHCI&amp;redirect=no" title="XHCI">XHCI</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="XHCI#mw-head">navigation</a>,
+					<a href="XHCI#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>eXtensible Host Controller Interface (xHCI) defines a register-level description of a Host Controller for Universal Serial bus (<a href="USB" title="USB" class="mw-redirect">USB</a>), which is capable of interfacing to USB 1.x, 2.0, and 3.0 compatible devices.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="XHCI#Technical_Details"><span class="tocnumber">1</span> <span class="toctext">Technical Details</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="XHCI#Capability_Registers"><span class="tocnumber">2</span> <span class="toctext">Capability Registers</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="XHCI#Operational_Registers"><span class="tocnumber">3</span> <span class="toctext">Operational Registers</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="XHCI#Port_Registers"><span class="tocnumber">4</span> <span class="toctext">Port Registers</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="XHCI#Runtime_Registers"><span class="tocnumber">5</span> <span class="toctext">Runtime Registers</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="XHCI#Doorbell_Registers"><span class="tocnumber">6</span> <span class="toctext">Doorbell Registers</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="XHCI#Virtual_Registers"><span class="tocnumber">7</span> <span class="toctext">Virtual Registers</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Technical_Details"> Technical Details </span></h2>
+<p>The xHCI controller communicates with the operating system using memory mapped registers that can be located by searching the <a href="PCI" title="PCI">PCI</a> configuration space for a device with a specific Class ID, Subclass ID, and Interface number.  All xHCI controllers will have a Class ID of 0x0C, a Sublcass ID of 0x03, and an Interface value of 0x30.  The configuration space for this device will contain two Base Address Registers: BAR0 and BAR1.  These two 32-bit address fields combine to create a single 64-bit address that points to the base address of the memory mapped registers for the controller.
+</p>
+<h2> <span class="mw-headline" id="Capability_Registers"> Capability Registers </span></h2>
+<p>The capability registers are located at the address specified by the PCI configuration space.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (Hex)
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> CAPLENGTH </td>
+<td> Capability Register Length
+</td></tr>
+<tr>
+<td> 02 </td>
+<td> HCIVERSION </td>
+<td> Interface Version Number
+</td></tr>
+<tr>
+<td> 04 </td>
+<td> HCSPARAMS1 </td>
+<td> Structural Parameters 1
+</td></tr>
+<tr>
+<td> 08 </td>
+<td> HCSPARAMS2 </td>
+<td> Structural Parameters 2
+</td></tr>
+<tr>
+<td> 0C </td>
+<td> HCSPARAMS3 </td>
+<td> Structural Parameters 3
+</td></tr>
+<tr>
+<td> 10 </td>
+<td> HCCPARAMS </td>
+<td> Capability Parameters
+</td></tr>
+<tr>
+<td> 14 </td>
+<td> DBOFF </td>
+<td> Doorbell Offset
+</td></tr>
+<tr>
+<td> 18 </td>
+<td> RTSOFF </td>
+<td> Runtime Registers Space Offset
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Operational_Registers"> Operational Registers </span></h2>
+<p>The operational registers are located after the capability registers in memory, and can be found by adding the CAPLENGTH field to the base address specified in the PCI configuration space.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (Hex)
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> USBCMD </td>
+<td> USB Command
+</td></tr>
+<tr>
+<td> 04 </td>
+<td> USBSTS </td>
+<td> USB Status
+</td></tr>
+<tr>
+<td> 08 </td>
+<td> PAGESIZE </td>
+<td> Page Size
+</td></tr>
+<tr>
+<td> 14 </td>
+<td> DNCTRL </td>
+<td> Device Notification Control
+</td></tr>
+<tr>
+<td> 18 </td>
+<td> CRCR </td>
+<td> Command Ring Control
+</td></tr>
+<tr>
+<td> 30 </td>
+<td> DCBAAP </td>
+<td> Device Context Base Address Array Pointer
+</td></tr>
+<tr>
+<td> 38 </td>
+<td> CONFIG </td>
+<td> Configure
+</td></tr>
+</table>
+<p>Reading CRCR (or bits of it) provides '0'. Therefore, keep your own track of this address. Bit 0 of CRCR is the Consumer Cycle State (CCS) flag.
+</p>
+<h2> <span class="mw-headline" id="Port_Registers"> Port Registers </span></h2>
+<p>At the end of the operational registers (<b>at offset 0x400!</b>), each port on the root hub is assigned a set of registers.  The number of entries in the port registers table is determined by the MaxPorts value in the HCSPARAMS1 register.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (Hex)
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> PORTSC </td>
+<td> Port Status and Control
+</td></tr>
+<tr>
+<td> 04 </td>
+<td> PORTPMSC </td>
+<td> Port Power Management Status and Control
+</td></tr>
+<tr>
+<td> 08 </td>
+<td> PORTLI </td>
+<td> Port Link Info
+</td></tr>
+<tr>
+<td> 0C </td>
+<td> reserved
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Runtime_Registers"> Runtime Registers </span></h2>
+<p>The runtime registers are located after the operational registers in memory, and can be found by adding the RTSOFF field to the base address specified in the PCI configuration space.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (Hex)
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> MFINDEX </td>
+<td> Microframe Index
+</td></tr>
+<tr>
+<td> 20 </td>
+<td> IR0-1023 </td>
+<td> Interrupter Register Sets
+</td></tr>
+</table>
+<p>Starting at offset 0x20, each interrupter register set defines the event ring memory addresses needed to send and receive events and data to the USB bus.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (Hex)
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> IMAN </td>
+<td> Interrupter Management
+</td></tr>
+<tr>
+<td> 04 </td>
+<td> IMOD </td>
+<td> Interrupter Moderation
+</td></tr>
+<tr>
+<td> 08 </td>
+<td> ERSTSZ </td>
+<td> Event Ring Segment Table Size
+</td></tr>
+<tr>
+<td> 10 </td>
+<td> ERSTBA </td>
+<td> Event Ring Segment Table Base Address
+</td></tr>
+<tr>
+<td> 18 </td>
+<td> ERDP </td>
+<td> Event Ring Dequeue Pointer
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Doorbell_Registers"> Doorbell Registers </span></h2>
+<p>The doorbell registers are located after the runtime registers in memory, and can be found by adding the DBOFF field to the base address specified in the PCI configuration space.  The length of the doorbell register table is based on the number of ports specified in the MaxSlots field in the HCSPARAMS1 register above.  Each doorbell register is 32-bits long, and is used to notify the controller that there are pending operations to be performed on a specific device slot.
+</p>
+<h2> <span class="mw-headline" id="Virtual_Registers"> Virtual Registers </span></h2>
+<p>The xHCI specifications support "virtual" controllers that can be used to support multiple virtual machines running on a single physical machine.  These registers must be configured and managed by the VM host, and effectively duplicate the registers above for use by the guest VMs.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 58/1000000
+Post-expand include size: 810/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3309-0!*!0!!en!*!* and timestamp 20180121063952 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=EXtensible_Host_Controller_Interface&amp;oldid=17287">http://wiki.osdev.org/index.php?title=EXtensible_Host_Controller_Interface&amp;oldid=17287</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:USB" title="Category:USB">USB</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=EXtensible_Host_Controller_Interface" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="EXtensible_Host_Controller_Interface"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:EXtensible_Host_Controller_Interface&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="XHCI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="EXtensible_Host_Controller_Interface" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=EXtensible_Host_Controller_Interface&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=EXtensible_Host_Controller_Interface&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="XHCI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/EXtensible_Host_Controller_Interface" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/EXtensible_Host_Controller_Interface" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=EXtensible_Host_Controller_Interface&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=EXtensible_Host_Controller_Interface&amp;oldid=17287" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 December 2014, at 15:36.</li>
+											<li id="footer-info-viewcount">This page has been accessed 13,204 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.056 secs. -->
+	</body>
+</html>

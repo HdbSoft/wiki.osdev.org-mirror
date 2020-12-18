@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>OS Specific Toolchain - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "OS_Specific_Toolchain", "wgTitle": "OS Specific Toolchain", "wgCurRevisionId": 21776, "wgArticleId": 2164, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 3 Tutorials", "Tools", "Tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-make {line-height: normal;}
+.source-make li, .source-make pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for make
+ * CSS class: source-make, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.make.source-make .de1, .make.source-make .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.make.source-make  {font-family:monospace;}
+.make.source-make .imp {font-weight: bold; color: red;}
+.make.source-make li, .make.source-make .li1 {font-weight: normal; vertical-align:top;}
+.make.source-make .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.make.source-make .li2 {font-weight: bold; vertical-align:top;}
+.make.source-make .kw1 {color: #666622; font-weight: bold;}
+.make.source-make .kw2 {color: #990000;}
+.make.source-make .co1 {color: #339900; font-style: italic;}
+.make.source-make .co2 {color: #000099; font-weight: bold;}
+.make.source-make .es0 {color: #000099; font-weight: bold;}
+.make.source-make .br0 {color: #004400;}
+.make.source-make .sy0 {color: #004400;}
+.make.source-make .st0 {color: #CC2200;}
+.make.source-make .nu0 {color: #CC2200;}
+.make.source-make .re0 {color: #000088; font-weight: bold;}
+.make.source-make .re1 {color: #0000CC; font-weight: bold;}
+.make.source-make .re2 {color: #000088;}
+.make.source-make .ln-xtra, .make.source-make li.ln-xtra, .make.source-make div.ln-xtra {background-color: #ffc;}
+.make.source-make span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-autoconf {line-height: normal;}
+.source-autoconf li, .source-autoconf pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for autoconf
+ * CSS class: source-autoconf, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.autoconf.source-autoconf .de1, .autoconf.source-autoconf .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.autoconf.source-autoconf  {font-family:monospace;}
+.autoconf.source-autoconf .imp {font-weight: bold; color: red;}
+.autoconf.source-autoconf li, .autoconf.source-autoconf .li1 {font-weight: normal; vertical-align:top;}
+.autoconf.source-autoconf .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.autoconf.source-autoconf .li2 {font-weight: bold; vertical-align:top;}
+.autoconf.source-autoconf .kw1 {color: #00ffff;}
+.autoconf.source-autoconf .co1 {color: #666666;}
+.autoconf.source-autoconf .co2 {color: #339900;}
+.autoconf.source-autoconf .co3 {color: #666666;}
+.autoconf.source-autoconf .coMULTI {color: #ff0000; font-style: italic;}
+.autoconf.source-autoconf .es0 {color: #000099;}
+.autoconf.source-autoconf .es1 {color: #000099;}
+.autoconf.source-autoconf .es2 {color: #660099;}
+.autoconf.source-autoconf .es3 {color: #660099;}
+.autoconf.source-autoconf .es4 {color: #660099;}
+.autoconf.source-autoconf .es5 {color: #006699;}
+.autoconf.source-autoconf .br0 {color: #008000;}
+.autoconf.source-autoconf .sy0 {color: #008000;}
+.autoconf.source-autoconf .sy1 {color: #000080;}
+.autoconf.source-autoconf .sy2 {color: #000040;}
+.autoconf.source-autoconf .sy3 {color: #000040;}
+.autoconf.source-autoconf .sy4 {color: #008080;}
+.autoconf.source-autoconf .st0 {color: #996600;}
+.autoconf.source-autoconf .nu0 {color: #0000dd;}
+.autoconf.source-autoconf .nu6 {color: #208080;}
+.autoconf.source-autoconf .nu8 {color: #208080;}
+.autoconf.source-autoconf .nu12 {color: #208080;}
+.autoconf.source-autoconf .nu16 {color:#800080;}
+.autoconf.source-autoconf .nu17 {color:#800080;}
+.autoconf.source-autoconf .nu18 {color:#800080;}
+.autoconf.source-autoconf .nu19 {color:#800080;}
+.autoconf.source-autoconf .me1 {color: #202020;}
+.autoconf.source-autoconf .me2 {color: #202020;}
+.autoconf.source-autoconf .ln-xtra, .autoconf.source-autoconf li.ln-xtra, .autoconf.source-autoconf div.ln-xtra {background-color: #ffc;}
+.autoconf.source-autoconf span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-OS_Specific_Toolchain action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">OS Specific Toolchain</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="OS_Specific_Toolchain#mw-head">navigation</a>,
+					<a href="OS_Specific_Toolchain#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a><br />Advanced</td></tr></table>
+<p>This tutorial will guide you through creating a toolchain comprising Binutils and GCC that specifically targets your operating system. The instructions below teach Binutils and GCC how to create programs for a hypothetical OS named 'MyOS'. 
+</p><p>Until now you have been using a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">cross-compiler</a> configured to use an existing generic bare target. This is very convenient when starting out as you get a reliable target and the compiler doesn't make any bad assumptions because it thinks it is targeting an existing operating system. However, when you proceed it becomes useful if the compiler knows it is targeting your operating system and what its customs are. For instance, you can make the compiler define a <tt>__myos__</tt> preprocessor macro, know which directories to search for include files in, what special <tt>crt*.o</tt> files are used when linking against libc, and so on. It also becomes much easier to cross-compile software to your OS when you simply have to invoke <tt>x86_64-myos-gcc hello.c -o hello</tt> to cross-compile a program. Additionally part of the instructions here can be applied to other software packages that also use the GNU build system, which will help you <a href="Cross-Porting_Software" title="Cross-Porting Software">port existing software</a>.
+</p><p>This tutorial teaches you how to set up a cross-compiler that specifically targets your OS. This is actually the first step of <i>porting Binutils and GCC to your operating system</i>: Any information you give GCC about your OS will help it run on your OS. Once your OS Specific Toolchain has been set up and you have built your OS with it, you can continue by using the cross-compiler to cross-compile the compiler itself to your OS, assuming your libc and kernel is powerful enough. For more information see <a href="Porting_GCC_to_your_OS" title="Porting GCC to your OS">Porting GCC to your OS</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="OS_Specific_Toolchain#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="OS_Specific_Toolchain#Modifying_Binutils"><span class="tocnumber">2</span> <span class="toctext">Modifying Binutils</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="OS_Specific_Toolchain#config.sub"><span class="tocnumber">2.1</span> <span class="toctext">config.sub</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="OS_Specific_Toolchain#bfd.2Fconfig.bfd"><span class="tocnumber">2.2</span> <span class="toctext">bfd/config.bfd</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="OS_Specific_Toolchain#gas.2Fconfigure.tgt"><span class="tocnumber">2.3</span> <span class="toctext">gas/configure.tgt</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="OS_Specific_Toolchain#ld.2Fconfigure.tgt"><span class="tocnumber">2.4</span> <span class="toctext">ld/configure.tgt</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="OS_Specific_Toolchain#ld.2Femulparams.2Felf_i386_myos.sh"><span class="tocnumber">2.5</span> <span class="toctext">ld/emulparams/elf_i386_myos.sh</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="OS_Specific_Toolchain#ld.2Femulparams.2Felf_x86_64_myos.sh"><span class="tocnumber">2.6</span> <span class="toctext">ld/emulparams/elf_x86_64_myos.sh</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="OS_Specific_Toolchain#ld.2FMakefile.am"><span class="tocnumber">2.7</span> <span class="toctext">ld/Makefile.am</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="OS_Specific_Toolchain#Modifying_GCC"><span class="tocnumber">3</span> <span class="toctext">Modifying GCC</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="OS_Specific_Toolchain#config.sub_2"><span class="tocnumber">3.1</span> <span class="toctext">config.sub</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="OS_Specific_Toolchain#gcc.2Fconfig.gcc"><span class="tocnumber">3.2</span> <span class="toctext">gcc/config.gcc</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="OS_Specific_Toolchain#gcc.2Fconfig.2Fmyos.h"><span class="tocnumber">3.3</span> <span class="toctext">gcc/config/myos.h</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="OS_Specific_Toolchain#libstdc.2B.2B-v3.2Fcrossconfig.m4"><span class="tocnumber">3.4</span> <span class="toctext">libstdc++-v3/crossconfig.m4</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="OS_Specific_Toolchain#libgcc.2Fconfig.host"><span class="tocnumber">3.5</span> <span class="toctext">libgcc/config.host</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="OS_Specific_Toolchain#fixincludes.2Fmkfixinc.sh"><span class="tocnumber">3.6</span> <span class="toctext">fixincludes/mkfixinc.sh</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-17"><a href="OS_Specific_Toolchain#Further_Customization"><span class="tocnumber">4</span> <span class="toctext">Further Customization</span></a>
+<ul>
+<li class="toclevel-2 tocsection-18"><a href="OS_Specific_Toolchain#Changing_the_Default_Include_Directory"><span class="tocnumber">4.1</span> <span class="toctext">Changing the Default Include Directory</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="OS_Specific_Toolchain#Changing_the_Default_Library_Directory"><span class="tocnumber">4.2</span> <span class="toctext">Changing the Default Library Directory</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="OS_Specific_Toolchain#Start_Files_Directory"><span class="tocnumber">4.3</span> <span class="toctext">Start Files Directory</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-21"><a href="OS_Specific_Toolchain#Selecting_a_C_Library"><span class="tocnumber">5</span> <span class="toctext">Selecting a C Library</span></a></li>
+<li class="toclevel-1 tocsection-22"><a href="OS_Specific_Toolchain#Building"><span class="tocnumber">6</span> <span class="toctext">Building</span></a></li>
+<li class="toclevel-1 tocsection-23"><a href="OS_Specific_Toolchain#Conclusion"><span class="tocnumber">7</span> <span class="toctext">Conclusion</span></a></li>
+<li class="toclevel-1 tocsection-24"><a href="OS_Specific_Toolchain#Common_errors"><span class="tocnumber">8</span> <span class="toctext">Common errors</span></a>
+<ul>
+<li class="toclevel-2 tocsection-25"><a href="OS_Specific_Toolchain#Whitespaces"><span class="tocnumber">8.1</span> <span class="toctext">Whitespaces</span></a></li>
+<li class="toclevel-2 tocsection-26"><a href="OS_Specific_Toolchain#Autoconf"><span class="tocnumber">8.2</span> <span class="toctext">Autoconf</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-27"><a href="OS_Specific_Toolchain#See_Also"><span class="tocnumber">9</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-28"><a href="OS_Specific_Toolchain#Articles"><span class="tocnumber">9.1</span> <span class="toctext">Articles</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>You need the following before you get started:
+</p>
+<ul><li> A build environment that can successfully build a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a>.
+</li><li> autoconf (exactly version 2.64)
+</li><li> automake (exactly version 1.11 or 1.11.6)
+</li><li> libtool
+</li><li> The latest Binutils source code.
+</li><li> The latest GCC source code.
+</li><li> Knowledge of the internals of Binutils and GCC.
+</li><li> Knowledge of autoconf and automake.
+</li><li> The dependencies of Binutils and GCC as detailed in <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a>.
+</li></ul>
+<p>Additionally you will need a <a href="C_Library" title="C Library">C Library</a> as described in a later section. As detailed in <a href="Hosted_GCC_Cross-Compiler" title="Hosted GCC Cross-Compiler">Hosted GCC Cross-Compiler</a>, it doesn't need to support much and the functionality can be stubbed, but libgcc will need to believe you have a libc.
+</p><p>You should decide exactly what targets you'll add to Binutils and GCC. If you have been using a generic <tt>i686-elf</tt> or <tt>x86_64-elf</tt> or such target, you'll simply want to swap <tt>-elf</tt> with <tt>-myos</tt> and get <tt>i686-myos</tt> and <tt>x86_64-myos</tt>. Naturally, don't actually write myos, but rather use the name of your OS converted to lower case. See <a href="Target_Triplet" title="Target Triplet">Target Triplet</a>.
+</p><p>This tutorial currently only have instructions for adding a new x86 and x86_64 target for myos, but it serves as a good enough example that it should be trivial to add more processors by basing it on these instructions and what other operating systems have done.
+</p>
+<h2> <span class="mw-headline" id="Modifying_Binutils"> Modifying Binutils </span></h2>
+<h3> <span class="mw-headline" id="config.sub"> config.sub </span></h3>
+<p>This is a file you will modify in the same way for each package.  It is a GNU standard file produced by including the line 'AC_CANONICAL_SYSTEM' in a configure.ac that is processed by autoconf, and is designed to convert a canonical name of the form <tt>i686-pc-myos</tt> into separate variables for the processor, vendor and OS, and also rejects systems it doesn't know about.  We simply need to add 'myos' to the list of acceptable operating systems.  Find the section that begins with the comment "<tt>First accept the basic system types</tt>" (it begins '<tt>-gnu*</tt>') and add '<tt>-myos*</tt>' to the list.  Find a line with some free room and add your entry there.
+</p>
+<h3> <span class="mw-headline" id="bfd.2Fconfig.bfd"> bfd/config.bfd </span></h3>
+<p>This file is part of the configuration for libbfd, the back-end to Binutils which provides a consistent interface for many object file formats.  Generally, each platform-specific version of Binutils contains a libbfd which only supports the object files normally in use on that system, as otherwise the library would be massive (libbfd can support a _lot_ of object types).  We need to associate our os with some particular object types.  There is a long list starting 'WHEN ADDING ENTRIES TO THIS MATRIX' with the first line as 'case "${targ}" in'.  We need to add our full canonical name to this list, by adding some cases such as:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">  i<span class="br0">&#91;</span><span class="nu0">3</span>-<span class="nu0">7</span><span class="br0">&#93;</span><span class="nu0">86</span>-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+    <span class="re2">targ_defvec</span>=i386_elf32_vec
+    <span class="re2">targ_selvecs</span>=
+    <span class="re2">targ64_selvecs</span>=x86_64_elf64_vec
+    <span class="sy0">;;</span>
+<span class="co0">#ifdef BFD64</span>
+  x86_64-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+    <span class="re2">targ_defvec</span>=x86_64_elf64_vec
+    <span class="re2">targ_selvecs</span>=i386_elf32_vec
+    <span class="re2">want64</span>=<span class="kw2">true</span>
+    <span class="sy0">;;</span>
+<span class="co0">#endif</span></pre></div></div>
+<p><b>Note:</b> If using binutils-2.24 or older, change <i>i386_elf32_vec</i> to <i>bfd_elf32_i386_vec</i> and <i>x86_64_elf64_vec</i> to <i>bfd_elf64_x86_64_vec</i>.
+</p><p>Be sure to follow the instructions in the comment block above the list and add your entry beneath the comment "<tt>#START OF targmatch.h</tt>". If you like, you could support different object formats (look at other entries in the list, and the contents of 'bfd' for hints) and also provide more than one to the <tt>targ_selvecs</tt> line. For instance, you can support coff object files if you add <tt>i386coff_vec</tt> to the <tt>targ_selvecs</tt> list. For some reason, all the <tt>x86_64</tt> entries in the file file are wrapped in <tt>#ifdef BFD64</tt>, it's probably prudent to do it yourself as well.
+</p>
+<h3> <span class="mw-headline" id="gas.2Fconfigure.tgt"> gas/configure.tgt </span></h3>
+<p>This file tells the gnu assembler what type of output to generate for each target.  It automatically matches the i686 part of your target and generates the correct output for that.  We just need to tell it what type of object file to generate for myos.  In the section starting '<tt>Assign object format ... case ${generic_target} in</tt>' you need to add a line like
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">  i386-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>    <span class="re2">fmt</span>=elf <span class="sy0">;;</span></pre></div></div>
+<p>You should use '<tt>i386</tt>' in this line even if you are targeting x86_64.  This is the only file where you should do it.  It is basically because the variable 'generic_target' is not your canonical target name, but rather a variable generated further up in the configure.tgt file, and it sets the first part to <tt>i386</tt> for any <tt>i[3-7]86</tt> or <tt>x86_64</tt>.
+</p><p>Note: this will use the 'generic' emulation. One side-effect is that gas will interpret slash ('/') as a comment, not as a division operator. This will break any code like "<tt>movl $(ADDRESS/PAGE_SIZE),&#160;%eax</tt>". Using "<tt>fmt=elf em=gnu&#160;;;</tt>" or "<tt>fmt=elf em=linux&#160;;;</tt>" will disable slash as a comment character.
+</p>
+<h3> <span class="mw-headline" id="ld.2Fconfigure.tgt"> ld/configure.tgt </span></h3>
+<p>This file tells the gnu linker what 'emulation' to use for each target.  An emulation is basically a combination of linker script and executable file format.  We are going to define our own emulation called <tt>elf_i386_myos</tt>.  We need to add an entry to the case statement here after '<tt>Please try to keep this table in alphabetical order ... case "${targ}</tt>" in':
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">i<span class="br0">&#91;</span><span class="nu0">3</span>-<span class="nu0">7</span><span class="br0">&#93;</span><span class="nu0">86</span>-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+			<span class="re2">targ_emul</span>=elf_i386_myos
+			<span class="re2">targ_extra_emuls</span>=elf_i386
+			<span class="re2">targ64_extra_emuls</span>=<span class="st0">&quot;elf_x86_64_myos elf_x86_64&quot;</span>
+			<span class="sy0">;;</span>
+x86_64-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+			<span class="re2">targ_emul</span>=elf_x86_64_myos
+			<span class="re2">targ_extra_emuls</span>=<span class="st0">&quot;elf_i386_myos elf_x86_64 elf_i386&quot;</span>
+			<span class="sy0">;;</span></pre></div></div>
+<ul><li> <b>elf_i386_myos</b> is a 32-bit target for your OS.
+</li><li> <b>elf_x86_64_myos</b> is a 64-bit target for your OS.
+</li><li> <b>elf_i386</b> is a bare 32-bit target as you had with <tt>i686-elf</tt>.
+</li><li> <b>elf_x86_64</b> is a bare 64-bit target for your OS as you had with <tt>x86_64-elf</tt>.
+</li></ul>
+<p>This setup provides you with a 32-bit toolchain that also can produce 64-bit executables, and a 64-bit toolchain that can also produce 64-bit executables. This comes in handy if you use objcopy, for instance. You can also add <tt>targ_extra_emuls</tt> entries to specify other targets ld should support. See the <tt>ld/configure.tgt</tt> file for examples.
+</p>
+<h3> <span class="mw-headline" id="ld.2Femulparams.2Felf_i386_myos.sh"> ld/emulparams/elf_i386_myos.sh </span></h3>
+<p>Now we need to actually define our emulation. There is a generic file called <tt>ld/genscripts.sh</tt> which creates the required linker scripts for our target (you need more than one, depending on shared object usage and the like: I have 13 for a single target). It uses a linker script template (from the ld/scripttempl directory) to do this, and it creates the actual emulation C file from an emulation template (from the ld/emultempl directory). These templates are customised by running a script in the ld/emulparams directory which sets various variables. You are welcome to define your own emulation and linker templates, but I find the ELF ones adequate, given that they can be customised by simply adding a file to the emulparams directory. This is what we are going to do now. The content of the file could be something like:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">. <span class="co1">${srcdir}</span><span class="sy0">/</span>emulparams<span class="sy0">/</span>elf_i386.sh
+<span class="re2">GENERATE_SHLIB_SCRIPT</span>=<span class="kw2">yes</span>
+<span class="re2">GENERATE_PIE_SCRIPT</span>=<span class="kw2">yes</span></pre></div></div>
+<p>This script is included by <tt>ld/genscripts.sh</tt> to customize its behavior through shell variables. We include the base <tt>elf_i386.sh</tt> script as it sets reasonable defaults. Finally, we override the variables whose defaults we disagree with.
+</p><p>There are a large number of variables that can be set here to customize your toolchain. Read the documentation and look at existing emulations for further information. These are some of the variables that can be set:
+</p>
+<ul><li> <b>GENERATE_SHLIB_SCRIPT</b>=<i>yes|no</i> Whether to generate a linker script for shared libraries. We enable this as you might want it later. The base 32-bit elf script defaults this to disabled for some reason.
+</li><li> <b>GENERATE_PIE_SCRIPT</b>=<i>yes|no</i> Whether to generate a linker script for position independent executables. We enable this as you might want it later. The base 32-bit elf script defaults this to disabled for some reason.
+</li><li> <b>SCRIPT_NAME</b>=<i>name</i> Controls which ld/scripttempl/<i>name</i>.sc script generates our linker scripts.
+</li><li> <b>TEMPLATE_NAME</b>=<i>name</i> Controls which ld/emultempl/<i>name</i>.em script generates our bfd emulation C implementation.
+</li><li> <b>OUTPUT_FORMAT</b>=<i>name</i> The name of the BFD output target we use.
+</li><li> <b>TEXT_START_ADDR</b>=0x<i>value</i> Controls where the executable begins in memory.
+</li></ul>
+<p>You can read the base <tt>elf_i386.sh</tt> script for the defaults of these variables, you can then decide for yourself if you wish to override them for your operating system.
+</p>
+<h3> <span class="mw-headline" id="ld.2Femulparams.2Felf_x86_64_myos.sh"> ld/emulparams/elf_x86_64_myos.sh </span></h3>
+<p>This file is just like the above <tt>ld/emulparams/elf_i386_myos.sh</tt> but for x86_64.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">. <span class="co1">${srcdir}</span><span class="sy0">/</span>emulparams<span class="sy0">/</span>elf_x86_64.sh</pre></div></div>
+<p>There is no reason to set <tt>GENERATE_SHLIB_SCRIPT</tt> and <tt>GENERATE_PIE_SCRIPT</tt> here as the x86_64 base script enables them by default.
+</p>
+<h3> <span class="mw-headline" id="ld.2FMakefile.am"> ld/Makefile.am </span></h3>
+<p>We now just need to tell make how to produce the emulation C file for our specific emulation. Putting the '<tt>targ_emul=elf_i386_myos</tt>' line into <tt>ld/configure.tgt</tt> above implies that your host linker will try to link your target ld executable with an object file called <tt>eelf_i386_myos.o</tt>. There is a default rule to generate this from <tt>eelf_i386_myos.c</tt>, so we just need to tell it how to make this <tt>eelf_i386_myos.c</tt> file.  As stated above, we let the genscripts.sh file do the hard work. You need to add makefile rules:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="make source-make"><pre class="de1"><span class="co1"># Add this after eelf_i386.c:</span>
+eelf_i386_myos<span class="sy0">.</span>c<span class="sy0">:</span> <span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">srcdir</span><span class="br0">&#41;</span><span class="sy0">/</span>emulparams<span class="sy0">/</span>elf_i386_myos<span class="sy0">.</span>sh \
+  <span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">ELF_DEPS</span><span class="br0">&#41;</span> <span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">srcdir</span><span class="br0">&#41;</span><span class="sy0">/</span>scripttempl<span class="sy0">/</span>elf<span class="sy0">.</span>sc <span class="sy0">$</span><span class="br0">&#123;</span><span class="re2">GEN_DEPENDS</span><span class="br0">&#125;</span>
+       <span class="sy0">$</span><span class="br0">&#123;</span><span class="re2">GENSCRIPTS</span><span class="br0">&#125;</span> elf_i386_myos <span class="st0">&quot;$(tdir_elf_i386_myos)&quot;</span>
+&#160;
+<span class="co1"># Add this after eelf_x86_64.c:</span>
+eelf_x86_64_myos<span class="sy0">.</span>c<span class="sy0">:</span> <span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">srcdir</span><span class="br0">&#41;</span><span class="sy0">/</span>emulparams<span class="sy0">/</span>elf_x86_64_myos<span class="sy0">.</span>sh \
+  <span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">ELF_DEPS</span><span class="br0">&#41;</span> <span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">srcdir</span><span class="br0">&#41;</span><span class="sy0">/</span>scripttempl<span class="sy0">/</span>elf<span class="sy0">.</span>sc <span class="sy0">$</span><span class="br0">&#123;</span><span class="re2">GEN_DEPENDS</span><span class="br0">&#125;</span>
+       <span class="sy0">$</span><span class="br0">&#123;</span><span class="re2">GENSCRIPTS</span><span class="br0">&#125;</span> elf_x86_64_myos <span class="st0">&quot;$(tdir_elf_x86_64_myos)&quot;</span></pre></div></div>
+<p><b>Note</b>: Some parts of the line use normal brackets () whereas other parts use curly braces {}.
+</p><p><b>Note</b>: The third line must start with single <i>tab</i>, not spaces, as this is a <a href="Makefile" title="Makefile">Makefile</a>.
+</p><p>You also need to add <tt>eelf_i386_myos.c</tt> to the <tt>ALL_EMULATION_SOURCES</tt> list; and you also need to add <tt>eelf_x86_64_myos.c</tt> to the <tt>ALL_64_EMULATION_SOURCES</tt> list.
+</p><p><b>Note</b>: You <i>must</i> run <tt>automake</tt> in the <tt>ld</tt> directory after you modify <tt>Makefile.am</tt> to regenerate <tt>Makefile.in</tt>.
+</p>
+<h2> <span class="mw-headline" id="Modifying_GCC"> Modifying GCC </span></h2>
+<h3> <span class="mw-headline" id="config.sub_2"> config.sub </span></h3>
+<p>Similar modification to config.sub in Binutils.
+</p>
+<h3> <span class="mw-headline" id="gcc.2Fconfig.gcc"> gcc/config.gcc </span></h3>
+<p>This file defines what needs to be built for each particular target and what to include in the final executable.  There are two main sections: one which defines generic options for your operating system, and those which define options specific to your operating system on each individual machine type. 
+</p><p>For the first part, find the '<tt>case ${target} in</tt>' line just after '<tt># Common parts for widely ported systems</tt>' (around line 617) and add something like:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="sy0">*</span>-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+  <span class="re2">gas</span>=<span class="kw2">yes</span>
+  <span class="re2">gnu_ld</span>=<span class="kw2">yes</span>
+  <span class="re2">default_use_cxa_atexit</span>=<span class="kw2">yes</span>
+  <span class="sy0">;;</span></pre></div></div>
+<p>This states that our operating system by default uses the GNU linker and assembler and that we will provide __cxa_atexit (you will need to provide this in your standard library).
+</p><p>The second section we need to add to is the architecture-specific one. Find the '<tt>case ${target} in</tt>' line just before '<tt>tm_file="${tm_file} dbxelf.h elfos.h newlib-stdint.h"</tt>' (around line 886) and add something like:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">i<span class="br0">&#91;</span><span class="nu0">34567</span><span class="br0">&#93;</span><span class="nu0">86</span>-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+    <span class="re2">tm_file</span>=<span class="st0">&quot;<span class="es3">${tm_file}</span> i386/unix.h i386/att.h dbxelf.h elfos.h glibc-stdint.h i386/i386elf.h myos.h&quot;</span>
+    <span class="sy0">;;</span>
+x86_64-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+    <span class="re2">tm_file</span>=<span class="st0">&quot;<span class="es3">${tm_file}</span> i386/unix.h i386/att.h dbxelf.h elfos.h glibc-stdint.h i386/i386elf.h i386/x86-64.h myos.h&quot;</span>
+    <span class="sy0">;;</span></pre></div></div>
+<p>This defines which target configuration header files gets used. You can make <tt>i386/myos32.h</tt> and <tt>i386/myos64.h</tt> files if desired.
+</p>
+<h3> <span class="mw-headline" id="gcc.2Fconfig.2Fmyos.h"> gcc/config/myos.h </span></h3>
+<p>This header allows you to customize your toolchain using preprocessor macros. The relevant parts of GCC will include this header (as controlled by <tt>gcc/config.gcc</tt>) and modify the behavior according to your customizations. 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="coMULTI">/* Useful if you wish to make target-specific GCC changes. */</span>
+<span class="co2">#undef TARGET_MYOS</span>
+<span class="co2">#define TARGET_MYOS 1</span>
+&#160;
+<span class="coMULTI">/* Default arguments you want when running your
+   i686-myos-gcc/x86_64-myos-gcc toolchain */</span>
+<span class="co2">#define LIB_SPEC &quot;-lc&quot; /* link against C standard library */</span>
+&#160;
+<span class="coMULTI">/* Files that are linked before user code.
+   The&#160;%s tells GCC to look for these files in the library directory. */</span>
+<span class="co2">#define STARTFILE_SPEC &quot;crt0.o%s crti.o%s crtbegin.o%s&quot;</span>
+&#160;
+<span class="coMULTI">/* Files that are linked after user code. */</span>
+<span class="co2">#define ENDFILE_SPEC &quot;crtend.o%s crtn.o%s&quot;</span>
+&#160;
+<span class="coMULTI">/* Don't automatically add extern &quot;C&quot; { } around header files. */</span>
+<span class="co2">#undef  NO_IMPLICIT_EXTERN_C</span>
+<span class="co2">#define NO_IMPLICIT_EXTERN_C 1</span>
+&#160;
+<span class="coMULTI">/* Additional predefined macros. */</span>
+<span class="co2">#undef TARGET_OS_CPP_BUILTINS</span>
+<span class="co2">#define TARGET_OS_CPP_BUILTINS()      \
+  do {                                \
+    builtin_define (&quot;__myos__&quot;);      \
+    builtin_define (&quot;__unix__&quot;);      \
+    builtin_assert (&quot;system=myos&quot;);   \
+    builtin_assert (&quot;system=unix&quot;);   \
+    builtin_assert (&quot;system=posix&quot;);   \
+  } while(0);</span></pre></div></div>
+<h3> <span class="mw-headline" id="libstdc.2B.2B-v3.2Fcrossconfig.m4"> libstdc++-v3/crossconfig.m4 </span></h3>
+<p>This file describes how the libstdc++ configure file will examine your operating system and adjust the provided features of libstdc++ accordingly. Add a case similar to
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="autoconf source-autoconf"><pre class="de1">  <span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+    GLIBCXX_CHECK_COMPILER_FEATURES
+    GLIBCXX_CHECK_LINKER_FEATURES
+    GLIBCXX_CHECK_MATH_SUPPORT
+    GLIBCXX_CHECK_STDLIB_SUPPORT
+    <span class="sy0">;;</span></pre></div></div>
+<p><b>TODO</b>: Examine this design and find out what actually needs to be done here.
+</p><p><b>Note</b>: You need to run <tt>autoconf</tt> in the <tt>libstdc++-v3</tt> directory.
+</p>
+<h3> <span class="mw-headline" id="libgcc.2Fconfig.host"> libgcc/config.host </span></h3>
+<p>Find the '<tt>case ${host} in</tt>' just prior to '<tt>extra_parts="$extra_parts crtbegin.o crtend.o crti.o crtn.o"</tt>' (around line 318) and add the cases:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">i<span class="br0">&#91;</span><span class="nu0">34567</span><span class="br0">&#93;</span><span class="nu0">86</span>-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+	<span class="re2">extra_parts</span>=<span class="st0">&quot;<span class="es2">$extra_parts</span> crti.o crtbegin.o crtend.o crtn.o&quot;</span>
+	<span class="re2">tmake_file</span>=<span class="st0">&quot;<span class="es2">$tmake_file</span> i386/t-crtstuff t-crtstuff-pic t-libgcc-pic&quot;</span>
+	<span class="sy0">;;</span>
+x86_64-<span class="sy0">*</span>-myos<span class="sy0">*</span><span class="br0">&#41;</span>
+	<span class="re2">extra_parts</span>=<span class="st0">&quot;<span class="es2">$extra_parts</span> crti.o crtbegin.o crtend.o crtn.o&quot;</span>
+	<span class="re2">tmake_file</span>=<span class="st0">&quot;<span class="es2">$tmake_file</span> i386/t-crtstuff t-crtstuff-pic t-libgcc-pic&quot;</span>
+	<span class="sy0">;;</span></pre></div></div>
+<h3> <span class="mw-headline" id="fixincludes.2Fmkfixinc.sh"> fixincludes/mkfixinc.sh </span></h3>
+<p>You should disable fixincludes for your operating system. Find the case statement and add a pattern for your operating system. For instance:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="co0"># Check for special fix rules for particular targets</span>
+<span class="kw1">case</span> <span class="re1">$machine</span> <span class="kw1">in</span>
+    <span class="sy0">*</span>-myos<span class="sy0">*</span> <span class="sy0">|</span> \
+    i?<span class="nu0">86</span>-<span class="sy0">*</span>-cygwin<span class="sy0">*</span> <span class="sy0">|</span> \
+	<span class="co0"># (... snip ...)</span>
+    powerpcle-<span class="sy0">*</span>-eabi<span class="sy0">*</span> <span class="br0">&#41;</span>
+	<span class="co0">#  IF there is no include fixing,</span>
+	<span class="co0">#  THEN create a no-op fixer and exit</span>
+	<span class="br0">&#40;</span><span class="kw3">echo</span> <span class="st0">&quot;#! /bin/sh&quot;</span>&#160;; <span class="kw3">echo</span> <span class="st0">&quot;exit 0&quot;</span> <span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="co1">${target}</span>
+        <span class="sy0">;;</span></pre></div></div>
+<p>A number of operating systems (especially older and obscure ones) provide troublesome systems headers that fail to strictly comply with various standards. The GCC developers consider it their job to fix these headers. GCC will look into your system root, apply a bunch of patterns to detect headers it doesn't like, then it copies that header into a private GCC system directory (that overrides your standard system directory) and attempts to fix the header. Sometimes fixincludes even break working headers (some people refer to it as breakincludes).
+</p><p>This is rather inconvenient as your libc will likely happen to trigger these patterns (and false positives often happens). Any time you change your system headers, you have to rebuild your compiler so the fixed versions get updated. The first time you encounter this, it will show up as a system header that does nothing different even though you edit it.
+</p><p>This addition to the <tt>mkfixinc.sh</tt> file forcefully disables fixincludes for your operating system. It's your job to provide working system headers, not the compiler developers'.
+</p>
+<h2> <span class="mw-headline" id="Further_Customization"> Further Customization </span></h2>
+<p><b>TODO</b>: Document more various tips and tricks for further customization of OS specific toolchains.
+</p>
+<h3> <span class="mw-headline" id="Changing_the_Default_Include_Directory"> Changing the Default Include Directory </span></h3>
+<p>If you wish to change the default include directory from <tt>/usr/include</tt>, you can override the <tt>native_system_header_dir</tt> variable in <tt>gcc/config.gcc</tt> in the case for your OS.
+</p>
+<h3> <span class="mw-headline" id="Changing_the_Default_Library_Directory"> Changing the Default Library Directory </span></h3>
+<p>If you wish to change the default library directory from <tt>/usr/lib</tt>, you can change it to <tt>/lib</tt> by adding the following block of code to the case just below the declaration of <tt>NATIVE_LIB_DIRS</tt> in <tt>binutils/ld/configure.tgt</tt> (around line 785).
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="sy0">*-*-</span>myos<span class="sy0">*</span><span class="br0">&#41;</span>
+  NATIVE_LIB_DIRS<span class="sy0">=</span><span class="st0">'/lib /local/lib'</span>
+  <span class="sy0">;;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Start_Files_Directory"> Start Files Directory </span></h3>
+<p>You can modify which directory GCC looks for the crt0.o, crti.o and crtn.o in. The path to that directory is stored in <tt>STANDARD_STARTFILE_PREFIX</tt>. For instance, if you change the library directory to <tt>/lib</tt> in Binutils and want GCC to match, you can add the following to <tt>gcc/config/myos.h</tt>:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#undef STANDARD_STARTFILE_PREFIX</span>
+<span class="co2">#define STANDARD_STARTFILE_PREFIX &quot;/lib/&quot;</span></pre></div></div>
+<p>Note that the trailing slash is important as the raw crt*.o names are appended without first adding a slash.
+</p>
+<h2> <span class="mw-headline" id="Selecting_a_C_Library"> Selecting a C Library </span></h2>
+<dl><dd><i>Main article:</i> <a href="C_Library" title="C Library">C Library</a>
+</dd></dl>
+<p>At this point, you have to decide which <a href="C_Library" title="C Library">C Library</a> to use. You have options:
+</p>
+<ul><li> <a href="Creating_a_C_Library" title="Creating a C Library">Create your own C library</a>.
+</li><li> Pick an existing <a href="C_Library" title="C Library">C Library</a> such as <a href="Porting_Newlib" title="Porting Newlib">Newlib</a>.
+</li></ul>
+<h2> <span class="mw-headline" id="Building"> Building </span></h2>
+<dl><dd><i>Main article:</i> <a href="Hosted_GCC_Cross-Compiler" title="Hosted GCC Cross-Compiler">Hosted GCC Cross-Compiler</a>
+</dd></dl>
+<p>Your OS specific toolchain is built differently from the introductory <tt>i686-elf</tt> toolchain as it has a user-space and standard library. In particular, you need to ensure your libc meets the minimum requirements for libgcc. You need to install the standard library headers into your <a href="Meaty_Skeleton#System_Root" title="Meaty Skeleton">System Root</a> before building the cross-compiler. You need to tell the cross-binutils and cross-gcc where the system root is via the configure option <tt>--with-sysroot=/path/to/sysroot</tt>. You can then build your libc with your cross-compiler and then finally libstdc++ if desired.
+</p>
+<h2> <span class="mw-headline" id="Conclusion"> Conclusion </span></h2>
+<p>You now have a <tt>i686-myos</tt> toolchain that can be used instead of your old <tt>i686-elf</tt> toolchain. Your new toolchain is effectively just a renamed <tt>i686-elf</tt> with customizations. You should switch all your operating system build scripts to use this new compiler, even the kernel and libk, as your new compiler is capable of providing a freestanding environment.
+</p><p>You will certainly wish to package up your custom toolchain (and be able to create a diff between the upstream version and your custom version for others to audit). Contributors should be able to download tarballs of your myos-binutils and myos-gcc packages, so they can build themselves your custom toolchain. 
+</p>
+<h2> <span class="mw-headline" id="Common_errors"> Common errors </span></h2>
+<h3> <span class="mw-headline" id="Whitespaces"> Whitespaces </span></h3>
+<p>Some files need tabs, some files need spaces and some files accept happily any mixture. Use an editor that can display special chars such as tabs and spaces, to be sure you use the right form. Whitespace errors may result in 'make' reporting missing separators. Some editors will replace a tab with four spaces, which will also cause invalid separator issues.
+</p>
+<h3> <span class="mw-headline" id="Autoconf"> Autoconf </span></h3>
+<p>There are several steps that conclude in running '<tt>autoconf</tt>' or '<tt>automake</tt>', '<tt>autoreconf</tt>', be sure you did not miss them. The order of autoconf/-reconf calls in a package is important. These errors may result in missing subdirectories of the build-* directory and/or 'make' reporting missing targets.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="GCC" title="GCC">GCC</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 421/1000000
+Post-expand include size: 452/2097152 bytes
+Template argument size: 118/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2164-0!*!0!!en!2!* and timestamp 20180121035035 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=OS_Specific_Toolchain&amp;oldid=21776">http://wiki.osdev.org/index.php?title=OS_Specific_Toolchain&amp;oldid=21776</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_3_Tutorials" title="Category:Level 3 Tutorials">Level 3 Tutorials</a></li><li><a href="Category:Tools" title="Category:Tools">Tools</a></li><li><a href="Category:Tutorials" title="Category:Tutorials">Tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=OS_Specific_Toolchain" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="OS_Specific_Toolchain"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:OS_Specific_Toolchain"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="OS_Specific_Toolchain#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="OS_Specific_Toolchain" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=OS_Specific_Toolchain&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=OS_Specific_Toolchain&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="OS_Specific_Toolchain#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/OS_Specific_Toolchain" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/OS_Specific_Toolchain" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=OS_Specific_Toolchain&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=OS_Specific_Toolchain&amp;oldid=21776" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 28 November 2017, at 12:42.</li>
+											<li id="footer-info-viewcount">This page has been accessed 106,748 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+									skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/OS_Specific_Toolchain" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/OS_Specific_Toolchain" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=OS_Specific_Toolchain&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=OS_Specific_Toolchain&amp;oldid=21776" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 28 November 2017, at 12:42.</li>
+											<li id="footer-info-viewcount">This page has been accessed 106,748 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

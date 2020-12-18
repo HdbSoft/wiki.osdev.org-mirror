@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Going Further on x86 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Going_Further_on_x86", "wgTitle": "Going Further on x86", "wgCurRevisionId": 20533, "wgArticleId": 3919, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 2 Tutorials", "Tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Going_Further_on_x86 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Going Further on x86</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Going_Further_on_x86#mw-head">navigation</a>,
+					<a href="Going_Further_on_x86#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a><br />Medium</td></tr></table> <table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="Kernels" title="Kernels" class="mw-redirect">Kernel Designs</a></th></tr><tr><th>Models</th></tr><tr><td><div>
+<p><a href="Monolithic_Kernel" title="Monolithic Kernel">Monolithic Kernel</a><br />
+<a href="Microkernel" title="Microkernel">Microkernel</a><br />
+<a href="Hybrid_Kernel" title="Hybrid Kernel">Hybrid Kernel</a><br />
+<a href="Exokernel" title="Exokernel">Exokernel</a><br />
+<a href="Nanokernel" title="Nanokernel" class="mw-redirect">Nano/Picokernel</a><br />
+<a href="Exokernel#Cache_Kernel" title="Exokernel">Cache Kernel</a><br />
+<a href="Exokernel#Virtualizing_Kernel" title="Exokernel">Virtualizing Kernel</a><br />
+<a href="Megalithic_Kernel" title="Megalithic Kernel">Megalithic Kernel</a><br />
+</p>
+</div></td></tr><tr><th>Other Concepts</th></tr><tr><td><div>
+<p><a href="Modular_Kernel" title="Modular Kernel">Modular Kernel</a><br />
+<a href="Higher_Half_Kernel" title="Higher Half Kernel">Higher Half Kernel</a><br />
+<a href="Creating_a_64-bit_kernel" title="Creating a 64-bit kernel">64-bit Kernel</a><br />
+</p>
+</div></td></tr></table>
+<p>You have completed <a href="Bare_Bones" title="Bare Bones">Bare Bones</a> for <a href="X86" title="X86" class="mw-redirect">x86</a>. Now what, you may be wondering. Welcome to the OS development world!
+</p><p>The following guide assumes you are doing the things discussed below in order from top to down. Before starting implementing things from this, it is advised that you read it whole to get a broader perspective.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Going_Further_on_x86#Preparing_For_Real"><span class="tocnumber">1</span> <span class="toctext">Preparing For Real</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Going_Further_on_x86#Design_Considerations"><span class="tocnumber">2</span> <span class="toctext">Design Considerations</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Going_Further_on_x86#Code_Structuring"><span class="tocnumber">2.1</span> <span class="toctext">Code Structuring</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Going_Further_on_x86#Future_Proofing"><span class="tocnumber">2.2</span> <span class="toctext">Future Proofing</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Going_Further_on_x86#Multithreading"><span class="tocnumber">2.3</span> <span class="toctext">Multithreading</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Going_Further_on_x86#Hardware_Abstraction"><span class="tocnumber">2.4</span> <span class="toctext">Hardware Abstraction</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Going_Further_on_x86#Algorithms"><span class="tocnumber">2.5</span> <span class="toctext">Algorithms</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="Going_Further_on_x86#Paging"><span class="tocnumber">3</span> <span class="toctext">Paging</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="Going_Further_on_x86#Higher_Half"><span class="tocnumber">3.1</span> <span class="toctext">Higher Half</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Going_Further_on_x86#Permissions"><span class="tocnumber">3.2</span> <span class="toctext">Permissions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="Going_Further_on_x86#More_x86_Specific_Things"><span class="tocnumber">4</span> <span class="toctext">More x86 Specific Things</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="Going_Further_on_x86#Segments"><span class="tocnumber">4.1</span> <span class="toctext">Segments</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Going_Further_on_x86#Interrupts"><span class="tocnumber">4.2</span> <span class="toctext">Interrupts</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="Going_Further_on_x86#Timers"><span class="tocnumber">4.3</span> <span class="toctext">Timers</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="Going_Further_on_x86#Memory_Management"><span class="tocnumber">5</span> <span class="toctext">Memory Management</span></a>
+<ul>
+<li class="toclevel-2 tocsection-16"><a href="Going_Further_on_x86#Getting_the_Memory_Map"><span class="tocnumber">5.1</span> <span class="toctext">Getting the Memory Map</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="Going_Further_on_x86#Physical_Memory_Manager"><span class="tocnumber">5.2</span> <span class="toctext">Physical Memory Manager</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="Going_Further_on_x86#Virtual_Memory_Allocator"><span class="tocnumber">5.3</span> <span class="toctext">Virtual Memory Allocator</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="Going_Further_on_x86#Heap_Allocator"><span class="tocnumber">5.4</span> <span class="toctext">Heap Allocator</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-20"><a href="Going_Further_on_x86#Scheduler"><span class="tocnumber">6</span> <span class="toctext">Scheduler</span></a>
+<ul>
+<li class="toclevel-2 tocsection-21"><a href="Going_Further_on_x86#Multiprocessing"><span class="tocnumber">6.1</span> <span class="toctext">Multiprocessing</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="Going_Further_on_x86#Priority_Levels"><span class="tocnumber">6.2</span> <span class="toctext">Priority Levels</span></a></li>
+<li class="toclevel-2 tocsection-23"><a href="Going_Further_on_x86#Thread_Lists"><span class="tocnumber">6.3</span> <span class="toctext">Thread Lists</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-24"><a href="Going_Further_on_x86#Conclusion"><span class="tocnumber">7</span> <span class="toctext">Conclusion</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Preparing_For_Real"> Preparing For Real </span></h2>
+<p>Before going any further:
+</p>
+<ul><li> You should grab a copy of the Intel manuals. Most of the processor-specific things discussed below are best described in the Intel manuals.
+</li><li> You should ensure you have enough patience and time. Operating system development is one of the most time-consuming projects.
+</li></ul>
+<h2> <span class="mw-headline" id="Design_Considerations"> Design Considerations </span></h2>
+<p>Designing the operating system as a whole, and part to part, is a tricky, yet important task to accomplish.
+</p>
+<h3> <span class="mw-headline" id="Code_Structuring"> Code Structuring </span></h3>
+<p>You should decide how your code should be structured. Consider that you will eventually port your operating system to different architectures, with different assembly instructions, with different initialisation sequences, with different hardware, with different memory structures, etc. You have to ensure you don't mix files from one architecture with files from another architecture. <a href="Meaty_Skeleton" title="Meaty Skeleton">Meaty Skeleton</a> serves as a minimal example of how to structure your code.
+</p>
+<h3> <span class="mw-headline" id="Future_Proofing"> Future Proofing </span></h3>
+<p>Consider that you will eventually want to add new features to the whole range of kernel interfaces. Therefore, you have to make sure it is easy to refactor them without breaking the dependant interfaces.
+</p>
+<h3> <span class="mw-headline" id="Multithreading"> Multithreading </span></h3>
+<p>Realise that, in some time from now, you will not run your code in a single thread, but it <b>will</b> be running in parallel with other threads and with other processors, meaning that it will be eventually preempted during a critical operation, and that some other thread will be able to corrupt the saved state.
+</p>
+<h3> <span class="mw-headline" id="Hardware_Abstraction"> Hardware Abstraction </span></h3>
+<p>Realise that not every piece of hardware is present in every computer, so you might want to abstract it through a <a href="Hardware_Abstraction_Layer" title="Hardware Abstraction Layer">Hardware Abstraction Layer</a>. For example <a href="PIT" title="PIT" class="mw-redirect">PIT</a> and <a href="HPET" title="HPET">HPET</a> are two timers, which you might want to abstract into a single timing interface.
+</p>
+<h3> <span class="mw-headline" id="Algorithms"> Algorithms </span></h3>
+<p>For every task, find the algorithm that gets the most points from every aspect that matters to you (for example simplicity, speed, memory usage, etc).
+</p>
+<h2> <span class="mw-headline" id="Paging"> Paging </span></h2>
+<p><a href="Paging" title="Paging">Paging</a> is nice because it lets you map memory however you want and it lets processes see the full address space. It also provides advanced protection capabilities. You may wish to enable it early in <tt>boot.s</tt>.
+</p>
+<h3> <span class="mw-headline" id="Higher_Half"> Higher Half </span></h3>
+<p>You should continue with a <a href="Higher_Half_Kernel" title="Higher Half Kernel">higher half kernel</a>, so user-space programs can be loaded at 4 MiB (or lower if you like) without conflicting with the kernel binary. An important decision to take is where to exactly map the kernel.
+</p><p>Many prefer mapping the kernel to 0x80000000, leaving 2 GiB for kernel data and 2 GiB for processes. This can allow a monolithic kernel to cache large files or filesystem structures.
+</p><p>Others prefer mapping it to 0xC0000000, leaving 1 GiB for kernel data and 3 GiB for processes. Their main argument is that it integrates better with <a href="PAE" title="PAE" class="mw-redirect">PAE</a>, since the whole kernel space fits exactly in one page directory.
+</p><p>Some others (including the original author of this page) go extreme and map the kernel at 0xE0000000, leaving the tight space of 512 MiB for kernel data and 3.5 GiB for processes. Their main argument is that user-space should be able to use as much memory as possible.
+</p>
+<h3> <span class="mw-headline" id="Permissions"> Permissions </span></h3>
+<p><a href="Bare_Bones" title="Bare Bones">Bare Bones</a> taught you to use an <a href="ELF" title="ELF">ELF</a> binary for the kernel. Do you know what do <tt>.text</tt>, <tt>.data</tt>, <tt>.rodata</tt>, <tt>.bss</tt> mean? Right, they are the sections of the executable. In <tt>.text</tt> the instructions for the processor are stored, in <tt>.data</tt> there is data, in <tt>.rodata</tt> there is read-only data, in <tt>.bss</tt> there is uninitialised data. There may be more sections, but let's focus on these for now.
+</p><p>Each of these sections should have different permissions applied, for example <tt>.text</tt> should be read-only, <tt>.data</tt> should be read-write, <tt>.rodata</tt> should be read-only, and <tt>.bss</tt> should be read-write. For these changes to take effect in kernel-space, you have to set the WP bit in the appropriate register. Make sure you disable execution of non-<tt>.text</tt> sections in <a href="X86-64" title="X86-64">x86-64</a> and <a href="PAE" title="PAE" class="mw-redirect">PAE</a> modes.
+</p><p>To facilitate setting permissions on sections you can do the following:
+</p>
+<ul><li> Tell the linker to align them at 4 KiB boundaries, so sections occupy whole pages.
+</li><li> Tell the linker to insert symbols indicating the start and end addresses of specific sections, so you can access them from your mapping code.
+</li></ul>
+<h2> <span class="mw-headline" id="More_x86_Specific_Things"> More x86 Specific Things </span></h2>
+<p>An operating system should be self-reliant as much as possible. The bootloader may have left the environment in a "working" state, but it is not convenient in the long run.
+</p>
+<h3> <span class="mw-headline" id="Segments"> Segments </span></h3>
+<p>Create a <a href="GDT" title="GDT" class="mw-redirect">GDT</a> before the first segment change, because the one that <a href="GRUB" title="GRUB">GRUB</a> has setup is no longer valid (the entries are simply cached in the processor still, that's why it "works").
+</p><p>You need at least these entries: null segment entry, kernel code segment entry, kernel data segment entry, user code segment entry, user data segment entry, <a href="Task_State_Segment" title="Task State Segment">task state segment</a> entry.
+</p>
+<h3> <span class="mw-headline" id="Interrupts"> Interrupts </span></h3>
+<p>Every real operating system handles <a href="Exceptions" title="Exceptions">exceptions</a> (for example <a href="Page_Fault" title="Page Fault">page faults</a>), and reads from peripherals only when data is received (instead of polling).
+</p><p>Create an <a href="IDT" title="IDT" class="mw-redirect">IDT</a>. Write interrupt handlers. Enable an interrupt controller (for example <a href="PIC" title="PIC" class="mw-redirect">PIC</a> or <a href="APIC" title="APIC">APIC</a>).
+</p><p>Make sure to save all registers at the start of the interrupt handlers, and restore them at the end of the interrupt handlers. Keep also in mind that some exceptions cause an error code to be pushed to the stack, while some others do not.
+</p>
+<h3> <span class="mw-headline" id="Timers"> Timers </span></h3>
+<p>Initialise a timer to be able to keep track of timing. Consider which timer you would like to support first (most beginners go with <a href="PIT" title="PIT" class="mw-redirect">PIT</a>, although it is ancient), and how would you like to set it up (most set it up to tick at a convenient interval, like 1 ms or 10 ms). However, make sure you abstract the interface so adding support for more timers is easier.
+</p>
+<h2> <span class="mw-headline" id="Memory_Management"> Memory Management </span></h2>
+<p>Soon you will need to allocate something whose size is not known at compile time. This is where the <a href="Memory_Management" title="Memory Management" class="mw-redirect">memory manager</a> comes in.
+</p>
+<h3> <span class="mw-headline" id="Getting_the_Memory_Map"> Getting the Memory Map </span></h3>
+<p>You first need to <a href="Detecting_Memory_(x86)#Memory_Map_Via_GRUB" title="Detecting Memory (x86)">obtain the memory map</a>, so you know which physical areas are free. Then you build on top of that.
+</p>
+<h3> <span class="mw-headline" id="Physical_Memory_Manager"> Physical Memory Manager </span></h3>
+<p>You for sure also need a list of free physical pages, so you know which physical page frames to allocate next.
+</p><p>A common way to do it is to create a linked list, that is to store the physical address of the next free page at the start of the previous free page, so only free memory is used to store it. However, you have paging enabled, so you can't arbitrarily write to every part of memory. You can instead map a page frame at a time, and write to it the address of the next free page.
+</p>
+<h3> <span class="mw-headline" id="Virtual_Memory_Allocator"> Virtual Memory Allocator </span></h3>
+<p>You will also need a way to allocate virtual pages for mapping physical memory, instead of hard-coded values. Get a way to track which parts of the address space are used, and which aren't.
+</p><p>There are multiple ways to track the address space. Modern operating systems like Linux and Windows use AVL trees, but you can also use whatever data structure you like.
+</p>
+<h3> <span class="mw-headline" id="Heap_Allocator"> Heap Allocator </span></h3>
+<p>You will certainly want a <a href="Heap" title="Heap">heap</a> as well, or do you want to keep allocating with 4KB granularity at a time? Start by implementing a very simple (but slow) linked list heap. You can then get to the more complicated designs, like separate block sizes for different buckets, etc. You should also keep in mind that eventually your heap will get out of memory, so you need to implement heap expansion.
+</p><p>Or you might opt for another design which involves a <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Slab_allocation">Slab Allocator</a>.
+</p>
+<h2> <span class="mw-headline" id="Scheduler"> Scheduler </span></h2>
+<p>No operating system is real if it cannot schedule tasks. Every modern desktop operating system should allow browsing the web, while rendering a 3D scene, while sorting data in a spreadsheet, while writing a large file to the disk. This is taken care by the <a href="Scheduler" title="Scheduler" class="mw-redirect">scheduler</a>.
+</p>
+<h3> <span class="mw-headline" id="Multiprocessing"> Multiprocessing </span></h3>
+<p>Be prepared for <a href="Multiprocessing" title="Multiprocessing">multiprocessing</a>. A scheduler that is not ready for multiprocessing will probably be fully rewritten.
+</p>
+<h3> <span class="mw-headline" id="Priority_Levels"> Priority Levels </span></h3>
+<p>Design the scheduler in a way, so threads can have different priority levels.
+</p>
+<h3> <span class="mw-headline" id="Thread_Lists"> Thread Lists </span></h3>
+<p>It is generally recommended there are different lists of threads for each state and priority level. This way, the scheduling code does not have to look through every thread for a high priority one, then possibly fail to find one, then iterate the thread list again to find a somewhat lower priority thread, then possibly fail again, etc. This means the scheduler code runs faster, since the lack of a thread of a specific priority level can be detected immediately, while also not iterating through inactive threads.
+</p>
+<h2> <span class="mw-headline" id="Conclusion"> Conclusion </span></h2>
+<p>Operating system development is not easy and is not hard. It's pretty hard. The above (incomplete) list is nothing compared to the complexity involved in a mature operating system.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 562/1000000
+Post-expand include size: 2554/2097152 bytes
+Template argument size: 2250/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3919-0!*!0!!en!2!* and timestamp 20180121040007 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Going_Further_on_x86&amp;oldid=20533">http://wiki.osdev.org/index.php?title=Going_Further_on_x86&amp;oldid=20533</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_2_Tutorials" title="Category:Level 2 Tutorials">Level 2 Tutorials</a></li><li><a href="Category:Tutorials" title="Category:Tutorials">Tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Going_Further_on_x86" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Going_Further_on_x86"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Going_Further_on_x86&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Going_Further_on_x86#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Going_Further_on_x86" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Going_Further_on_x86&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Going_Further_on_x86&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Going_Further_on_x86#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Going_Further_on_x86" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Going_Further_on_x86" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Going_Further_on_x86&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Going_Further_on_x86&amp;oldid=20533" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 February 2017, at 22:43.</li>
+											<li id="footer-info-viewcount">This page has been accessed 23,630 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </sskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Going_Further_on_x86" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Going_Further_on_x86" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Going_Further_on_x86&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Going_Further_on_x86&amp;oldid=20533" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 February 2017, at 22:43.</li>
+											<li id="footer-info-viewcount">This page has been accessed 23,630 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.034 secs. -->
+	</body>
+</html>

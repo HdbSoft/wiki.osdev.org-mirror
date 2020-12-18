@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Random Number Generator - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Random_Number_Generator", "wgTitle": "Random Number Generator", "wgCurRevisionId": 20891, "wgArticleId": 2935, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Common Algorithms"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Random_Number_Generator action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Random Number Generator</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Random_Number_Generator#mw-head">navigation</a>,
+					<a href="Random_Number_Generator#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Random number generators (RNG) can be implemented in lots of different ways. This article explains some of them.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Random_Number_Generator#Types_of_random_number_generators"><span class="tocnumber">1</span> <span class="toctext">Types of random number generators</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Random_Number_Generator#True_random_number_generators"><span class="tocnumber">2</span> <span class="toctext">True random number generators</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Random_Number_Generator#x86_RDRAND_Instruction"><span class="tocnumber">2.1</span> <span class="toctext">x86 RDRAND Instruction</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="Random_Number_Generator#Pseudorandom_number_generators"><span class="tocnumber">3</span> <span class="toctext">Pseudorandom number generators</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Random_Number_Generator#The_Standard.27s_Example"><span class="tocnumber">3.1</span> <span class="toctext">The Standard's Example</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Random_Number_Generator#Simple_Number_Generator"><span class="tocnumber">3.2</span> <span class="toctext">Simple Number Generator</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Random_Number_Generator#Linear_congruential_generator"><span class="tocnumber">3.3</span> <span class="toctext">Linear congruential generator</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Random_Number_Generator#Fibonacci_random_number"><span class="tocnumber">3.4</span> <span class="toctext">Fibonacci random number</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Random_Number_Generator#Linear_feedback_shift_register"><span class="tocnumber">3.5</span> <span class="toctext">Linear feedback shift register</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Types_of_random_number_generators"> Types of random number generators </span></h2>
+<p>There are three types of random number generators:
+</p>
+<ul><li><b>True random numbers:</b> The generated values are really random, that means, that you cannot "predict" the next number, because they don't follow any recognizable patterns.  Linux provides <font color="blue" face="courier new">/dev/random</font> for this.
+</li><li><b>pseudorandom numbers</b>: The generated values aren't random, because they are calculated.
+</li><li><b>hybrid:</b> The random number generator uses both methods to calculate the random number. E.g. it uses a true random number as s initial value (often refered to as "seed") for an algorithm, that generates pseudorandom numbers. This method is the most commonly used method in OSes, since it is fast and generates very useful results. Indeed <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Linux">Linux</a> does it this way to provide <font color="blue" face="courier new">/dev/urandom</font>.
+</li></ul>
+<h2> <span class="mw-headline" id="True_random_number_generators"> True random number generators </span></h2>
+<p>True random number generators use physical devices to generate random numbers, whose unpredictability can be traced to the laws of quantum mechanics.
+Another commonly used "resource" is the behaviour of the user. Here the system generates values out of mouse movements, keyboard inputs or other human actions.
+Finally a very simple way to obtain a seed is getting the time value of the system's <a href="Real_Time_Clock" title="Real Time Clock" class="mw-redirect">Real Time Clock</a>.
+</p>
+<h3> <span class="mw-headline" id="x86_RDRAND_Instruction"> x86 RDRAND Instruction </span></h3>
+<p>Newer x86 and x86-64 processors have the instruction RDRAND for generating random numbers.
+To use RDRAND you will first need to check if the instruction is available.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">1</span>     <span class="co1">; set EAX to request function 1</span>
+<span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">0</span>    <span class="co1">; set ECX to request subfunction 0</span>
+<span class="kw1">cpuid</span>
+<span class="kw1">shr</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">30</span>   <span class="co1">; the result we want is in ECX...</span>
+<span class="kw1">and</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">1</span>     <span class="co1">; ...test for the flag of interest...</span></pre></div></div>
+<p>If ECX is set to 1, the instruction is available.  Then it can be used to generate a 16/32/64 bit random number (depending on the register size used as an argument).
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">rdrand <span class="kw3">eax</span>   <span class="co1">;generate a 32 bit random number and store it in EAX</span></pre></div></div>
+<p><b>TODO</b>: don't actually do this, see Section "4.2.3 RDRAND Retry Loop" of the <a rel="nofollow" class="external text" href="https://software.intel.com/en-us/articles/intel-digital-random-number-generator-drng-software-implementation-guide">Intel Digital Random Number Generator (DRNG) Software Implementation Guide</a> for the recommended (read: correct) way.
+</p>
+<h2> <span class="mw-headline" id="Pseudorandom_number_generators"> Pseudorandom number generators </span></h2>
+<h3> <span class="mw-headline" id="The_Standard.27s_Example"> The Standard's Example </span></h3>
+<p>Taken directly from the C standard document:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">// The following functions define a portable implementation of rand and srand.</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">unsigned</span> <span class="kw4">long</span> <span class="kw4">int</span> next <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+&#160;
+<span class="kw4">int</span> <span class="kw3">rand</span><span class="br0">&#40;</span> <span class="kw4">void</span> <span class="br0">&#41;</span> <span class="co1">// RAND_MAX assumed to be 32767</span>
+<span class="br0">&#123;</span>
+    next <span class="sy0">=</span> next <span class="sy0">*</span> <span class="nu0">1103515245</span> <span class="sy0">+</span> <span class="nu0">12345</span><span class="sy0">;</span>
+    <span class="kw1">return</span> <span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#40;</span>next <span class="sy0">/</span> <span class="nu0">65536</span><span class="br0">&#41;</span> <span class="sy0">%</span> <span class="nu0">32768</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> <span class="kw3">srand</span><span class="br0">&#40;</span> <span class="kw4">unsigned</span> <span class="kw4">int</span> seed <span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    next <span class="sy0">=</span> seed<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Simple_Number_Generator"> Simple Number Generator </span></h3>
+<p>This is a simple number generator that generates integers based on a seed and a maximum. It requires that random_seed(with a initial value) is defined. It is based off of the K&amp;R C book.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> random_seed<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+<span class="kw4">int</span> maxrand<span class="br0">&#40;</span><span class="kw4">int</span> seed<span class="sy0">,</span><span class="kw4">int</span> max<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	random_seed <span class="sy0">=</span> random_seed<span class="sy0">+</span>seed <span class="sy0">*</span> <span class="nu0">1103515245</span> <span class="sy0">+</span><span class="nu0">12345</span><span class="sy0">;</span>
+	<span class="kw1">return</span> <span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#40;</span>random_seed <span class="sy0">/</span> <span class="nu0">65536</span><span class="br0">&#41;</span> <span class="sy0">%</span> <span class="br0">&#40;</span>max<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Linear_congruential_generator"> Linear congruential generator </span></h3>
+<p>The LCG is one of the oldest, but also one of the most simple algorithm to generate streams of pseudorandom numbers. Its based on this recurrence formula
+</p>
+<pre> X<sub>n+1</sub> = (aX<sub>n</sub> + c) mod m
+</pre>
+<p>where the modulus m is the number of random value the LCG produces.
+The quality of this algorithm highly relies on chosing the right values for a, c and m. One good assignment is
+</p>
+<pre> m = 2<sup>32</sup>, a = 1103515245, c = 12345
+</pre>
+<p>as it's used in the glib.
+So to generate a random number, choose a seed, which is X<sub>0</sub>. Then you can calculate the next random number in the stream, i.e. X<sub>1</sub>, by calculating:
+</p>
+<pre> X<sub>1</sub> = (aX<sub>0</sub> + c) mod m
+</pre>
+<p>To get the next random number X<sub>2</sub> take X<sub>1</sub> and calculate:
+</p>
+<pre> X<sub>2</sub> = (aX<sub>1</sub> + c) mod m
+</pre>
+<p>and so on.
+Notice that this algorithm just generates m random numbers. So after m calculations it generates your seed again. Therefore it is a good idea to change the seed frequently.
+For more values of a,c and m, see <a rel="nofollow" class="external free" href="http://en.wikipedia.org/wiki/Linear_congruential_generator#LCGs_in_common_use">http://en.wikipedia.org/wiki/Linear_congruential_generator#LCGs_in_common_use</a>.
+</p>
+<h3> <span class="mw-headline" id="Fibonacci_random_number"> Fibonacci random number </span></h3>
+<p><a href="http://wiki.osdev.org/User:Mariuszp" title="User:Mariuszp">My</a> OS uses a special "remake" of the Fibonacci sequence to generate random numbers. This is done by having 4 "seeds", which start off as really weird values (e.g. 45, 80, 22, 32).
+</p><p>I implemented a seed() function which adds a new seed to the end of the sequence, and erases the first one (the seeds are referred to as A, B, C and D). The rand() function just returns the sum of the seeds, and calls seed() with the result.
+</p>
+<h3> <span class="mw-headline" id="Linear_feedback_shift_register"> Linear feedback shift register </span></h3>
+<p>A Linear Feedback Shift Register (LFSR) is a simple way to generate a very long sequence of random numbers, given a non-zero seed. The idea is as follows: an <i>n</i>-bit LFSR has <i>n</i> 'registers', each containing one bit (either 0 or 1). Initially, all the registers are filled with the bits from an <i>n</i>-bit seed. For each next value to be generated, take some bits from certain registers and XOR them together. Feed the resulting binary value into the left-most register, shifting all bits one position to the right. The bit that is shifted out of the LFSR on the right-most side is the generated random bit.
+</p><p>The sequence of bits that an LFSR can produce will eventually repeat, but by choosing the XOR'ed bits carefully the period of the LFSR can be increased to up to 2<sup>n</sup> - 1 bits. This means that after a sequence of 2<sup>n</sup> - 1 bits, the same sequence will be returned. However, this is a property that all pseudo-random number generators have: without changing the seed, they will eventually repeat themselves.
+</p><p>The following is an example of an 16-bit LFSR using bits 11, 13, 14 and 16 XOR'ed together as its input. The period of this LFSR is 65535 bits, so it will generate a pseudo-random sequence of 65535 bits before the sequence repeats itself. The next bit produced by the LFSR is 1 (the value of bit 16) and the next input bit is 0.
+</p>
+<pre>
+            1                                       11      13  14      16
+          +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+INPUT --&gt; | 0   1   0   0   0   1   0   0   1   1   1   1   0   0   0   1 | --&gt; OUTPUT
+          +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+INPUT = bit 11 XOR bit 13 XOR bit 14 XOR bit 16
+</pre>
+<p>Larger (and smaller) LFSR's are also possible. Smart people have derived polynomials that will ensure that given any non-zero input, the period of the LFSR is as large as it can be (2<sup>n</sup> - 1). Such a polynomial are written as x<sup>16</sup> + x<sup>14</sup> + x<sup>13</sup> + x<sup>11</sup> + 1. For this example polynomial for <i>n</i> = 16, bits 16, 14, 13 and 11 must be XOR'ed together and provided as input, counting from the left and starting with 1. Polynomials for other values of <i>n</i> can be found <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Linear_feedback_shift_register#Some_polynomials_for_maximal_LFSRs">here on Wikipedia</a> and on page 5 of <a rel="nofollow" class="external text" href="http://www.xilinx.com/support/documentation/application_notes/xapp052.pdf">this PDF document</a>.
+</p><p>Note that the seed must never be zero. This also means that it is never possible for all registers to have bit value zero, and that of the 2<sup>n</sup> possible combinations of registers, the all-zero state is not allowed. Therefore, 2<sup>n</sup> - 1 states is the maximum possible.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 90/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2935-0!*!0!!en!*!* and timestamp 20180121080051 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Random_Number_Generator&amp;oldid=20891">http://wiki.osdev.org/index.php?title=Random_Number_Generator&amp;oldid=20891</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Common_Algorithms" title="Category:Common Algorithms">Common Algorithms</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Random_Number_Generator" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Random_Number_Generator"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Random_Number_Generator"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Random_Number_Generator#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Random_Number_Generator" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Random_Number_Generator&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Random_Number_Generator&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Random_Number_Generator#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Random_Number_Generator" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Random_Number_Generator" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Random_Number_Generator&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Random_Number_Generator&amp;oldid=20891" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 9 June 2017, at 17:16.</li>
+											<li id="footer-info-viewcount">This page has been accessed 25,129 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </scriskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Random_Number_Generator" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Random_Number_Generator" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Random_Number_Generator&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Random_Number_Generator&amp;oldid=20891" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 9 June 2017, at 17:16.</li>
+											<li id="footer-info-viewcount">This page has been accessed 25,129 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.097 secs. -->
+	</body>
+</html>

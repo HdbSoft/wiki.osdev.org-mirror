@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>My Bootloader Does Not Work - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "My_Bootloader_Does_Not_Work", "wgTitle": "My Bootloader Does Not Work", "wgCurRevisionId": 19641, "wgArticleId": 3688, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["FAQ"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-My_Bootloader_Does_Not_Work action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">My Bootloader Does Not Work</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="My_Bootloader_Does_Not_Work#mw-head">navigation</a>,
+					<a href="My_Bootloader_Does_Not_Work#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Here follows a list of the (excessively made beginner) mistakes that occur when writing a bootsector. There are several tutorials out there that suggest really broken behaviour, and there are many errors typically coming out of ignorance. 
+</p><p>If you came here wondering how to start at all, have a look at <a href="Rolling_Your_Own_Bootloader" title="Rolling Your Own Bootloader">rolling your own</a> or <a href="Bootloader" title="Bootloader">bootloaders</a> in general.
+</p><p><a href="GAS" title="GAS">GAS</a> will not be discussed here as of yet. If you use it, you're a masochist for making things unnecessarily more complicated, and we'll happily suggest other assemblers on request.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="My_Bootloader_Does_Not_Work#Draw_a_map"><span class="tocnumber">1</span> <span class="toctext">Draw a map</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="My_Bootloader_Does_Not_Work#You_read_something_from_disk_and_did_not_put_it_on_the_memory_map"><span class="tocnumber">1.1</span> <span class="toctext">You read something from disk and did not put it on the memory map</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="My_Bootloader_Does_Not_Work#90.25_of_the_errors_happen_within_the_first_10_lines_of_assembly"><span class="tocnumber">2</span> <span class="toctext">90% of the errors happen within the first 10 lines of assembly</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="My_Bootloader_Does_Not_Work#There.27s_no_ORG_statement"><span class="tocnumber">2.1</span> <span class="toctext">There's no ORG statement</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="My_Bootloader_Does_Not_Work#There.27s_no_BITS_16_statement"><span class="tocnumber">2.2</span> <span class="toctext">There's no BITS 16 statement</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="My_Bootloader_Does_Not_Work#There.27s_no_reference_to_SS_or_SP"><span class="tocnumber">2.3</span> <span class="toctext">There's no reference to SS or SP</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="My_Bootloader_Does_Not_Work#The_value_of_SP_ends_in_an_0xF"><span class="tocnumber">2.4</span> <span class="toctext">The value of SP ends in an 0xF</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="My_Bootloader_Does_Not_Work#The_value_of_SP_points_to_the_beginning_of_the_stack_in_memory"><span class="tocnumber">2.5</span> <span class="toctext">The value of SP points to the beginning of the stack in memory</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="My_Bootloader_Does_Not_Work#The_value_of_SP_ends_in_an_0xE"><span class="tocnumber">2.6</span> <span class="toctext">The value of SP ends in an 0xE</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="My_Bootloader_Does_Not_Work#There.27s_a_PUSH.2C_CALL_or_INT_before_SS_is_being_set"><span class="tocnumber">2.7</span> <span class="toctext">There's a PUSH, CALL or INT before SS is being set</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="My_Bootloader_Does_Not_Work#SP_isn.27t_set_in_the_instruction_immediately_after_SS"><span class="tocnumber">2.8</span> <span class="toctext">SP isn't set in the instruction immediately after SS</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="My_Bootloader_Does_Not_Work#There.27s_no_reference_to_DS_or_ES"><span class="tocnumber">2.9</span> <span class="toctext">There's no reference to DS or ES</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="My_Bootloader_Does_Not_Work#There.27s_a_save_of_the_boot_drive_number_before_DS_is_set"><span class="tocnumber">2.10</span> <span class="toctext">There's a save of the boot drive number before DS is set</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="My_Bootloader_Does_Not_Work#A_segment_register_contains_9xxx_or_8xxx"><span class="tocnumber">2.11</span> <span class="toctext">A segment register contains 9xxx or 8xxx</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="My_Bootloader_Does_Not_Work#BIOS_specific_problems"><span class="tocnumber">3</span> <span class="toctext">BIOS specific problems</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Draw_a_map"> Draw a <a href="Memory_Map_(x86)" title="Memory Map (x86)">map</a> </span></h2>
+<p>Or type it out. An x86 bootsector is loaded at 0x00007C00 in physical memory. There's a BIOS area at 0x00000000 to 0x000004FF, and there's an EBDA somewhere between 0x00080000 and 0x0009FFFF. There's a lot of memory again after 0x00100000 but you can't tell the BIOS to use it, you'll have to check for it, enable it, and real mode dislikes it in general, so you don't want to avoid going there as long as possible.
+</p><p>Plot in this map where you will put a stack (give it 0x1000 bytes), where you want to load any pieces from the disk like second stages, <a href="FAT" title="FAT">FAT</a> tables and anything else that does not come preallocated within your bootsector. Look up how big everything is, and make sure nothing overlaps with anything else. You need this later, and 
+</p><p><b>You will have to tell us what's in your map if you decide to ask a question later</b>
+</p>
+<h3> <span class="mw-headline" id="You_read_something_from_disk_and_did_not_put_it_on_the_memory_map"> You read something from disk and did not put it on the memory map </span></h3>
+<p>And more often than not, the fact that you're looking here is that you just loaded a sector from disk over your stack or your existing code.
+</p>
+<h2> <span class="mw-headline" id="90.25_of_the_errors_happen_within_the_first_10_lines_of_assembly"> 90% of the errors happen within the first 10 lines of assembly </span></h2>
+<p>And more than often several. Fix them all.
+</p><p>In real mode, memory is always accessed as segment*16 + offset. There's always a segment involved, and there's always an offset involved in anything real-mode related. Now that you have your map, you'll have to find yourself pairs of segments and offsets that point to each of those addresses. There are three standard methods of going at it.
+</p>
+<ul><li> <b>The segment is zero, making the offset the physical address.</b> This limits you to the first 64k of memory, but that might also exactly be the memory you want.
+</li><li> <b>The offset is zero, making the segment the physical address divided by 16.</b> You're not allowed to round off. You also need to be careful with that you need to set segment registers all over the place.
+</li><li> <b>The offset is the lowest 16 bits of the address, and the next four bits end up in the segment followed by three zeroes</b>. Write it out on paper. It's more complicated, but it works for any address in the 640K you could think of.
+</li></ul>
+<h3> <span class="mw-headline" id="There.27s_no_ORG_statement"> There's no ORG statement </span></h3>
+<p>Your code involves a CS and an IP, the segment and offset. Your data is in the same block, using another segment register and offset. ORG tells the assembler at which offset, not the segment, you will be using it. If you picked segment=0 and offset=0x7C00, then ORG 0x7C00 is correct. If you pick segment=0x07C0 and offset=0 then ORG 0 is required. This might happen to be the default for many assemblers, but if you don't put it there we will assume it's wrong anyway.
+</p>
+<h3> <span class="mw-headline" id="There.27s_no_BITS_16_statement"> There's no BITS 16 statement </span></h3>
+<p>There are several execution modes. Don't let your assembler guess one.
+</p>
+<h3> <span class="mw-headline" id="There.27s_no_reference_to_SS_or_SP"> There's no reference to SS or SP </span></h3>
+<p>All, but a select few of the registers are undefined. The stack is not where you put it on your map. Set it or things will break.
+</p>
+<pre>MOV AX, 0
+MOV SS, AX
+MOV SP, 0x7C00
+</pre>
+<p>This puts the stack directly in front of your bootsector. That means you also occupy 0x6C00-0x7BFF and can't use it for anything else after this.
+</p>
+<h3> <span class="mw-headline" id="The_value_of_SP_ends_in_an_0xF"> The value of SP ends in an 0xF </span></h3>
+<p>You stole some code off the internet. Shame on you, and I hope you learnt not to use tutorials in the future. The stack should be a multiple of two in real mode (the number of bytes you PUSH and POP each time). Failure to do so makes your code slower - up to 25%!
+</p>
+<h3> <span class="mw-headline" id="The_value_of_SP_points_to_the_beginning_of_the_stack_in_memory"> The value of SP points to the beginning of the stack in memory </span></h3>
+<p>The stack grows downwards. SP should be the first byte after the stack's memory. If that would make it 0x10000, set it to zero, because in 16-bit numbers the -2 it will do before writing will automatically wrap it around back to 0xFFFE
+</p>
+<h3> <span class="mw-headline" id="The_value_of_SP_ends_in_an_0xE"> The value of SP ends in an 0xE </span></h3>
+<p>SP is reduced by two for each push operation. Suddenly it writes two bytes at 0x..C and 0x..D wasting the bytes at 0x..E and 0x..F
+</p>
+<h3> <span class="mw-headline" id="There.27s_a_PUSH.2C_CALL_or_INT_before_SS_is_being_set"> There's a PUSH, CALL or INT before SS is being set </span></h3>
+<p>You just wrote over some memory SS:SP happened to point at. Now every BIOS call will fail because of this.
+</p>
+<h3> <span class="mw-headline" id="SP_isn.27t_set_in_the_instruction_immediately_after_SS"> SP isn't set in the instruction immediately after SS </span></h3>
+<p>If an interrupt happens, it will use an old SP and a new SS. Setting SS prevents interrupts for the next instruction, so that has to be SP.
+</p>
+<h3> <span class="mw-headline" id="There.27s_no_reference_to_DS_or_ES"> There's no reference to DS or ES </span></h3>
+<p>You can't use any data in your bootsector. Every piece of data is accessed by a segment and an offset, so you have to set the segment because it's not pointing anywhere yet. The assembler will deal with the offsets if you have the right ORG statement.
+</p><p>Several BIOS calls require you to supply a value in a segment register. Be sure to restore it again.
+</p>
+<h3> <span class="mw-headline" id="There.27s_a_save_of_the_boot_drive_number_before_DS_is_set"> There's a save of the boot drive number before DS is set </span></h3>
+<p>To reiterate on the previous point, you cannot e.g. store the <a href="MBR_(x86)#MBR_Bootstrap" title="MBR (x86)">boot drive number</a> (passed to your bootloader in the DL register) in a variable at some memory location before you've first correctly set up DS.
+</p>
+<h3> <span class="mw-headline" id="A_segment_register_contains_9xxx_or_8xxx"> A segment register contains 9xxx or 8xxx </span></h3>
+<p>You're writing into the EBDA and you just broke the BIOS.
+</p>
+<h2> <span class="mw-headline" id="BIOS_specific_problems"> BIOS specific problems </span></h2>
+<p>Unfortunately the BIOS is poorly standardised leading to various and sometimes poorly written implementations. Because of this BIOS specific situations can arise that will cause it not to load a bootloader. As an example some BIOSes may require a valid partition table to exist at byte adress 0x1BE of the storage device. Furthermore, if you use older hardware for testing, the BIOS may not support int 13h extensions - most notably LBA support.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 87/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3688-0!*!0!!en!*!* and timestamp 20180121075440 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=My_Bootloader_Does_Not_Work&amp;oldid=19641">http://wiki.osdev.org/index.php?title=My_Bootloader_Does_Not_Work&amp;oldid=19641</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:FAQ" title="Category:FAQ">FAQ</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=My_Bootloader_Does_Not_Work" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="My_Bootloader_Does_Not_Work"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:My_Bootloader_Does_Not_Work&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="My_Bootloader_Does_Not_Work#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="My_Bootloader_Does_Not_Work" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=My_Bootloader_Does_Not_Work&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=My_Bootloader_Does_Not_Work&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="My_Bootloader_Does_Not_Work#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/My_Bootloader_Does_Not_Work" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/My_Bootloader_Does_Not_Work" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=My_Bootloader_Does_Not_Work&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=My_Bootloader_Does_Not_skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/My_Bootloader_Does_Not_Work" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/My_Bootloader_Does_Not_Work" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=My_Bootloader_Does_Not_Work&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=My_Bootloader_Does_Not_Work&amp;oldid=19641" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 1 August 2016, at 03:46.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,086 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

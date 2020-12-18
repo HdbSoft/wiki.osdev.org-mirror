@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Network Stack - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="Network_Stack" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Network_Stack", "wgTitle": "Network Stack", "wgCurRevisionId": 19283, "wgArticleId": 2538, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "Networking"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Network_Stack action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Network Stack</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=Networking&amp;redirect=no" title="Networking">Networking</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Networking#mw-head">navigation</a>,
+					<a href="Networking#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>This article is about writing a TCP/IP stack, ie. a subsystem which uses a link layer (eg. ethernet card) to process packets of such protocols as IP, <a href="Address_Resolution_Protocol" title="Address Resolution Protocol">ARP</a>, TCP, UDP.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Networking#Scanning_the_PCI_devices"><span class="tocnumber">1</span> <span class="toctext">Scanning the PCI devices</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Networking#Writing_a_driver_for_your_NIC"><span class="tocnumber">2</span> <span class="toctext">Writing a driver for your NIC</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Networking#Networking_protocols"><span class="tocnumber">3</span> <span class="toctext">Networking protocols</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Networking#The_network_stack"><span class="tocnumber">4</span> <span class="toctext">The network stack</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Networking#Little_and_big_endian"><span class="tocnumber">5</span> <span class="toctext">Little and big endian</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Networking#Checksums"><span class="tocnumber">6</span> <span class="toctext">Checksums</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Networking#ARP"><span class="tocnumber">7</span> <span class="toctext">ARP</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Networking#TCP"><span class="tocnumber">8</span> <span class="toctext">TCP</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="Networking#Establishing_a_connection"><span class="tocnumber">8.1</span> <span class="toctext">Establishing a connection</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Networking#Transmitting_data"><span class="tocnumber">8.2</span> <span class="toctext">Transmitting data</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="Networking#Closing_the_connection"><span class="tocnumber">8.3</span> <span class="toctext">Closing the connection</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="Networking#An_example"><span class="tocnumber">8.4</span> <span class="toctext">An example</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="Networking#What_to_focus_on"><span class="tocnumber">9</span> <span class="toctext">What to focus on</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="Networking#General_considerations"><span class="tocnumber">10</span> <span class="toctext">General considerations</span></a></li>
+<li class="toclevel-1 tocsection-15"><a href="Networking#See_Also"><span class="tocnumber">11</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-16"><a href="Networking#Articles"><span class="tocnumber">11.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="Networking#Threads"><span class="tocnumber">11.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="Networking#External_Links"><span class="tocnumber">11.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Scanning_the_PCI_devices"> Scanning the PCI devices </span></h2>
+<p>The first thing to do is to scan the PCI devices installed on the machine so you can detect an Ethernet card by looking at a specific vendor ID and device ID. See the <a href="PCI" title="PCI">PCI</a> page for more details.
+</p>
+<h2> <span class="mw-headline" id="Writing_a_driver_for_your_NIC"> Writing a driver for your NIC </span></h2>
+<p>Once you have located the Ethernet card(s), you will need to implement a driver for it to be able to send and receive data. If you are using an emulator, a good card to write a driver for is the Intel E1000 as it is available on a variety of emulators such as VirtualBox - and has a thorough coverage on osdev.org (see <a href="Intel_Ethernet_i217" title="Intel Ethernet i217">Intel Ethernet i217</a>).
+</p><p>The first thing to get out of the Ethernet card is the machine's MAC address. This 6-bytes address is needed to exchange data on the local network.
+</p><p>The easiest test you can do is to send an ARP broadcast on the network. You can use <a rel="nofollow" class="external text" href="https://www.wireshark.org/">Wireshark</a> both to capture an example of a valid ARP request and to verify your own request has been received by the target host. As far as receiving data, your network card should capture data sent across the local network, even if it is not addressed to your machine.
+</p>
+<h2> <span class="mw-headline" id="Networking_protocols"> Networking protocols </span></h2>
+<p>Once you can send and receive data through your NIC and have your machine's MAC address, you will have to implement (at least partially) several networking protocols that coexist on top of each other:
+</p>
+<ul><li> Ethernet: this is the basic protocol that sends data to another machine on your local network using your MAC address. This is the building block for all the rest as you need to send data to the router if you want to communicate with the outside world.
+<ul><li> <a href="ARP" title="ARP" class="mw-redirect">ARP</a> (Address Resolution Protocol): allows to translate an IPv4 address into a MAC address
+</li><li> IP (Internet Protocol): this sits on top of Ethernet and is required to send data on the Internet given an IP address. The mostly common version is IPv4 which uses a 32-bit IP address, but IPv6 (which is using 128-bit IP addresses) is gaining some traction. Note that IP provides a "best effort" to send a packet, but does not guarantee it will successfully reach its destination, nor that the packets will be received in the order they were sent
+<ul><li> <a href="ICMP" title="ICMP" class="mw-redirect">ICMP</a> (Internet Control Message Protocol): used by tools such as ping or traceroute
+</li><li> UDP (User Datagram Protocol): a connectionless transmission protocol that adds the notion of source and target ports to IP. Application services can subscribe to one or more port(s) to be notified if a UDP message is sent to that port
+<ul><li> DHCP (Dynamic Host Configuration Protocol): allows to request the machine network configuration information such as its IP address, the IP address of the local router, the DNS, etc.
+</li><li> DNS (Domain Name System): get the IP address for a given domain name
+</li></ul>
+</li><li> TCP (Transmission Control Protocol): like UDP, it adds the notion of source and destination port. TCP is however more complex as it creates its own session mechanism and makes sure that the application using it will receive the packets in order, resending packets if need be. 
+<ul><li> <a href="SSL/TLS" title="SSL/TLS">SSL/TLS</a> (optional): if you want to use a secure connection
+<ul><li> HTTP (HyperText Transfer Protocol): defines a request and response mechanism to transfer web pages, images and other resources.
+</li><li> Telnet: a protocol to remotely access a machine using a command line shell.
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+<p>A tool of choice to help you will be <a rel="nofollow" class="external text" href="https://www.wireshark.org/">Wireshark</a>, a free network sniffer and analyzer. It is a great tool to understand how the various networking protocols are encoded as it explains in great details what each byte of a packet corresponds to. Note that on Windows, Wireshark does not capture the loopback traffic (i.e. traffic made from localhost to localhost), so may not capture network traffic between an emulator and the host machine. You can however use Rawcap to capture the networking traffic into a file and use Wireshark to examine it.
+</p>
+<h2> <span class="mw-headline" id="The_network_stack"> The network stack </span></h2>
+<p>Networking protocols are organized as a stack where each layer calls the next layer. A packet sent across the network will be composed of several headers, one for each layer involved.
+</p><p>Consider the example of a DHCP request. This is one of the protocols you might want to implement early on as it allows your machine to find its IP address, get the local router IP address, the DNS IP address - the basic information to be able to properly communicate across the network.
+</p><p>One way to implement this is as follows:
+</p>
+<ul><li> The Operating System decides to send a DHCP request, so calls the DHCP layer
+<ul><li> The DHCP layer asks the UDP layer to create a packet whose target is IP address 255,255,255,255 (broadcast to the whole local network), port 53, and whose payload size is 300 bytes (the length may vary)
+<ul><li> The UDP layer asks the IP layer to create a packet of type UDP to IP address 255,255,255,255, of size 308 bytes
+<ul><li> The IP layer asks the Ethernet layer to create a packet of type IPv4 of length 328 bytes whose target is IP address 255,255,255,255
+<ul><li> The Ethernet layer creates a packet of size 342 bytes, and writes in the first 14 bytes the Ethernet header, including the source address (the machine's MAC address), the destination MAC address FF:FF:FF:FF:FF:FF (translated from the IP address 255,255,255,255) and sends it back to the IP layer
+</li></ul>
+</li><li> The IP layer writes the IP header in the 20 bytes after the Ethernet header and sends it to the UDP layer
+</li></ul>
+</li><li> The UDP layer writes its header in the 8 bytes after the IP header and sends it to the DHCP layer
+</li></ul>
+</li><li> The DHCP layer writes its request in the 300 bytes left and sends it back to the UDP layer
+<ul><li> The UDP layer completes its header by writing its checksum (which encompasses the DHCP message) and sends it to the IP layer
+<ul><li> The IP layer sends it to the Ethernet layer
+<ul><li> The Ethernet layer sends the packet to the Ethernet card, that sends the message across the network
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+<p>The packet actually sent across the network will look like:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td> Ethernet header (14 bytes)
+</td></tr>
+<tr>
+<td> IPv4 header (20 bytes)
+</td></tr>
+<tr>
+<td> UDP header (8 bytes)
+</td></tr>
+<tr>
+<td> The DHCP request (300 bytes payload)
+</td></tr></table>
+<p>The DHCP response will have the same format as the request, and should be processed as follows:
+</p>
+<ul><li> The Ethernet card driver will verify that the target MAC is the current machine's, and if so sends the packet to the Ethernet layer
+</li><li> The Ethernet layer will look at the Ethernet header, check the service type (which should be IP) and will send the packet (stripped of its Ethernet header) to the IP layer
+</li><li> The IP layer will check the IP header, verify the checksum and, because its type is UDP will forward the packet (without its IP header) to the UDP layer.
+</li><li> The UDP layer will check the UDP header, verify the checksum, and based on the destination port will send the payload to right service - in this example the DHCP layer (once again stripping the UDP header)
+</li><li> The DHCP layer will read the DHCP message verify that the message type is Response (i.e. It's a response from the router) and will retrieve its IP address, the router's IP address and other networking configuration information.
+</li></ul>
+<p>Note that networking protocols are by definition asynchronously i.e. you send a request on the network and you need to wait for its response. In particular, you have no way of predicting when will a response arrive, if at all. And because an incoming packet is handled by an interrupt handler, it could interrupt your code at any time.
+</p>
+<h2> <span class="mw-headline" id="Little_and_big_endian"> Little and big endian </span></h2>
+<p>By convention, any message encoded on the Internet is using big endian (the most significant byte goes first). This is something to always keep in mind for people developing on Intel and AMD processors as x86 processors encode numbers using little endian. As a result, you will have to often convert numbers. Here are two functions to convert the endian for 16 and 32-bit integers:
+</p>
+<pre>   uint16_t switch_endian16(uint16_t nb) {
+       return (nb&gt;&gt;8) | (nb&lt;&lt;8);
+   }
+   
+   uint_t switch_endian32(uint_t nb) {
+       return ((nb&gt;&gt;24)&amp;0xff)      |
+              ((nb&lt;&lt;8)&amp;0xff0000)   |
+              ((nb&gt;&gt;8)&amp;0xff00)     |
+              ((nb&lt;&lt;24)&amp;0xff000000);
+   }
+</pre>
+<h2> <span class="mw-headline" id="Checksums"> Checksums </span></h2>
+<p>Several networking protocols use a checksum to verify that the message was not accidentally altered during the transport. Without a valid checksum, the packet is likely to be ignored. The checksum is a 16-bit number computed as follows:
+</p>
+<ul><li> Split the message to checksum into 16-bit chunks
+</li><li> Add those chunks
+</li><li> If the message has an odd number of bytes, the last byte should be counted as the higher byte (e.g. if the last byte is 0x42 then add 0x4200)
+</li><li> If the sum does not fit in a 16-bit number (i.e. is greater than 0xFFFF), strip the top 16 bits and add them to the low 16 bits. Repeat the last step until you have a 16-bit sum
+</li><li> Return the binary inverse of that sum
+</li></ul>
+<p>The IP checksum only covers its own header. The UDP and TCP checksums are a bit more complex as they include the UDP/TCP header, the payload (i.e. anything after the UDP/TCP header) as well as a "pseudo header" composed of the source and target IP addresses, the IP type (0x11 for UDP, 0x06 for TCP) and the UDP/TCP message length (starting with the UDP/TCP header).
+</p><p>If properly computing the checksum can be tricky, Wireshark can help you. For this, make sure that it is verifying the checksum (an option not enabled by default) by going to Edit / Preferences / Protocols, select the desired protocol (e.g. UDP, TCP, IPv4) and make sure that "Validate the checksum if possible" is checked. This way, Wireshark will tell you if the checksum is valid, and if not, what its value should be.
+</p>
+<h2> <span class="mw-headline" id="ARP"> ARP </span></h2>
+<p>The ARP protocol will be one of the first protocols you will need to implement. Without it, you will not be able to communicate on your local network, let alone on the Internet. Fortunately this is a simple protocol which only requires to implement a few functions:
+</p>
+<ul><li> Sending requests and processing replies: your OS will need to perform a request to convert an IP address into a MAC address, something which is required to even communicate with your local router. This implies not only sending a request packet but also processing the reply when it comes so your OS can update its ARP table
+</li><li> Receiving requests and sending replies: your OS will also need to honor the requests sent its way (e.g. when someone asks what is its MAC address). In particular, the local router will send an ARP requests to your machine on a regular basis. Failure to respond will have the router consider your machine is down, and won't forward any more traffic to it
+</li></ul>
+<h2> <span class="mw-headline" id="TCP"> TCP </span></h2>
+<p>TCP is one of the most complex networking protocols.
+</p><p>First of all, it creates a virtual connection between the client and the server. To achieve this, a TCP header contains multiple flags that will be used by both sides to communicate about the status of that connection: SYN (synchronize), ACK (acknowledge), PSH (Push), FIN (finish) and others.
+</p><p>On top of that, TCP is trying to alleviate the fact that IP does not guarantee that packets will be received in the order they were sent, let alone received at all. This is why it keeps track of the amount of data actually sent, requires each side to regularly acknowledge the data they have received, and will have packets resent if need be. For this, a TCP header contains a sequence number and an acknowledgement number.
+</p><p>In the course of a TCP connection, both sides send each other some data, split across multiple packets. One way to measure where the communication stands is to send the position (in number of bytes) in that communication. The sequence number in a TCP packet is the position the current packet is at. Likewise, the acknowledgement number indicates the position (still in bytes) where one party expects the other party to send.
+</p><p>When either side receives a TCP packet with a sequence number S, an acknowledgement number A and a payload of size N, its next packet it sends should have the sequence number A (i.e. it's sending the data the other party expects) and the acknowledgement number S + N (or S+1 if N is null).
+</p>
+<h3> <span class="mw-headline" id="Establishing_a_connection"> Establishing a connection </span></h3>
+<p>A TCP connection is established with the following 3-way handshake:
+</p>
+<ul><li> The client sends a SYN request to the server (i.e. a message with the SYN flag set)
+</li><li> The server responds with an SYN+ACK request (the standard also allows it to send an ACK and SYN separately, though that rarely happens).
+</li><li> The client sends an ACK response.
+</li></ul>
+<p>The sequence number used in the SYN packets is the initial sequence number; all further packets shall use sequence numbers that are increments of the initial sequency number.  The sequence number can be reset by sending a new SYN packet with a new sequence number.
+</p><p>The initial SYN and SYN+ACK packets "may" also contain data to be sent to the application, but this is rarely used.  The TCP specification states that this data shall not be delivered to the application until the connection is established (i.e. after the final ACK response packet is received).
+</p>
+<h3> <span class="mw-headline" id="Transmitting_data"> Transmitting data </span></h3>
+<p>To send data, either side can send a PSH, ACK message, with the actual data after the TCP header. The other party will need to send an ACK message to acknowledge it has received the packet. If not, the sender will send again the packet. This is where multiple TCP/IP implementations differ - some may wait more or less long before sending an ACK.
+</p>
+<h3> <span class="mw-headline" id="Closing_the_connection"> Closing the connection </span></h3>
+<p>The termination of the connection&#160;:
+</p>
+<ul><li> The side that wants to close the connection sends a packet with a FIN flag
+</li><li> The other side sends a FIN, ACK message
+</li><li> The first side sends an ACK message
+</li></ul>
+<p>Like for the packets used to establish a connection, those packets do not contain any payload - just a TCP header.
+</p>
+<h3> <span class="mw-headline" id="An_example"> An example </span></h3>
+<p>Let's look at an example of a TCP communication for an HTTP GET request:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th> Source -&gt; Destination
+</th>
+<th> Destination -&gt; Source
+</th>
+<th> Comment
+</th></tr>
+<tr>
+<td> Flag: SYN
+<p>seq_nb=0, ack_nb=0
+</p>
+</td>
+<td>
+</td>
+<td> Beginning of the TCP handshake. It is sending byte #0 (a packet without a payload will be considered to have at least one byte communication) and hasn't received any data yet from the server
+</td></tr>
+<tr>
+<td>
+</td>
+<td> Flags: SYN, ACK
+<p>seq_nb=0, ack_nb=1
+</p>
+</td>
+<td>
+</td></tr>
+<tr>
+<td> Flag: ACK
+<p>seq_nb=1, ack_nb=1
+</p>
+</td>
+<td>
+</td>
+<td> The TCP handshake is completed, the communication can start
+</td></tr>
+<tr>
+<td> Flags: PSH, ACK
+<p>seq_nb=1, ack_nb=1, len=77
+</p>
+</td>
+<td>
+</td>
+<td> This is the HTTP GET request sent by the client. This is the first packet with an actual payload
+</td></tr>
+<tr>
+<td>
+</td>
+<td> Flag: ACK
+<p>seq_nb=1, ack_nb=78
+</p>
+</td>
+<td> The server acknowledges the HTTP request: it has successfully read up to byte #77, so expects the next communication to start at byte #78
+</td></tr>
+<tr>
+<td>
+</td>
+<td> Flags: PSH, ACK
+<p>seq_nb=1, ack_nb=78, len=1009
+</p>
+</td>
+<td> This is the body of the HTML
+</td></tr>
+<tr>
+<td> Flag: ACK
+<p>seq_nb=78, ack_nb=1010
+</p>
+</td>
+<td>
+</td>
+<td> The client acknowledges the message sent by the server: it is sending byte #78, and has receveid up to byte #1009 so expects the next communication to start at byte #1010
+</td></tr>
+<tr>
+<td> Flags: FIN, ACK
+<p>seq_nb=78, ack_nb=1010
+</p>
+</td>
+<td>
+</td>
+<td> The client terminates the TCP connection
+</td></tr>
+<tr>
+<td>
+</td>
+<td> Flags: FIN, ACK
+<p>seq_nb=1010, ack_nb=79
+</p>
+</td>
+<td>
+</td></tr>
+<tr>
+<td> Flag: ACK
+<p>seq_nb=79, ack_nb=1011
+</p>
+</td>
+<td>
+</td>
+<td> The end of the TCP communication
+</td></tr></table>
+<h2> <span class="mw-headline" id="What_to_focus_on"> What to focus on </span></h2>
+<p>The shape of the stack will vary on design decisions. These may include
+</p>
+<ul><li> whether or not a packet is passed between processing layers in one buffer or is copied to a new buffer when passing a layer boundary;
+</li><li> whether in and outbound frames are communicated with the link layer with the use of a dedicated thread, are fully contained in an interrupt handler or in a loop in a single-threaded environment;
+</li><li> whether frames (eg. ethernet frames) are processed immediately or queued;
+</li><li> whether you want TCP support or just UDP or maybe only IP support; TCP is the most complex part of the stack, in the lwip implementation half of the code is specific to TCP.
+</li></ul>
+<p>As an example, a stack might
+</p>
+<ul><li> have the NIC's API provide three functions: setting up the NIC, poll for a frame and send a frame;
+</li><li> communicate in and outbound frames to the NIC in a one thread;
+</li><li> demultiplex inbound frames from a reception queue in another thread.
+</li></ul>
+<h2> <span class="mw-headline" id="General_considerations"> General considerations </span></h2>
+<ul><li> When writing a stack over an ethernet, you may want to provide support for the ARP protocol and resolve functions.
+</li><li> For the sake of modularity, the station's IP would be better stored in an nic_info struct rather than as a global variable.
+</li><li> You may want to use Wireshark or another packet sniffer to inspect the communication and netcat which would dump debugging data sent from your OS once you have UDP or TCP support. Also, arping is useful when debugging arp code. You may code a trigger which for example reboots your system upon receipt of an ARP who-has for a chosen IP.
+</li><li> You may use a dedicated ethernet card on one computer connected with a crossed over cable to another computer (which runs your operating system) and use static IP. Other options include testing under bochs or qemu after implementing drivers for the network devices they provide.
+</li></ul>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Diskless_Booting" title="Diskless Booting">Diskless Booting</a>
+</li><li> <a href="Category:Network_Hardware" title="Category:Network Hardware">Network Hardware</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://focus.ti.com/lit/an/slaa137a/slaa137a.pdf">Details on a implementation of a embedded web server with overview of the hardware, TCP/IP suite, TCP/IP stack and its API.</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.faqs.org/rfcs/rfc793.html">RFC 793 - Transmission Control Protocol</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.amazon.com/TCP-Illustrated-Protocols-Addison-Wesley-Professional/dp/0201633469/ref=pd_bbs_sr_1?ie=UTF8&amp;s=books&amp;qid=1229662804&amp;sr=8-1">TCP/IP Illustrated - A must have book for any type of networking, great reference book</a>
+</li></ul>
+<p>A number of tcp/ip stacks come with a documentation of their implementations; it makes a good read.
+</p>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.cs.northwestern.edu/~pdinda/minet/">Minet: A User-level TCP/IP Stack</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.sics.se/~adam/uip/index.php/Main_Page">uIP tiny stack for 8-bit embedded microcontrollers</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.sics.se/~adam/lwip/">lwIP light-weight implementation</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 117/1000000
+Post-expand include size: 671/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2538-0!*!0!!en!2!* and timestamp 20180121061310 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Network_Stack&amp;oldid=19283">http://wiki.osdev.org/index.php?title=Network_Stack&amp;oldid=19283</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:Networking" title="Category:Networking">Networking</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Network_Stack" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Network_Stack"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Network_Stack&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Networking#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Network_Stack" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Network_Stack&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Network_Stack&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Networking#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" reskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Network_Stack" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Network_Stack" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Network_Stack&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Network_Stack&amp;oldid=19283" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 28 May 2016, at 06:39.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,715 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.035 secs. -->
+	</body>
+</html>

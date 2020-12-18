@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Object Files - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="Object_Files" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Object_Files", "wgTitle": "Object Files", "wgCurRevisionId": 19508, "wgArticleId": 2864, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Object Files", "Theory"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Object_Files action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Object Files</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=Object_File&amp;redirect=no" title="Object File">Object File</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Object_File#mw-head">navigation</a>,
+					<a href="Object_File#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Object files basically consist of compiled and assembled code, data, and all the additional information necessary to make their content usable. In the process of building an operating system, you will use a lot of object files. While for common development tasks you do not need to know their exact details, when you want to create or use one with various specifics, the details can be very important. 
+</p><p><b>Note:</b> The term 'object file' has no relation to the high-level concept of 'object-oriented programming'. Object files predate the earliest forms of OOP (the 'Actors model', circa 1966) by over ten years, and the term was in use at IBM by 1958 or earlier.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Object_File#Core_Concepts"><span class="tocnumber">1</span> <span class="toctext">Core Concepts</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Object_File#Object_files.2C_executable_files_and_library_files"><span class="tocnumber">2</span> <span class="toctext">Object files, executable files and library files</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Object_File#Relocations"><span class="tocnumber">3</span> <span class="toctext">Relocations</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="Object_File#Relocating_code"><span class="tocnumber">3.1</span> <span class="toctext">Relocating code</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Object_File#Common_errors"><span class="tocnumber">4</span> <span class="toctext">Common errors</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Core_Concepts"> Core Concepts </span></h2>
+<p>An object file is one of three types of files which contain <i>object code</i>, a modified form of machine code in which additional information that allows for linking and relocation of the final loaded executable is included. 
+</p><p>For most purposes, a compiler or assembler will produce object code as its final result, rather than a true executable binary. While most assemblers, and some compilers, have an option to produce a raw binary image, this is usually only applied to boot loaders, Read-Only Memory chips, and other special-purpose executables. As a practical matter, virtually all systems today use both object files and relocatable executables. Even the simplest file format in regular use today, the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/COM_file">MS-DOS .COM format</a>, is not a pure binary executable image; the MS-DOS loader uses the first 0x100 bytes of the segment for the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Program_Segment_Prefix">Program Segment Prefix</a>, so that portion of the segment image is excluded in the file. 
+</p><p>The majority of systems today have significantly more complex object formats, in which the address information is replaced with a stub or symbol of some kind, and which contain information regarding the relative location of externally visible functions, variables, and so forth. This facilitates the processes of 
+</p>
+<ul><li> linking, in which two or more object and/or library files are combined to form an executable file, and 
+</li><li> loading, where the address stubs are replaced by the loader with the actual memory locations that the code will reside within the process' memory.
+</li></ul>
+<h2> <span class="mw-headline" id="Object_files.2C_executable_files_and_library_files"> Object files, executable files and library files </span></h2>
+<p>Whereas Wikipedia considers executables to be a subset of object files, on the basis that both contain object code rather than a binary image, there are significant differences. In some systems, they are a completely different format (COFF vs PE), or they have different fields (ELF program/section headers). The key difference is that in executables, the full object code of the program is present (save for whatever may be in shared libraries, as explained below), while object files are only the object code for the specific module that they were generated from. This means that non-executable files do not contain loadable code. 
+</p><p>As stated earlier, this does not necessarily mean that the 'executable' file is the actual binary image that is executed; in most modern systems, that is produced in the loading step. In many cases, executable files still contain object code, not pure machine code, and the address locations may not be resolved until loading, but they <i>do</i> include all of the statically-linked code for the working program. Some linkers (such as <a href="LD" title="LD">ld</a>, the Unix/Linux linker, which is invoked implicitly by GCC when generating an executable) have the option of  - or even default to, as <a href="LD" title="LD">ld</a> does - resolving the addresses at link time, but even in this case, the executable files generated usually contain additional information to facilitate the loading process - e.g., a separate read-only data section, a definition of the writable data area (sometimes called the <i><a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/.bss">.bss section</a></i>), a section defining the stack area, etc. - and may have linkage information for using shared libraries.
+</p><p>A third type of object code file is a <i>library file</i>, a file that contains elements used by several programs, and made available for general use. Most functions, variables, and other elements used by the majority of programs are held in libraries. Libraries differ from regular object files mainly in that (on most systems) they are arranged so that independent elements of the library can be extracted from the file by the linker, so that only the elements used by the program are included in the executable generated from them.
+</p><p>On most systems today, libraries come in two types, <i>static libraries</i>, which are directly linked into into the executable file at linkage time, and <i>shared libraries</i> (also called <i>dynamic-link libraries</i> or DLLs in the Windows world), which are loaded and linked at run time to the programs which use them. The main difference is that shared libraries, as the name implies, can be shared by several programs at once, lowering memory usage. However, this comes at the cost of having to load the shared library in addition to the executable file when the first use of an element in them is made, and then linking it to the program(s) using them at run-time. Shared libraries are generally cached, to reduce the loading overhead, and usually are not loaded until the elements in them are actually used, meaning that if the part of the program using the shared library is not invoked, the library need not be loaded at all. Still, the trade-offs are such that code which isn't likely to be shared by several programs at once generally is linked as a static library instead, with only very common elements (e.g., the standard C and C++ libraries) being dynamically linked.
+</p>
+<h2> <span class="mw-headline" id="Relocations"> Relocations </span></h2>
+<p>A good part of the object file contains the code and its associated data. In source, code contains references to other functions and storage of data. In the object file such references are converted to instructions and relocation pairs, as the compiler can't tell in advance where the code will end up. As an example a function call on an x86 will look like this (in an object file):
+</p>
+<pre> 14:   e8 fc ff ff ff          call   15 &lt;sprintf+0x15&gt;
+                       15: R_386_PC32  vsnprintf 
+</pre>
+<p>The disassembly contains the opcode for call (e8) plus the offset -4 (fc ff ff ff). If this were to be executed it would make a call to address 15, which looks like halfway through the instruction. The second line (the relocation entry) lists that the address at position 15 (the -4) should be fixed with a displacement to the address of vsnprintf. That means it should get the address of the called function minus the address of the relocation. However blankly entering the difference would not work, as the call address is relative to the next instruction, not the start of the offset bytes halfway into an opcode. This is where the -4 comes in: the result of the relocation is added to the field being padded. By subtracting 4 (adding -4) from the address, the displacement becomes relative to the end of the instruction, and the call ends up where it should go. In the executable file:
+</p>
+<pre> 804a1d4:       e8 07 00 00 00          call   804a1e0 &lt;vsnprintf&gt;
+                        <b>804a1d5</b>: R_386_PC32     vsnprintf
+ <i>804a1d9</i>:       c9                      leave
+
+ (...)
+0804a1e0 &lt;vsnprintf&gt;:
+</pre>
+<p>The displacement needed for the call is the address of vsnprintf minus the address of the next instruction, i.e. <tt>0x804a1e0 - <i>0x804a1d9</i> = 0x7</tt>, which is the value seen in the call bytes (07 00 00 00). This is equivalent to the address of the target minus the address of the relocation plus the value stored: <tt>0x804a1e0 - <b>0x804a1d5</b> + -4 = 0x7</tt>.
+</p>
+<h3> <span class="mw-headline" id="Relocating_code"> Relocating code </span></h3>
+<p>When an executable is created, it will be set to use a specific address by default. This can be a problem when you need several object files in the same address space and they may overlap, or you want to perform address space randomization, you might find relocating an executable an option.
+</p><p>Since relocations are only needed to build an executable, but not when you run it, they normally aren't present in a linked file. Instead you need to specifically tell the linker to emit relocations when necessary. For the <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a>, this can be done with the <tt>-q</tt> switch. Note that the <tt>-i</tt> and <tt>-r</tt> switches have a similar description, but cause the linker to yield an object file rather than an executable.
+</p><p>Relocating is of itself fairly straightforward by finding the differences. Start with loading the sections to the location of your choice, then for each relocation entry:
+</p>
+<ul><li> compute the original address where the relocation was applied
+</li><li> compute the address where the relocation applies now (its moved by the same amount you moved the original section from its original location)
+</li><li> do the same for the destination of the relocation
+</li><li> compute what the relocation value is - the destination for absolute relocations, and the destination minus the origin for relative relocations.
+</li><li> compute what the relocation value was using the original location.
+</li><li> subtract the old value from the new value
+</li><li> add the result to the original relocation value in memory.
+</li></ul>
+<p>If the sections are moved relatively to each other, then relocating can become as simple as only adding the displacement to the absolute relocations. The relative locations do not get changed as both the source and the target are moved by the same amount.
+</p>
+<h2> <span class="mw-headline" id="Common_errors"> Common errors </span></h2>
+<ul><li> <b>Passing -i or -r to ld.</b> It does not work except for some limited cases, as it generates a file where relocations have not been applied at all.
+</li><li> <b>Assuming code and data are continuous.</b> A pitfall when trying to make a PE file multiboot-compatible. A section is generally page-aligned (4k), but a PE file is sector-aligned (512b). So if a section is not multiple of 4k in size, relative addresses to the data section will be off by a multiple of 512 bytes as the gap has been removed from the binary. Worse, it is perfectly valid to have metadata sections between the various loadable sections, which can put addresses off. 
+</li><li> <b>Loading as a flat binary.</b> All executables that aren't flat binaries have a header up front. Blatantly loading a file and starting at the start will execute the header instead of your code. Again, there is a tutorial that tries to get away with this. 
+</li><li> <b>Assuming the entry point is at the start</b>. The linker has a certain amount of freedom in what order it loads the object files, and so does the compiler. That means that main doesn't need to be at the start of the code section.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 31/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2864-0!*!0!!en!*!* and timestamp 20180121031658 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Object_Files&amp;oldid=19508">http://wiki.osdev.org/index.php?title=Object_Files&amp;oldid=19508</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Object_Files" title="Category:Object Files">Object Files</a></li><li><a href="Category:Theory" title="Category:Theory">Theory</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Object_Files" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Object_Files"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Object_Files&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Object_File#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Object_Files" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Object_Files&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Object_Files&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Object_File#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joinskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Object_Files" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Object_Files" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Object_Files&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Object_Files&amp;oldid=19508" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 July 2016, at 07:15.</li>
+											<li id="footer-info-viewcount">This page has been accessed 52,264 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.034 secs. -->
+	</body>
+</html>

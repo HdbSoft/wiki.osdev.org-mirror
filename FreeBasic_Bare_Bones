@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>FreeBasic Bare Bones - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "FreeBasic_Bare_Bones", "wgTitle": "FreeBasic Bare Bones", "wgCurRevisionId": 18421, "wgArticleId": 2155, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 2 Tutorials", "Bare bones tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-freebasic {line-height: normal;}
+.source-freebasic li, .source-freebasic pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for freebasic
+ * CSS class: source-freebasic, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.freebasic.source-freebasic .de1, .freebasic.source-freebasic .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.freebasic.source-freebasic  {font-family:monospace;}
+.freebasic.source-freebasic .imp {font-weight: bold; color: red;}
+.freebasic.source-freebasic li, .freebasic.source-freebasic .li1 {font-weight: normal; vertical-align:top;}
+.freebasic.source-freebasic .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.freebasic.source-freebasic .li2 {font-weight: bold; vertical-align:top;}
+.freebasic.source-freebasic .kw1 {color: #b1b100;}
+.freebasic.source-freebasic .co1 {color: #808080;}
+.freebasic.source-freebasic .co2 {color: #339933;}
+.freebasic.source-freebasic .es0 {color: #000099;}
+.freebasic.source-freebasic .br0 {color: #66cc66;}
+.freebasic.source-freebasic .sy0 {color: #66cc66;}
+.freebasic.source-freebasic .st0 {color: #ff0000;}
+.freebasic.source-freebasic .nu0 {color: #cc66cc;}
+.freebasic.source-freebasic .me0 {color: #66cc66;}
+.freebasic.source-freebasic .ln-xtra, .freebasic.source-freebasic li.ln-xtra, .freebasic.source-freebasic div.ln-xtra {background-color: #ffc;}
+.freebasic.source-freebasic span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-qbasic {line-height: normal;}
+.source-qbasic li, .source-qbasic pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for qbasic
+ * CSS class: source-qbasic, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.qbasic.source-qbasic .de1, .qbasic.source-qbasic .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.qbasic.source-qbasic  {font-family:monospace;}
+.qbasic.source-qbasic .imp {font-weight: bold; color: red;}
+.qbasic.source-qbasic li, .qbasic.source-qbasic .li1 {font-weight: normal; vertical-align:top;}
+.qbasic.source-qbasic .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.qbasic.source-qbasic .li2 {font-weight: bold; vertical-align:top;}
+.qbasic.source-qbasic .kw1 {color: #a1a100;}
+.qbasic.source-qbasic .kw3 {color: #000066;}
+.qbasic.source-qbasic .co1 {color: #808080;}
+.qbasic.source-qbasic .co2 {color: #808080;}
+.qbasic.source-qbasic .co3 {color: #8080C0;}
+.qbasic.source-qbasic .es0 {color: #000099;}
+.qbasic.source-qbasic .br0 {color: #66cc66;}
+.qbasic.source-qbasic .sy0 {color: #66cc66;}
+.qbasic.source-qbasic .st0 {color: #ff0000;}
+.qbasic.source-qbasic .nu0 {color: #cc66cc;}
+.qbasic.source-qbasic .re1 {color: #cc66cc;}
+.qbasic.source-qbasic .re2 {color: #339933;}
+.qbasic.source-qbasic .ln-xtra, .qbasic.source-qbasic li.ln-xtra, .qbasic.source-qbasic div.ln-xtra {background-color: #ffc;}
+.qbasic.source-qbasic span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-FreeBasic_Bare_Bones action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">FreeBasic Bare Bones</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="FreeBasic_Bare_Bones#mw-head">navigation</a>,
+					<a href="FreeBasic_Bare_Bones#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a><br />Medium</td></tr></table>
+<p>While the forum has several flamewars about BASIC, it is a turing-complete language. FreeBasic adds functionality that makes it suitable for OS development. This tutorial provides a working kernel in Basic, together with the pitfalls associated with it.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="FreeBasic_Bare_Bones#About_FreeBasic_and_the_Runtime"><span class="tocnumber">1</span> <span class="toctext">About FreeBasic and the Runtime</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="FreeBasic_Bare_Bones#Pointers_for_Beginners"><span class="tocnumber">2</span> <span class="toctext">Pointers for Beginners</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="FreeBasic_Bare_Bones#Tuning_FreeBasic_for_OS_Development"><span class="tocnumber">3</span> <span class="toctext">Tuning FreeBasic for OS Development</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="FreeBasic_Bare_Bones#The_code"><span class="tocnumber">4</span> <span class="toctext">The code</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="FreeBasic_Bare_Bones#kernel.bas"><span class="tocnumber">4.1</span> <span class="toctext">kernel.bas</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="FreeBasic_Bare_Bones#link.ld"><span class="tocnumber">4.2</span> <span class="toctext">link.ld</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="FreeBasic_Bare_Bones#Build_instructions"><span class="tocnumber">4.3</span> <span class="toctext">Build instructions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="FreeBasic_Bare_Bones#Getting_the_Runtime_to_work"><span class="tocnumber">5</span> <span class="toctext">Getting the Runtime to work</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="About_FreeBasic_and_the_Runtime"> About FreeBasic and the Runtime </span></h2>
+<p><a href="FreeBasic" title="FreeBasic" class="mw-redirect">FreeBasic</a> is a BASIC compiler with syntax compatible to QuickBasic, with several improvements that make it a viable compiler for Operating System Development. However, normal Basic programs rely heavily on part of the language that is called the Runtime. The Runtime consists of all operations that cannot be performed by a set of basic processor instructions. When engaging in operating systems development, you must be aware that you can not use anything that is part of the Runtime. That includes:
+</p>
+<ul><li> String operations. You can define strings, but not use them in any regular way.
+</li><li> Dynamic-sized arrays. Only arrays with a fixed size can be used, and even then some operations won't work on them.
+</li><li> Any input or output statements. Normally the program communicates with the OS about these things, but since we are <i>writing</i> the OS, these things can't be used.
+</li></ul>
+<p>When you get messages about undefined symbols starting with fb_, it means you are using parts of the Runtime.
+</p><p>To compensate, FreeBasic provides pointers that can be used to perform functionality the runtime would provide. Inline assembly can be used as well.
+</p>
+<h2> <span class="mw-headline" id="Pointers_for_Beginners"> Pointers for Beginners </span></h2>
+<p>Pointers can be difficult to understand. Many modern languages do not work with pointers, while if you know a language like C, C++ or Assembly, you will probably know what they do. Since you will need to use them, a quick introduction in how they work in FreeBasic.
+</p><p>The computer uses a set of registers, and memory. Memory is divided into bytes, each byte has its own location number. Big numbers, strings, types and arrays use up multiple bytes. These bytes are stored next to each other. A Long will hold 4 bytes, and will for example occupy locations 239394, 239395, 239396 and 239397. In the computer, these location numbers are called addresses (like the address when sending letters)
+</p><p>Pointers hold these location numbers. For bytes, they hold the exact address, for larger objects, it will hold the address of the lowest address (you can determine the other addresses as they will immediately follow the first)
+</p><p>In FreeBasic, a pointer is defined by adding the Ptr keyword.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="freebasic source-freebasic"><pre class="de1"> <span class="kw1">Dim</span> mypointer <span class="kw1">As</span> <span class="kw1">Byte</span> <span class="kw1">Ptr</span></pre></div></div>
+<p>This one holds the location of a byte of memory.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="freebasic source-freebasic"><pre class="de1"> <span class="kw1">Dim</span> mypointer <span class="kw1">As</span> <span class="kw1">Long</span> <span class="kw1">Ptr</span></pre></div></div>
+<p>This one points to the first of 4 bytes of memory, which together form the number.
+</p><p>You can not use pointers straight away. Consider sending a letter with no address on it will not do any good. So we must first put an address in there. That leads to the question: how do we get an address. Some things have fixed addresses, like the video card. 
+You can also ask variables for their addresses.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="freebasic source-freebasic"><pre class="de1"> <span class="kw1">Dim</span> variable <span class="kw1">as</span> <span class="kw1">Byte</span>
+ <span class="kw1">Dim</span> <span class="kw1">pointer</span> <span class="kw1">as</span> <span class="kw1">Byte</span> <span class="kw1">Ptr</span>
+ <span class="kw1">pointer</span> = @variable</pre></div></div>
+<p>The @ returns the address of the variable that follows it.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="freebasic source-freebasic"><pre class="de1"> <span class="kw1">Dim</span> <span class="kw1">pointer</span> <span class="kw1">as</span> <span class="kw1">Byte</span> <span class="kw1">Ptr</span>
+ <span class="kw1">Dim</span> address <span class="kw1">as</span> <span class="kw1">Long</span>
+ address = <span class="nu0">12345</span>
+ <span class="kw1">pointer</span> = CPtr<span class="br0">&#40;</span><span class="kw1">Byte</span> <span class="kw1">Ptr</span>, address<span class="br0">&#41;</span></pre></div></div>
+<p>Here CPtr (Convert to Pointer) is used to create pointers. You give it a type (Byte Ptr) and the address. You can also change pointers:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="freebasic source-freebasic"><pre class="de1"> <span class="kw1">Dim</span> pointer1 <span class="kw1">as</span> <span class="kw1">Byte</span> <span class="kw1">Ptr</span>
+ <span class="kw1">Dim</span> pointer2 <span class="kw1">as</span> <span class="kw1">Long</span> <span class="kw1">Ptr</span>
+ pointer2 = CPtr<span class="br0">&#40;</span><span class="kw1">Long</span> <span class="kw1">Ptr</span>, pointer1<span class="br0">&#41;</span></pre></div></div>
+<p>Be careful when you do so: a byte occupies one location in memory, a long occupies four. if we would use this pointer, we would use three locations in memory of which we know nothing about. Sometimes, they are necessary, like when we want to work with strings without having the Runtime.
+</p><p>You can access pointers with an index:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="freebasic source-freebasic"><pre class="de1"> <span class="kw1">Dim</span> value <span class="kw1">as</span> <span class="kw1">Long</span>
+ <span class="kw1">Dim</span> <span class="kw1">pointer</span> <span class="kw1">as</span> <span class="kw1">Long</span> <span class="kw1">Pointer</span>
+ <span class="kw1">pointer</span> = @value
+ <span class="co1">' value = pointer[0]</span></pre></div></div>
+<p>when we want to know what is behind the pointer, we ask for the memory at its location with the [ ], and then we add a number which tells us how many locations further to look. When we use [0] it simply means that we do not want to do anything with the address stored in the pointer. The result is the value stored in the memory locations pointed to by the pointer. For byte pointers, this will look at the address stored and return the result. For other pointers, it will look at a series of locations and return what those values represent.
+</p><p>Strings are useful, but tedious. A string is stored as a series of bytes in consecutive addresses. You can build a pointer to a string as well:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="freebasic source-freebasic"><pre class="de1"> <span class="kw1">Dim</span> s <span class="kw1">as</span> <span class="kw1">String</span>
+ <span class="kw1">Dim</span> <span class="kw1">pointer</span> <span class="kw1">as</span> <span class="kw1">String</span> <span class="kw1">Ptr</span>
+ <span class="kw1">pointer</span> = @s</pre></div></div>
+<p>But since we do not have the Runtime, we have to use something that does not use it.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="freebasic source-freebasic"><pre class="de1"> <span class="kw1">Const</span> s = <span class="st0">&quot;Text&quot;</span>
+ <span class="kw1">Dim</span> <span class="kw1">pointer</span> <span class="kw1">as</span> <span class="kw1">Byte</span> <span class="kw1">Ptr</span>
+ <span class="kw1">pointer</span> = CPtr<span class="br0">&#40;</span><span class="kw1">Byte</span> <span class="kw1">Ptr</span>, @s<span class="br0">&#41;</span>
+ <span class="co1">' pointer[0] = Asc(&quot;T&quot;)</span>
+ <span class="co1">' pointer[1] = Asc(&quot;e&quot;)</span>
+ <span class="co1">' pointer[2] = Asc(&quot;x&quot;)</span>
+ <span class="co1">' pointer[3] = Asc(&quot;t&quot;)</span>
+ <span class="co1">' pointer[4] = 0</span></pre></div></div>
+<p>The first example uses the Runtime which will not compile. The second example shows the only working method of using strings: Define one using Const, then ask for a pointer to that. Since a string is a sequence of characters (bytes), we change the type of the pointer in the process. Next we can ask for individual characters as if it were an array. However, they now appear as numbers. The ASCII codes to be precise, and the same as when you use Chr$() and Asc().
+</p><p>Basic uses an borrowed trick to tell us the end of the string. After the last character, there will always be a 0. So if we read a string in order, we can tell when it has ended.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="freebasic source-freebasic"><pre class="de1"> <span class="kw1">Sub</span> PrintString<span class="br0">&#40;</span>src <span class="kw1">As</span> <span class="kw1">Byte</span> <span class="kw1">Ptr</span>, x <span class="kw1">As</span> <span class="kw1">Long</span>, y <span class="kw1">As</span> <span class="kw1">Long</span><span class="br0">&#41;</span>
+&#160;
+    <span class="kw1">Dim</span> dst <span class="kw1">as</span> <span class="kw1">Byte</span> <span class="kw1">Ptr</span>
+    <span class="kw1">Dim</span> counter <span class="kw1">as</span> <span class="kw1">Long</span>
+&#160;
+    dst = CPtr<span class="br0">&#40;</span><span class="kw1">Byte</span> <span class="kw1">Ptr</span>, &amp;HB8000 + y * <span class="nu0">160</span> + x * <span class="nu0">2</span><span class="br0">&#41;</span>
+&#160;
+    counter = <span class="nu0">0</span>
+&#160;
+    <span class="kw1">while</span> src<span class="br0">&#91;</span>counter<span class="br0">&#93;</span> &lt;&gt; <span class="nu0">0</span>
+        dst<span class="br0">&#91;</span><span class="nu0">2</span> * counter<span class="br0">&#93;</span> = src<span class="br0">&#91;</span>counter<span class="br0">&#93;</span>
+        dst<span class="br0">&#91;</span><span class="nu0">2</span> * counter + <span class="nu0">1</span><span class="br0">&#93;</span> = <span class="nu0">15</span>
+        counter = counter + <span class="nu0">1</span>
+    <span class="kw1">wend</span>
+ <span class="kw1">End</span> <span class="kw1">Sub</span></pre></div></div>
+<p>To conclude, this function prints a string (a converted Byte Ptr string). It creates a pointer that is aimed at the <a href="Text_UI" title="Text UI">video card</a> (it occupies among others a range starting from address B8000 hex), and we pick a location in there. Next we take a character from the string, check if its 0, and if it isn't, copy it to the video card and go to the next character. Due to the way the video card works, we add a color (15) as well.
+</p>
+<h2> <span class="mw-headline" id="Tuning_FreeBasic_for_OS_Development"> Tuning FreeBasic for OS Development </span></h2>
+<p>A normal install of FreeBasic is in most cases configured to build for the system it was installed on. That means that it will try to compile programs for linux or windows OSes, rather than your own. 
+</p><p>To fix this, you should build at the very least a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">crosscompiling binutils</a> (2.17 or later recommended). While you're at it, you can also build GCC, which comes in handy once you start porting software written in C (that includes the runtime).
+</p><p>FreeBasic stores its auxiliary binaries in the bin directory, or a subdirectory thereof. To get started quickly, replace <code>ld</code>, <code>ar</code> and <code>as</code> with the versions built in the previous step. Note that this stops FreeBasic from working on its previous host.
+Under windows, the bin directory is subdivided into platforms, and you can add a new one rather than modifying the existing one. To use this, create the 'linux' directory, copy <code>i586-elf-ld</code>, <code>i586-elf-ar</code> and <code>i586-elf-as</code>, and rename them to <code>ld</code>, <code>ar</code> and <code>as</code>. When running freebasic you can use the <code>-t linux</code> command line switch to compile for your OS instead of windows, allowing you to continue using Freebasic normally for non-os development. The Linux version does not come with this target switch - here you'll have to replace the bundled binaries with your own versions.
+</p>
+<h2> <span class="mw-headline" id="The_code"> The code </span></h2>
+<p>Here is the entire project for reference
+</p>
+<h3> <span class="mw-headline" id="kernel.bas"> kernel.bas </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="qbasic source-qbasic"><pre class="de1"><span class="kw3">DECLARE</span> <span class="kw1">SUB</span> PrintString<span class="br0">&#40;</span>src <span class="kw3">AS</span> Byte Ptr<span class="sy0">,</span> x <span class="kw3">AS</span> <span class="kw3">LONG</span><span class="sy0">,</span> y <span class="kw3">AS</span> <span class="kw3">LONG</span><span class="br0">&#41;</span>
+<span class="kw3">DECLARE</span> <span class="kw1">SUB</span> main <span class="br0">&#40;</span><span class="br0">&#41;</span>
+&#160;
+<span class="kw1">SUB</span> multiboot <span class="br0">&#40;</span><span class="br0">&#41;</span>
+   Asm
+&#160;
+     <span class="co1">'setting up the Multiboot header - see GRUB docs for details</span>
+&#160;
+     .set ALIGN<span class="sy0">,</span>    <span class="nu0">1</span><span class="sy0">&lt;&lt;</span><span class="nu0">0</span>             
+     .set MEMINFO<span class="sy0">,</span>  <span class="nu0">1</span><span class="sy0">&lt;&lt;</span><span class="nu0">1</span>             
+     .set FLAGS<span class="sy0">,</span>    ALIGN | MEMINFO  
+     .set MAGIC<span class="sy0">,</span>    0x1BADB002       
+     .set CHECKSUM<span class="sy0">,</span> <span class="sy0">-</span><span class="br0">&#40;</span>MAGIC <span class="sy0">+</span> FLAGS<span class="br0">&#41;</span> 
+&#160;
+     .align <span class="nu0">4</span>
+     .<span class="kw3">LONG</span> MAGIC
+     .<span class="kw3">LONG</span> FLAGS
+     .<span class="kw3">LONG</span> CHECKSUM
+&#160;
+     .set STACKSIZE<span class="sy0">,</span> 0x4000          
+     .comm stack<span class="sy0">,</span> STACKSIZE<span class="sy0">,</span> <span class="nu0">32</span>      
+&#160;
+     .global loader                  
+&#160;
+     loader:
+       lea   esp<span class="sy0">,</span> stack <span class="sy0">+</span> STACKSIZE
+       push  eax                       
+       push  ebx                       
+&#160;
+       <span class="kw1">CALL</span>  MAIN
+&#160;
+       cli
+       hlt                    
+   <span class="kw3">END</span> Asm
+&#160;
+<span class="kw3">END</span> <span class="kw1">SUB</span>
+&#160;
+<span class="kw1">SUB</span> main <span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw3">CONST</span> s <span class="sy0">=</span> <span class="st0">&quot;Hello World&quot;</span>
+&#160;
+    PrintString CPtr<span class="br0">&#40;</span>Byte Ptr<span class="sy0">,</span> @s<span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">35</span><span class="sy0">,</span> <span class="nu0">12</span>
+&#160;
+<span class="kw3">END</span> <span class="kw1">SUB</span>
+&#160;
+<span class="kw1">SUB</span> PrintString<span class="br0">&#40;</span>src <span class="kw3">AS</span> Byte Ptr<span class="sy0">,</span> x <span class="kw3">AS</span> <span class="kw3">LONG</span><span class="sy0">,</span> y <span class="kw3">AS</span> <span class="kw3">LONG</span><span class="br0">&#41;</span>
+&#160;
+    <span class="kw3">DIM</span> dst <span class="kw3">AS</span> Byte Ptr
+    <span class="kw3">DIM</span> counter <span class="kw3">AS</span> <span class="kw3">LONG</span>
+&#160;
+    dst <span class="sy0">=</span> CPtr<span class="br0">&#40;</span>Byte Ptr<span class="sy0">,</span> <span class="re1">&amp;HB8000</span> <span class="sy0">+</span> y <span class="sy0">*</span> <span class="nu0">160</span> <span class="sy0">+</span> x <span class="sy0">*</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+&#160;
+    counter <span class="sy0">=</span> <span class="nu0">0</span>
+&#160;
+    <span class="kw1">WHILE</span> src<span class="br0">&#91;</span>counter<span class="br0">&#93;</span> <span class="sy0">&lt;&gt;</span> <span class="nu0">0</span>
+        dst<span class="br0">&#91;</span><span class="nu0">2</span> <span class="sy0">*</span> counter<span class="br0">&#93;</span> <span class="sy0">=</span> src<span class="br0">&#91;</span>counter<span class="br0">&#93;</span>
+        dst<span class="br0">&#91;</span><span class="nu0">2</span> <span class="sy0">*</span> counter <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">15</span>
+        counter <span class="sy0">=</span> counter <span class="sy0">+</span> <span class="nu0">1</span>
+    <span class="kw1">WEND</span>
+<span class="kw3">END</span> <span class="kw1">SUB</span></pre></div></div>
+<h3> <span class="mw-headline" id="link.ld"> link.ld </span></h3>
+<pre>
+OUTPUT_FORMAT(&quot;elf32-i386&quot;)
+ENTRY (loader)
+
+SECTIONS{
+    . = 0x00100000;
+
+    .text&#160;:{
+        KERNEL_START = .;
+
+        *(.text)
+    }
+
+    .rodata ALIGN (0x1000)&#160;: {
+        *(.rodata)
+        _CTORS = .;
+        *(.ctors)
+        _CTORS_END = .;       
+    }
+
+    .data ALIGN (0x1000)&#160;: {
+        *(.data)
+    }
+
+    .bss&#160;: {
+        SBSS = .;
+        *(COMMON)
+        *(.bss)
+        EBSS = .;
+
+        KERNEL_END = .;
+    }
+}
+</pre>
+<h3> <span class="mw-headline" id="Build_instructions"> Build instructions </span></h3>
+<pre>fbc -c kernel.bas -o kernel.o
+i586-elf-ld -T link.ld -o kernel.bin kernel.o</pre>
+<p><tt>kernel.bin</tt> can then be loaded by <a href="GRUB" title="GRUB">GRUB</a>
+</p>
+<h2> <span class="mw-headline" id="Getting_the_Runtime_to_work"> Getting the Runtime to work </span></h2>
+<p>Once you progress with your kernel, you can try to get runtime functionality to work.
+</p><p>The Runtime is built on top of the C library. FreeBasic provides sources to the Runtime (which are written in C). You'll need to provide the C library. Since many parts of the kernel rely heavily upon each other, you will probably add the Runtime in steps.
+Some functions compile cleanly with minimal effort. When you compile the CType, String and Stdlib (excluding malloc, calloc, and free) parts of the runtime can be compiled on top of those. 
+Before you can use the string and array instructions, you will need to have <a href="Memory_Management" title="Memory Management" class="mw-redirect">memory management</a> implemented. That will allow you to compile malloc, calloc, free from the C library, after which the string and some of the array functions can be compiled.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 246/1000000
+Post-expand include size: 342/2097152 bytes
+Template argument size: 52/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2155-0!*!0!!en!2!* and timestamp 20180121064000 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=FreeBasic_Bare_Bones&amp;oldid=18421">http://wiki.osdev.org/index.php?title=FreeBasic_Bare_Bones&amp;oldid=18421</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_2_Tutorials" title="Category:Level 2 Tutorials">Level 2 Tutorials</a></li><li><a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=FreeBasic_Bare_Bones" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="FreeBasic_Bare_Bones"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:FreeBasic_Bare_Bones&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="FreeBasic_Bare_Bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="FreeBasic_Bare_Bones" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=FreeBasic_Bare_Bones&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=FreeBasic_Bare_Bones&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="FreeBasic_Bare_Bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigationskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/FreeBasic_Bare_Bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/FreeBasic_Bare_Bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=FreeBasic_Bare_Bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=FreeBasic_Bare_Bones&amp;oldid=18421" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 26 October 2015, at 16:54.</li>
+											<li id="footer-info-viewcount">This page has been accessed 70,246 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

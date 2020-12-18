@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Bootloader - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Bootloader", "wgTitle": "Bootloader", "wgCurRevisionId": 18923, "wgArticleId": 1682, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["OS theory", "Bootloaders"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Bootloader action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Bootloader</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Bootloader#mw-head">navigation</a>,
+					<a href="Bootloader#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>A bootloader is a program written to load a more complex <a href="Kernels" title="Kernels" class="mw-redirect">kernel</a>. Implementation details are gathered in <a href="Rolling_Your_Own_Bootloader" title="Rolling Your Own Bootloader">Rolling Your Own Bootloader</a>
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Bootloader#What_does_a_boot_loader_do"><span class="tocnumber">1</span> <span class="toctext">What does a boot loader do</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Bootloader#Loading_your_kernel"><span class="tocnumber">1.1</span> <span class="toctext">Loading your kernel</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Bootloader#Giving_the_kernel_its_information"><span class="tocnumber">1.2</span> <span class="toctext">Giving the kernel its information</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Bootloader#Establishing_an_environment"><span class="tocnumber">1.3</span> <span class="toctext">Establishing an environment</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Bootloader#Bootloader_design"><span class="tocnumber">2</span> <span class="toctext">Bootloader design</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Bootloader#Single_Stage_Bootloader"><span class="tocnumber">2.1</span> <span class="toctext">Single Stage Bootloader</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Bootloader#Two-Stage_Bootloader"><span class="tocnumber">2.2</span> <span class="toctext">Two-Stage Bootloader</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Bootloader#Mixed_Bootloader"><span class="tocnumber">2.3</span> <span class="toctext">Mixed Bootloader</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="Bootloader#Booting_multiple_OSes"><span class="tocnumber">3</span> <span class="toctext">Booting multiple OSes</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Bootloader#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="Bootloader#Articles"><span class="tocnumber">4.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="Bootloader#Threads"><span class="tocnumber">4.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Bootloader#External_Links"><span class="tocnumber">4.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="What_does_a_boot_loader_do"> What does a boot loader do </span></h2>
+<p>The boot loader ultimately has to:
+</p>
+<ul><li> Bring the kernel (and all the kernel needs to bootstrap) into memory
+</li><li> Provide the kernel with the information it needs to work correctly
+</li><li> Switch to an environment that the kernel will like
+</li><li> Transfer control to the kernel
+</li></ul>
+<p>On the x86, the boot loader runs in <a href="Real_Mode" title="Real Mode">Real Mode</a>. Consequently it has easy access to BIOS resources and functions. Therefore it's a good place to perform memory map detection, detection of available video modes, loading of additional files, etc. The boot loader will collect this information and present it in a way the kernel will be able to understand.
+</p>
+<h3> <span class="mw-headline" id="Loading_your_kernel"> Loading your kernel </span></h3>
+<p>The bits of your kernel are somewhere on some disk (presumably the booting disk, but this is not mandatory). Question is: where on the disk? Is it a regular file on a <a href="FAT" title="FAT">FAT-formatted</a> floppy? Is it a collection of consecutive sectors in the "reserved area" of the FAT12 floppy (in which case you may need a dedicated tool to format the disk and install the kernel on it)? Or is the floppy simply left unformatted and the kernel pasted directly with a disk image tool?
+</p><p>All the above options are possible. Maybe the one I'd choose myself would be to reserve enough space on a FAT12 floppy to store the list of sectors used by the kernel file. The "advantage" of being fully-FAT12 is that you don't need to re-write the bootsector every time you rewrite the kernel.
+</p><p>What needs to be loaded mainly depends on what's in your kernel. Linux, for instance, requires an additional 'initrd' file that will contain the 'initialization process' (as user level). If your kernel is modular and if Filesystems are understood by some modules, you need to load the modules along with the kernel. Same goes for 'microkernel services' like disk/files/memory services, etc.
+</p>
+<h3> <span class="mw-headline" id="Giving_the_kernel_its_information"> Giving the kernel its information </span></h3>
+<p>Some kernels require some extra information to run. For example, you'll need to tell Linux the root partition to start from. Pretty useful information to have is a map of the address space - effectively a map of where physical memory is and where it's not. Other popular queries regard video modes.
+</p><p>In general, anything that involves a BIOS call is easier to do in <a href="Real_Mode" title="Real Mode">Real Mode</a>, so better do them while in real mode than trying to come back to real mode for a trip later.
+</p>
+<h3> <span class="mw-headline" id="Establishing_an_environment"> Establishing an environment </span></h3>
+<p>Most kernels require protected mode. For these kernels you'll have to 
+</p>
+<ul><li> Enable <a href="A20_Line" title="A20 Line">A20</a>
+</li><li> Load a <a href="GDT" title="GDT" class="mw-redirect">GDT</a>
+</li><li> Enter <a href="Protected_mode" title="Protected mode" class="mw-redirect">Protected mode</a>
+</li></ul>
+<p>before giving control to the kernel.
+</p><p>It's common for the loader to keep interrupts disabled (the kernel will enable them later when an IDT is properly set up).
+</p><p><i>Note: take time to think about whether or not you'll enable paging here. Keep in mind that debugging paging initialization code without the help of exception handlers may quickly become a nightmare!</i>
+</p>
+<h2> <span class="mw-headline" id="Bootloader_design"> Bootloader design </span></h2>
+<p>Virtually any bootloader follows a common design.
+</p>
+<h3> <span class="mw-headline" id="Single_Stage_Bootloader"> Single Stage Bootloader </span></h3>
+<p>A single stage bootloader consists of a single file that is loaded entirely by the BIOS. This image then performs the steps described above to start the kernel.
+However, on the x86 you are usually limited to 512 bytes for a first stage (An exception is no-emulation <a href="El-Torito" title="El-Torito">El-Torito</a>), which is not much. Also, a lot of this size may be dedicated to bios structures and <a href="FAT" title="FAT">FAT</a> headers, which leaves even less space to work with
+</p>
+<h3> <span class="mw-headline" id="Two-Stage_Bootloader"> Two-Stage Bootloader </span></h3>
+<p>A two-stage bootloader actually consists of two bootloaders after each other. The first being small with the sole purpose of loading the second one. The second one can then contain all the code needed for loading the kernel. <a href="GRUB" title="GRUB">GRUB</a> uses two (or arguably, three) stages.
+</p>
+<h3> <span class="mw-headline" id="Mixed_Bootloader"> Mixed Bootloader </span></h3>
+<p>Another way to avoid the 512-byte barrier is to split the bootloader in two parts, where the first half (512 bytes) can load the rest. This can be achieved by inserting a '512-bytes' break in the ASM code, making sure the rest of the loader is put after the bootsector.
+</p>
+<h2> <span class="mw-headline" id="Booting_multiple_OSes"> Booting multiple OSes </span></h2>
+<p>The easiest way to boot another OS is a mechanism called chainloading. Windows stores something akin to a second-stage bootloader in the boot sector of the partition it was installed in. When installing Linux, writing e.g. LILO or GRUB to the partition boot sector instead of the MBR is also an option. Now, the thing your MBR bootsector can do is to relocate itself (copying from 0x0000:0x7c00 to, traditionally, 0x0060:0x0000), parse the partition table, display some kind of menu and let the user choose which partition to boot from. Then, your (relocated) MBR bootsector would load that partition boot sector to 0x0000:0x7c00, and jump there. The partition boot sector would be none the wiser that there already was a bootsector loaded before, and could actually load yet another bootsector - which is why it's called chainloading.
+</p><p>You see that with displaying a menu in some intelligible way and accepting keystrokes, such a multi-option bootloader can get quite complex rather quickly. We didn't even touch the subject of booting from extended partitions, which would require sequentially reading and parsing multiple extended partition tables before printing the menu.
+</p><p>Taken to the extreme, bootmanagers like that can become as complex as a simple OS, <a href="GRUB" title="GRUB">GRUB</a> being a good example: It offers reading from various filesystems, booting <a href="Multiboot" title="Multiboot">Multiboot</a> kernels, chainloading, loading initrd <a href="http://wiki.osdev.org/index.php?title=Ramdisk&amp;action=edit&amp;redlink=1" class="new" title="Ramdisk (page does not exist)">ramdisks</a> etc. etc.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="BootProg" title="BootProg">BootProg</a>
+</li><li> <a href="Bootf" title="Bootf">Bootf</a>
+</li><li> <a href="Gujin" title="Gujin">Gujin</a>
+</li><li> <a href="GRUB" title="GRUB">GRUB</a>
+</li><li> <a href="Rolling_Your_Own_Bootloader" title="Rolling Your Own Bootloader">Rolling Your Own Bootloader</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://viralpatel.net/taj/tutorial/hello_world_bootloader.php">Writing Hello World Bootloader</a> (<a rel="nofollow" class="external text" href="http://web.archive.org/web/20140729084135/http://viralpatel.net/taj/tutorial/hello_world_bootloader.php">Cached version</a>)
+</li><li> <a rel="nofollow" class="external text" href="http://www.cs.cmu.edu/~410-s07/p4/p4-boot.pdf">"Writing a Bootloader from Scratch"</a> from Carnegie Mellon Computer Science Department
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 103/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1682-0!*!0!!en!*!* and timestamp 20180121032514 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Bootloader&amp;oldid=18923">http://wiki.osdev.org/index.php?title=Bootloader&amp;oldid=18923</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:OS_theory" title="Category:OS theory">OS theory</a></li><li><a href="Category:Bootloaders" title="Category:Bootloaders">Bootloaders</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Bootloader" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Bootloader"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Bootloader"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Bootloader#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Bootloader" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Bootloader&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Bootloader&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Bootloader#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Bootloader" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Bootloader" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Bootloader&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Bootloader&amp;oldid=18923" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Bootloader" title="Bootloader">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 10 February 2016, at 09:33.</li>
+											<li id="footer-info-viewcount">This page has been accessed 157,725 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Bootloader" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Bootloader" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Bootloader&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Bootloader&amp;oldid=18923" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Bootloader" title="Bootloader">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 10 February 2016, at 09:33.</li>
+											<li id="footer-info-viewcount">This page has been accessed 157,725 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

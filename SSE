@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>SSE - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "SSE", "wgTitle": "SSE", "wgCurRevisionId": 21726, "wgArticleId": 2521, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["X86"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-SSE action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">SSE</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="SSE#mw-head">navigation</a>,
+					<a href="SSE#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;">Real numbers, coprocessors and vector units</th></tr><tr><th>Technical</th></tr><tr><td><div>
+<p><a href="Floating_Point_Number" title="Floating Point Number">Floating Point Number</a>
+</p>
+</div></td></tr><tr><th>X86 implementations</th></tr><tr><td><div>
+<p><a href="FPU" title="FPU">X87 FPU</a><br />
+<a href="MMX" title="MMX">MMX</a><br />
+<strong class="selflink">SSE</strong><br />
+<a href="AVX" title="AVX" class="mw-redirect">AVX</a><br />
+</p>
+</div></td></tr></table>
+<p><b> Streaming SIMD Extensions (SSE) </b>
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="SSE#Streaming_SIMD_Extensions_.28SSE.29"><span class="tocnumber">1</span> <span class="toctext">Streaming SIMD Extensions (SSE)</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="SSE#Introduction"><span class="tocnumber">1.1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="SSE#Checking_for_SSE"><span class="tocnumber">1.2</span> <span class="toctext">Checking for SSE</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="SSE#Adding_support"><span class="tocnumber">1.3</span> <span class="toctext">Adding support</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="SSE#FXSAVE_and_FXRSTOR"><span class="tocnumber">1.4</span> <span class="toctext">FXSAVE and FXRSTOR</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="SSE#MXCSR_and_its_helpers_LDMXCSR_and_STMXCSR"><span class="tocnumber">1.5</span> <span class="toctext">MXCSR and its helpers LDMXCSR and STMXCSR</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="SSE#Updates_to_SSE"><span class="tocnumber">2</span> <span class="toctext">Updates to SSE</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="SSE#CPUID_bits"><span class="tocnumber">2.1</span> <span class="toctext">CPUID bits</span></a>
+<ul>
+<li class="toclevel-3 tocsection-9"><a href="SSE#SSE2"><span class="tocnumber">2.1.1</span> <span class="toctext">SSE2</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="SSE#SSE3"><span class="tocnumber">2.1.2</span> <span class="toctext">SSE3</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="SSE#SSSE3"><span class="tocnumber">2.1.3</span> <span class="toctext">SSSE3</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="SSE#SSE4"><span class="tocnumber">2.1.4</span> <span class="toctext">SSE4</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="SSE#SSE5"><span class="tocnumber">2.1.5</span> <span class="toctext">SSE5</span></a>
+<ul>
+<li class="toclevel-4 tocsection-14"><a href="SSE#XOP"><span class="tocnumber">2.1.5.1</span> <span class="toctext">XOP</span></a></li>
+<li class="toclevel-4 tocsection-15"><a href="SSE#FMA4"><span class="tocnumber">2.1.5.2</span> <span class="toctext">FMA4</span></a></li>
+<li class="toclevel-4 tocsection-16"><a href="SSE#CVT16"><span class="tocnumber">2.1.5.3</span> <span class="toctext">CVT16</span></a></li>
+<li class="toclevel-4 tocsection-17"><a href="SSE#AVX"><span class="tocnumber">2.1.5.4</span> <span class="toctext">AVX</span></a></li>
+<li class="toclevel-4 tocsection-18"><a href="SSE#XSAVE"><span class="tocnumber">2.1.5.5</span> <span class="toctext">XSAVE</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-19"><a href="SSE#AVX-512"><span class="tocnumber">2.1.6</span> <span class="toctext">AVX-512</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-20"><a href="SSE#X86_64"><span class="tocnumber">2.2</span> <span class="toctext">X86_64</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="SSE#AVX_2"><span class="tocnumber">2.3</span> <span class="toctext">AVX</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-22"><a href="SSE#See_Also"><span class="tocnumber">3</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-23"><a href="SSE#References"><span class="tocnumber">3.1</span> <span class="toctext">References</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Streaming_SIMD_Extensions_.28SSE.29"> Streaming SIMD Extensions (SSE) </span></h2>
+<h3> <span class="mw-headline" id="Introduction"> Introduction </span></h3>
+<p>SSE was introduced in the Pentium III and offered an additional 70 instructions to the Intel Instruction Set.  SSE instructions can help give an increase in data thouroughput due to Single Instruction, Multiple Data (SIMD) instructions.  These instructions can execute a common expression on multiple data in parallel.  
+</p><p>There are 8 (16 in 64-bit mode) XMM registers (XMM0-7(15)) that come with SSE, and they are 128-bit registers.  Certain SSE instructions (movntdqa, movdqa, movdqu, etc...) can load 16 bytes from memory or store 16 bytes to memory in a single operation.  Also, SSE introduces a few non-temporal hint instructions (movntdqa and movntdq) that allow one-shot memory locations to be stored in non-temporal memory so those location references to do not pollute the small on-chip caches.  
+</p><p>Since this change added new registers, it is disabled by default as the typical operating system of that time was not yet able to save those registers on a task switch. To support SSE, you will need to implement separate code paths for saving and restoring SSE state (as those instructions will cause an exception on processors that do not support it), and handlers for the new exceptions. After that, you can tell the CPU to enable SSE use in userland tasks.
+</p>
+<h3> <span class="mw-headline" id="Checking_for_SSE"> Checking for SSE </span></h3>
+<p>to check for SSE CPUID.01h:EDX.SSE[bit 25] needs to be set
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0x1</span>
+<span class="kw1">cpuid</span>
+<span class="kw1">test</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">1</span>&lt;&lt;<span class="nu0">25</span>
+<span class="kw1">jz</span> <span class="sy0">.</span>noSSE
+<span class="co1">;SSE is available</span></pre></div></div>
+<h3> <span class="mw-headline" id="Adding_support"> Adding support </span></h3>
+<p>In order to allow SSE instructions to be executed without generating a #UD, we need to alter the CR0 and CR4 registers. 
+</p>
+<pre>clear the CR0.EM bit (bit 2) [ CR0 &amp;= ~(1 &lt;&lt; 2) ]
+set the CR0.MP bit (bit 1) [ CR0 |= (1 &lt;&lt; 1) ]
+set the CR4.OSFXSR bit (bit 9) [ CR4 |= (1 &lt;&lt; 9) ]
+set the CR4.OSXMMEXCPT bit (bit 10) [ CR4 |= (1 &lt;&lt; 10) ]
+</pre>
+<p>Here is an asm example:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">;now enable SSE and the like</span>
+<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">cr0</span>
+<span class="kw1">and</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="nu0">0xFFFB</span>		<span class="co1">;clear coprocessor emulation CR0.EM</span>
+<span class="kw1">or</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="nu0">0x2</span>			<span class="co1">;set coprocessor monitoring  CR0.MP</span>
+<span class="kw1">mov</span> <span class="kw3">cr0</span><span class="sy0">,</span> <span class="kw3">eax</span>
+<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> cr4
+<span class="kw1">or</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="nu0">3</span> &lt;&lt; <span class="nu0">9</span>		<span class="co1">;set CR4.OSFXSR and CR4.OSXMMEXCPT at the same time</span>
+<span class="kw1">mov</span> cr4<span class="sy0">,</span> <span class="kw3">eax</span>
+<span class="kw1">ret</span></pre></div></div>
+<h3> <span class="mw-headline" id="FXSAVE_and_FXRSTOR"> FXSAVE and FXRSTOR </span></h3>
+<p>FXSAVE and FXRSTOR are used to save and load the complete SSE, x87 FPU, and MMX states from memory.  The host needs to allocate 512 bytes for the storage and use that memory pointer as an operand to either FXSAVE or FXRSTOR.  Before using either of those instructions, make sure to check the CPUID features for the FXSR bit.  Also, like most SSE instructions, the memory operand needs to be 16-byte aligned or a #GP exception will occur.  Remember to execute FXSAVE *before* any MXCSR modifications happen, or else it the register will most likely get overwritten or set to 0 based on the unknown state of the MXCSR_MASK.  
+</p><p>Example usage:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">char</span> fxsave_region<span class="br0">&#91;</span><span class="nu0">512</span><span class="br0">&#93;</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>aligned<span class="br0">&#40;</span><span class="nu0">16</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot; fxsave; &quot;</span><span class="sy0">::</span><span class="st0">&quot;m&quot;</span><span class="br0">&#40;</span>fxsave_region<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>or in asm:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw4">segment</span> <span class="kw4">.code</span>
+SaveFloats<span class="sy0">:</span>
+<span class="kw2">fxsave</span> <span class="br0">&#91;</span>SavedFloats<span class="br0">&#93;</span>
+<span class="kw4">segment</span> <span class="kw4">.data</span>
+<span class="kw4">align</span> <span class="nu0">16</span>
+SavedFloats<span class="sy0">:</span> TIMES <span class="nu0">512</span> <span class="kw4">db</span> <span class="nu0">0</span></pre></div></div>
+<p>Pitfalls: only one level of saving supported.
+</p>
+<h3> <span class="mw-headline" id="MXCSR_and_its_helpers_LDMXCSR_and_STMXCSR"> MXCSR and its helpers LDMXCSR and STMXCSR </span></h3>
+<p>The MXCSR register holds all of the masking and flag information for use with SSE floating-point operations.  Just like the x87 FPU control word, if you would like to mask certain exceptions from occuring or would like to specify rounding types, MXCSR will need to be modified.  Bits 16-31 are reserved and will cause a #GP exception if set.  LDMXCSR and STMXCSR load and write the MXCSR register respectively.  They both require a 32-bit memory operand.  SSE support needs to already be set up before using either of these instructions (CR4.OSFXSR = 1, CR0.EM = 0, and CR0.TS = 0).  If bits 7-12 are set, all SSE floating-point exceptions are masked.  Bits 0-5 are exception status flags that are set if the corresponding exception has occured.  Bits 13-14 are the RC (Rounding Control) bits.  RC:0 = to nearest, RC:1 = down, RC:2 = up, RC:3 = truncate. 
+</p>
+<h2> <span class="mw-headline" id="Updates_to_SSE"> Updates to SSE </span></h2>
+<p>Later processors have added more instructions for different work to be performed on the vector registers. Supporting them with SSE support in place doesn't require any effort on the part of the OS (except for AVX, see below). The actual user of the instructions should however check if those instructions actually exist.
+</p>
+<h3> <span class="mw-headline" id="CPUID_bits"> CPUID bits </span></h3>
+<h5> <span class="mw-headline" id="SSE2">SSE2</span></h5>
+<p><small><b>Streaming SIMD Extensions 2 (SSE2)</b></small><br />
+The bit for SSE2 can be found on CPUID page 1, in EDX bit 26.
+</p>
+<h5> <span class="mw-headline" id="SSE3">SSE3</span></h5>
+<p><small><b>Streaming SIMD Extensions 3 (SSE3)</b></small><br />
+The bit for SSE3 can be found on CPUID page 1, in ECX bit 0.
+</p>
+<h5> <span class="mw-headline" id="SSSE3">SSSE3</span></h5>
+<p><small><b>Supplemental Streaming SIMD Extensions 3 (SSSE3)</b></small><br />
+The bit for SSSE3 can be found on CPUID page 1, in ECX bit 9.
+</p>
+<h5> <span class="mw-headline" id="SSE4">SSE4</span></h5>
+<p><small><b>Streaming SIMD Extensions 4 (SSE4)</b></small><br />
+The bit for SSE4.1 can be found on CPUID page 1, in ECX bit 19
+</p><p>The bit for SSE4.2 can be found on CPUID page 1, in ECX bit 20
+</p><p>The bit for SSE4A can be found on CPUID page 1, in ECX bit 6
+</p>
+<h5> <span class="mw-headline" id="SSE5">SSE5</span></h5>
+<p><small><b>Streaming SIMD Extensions 5 (SSE5)</b></small><br />
+SSE5 was planned as one unit, but split into several:
+</p>
+<h6> <span class="mw-headline" id="XOP">XOP</span></h6>
+<p>The bit for XOP can be found on CPUID page 1, in ECX bit 11
+</p>
+<h6> <span class="mw-headline" id="FMA4">FMA4</span></h6>
+<p>The bit for FMA4 can be found on CPUID page 1, in ECX bit 16
+</p>
+<h6> <span class="mw-headline" id="CVT16">CVT16</span></h6>
+<p>The bit for CVT16 can be found on CPUID page 1, in ECX bit 29
+</p>
+<h6> <span class="mw-headline" id="AVX">AVX</span></h6>
+<p>The bit for AVX can be found on CPUID page 1, in ECX bit 28
+</p>
+<h6> <span class="mw-headline" id="XSAVE">XSAVE</span></h6>
+<p>The bit for XSAVE (needed to manage extended processor states) can be found on CPUID page 1, in ECX bit 26
+</p>
+<h5> <span class="mw-headline" id="AVX-512">AVX-512</span></h5>
+<p>The bits for AVX-512 are in CPUID page 0x0D, 0x0, EAX bits 5-7
+</p>
+<h3> <span class="mw-headline" id="X86_64">X86_64</span></h3>
+<p>When the <a href="X86-64" title="X86-64">X86-64</a> architecture was introduced, AMD demanded a minimum level of SSE support to simplify OS code. Any system capable of long mode should support at least SSE and SSE2, which means that the kernel does not need to care about the old FPU save code.
+X86-64 adds 8 SSE registers (xmm8 - xmm15) to the mix. However, you can only access these in 64 bit mode.
+</p><p><b>Advanced Vector Extensions</b> is a <b>SIMD</b> (Single Instruction, Multiple Data) instruction set introduced by Intel in 2011.
+</p>
+<h3> <span class="mw-headline" id="AVX_2"> AVX </span></h3>
+<p>AVX needs to be enabled by the kernel before being used. Forgetting to do this will raise an #UD on the first AVX call.
+Both SSE and OSXSAVE must be enabled before allowing. Failing to do so will also produce an #UD.
+</p><p>AVX is enabled by setting bit 2 of the XCR0 register. Bit 1 of XCR0 must also be set (indicating SSE support).
+</p><p>Here is an example of assembly code enabling AVX after SSE has been enabled (you should check AVX and XSAVE are supported first, see above):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">enable_avx<span class="sy0">:</span>
+    <span class="kw1">push</span> <span class="kw3">rax</span>
+    <span class="kw1">push</span> <span class="kw3">rcx</span>
+&#160;
+    <span class="kw1">xor</span> <span class="kw3">rcx</span><span class="sy0">,</span> <span class="kw3">rcx</span>
+    xgetbv <span class="co1">;Load XCR0 register</span>
+    <span class="kw1">or</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">7</span> <span class="co1">;Set AVX, SSE, X87 bits</span>
+    xsetbv <span class="co1">;Save back to XCR0</span>
+&#160;
+    <span class="kw1">pop</span> <span class="kw3">rcx</span>
+    <span class="kw1">pop</span> <span class="kw3">rax</span>
+    <span class="kw1">ret</span></pre></div></div>
+<p>To enable AVX-512, set the OPMASK (bit 5), ZMM_Hi256 (bit 6), Hi16_ZMM (bit 7) of XCR0. You must ensure that these bits are valid first (see above).
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li> <a href="MMX" title="MMX">MMX</a>
+</li><li> The <a href="http://wiki.osdev.org/User:01000101/optlib/" title="User:01000101/optlib/">optimisation library</a> of 01000101, containing example code
+</li></ul>
+<h3> <span class="mw-headline" id="References"> References </span></h3>
+<ul><li> The <a href="http://wikipedia.org/wiki/EN:Streaming_SIMD_Extensions" class="extiw" title="wikipedia:EN:Streaming SIMD Extensions">Wikipedia article</a> on SSE 
+</li><li> The <a href="http://wikipedia.org/wiki/EN:AVX-512" class="extiw" title="wikipedia:EN:AVX-512">Wikipedia article</a> on AVX-512
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 455/1000000
+Post-expand include size: 1218/2097152 bytes
+Template argument size: 509/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2521-0!*!0!!en!*!* and timestamp 20180121053217 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=SSE&amp;oldid=21726">http://wiki.osdev.org/index.php?title=SSE&amp;oldid=21726</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:X86" title="Category:X86">X86</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=SSE" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="SSE"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:SSE&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="SSE#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="SSE" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=SSE&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=SSE&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="SSE#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/SSE" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/SSE" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=SSE&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=SSE&amp;oldid=21726" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 November 2017, at 05:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 46,781 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.049 secs. -->
+	</body>
+</html>

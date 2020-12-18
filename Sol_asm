@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Sol asm - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Sol_asm", "wgTitle": "Sol asm", "wgCurRevisionId": 8678, "wgArticleId": 2670, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "Stubs", "Assemblers"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Sol_asm action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Sol asm</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Sol_asm#mw-head">navigation</a>,
+					<a href="Sol_asm#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>Solar Assembler (aka Sol_Asm) is a multipass macro assembler written by Bogdan Ontanu. It supports HLL primitives, like procedures, structures/unions, .IF/.ENDIF, .WHILE/.ENDWHILE, .REPEAT/.UNTIL, etc. Sol_Asm can produce binary files, PE executables (32/64-bit), COFF object files (32/64-bit), ELF object files (32-bit only) and Mach-O object files (32-bit only).
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Sol_asm#Sol_Asm_syntax"><span class="tocnumber">1</span> <span class="toctext">Sol_Asm syntax</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Sol_asm#Syntax_comparison"><span class="tocnumber">1.1</span> <span class="toctext">Syntax comparison</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="Sol_asm#Original_features"><span class="tocnumber">2</span> <span class="toctext">Original features</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="Sol_asm#ENUMs"><span class="tocnumber">2.1</span> <span class="toctext">ENUMs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Sol_asm#Resource_compiler"><span class="tocnumber">2.2</span> <span class="toctext">Resource compiler</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="Sol_asm#See_Also"><span class="tocnumber">3</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="Sol_asm#External_Links"><span class="tocnumber">3.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Sol_Asm_syntax">Sol_Asm syntax</span></h2>
+<center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=Sol_asm&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<h3> <span class="mw-headline" id="Syntax_comparison">Syntax comparison</span></h3>
+<p>The syntax of Sol_Asm is easy to learn and has similarities with the syntax of <a href="TASM" title="TASM">TASM</a> or <a href="MASM" title="MASM">MASM</a>. 
+This table shows the differences between Sol_Asm and other HLL assemblers:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th>
+</th>
+<th> SOL_ASM
+</th>
+<th> <a href="TASM" title="TASM">TASM</a>
+</th>
+<th> <a href="MASM" title="MASM">MASM</a> / <a href="JWASM" title="JWASM" class="mw-redirect">JWASM</a>
+</th>
+<th> <a href="FASM" title="FASM">FASM</a> with HLL macros
+</th></tr>
+<tr>
+<td> Procedures
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw4">PROC</span> TestProc
+     <span class="kw5">USES</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span>
+     ARG Var1<span class="sy0">,</span> Var2
+     <span class="kw4">LOCAL</span> Var3
+&#160;
+     <span class="sy0">...</span>
+<span class="kw4">ENDP</span></pre></div></div><small><sup id="ref_1" class="plainlinks"><a rel="nofollow" class="external autonumber" href="Sol_asm#endnote_1">[1]</a></sup></small>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">TestProc <span class="kw4">PROC</span>
+     <span class="kw5">USES</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span>
+     ARG Var1<span class="sy0">:</span><span class="kw5">DWORD</span><span class="sy0">,</span> Var2<span class="sy0">:</span><span class="kw5">BYTE</span>
+     <span class="kw4">LOCAL</span> Var3<span class="sy0">:</span><span class="kw5">WORD</span>
+&#160;
+     <span class="sy0">...</span>
+<span class="kw4">ENDP</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">TestProc <span class="kw4">PROC</span> \
+     <span class="kw5">USES</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span> \
+     Var1<span class="sy0">:</span><span class="kw5">DWORD</span><span class="sy0">,</span> Var2<span class="sy0">:</span><span class="kw5">BYTE</span>
+     <span class="kw4">LOCAL</span> Var3<span class="sy0">:</span><span class="kw5">WORD</span>
+&#160;
+     <span class="sy0">...</span>
+TestProc <span class="kw4">ENDP</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw4">proc</span> TestProc \
+     <span class="kw5">USES</span> <span class="kw3">eax</span> <span class="kw3">ebx</span> \
+     Var1<span class="sy0">:</span><span class="kw5">DWORD</span><span class="sy0">,</span> Var2<span class="sy0">:</span><span class="kw5">BYTE</span>
+     <span class="kw4">LOCAL</span> Var3<span class="sy0">:</span><span class="kw5">WORD</span>
+&#160;
+     <span class="sy0">...</span>
+<span class="kw4">endp</span></pre></div></div>
+</td></tr>
+<tr>
+<td> Structures
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw4">STRUC</span> StructTest
+    Var1     <span class="kw4">db</span>&#160;?
+    Var2     <span class="kw4">dw</span>&#160;?
+    Var3     <span class="kw4">dd</span>&#160;?
+<span class="kw4">ENDS</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">StructTest <span class="kw4">STRUC</span>
+    Var1<span class="sy0">:</span>    <span class="kw4">db</span>&#160;?
+    Var2<span class="sy0">:</span>    <span class="kw4">dw</span>&#160;?
+    Var3<span class="sy0">:</span>    <span class="kw4">dd</span>&#160;?
+<span class="kw4">ENDS</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">StructTest <span class="kw4">STRUC</span>
+    Var1<span class="sy0">:</span>    <span class="kw4">db</span>&#160;?
+    Var2<span class="sy0">:</span>    <span class="kw4">dw</span>&#160;?
+    Var3<span class="sy0">:</span>    <span class="kw4">dd</span>&#160;?
+StrucTTest <span class="kw4">ENDS</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw4">struct</span> StructTest
+    Var1<span class="sy0">:</span>    <span class="kw4">db</span>&#160;?
+    Var2<span class="sy0">:</span>    <span class="kw4">dw</span>&#160;?
+    Var3<span class="sy0">:</span>    <span class="kw4">dd</span>&#160;?
+<span class="kw4">ends</span></pre></div></div>
+</td></tr>
+<tr>
+<td> Reserve non initialized data
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">Buffer<span class="sy0">:</span>    rb <span class="nu0">256</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">Buffer<span class="sy0">:</span>    <span class="kw4">db</span> <span class="nu0">256</span> <span class="kw4">dup</span><span class="br0">&#40;</span>?<span class="br0">&#41;</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">Buffer<span class="sy0">:</span>    <span class="kw4">db</span> <span class="nu0">256</span> <span class="kw4">dup</span><span class="br0">&#40;</span>?<span class="br0">&#41;</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">Buffer<span class="sy0">:</span>    <span class="kw4">db</span> <span class="nu0">256</span> <span class="kw4">dup</span><span class="br0">&#40;</span>?<span class="br0">&#41;</span>
+<span class="kw1">or</span>
+Buffer<span class="sy0">:</span>    rb <span class="nu0">256</span></pre></div></div>
+</td></tr>
+<tr>
+<td> I/O ports
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">in</span>   <span class="kw3">al</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">92h</span><span class="br0">&#93;</span>
+<span class="kw1">or</span>   <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">02h</span>
+<span class="kw1">out</span>  <span class="br0">&#91;</span><span class="nu0">92h</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">al</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">in</span>   <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">92h</span>
+<span class="kw1">or</span>   <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">02h</span>
+<span class="kw1">out</span>  <span class="nu0">92h</span><span class="sy0">,</span> <span class="kw3">al</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">in</span>   <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">92h</span>
+<span class="kw1">or</span>   <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">02h</span>
+<span class="kw1">out</span>  <span class="nu0">92h</span><span class="sy0">,</span> <span class="kw3">al</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">in</span>   <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">92h</span>
+<span class="kw1">or</span>   <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">02h</span>
+<span class="kw1">out</span>  <span class="nu0">92h</span><span class="sy0">,</span> <span class="kw3">al</span></pre></div></div>
+</td></tr>
+<tr>
+<td> .IF/.ENDIF
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="sy0">.</span><span class="kw4">IF</span> <span class="br0">&#40;</span> <span class="kw3">eax</span> == <span class="nu0">2</span> <span class="sy0">.</span><span class="kw1">or</span><span class="sy0">.</span> <span class="kw3">ebx</span>&#160;!= <span class="nu0">3</span> <span class="br0">&#41;</span>
+    <span class="co1">; something...</span>
+<span class="sy0">.</span><span class="kw4">ENDIF</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="sy0">.</span><span class="kw4">IF</span> <span class="br0">&#40;</span><span class="kw3">eax</span> == <span class="nu0">2</span> <span class="kw1">or</span> <span class="kw3">ebx</span>&#160;!= <span class="nu0">3</span><span class="br0">&#41;</span>
+    <span class="co1">; something...</span>
+<span class="sy0">.</span><span class="kw4">ENDIF</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="sy0">.</span><span class="kw4">IF</span> <span class="br0">&#40;</span><span class="kw3">eax</span> == <span class="nu0">2</span> <span class="kw1">or</span> <span class="kw3">ebx</span>&#160;!= <span class="nu0">3</span><span class="br0">&#41;</span>
+    <span class="co1">; something...</span>
+<span class="sy0">.</span><span class="kw4">ENDIF</span></pre></div></div>
+</td>
+<td> <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="sy0">.</span><span class="kw4">if</span> <span class="br0">&#40;</span><span class="kw3">eax</span> == <span class="nu0">2</span> <span class="kw1">or</span> <span class="kw3">ebx</span>&#160;!= <span class="nu0">3</span><span class="br0">&#41;</span>
+    <span class="co1">; something...</span>
+<span class="sy0">.</span><span class="kw4">endif</span></pre></div></div>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Original_features">Original features</span></h2>
+<p>Sol_asm also implements some original features.
+</p>
+<h3> <span class="mw-headline" id="ENUMs">ENUMs</span></h3>
+<p>It is possible to define some constants like C language with the ENUM keyword.
+This little example will generate: TASK_ZOMBIE equ 0, TASK_READY equ 1, TASK_RUNNING equ 2, etc.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">ENUM TASK<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">4</span>
+    TASK_ZOMBIE
+    TASK_READY
+    TASK_RUNNING
+    TASK_WAITING
+    TASK_SLEEPING
+ENDE</pre></div></div>
+<h3> <span class="mw-headline" id="Resource_compiler">Resource compiler</span></h3>
+<p>Sol_Asm includes a small resource compiler. This little example will define a dialog box:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">IDD_DIALOG1 equ <span class="nu0">100</span>
+IDD_BUTTON1 equ <span class="nu0">101</span>
+&#160;
+IDD_DIALOG1 DIALOGEX <span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">320</span><span class="sy0">,</span> <span class="nu0">240</span>
+CAPTION <span class="st0">&quot;Hello!&quot;</span>
+STYLE <span class="nu0">0x10CF0000</span>
+&#160;
+BEGIN
+    CONTROL <span class="st0">&quot;Hello&quot;</span><span class="sy0">,</span> IDC_BUTTON1<span class="sy0">,</span> <span class="st0">&quot;Button&quot;</span><span class="sy0">,</span> <span class="nu0">0x50010000</span><span class="sy0">,</span> <span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">50</span><span class="sy0">,</span> <span class="nu0">24</span><span class="sy0">,</span> <span class="nu0">0x00000000</span>
+<span class="kw4">END</span></pre></div></div>
+<ul><li> <cite id="endnote_1" style="font-style: normal;"><a href="Sol_asm#ref_1"><span style="position:relative; bottom:0.25em; font-size:0.8em;">↑</span></a></cite>&#160; by default, arguments and locals are always dwords.
+</li></ul>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://www.oby.ro/sol_asm/index.html">Solar Assembler homepage</a>
+</li><li><a rel="nofollow" class="external text" href="http://www.oby.ro/sol_asm/docs/sol_asm_manual.htm">Solar Assembler Reference Manual</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 278/1000000
+Post-expand include size: 1237/2097152 bytes
+Template argument size: 4/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2670-0!*!0!!en!2!* and timestamp 20180121080123 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Sol_asm&amp;oldid=8678">http://wiki.osdev.org/index.php?title=Sol_asm&amp;oldid=8678</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:Stubs" title="Category:Stubs">Stubs</a></li><li><a href="Category:Assemblers" title="Category:Assemblers">Assemblers</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Sol_asm" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Sol_asm"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Sol_asm&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Sol_asm#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Sol_asm" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Sol_asm&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Sol_asm&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Sol_asm#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  tskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Sol_asm" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Sol_asm" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Sol_asm&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Sol_asm&amp;oldid=8678" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 July 2009, at 12:24.</li>
+											<li id="footer-info-viewcount">This page has been accessed 11,242 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.340 secs. -->
+	</body>
+</html>

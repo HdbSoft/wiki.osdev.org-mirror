@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>IA32 Architecture Family - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "IA32_Architecture_Family", "wgTitle": "IA32 Architecture Family", "wgCurRevisionId": 13227, "wgArticleId": 1897, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["X86"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-IA32_Architecture_Family action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">IA32 Architecture Family</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="IA32_Architecture_Family#mw-head">navigation</a>,
+					<a href="IA32_Architecture_Family#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The following tables and notes constitute an overview of the x86-based processors produced (most of which are still available in some form today). These tables are intended as a guide only, the most reliable way to determine CPU features (amongst newer CPUs at least) is by using <a href="CPUID" title="CPUID">CPUID</a>.
+</p><p>The table is fairly easy to read, but a note on some of the values would be helpful. Values marked with <b>Yes</b> are available in all CPUs in that series, no exceptions. Items marked with <b>No</b> are not available at all. Items marked with <b>Maybe</b> are available in some of the CPUs (maybe higher spec'd machines, for instance the 486DX, or in later processor steppings). Items marked with a <b>?</b> are yet to be researched or confirmed. If you have some information, let us know!
+</p><p>Most of the information in this table comes from <a href="http://wikipedia.org/wiki/Main_Page" class="extiw" title="wikipedia:Main Page">Wikipedia</a>, with some coming from the Intel and AMD processor manuals.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="IA32_Architecture_Family#Intel_Processors"><span class="tocnumber">1</span> <span class="toctext">Intel Processors</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="IA32_Architecture_Family#Advanced_Micro_Device_Intel-compatible_Processors"><span class="tocnumber">2</span> <span class="toctext">Advanced Micro Device Intel-compatible Processors</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="IA32_Architecture_Family#AMD64_based_CPU.27s"><span class="tocnumber">2.1</span> <span class="toctext">AMD64 based CPU's</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="IA32_Architecture_Family#Other_CPU_vendors_making_similar_chips"><span class="tocnumber">3</span> <span class="toctext">Other CPU vendors making similar chips</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="IA32_Architecture_Family#Cyrix"><span class="tocnumber">3.1</span> <span class="toctext">Cyrix</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="IA32_Architecture_Family#Cyrix_387"><span class="tocnumber">3.1.1</span> <span class="toctext">Cyrix 387</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="IA32_Architecture_Family#Cyrix_4x86"><span class="tocnumber">3.1.2</span> <span class="toctext">Cyrix 4x86</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="IA32_Architecture_Family#Cyrix_5x86"><span class="tocnumber">3.1.3</span> <span class="toctext">Cyrix 5x86</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="IA32_Architecture_Family#Cyrix_6x86_.2F_M1"><span class="tocnumber">3.1.4</span> <span class="toctext">Cyrix 6x86 / M1</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="IA32_Architecture_Family#Cyrix_6x86MX_.2F_M2"><span class="tocnumber">3.1.5</span> <span class="toctext">Cyrix 6x86MX / M2</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="IA32_Architecture_Family#MediaGX"><span class="tocnumber">3.1.6</span> <span class="toctext">MediaGX</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-12"><a href="IA32_Architecture_Family#Rise_Technologies"><span class="tocnumber">3.2</span> <span class="toctext">Rise Technologies</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="IA32_Architecture_Family#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="IA32_Architecture_Family#Articles"><span class="tocnumber">4.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="IA32_Architecture_Family#Threads"><span class="tocnumber">4.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="IA32_Architecture_Family#External_Links"><span class="tocnumber">4.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Intel_Processors">Intel Processors</span></h2>
+<p>These processors from Intel use the CPUID string "GenuineIntel".
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th>
+</th>
+<th> Release Date
+</th>
+<th> <a href="FPU" title="FPU">FPU (80x87)</a>
+</th>
+<th> <a href="Protected_Mode" title="Protected Mode">Protected Mode</a>
+</th>
+<th> <a href="SMP" title="SMP" class="mw-redirect">SMP</a>
+</th>
+<th> <a href="MMX" title="MMX">MMX</a>
+</th>
+<th> <a href="PAE" title="PAE" class="mw-redirect">PAE</a>
+</th>
+<th> <a href="SSE" title="SSE">SSE</a>
+</th>
+<th> Hyper-threading
+</th>
+<th> <a href="EM64T" title="EM64T">EM64T</a>/<a href="AMD64" title="AMD64" class="mw-redirect">AMD64</a>
+</th>
+<th> Notes
+</th></tr>
+<tr>
+<th> 8086
+</th>
+<td> 1978
+</td>
+<td style="background: #ffff99"> Optional
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No, 16-bit only
+</td>
+<td> First processor of the long-lasting x86 ISA, only supporting 16-bit real mode and 64KB segmentation. Eight 16-bit general-purpose registers, four 16-bit segment registers, a 16-bit instruction pointer, and a 16-bit flags register. 256 interrupts available and a 64KB I/O space.
+</td></tr>
+<tr>
+<th> 80186
+</th>
+<td> 1982
+</td>
+<td style="background: #ffff99"> Optional
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No, 16-bit only
+</td>
+<td> Designed and intended for embedded systems. First x86 processor with ENTER/LEAVE instructions, as well as PUSHA/POPA, a few other instructions, and immediate modes for PUSH, IMUL, and shift instructions. Exception 06h (Invalid Opcode, #UD) introduced with the UD2 "instruction".
+</td></tr>
+<tr>
+<th> 80286
+</th>
+<td> 1982
+</td>
+<td style="background: #ffff99"> Optional
+</td>
+<td style="background: #ffff99"> 16-bit only
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No, 16-bit only
+</td>
+<td> First x86 processor with a "protected mode" and a 24-bit address bus and can not go from pmode to real mode without a CPU reset. It has better performance in real mode than the previous 16-bit Intel processors. Designed for multitasking and multi-user systems.
+</td></tr>
+<tr>
+<th> 80386
+</th>
+<td> 1985
+</td>
+<td style="background: #ffff99"> Optional
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> Successor to the 80286, the Intel 386 is the first processor of the IA32 architecture. It has 32 bit wide registers, supports 4 kByte paging, and a flat memory model in addition to the segmented memory model of the 80286.
+</td></tr>
+<tr>
+<th> 80486
+</th>
+<td> 1989
+</td>
+<td style="background: #ffff99"> Optional
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> The 486 integrates a 80x87 FPU on-chip (not the 486SX though), and supports power saving functions (System Management Mode, Stop Clock, Auto Halt Powerdown). It also supports SMP with an external APIC (though rare), and adds pipelining and on-chip caches, as well as related opcodes such as INVD, INVLPG, XADD and CMPXCHG.
+</td></tr>
+<tr>
+<th> Pentium
+</th>
+<td> 1993
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> The Pentium integrates an APIC (which may be permanently disabled by the BIOS), and supports PSE (4 MiB pages). It also supports 2-way multiprocessing.
+</td></tr>
+<tr>
+<th> Pentium Pro
+</th>
+<td> 1995
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> The Pentium Pro supports PAE (36 bit physical address space with 2 MiB and/or 4 KiB pages), but does not have the MMX registers of the Pentium.
+</td></tr>
+<tr>
+<th> Pentium MMX
+</th>
+<td> 1996
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> The Pentium MMX is very similar to the original Pentium CPU, but includes MMX SIMD registers (single instruction, multiple data). It doesn't seem logical, but the Pentium MMX was released after the Pentium Pro.
+</td></tr>
+<tr>
+<th> Pentium II
+</th>
+<td> 1997
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> The Pentium II again supports MMX (as well as PAE), as well as additional low-power states: AutoHALT, Stop-Grant, Sleep, and ~DeepSleep.
+</td></tr>
+<tr>
+<th> Pentium II Xeon
+</th>
+<td> 1998
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> The Xeon supports 4/8/+ way multiprocessing.
+</td></tr>
+<tr>
+<th> Pentium III
+</th>
+<td> 1999
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> Available in speeds from 450MHz to 1400MHz, the Pentium III  was the first to support SSE (128 bit packed single FP SIMD). Other than this it was widely similar to the Pentium II Deschutes.
+</td></tr>
+<tr>
+<th> Pentium III Xeon
+</th>
+<td> 1999
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Pentium IV
+</th>
+<td> 2000
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE2*
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffff99"> Maybe
+</td>
+<td> Intel added both SSE3 and "EMT64/Intel 64" to the Prescott series.
+</td></tr>
+<tr>
+<th> Pentium M
+</th>
+<td> 2003
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE2
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Core
+</th>
+<td> 2003
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE3
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Xeon 51xx
+</th>
+<td> 2006
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSSE3
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Core 2
+</th>
+<td> 2006
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE4.1
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Xeon 54xx
+</th>
+<td> 2007
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE4.1
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Core i-series
+</th>
+<td> 2008
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE4.2
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Atom 200/300
+</th>
+<td> 2008
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSSE3
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Atom N-series
+</th>
+<td> 2008
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSSE3
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffff99"> Maybe
+</td>
+<td> Intel omitted 64-bit mode from the Diamondville (N-2xx) series, but included it with Pineview (N-4xx).
+</td></tr>
+<tr>
+<th> Atom Z-series
+</th>
+<td> 2008
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSSE3
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td></tr></table>
+<h2> <span class="mw-headline" id="Advanced_Micro_Device_Intel-compatible_Processors">Advanced Micro Device Intel-compatible Processors</span></h2>
+<p>AMD has been developing integrated circuits since the early 70's, they originally licensed the 80286 from Intel and branded it as the Am286. The company later went on to release its first Intel 386 clone, the Am386, in 1991.
+</p><p>The CPUID identifier string is "AuthenticAMD".
+</p><p>It is important to note that the "SSE" used by AMD and the "SSE" used by Intel may not be entirely compatible.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th>
+</th>
+<th> Release Date
+</th>
+<th> <a href="FPU" title="FPU">FPU (80x87)</a>
+</th>
+<th> <a href="Protected_Mode" title="Protected Mode">Protected Mode</a>
+</th>
+<th> <a href="SMP" title="SMP" class="mw-redirect">SMP</a>
+</th>
+<th> <a href="MMX" title="MMX">MMX</a>
+</th>
+<th> <a href="http://wiki.osdev.org/index.php?title=3DNow!&amp;action=edit&amp;redlink=1" class="new" title="3DNow! (page does not exist)">3DNow!</a>
+</th>
+<th> <a href="PAE" title="PAE" class="mw-redirect">PAE</a>
+</th>
+<th> <a href="SSE" title="SSE">SSE</a>
+</th>
+<th> Hyper-threading
+</th>
+<th> <a href="EM64T" title="EM64T">EM64T</a>/<a href="AMD64" title="AMD64" class="mw-redirect">AMD64</a>
+</th>
+<th> Notes
+</th></tr>
+<tr>
+<th> Am386
+</th>
+<td> 1991
+</td>
+<td style="background: #ffff99"> Optional
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> AMD's first clone of the 32-bit i386 architecture, FPU was optional.
+</td></tr>
+<tr>
+<th> Am486
+<p>Am5x86
+</p>
+</th>
+<td> 1994
+<p>1995
+</p>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> AMD's 486 clone, 2x the cache size of most of Intel's 486 chips.
+</td></tr>
+<tr>
+<th> K5
+</th>
+<td> 1996
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> AMD's first try at a Pentium-compatible CPU.
+</td></tr>
+<tr>
+<th> K6
+</th>
+<td> 1997
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> Actually designed by NexGen (taken over by AMD), the K6 is a fully Pentium-compatible CPU. One notable instruction was the LOOPcc instruction, which executed in 2 cycles compared to a Pentium's 18, causing timing problems.
+</td></tr>
+<tr>
+<th> K6-2
+</th>
+<td> 1998
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> AMD added 16 wait states to the execution of the LOOPcc and thus caused it to slow to the speed of a Pentium. They added a special case (speculation, might be coincidence) for the DEC (E)CX; Jcc combination, which is semantically equivalent with the LOOPcc instruction; since LOOPcc was faster on Intels, nobody used the DEC/Jcc combo there. So AMD kept the original speed for this combo, and specified in their optimization manuals that this was the preferred method over the LOOPcc instruction.
+<p>The K6-2 also featured the 3DNOW! technology, which was "MMX using floating point numbers", and multiplexed (again) on the floating point registers. It was largely compatible with the P2.
+</p>
+</td></tr>
+<tr>
+<th> K6-3
+</th>
+<td> 1999
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> This design was fully P2 compatible.
+<p>The K6-3 suffered from a bottleneck at the instruction decode unit (which converts the x86 instructions to native instructions). While it did have 3 execution units of each type (ALU / MMX / loadstore), they were not used much at all since the instruction decode unit could not keep up.
+</p>
+</td></tr>
+<tr>
+<th> Athlon
+</th>
+<td> 1999
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Athlon XP/MP
+</th>
+<td> 2001
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffff99"> Maybe
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> Athlon XP (starting with Palomino) introduced SSE. SMP capable chips were branded as Athlon MP.
+</td></tr>
+<tr>
+<th> Athlon 64
+</th>
+<td> 2003
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE3
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Athlon 64 X2
+</th>
+<td> 2005
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE3
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Phenom
+</th>
+<td> 2007
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>&#160;?
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> SSE4a
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td></tr>
+</table>
+<h3> <span class="mw-headline" id="AMD64_based_CPU.27s">AMD64 based CPU's</span></h3>
+<p>These processors all support the entire IA32 family natively. AMD created a new processor, with 48-bit memory addressing and 64-bit calculations, being very compatible with the old style CPU's. So compatible, that the core for 32-bit and 64-bit is essentially identical, aside from the size of calculations and the support of a few encodings that were effectively redundant. They removed a few 1-byte opcodes (about 20 in total, including all 1-byte INC and 1-byte DEC instructions) to make room for a new REX prefix. They modified the core to use 16 registers instead of 8, added a load of new names, got the old software working, and optimized the 32-bit performance.
+</p>
+<h2> <span class="mw-headline" id="Other_CPU_vendors_making_similar_chips"> Other CPU vendors making similar chips</span></h2>
+<h3> <span class="mw-headline" id="Cyrix">Cyrix</span></h3>
+<p>Cyrix was a well-known CPU vendor from the 386 years (and slightly before), up to Pentium II times, when it more or less vanished inside Via. Via now uses the name as a CPU name (not making it clearer), but this section is about the original Cyrix CPU's. The processors supporting <a href="CPUID" title="CPUID">CPUID</a> call it "CyrixInstead".
+</p>
+<h4> <span class="mw-headline" id="Cyrix_387"> Cyrix 387 </span></h4>
+<p>This isn't actually a processor but an FPU. It was the fastest coprocessor to the 386 to be found, and was even very usable aside a 486-SX.
+</p>
+<h4> <span class="mw-headline" id="Cyrix_4x86"> Cyrix 4x86 </span></h4>
+<p>A processor that had the abilities of a 486. The first generation plugged into 386 sockets giving greater speeds without requiring extra hardware updates. Later editions could also be used on 486 motherboards.
+</p>
+<h4> <span class="mw-headline" id="Cyrix_5x86"> Cyrix 5x86 </span></h4>
+<p>A processor that performed as a 486 and was socket-compatible. It features some of the Pentium's abilities, but not all (such as cmpxchg8b).
+</p>
+<h4> <span class="mw-headline" id="Cyrix_6x86_.2F_M1"> Cyrix 6x86 / M1 </span></h4>
+<p>This processor is, even though the name suggests otherwise, compatible with the 586 (Pentium). It didn't contain any of the MMX or PPro features. It performed slightly better per cycle compared to the Pentium Pro, and was thus given ratings. The performance of floating point operations was lower than that of the Pentium Pro.
+</p>
+<h4> <span class="mw-headline" id="Cyrix_6x86MX_.2F_M2"> Cyrix 6x86MX / M2 </span></h4>
+<p>Was a Pentium MMX compatible processor, also using ratings. It was again socket-compatible to the Pentium MMX and the older Pentiums (without MMX). It supported a few features from the Pentium Pro, among which the very usable CMOVcc set.
+</p>
+<h4> <span class="mw-headline" id="MediaGX"> MediaGX </span></h4>
+<p>This was a chip that, apart from the CPU, included several peripherals on-chip including graphics and audio devices. 
+</p><p>The company was bought by National Semiconductor, who sold the trademark to VIA. The MediaGX was developed further and was eventually bought by AMD who marketed it as the Geode.
+</p>
+<h3> <span class="mw-headline" id="Rise_Technologies"> Rise Technologies </span></h3>
+<p>A company reputedly producing Pentium-compatible chips, without MMX. Little detail is known, but the CPUID identifier string was "RiseRiseRise", or the same in all 3 dwords (making a search for it very easy).
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<h3> <span class="mw-headline" id="Threads">Threads</span></h3>
+<p><a href="http://forum.osdev.org/viewtopic.php?t=10030" class="extiw" title="topic:10030">AT,XT and PC</a>
+</p>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a href="http://wikipedia.org/wiki/X86" class="extiw" title="wikipedia:X86">x86</a> on Wikipedia
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 931/1000000
+Post-expand include size: 8774/2097152 bytes
+Template argument size: 59/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1897-0!*!0!!en!*!* and timestamp 20180121061852 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=IA32_Architecture_Family&amp;oldid=13227">http://wiki.osdev.org/index.php?title=IA32_Architecture_Family&amp;oldid=13227</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:X86" title="Category:X86">X86</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=IA32_Architecture_Family" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="IA32_Architecture_Family"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:IA32_Architecture_Family"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="IA32_Architecture_Family#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="IA32_Architecture_Family" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=IA32_Architecture_Family&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=IA32_Architecture_Family&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="IA32_Architecture_Family#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/IA32_Architecture_Family" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/IA32_Architecture_Family" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=IA32_Architecture_Family&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=IA32_Architecture_Family&amp;oldid=13227" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/IA32_Architecture_Family" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/IA32_Architecture_Family" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=IA32_Architecture_Family&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=IA32_Architecture_Family&amp;oldid=13227" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 April 2012, at 22:42.</li>
+											<li id="footer-info-viewcount">This page has been accessed 88,694 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

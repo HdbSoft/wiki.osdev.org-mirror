@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>USB Human Interface Devices - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "USB_Human_Interface_Devices", "wgTitle": "USB Human Interface Devices", "wgCurRevisionId": 20862, "wgArticleId": 4063, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["USB"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-USB_Human_Interface_Devices action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">USB Human Interface Devices</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="USB_Human_Interface_Devices#mw-head">navigation</a>,
+					<a href="USB_Human_Interface_Devices#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><b>USB Human Interface Devices (HID)</b> are devices that, like the name suggests, allow an interface that lets humans interact with the computer. Common examples include USB mice, USB keyboards, USB joysticks, and other such devices. The protocol used by USB HID devices is defined in the USB HID specification. Some chipsets support emulating USB keyboards and mice as standard PS/2 devices, but many chipsets don't. Thus, a USB HID driver is necessary in some PCs that may not have PS/2 ports at all. 
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="USB_Human_Interface_Devices#Protocol"><span class="tocnumber">1</span> <span class="toctext">Protocol</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="USB_Human_Interface_Devices#Detecting_HID_devices"><span class="tocnumber">1.1</span> <span class="toctext">Detecting HID devices</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="USB_Human_Interface_Devices#.22SetProtocol.22_request"><span class="tocnumber">1.2</span> <span class="toctext">"SetProtocol" request</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="USB_Human_Interface_Devices#.22GetReport.22_request"><span class="tocnumber">1.3</span> <span class="toctext">"GetReport" request</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="USB_Human_Interface_Devices#Interrupt_endpoint"><span class="tocnumber">1.4</span> <span class="toctext">Interrupt endpoint</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="USB_Human_Interface_Devices#USB_keyboard"><span class="tocnumber">2</span> <span class="toctext">USB keyboard</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="USB_Human_Interface_Devices#Report_format"><span class="tocnumber">2.1</span> <span class="toctext">Report format</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="USB_Human_Interface_Devices#Keypress_mechanism"><span class="tocnumber">2.2</span> <span class="toctext">Keypress mechanism</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="USB_Human_Interface_Devices#Auto-repeat"><span class="tocnumber">2.3</span> <span class="toctext">Auto-repeat</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="USB_Human_Interface_Devices#LED_lamps"><span class="tocnumber">2.4</span> <span class="toctext">LED lamps</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="USB_Human_Interface_Devices#USB_mouse"><span class="tocnumber">3</span> <span class="toctext">USB mouse</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="USB_Human_Interface_Devices#Report_format_2"><span class="tocnumber">3.1</span> <span class="toctext">Report format</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="USB_Human_Interface_Devices#See_also"><span class="tocnumber">4</span> <span class="toctext">See also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="USB_Human_Interface_Devices#Articles"><span class="tocnumber">4.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="USB_Human_Interface_Devices#External_links"><span class="tocnumber">4.2</span> <span class="toctext">External links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Protocol"> Protocol </span></h2>
+<p>USB HID devices are mainly based on two protocols: the report protocol and the boot protocol. A report is a data structure that is sent to the host from the device, or can also be sent from the host to the device. When a device sends a report to the host, it normally contains status change information, such as a keypress, mouse movement, etc. When the host sends a report to the device, it normally contains commands for configuring the device, such as setting LEDs on a keyboard, for example. This protocol of course depends on the <a href="USB#USB_Device_Framework" title="USB" class="mw-redirect">standard USB framework</a>. USB HID devices communicate using interrupt transfers, as they don't always transfer data, but when they do, they require very fast response from the software as well as the data transferred is normally small. Reports generally have two types, depending on the protocol type. Report protocols are based on the concept of "items," and their structures are defined in report descriptors. The boot protocol is much simpler, and follows standard structures for mice and keyboards. For simplicity's sake, this article will discuss the boot protocol only, for now at least. 
+</p>
+<h3> <span class="mw-headline" id="Detecting_HID_devices"> Detecting HID devices </span></h3>
+<p>HID devices have class/sub-class values of both zeroes in their device descriptors, and instead have the class/sub-class values valid in their interface descriptors. Keep in mind that interface descriptors cannot be manually requested, and must be acquired along with the configuration and endpoint descriptors. The class value that identifies a HID device in the interface descriptors is 3. The sub-class value in the interface descriptor can be either 1 to indicate the device supports the boot protocol, or zero to indicate the device only supports the report protocol. The protocol field in the interface descriptor as well determines it is a mouse or a keyboard. Specifically, 1 indicates the HID device is a keyboard, while 2 indicates the HID device is a mouse. 
+</p>
+<h3> <span class="mw-headline" id=".22SetProtocol.22_request"> "SetProtocol" request </span></h3>
+<p>Assuming a USB HID device supports the boot protocol, as explained in the section above, where is has a class value of 3 and a sub-class value of 1, the driver software can select the protocol to use. It uses the "SetProtocol" request to tell the device whether it wants to use the report protocol or the boot protocol. For simplicity's sake, this article will describe the boot protocol only, for now. To send the "SetProtocol" request, software sends a regular SETUP transaction to the device's control endpoint zero. The SETUP packet's request type would contain 0x21, the request code for "SetProtocol" is 0x0B, and the value field of the SETUP packet should contain 0 to indicate boot protocol, or 1 to indicate report protocol. The index and length fields both must be zero, as the index is unused and this request has no data stages. This command is only supported on device that support the boot protocol at all. After this command has been used, all reports sent from the device to the host will be either boot reports or regular reports, depending on the type the software requests. 
+</p>
+<h3> <span class="mw-headline" id=".22GetReport.22_request"> "GetReport" request </span></h3>
+<p>The software can request a report from a USB device using the control endpoint and the regular SETUP packet. The SETUP packet's request type would contain 0xA1, the request code for "GetReport" is 1, the SETUP packet's "value" field would contain 0x0100, to request an input packet with ID zero, and the length field would be the length of the data stage the host wishes to receive. The SETUP packet should be sent to the device endpoint 0 (control endpoint.) For keyboards, the data stage is normally 8 bytes, while for mice, the data stage has the first 3 bytes in a standard format, while the rest of it may be used by device-specific features. Receiving reports this way is recommended only to test that the device initialization was completed successfully, or such, and the "GetReport" request should not be used to poll the HID device for changes, as the SETUP and STATUS stages waste too much time. Instead, software should poll the HID using interrupt transfers, using the interrupt IN endpoint. 
+</p>
+<h3> <span class="mw-headline" id="Interrupt_endpoint"> Interrupt endpoint </span></h3>
+<p>It is generally recommended that the HID reports to the software using interrupt transfers, and that software should normally avoid the "GetReport" request mentioned above. Driver software should request the <a href="USB#CONFIGURATION" title="USB" class="mw-redirect">configuration descriptor</a> for the HID device. A HID device must support at least one configuration. Software should then scan the <a href="USB#INTERFACE" title="USB" class="mw-redirect">endpoint descriptors</a>, searching for a descriptor that indicates an "interrupt IN" type, which is an endpoint that sends device data to the host using interrupt transfers. Software should save the 4-bit ID of the endpoint, as well as the 8-bit interval of the endpoint. The interval value encodes time in milliseconds (ms) in which timespace the software should poll for a report packet once. For example, if the interval value is 8, software should request a report from the device every 8 ms. If software requests a report too early, for example, after 6 ms, the device may send the same packet as before, or it may not send anything, and return NAK instead. If software requests a report after the timespan, say for example 9 ms, then the device will send the new packet. Software constantly polls USB HID devices using this described method. This is also a good chance to optimize your USB code, as the polling functions will be run hundreds of times per second. Specifically in Bochs, the interval value of the USB mouse is 10 ms, and so software polls the USB device 100 times per second. 
+</p>
+<h2> <span class="mw-headline" id="USB_keyboard"> USB keyboard </span></h2>
+<p>USB keyboards communicate with software using reports, just like other HID devices. USB keyboards are detected by having a class code of 3 and a protocol value of 1, in the interface descriptor. I will be describing the boot protocol here, for simplicity's sake, for now at least.
+</p>
+<h3> <span class="mw-headline" id="Report_format"> Report format </span></h3>
+<p>This report must be requested by the software using interrupt transfers once every interval milliseconds, and the interval is defined in the interrupt IN descriptor of the USB keyboard. The USB keyboard report may be up to 8 bytes in size, although not all these bytes are used and it's OK to implement a proper implementation using only the first three or four bytes (and this is how I do it.) Just for completion's sake, however, I will describe the full report mechanism of the keyboard. Notice that the report structure defined below applies to the boot protocol only.
+</p>
+<table width="70%" border="1">
+
+<tr>
+<td><b>Offset</b>
+</td>
+<td><b>Size</b>
+</td>
+<td><b>Description</b>
+</td></tr>
+<tr>
+<td>0
+</td>
+<td>Byte
+</td>
+<td>Modifier keys status.
+</td></tr>
+<tr>
+<td>1
+</td>
+<td>Byte
+</td>
+<td>Reserved field.
+</td></tr>
+<tr>
+<td>2
+</td>
+<td>Byte
+</td>
+<td>Keypress #1.
+</td></tr>
+<tr>
+<td>3
+</td>
+<td>Byte
+</td>
+<td>Keypress #2.
+</td></tr>
+<tr>
+<td>4
+</td>
+<td>Byte
+</td>
+<td>Keypress #3.
+</td></tr>
+<tr>
+<td>5
+</td>
+<td>Byte
+</td>
+<td>Keypress #4.
+</td></tr>
+<tr>
+<td>6
+</td>
+<td>Byte
+</td>
+<td>Keypress #5.
+</td></tr>
+<tr>
+<td>7
+</td>
+<td>Byte
+</td>
+<td>Keypress #6.
+</td></tr></table>
+<p><b>Modifier keys status:</b> This byte is a bitfield, where each bit corresponds to a specific modifier key. When a bit is set to 1, the corresponding modifier key is being pressed. Unlike PS/2 keyboards, USB keyboards don't have "scancodes" for modifier keys. The bit structure of this byte is:
+</p>
+<table width="70%" border="1">
+
+<tr>
+<td><b>Bit</b>
+</td>
+<td><b>Bit Length</b>
+</td>
+<td><b>Description</b>
+</td></tr>
+<tr>
+<td>0
+</td>
+<td>1
+</td>
+<td>Left Ctrl.
+</td></tr>
+<tr>
+<td>1
+</td>
+<td>1
+</td>
+<td>Left Shift.
+</td></tr>
+<tr>
+<td>2
+</td>
+<td>1
+</td>
+<td>Left Alt.
+</td></tr>
+<tr>
+<td>3
+</td>
+<td>1
+</td>
+<td>Left GUI (Windows/Super key.)
+</td></tr>
+<tr>
+<td>4
+</td>
+<td>1
+</td>
+<td>Right Ctrl.
+</td></tr>
+<tr>
+<td>5
+</td>
+<td>1
+</td>
+<td>Right Shift.
+</td></tr>
+<tr>
+<td>6
+</td>
+<td>1
+</td>
+<td>Right Alt.
+</td></tr>
+<tr>
+<td>7
+</td>
+<td>1
+</td>
+<td>Right GUI (Windows/Super key.)
+</td></tr></table>
+<p>When software receives an interrupt and, for example, one of the Shift modifier keys are set to 1, software should use the scancode table for the shift modification to get the key from the scancode.
+</p><p><b>Reserved field:</b> This byte is reserved by the USB HID specification, and thus software should ignore it.
+</p><p><b>Keypress fields:</b> One keyboard report can indicate up to 6 keypresses. All these values are unsigned 8-bit values (unlike PS/2 scancodes, which are mostly 7-bit) which indicate the key being pressed. A reference on the USB scancode to ASCII character conversion table is in the bottom of the article.
+</p>
+<h3> <span class="mw-headline" id="Keypress_mechanism"> Keypress mechanism </span></h3>
+<p>USB keyboards send interrupts when a key is pressed or released, just like a PS/2 keyboard. However, unlike PS/2 keyboards, USB keyboard does not have the concept of "make" and "break" scancodes. When a user presses a key, the interrupt comes in with a scancode value in one of the keypress fields. When a key is released, the corresponding keypress field is returned zero in the next packet. To illustrate this more clearly and to illustrate why there are more than one keypress scancode field, let's look at the following examples.
+Assume the user pressed the "A" key, which is scancode 0x04. The returned interrupt packet would look like this:
+</p>
+<pre>00 00 04 00 00 00 00 00
+</pre>
+<p>Notice the modifier keys are zero, because the user isn't pressing any. The reserved field is also zero, as recommended by the USB HID spec. The first keypress field contains 0x04, which corresponds to the "A" key. Now, let's assume the user lets go of the "A" key. The packet sent would look like:
+</p>
+<pre>00 00 00 00 00 00 00 00
+</pre>
+<p>Now, let's assume the user pressed the "A" key, and then pressed the "B" key (scancode 0x05) without letting go of the "A" key:
+</p>
+<pre>00 00 04 05 00 00 00 00
+</pre>
+<p>Notice how one interrupt packet is capable of transferring two keypresses together. Now let's assume the user presses the "C" key (scancode 0x06) without letting go of either "A" or "B" key:
+</p>
+<pre>00 00 04 05 06 00 00 00
+</pre>
+<p>Now what if the user lets go of the "A" key but keeps pressing the "B" and "C" keys? The keyboard will indicate that "A" is no longer being pressed, and "B" and "C" will move towards the beginning of the packet:
+</p>
+<pre>00 00 05 06 00 00 00 00
+</pre>
+<p>As is probably obvious now, the USB keyboard returns scancodes in order of which one was pressed first. As such, if the first keypress field is zero, there are no keys that send scancodes being pressed. If it is not zero, software can check the next fields, to see if another key is being pressed as well.
+</p><p>The concept of modifier keys is probably obvious, but just for completion, let's assume the user pressed the left shift key with the "X" key (scancode 0x1B). The interrupt packet sent will contain:
+</p>
+<pre>02 00 1B 00 00 00 00 00
+</pre>
+<p>Notice that bit 1 (value 0x02) of the modifier field is set, to indicate that the the left shift key is being pressed.
+</p><p>There is also a "phantom condition" which you can think of as an overflow. A USB keyboard packet can indicate up to 6 keypresses in one transfer, but let's imagine someone dropped their keyboard and more than 6 keys were pressed in one time. The keyboard will enter the phantom condition, in which all reported keys will be of the invalid scancode 0x01. Modifier keys will still be reported however. Imagine that 8 keys (or any random number more than 6) are being pressed, and the right shift key is also being pressed. The packet sent would look like:
+</p>
+<pre>20 00 01 01 01 01 01 01
+</pre>
+<p>Notice that the modifier keys are still being indicated, but the actual scancodes all return the phantom condition. There are other special scancodes besides the phantom condition: 0x00 indicates there is no scancode and no key being pressed, 0x01 indicates the phantom condition we just explained, 0x02 indicates the keyboard's self-test failed and 0x03 indicates an undefined error occured. Starting from 0x04 the scancodes are valid and correspond to "real" keys. IMHO, a device driver should ignore the phantom condition if it happens.
+</p>
+<h3> <span class="mw-headline" id="Auto-repeat"> Auto-repeat </span></h3>
+<p>One thing that makes USB keyboards a pain is that there is no mechanism for auto-repeat and auto-repeat delays in hardware; this must be implemented entirely in software, unlike PS/2 keyboards. For an example auto-repeat delay of 500 milliseconds and an auto-repeat speed of 10 characters per second, when software becomes aware that a certain key is being pressed without being released constantly, it ignores all the key presses except the first one for 500 milliseconds (or whatever auto-repeat delay you like), and if this times out and the key is still being pressed, the driver will report 10 keypresses every 1 second, or whatever auto-repeat speed you want as well. This would make the user feel natural, just like you would when you press and hold a key; the first key appears on the screen, the computer waits a short delay, and then the keys keep coming up.
+</p>
+<h3> <span class="mw-headline" id="LED_lamps"> LED lamps </span></h3>
+<p>LED lamps are also handled in software, and according to the hardware, NumLock, CapsLock and ScrollLock are normal keys that send normal scancodes. The driver is responsible for manipulating the LED lamps when one of these keys are pressed.
+</p><p>To set the LED lamps, the driver sends a SetReport request to the device using a standard USB Setup Transaction, with a one-byte data stage. The setup packet's request type should contain 0x21, the request code for SetReport is 0x09. The value field of the setup packet contains the report ID in the low byte, which should be zero. The high byte contains the report type, which should be 0x02 to indicate an output report, or a report that is being sent from the software to the hardware. The index field should contain the interface number of the USB keyboard, which is the number present in the interface descriptor which indicated this device was a USB keyboard at all. The data stage should be 1 byte, which is a bitfield. This Setup Transaction should be transferred to control endpoint zero, which would work on all hardware. Other hardware may or may not support the optional interrupt OUT endpoint. If the hardware supports the interrupt OUT endpoint, you can just transfer the 1 byte data stage to the interrupt OUT endpoint, without the extra overhead of the SETUP stage and STATUS stage. If the hardware support the interrupt OUT endpoint, you should avoid the control endpoint when possible, as the interrupt OUT endpoint is faster and can be programmed with interrupt transfers instead of setup transfers. The format of the 1-byte data stage (for SETUP transaction) or 1-byte interrupt OUT transfer is shown below. When a bit is set to 1, the corresponding LED is turned on.
+</p>
+<table width="70%" border="1">
+
+<tr>
+<td><b>Bit</b>
+</td>
+<td><b>Bit Length</b>
+</td>
+<td><b>Description</b>
+</td></tr>
+<tr>
+<td>0
+</td>
+<td>1
+</td>
+<td>Num Lock.
+</td></tr>
+<tr>
+<td>1
+</td>
+<td>1
+</td>
+<td>Caps Lock.
+</td></tr>
+<tr>
+<td>2
+</td>
+<td>1
+</td>
+<td>Scroll Lock.
+</td></tr>
+<tr>
+<td>3
+</td>
+<td>1
+</td>
+<td>Compose.
+</td></tr>
+<tr>
+<td>4
+</td>
+<td>1
+</td>
+<td>Kana.
+</td></tr>
+<tr>
+<td>5
+</td>
+<td>3
+</td>
+<td>Reserved, must be zero.
+</td></tr></table>
+<h2> <span class="mw-headline" id="USB_mouse"> USB mouse </span></h2>
+<p>USB mice, just like any other HID device, communicate with the software using reports, which are sent via interrupt endpoints or can be manually requested with the "GetReport" request. USB mice have a protocol value of 2 in the interface descriptor. 
+</p>
+<h3> <span class="mw-headline" id="Report_format_2"> Report format </span></h3>
+<p>This report must be requested by the host using interrupt transfers once every interval milliseconds. Interval is defined in the interrupt IN descriptor of the USB mouse device. Only the first three bytes of the USB mouse report are defined. The remaining bytes, if existed, may be used for device-specific features. Software may request only three bytes in an interrupt transfer, and this will not cause an error even if the actual packet is larger. The table below defines the report format for USB mice operating using the boot protocol.
+</p>
+<table width="70%" border="1">
+
+<tr>
+<td><b>Offset</b>
+</td>
+<td><b>Size</b>
+</td>
+<td><b>Description</b>
+</td></tr>
+<tr>
+<td>0
+</td>
+<td>Byte
+</td>
+<td>Button status.
+</td></tr>
+<tr>
+<td>1
+</td>
+<td>Byte
+</td>
+<td>X movement.
+</td></tr>
+<tr>
+<td>2
+</td>
+<td>Byte
+</td>
+<td>Y movement.
+</td></tr></table>
+<p><br />
+<b>Button status:</b> This byte is a bitfield, in which the lowest three bits are standard format. The remaining 5 bits may be used for device-specific purposes.
+</p>
+<table width="70%" border="1">
+
+<tr>
+<td><b>Bit</b>
+</td>
+<td><b>Bit Length</b>
+</td>
+<td><b>Description</b>
+</td></tr>
+<tr>
+<td>0
+</td>
+<td>1
+</td>
+<td>When set to 1, indicates the left mouse button is being clicked.
+</td></tr>
+<tr>
+<td>1
+</td>
+<td>1
+</td>
+<td>When set to 1, indicates the right mouse button is being clicked.
+</td></tr>
+<tr>
+<td>2
+</td>
+<td>1
+</td>
+<td>When set to 1, indicates the middle mouse button is being clicked.
+</td></tr>
+<tr>
+<td>3
+</td>
+<td>5
+</td>
+<td>These bits are reserved for device-specific features.
+</td></tr></table>
+<p><br />
+<b>X movement:</b> This is a signed 8-bit integer that represents the X movement. Bit 7 (value 0x80) determines the sign of the value. When this value is negative, the mouse is being moved to the left. When this value is positive, the mouse is being moved to the right. Notice that unlike PS/2 mice, the movement values for USB mice are 8-bit signed integers and not 9-bit integers.
+</p><p><b>Y movement:</b> This is also a signed 8-bit integer that represents the Y movement. When this value is negative, the mouse is being moved up. When the value is positive, the mouse is being moved down (towards the user.)
+</p>
+<h2> <span class="mw-headline" id="See_also"> See also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Universal_Serial_Bus" title="Universal Serial Bus">Universal Serial Bus</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_links"> External links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.usb.org/developers/hidpage/HID1_11.pdf">USB HID specification</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/omarrx024/xos/blob/master/kernel/usb/hid.asm">xOS USB HID implementation</a>
+</li><li> <a rel="nofollow" class="external text" href="https://www.win.tue.nl/~aeb/linux/kbd/scancodes-14.html">USB scancodes to ASCII characters conversion table</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 83/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4063-0!*!0!!en!*!* and timestamp 20180121031516 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=USB_Human_Interface_Devices&amp;oldid=20862">http://wiki.osdev.org/index.php?title=USB_Human_Interface_Devices&amp;oldid=20862</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:USB" title="Category:USB">USB</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=USB_Human_Interface_Devices" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="USB_Human_Interface_Devices"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:USB_Human_Interface_Devices&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="USB_Human_Interface_Devices#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="USB_Human_Interface_Devices" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=USB_Human_Interface_Devices&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=USB_Human_Interface_Devices&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="USB_Human_Interface_Devices#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/USB_Human_Interface_Devices" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/USB_Human_Interface_Devices" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=USB_Human_Interface_Devices&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=USB_Human_Interface_Devices&amp;oldid=20862" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 June 2017, at 21:39.</li>
+											<li id="footer-info-viewcount">This page has been accessed 2,138 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-placesskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/USB_Human_Interface_Devices" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/USB_Human_Interface_Devices" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=USB_Human_Interface_Devices&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=USB_Human_Interface_Devices&amp;oldid=20862" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 June 2017, at 21:39.</li>
+											<li id="footer-info-viewcount">This page has been accessed 2,138 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

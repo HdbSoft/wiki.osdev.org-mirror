@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Talk:Why do I need a Cross Compiler? - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "Talk", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 1, "wgPageName": "Talk:Why_do_I_need_a_Cross_Compiler?", "wgTitle": "Why do I need a Cross Compiler?", "wgCurRevisionId": 15521, "wgArticleId": 2976, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-1 ns-talk page-Talk_Why_do_I_need_a_Cross_Compiler action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Talk:Why do I need a Cross Compiler?</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Talk:Why_do_I_need_a_Cross_Compiler?#mw-head">navigation</a>,
+					<a href="Talk:Why_do_I_need_a_Cross_Compiler?#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>As we're talking about GCC, I really don't see any reason for which a cross-compiler is neccessary, unless a different target architecture and/or executable format are needed. However, this is usually not the case. The more natural solution is to use the free-standing environment provided by GCC. --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 15:01, 21 April 2011 (UTC)
+</p>
+<dl><dd>To get around distribution patches that almost always exist, licensing reasons, to create a reproducible environment on a variety of different development platforms.. and attempt to curtail the plethora of Cygwin/MinGW/DJGPP users asking dumb questions. So, is that reason enough for ya? --<a href="http://wiki.osdev.org/User:Brynet-inc" title="User:Brynet-inc">Brynet-Inc</a> 06:04, 23 April 2011 (UTC)
+<dl><dd>The first reason makes the most sense. Alas, I don't really know what kind of patches are usually there and how they affect code generation and/or linking---perhaps I should look into this. Could you give some examples for the other two reasons? I'm not 100% sure what you had in mind. --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 14:51, 23 April 2011 (UTC)
+<dl><dd>Well, GCC 4.2.1 for example.. it's the last GPLv2 version and contains several code generation bugs that had to be independently fixed, not only that, but the fixes aren't always identical between forks. Also, for someone running on Linux.. they may not wish to use the particular version of GCC that's available. It makes sense to pick a version of GCC/binutils that you've tested extensively for building your kernel/OS, as well as making that environment reproducible on Windows/Linux/OSX/BSD/etc. --<a href="http://wiki.osdev.org/User:Brynet-inc" title="User:Brynet-inc">Brynet-Inc</a> 19:17, 23 April 2011 (UTC)
+<dl><dd>I'm not sure using all this indentation is helpful&#160;:) Anyway, the GPL license applies to GCC, not code generated by it, so as far as the OS is concerned, this isn't a problem. As for the other thing, I thought it might be what you were thinking and it makes sense to some extent but I can't think of any specific problems that I've come across when using this technique... --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 04:37, 24 April 2011 (UTC)
+<dl><dd><dl><dd><dl><dd><dl><dd><dl><dd><dl><dd><dl><dd><dl><dd><dl><dd><dl><dd><dl><dd><dl><dd>Indeed, one mustn't abuse indentation. Also, the license covers distribution.. and with the introduction of the GPLv3 some additional gotchas. If you plan on including a compiler along with your OS, for example. It makes sense to eventually port the cross-compiler environment to your OS as a native hosted environment. Just trust me on this one. --<a href="http://wiki.osdev.org/User:Brynet-inc" title="User:Brynet-inc">Brynet-Inc</a> 20:03, 24 April 2011 (UTC)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd>For the record, only 32-bit linux is the actively used platform which shares architecture and executable format with "common" OS development. 64-bit linux comes with an amd64 toolchain, Windows and Macintosh comes with a different binary format - each of them needs very specific workarounds to get the desired behaviour if possible at all. On top of that, all of the hosted compilers might fail now or in the future because they target a specific OS and are therefore freely allowed to generate OS-specific code. Excluding the notion of doing things the right way, which you obviously do not promote, your suggestion requires that <b>portable</b> means 32-bits linux only instead of all common desktop installations out there.&lt;/sarcasm&gt; - <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 21:40, 24 April 2011 (UTC)
+</dd></dl>
+<dl><dd><dl><dd>In the first part of your reply, you just repeated what I said (i.e., that cross-compilers are useful for different target architectures and/or file formats) and assumed you were making some point. No one argued against building a cross-compiler in that scenario; I only complained because the article instructs people to always do this, which is unnecessary. In the second part of your reply, you talked about hosted compilers and completely missed what I said about the freestanding functionality, which is present with any GCC port (RTFM, in this case, the GCC documentation), followed by more of your usual gibberish. --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 22:15, 24 April 2011 (UTC)
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd>It is almost always necessary, you really shouldn't just build your OS with whatever is shipped with your 32-bit Linux distribution.. as stated many times on the forums, you'll run into problems eventually.. and you'll be surprised when an update introduces unexpected behaviour. --<a href="http://wiki.osdev.org/User:Brynet-inc" title="User:Brynet-inc">Brynet-Inc</a> 22:28, 24 April 2011 (UTC)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd><dl><dd>Well, at least there's an argument on the table now so let's focus on that one. I've successfully used MinGW, Cygwin GCC, Linux GCC and clean cross-compilers and had problems with neither so I wonder whether we're being realistic in the article. As per the GCC documentation, the freestanding environment implies that there's no standard library linked in and no system-specific startup code present. Could anyone point out any reproducible problems, on the forums or anywhere else? Otherwise, you could guess, I could guess but we're not really going to get anywhere&#160;:) --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 22:42, 24 April 2011 (UTC)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd><dl><dd><dl><dd>I give you the OpenBSD manual that briefly touches on some of the changes (..beyond bug fixes) to their version of GCC 4.2.1, as an example. <a rel="nofollow" class="external text" href="http://www.openbsd.org/cgi-bin/man.cgi?query=gcc-local&amp;manpath=OpenBSD+Current&amp;format=html">gcc-local(1)</a> --<a href="http://wiki.osdev.org/User:Brynet-inc" title="User:Brynet-inc">Brynet-Inc</a> 01:59, 25 April 2011 (UTC)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd>First off, I regret the ad hominem you had to use. Yes I know exactly what -ffreestanding is meant to do, and I also know its not enough, thanks to references to the always platform-specific libgcc. Point was that the cases where the hack of not building a crosscompiler only works on a limited <b>and shrinking</b> number of platforms. Now to return the favour, <b>will you quit the arguments about ugly hacks being better than proper use because they happen to be marginally simpler</b>. I hate those and they only really help those who are already aware of the reasons of why you would do things one way. We are out here to help mostly newcomers, and providing them broken information and dirty workarounds is counterproductive in the long run. 
+</dd><dd>I want to close this up and call it a 3v1 vote. I'm including solar besides the active participants here because he wrote the original text and has made it clear that using a crosscompiler <b>rules out</b> any possible host-compiler-related problems rather than just making them unlikely. And debugging is about testing assertions, not guesswork.
+</dd><dd>- <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 09:23, 25 April 2011 (UTC)
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd>If you'll read more carefully, you'll see that there was no ad hominem in my reply, regardless of which one you are referring to (you've either read just half of one phrase or considered something to be an argument when it wasn't). Anyway, can you point out any problems for platform X or Y yet so as to shut me up? The reason for which I don't think this is a hack, but a solution, is that I have yet to come across any. Brynet's link seems to point out that OpenBSD's port changes some arguments and some other stuff but it shouldn't really cause any problems, esp. if one is going to write proper standards-compliant code. I expect that <i>maybe</i> sometimes people will need to use some different compiler/linker flags to get the thing to work, but does that make it a hack? Voting is nice but I prefer facts. --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 13:43, 25 April 2011 (UTC)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd>There is potential for problems, nobody has said that what you're doing won't work.. it's just not guaranteed to work, you can go around licking public surfaces and not get sick.. doesn't mean you're not going to.. get hit by a bus. --<a href="http://wiki.osdev.org/User:Brynet-inc" title="User:Brynet-inc">Brynet-Inc</a> 23:54, 25 April 2011 (UTC)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<h2> <span class="mw-headline" id="What_.2Ashould.2A_be_on_this_page..."> What *should* be on this page... </span></h2>
+<p>The fact that Love4Boobies didn't understand the need for a cross-compiler shows that this page does a poor job of answering the question.
+</p><p>Things I feel are missing from the page (which might satisfy Love4Boobies, and which perhaps someone would like to insert as appropriate - I don't have the leisure ATM):
+</p>
+<ul><li> Building a cross-compiler is merely the first step towards "going native", i.e. a step you have to do sooner or later anyway. You might as well do it right at the beginning.
+</li><li> The moment you go forward to the next step - putting YourOS-specific files like libc headers, startup code etc. in the compiler directories - you <b>need</b> to seperate between system compiler and OSDev compiler, or you'll end up with a disfunctional system compiler.
+</li><li> Your system compiler is subject to being updated by your package management without specific notice. Depending on your distro, locking a specific version, or going back to an older version, might be anything but trivial (if at all possible without breaking your system). Worse, you might not even know which version it <i>was</i> that actually worked (before the latest update), and you might have depended on something distro-specific before, leaving your development environment in complete limbo.
+</li><li> As the recommended thing to do, it puts everyone following the recommended practice on similar footing. No comparing of (vanilla) gcc-4.5.2 with (Gentoo) gcc-4.5.2-r1 or (Ubuntu) gcc-4.5.2-1ubuntu3 or (Cygwin) gcc4-4.5.2-2 or somesuch.
+</li></ul>
+<p>-- <a href="http://wiki.osdev.org/User:Solar" title="User:Solar">Solar</a> 09:15, 2 May 2011 (UTC)
+</p><p><br />
+For the record, I completely agree with Love4Boobies and completely disagree with Solar. Building a crosscompile toolchain for later work is solely useful to cut down on the extra arguments needed to be given. You can achieve the same result with -ffreestanding -nostdlib -nostdlibinc (for the kernel) and --sysroot for usermode apps.
+</p><p>Not to mention that recompiling the compiler is a GCC-ism. Clang doesn't require it, it is naturally a crosscompiler, in which case you use --sysroot as well (until someone fixes the compiler driver to support dynamic retargetting, which is on my agenda but hasn't been done yet) -- JamesM
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id=".28.22Tongue_in_Cheek.22.29_Suggestion_For_Rewritten_Page_Introduction"> ("Tongue in Cheek") Suggestion For Rewritten Page Introduction </span></h2>
+<p>The suggested new introduction for this page is:
+</p><p>"<i>Even though C is a well known language that has been around since 1973, and GCC is a well known toolchain that has been around since 1987 and is relied on by many major open source projects; some people think GCC is so utterly broken that the sheer hassle of creating a cross-compiler is not only a justified step but necessary step, to shield developers from the complete and utter horror of GCC's brokenness. However, some people think that GCC actually does work (for at least one definition of "works") and that GNU developers and the open source community as a whole actually aren't completely incompetent. These people don't agree that creating a cross-compiler is justified or necessary. A third group of people are more practical and have the opinion that if GCC actually is so broken that a cross-compiler is necessary, then hiding symptoms isn't a cure and you should probably just use NASM instead.</i>" --<a href="http://wiki.osdev.org/index.php?title=User:Brendan&amp;action=edit&amp;redlink=1" class="new" title="User:Brendan (page does not exist)">Brendan</a> 12:57, 19 March 2012 (CDT)
+</p>
+<h2> <span class="mw-headline" id="Development_without_a_cross-compiler.3F"> Development without a cross-compiler? </span></h2>
+<p>I would like to give a perspective from a os-dev newcomer who has been using the this and wiki pages to get started with kernel developement.  I do not feel mature enough to take side, but for me it would have been helpfull if the article would state something like "It is possible, under circumstances xyz, not to use a crosscompiler or post-pone it for later. Then flags xyz will be necessary."  And then stress again that this is not recommanded.  Maybe also point to the discussion page for details why or why not.
+</p><p>I downloaded a couple of available "hobby OSes" (e.g. geekos and prettyos) and compiled them without problem using my i686-linux-gnu gcc and they run.  I'm not trying to say that it is a good idea not to use a cross compiler.  I'm saying that to me this article in the current version gave the impression that it is simply impossible without build cross-compiler; and I was confused when it actually worked. -- Tang
+</p>
+<dl><dd>Hi, this kind of discussion is probably more suited for the forums. Nonetheless, I'll try to answer your questions here. The main reason you need a cross-compiler is because the <tt>gcc</tt> that came with your distribution targets your current system. For instance, a Linux gcc will search for headers in <tt>/usr/include</tt> and libraries in <tt>/usr/lib</tt>. Not only that, it will use the Linux executable format (ELF) and the generated code will assume the Linux ABI. Indeed, the compiler will declare Linux-specific preprocessor macros. It will assume instruction set extensions are enabled. (Even the libgcc assumes it will run on a Linux platform and contains references to stuff like pthreads, if I'm not wrong). It might even generate code for the wrong architecture if you wish to make a 32-bit kernel on a 64-bit system.
+</dd><dd>In other words, the root cause is that the compiler thinks it targets a Linux system (in this example, but substitute whatever you use) and all the problems you will experience are caused by this. You implicitly lied to the compiler and told it that it targets Linux - when it really doesn't - and it might do bad things. This article mentions a number of compiler options that can change the behaviour to disable some of the symptoms, but it doesn't correct the root problem: Your OS is <i>not</i> Linux. You can use the compiler options, but the result will be a fragile toolchain that is harder to use. Indeed, you can't even fully pass command line options that undo all the Linux assumptions. You can't even use freestanding headers like <tt>&lt;stdint.h&gt;</tt> in your kernel as on GNU libc platforms this header is provided by GNU libc, but as you pass -nostdinc you disable both /usr/include and the compiler specific include directory.
+</dd><dd>That said, you can provide a bunch of compiler options that gradually treat whatever symptoms would appear and it will likely work if you are skilled - but you won't gain the reliably of a target like i686-elf where the compiler never makes any of these bad assumptions in the first place. It is likely possible to provide a list of options that would fix most issues people would encounter, but then there's additional problems caused by the fact that distributions further patch the system compiler with further enhancements and change compiler option defaults - even the fact that they may need to pass options like -m32 (which doesn't make sense if cross-developing from, say, ARM) causes much complexity.
+</dd><dd>So yes, it's much simpler to just do things <i>properly</i> and cross-compile to a target like i686-elf. Indeed, most people that would use the advise on how to avoid using a cross-compiler are likely lazy and will complain when things break - this increases the support burden for our community. Besides, requiring a bit of patience from newcomers to build a cross-compiler isn't unreasonable considering the time it takes to write an OS - it's even educational to know how to compile GCC. --<a href="http://wiki.osdev.org/User:Sortie" title="User:Sortie">Sortie</a> 14:52, 4 January 2014 (CST)
+</dd></dl>
+<p><br />
+</p>
+<dl><dd>I noted in a comment earlier that "portable" seems to be defined as "32-bit linux only". While this wouldn't be completely true, the hacks you need to force specific compilers to do the things you expect them to do can often differ between setups, have some issues that can't be patched, or just can't be made to work at all in several cases. And these settings change as GCC goes to newer versions. Basically what you request consists of two things:
+<ol><li> Post <i>and maintain</i> hacks for all possibilities.
+</li><li> Post instructions with the intent that they're not being performed.
+</li></ol>
+</dd><dd>The former is a waste of time, the second is just silly. Also note that building the cross-compiler is in several people's vision the equivalent of the entrance test because it implies the minimal reading skills many people lack. Getting caught not using one is in practice just an excuse for being flamed for your stupidity, and not getting any further help until you "fix" the problem. So you're better off doing it right the first time anyway. 
+</dd><dd> As for the article, I'll always stick with the established psychology that tells you to teach people the things to do, rather than the things <i>not</i> to do because the latter only gives people ideas. Basically, every non-cross-compiler reference to GCC in the wiki is to be considered an error.
+</dd><dd> - <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 10:14, 7 January 2014 (CST)
+</dd></dl>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 47/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2976-0!*!0!!*!*!* and timestamp 20180121080139 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Talk:Why_do_I_need_a_Cross_Compiler%3F&amp;oldid=15521">http://wiki.osdev.org/index.php?title=Talk:Why_do_I_need_a_Cross_Compiler%3F&amp;oldid=15521</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Talk%3AWhy_do_I_need_a_Cross_Compiler%3F" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main"><span><a href="Why_do_I_need_a_Cross_Compiler?"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="selected"><span><a href="Talk:Why_do_I_need_a_Cross_Compiler?"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Talk:Why_do_I_need_a_Cross_Compiler?#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Talk:Why_do_I_need_a_Cross_Compiler?" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Why_do_I_need_a_Cross_Compiler%3F&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Why_do_I_need_a_Cross_Compiler%3F&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Talk:Why_do_I_need_a_Cross_Compiler?#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Talk:Why_do_I_need_a_Cross_Compiler%3F" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Talk:Why_do_I_need_a_Cross_Compiler%3F" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Talk:Why_do_I_need_a_Cross_Compiler%3F&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Talk:Why_do_I_need_a_Cross_Compiler%3F&amp;oldid=15521" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 January 2014, at 10:14.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,789 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+			skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Talk:Why_do_I_need_a_Cross_Compiler%3F" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Talk:Why_do_I_need_a_Cross_Compiler%3F" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Talk:Why_do_I_need_a_Cross_Compiler%3F&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Talk:Why_do_I_need_a_Cross_Compiler%3F&amp;oldid=15521" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 January 2014, at 10:14.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,789 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.055 secs. -->
+	</body>
+</html>

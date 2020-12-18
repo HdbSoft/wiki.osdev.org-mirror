@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>PS/2 Mouse - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "PS/2_Mouse", "wgTitle": "PS/2 Mouse", "wgCurRevisionId": 19698, "wgArticleId": 3157, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Human Interface Device", "Common Devices"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-PS_2_Mouse action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">PS/2 Mouse</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="2_Mouse#mw-head">navigation</a>,
+					<a href="2_Mouse#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Also be sure to read <a href="../Mouse_Input" title="Mouse Input">Mouse Input</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="2_Mouse#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="2_Mouse#Mouse_Device_Over_PS.2F2"><span class="tocnumber">2</span> <span class="toctext">Mouse Device Over PS/2</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="2_Mouse#Mouse_Extensions"><span class="tocnumber">3</span> <span class="toctext">Mouse Extensions</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="2_Mouse#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="2_Mouse#Articles"><span class="tocnumber">4.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="2_Mouse#External_Links"><span class="tocnumber">4.2</span> <span class="toctext">External Links</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="2_Mouse#Implementations"><span class="tocnumber">4.3</span> <span class="toctext">Implementations</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Overview"> Overview </span></h2>
+<p>The PS/2 Mouse is a device that talks to a PS/2 controller using <a href="2" title="PS/2">serial communication</a>. Ideally, each different type of PS/2 controller driver should provide some sort of standard/simple "send byte/receive byte" interface, and the PS/2 Mouse driver would use this interface without caring about lower level details (like what type of PS/2 controller the device is plugged into).
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="Mouse_Device_Over_PS.2F2"> Mouse Device Over PS/2 </span></h2>
+<p>Here is the table of command a generic PS/2 compatible mouse understands:
+</p>
+<table class="wikitable">
+<tr>
+<th colspan="3"> Standard PS/2 Mouse Commands
+</th></tr>
+<tr>
+<th> Byte </th>
+<th> Data byte </th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0xFF </td>
+<td> None </td>
+<td> Reset
+</td></tr>
+<tr>
+<td> 0xFE </td>
+<td> None </td>
+<td> Resend
+</td></tr>
+<tr>
+<td> 0xF6 </td>
+<td> None </td>
+<td> Set Defaults
+</td></tr>
+<tr>
+<td> 0xF5 </td>
+<td> None </td>
+<td> Disable Data Reporting
+</td></tr>
+<tr>
+<td> 0xF4 </td>
+<td> None </td>
+<td> Enable Data Reporting
+</td></tr>
+<tr>
+<td> 0xF3
+</td>
+<td> Sample rate, ranges from 10-200.
+</td>
+<td> Set Sample Rate
+</td></tr>
+<tr>
+<td> 0xF2
+</td>
+<td> None
+</td>
+<td> Get Device ID. See <a href="../&quot;8042&quot;_PS/2_Controller#Detecting_PS.2F2_Device_Types" title="&quot;8042&quot; PS/2 Controller">Detecting PS/2 Device Types</a> for the response bytes.
+</td></tr>
+<tr>
+<td> 0xF0 </td>
+<td> None </td>
+<td> Set Remote Mode
+</td></tr>
+<tr>
+<td> 0xEE </td>
+<td> None </td>
+<td> Set Wrap Mode
+</td></tr>
+<tr>
+<td> 0xEC </td>
+<td> None </td>
+<td> Reset Wrap Mode
+</td></tr>
+<tr>
+<td> 0xEB </td>
+<td> None </td>
+<td> Read Data
+</td></tr>
+<tr>
+<td> 0xEA </td>
+<td> None </td>
+<td> Set Stream Mode
+</td></tr>
+<tr>
+<td> 0xE9 </td>
+<td> None </td>
+<td> Status Request
+</td></tr>
+<tr>
+<td> 0xE8
+</td>
+<td>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th> Byte
+</th>
+<th> Resolution
+</th></tr>
+<tr>
+<td> 00
+</td>
+<td> 1 count/mm
+</td></tr>
+<tr>
+<td> 01
+</td>
+<td> 2 count/mm
+</td></tr>
+<tr>
+<td> 02
+</td>
+<td> 4 count/mm
+</td></tr>
+<tr>
+<td> 03
+</td>
+<td> 8 count/mm
+</td></tr></table>
+</td>
+<td> Set Resolution
+</td></tr>
+</table>
+<p>The most common command reply is <i>0xFA</i> from the master (mouse), which means acknowledge. You may then get a variable number of bytes afterwards depending on the command. You may also receive other command replies which may state that the master (mouse) has encountered an error decoding your command. For a more detailed list check out some of the links above or look through the Linux source tree. 
+</p><p>First, you have to enable the mouse on the PS/2 bus. This requires sending one byte which is clocked over the PS/2 interface. You will then get a response regarding the result. By sending <i>0xF4</i> (Enable Data Reporting) the mouse should reply back with a <i>0xFA</i> which means acknowledgement. Then afterwards as the mouse pointer is moved it will send back the generic packet format like below. Unless you enable an enhanced mode for the mouse (non-standard) this is what you will get when ever the mouse is moved.
+</p>
+<table class="wikitable">
+<tr>
+<th colspan="9"> Generic PS/2 Mouse Packet Bits
+</th></tr>
+<tr>
+<th> BYTE</th>
+<th>7</th>
+<th>6</th>
+<th>5</th>
+<th>4</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+<th>0
+</th></tr>
+<tr align="center">
+<td> 0 </td>
+<td> yo </td>
+<td> xo </td>
+<td> ys </td>
+<td> xs </td>
+<td> ao </td>
+<td> bm </td>
+<td> br </td>
+<td> bl
+</td></tr>
+<tr align="center">
+<td> 1 </td>
+<td colspan="8"> xm
+</td></tr>
+<tr align="center">
+<td> 2 </td>
+<td colspan="8"> ym
+</td></tr></table>
+<table class="wikitable">
+<tr>
+<th> Code </th>
+<th> Description
+</th></tr>
+<tr>
+<td> yo </td>
+<td> Y-Axis Overflow
+</td></tr>
+<tr>
+<td> xo </td>
+<td> X-Axis Overflow
+</td></tr>
+<tr>
+<td> ys </td>
+<td> Y-Axis Sign Bit (9-Bit Y-Axis Relative Offset)
+</td></tr>
+<tr>
+<td> xs </td>
+<td> X-Axis Sign Bit (9-Bit X-Axis Relative Offset)
+</td></tr>
+<tr>
+<td> ao </td>
+<td> Always One
+</td></tr>
+<tr>
+<td> bm </td>
+<td> Button Middle (Normally Off = 0)
+</td></tr>
+<tr>
+<td> br </td>
+<td> Button Right (Normally Off = 0)
+</td></tr>
+<tr>
+<td> bl </td>
+<td> Button Left (Normally Off = 0)
+</td></tr>
+<tr>
+<td> xm </td>
+<td> X-Axis Movement Value
+</td></tr>
+<tr>
+<td> ym </td>
+<td> Y-Axis Movement Value
+</td></tr></table>
+<p>Each X and Y axis value is relative. The mouse device does not track it's location in absolute coordinates. This should also be apparent by the 9-bit values. Instead, it sends back saying I moved this far to the left, to the right, down, or up. To keep track of a mouse position you need to accumulate these relative offsets into a absolute position offset in your code:
+</p>
+<pre>
+    mouse_x = mouse_x + mouse_packet_rel_x
+    mouse_y = mouse_y + mouse_packet_rel_y
+</pre>
+<p><i>Being these 9-bit values are signed the above pseudo would work.</i>
+</p><p>Also, if you simply read the <i>xm</i> or <i>ym</i> fields you will get an 8-bit unsigned value. Which, if used as unsigned will yield incorrect behavior. If you convert it into a signed 8-bit value you will get behavior that is similar to correct, but strange artifacts will appear when the mouse is moved fast. The correct way to produce a 9-bit or greater signed value is as follows:
+</p>
+<pre>
+	state = first_byte
+	d = second_byte
+	rel_x = d - ((state &lt;&lt; 4) &amp; 0x100)
+	d = third_byte
+	rel_y = d - ((state &lt;&lt; 3) &amp; 0x100)
+</pre>
+<p>The pseudo code above will cause <i>((state &lt;&lt; 4) &amp; 0x100)</i> to equal <i>0x100</i> only if the signed bit (9'th bit stored in the first byte) is set. If the 9'th bit is set then the value is deemed negative, but the value in <i>second_byte</i> is not stored in one or two's complement form. It is instead stored as a positive 8-bit value. So, if <i>second_byte</i> is say a <i>2</i> then it will become <i>2 minus 0</i> since the negative (9'th bit) is off. But, if it is on then it will become <i>2 minus 0x100</i> which will produce the twos complement, or <i>-2</i>. It will also cause the register to be correctly sign extended no matter it's size.
+</p>
+<h2> <span class="mw-headline" id="Mouse_Extensions"> Mouse Extensions </span></h2>
+<p>Here, an example of mouse that supports extensions. To maintain backwards compatibility
+you should have to activate these features through the PS/2 bus. Various mouse devices
+use different ways. Linux mouse drivers for example sometimes handle multiple different
+devices which all share the same standard packet format above, or at least support the
+compatibility mode described above.
+</p>
+<table class="wikitable">
+<tr>
+<th colspan="9"> IntelliMouse Explorer
+</th></tr>
+<tr>
+<th> BYTE</th>
+<th>7</th>
+<th>6</th>
+<th>5</th>
+<th>4</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+<th>0
+</th></tr>
+<tr align="center">
+<td> 3 </td>
+<td> vs </td>
+<td> hs </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>
+</td></tr></table>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles">Articles</span></h3>
+<ul><li><a href="2" title="PS/2">PS/2</a>
+</li><li><a href="../&quot;8042&quot;_PS/2_Controller" title="&quot;8042&quot; PS/2 Controller">"8042" PS/2 Controller</a>
+</li><li><a href="2_Keyboard" title="PS/2 Keyboard">PS/2 Keyboard</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://www.computer-engineering.org/ps2mouse/">www.Computer-Engineering.org/ps2mouse</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Implementations"> Implementations </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://lxr.linux.no/#linux+v3.5.4/drivers/input/mouse/psmouse-base.c">Linux</a> (C,GPL)
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 70/1000000
+Post-expand include size: 162/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3157-0!*!0!!en!*!* and timestamp 20180121050733 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=PS/2_Mouse&amp;oldid=19698">http://wiki.osdev.org/index.php?title=PS/2_Mouse&amp;oldid=19698</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="../Category:Human_Interface_Device" title="Category:Human Interface Device">Human Interface Device</a></li><li><a href="../Category:Common_Devices" title="Category:Common Devices">Common Devices</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=PS%2F2_Mouse" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="2_Mouse"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="../Talk:PS/2_Mouse"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="2_Mouse#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="2_Mouse" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=PS/2_Mouse&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=PS/2_Mouse&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="2_Mouse#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="../Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" tit../skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="../Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="../Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="../Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="../OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="../OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="../OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/PS/2_Mouse" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/PS/2_Mouse" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=PS/2_Mouse&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=PS/2_Mouse&amp;oldid=19698" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 August 2016, at 04:17.</li>
+											<li id="footer-info-viewcount">This page has been accessed 17,806 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="../OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="../OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="../OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="../skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.039 secs. -->
+	</body>
+</html>

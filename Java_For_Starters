@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Java For Starters - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Java_For_Starters", "wgTitle": "Java For Starters", "wgCurRevisionId": 20369, "wgArticleId": 3831, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Disputed Pages", "Bare bones tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-java {line-height: normal;}
+.source-java li, .source-java pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for java
+ * CSS class: source-java, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.java.source-java .de1, .java.source-java .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.java.source-java  {font-family:monospace;}
+.java.source-java .imp {font-weight: bold; color: red;}
+.java.source-java li, .java.source-java .li1 {font-weight: normal; vertical-align:top;}
+.java.source-java .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.java.source-java .li2 {font-weight: bold; vertical-align:top;}
+.java.source-java .kw1 {color: #000000; font-weight: bold;}
+.java.source-java .kw2 {color: #000066; font-weight: bold;}
+.java.source-java .kw3 {color: #003399;}
+.java.source-java .kw4 {color: #000066; font-weight: bold;}
+.java.source-java .co1 {color: #666666; font-style: italic;}
+.java.source-java .co2 {color: #006699;}
+.java.source-java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java.source-java .coMULTI {color: #666666; font-style: italic;}
+.java.source-java .es0 {color: #000099; font-weight: bold;}
+.java.source-java .br0 {color: #009900;}
+.java.source-java .sy0 {color: #339933;}
+.java.source-java .st0 {color: #0000ff;}
+.java.source-java .nu0 {color: #cc66cc;}
+.java.source-java .me1 {color: #006633;}
+.java.source-java .me2 {color: #006633;}
+.java.source-java .ln-xtra, .java.source-java li.ln-xtra, .java.source-java div.ln-xtra {background-color: #ffc;}
+.java.source-java span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Java_For_Starters action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Java For Starters</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Java_For_Starters#mw-head">navigation</a>,
+					<a href="Java_For_Starters#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; padding: .0em .25em .0em; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><font color="black">The factual accuracy of this article or section is <a href="Category:Disputed_Pages" title="Category:Disputed Pages">disputed</a>.</font><br /><small><font color="red">Please see the relevant discussion on the <a href="http://forum.osdev.org/viewtopic.php?t=29802" class="extiw" title="topic:29802">talk page</a>.</font></small>
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Java_For_Starters#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Java_For_Starters#The_problem_with_OS_development_in_Java"><span class="tocnumber">2</span> <span class="toctext">The problem with OS development in Java</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Java_For_Starters#How_to_run_you_without_a_car.3F"><span class="tocnumber">3</span> <span class="toctext">How to run you without a car?</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Java_For_Starters#Here_are_some_tools_available_for_Java_OS_developers."><span class="tocnumber">4</span> <span class="toctext">Here are some tools available for Java OS developers.</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Java_For_Starters#A_bit_of_theory"><span class="tocnumber">5</span> <span class="toctext">A bit of theory</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Java_For_Starters#How_it_works."><span class="tocnumber">6</span> <span class="toctext">How it works.</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Java_For_Starters#What.27s_next."><span class="tocnumber">7</span> <span class="toctext">What's next.</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>Java is a very nice language, it is very easy to learn and also it's used in a lot of projects by millions of programmers, so it seems a good idea to show a way of OS development for all these Java developers and other people interested in Java. But before you start it would be nice to familiarize yourself with the basic OS concepts, <a href="Main_Page" title="Main Page" class="mw-redirect"> described in this wiki</a>.
+</p>
+<h2> <span class="mw-headline" id="The_problem_with_OS_development_in_Java">The problem with OS development in Java</span></h2>
+<p>The main problem for people writing an OS in a language without flexible native tools is the lack of the tools. Also Java program needs Java Runtime Environment (JRE) to be run. But during OS startup there's no JRE and we should somehow manage to run Java program without it. As we can see, there's a need in tools and runtime support now. More information on using different languages in OS development is present <a href="Languages" title="Languages"> here</a>.
+</p>
+<h2> <span class="mw-headline" id="How_to_run_you_without_a_car.3F">How to run you without a car?</span></h2>
+<p>Well, it's simple - you can use your legs. But yes, it's not very convenient. And it's better to have some kind of a vehicle to help you to get some speed. That's why it is important to understand what tools we have.
+</p><p>First, it is possible to use some combination of tools, written in C or Assembly, with some source code, written according to the Java syntax, and another part of code, written in C or Assembly. It's actually the way many people prefer, <a href="Pascal_Bare_Bones" title="Pascal Bare Bones"> and here is the Pascal example</a>, which shows such approach. But it should be noted, there's just a small part of the job done in Pascal. Without tools, written in other languages, there will be no Pascal OS. Also, without code in other languages (mostly assembly) there will be no Pascal OS.
+</p><p>Second, it's possible to write absolutely everything in the preferred language. And of course, it means somebody should write the "everything". Because in case of many languages there's no native tools available, it's the OS developer who should write "everything".
+</p><p>And third, most realistic way. An OS can be written using as much tools in the target language, as available, and all the rest can be borrowed from other languages and environments. It's something in between of the first and the second ways.
+</p>
+<h2> <span class="mw-headline" id="Here_are_some_tools_available_for_Java_OS_developers.">Here are some tools available for Java OS developers.</span></h2>
+<p>First, of course, it's the standard tool set <a href="Getting_Started#Choosing_your_development_environment" title="Getting Started"> as described here</a>. It supports the first way of doing things - just some language flavor around the same C and Assembly based environment. And the flavor can be compiled by the <a rel="nofollow" class="external text" href="https://gcc.gnu.org/java/">GNU Compiler for the Java</a> (GCJ), for example. The GCJ was written in C and supports only standard C related conventions. If a developer prefers this way it should be noted this article is not intended to be of a great help for such approach.
+</p><p>The second option (everything in Java) is described below. But it introduces some tools, already written in Java. The tools here are used as an example and there's no attempt to enforce you to use them. Following article shows how to create a simple bootloader in Java. There is a jump in the end of the bootloader code and all your potential Java OS can start after the jump is performed. So, your OS in Java can start with this article and end in some very interesting form, unseen until you'll have it done.
+</p>
+<h2> <span class="mw-headline" id="A_bit_of_theory">A bit of theory</span></h2>
+<p>Basically it is required to load an OS for it's code to be executed. Because we are talking about Java then it seems a good idea to understand first how Java can load itself (or an OS written in Java). There is a number of ways.
+</p>
+<ul><li> First, you can use tools like <a rel="nofollow" class="external text" href="https://www.gnu.org/software/grub/">GRUB</a> and forget about loading OS yourself.
+</li><li> Second, you can write a bootloader in another language, but not in Java, like assembly, for example.
+</li><li> And third, you can write a bootloader in Java.
+</li></ul>
+<p>The third option is described here. In fact, when the bootloader is actually written in Java, there's some subtle aspect related to the syntax involved. Somebody can say "it's not Java". Well, it's yes and no. But now you have an opportunity to decide it yourself.
+</p><p>First we have to look in the depth of the software execution. For the software to be executed there should be a processor which is able to understand software's instructions. Usually the code you see in many languages is not understandable by the processor. So, there's a translation layer between the code and the executable software. But the translation can be implemented in many forms. First it was the assembly. People had written short textual commands and software was required to translate the commands in the form the processor understands. Next people understood it's very tedious and time consuming to write software in such a form of short textual commands, so the high level languages were born. And as we know, Java is the one. But the translation level between Java and the actually executed code hides a lot of details. It is done for a reason. It helps a developer to concentrate on the goal instead of gory details. And with the goal achieved faster we, unfortunately, lose some flexibility the low level commands have. And finally people managed to mix the high level with the low level in a consistent manner. It was called "inline assembly". It's not ideal and there's still a way for better compilers with the ability to understand such a mixture without requiring a programmer to jump between two languages. But unfortunately, such compilers are still far away from Java developers. However, the idea of inline assembly works perfectly even in Java.
+</p><p>Now we can try to look at the way Java can inline the assembly. First, of course, there should be <a rel="nofollow" class="external text" href="http://jembryos.org/inline.html">the assembly for Java</a>. It's not the only possible implementation, but other variants are far too different from the assembly syntax. Because the assembly syntax is widely used in the hardware documentation and software examples it is a good idea to have the inline version which is as close to the generally accepted assembly syntax as possible.
+</p><p>And as we mentioned above there can be voices like "it's not Java!", we have to clear the subject a bit. If we remember the way a program goes along before being executed we can see some intermediary steps. It's the translation phase. The translation phase hides low level details and produces an executable file. But if we forget about the translation then it really can look like this - we write a program and (after some magic applied) it just runs. Yes, we can forget about translation and be happy with the actually running program. But the OS development is a thing that just requires us to go into the low level details. And if we go then it becomes obvious there's no more "the program" and there are just some bytes, produced by tools and executed by a processor. The actual execution details can be very different from what we expect while looking at the initial program. And the following information (hopefully) can show how things actually work between the layer of the programming language abstraction and the hardware layer. It's not Java or not Java talk, it's just way of doing things in Java. The same is true for every C or assembly program - there just must be some tools for the translation phase to work. And the tools can be written in C or assembly or (yes!) in Java.
+</p>
+<h2> <span class="mw-headline" id="How_it_works.">How it works.</span></h2>
+<p>First, it's still a Java program. So, the Java syntax should be respected. But Java syntax allows us a lot of flexibility. And the flexibility was used as such - every assembly instruction was defined in a Java class and instance of this class with the same name, as is used in assembly, is referenced from a successor of the AssemblerProgram class. As a result you can write a standard Java method and use assembly instructions in it.
+</p><p>But it's not the actual "inline" assembly now. What the <a rel="nofollow" class="external text" href="http://www.jembryos.org/inline.html">inline assembly project</a> does is the translation <b>and</b> connection between Java code and the translated assembly code. Here we can see just the translation phase. It's actually the collection of assembly instructions step, which allows to translate the instructions in a binary form later (with the help of the <i>getProgram()</i> method). And the actual way of connection of translated assembly instructions with the Java code is outlined in the end of the article.
+</p><p>The collection of assembly instructions can look like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="java source-java"><pre class="de1">mov.<span class="me1">x32</span><span class="br0">&#40;</span>EAX,EDX<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<ul><li> Here the "mov" is the class's field name.
+</li><li> The "x32" is the Java method, but it also is used as a way to show us the instruction operand size (32 bits here).
+</li><li> The "EAX" and "EDX" are also fields of the ancestor class and represent well known in the assembly syntax registers.
+</li></ul>
+<p>The code line above tells us that we have the 32 bit move assembly instruction with operands in EAX (destination) and EDX (source) registers. hopefully, any developer with assembly knowledge can understand this code. But Java adds here type safeness, which (if you use IDE like Eclipse) can highlight errors like wrong register name for selected operand size right at the moment you are editing the code.
+</p><p>Next it is required to understand how the instruction above can be executed. For it to be possible the translation phase is required. But before the translation step it is usually a good idea to have the actual program. The program actually is just a number of text strings in the form described above. It can be good to separate code fragments intended for different purposes in separate methods like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="java source-java"><pre class="de1"><span class="kw1">protected</span> <span class="kw4">void</span> writeBootCodeInitialization<span class="br0">&#40;</span><span class="kw4">short</span> stackAddress, <span class="kw4">short</span> bootLoaderAddress<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	eflags.<span class="me1">cld</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// eflags here is the common place for a number of flag manipulaton related instructions</span>
+	mov.<span class="me1">x16</span><span class="br0">&#40;</span>AX,<span class="br0">&#40;</span><span class="kw4">short</span><span class="br0">&#41;</span><span class="br0">&#40;</span>bootLoaderAddress<span class="sy0">&gt;&gt;&gt;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// mov WORD AX, immediate</span>
+	mov.<span class="me1">x16</span><span class="br0">&#40;</span>DS,AX<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// ordinary 16 bit mov instruction</span>
+	xor.<span class="me1">x16</span><span class="br0">&#40;</span>AX,AX<span class="br0">&#41;</span><span class="sy0">;</span>
+	mov.<span class="me1">x16</span><span class="br0">&#40;</span>ES,AX<span class="br0">&#41;</span><span class="sy0">;</span>
+	mov.<span class="me1">x16</span><span class="br0">&#40;</span>SS,AX<span class="br0">&#41;</span><span class="sy0">;</span>
+	mov.<span class="me1">x16</span><span class="br0">&#40;</span>SP,stackAddress<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>And the class, where code fragments are supposed to be, can look like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="java source-java"><pre class="de1"><span class="kw1">public</span> <span class="kw1">class</span> AnAssemblyWriter <span class="kw1">extends</span> AssemblerProgram
+<span class="br0">&#123;</span>
+	<span class="kw1">public</span> AnAssemblyWriter<span class="br0">&#40;</span>Mode mode, DebugStream debugStream<span class="br0">&#41;</span>
+	<span class="br0">&#123;</span> <span class="kw1">super</span><span class="br0">&#40;</span>mode, debugStream<span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&#160;
+	... <span class="co1">// your code fragment methods</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>Here we see the class's constructor with two parameters, the mode parameter can be one of the following:
+</p>
+<pre> 	CODE16 // Generate 16-bit code
+ 	CODE32 // Generate 32-bit code
+ 	CODE64 // Generate 64-bit code
+</pre>
+<p>And the debugStream is just a wrapper around an arbitrary OutputStream. It can be used to print the resulting assembly program in textual form. The actual print is performed during AssemblerProgram's getProgram() call.
+</p><p>Next you can add a particular code to the bootloader for it to be able to actually load something. You can write a method like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="java source-java"><pre class="de1"><span class="kw1">protected</span> <span class="kw4">void</span> loadImageUsingInt13x42<span class="br0">&#40;</span><span class="kw3">String</span> problemLabel, <span class="kw3">String</span> diskAddressPacketLabel, <span class="kw4">int</span> imageSizeInDiskSectors<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw3">String</span> startTransfer<span class="sy0">=</span><span class="st0">&quot;startTransfer&quot;</span>, done<span class="sy0">=</span><span class="st0">&quot;doneInt13x42&quot;</span><span class="sy0">;</span>
+	<span class="kw1">if</span> <span class="br0">&#40;</span>imageSizeInDiskSectors<span class="sy0">&gt;</span>BootstrapConstants.<span class="me1">int13x42NumberOfBlocksLimit</span><span class="br0">&#41;</span>
+	<span class="br0">&#123;</span>
+		mov.<span class="me1">x16</span><span class="br0">&#40;</span>AX,<span class="br0">&#40;</span><span class="kw4">short</span><span class="br0">&#41;</span><span class="br0">&#40;</span>imageSizeInDiskSectors<span class="sy0">-</span>BootstrapConstants.<span class="me1">int13x42NumberOfBlocksLimit</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		mov.<span class="me1">x16</span><span class="br0">&#40;</span>SI,diskAddressPacketLabel<span class="br0">&#41;</span><span class="sy0">;</span>
+		label<span class="br0">&#40;</span>startTransfer<span class="br0">&#41;</span><span class="sy0">;</span>
+		push.<span class="me1">x16</span><span class="br0">&#40;</span>AX<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+	<span class="kw1">else</span> mov.<span class="me1">x16</span><span class="br0">&#40;</span>SI,diskAddressPacketLabel<span class="br0">&#41;</span><span class="sy0">;</span>
+	mov.<span class="me1">x8</span><span class="br0">&#40;</span>AH,<span class="br0">&#40;</span><span class="kw4">byte</span><span class="br0">&#41;</span>0x42<span class="br0">&#41;</span><span class="sy0">;</span>
+	mov.<span class="me1">x8</span><span class="br0">&#40;</span>DL,<span class="br0">&#40;</span><span class="kw4">byte</span><span class="br0">&#41;</span>0x80<span class="br0">&#41;</span><span class="sy0">;</span>
+	Int.<span class="me1">x</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">byte</span><span class="br0">&#41;</span>0x13<span class="br0">&#41;</span><span class="sy0">;</span>
+	jcc.<span class="me1">jc</span><span class="br0">&#40;</span>problemLabel<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="kw1">if</span> <span class="br0">&#40;</span>imageSizeInDiskSectors<span class="sy0">&gt;</span>BootstrapConstants.<span class="me1">int13x42NumberOfBlocksLimit</span><span class="br0">&#41;</span>
+	<span class="br0">&#123;</span>
+		mov.<span class="me1">x16</span><span class="br0">&#40;</span>SI,diskAddressPacketLabel<span class="br0">&#41;</span><span class="sy0">;</span>
+		add.<span class="me1">x16</span><span class="br0">&#40;</span>i<span class="br0">&#40;</span>SI,<span class="nu0">6</span><span class="br0">&#41;</span>,<span class="br0">&#40;</span><span class="kw4">short</span><span class="br0">&#41;</span><span class="br0">&#40;</span>BootstrapConstants.<span class="me1">int13x42NumberOfBlocksLimit</span><span class="sy0">&lt;&lt;</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		add.<span class="me1">x32</span><span class="br0">&#40;</span>i<span class="br0">&#40;</span>SI,<span class="nu0">8</span><span class="br0">&#41;</span>,BootstrapConstants.<span class="me1">int13x42NumberOfBlocksLimit</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		pop.<span class="me1">x16</span><span class="br0">&#40;</span>AX<span class="br0">&#41;</span><span class="sy0">;</span>
+		sub.<span class="me1">x16</span><span class="br0">&#40;</span>AX,<span class="br0">&#40;</span><span class="kw4">short</span><span class="br0">&#41;</span>BootstrapConstants.<span class="me1">int13x42NumberOfBlocksLimit</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		jcc.<span class="me1">jae</span><span class="br0">&#40;</span>startTransfer<span class="br0">&#41;</span><span class="sy0">;</span>
+		add.<span class="me1">x16</span><span class="br0">&#40;</span>AX,<span class="br0">&#40;</span><span class="kw4">short</span><span class="br0">&#41;</span>BootstrapConstants.<span class="me1">int13x42NumberOfBlocksLimit</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		jcc.<span class="me1">jz</span><span class="br0">&#40;</span>done<span class="br0">&#41;</span><span class="sy0">;</span>
+		mov.<span class="me1">x16</span><span class="br0">&#40;</span>i<span class="br0">&#40;</span>SI,<span class="nu0">2</span><span class="br0">&#41;</span>,AX<span class="br0">&#41;</span><span class="sy0">;</span>
+		xor.<span class="me1">x16</span><span class="br0">&#40;</span>AX,AX<span class="br0">&#41;</span><span class="sy0">;</span>
+		jmp.<span class="me1">near</span><span class="br0">&#40;</span>startTransfer<span class="br0">&#41;</span><span class="sy0">;</span>
+		label<span class="br0">&#40;</span>done<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>The the final program (it's main method) can look like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="java source-java"><pre class="de1"><span class="kw1">private</span> <span class="kw4">void</span> createBootCode<span class="br0">&#40;</span><span class="kw4">int</span> imageStartAbsoluteBlockNumber, <span class="kw4">int</span> imageSizeInDiskSectors,
+		<span class="kw4">short</span> memoryAddressToPlaceBootstrapImageAt, <span class="kw4">short</span> bootLoaderNewAddress,
+		<span class="kw4">short</span> bootLoaderInitialAddress, <span class="kw4">short</span> bootLoaderSize<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="co1">// define labels in one place for not to copy the same text in many places</span>
+	<span class="kw3">String</span> diskReadProblemLabel<span class="sy0">=</span><span class="st0">&quot;diskProblem&quot;</span>, diskAddressPacketLabel<span class="sy0">=</span><span class="st0">&quot;diskAddressPacket&quot;</span><span class="sy0">;</span>
+&#160;
+	<span class="co1">// call a few methods to include separate code fragments in the resulting program</span>
+	writeBootCodeInitialization<span class="br0">&#40;</span>memoryAddressToPlaceBootstrapImageAt,bootLoaderNewAddress<span class="br0">&#41;</span><span class="sy0">;</span>
+	loadImageUsingInt13x42<span class="br0">&#40;</span>diskReadProblemLabel, diskAddressPacketLabel, imageSizeInDiskSectors<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+	mov.<span class="me1">x16</span><span class="br0">&#40;</span>AX,memoryAddressToPlaceBootstrapImageAt<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// address to jump to</span>
+	<span class="co1">// in fact this line is just for demonstration, because the actual address should include the segment and developers should keep it in mind</span>
+	jmp.<span class="me1">near16</span><span class="br0">&#40;</span>AX<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// jump to the offset in AX and start loaded image code</span>
+&#160;
+	writeProceduresAndData<span class="br0">&#40;</span>diskReadProblemLabel,diskAddressPacketLabel,
+			imageSizeInDiskSectors,imageStartAbsoluteBlockNumber,memoryAddressToPlaceBootstrapImageAt<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>And here you can see how helper procedures and data structures are written together with the actual bootloader's code.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="java source-java"><pre class="de1"><span class="kw1">private</span> <span class="kw4">void</span> writeProceduresAndData<span class="br0">&#40;</span><span class="kw3">String</span> diskReadProblemLabel, <span class="kw3">String</span> diskAddressPacketLabel,
+		<span class="kw4">int</span> imageSizeInDiskSectors, <span class="kw4">int</span> imageStartAbsoluteBlockNumber, <span class="kw4">short</span> memoryAddressToPlaceBootstrapImageAt<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw3">String</span> printMsgProcLabel<span class="sy0">=</span><span class="st0">&quot;printMsgLabel&quot;</span>, diskErrorMsgLabel<span class="sy0">=</span><span class="st0">&quot;diskErrorMsg&quot;</span><span class="sy0">;</span>
+&#160;
+	label<span class="br0">&#40;</span>diskReadProblemLabel<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// assembly label analog</span>
+	<span class="co1">// it's inline because it's not supposed to be called, only jumps here are expected</span>
+	inline_printMessage_haltIfSecondZero<span class="br0">&#40;</span>diskErrorMsgLabel,printMsgProcLabel<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+	writePrintMessageProcedure<span class="br0">&#40;</span>printMsgProcLabel<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// it is supposed to ret in the end</span>
+&#160;
+	label<span class="br0">&#40;</span>diskErrorMsgLabel<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="co1">// the zeros at the end denote the end of string and the halt after shown flag</span>
+	writeString<span class="br0">&#40;</span><span class="st0">&quot;Disk error<span class="es0">\0</span><span class="es0">\0</span>&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// just write the string as a sequence of bytes</span>
+&#160;
+	label<span class="br0">&#40;</span>diskAddressPacketLabel<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// int 13*42 data structure follows here</span>
+	<span class="kw4">int</span> imageSize<span class="sy0">=</span><span class="br0">&#40;</span>imageSizeInDiskSectors<span class="sy0">&gt;</span>int13x42NumberOfBlocksLimit<span class="sy0">?</span>int13x42NumberOfBlocksLimit<span class="sy0">:</span>imageSizeInDiskSectors<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="kw4">byte</span> bs<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">=</span><span class="kw1">new</span> <span class="kw4">byte</span><span class="br0">&#91;</span><span class="nu0">16</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// data structure buffer</span>
+	<span class="kw4">int</span> memoryAddressToPlaceImageAt_offset<span class="sy0">=</span>memoryAddressToPlaceBootstrapImageAt<span class="sy0">&amp;</span>0xf<span class="sy0">;</span>
+	<span class="kw4">int</span> memoryAddressToPlaceImageAt_segment<span class="sy0">=</span>memoryAddressToPlaceBootstrapImageAt<span class="sy0">&gt;&gt;</span><span class="nu0">4</span><span class="sy0">;</span>
+	@SuppressWarnings<span class="br0">&#40;</span><span class="st0">&quot;resource&quot;</span><span class="br0">&#41;</span> <span class="co1">// this stream requires no close() call</span>
+	LittleEndianOutputStream leos<span class="sy0">=</span><span class="kw1">new</span> LittleEndianOutputStream<span class="br0">&#40;</span>bs<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// it can write bytes to the bs array</span>
+	leos.<span class="me1">w8</span><span class="br0">&#40;</span>0x10<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// write byte</span>
+	leos.<span class="me1">w8</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	leos.<span class="me1">w16</span><span class="br0">&#40;</span>imageSize<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// write short (16 bit)</span>
+	leos.<span class="me1">w16</span><span class="br0">&#40;</span>memoryAddressToPlaceImageAt_offset<span class="br0">&#41;</span><span class="sy0">;</span>
+	leos.<span class="me1">w16</span><span class="br0">&#40;</span>memoryAddressToPlaceImageAt_segment<span class="br0">&#41;</span><span class="sy0">;</span>
+	leos.<span class="me1">w32</span><span class="br0">&#40;</span>imageStartAbsoluteBlockNumber<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// write int (32 bit)</span>
+	leos.<span class="me1">w32</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	writeBytes<span class="br0">&#40;</span>bs<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// now add the bs buffer to the actual program</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>After you have all inline assembly instructions in place you can first call the methods with the instructions for them to write their binary representation and next call AssemblerProgram's getProgram() method to get the actual machine code stored in the returned byte array. The resulting bytes can be written to the boot sector using appropriate tools.
+</p><p>And, of course, this example shouldn't be considered as a good bootloader. It's just an example of a very simple bootloader, written in Java, which is able to load in memory a small image of 16-bit code and jump to it (do not forget offset register values).
+</p>
+<h2> <span class="mw-headline" id="What.27s_next.">What's next.</span></h2>
+<p>For the code above to work it is required to <a rel="nofollow" class="external text" href="http://sourceforge.net/projects/jembryos/">download some code</a>. But the general direction of next step is towards the OS logic being defined as a more familiar Java program. The inline assembly shouldn't be used if there's no other way to define required logic. For it to be the case we need the translation phase. It is possible to compile Java code using GCC (GCJ) compiler, but it leads us to the area of C programmers with it's code formats, call conventions and a lot of compiler settings. The second option is to invent your own compiler. It's not so hard and in it's simplest form can be done just by translation of every Java bytecode in the assembly form. Example of such simple compiler also is included in the download, mentioned above. Beside of the translation the compiler allows to inline some assembly code and to invoke it from pure Java program. Also it worth to note the AssemblerProgramm class is able to produce 32 and 64 bit code and if you look at the package org.jembryos.boot.image._native.x86, and the BootRecordCode class (part of jEmbryoBootstrap project), then it is possible to find some examples that can help you to understand the tool better.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 105/1000000
+Post-expand include size: 394/2097152 bytes
+Template argument size: 11/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3831-0!*!0!!en!*!* and timestamp 20180121080038 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Java_For_Starters&amp;oldid=20369">http://wiki.osdev.org/index.php?title=Java_For_Starters&amp;oldid=20369</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Disputed_Pages" title="Category:Disputed Pages">Disputed Pages</a></li><li><a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Java_For_Starters" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Java_For_Starters"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Java_For_Starters&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Java_For_Starters#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Java_For_Starters" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Java_For_Starters&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Java_For_Starters&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Java_For_Starters#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Java_For_Starters" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Java_For_Starters" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Java_For_Starters&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Java_For_Starters&amp;oldid=20369" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 12:33.</li>
+											<li id="footer-info-viewcount">This page has been accessed 4,275 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.277 secs. -->
+	</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>C Sharp - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="C_Sharp" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "C_Sharp", "wgTitle": "C Sharp", "wgCurRevisionId": 20759, "wgArticleId": 2255, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Languages"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-C_Sharp action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">C Sharp</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=CSharp&amp;redirect=no" title="CSharp">CSharp</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="CSharp#mw-head">navigation</a>,
+					<a href="CSharp#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p style="margin-left:2em; font-size:smaller;">Please note that the correct title of this article is C#, however because of technical restrictions it's called "C Sharp".</p>
+<p>C# is an object-oriented programming language developed by Microsoft and standardized by the ECMA and ISO. Its syntax is similar to <a href="C++" title="C++">C++</a>, but with significant differences in functionality.  It was designed to be used to create applications to run under Microsoft's .NET infrastructure.  The idea was that it would be compiled into an intermediate bytecode language called <a href="CIL" title="CIL">CIL</a> which was then just-in-time compiled into machine code by the .NET runtime.  The runtime also provided several useful functions to the code with regards to garbage collection, run time type information and dynamic compilation.  A standard library (called mscorlib) would provide string and other data structure classes (similar to the stdlib in C++) with calls into the Windows API for other tasks (predominantly I/O, GUI and process and thread management).
+</p><p><br />
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="CSharp#Why_write_a_kernel_in_C.23.3F"><span class="tocnumber">1</span> <span class="toctext">Why write a kernel in C#?</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="CSharp#Compiling_your_kernel_to_machine_code"><span class="tocnumber">2</span> <span class="toctext">Compiling your kernel to machine code</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="CSharp#The_runtime"><span class="tocnumber">3</span> <span class="toctext">The runtime</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="CSharp#The_standard_library"><span class="tocnumber">4</span> <span class="toctext">The standard library</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="CSharp#Summary"><span class="tocnumber">5</span> <span class="toctext">Summary</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="CSharp#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="CSharp#Articles"><span class="tocnumber">6.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="CSharp#External_Links"><span class="tocnumber">6.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Why_write_a_kernel_in_C.23.3F"> Why write a kernel in C#? </span></h2>
+<p>There are many disadvantages to writing a kernel in C#.  Firstly, one would need to provide a substantial portion of both the runtime and the standard library along with some method of converting the kernel into machine code just to allow the kernel itself to run.  Secondly direct memory access is difficult (although not impossible - see the 'unsafe' keyword for further information).  The benefits are primarily those provided by type and memory safety.  Given a CIL to native code compiler that works as expected, and without using the 'unsafe' keyword, it should be possible to write a kernel that guarantees against accessing code or data outside of certain pre-defined regions.  This idea can then be extended to all user programs which would prevent user programs attempting to access areas of the kernel that it is not allowed to or areas of other programs.  What this means is that you could theoretically run all programs in the same address space without them either accidentally or maliciously interfering with each other, provided that the address space is big enough.  It is probable that the expanded address space provided with x86_64 is large enough for this.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="Compiling_your_kernel_to_machine_code"> Compiling your kernel to machine code </span></h2>
+<p>There are two approaches one could take to converting C# code to machine code:
+</p><p>1) Write a compiler which converts C# (or a superset of it) directly to machine code.  This is the approach taken by Microsoft's research OS, <a rel="nofollow" class="external text" href="http://research.microsoft.com/en-us/projects/singularity/">Singularity</a>, which defines the <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Sing_Sharp">Sing# language</a> for easier interaction with the underlying hardware.  The Sing# code is converted to machine code by their compiler, <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Bartok_%28compiler%29">Bartok</a>.
+</p><p>2) Write a compiler which converts CIL to machine code.  This leverages the C# to CIL compilers already present in Microsoft.NET or the mono project.  This is the approach taken by many open source C# kernels, including <a rel="nofollow" class="external text" href="http://sourceforge.net/projects/sharpos/">SharpOS</a>, <a rel="nofollow" class="external text" href="http://www.gocosmos.org/index.en.aspx">Cosmos</a>, <a rel="nofollow" class="external text" href="http://www.mosa-project.org/">the MOSA project</a> and <a rel="nofollow" class="external text" href="http://code.google.com/p/tysos/">tysos</a>.
+</p><p>In addition, both of the above approaches could be performed ahead-of-time (AOT) or just-in-time (JIT).  The AOT approach is probably simpler to begin with - you have your compiler running on your development system which is used to produce executable files (e.g. <a href="ELF" title="ELF">ELF</a>) which can then be loaded directly by a standard bootloader.  A JIT design would require a not insubstantial amount of code that is loaded before your kernel which then converts your kernel into machine code before running it.  The problem here is that the JIT compiler would likely need a lot of services which only your kernel could compile.  The best combination is probably to AOT compile your kernel and JIT compiler and have them loaded, and then all other processes can be JIT compiled.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="The_runtime"> The runtime </span></h2>
+<p>Several C# commands (or their equivalent in CIL) require a functioning runtime (Microsoft calls this the Virtual Execution System, or VES).  For example, the expected result of the 'newobj' CIL command is to create an object on a garbage managed heap.  This would require a malloc function and then some method to perform gargabe collection on the heap.  With clever coding (mainly using static or stack-defined objects), it is possible to have your kernel not use the newobj command until you have set up a heap and malloc function.
+</p><p>You will also need to provide an encapsulation of the run-time type information for a class and some way to implement the System.Object.GetType() and typeof() functions to return a class semantically equivalent to System.Type.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="The_standard_library"> The standard library </span></h2>
+<p>Mscorlib.dll is a basic component of the .NET runtime and provides definitions of all the standard types (e.g. System.Int32 for a 32-bit signed integer, System.String for a string, System.Collections.Generic.List&lt;T&gt; for a list of objects of type 'T').  To write any sort of meaningful code in your kernel you are probably going to need to provide implementations of most of these.  Options are:
+</p><p>1) Attempt to compile the Microsoft mscorlib.dll with your compiler.  I strongly recommend that anyone who considers this please check all the legal implications prior to doing it.  You have been warned.
+</p><p>2) Use the corlib provided by the <a rel="nofollow" class="external text" href="http://www.mono-project.com/Main_Page">Mono project</a>.  Note that a lot of the functions in their implementation are marked either 'InternalCall' or 'PInvoke'.  What these mean is that you have to provide an implementation of the function, either as a compiler builtin or provided by your kernel.  The library is quite complex and large, however, and you will need to make sure your compiler produces accurate code for every function - unit tests are your friend here.
+</p><p>3) Write your own basic corlib containing only those functions you need.
+</p><p>4) Don't use a corlib library - as long as you don't try and use any of the functions contained in it within your kernel you should be okay.  There is nothing stating that because you use C# to write your kernel you have to use the corlib library.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="Summary"> Summary </span></h2>
+<p>Whilst is is possible to write a kernel in C# (as many of the projects listed above have demonstrated), it is not something that (currently) can be done quickly.  You will need a combination of kernel, compiler, runtime and standard library to get it running properly.  It may, however, be possible to re-use the compiler and standard library used in many of the projects listed above once they have reached sufficient maturity, so that 'all' you need to do is write the kernel and some memory management functions.  Please note, however, that most of the ahead-of-time compilers used in these projects are closely tied to the operating system they are being used to develop.  If you choose to write your own compiler, be warned: to paraphrase <a href="Languages" title="Languages">Languages</a> - writing a compiler is as hard if not harder than writing a kernel.
+</p><p>Part of reason it is not so simple is that all current C# compilers output MSIL or .NET bytecode, which involves an extra step to convert it to machine code. However, it would be theoretically possible that one day somebody produces a C# frontend for GCC (so you can compile GCC straight to raw machine code) and this would be a completely different story.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="CIL" title="CIL">CIL</a>
+</li><li> <a href="C_Sharp_Bare_Bones" title="C Sharp Bare Bones">C Sharp Bare Bones</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29">C#</a> on Wikipedia
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 53/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2255-0!*!0!!en!*!* and timestamp 20180121035500 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=C_Sharp&amp;oldid=20759">http://wiki.osdev.org/index.php?title=C_Sharp&amp;oldid=20759</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Languages" title="Category:Languages">Languages</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=C_Sharp" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="C_Sharp"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:C_Sharp"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="CSharp#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="C_Sharp" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=C_Sharp&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=C_Sharp&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="CSharp#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/C_Sharp" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/C_Sharp" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=C_Sharp&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=C_Sharp&amp;oldid=20759" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 30 April 2017, at 14:31.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,085 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/C_Sharp" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/C_Sharp" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=C_Sharp&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=C_Sharp&amp;oldid=20759" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 30 April 2017, at 14:31.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,085 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.034 secs. -->
+	</body>
+</html>

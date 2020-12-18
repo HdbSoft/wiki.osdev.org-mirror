@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Troubleshooting - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Troubleshooting", "wgTitle": "Troubleshooting", "wgCurRevisionId": 16322, "wgArticleId": 1540, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Troubleshooting"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Troubleshooting action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Troubleshooting</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Troubleshooting#mw-head">navigation</a>,
+					<a href="Troubleshooting#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Troubleshooting#Providing_a_basic_debugging_environment"><span class="tocnumber">1</span> <span class="toctext">Providing a basic debugging environment</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Troubleshooting#Exception_handlers"><span class="tocnumber">1.1</span> <span class="toctext">Exception handlers</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="Troubleshooting#What_to_do_if_characters_cannot_be_displayed"><span class="tocnumber">1.1.1</span> <span class="toctext">What to do if characters cannot be displayed</span></a></li>
+<li class="toclevel-3 tocsection-4"><a href="Troubleshooting#Avoiding_exception_loops"><span class="tocnumber">1.1.2</span> <span class="toctext">Avoiding exception loops</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="Troubleshooting#Showing_the_stack_content"><span class="tocnumber">1.1.3</span> <span class="toctext">Showing the stack content</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="Troubleshooting#Locating_the_Faulty_instruction"><span class="tocnumber">1.1.4</span> <span class="toctext">Locating the Faulty instruction</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="Troubleshooting#Locating_the_offending_line_of_source_code"><span class="tocnumber">1.1.5</span> <span class="toctext">Locating the offending line of source code</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-8"><a href="Troubleshooting#Enhanced_debugging_techniques"><span class="tocnumber">1.2</span> <span class="toctext">Enhanced debugging techniques</span></a>
+<ul>
+<li class="toclevel-3 tocsection-9"><a href="Troubleshooting#Stack_tracing"><span class="tocnumber">1.2.1</span> <span class="toctext">Stack tracing</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-10"><a href="Troubleshooting#Debugging_techniques"><span class="tocnumber">1.3</span> <span class="toctext">Debugging techniques</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="Troubleshooting#External_assistance"><span class="tocnumber">2</span> <span class="toctext">External assistance</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="Troubleshooting#Debugging_interface"><span class="tocnumber">2.1</span> <span class="toctext">Debugging interface</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="Troubleshooting#See_Also"><span class="tocnumber">3</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="Troubleshooting#Articles"><span class="tocnumber">3.1</span> <span class="toctext">Articles</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Providing_a_basic_debugging_environment"> Providing a basic debugging environment </span></h2>
+<h3> <span class="mw-headline" id="Exception_handlers"> Exception handlers </span></h3>
+<p>The first thing ever to do is to implement a reliable 'exception handler' which will tell you what went wrong. Under an emulator like <a href="Bochs" title="Bochs">Bochs</a>, the absence of such a handler will lead to a '3rd Exception without resolution' panic message (a.k.a <a href="Triple_Fault" title="Triple Fault">Triple Fault</a>), if the emulator is configured to do so... On bare hardware, it will simply reset your computer with a laconic 'bip'.
+</p><p>Every time the CPU is unable to call some exception handler, it tries to execute the <a href="Double_Fault" title="Double Fault" class="mw-redirect">Double Fault</a> exception handler. If it fails to call it either, a <a href="Triple_Fault" title="Triple Fault">Triple Fault</a> occurs. Also keep in mind that exceptions cannot be masked, so either your code is perfect or you need exception handlers. Also keep in mind that when you run applications <i><b>their</b></i> code must be perfect without exception handlers, so it's a good idea to get them quite quickly.
+</p><p>It's quite convenient to have the exception handler showing what kind of exception occurred before anything 'hazardous' is attempted. Displaying, for instance, the (hexadecimal) exception number in a corner of the screen, can save you hours of debugging.&#160;:)
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">exc_0d_handler<span class="sy0">:</span>
+    <span class="kw1">push</span> <span class="kw3">gs</span>
+    <span class="kw1">mov</span> <span class="kw3">gs</span><span class="sy0">,</span>ZEROBASED_DATA_SELECTOR
+    <span class="kw1">mov</span> <span class="kw5">word</span> <span class="br0">&#91;</span><span class="kw3">gs</span><span class="sy0">:</span><span class="nu0">0xb8000</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="st0">'D '</span>
+    <span class="co1">;; D in the top-left corner means we're handling</span>
+    <span class="co1">;;  a GPF exception right ATM.</span>
+&#160;
+    <span class="co1">;; your 'normal' handler comes here</span>
+    <span class="kw1">pushad</span>
+    <span class="kw1">push</span> <span class="kw3">ds</span>
+    <span class="kw1">push</span> <span class="kw3">es</span>
+    <span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span>KERNEL_DATA_SELECTOR
+    <span class="kw1">mov</span> <span class="kw3">ds</span><span class="sy0">,</span><span class="kw3">ax</span>
+    <span class="kw1">mov</span> <span class="kw3">es</span><span class="sy0">,</span><span class="kw3">ax</span>
+&#160;
+    <span class="kw1">call</span> gpfExcHandler
+&#160;
+    <span class="kw1">pop</span> <span class="kw3">es</span>
+    <span class="kw1">pop</span> <span class="kw3">ds</span>
+    <span class="kw1">popad</span>
+&#160;
+    <span class="kw1">mov</span> <span class="kw5">dword</span> <span class="br0">&#91;</span><span class="kw3">gs</span><span class="sy0">:</span><span class="nu0">0xb8000</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="st0">'  D-'</span>
+    <span class="co1">;; the 'D' moved one character to the right, letting</span>
+    <span class="co1">;; us know that the exception has been handled properly</span>
+    <span class="co1">;; and that normal operations continues.</span>
+    <span class="kw1">pop</span> <span class="kw3">gs</span>
+    <span class="kw1">iret</span></pre></div></div>
+<p>Once you have implemented such a technique, it may be wise to test it, deliberately issuing 'faulty' instructions to see if the correct code is displayed. Having the 'double fault' exception (08) displayed somewhere else on the screen may also be a smart move.
+</p>
+<h4> <span class="mw-headline" id="What_to_do_if_characters_cannot_be_displayed"> What to do if characters cannot be displayed </span></h4>
+<p>Such things occurs for instance when your GDT or paging tables has been badly configured (e.g. 0xb8000 no longer refers to the video memory). Fortunately enough, the video memory is not your sole communication technique with your kernel:
+</p>
+<ul><li> you may use the <a href="PS2_Keyboard" title="PS2 Keyboard" class="mw-redirect">keyboard</a> LEDs to report some events (for instance enabling the 'scroll lock' LED when you're a handler and disabling it when you're out).
+</li><li> you may use the internal <a href="PC_Speaker" title="PC Speaker">PC Speaker</a> to make Morse-code-like signals reporting early errors. (May be disgraceful if coding late, though.)
+</li><li> you may use <a href="VGA_Hardware" title="VGA Hardware">VGA registers</a> to change the background color or the overscan (screen border) color to report the current 'state' of your kernel. (E.g. black = normal operations, yellow = processing interrupt, red = crash condition occurred (just before cli:hlt), blue = processing an exception, etc...)
+</li></ul>
+<p>Refer to <a href="Category:VGA" title="Category:VGA">VGA Resources</a> to see how you can modify colors. The <a href="Resources" title="Resources">resources</a> page should have all the documentation for LED flashing and speaker beeping.
+</p>
+<ul><li> you may output bytes via the <a href="Serial_ports" title="Serial ports" class="mw-redirect">serial port</a>. Most emulators allow you to redirect these characters into a file and unlike the screen the number of characters is not limited. A driver for the serial port is also very easy to implement.
+</li></ul>
+<h4> <span class="mw-headline" id="Avoiding_exception_loops"> Avoiding exception loops </span></h4>
+<p>So we know when exceptions occur and which exception occurred. That's better but still not especially useful. Your exception handler is likely to become something complex as your kernel will evolve, and you'll discover that exceptions mainly occur ... in exception handlers.
+</p><p>In order to avoid recursive exceptions to occur endlessly, you can easily maintain a 'nested exceptions counter' that will be incremented every time you enter an exception handler and decremented just before you leave that handler. If the counter is above a certain threshold of a few units (3 should give interesting enough results), the kernel will abort trying to solve the exception and enter a 'panic' mode (red background, flashing LED, whatever).
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> nestexc <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&#160;
+<span class="co1">// called by the stub</span>
+<span class="kw4">void</span> gpfExcHandler<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+   <span class="kw1">if</span> <span class="br0">&#40;</span>nestexc <span class="sy0">&gt;</span> MAX_NESTED_EXCEPTIONS<span class="br0">&#41;</span> panic<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   nestexc<span class="sy0">++;</span>
+&#160;
+   <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>fix_the_error<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+     write_an_error_message<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="br0">&#125;</span>
+   nestexc<span class="sy0">--;</span>
+   <span class="kw1">return</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>You need to know, of course, that some exceptions are not 'resumable'. If your kernel issued a division by zero, trying to return to the 'div' instruction will only trigger the exception one more time (yeah! altogether, now&#160;:). Such loops cannot be solved by the 'nestexc' counter
+</p>
+<h4> <span class="mw-headline" id="Showing_the_stack_content"> Showing the stack content </span></h4>
+<p>Much of your program's state (function arguments, return address, local variables) is stored on the <a href="Stack" title="Stack">stack</a>, especially when using C/C++ code. A complete debugger (like GDB) will inspect the debugging info to give names to the stack content, provide a list of calls, etc. This is a bit complex to do ourselves, but if your kernel can simply <i>show</i> the content of the stack and if you know <i>where</i> in the code the process halted, you can already fix quite a lot of bugs by doing the job of the debugger yourself, guessing which stack location holds which variable, where the return addresses are, etc.
+</p><p>The stack content is still in memory. The <a href="http://wiki.osdev.org/index.php?title=EBP&amp;action=edit&amp;redlink=1" class="new" title="EBP (page does not exist)">EBP</a> value of the erroring process is still in memory, and points to the start of the stack frame for the current function. Everything from this address and up was the current stack. Now, you can use the value in ebp as the source. Just use the following call:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">stack_dump<span class="sy0">:</span>
+  <span class="kw1">push</span> <span class="kw3">ebp</span>
+  <span class="kw1">mov</span> <span class="kw3">ebp</span><span class="sy0">,</span> <span class="kw3">esp</span>
+  <span class="kw1">call</span> dump_hex
+  <span class="kw1">pop</span> <span class="kw3">ebp</span>
+  <span class="kw1">ret</span> <span class="co1">; note that this is not going to work, but it should be here for completion.</span></pre></div></div>
+<p>and use <tt>void dump_hex(char *stack)</tt>.
+</p>
+<h4> <span class="mw-headline" id="Locating_the_Faulty_instruction"> Locating the Faulty instruction </span></h4>
+<p>In most cases, when your exception handler is called, the address of the faulty instruction is somewhere on the stack. The first step here is to print out the address of this instruction.
+</p><p>Once this is done, you (as a human) can inspect the <i>linker map</i> and find out in which object file the problem was. You can request a map with <tt>ld </tt><i>&lt;usual options&gt;</i><tt> -Map </tt><i>&lt;filename.map&gt;</i>.
+</p>
+<pre>
+.text           0x0000000000005330      0x556 bin/init.o
+                0x0000000000005370                kinit_dsp_buffer
+                0x0000000000005380                kinit_glocal_tag
+                0x0000000000005400                kinit
+                0x0000000000005830                kreset
+ *fill*         0x0000000000005886        0xa 00
+ .text          0x0000000000005890      0x66d bin/kalloc.o
+                0x0000000000005ac0                kfree
+                0x0000000000005b70                kmRegister
+                0x00000000000059b0                kealloc
+                0x0000000000005e60                kmFindP
+                0x0000000000005dd0                kmFindA
+                0x0000000000005d10                kmSetFull
+                0x0000000000005890                kalloc
+</pre>
+<p>Is an example of what a map can look like. If the error address was 0x554f, we can tell from this that the error is somewhere in init.o, and most likely in <tt>kinit()</tt> function (it may still be in some other function if there are some <i>static</i> functions in the source file). All we know is that the error occurred at offset +21f in the file.
+</p><p>Now, we can use <tt>objdump -drS bin/init.o</tt> to get a look at the disassembled output. Note that this step will work properly only if you had enabled debug information in those separated <tt>.o</tt> files...
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#ifdef __DEBUG__</span>
+  kprint<span class="br0">&#40;</span><span class="st0">&quot;kernel in debug-mode(%x) press [SHIFT+SPACE] to bypass anykey()<span class="es1">\n</span>&quot;</span><span class="sy0">,</span>
+ <span class="nu0">216</span><span class="sy0">:</span>   <span class="nu0">83</span> c4 f8                add    $<span class="nu12">0xfffffff8</span><span class="sy0">,%</span>esp
+ <span class="nu0">219</span><span class="sy0">:</span>   a1 <span class="nu8">00</span> <span class="nu8">00</span> <span class="nu8">00</span> <span class="nu8">00</span>          mov    <span class="nu12">0x0</span><span class="sy0">,%</span>eax
+                        21a<span class="sy0">:</span> R_386_32   DbMsk
+ 21e<span class="sy0">:</span>   <span class="nu0">50</span>                      push   <span class="sy0">%</span>eax
+ <span class="nu17">21f</span><span class="sy0">:</span>   <span class="nu0">68</span> a0 <span class="nu8">01</span> <span class="nu8">00</span> <span class="nu8">00</span>          push   $<span class="nu12">0x1a0</span>
+                        <span class="nu0">220</span><span class="sy0">:</span> R_386_32   .<span class="me1">rodata</span>
+ <span class="nu0">224</span><span class="sy0">:</span>   e8 fc ff ff ff          call   <span class="nu0">225</span> <span class="sy0">&lt;</span>kinit<span class="sy0">+</span><span class="nu12">0x155</span><span class="sy0">&gt;</span>
+                        <span class="nu0">225</span><span class="sy0">:</span> R_386_PC32 kprint
+         DbMsk<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co2">#endif</span></pre></div></div>
+<p>Of course, as I picked up a random address, there's nothing wrong to see at +21f, but I guess you got my point.&#160;:)
+</p>
+<h4> <span class="mw-headline" id="Locating_the_offending_line_of_source_code"> Locating the offending line of source code </span></h4>
+<p>Once you have found the address of the faulty instruction in the previous step, you can identify the corresponding line of source code by running
+</p>
+<pre>
+addr2line -e &lt;your_kernel.elf&gt; &lt;address of faulty instruction&gt;
+</pre>
+<h3> <span class="mw-headline" id="Enhanced_debugging_techniques"> Enhanced debugging techniques </span></h3>
+<h4> <span class="mw-headline" id="Stack_tracing"> Stack tracing </span></h4>
+<p>By analyzing the default way to create a stack frame, you can rip off a stack frame at a time, resulting in the call sequence that leads to the fault. For a single bonus point, also extract the arguments and dump them as well. For multiple bonus points, use C++ name mangling, and export the arguments in readable form in the correct type.
+</p><p>Each time a function is called it gets the following head/tail: (<a href="GCC" title="GCC">GCC</a> 3.3.2)
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">push</span> <span class="kw3">ebp</span>
+<span class="kw1">mov</span> <span class="kw3">ebp</span><span class="sy0">,</span> <span class="kw3">esp</span>
+<span class="sy0">...</span>
+<span class="kw1">leave</span>
+<span class="kw1">ret</span></pre></div></div>
+<p>On the place of the ... the rest of the code is filled in. Now, if you analyze the stack output, it looks something like:
+</p>
+<pre>
+0000FFC0 0000FFD0 -&gt; this is the result of a push EBP (which pushes the esp at the start of the previous function)
+0000FFC4 001023A5 -&gt; this was the old EIP, which can be looked up in the function table (map file)
+0000FFC8 01234567 -&gt; this is an argument
+0000FFCC 89ABCDEF -&gt; this is another argument
+0000FFD0 0000FFF0 -&gt; this is again another EBP
+0000FFD4 00105BC3 -&gt; this is again an EIP
+0000FFD8 001023A5 -&gt; this is an argument (could be a function pointer)
+0000FFDC 01234567 -&gt; this is another argument
+0000FFE0 89ABCDEF -&gt; this is again an argument
+0000FFE4 000B8000 -&gt; this is an argument, but not to this function
+0000FFE8 FFC00000 -&gt; this is again an argument to a different function
+0000FFEC 00010000 -&gt; this is again another argument, but again not to this function.
+0000FFF0 0000FFFC -&gt; this is the previous EBP again (note this is in this case the top)
+0000FFF4 0010002C -&gt; this is an old EIP
+0000FFF8 00000001 -&gt; this is an argument
+0000FFFC 00000000 -&gt; this is the EBP at the start of the first function, not necessarily valid!
+</pre>
+<p>Now, you can traverse along the path of execution. The content of EBP is the old value of EBP, that is, the one of the last stack frame. The value above that is the old instruction pointer (which points inside the current function), and the values above that, up to but not including the value pointed to by the old EBP, are the arguments. Note that the arguments don't have to belong to this function, GCC occasionally saves an add to esp by not popping the values. By then pretending the old EBP is the current EBP, you can unwind another call. Do this until you are fed up by it, you have enough output or the stack ends. If the last one, watch out for not generating a double fault.
+</p><p>If you use C++ name mangling, the arguments are encoded in the function name. If you can read that, you can decode what the value on the stack must be, so you can actually present it to the user in the form of a normal function call with legible arguments and everything. This is the 'crème de la crème' of stack dumping methods, so most aren't expected to do this.
+</p><p>While I program my kernel in C, I actually thought of writing a script that would parse the header files for function declarations, extract the debugging symbols from the compiled kernel image using <tt>objdump</tt>, and write a system map which would provide the types. Forgot it after falling in love with <a href="Bochs" title="Bochs">Bochs</a>' debugger though. Similarly, typemaps for structured types could be created, which would allow the same kind of browsing that GDB or <a href="Visual_Studio" title="Visual Studio">Visual Studio</a> give you. THIS would be the crème de la crème.
+</p>
+<h3> <span class="mw-headline" id="Debugging_techniques"> Debugging techniques </span></h3>
+<p>If your function <tt>x()</tt> wreaks havoc only after 1000 calls it may not suffice to put a <tt>panic()</tt> statement inside the functions to see where the functions breaks. You may want to know which call is malignant. To do this, one might use a global or static var to count calls and panic() after an amount to see if it managed to crash. If not, you try twice that amount; if it does crash, you try bisection to find the amount.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> scheduler_choose_task<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw4">static</span> <span class="kw4">uint32_t</span> Z<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+    Z<span class="sy0">++;</span>
+    <span class="kw4">uint32_t</span> N <span class="sy0">=</span> <span class="nu0">1000</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>Z <span class="sy0">&gt;</span> N<span class="br0">&#41;</span> panic<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">//find the largest integer N for which it crashes not</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>in_critical_section<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw1">return</span><span class="sy0">;</span>
+    ...
+<span class="br0">&#125;</span></pre></div></div>
+<p>...and then check how far does it go:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">Z<span class="sy0">++;</span>
+<span class="kw4">uint32_t</span> N <span class="sy0">=</span> <span class="nu0">1000</span><span class="sy0">;</span>
+                                       <span class="co1">//we get here,</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span>in_critical_section<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw1">return</span><span class="sy0">;</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span>Z <span class="sy0">&gt;</span> N<span class="br0">&#41;</span> panic<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>                    <span class="co1">//do we get here to panic() before a crash?</span></pre></div></div>
+<p>However as complexity rises or multithreading is involved, it is less probable that a crash would be consistently occurring at the same point, after the same amount of calls every time. Then it would not be possible to find the number of the call to <tt>scheduler_choose_talk()</tt> that crashes it (because that number changes). Debugging needs some imagination; what if you knew, by tracing the program flow with <tt>print(__LINE__)</tt> that <tt>scheduler_choose_task()</tt> crashes only when a call to <tt>fun1()</tt> is in progress? You might use a global var <tt>uint32_t dbg</tt> or an array (<tt>uint32_t dbg[20]</tt>) of various <tt>dbg</tt> vars (which are used only in debugging code which is cleaned after the programmer ceases to debug) in a manner such as:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> fun1<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    dbg<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+    ...
+    <span class="kw1">if</span> <span class="br0">&#40;</span>x<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> dbg<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="kw1">return</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+    ...
+    <span class="me1">dbg</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>...and:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> scheduler_choose_task<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">//  if (dbg[3]==1) panic();         //check here.. a panic saves the day from crashing!</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>in_critical_section<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw1">return</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>dbg<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span> panic<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>             <span class="co1">//check here.. it crashes</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>(Or mix it with a call count, <tt>Z++; if (Z&gt;5 &amp;&amp; dbg[3] == 1) panic()</tt>.)
+</p><p>Using the <tt>__LINE__</tt> aids tracing the program flow:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">print<span class="br0">&#40;</span>__LINE__<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>See <a href="C_preprocessor#Uses_for_debugging" title="C preprocessor">Uses for debugging</a> for more info.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="External_assistance"> External assistance </span></h2>
+<p>So far, we assumed that the kernel was containing all the information required for debugging (like symbols names, etc). In production-stage, however, this information, as well as most of the 'debugging prints' have usually been stripped out of the final binary object.
+</p><p>Still, one could imagine a kernel that would be equipped with serial-line communication code and connected to another computer that would have all the 'removed' information (like the symbols map, or the debugging-info featured intermediate binaries).
+</p><p>In case of a panic, the kernel could for instance send the value of <tt>eip</tt> over the serial line and expect the helper PC to reply with the function name and line number corresponding to that address (or dump it on the helper PC's screen, that's a matter of choice&#160;:) ).
+</p>
+<h3> <span class="mw-headline" id="Debugging_interface"> Debugging interface </span></h3>
+<p><i>Now we have plenty of information about what was wrong... can we ask for more&#160;? what do Mobius' debugging shell and Clicker's information panels tell us ...</i>
+</p><p><i>Does anybody else know of an OS that allows the hacker to interactively probe the system state when crashes occur&#160;?</i>
+</p>
+<dl><dd><i>Yes. Guess. Correct: AmigaOS.&#160;;-) It offered a mode that allowed debugging over serial line even after the system went into Guru Meditation. That was possible because AmigaOS enjoyed a 256 / 512 kByte ROM image that could not get corrupted.</i> - <a href="http://wiki.osdev.org/User:Solar" title="User:Solar">MartinBaute</a>
+</dd></dl>
+<p><i>Unix systems traditionally write their state to /dev/core for offline guru meditation</i>
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="How_Do_I_Use_A_Debugger_With_My_OS" title="How Do I Use A Debugger With My OS" class="mw-redirect">How Do I Use A Debugger With My OS</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 221/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1540-0!*!0!!en!*!* and timestamp 20180121064002 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Troubleshooting&amp;oldid=16322">http://wiki.osdev.org/index.php?title=Troubleshooting&amp;oldid=16322</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Troubleshooting" title="Category:Troubleshooting">Troubleshooting</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Troubleshooting" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Troubleshooting"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Troubleshooting&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Troubleshooting#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Troubleshooting" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Troubleshooting&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Troubleshooting&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Troubleshooting#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Troubleshooting" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Troubleshooting" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Troubleshooting&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Troubleshooting&amp;oldid=16322" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Debugging" title="Debugging">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 April 2014, at 11:47.</li>
+											<li id="footer-info-viewcount">This page has been accessed 54,043 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.045 secs. -->
+	</body>
+</html>

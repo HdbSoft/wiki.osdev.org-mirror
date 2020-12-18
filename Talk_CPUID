@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Talk:CPUID - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "Talk", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 1, "wgPageName": "Talk:CPUID", "wgTitle": "CPUID", "wgCurRevisionId": 14143, "wgArticleId": 2588, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-1 ns-talk page-Talk_CPUID action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Talk:CPUID</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Talk:CPUID#mw-head">navigation</a>,
+					<a href="Talk:CPUID#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Anyone have any objection to replacing the CPUID flags with this updated one from Comos?
+</p>
+<pre>
+enum {
+    CPUID_FEAT_ECX_SSE3         = 1 &lt;&lt; 0,  // streaming SIMD extensions 3 (SSE3)
+    CPUID_FEAT_ECX_MONITOR      = 1 &lt;&lt; 3,  // monitor/mwait
+    CPUID_FEAT_ECX_DS_CPL       = 1 &lt;&lt; 4,  // CPL qualified debug store
+    CPUID_FEAT_ECX_VMX          = 1 &lt;&lt; 5,  // virtual machine extensions
+    CPUID_FEAT_ECX_SMX          = 1 &lt;&lt; 6,  // safer mode extensions
+    CPUID_FEAT_ECX_EST          = 1 &lt;&lt; 7,  // enhanced Intel SpeedStep(R) technology
+    CPUID_FEAT_ECX_TM2          = 1 &lt;&lt; 8,  // thermal monitor 2
+    CPUID_FEAT_ECX_SSSE3        = 1 &lt;&lt; 9,  // supplemental streaming SIMD extensions 3 (SSSSE3)
+    CPUID_FEAT_ECX_CNXT_ID      = 1 &lt;&lt; 10, // L1 context ID
+    CPUID_FEAT_ECX_CMPXCHG16B   = 1 &lt;&lt; 13, // cmpxchg16b available (obviously)
+    CPUID_FEAT_ECX_xTPR_UPDATE  = 1 &lt;&lt; 14, // xTPR update control
+    CPUID_FEAT_ECX_PDCM         = 1 &lt;&lt; 15, // performance and debug capability
+    CPUID_FEAT_ECX_DCA          = 1 &lt;&lt; 18, // memory-mapped device prefetching
+    CPUID_FEAT_ECX_SSE4_1       = 1 &lt;&lt; 19, // SSE4.1
+    CPUID_FEAT_ECX_SSE4_2       = 1 &lt;&lt; 20, // SSE4.2
+    CPUID_FEAT_ECX_x2APIC       = 1 &lt;&lt; 21, // x2APIC available
+    CPUID_FEAT_ECX_MOVBE        = 1 &lt;&lt; 22, // movbe available
+    CPUID_FEAT_ECX_POPCNT       = 1 &lt;&lt; 23, // popcnt available (sounds rude)
+    CPUID_FEAT_ECX_XSAVE        = 1 &lt;&lt; 26, // xsave/xrstor/xsetbv/xgetbv supported
+    CPUID_FEAT_ECX_OSXSAVE      = 1 &lt;&lt; 27, // xsetbv/xgetbv has been enabled
+
+    CPUID_FEAT_EDX_x87          = 1 &lt;&lt; 0,  // x86 FPU on chip
+    CPUID_FEAT_EDX_VME          = 1 &lt;&lt; 1,  // virtual-8086 mode enhancement
+    CPUID_FEAT_EDX_DE           = 1 &lt;&lt; 2,  // debugging extensions
+    CPUID_FEAT_EDX_PSE          = 1 &lt;&lt; 3,  // page size extensions
+    CPUID_FEAT_EDX_TSC          = 1 &lt;&lt; 4,  // timestamp counter
+    CPUID_FEAT_EDX_MSR          = 1 &lt;&lt; 5,  // rdmsr/wrmsr
+    CPUID_FEAT_EDX_PAE          = 1 &lt;&lt; 6,  // page address extensions
+    CPUID_FEAT_EDX_MCE          = 1 &lt;&lt; 7,  // machine check exception
+    CPUID_FEAT_EDX_CX8          = 1 &lt;&lt; 8,  // cmpxchg8b supported
+    CPUID_FEAT_EDX_APIC         = 1 &lt;&lt; 9,  // APIC on a chip
+    CPUID_FEAT_EDX_SEP          = 1 &lt;&lt; 11, // sysenter/sysexit
+    CPUID_FEAT_EDX_MTRR         = 1 &lt;&lt; 12, // memory type range registers
+    CPUID_FEAT_EDX_PGE          = 1 &lt;&lt; 13, // PTE global bit (PTE_GLOBAL)
+    CPUID_FEAT_EDX_MCA          = 1 &lt;&lt; 14, // machine check architecture
+    CPUID_FEAT_EDX_CMOV         = 1 &lt;&lt; 15, // conditional move/compare instructions
+    CPUID_FEAT_EDX_PAT          = 1 &lt;&lt; 16, // page attribute table
+    CPUID_FEAT_EDX_PSE36        = 1 &lt;&lt; 17, // page size extension
+    CPUID_FEAT_EDX_PSN          = 1 &lt;&lt; 18, // processor serial number
+    CPUID_FEAT_EDX_CLFSH        = 1 &lt;&lt; 19, // cflush instruction
+    CPUID_FEAT_EDX_DS           = 1 &lt;&lt; 21, // debug store
+    CPUID_FEAT_EDX_ACPI         = 1 &lt;&lt; 22, // thermal monitor and clock control
+    CPUID_FEAT_EDX_MMX          = 1 &lt;&lt; 23, // MMX technology
+    CPUID_FEAT_EDX_FXSR         = 1 &lt;&lt; 24, // fxsave/fxrstor
+    CPUID_FEAT_EDX_SSE          = 1 &lt;&lt; 25, // SSE extensions
+    CPUID_FEAT_EDX_SSE2         = 1 &lt;&lt; 26, // SSE2 extensions, obviously
+    CPUID_FEAT_EDX_SS           = 1 &lt;&lt; 27, // self-snoop
+    CPUID_FEAT_EDX_HTT          = 1 &lt;&lt; 28, // multi-threading (hyper-threading, I think - the afterburner of Intel CPUs)
+    CPUID_FEAT_EDX_TM           = 1 &lt;&lt; 29, // thermal monitor
+    CPUID_FEAT_EDX_PBE          = 1 &lt;&lt; 31, // Pend. Brk. EN. (wtf?)
+};
+</pre>
+<p>--<a href="http://wiki.osdev.org/User:Oros" title="User:Oros">OrOS</a> 19:22, 9 May 2009 (UTC)
+</p><p>No real objection here, but your code is still missing several of the newer flags as well. --<a href="http://wiki.osdev.org/User:Quok" title="User:Quok">quok</a> 16:11, 10 May 2009 (UTC)
+</p><p>I updated the page already with a more complete version, but if you see anything missing go ahead and add them (I was sure I got them all&#160;;( ) --<a href="http://wiki.osdev.org/User:Oros" title="User:Oros">OrOS</a> 20:25, 10 May 2009 (UTC)
+</p>
+<h2> <span class="mw-headline" id="Updated_cpuid_string_function_.28and_example_of_how_to_use_it.29"> Updated cpuid_string function (and example of how to use it) </span></h2>
+<p>The following is an updated cpuid_string function (which returns a string which is a bit more friendly to the user (this actually returns a readably null terminated string!)
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">static</span> <span class="kw2">inline</span> <span class="kw4">int</span> cpuid_string<span class="br0">&#40;</span><span class="kw4">int</span> code<span class="sy0">,</span> <span class="kw4">int</span> where<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  __asm__ <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;cpuid&quot;</span><span class="sy0">:</span><span class="st0">&quot;=a&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span>where<span class="br0">&#41;</span><span class="sy0">,</span><span class="st0">&quot;=b&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span>where<span class="sy0">+</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+               <span class="st0">&quot;=d&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span>where<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="st0">&quot;=c&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span>where<span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">:</span><span class="st0">&quot;a&quot;</span><span class="br0">&#40;</span>code<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">return</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span>where<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">const</span> <span class="kw4">char</span> <span class="sy0">*</span> <span class="kw4">const</span> cpu_string<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw4">static</span> <span class="kw4">char</span> s<span class="br0">&#91;</span><span class="nu0">16</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st0">&quot;BogusProces!&quot;</span><span class="sy0">;</span>
+	cpuid_string<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="kw1">return</span> s<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>The cpuid_string function switches the content of c and d, compared to the original, which orders the string so that it is readable. The cpu_string function wraps the cpuid_string function so that it can simply be called (no memory allocation required) and the beginning of the string is returned. The string is aggressively const'ed to make sure you don't accidentally try to overwrite it.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 23/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2588-0!*!0!*!*!*!* and timestamp 20180121080143 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Talk:CPUID&amp;oldid=14143">http://wiki.osdev.org/index.php?title=Talk:CPUID&amp;oldid=14143</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Talk%3ACPUID" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main"><span><a href="CPUID"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="selected"><span><a href="Talk:CPUID"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Talk:CPUID#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Talk:CPUID" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Talk:CPUID&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Talk:CPUID&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Talk:CPUID#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Talk:CPUID" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Talk:CPUID" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Talk:CPUID&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Talk:CPUID&amp;oldid=14143" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 December 2012, at 02:50.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,163 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Talk:CPUID" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Talk:CPUID" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Talk:CPUID&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Talk:CPUID&amp;oldid=14143" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 December 2012, at 02:50.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,163 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.046 secs. -->
+	</body>
+</html>

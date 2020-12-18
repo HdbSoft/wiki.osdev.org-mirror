@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Ada Bare bones - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Ada_Bare_bones", "wgTitle": "Ada Bare bones", "wgCurRevisionId": 20361, "wgArticleId": 3231, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "Level 2 Tutorials", "Bare bones tutorials", "Ada"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-ada {line-height: normal;}
+.source-ada li, .source-ada pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for ada
+ * CSS class: source-ada, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.ada.source-ada .de1, .ada.source-ada .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.ada.source-ada  {font-family:monospace;}
+.ada.source-ada .imp {font-weight: bold; color: red;}
+.ada.source-ada li, .ada.source-ada .li1 {font-weight: normal; vertical-align:top;}
+.ada.source-ada .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.ada.source-ada .li2 {font-weight: bold; vertical-align:top;}
+.ada.source-ada .kw1 {color: #00007f;}
+.ada.source-ada .kw2 {color: #0000ff;}
+.ada.source-ada .kw3 {color: #46aa03; font-weight:bold;}
+.ada.source-ada .co1 {color: #adadad; font-style: italic;}
+.ada.source-ada .coMULTI {color: #808080; font-style: italic;}
+.ada.source-ada .es0 {color: #000099; font-weight: bold;}
+.ada.source-ada .br0 {color: #66cc66;}
+.ada.source-ada .sy0 {color: #66cc66;}
+.ada.source-ada .st0 {color: #7f007f;}
+.ada.source-ada .nu0 {color: #ff0000;}
+.ada.source-ada .me1 {color: #202020;}
+.ada.source-ada .ln-xtra, .ada.source-ada li.ln-xtra, .ada.source-ada div.ln-xtra {background-color: #ffc;}
+.ada.source-ada span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-make {line-height: normal;}
+.source-make li, .source-make pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for make
+ * CSS class: source-make, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.make.source-make .de1, .make.source-make .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.make.source-make  {font-family:monospace;}
+.make.source-make .imp {font-weight: bold; color: red;}
+.make.source-make li, .make.source-make .li1 {font-weight: normal; vertical-align:top;}
+.make.source-make .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.make.source-make .li2 {font-weight: bold; vertical-align:top;}
+.make.source-make .kw1 {color: #666622; font-weight: bold;}
+.make.source-make .kw2 {color: #990000;}
+.make.source-make .co1 {color: #339900; font-style: italic;}
+.make.source-make .co2 {color: #000099; font-weight: bold;}
+.make.source-make .es0 {color: #000099; font-weight: bold;}
+.make.source-make .br0 {color: #004400;}
+.make.source-make .sy0 {color: #004400;}
+.make.source-make .st0 {color: #CC2200;}
+.make.source-make .nu0 {color: #CC2200;}
+.make.source-make .re0 {color: #000088; font-weight: bold;}
+.make.source-make .re1 {color: #0000CC; font-weight: bold;}
+.make.source-make .re2 {color: #000088;}
+.make.source-make .ln-xtra, .make.source-make li.ln-xtra, .make.source-make div.ln-xtra {background-color: #ffc;}
+.make.source-make span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Ada_Bare_bones action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Ada Bare bones</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Ada_Bare_bones#mw-head">navigation</a>,
+					<a href="Ada_Bare_bones#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a><br />Medium</td></tr></table><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="Kernels" title="Kernels" class="mw-redirect">Kernel Designs</a></th></tr><tr><th>Models</th></tr><tr><td><div>
+<p><a href="Monolithic_Kernel" title="Monolithic Kernel">Monolithic Kernel</a><br />
+<a href="Microkernel" title="Microkernel">Microkernel</a><br />
+<a href="Hybrid_Kernel" title="Hybrid Kernel">Hybrid Kernel</a><br />
+<a href="Exokernel" title="Exokernel">Exokernel</a><br />
+<a href="Nanokernel" title="Nanokernel" class="mw-redirect">Nano/Picokernel</a><br />
+<a href="Exokernel#Cache_Kernel" title="Exokernel">Cache Kernel</a><br />
+<a href="Exokernel#Virtualizing_Kernel" title="Exokernel">Virtualizing Kernel</a><br />
+<a href="Megalithic_Kernel" title="Megalithic Kernel">Megalithic Kernel</a><br />
+</p>
+</div></td></tr><tr><th>Other Concepts</th></tr><tr><td><div>
+<p><a href="Modular_Kernel" title="Modular Kernel">Modular Kernel</a><br />
+<a href="Higher_Half_Kernel" title="Higher Half Kernel">Higher Half Kernel</a><br />
+<a href="Creating_a_64-bit_kernel" title="Creating a 64-bit kernel">64-bit Kernel</a><br />
+</p>
+</div></td></tr></table>
+<p><i>In this tutorial we will compile a simple Ada kernel and boot it.</i>
+</p><p><big><b>WAIT! Have you read <a href="Getting_Started" title="Getting Started">Getting Started</a>, <a href="Beginner_Mistakes" title="Beginner Mistakes">Beginner Mistakes</a>, and some of the related <a href="Category:OS_theory" title="Category:OS theory">OS theory</a>?</b></big>
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Ada_Bare_bones#Preface"><span class="tocnumber">1</span> <span class="toctext">Preface</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Ada_Bare_bones#GNAT_and_the_Ada_runtime_system_.28RTS.29"><span class="tocnumber">2</span> <span class="toctext">GNAT and the Ada runtime system (RTS)</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Ada_Bare_bones#Directory_structure"><span class="tocnumber">2.1</span> <span class="toctext">Directory structure</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Ada_Bare_bones#RTS_files_to_copy"><span class="tocnumber">2.2</span> <span class="toctext">RTS files to copy</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Ada_Bare_bones#Files"><span class="tocnumber">3</span> <span class="toctext">Files</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Ada_Bare_bones#gnat.adc"><span class="tocnumber">3.1</span> <span class="toctext">gnat.adc</span></a>
+<ul>
+<li class="toclevel-3 tocsection-7"><a href="Ada_Bare_bones#Discard_Names"><span class="tocnumber">3.1.1</span> <span class="toctext">Discard_Names</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="Ada_Bare_bones#Normalize_Scalars"><span class="tocnumber">3.1.2</span> <span class="toctext">Normalize_Scalars</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="Ada_Bare_bones#No_Exception_Propagation"><span class="tocnumber">3.1.3</span> <span class="toctext">No_Exception_Propagation</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="Ada_Bare_bones#No_Exception_Registration"><span class="tocnumber">3.1.4</span> <span class="toctext">No_Exception_Registration</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="Ada_Bare_bones#No_Finalization"><span class="tocnumber">3.1.5</span> <span class="toctext">No_Finalization</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="Ada_Bare_bones#No_Tasking"><span class="tocnumber">3.1.6</span> <span class="toctext">No_Tasking</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="Ada_Bare_bones#No_Protected_Types"><span class="tocnumber">3.1.7</span> <span class="toctext">No_Protected_Types</span></a></li>
+<li class="toclevel-3 tocsection-14"><a href="Ada_Bare_bones#No_Delay"><span class="tocnumber">3.1.8</span> <span class="toctext">No_Delay</span></a></li>
+<li class="toclevel-3 tocsection-15"><a href="Ada_Bare_bones#No_Recursion"><span class="tocnumber">3.1.9</span> <span class="toctext">No_Recursion</span></a></li>
+<li class="toclevel-3 tocsection-16"><a href="Ada_Bare_bones#No_Allocators"><span class="tocnumber">3.1.10</span> <span class="toctext">No_Allocators</span></a></li>
+<li class="toclevel-3 tocsection-17"><a href="Ada_Bare_bones#No_Dispatch"><span class="tocnumber">3.1.11</span> <span class="toctext">No_Dispatch</span></a></li>
+<li class="toclevel-3 tocsection-18"><a href="Ada_Bare_bones#No_Implicit_Dynamic_Code"><span class="tocnumber">3.1.12</span> <span class="toctext">No_Implicit_Dynamic_Code</span></a></li>
+<li class="toclevel-3 tocsection-19"><a href="Ada_Bare_bones#No_Secondary_Stack"><span class="tocnumber">3.1.13</span> <span class="toctext">No_Secondary_Stack</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-20"><a href="Ada_Bare_bones#system.ads"><span class="tocnumber">3.2</span> <span class="toctext">system.ads</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="Ada_Bare_bones#Last_chance_handler"><span class="tocnumber">3.3</span> <span class="toctext">Last chance handler</span></a>
+<ul>
+<li class="toclevel-3 tocsection-22"><a href="Ada_Bare_bones#last_chance_handler.ads"><span class="tocnumber">3.3.1</span> <span class="toctext">last_chance_handler.ads</span></a></li>
+<li class="toclevel-3 tocsection-23"><a href="Ada_Bare_bones#last_chance_handler.adb"><span class="tocnumber">3.3.2</span> <span class="toctext">last_chance_handler.adb</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-24"><a href="Ada_Bare_bones#Compiling_the_runtime"><span class="tocnumber">3.4</span> <span class="toctext">Compiling the runtime</span></a></li>
+<li class="toclevel-2 tocsection-25"><a href="Ada_Bare_bones#startup.s"><span class="tocnumber">3.5</span> <span class="toctext">startup.s</span></a>
+<ul>
+<li class="toclevel-3 tocsection-26"><a href="Ada_Bare_bones#GAS"><span class="tocnumber">3.5.1</span> <span class="toctext">GAS</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-27"><a href="Ada_Bare_bones#multiboot.ads"><span class="tocnumber">3.6</span> <span class="toctext">multiboot.ads</span></a></li>
+<li class="toclevel-2 tocsection-28"><a href="Ada_Bare_bones#Console"><span class="tocnumber">3.7</span> <span class="toctext">Console</span></a>
+<ul>
+<li class="toclevel-3 tocsection-29"><a href="Ada_Bare_bones#console.ads"><span class="tocnumber">3.7.1</span> <span class="toctext">console.ads</span></a></li>
+<li class="toclevel-3 tocsection-30"><a href="Ada_Bare_bones#console.adb"><span class="tocnumber">3.7.2</span> <span class="toctext">console.adb</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-31"><a href="Ada_Bare_bones#bare_bones.adb"><span class="tocnumber">3.8</span> <span class="toctext">bare_bones.adb</span></a></li>
+<li class="toclevel-2 tocsection-32"><a href="Ada_Bare_bones#linker.ld"><span class="tocnumber">3.9</span> <span class="toctext">linker.ld</span></a></li>
+<li class="toclevel-2 tocsection-33"><a href="Ada_Bare_bones#makefile"><span class="tocnumber">3.10</span> <span class="toctext">makefile</span></a></li>
+<li class="toclevel-2 tocsection-34"><a href="Ada_Bare_bones#bare_bones.gpr"><span class="tocnumber">3.11</span> <span class="toctext">bare_bones.gpr</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-35"><a href="Ada_Bare_bones#Targetting_GNAT_to_bare_metal"><span class="tocnumber">4</span> <span class="toctext">Targetting GNAT to bare metal</span></a>
+<ul>
+<li class="toclevel-2 tocsection-36"><a href="Ada_Bare_bones#gcc.2Fada.2Fadaint.c"><span class="tocnumber">4.1</span> <span class="toctext">gcc/ada/adaint.c</span></a></li>
+<li class="toclevel-2 tocsection-37"><a href="Ada_Bare_bones#gcc.2Fada.2Fadaint.h"><span class="tocnumber">4.2</span> <span class="toctext">gcc/ada/adaint.h</span></a></li>
+<li class="toclevel-2 tocsection-38"><a href="Ada_Bare_bones#gcc.2Fada.2Fgcc-interface.2FMakefile.in"><span class="tocnumber">4.3</span> <span class="toctext">gcc/ada/gcc-interface/Makefile.in</span></a></li>
+<li class="toclevel-2 tocsection-39"><a href="Ada_Bare_bones#gcc.2Fada.2Fgsocket.h"><span class="tocnumber">4.4</span> <span class="toctext">gcc/ada/gsocket.h</span></a></li>
+<li class="toclevel-2 tocsection-40"><a href="Ada_Bare_bones#gcc.2Fada.2Fmlib-tgt-specific-bare.adb"><span class="tocnumber">4.5</span> <span class="toctext">gcc/ada/mlib-tgt-specific-bare.adb</span></a></li>
+<li class="toclevel-2 tocsection-41"><a href="Ada_Bare_bones#gcc.2Fada.2Fs-oscons-tmplt.c"><span class="tocnumber">4.6</span> <span class="toctext">gcc/ada/s-oscons-tmplt.c</span></a></li>
+<li class="toclevel-2 tocsection-42"><a href="Ada_Bare_bones#gcc.2Fada.2Fsystem-bare-armel.ads"><span class="tocnumber">4.7</span> <span class="toctext">gcc/ada/system-bare-armel.ads</span></a></li>
+<li class="toclevel-2 tocsection-43"><a href="Ada_Bare_bones#gnattools.2Fconfigure.5B.ac.5D"><span class="tocnumber">4.8</span> <span class="toctext">gnattools/configure[.ac]</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-44"><a href="Ada_Bare_bones#Raspberry_Pi"><span class="tocnumber">5</span> <span class="toctext">Raspberry Pi</span></a>
+<ul>
+<li class="toclevel-2 tocsection-45"><a href="Ada_Bare_bones#Boot_process"><span class="tocnumber">5.1</span> <span class="toctext">Boot process</span></a></li>
+<li class="toclevel-2 tocsection-46"><a href="Ada_Bare_bones#U-Boot"><span class="tocnumber">5.2</span> <span class="toctext">U-Boot</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-47"><a href="Ada_Bare_bones#Testing"><span class="tocnumber">6</span> <span class="toctext">Testing</span></a></li>
+<li class="toclevel-1 tocsection-48"><a href="Ada_Bare_bones#Source_access"><span class="tocnumber">7</span> <span class="toctext">Source access</span></a></li>
+<li class="toclevel-1 tocsection-49"><a href="Ada_Bare_bones#Future"><span class="tocnumber">8</span> <span class="toctext">Future</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Preface">Preface</span></h2>
+<p>This tutorial is based on my multiboot kernel which I developed some time ago (originating from 2000!!!) and placed on my site <a rel="nofollow" class="external autonumber" href="http://www.archeia.com/an-ada95-hello-world-style-kernel.html">[1]</a> and will also be the basis for my own kernel <a rel="nofollow" class="external text" href="https://github.com/Lucretia/tamp">TAMP</a>.
+</p><p>One of the first things people ask on the Ada IRC channel on Freenode is "Can Ada be used for OS development?" to which the answer is a resounding <b>yes</b>. But there are 2 problems:
+</p>
+<ol><li> The people asking this question are new to Ada, and
+</li><li> GNAT is not the easiest compiler to build.
+</li></ol>
+<p>Therefore these users don't understand what it takes to get the compiler into a useable state.
+</p><p>As you may have seen from other bare bones tutorials on this site, they state that you must have a compiler built which can handle <a href="ELF" title="ELF">ELF</a> files, the usual way is by building GCC which targets i386-elf or some other similar architecture. The problem here is that GNAT will not build for these targets out of the box without messing with it's makefile. You have to do this as the makefile builds the RTS and then the gnat tools (gnatmake, gnatbind, et al) which must all be built to have a working compiler - even though we will be replacing the RTS with our own cut down version.
+</p><p>For this tutorial, we will use the system GNAT compiler to build for a PC i386. GNAT is part of GCC. Later I will show how to build an arm-elf compiler and tools. My OS is Debian testing 64-bit with GNAT 4.6.
+</p>
+<h2> <span class="mw-headline" id="GNAT_and_the_Ada_runtime_system_.28RTS.29">GNAT and the Ada runtime system (RTS)</span></h2>
+<p>For this kernel we will be configuring a zero footprint RTS profile. This basically means, we have a compiler, tools and not much else.
+</p>
+<h3> <span class="mw-headline" id="Directory_structure">Directory structure</span></h3>
+<p>We need a place to structure this kernel, 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">mkdir</span> <span class="re5">-p</span> bare_bones<span class="sy0">/</span>src<span class="sy0">/</span>pc
+<span class="kw3">cd</span> bare_bones
+<span class="kw2">mkdir</span> <span class="re5">-p</span> rts<span class="sy0">/</span>boards<span class="sy0">/</span>i386<span class="sy0">/</span>adalib
+<span class="kw2">mkdir</span> <span class="re5">-p</span> rts<span class="sy0">/</span>boards<span class="sy0">/</span>i386<span class="sy0">/</span>adainclude
+<span class="kw2">mkdir</span> <span class="re5">-p</span> rts<span class="sy0">/</span>src
+<span class="kw2">mkdir</span> <span class="re5">-p</span> obj</pre></div></div>
+<h3> <span class="mw-headline" id="RTS_files_to_copy">RTS files to copy</span></h3>
+<p>You will need to copy the following files from your compiler's RTS directory into rts/src and then create symbolic links from them to rts/boards/&lt;arch&gt;/adainclude where your <i>arch</i> is i386 or arm, etc.
+</p><p><b>N.B:</b> You need to modify the location where these files are copied from, I've just used the location from my machine, which is most likely different to yours.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw1">for</span> f <span class="kw1">in</span> <span class="st0">&quot;ada.ads&quot;</span> <span class="st0">&quot;a-unccon.ads&quot;</span> <span class="st0">&quot;a-uncdea.ads&quot;</span> <span class="st0">&quot;gnat.ads&quot;</span> <span class="st0">&quot;g-souinf.ads&quot;</span> \
+<span class="st0">&quot;interfac.ads&quot;</span> <span class="st0">&quot;s-atacco.adb&quot;</span> <span class="st0">&quot;s-atacco.ads&quot;</span> <span class="st0">&quot;s-maccod.ads&quot;</span> <span class="st0">&quot;s-stoele.adb&quot;</span> \
+<span class="st0">&quot;s-stoele.ads&quot;</span>
+<span class="kw1">do</span>
+<span class="kw2">cp</span> <span class="sy0">/</span>usr<span class="sy0">/</span>lib<span class="sy0">/</span>gcc<span class="sy0">/</span>x86_64-linux-gnu<span class="sy0">/</span><span class="nu0">4.6</span><span class="sy0">/</span>adainclude<span class="sy0">/</span><span class="re1">$f</span> rts<span class="sy0">/</span>src<span class="sy0">/</span>
+<span class="kw2">ln</span> <span class="re5">-s</span> <span class="sy0">`</span><span class="kw3">pwd</span><span class="sy0">`/</span>rts<span class="sy0">/</span>src<span class="sy0">/</span><span class="re1">$f</span> <span class="sy0">`</span><span class="kw3">pwd</span><span class="sy0">`/</span>rts<span class="sy0">/</span>boards<span class="sy0">/</span>i386<span class="sy0">/</span>adainclude<span class="sy0">/</span><span class="re1">$f</span>
+<span class="kw1">done</span></pre></div></div>
+<h2> <span class="mw-headline" id="Files">Files</span></h2>
+<h3> <span class="mw-headline" id="gnat.adc">gnat.adc</span></h3>
+<p>This file in the root directory of the build tells GNAT there are some configuration pragmas to apply to the build. These pragmas can also be placed at the start of your custom sytem.ads (see below), but we'll place them here for now.
+</p><p><b>Note:</b> <i>Do not use <b>pragma No_Run_Time</b> as it is obsolete and has been for a number of years now!</i>
+</p><p>What these do is to tell GNAT how much of the RTS we can use in our kernel, which is not a lot really.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1"><span class="kw3">pragma</span> Discard_Names;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Enumeration_Maps<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Normalize_Scalars;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Exception_Propagation<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Finalization<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Tasking<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Protected_Types<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Delay<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Recursion<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Allocators<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Dispatch<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Implicit_Dynamic_Code<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Restrictions <span class="br0">&#40;</span>No_Secondary_Stack<span class="br0">&#41;</span>;</pre></div></div>
+<p>The final version of <a rel="nofollow" class="external text" href="https://github.com/Lucretia/bare_bones/blob/master/gnat.adc">gnat.adc</a> can be downloaded from GitHub.
+</p><p>By passing the <b>-r</b> flag to the binder (inside the bare_bones.gpr file), the binder will list further restrictions you can apply to enforce further checks.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1">   <span class="kw3">package</span> Binder <span class="kw1">is</span>
+      <span class="kw1">for</span> Default_Switches <span class="br0">&#40;</span><span class="st0">&quot;Ada&quot;</span><span class="br0">&#41;</span> <span class="kw3">use</span> <span class="br0">&#40;</span><span class="st0">&quot;-r&quot;</span><span class="br0">&#41;</span>;
+   <span class="kw1">end</span> Binder;</pre></div></div>
+<p>Between the GNAT Reference Manual and the Ada 2005 Reference Manual, you can find out what the various pragmas are and what they do.
+</p>
+<h4> <span class="mw-headline" id="Discard_Names">Discard_Names</span></h4>
+<p>In Ada, the compiler generates strings for various data types, e.g. enumerations, these strings can then be used in I/O.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1"><span class="kw3">type</span> Fruit <span class="kw1">is</span> <span class="br0">&#40;</span>Orange, Banana, Apple<span class="br0">&#41;</span>;
+<span class="co1">--  Ada defines the following strings, &quot;Orange&quot;, &quot;Banana&quot; and &quot;Apple&quot; in an array.</span>
+&#160;
+<span class="co1">--  These strings can be accessed using the 'Image attribute, as in</span>
+Put <span class="br0">&#40;</span>Fruit'Image <span class="br0">&#40;</span>Orange<span class="br0">&#41;</span><span class="br0">&#41;</span>;
+<span class="co1">--  Prints &quot;Orange&quot; to the console.</span></pre></div></div>
+<p>This pragma tells the compiler not to generate these tables.
+</p>
+<h4> <span class="mw-headline" id="Normalize_Scalars">Normalize_Scalars</span></h4>
+<p>Forces all scalars to be initialised, see the latest <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/Pragma-Normalize_005fScalars.html#Pragma-Normalize_005fScalars">GNAT RM:Normalize_Scalars</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Exception_Propagation">No_Exception_Propagation</span></h4>
+<p>This forces the compiler to disallow any attempt to raise an exception over a subprogram boundary. All exceptions are caught with the Last_Chance_Handler subprogram. See <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fException_005fPropagation.html#No_005fException_005fPropagation">GNAT RM:No_Exception_Propagation</a> for more information.
+</p><p>The <a rel="nofollow" class="external text" href="http://docs.adacore.com/gnat-hie-docs/html/gnathie_ug_3.html#SEC8">GNAT High Integrity Edition</a> documentation states the folowing:
+</p>
+<blockquote>
+Exception declarations and raise statements are still permitted under this restriction. A raise statement is compiled into a call of __gnat_last_chance_handler.
+</blockquote>
+<p>I have been unable, thus far, to raise my own exceptions, although I can declare one at library level. On placing a declaration inside console.ads:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1">   TE&#160;: <span class="kw1">exception</span>;  <span class="co1">--  A badly named exception.</span></pre></div></div>
+<p>and raising inside bare_bones.adb:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1">   <span class="kw3">raise</span> Console.<span class="me1">TE</span>;
+<span class="kw1">exception</span>
+   <span class="kw3">when</span> Console.<span class="me1">TE</span> =&gt;
+      Put <span class="br0">&#40;</span><span class="st0">&quot;TE caught&quot;</span>, <span class="nu0">1</span>, <span class="nu0">2</span><span class="br0">&#41;</span>;</pre></div></div>
+<p>and upon compiling, I get the following:
+</p>
+<pre>
+bare_bones.adb:17:04: construct not allowed in configurable run-time mode
+bare_bones.adb:17:04: file a-except.ads not found
+bare_bones.adb:17:04: entity &quot;Ada.Exceptions.Raise_Exception&quot; not available
+gnatmake: &quot;/home/laguest/src/mine/bare_bones/src/bare_bones.adb&quot; compilation error
+make: *** [disk/boot/bare_bones] Error 4
+</pre>
+<p>so the compiler is looking for the Ada.Exceptions package which defines the normal language standard exception handling, not the cut down version we are using here. Do the same with one of the language defined exceptions works fine. <i>I will file a bug at FSF for this as I believe it to be incorrect</i>.
+</p><p>I have had it confirmed via a <a rel="nofollow" class="external text" href="http://gcc.gnu.org/bugzilla/show_bug.cgi?id=53684">bug I filed</a> that the programmer is not allowed to declare their own exceptions and catch them. I have experimented by creating a version of the Ada.Exceptions (a-except.ad[sb]) package:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1"><span class="kw3">with</span> System;
+&#160;
+<span class="kw3">package</span> Ada.<span class="me1">Exceptions</span> <span class="kw1">is</span>
+   <span class="kw3">pragma</span> Preelaborate <span class="br0">&#40;</span>Exceptions<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw3">type</span> Exception_Id <span class="kw1">is</span> <span class="kw3">private</span>;
+   <span class="kw3">pragma</span> Preelaborable_Initialization <span class="br0">&#40;</span>Exception_Id<span class="br0">&#41;</span>;
+&#160;
+   Null_Id&#160;: <span class="kw3">constant</span> Exception_Id;
+&#160;
+   <span class="kw3">procedure</span> Raise_Exception
+     <span class="br0">&#40;</span>E      &#160;: Exception_Id;
+      Message&#160;: String&#160;:= <span class="st0">&quot;&quot;</span><span class="br0">&#41;</span>;
+   <span class="kw3">pragma</span> No_Return <span class="br0">&#40;</span>Raise_Exception<span class="br0">&#41;</span>;
+<span class="kw3">private</span>
+   <span class="kw3">type</span> Exception_Id <span class="kw1">is</span> <span class="kw3">new</span> Natural;
+&#160;
+   Null_Id&#160;: <span class="kw3">constant</span> Exception_Id&#160;:= Exception_Id'First;
+<span class="kw1">end</span> Ada.<span class="me1">Exceptions</span>;
+&#160;
+<span class="kw3">with</span> GNAT.<span class="me1">Source_Info</span>;
+<span class="kw3">with</span> Last_Chance_Handler;
+&#160;
+<span class="kw3">package</span> <span class="kw3">body</span> Ada.<span class="me1">Exceptions</span> <span class="kw1">is</span>
+   <span class="kw3">procedure</span> Raise_Exception
+     <span class="br0">&#40;</span>E      &#160;: Exception_Id;
+      Message&#160;: String&#160;:= <span class="st0">&quot;&quot;</span><span class="br0">&#41;</span> <span class="kw1">is</span>
+      <span class="kw3">pragma</span> Unreferenced <span class="br0">&#40;</span>E<span class="br0">&#41;</span>;
+      <span class="kw3">pragma</span> Unreferenced <span class="br0">&#40;</span>Message<span class="br0">&#41;</span>;
+      File            &#160;: String&#160;:= GNAT.<span class="me1">Source_Info</span>.<span class="me1">File</span>;
+      Line            &#160;: Positive&#160;:= GNAT.<span class="me1">Source_Info</span>.<span class="me1">Line</span>;
+      Source_Location &#160;: String&#160;:= GNAT.<span class="me1">Source_Info</span>.<span class="me1">Source_Location</span>;
+      Enclosing_Entity&#160;: String&#160;:= GNAT.<span class="me1">Source_Info</span>.<span class="me1">Enclosing_Entity</span>;
+      <span class="kw3">pragma</span> Unreferenced <span class="br0">&#40;</span>File, Line, Source_Location, Enclosing_Entity<span class="br0">&#41;</span>;
+   <span class="kw1">begin</span>
+      Last_Chance_Handler <span class="br0">&#40;</span>System.<span class="me1">Null_Address</span>, <span class="nu0">0</span><span class="br0">&#41;</span>;
+&#160;
+      <span class="kw1">loop</span>
+         <span class="kw3">null</span>;
+      <span class="kw1">end</span> <span class="kw1">loop</span>;
+   <span class="kw1">end</span> Raise_Exception;
+<span class="kw1">end</span> Ada.<span class="me1">Exceptions</span>;</pre></div></div>
+<p>This seemed to work until I tried to catch the exception inside bare_bones.adb at which point the compiler threw up a number of warnings, resulting in a compile failure:
+</p>
+<pre>
+bare_bones.adb:23:17: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:23:17: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:30:07: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:30:07: warning: Last_Chance_Handler will be called on exception
+bare_bones.adb:33:17: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:33:17: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:38:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:38:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:44:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:44:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:50:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:50:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:56:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:56:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:61:42: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:61:42: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:86:21: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:86:21: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:86:30: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:86:30: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:86:39: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:86:39: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:89:26: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:89:26: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:97:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:97:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:104:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:104:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:110:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:110:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:124:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:124:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:130:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:130:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:136:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:136:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:142:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:142:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:148:20: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:148:20: warning: &quot;Constraint_Error&quot; may call Last_Chance_Handler
+bare_bones.adb:151:04: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:151:04: warning: Last_Chance_Handler will be called on exception
+bare_bones.adb:160:04: warning: pragma Restrictions (No_Exception_Propagation) in effect
+bare_bones.adb:160:04: warning: this handler can never be entered, and has been removed
+bare_bones.adb:160:09: violation of restriction &quot;No_Exception_Propagation&quot; at ../gnat.adc:10
+gnatmake: &quot;/home/laguest/src/mine/bare_bones/src/bare_bones.adb&quot; compilation error
+make: *** [disk/boot/bare_bones] Error 4
+</pre>
+<p>So the net effect of this is to not bother with this package and only use the language defined exceptions for bare metal programming.
+</p>
+<h4> <span class="mw-headline" id="No_Exception_Registration">No_Exception_Registration</span></h4>
+<p>Ensures no stream operations are performed on types declared in Ada.Exceptions, see <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fException_005fRegistration.html#No_005fException_005fRegistration">GNAT RM:No_Exception_Registration</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Finalization">No_Finalization</span></h4>
+<p>Controlled types cannot be used, see <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fFinalization.html#No_005fFinalization">GNAT RM:No_Finalization</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Tasking">No_Tasking</span></h4>
+<p>Turns off tasking, so you cannot define tasks or protected objects or do anything related to tasking, see <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fTasking.html#No_005fTasking">GNAT RM:No_Tasking</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Protected_Types">No_Protected_Types</span></h4>
+<p>This is pretty much here for reinforcement of the above restriction. See <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fProtected_005fTypes.html#No_005fProtected_005fTypes">GNAT RM:No_Protected_Types</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Delay">No_Delay</span></h4>
+<p>You cannot use delay statements or the calendar package, see <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fDelay.html#No_005fDelay">GNAT RM:No_Delay</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Recursion">No_Recursion</span></h4>
+<p>Should be self evident, see <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fRecursion.html#No_005fRecursion">GNAT RM:No_Recursion</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Allocators">No_Allocators</span></h4>
+<p>You cannot use dynamic memory, see <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fAllocators.html#No_005fAllocators">GNAT RM:No_Allocators</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Dispatch">No_Dispatch</span></h4>
+<p>You cannot call a subprogram using Ada's object-orientated mechanism, see <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fDispatch.html#No_005fDispatch">GNAT RM:No_Dispatch</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Implicit_Dynamic_Code">No_Implicit_Dynamic_Code</span></h4>
+<p>You cannot use nested subprograms or any other features that generate trampolines on the stack, see <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fImplicit_005fDynamic_005fCode.html#No_005fImplicit_005fDynamic_005fCode">GNAT RM:No_Implicit_Dynamic_Code</a> for more information.
+</p>
+<h4> <span class="mw-headline" id="No_Secondary_Stack">No_Secondary_Stack</span></h4>
+<p>Without a secondary stack, you cannot return unconstrained types, such as arbitrary length strings, or variant records, see <a rel="nofollow" class="external text" href="http://gcc.gnu.org/onlinedocs/gcc-4.7.0/gnat_rm/No_005fSecondary_005fStack.html#No_005fSecondary_005fStack">GNAT RM:No_Secondary_Stack</a> for more information.
+</p><p>What this also means is you cannot use the runtime features 'Image and 'Val on any types, this would be useful for sending debugging info to the console, i.e. means you don't have to write your own code for converting strings to/from numbers.
+</p><p>I believe that it would be a good idea to have a small secondary stack defined in the assembler startup code, but define your own System.Secondary_Stack (s-secsta.ad[sb]) package which provides the correct API. Inside this package in it's executable part, you could then import the secondary stack from the assembly code, this would then be executed on elaboration of the package at the start of the kernel's execution.
+</p>
+<h3> <span class="mw-headline" id="system.ads">system.ads</span></h3>
+<p>Every Ada program must have access to the System package, this essentially tells the compiler what kind of hardware we are building for, therefore there will be 1 system.ads file per architecture your kernel supports.
+</p><p>Copy a system.ads from GCC that matches the target you are working with, in our case this is  gcc-&lt;version&gt;/gcc/ada/system-linux-x86.ads, name it system.ads and place it into rts/boards/i386/adainclude/ we need to edit this a bit.
+</p><p>We don't need to change anything from the top as all the integer sizes should be correct. Go to the private part of the spec and change the following values:
+</p>
+<ol><li> Command_Line_Args =&gt; False
+</li><li> Configurable_Run_Time =&gt; True
+</li><li> Exit_Status_Supported =&gt; False
+</li><li> Stack_Check_Probes =&gt; False
+</li><li> Suppress_Standard_Library =&gt; True
+</li><li> ZCX_By_Default =&gt; False
+</li><li> GCC_ZCX_Support =&gt; False
+</li></ol>
+<p>For more information on these options, see gcc-&lt;version&gt;/gcc/ada/targparm.ads.
+</p><p>Also, add the following line in the private part of the package:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1"><span class="kw3">private</span>
+&#160;
+   Run_Time_Name&#160;: <span class="kw3">constant</span> String&#160;:= <span class="st0">&quot;Bare Bones Run Time&quot;</span>;</pre></div></div>
+<p>According to targparm.ads, it must be the first thing after the private keyword. It should also show up in error messages in parentheses, but I've not managed to get it to show up thus far. This is useful as it should show you which RTS you are currently using, just in case you configure your build incorrectly.
+</p>
+<h3> <span class="mw-headline" id="Last_chance_handler">Last chance handler</span></h3>
+<p>When you start to write and compile Ada using this custom environment, the compiler will automatically place calls from the runtime into your final binary (this is what the compiler normally does, but we've restricted it a lot). One of these calls is to <b>Last_Chance_Handler</b> so create 2 new files and place into <i>rts/boards/<b>&lt;arch&gt;</b>/adainclude</i>, as follows.
+</p>
+<h4> <span class="mw-headline" id="last_chance_handler.ads">last_chance_handler.ads</span></h4>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1"><span class="kw3">with</span> System;
+&#160;
+<span class="kw3">procedure</span> Last_Chance_Handler
+  <span class="br0">&#40;</span>Source_Location&#160;: System.<span class="me1">Address</span>; Line&#160;: Integer<span class="br0">&#41;</span>;
+<span class="kw3">pragma</span> Export <span class="br0">&#40;</span>C, Last_Chance_Handler, <span class="st0">&quot;__gnat_last_chance_handler&quot;</span><span class="br0">&#41;</span>;</pre></div></div>
+<h4> <span class="mw-headline" id="last_chance_handler.adb">last_chance_handler.adb</span></h4>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1"><span class="kw3">procedure</span> Last_Chance_Handler
+  <span class="br0">&#40;</span>Source_Location&#160;: System.<span class="me1">Address</span>; Line&#160;: Integer<span class="br0">&#41;</span> <span class="kw1">is</span>
+   <span class="kw3">pragma</span> Unreferenced <span class="br0">&#40;</span>Source_Location, Line<span class="br0">&#41;</span>;
+<span class="kw1">begin</span>
+   <span class="co1">--  TODO: Add in code to dump the info to serial/screen which</span>
+   <span class="co1">--  is obviously board specific.</span>
+   <span class="kw1">loop</span>
+      <span class="kw3">null</span>;
+   <span class="kw1">end</span> <span class="kw1">loop</span>;
+<span class="kw1">end</span> Last_Chance_Handler;</pre></div></div>
+<p>As you can see, the meat of the handler is actualy a null loop at the moment, this is something you need to complete for your OS kernel and also, per platform.
+</p>
+<h3> <span class="mw-headline" id="Compiling_the_runtime">Compiling the runtime</span></h3>
+<p>Create a file called gnat.gpr in the root directory and copy the following into it:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1">library project gnat <span class="kw1">is</span>
+   <span class="kw3">type</span> Arch_Name <span class="kw1">is</span> <span class="br0">&#40;</span><span class="st0">&quot;i386&quot;</span>, <span class="st0">&quot;arm&quot;</span><span class="br0">&#41;</span>;
+   <span class="kw3">type</span> Board_Name <span class="kw1">is</span> <span class="br0">&#40;</span><span class="st0">&quot;pc&quot;</span>, <span class="st0">&quot;rpi&quot;</span><span class="br0">&#41;</span>;
+&#160;
+   Arch &#160;: Arch_Name &#160;:= <span class="st0">&quot;i386&quot;</span>;
+   Board&#160;: Board_Name&#160;:= external <span class="br0">&#40;</span><span class="st0">&quot;Board&quot;</span><span class="br0">&#41;</span>;
+&#160;
+   <span class="kw1">case</span> Board <span class="kw1">is</span>
+      <span class="kw3">when</span> <span class="st0">&quot;pc&quot;</span> =&gt;
+         Arch&#160;:= <span class="st0">&quot;i386&quot;</span>;
+      <span class="kw3">when</span> <span class="st0">&quot;rpi&quot;</span> =&gt;
+         Arch &#160;:= <span class="st0">&quot;arm&quot;</span>;
+   <span class="kw1">end</span> <span class="kw1">case</span>;
+&#160;
+   <span class="kw1">for</span> Source_Dirs <span class="kw3">use</span> <span class="br0">&#40;</span><span class="st0">&quot;rts/boards/&quot;</span> &amp; Arch &amp; <span class="st0">&quot;/adainclude&quot;</span><span class="br0">&#41;</span>;
+   <span class="kw1">for</span> Object_Dir <span class="kw3">use</span> <span class="st0">&quot;obj&quot;</span>; <span class="co1">--&quot;rts/boards/&quot; &amp; Arch &amp; &quot;/adalib&quot;;</span>
+&#160;
+   <span class="kw3">package</span> Builder <span class="kw1">is</span>
+      Basic_Switches&#160;:= <span class="br0">&#40;</span><span class="st0">&quot;-gnat2005&quot;</span>, <span class="st0">&quot;-g&quot;</span>, <span class="st0">&quot;-x&quot;</span>, <span class="st0">&quot;-a&quot;</span>, <span class="st0">&quot;-gnatg&quot;</span>,
+			 <span class="st0">&quot;-gnatec=../gnat.adc&quot;</span><span class="br0">&#41;</span>;
+&#160;
+      <span class="kw1">case</span> Board <span class="kw1">is</span>
+         <span class="kw3">when</span> <span class="st0">&quot;pc&quot;</span> =&gt;
+            <span class="kw1">for</span> Default_Switches <span class="br0">&#40;</span><span class="st0">&quot;Ada&quot;</span><span class="br0">&#41;</span> <span class="kw3">use</span> Basic_Switches &amp;
+               <span class="br0">&#40;</span><span class="st0">&quot;-m32&quot;</span>, <span class="st0">&quot;-march=i386&quot;</span><span class="br0">&#41;</span>;
+         <span class="kw3">when</span> <span class="st0">&quot;rpi&quot;</span> =&gt;
+            <span class="kw1">for</span> Default_Switches <span class="br0">&#40;</span><span class="st0">&quot;Ada&quot;</span><span class="br0">&#41;</span> <span class="kw3">use</span> Basic_Switches &amp;
+               <span class="br0">&#40;</span><span class="st0">&quot;-march=armv6zk&quot;</span>, <span class="st0">&quot;-mfpu=vfp&quot;</span>, <span class="st0">&quot;-mfloat-abi=hard&quot;</span>, <span class="st0">&quot;-marm&quot;</span>,
+                <span class="st0">&quot;-mcpu=arm1176jzf-s&quot;</span>, <span class="st0">&quot;-mtune=arm1176jzf-s&quot;</span><span class="br0">&#41;</span>;
+      <span class="kw1">end</span> <span class="kw1">case</span>;
+   <span class="kw1">end</span> Builder;
+&#160;
+   <span class="kw3">package</span> Compiler <span class="kw1">is</span>
+      <span class="kw1">for</span> Default_Switches <span class="br0">&#40;</span><span class="st0">&quot;Ada&quot;</span><span class="br0">&#41;</span> <span class="kw3">use</span> <span class="br0">&#40;</span><span class="st0">&quot;-O2&quot;</span>, <span class="st0">&quot;-ffunction-sections&quot;</span>, <span class="st0">&quot;-fdata-sections&quot;</span><span class="br0">&#41;</span>;
+   <span class="kw1">end</span> Compiler;
+&#160;
+   <span class="kw1">for</span> Library_Kind <span class="kw3">use</span> <span class="st0">&quot;static&quot;</span>;
+   <span class="kw1">for</span> Library_Name <span class="kw3">use</span> <span class="st0">&quot;gnat-4.6&quot;</span>;
+   <span class="kw1">for</span> Library_Dir <span class="kw3">use</span> <span class="st0">&quot;rts/boards/&quot;</span> &amp; Arch &amp; <span class="st0">&quot;/adalib&quot;</span>;
+<span class="kw1">end</span> gnat;</pre></div></div>
+<p>Now compile with the following command:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">gnatmake <span class="re5">-XBoard</span>=pc -Pgnat.gpr</pre></div></div>
+<p>Inside rts/boards/i386/adainclude/ you should have the RTS sources symbolically linked along with the custom last_chance_hander and system files. Inside rts/boards/i386/adalib/ you should have the libgnat-4.6.a and also *.ali matching the source which are required by GNAT.
+</p><p><b>N.B:</b> Please note that the above lib might need it's name changing as some OSes might have built libgnat with a version number different to the one I'm using. Yours might be libgnat-4.4.a and GNAT will expect to find that, so change the name in the GPR file accordingly.
+</p>
+<h3> <span class="mw-headline" id="startup.s">startup.s</span></h3>
+<p>This is PC specific so place this in the src/pc directory.
+</p>
+<h4> <span class="mw-headline" id="GAS">GAS</span></h4>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="sy0">.</span>global <span class="kw4">startup</span>                         # Make the <span class="kw4">startup</span> entry point symbol visible to the linker
+&#160;
+# Set up the Multiboot header <span class="br0">&#40;</span>see GRUB docs <span class="kw4">for</span> details<span class="br0">&#41;</span>
+<span class="sy0">.</span>set <span class="kw4">ALIGN</span><span class="sy0">,</span>    <span class="nu0">1</span>&lt;&lt;<span class="nu0">0</span>                     # <span class="kw4">Align</span> loaded modules on <span class="kw4">page</span> boundaries
+<span class="sy0">.</span>set MEMINFO<span class="sy0">,</span>  <span class="nu0">1</span>&lt;&lt;<span class="nu0">1</span>                     # Provide <span class="kw5">memory</span> map
+<span class="sy0">.</span>set FLAGS<span class="sy0">,</span>    <span class="kw4">ALIGN</span> | MEMINFO          # <span class="kw4">This</span> is the Multiboot <span class="st0">'flag'</span> field
+<span class="sy0">.</span>set MAGIC<span class="sy0">,</span>    <span class="nu0">0x1BADB002</span>               # <span class="st0">'magic number'</span> lets your bootloader find the header
+<span class="sy0">.</span>set CHECKSUM<span class="sy0">,</span> <span class="sy0">-</span><span class="br0">&#40;</span>MAGIC <span class="sy0">+</span> FLAGS<span class="br0">&#41;</span>         # Checksum required
+&#160;
+header<span class="sy0">:</span>                                 # Must be <span class="kw1">in</span> the first 8kb of the kernel file
+<span class="sy0">.</span><span class="kw4">align</span> <span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">0x90</span>                          # Pad the location counter <span class="br0">&#40;</span><span class="kw1">in</span> the current subsection<span class="br0">&#41;</span> to a <span class="nu0">4</span><span class="sy0">-</span><span class="kw5">byte</span>
+                                        # storage boundary<span class="sy0">.</span> The way alignment is specified can vary with
+                                        # host system architecture<span class="sy0">.</span>
+<span class="sy0">.</span>long MAGIC
+<span class="sy0">.</span>long FLAGS
+<span class="sy0">.</span>long CHECKSUM
+&#160;
+# Reserve initial kernel <span class="kw4">stack</span> space
+<span class="sy0">.</span>set STACKSIZE<span class="sy0">,</span> <span class="nu0">0x4000</span>                  # <span class="nu0">0x4000</span> being 16k<span class="sy0">.</span>
+<span class="sy0">.</span>lcomm <span class="kw4">stack</span><span class="sy0">,</span> STACKSIZE                 # Reserve 16k <span class="kw4">stack</span> on a32<span class="sy0">-</span>bit boundary
+<span class="sy0">.</span><span class="kw4">comm</span>  mbd<span class="sy0">,</span> <span class="nu0">4</span>                           # Declare <span class="kw5">common</span> symbol mbd<span class="sy0">,</span> allocate it <span class="nu0">4</span><span class="sy0">-</span>bytes of
+                                        # uninitialized <span class="kw5">memory</span><span class="sy0">.</span>
+<span class="sy0">.</span><span class="kw4">comm</span>  magic<span class="sy0">,</span> <span class="nu0">4</span>                         # Declare <span class="kw5">common</span> symbol magic<span class="sy0">,</span> allocate it <span class="nu0">4</span><span class="sy0">-</span>bytes of
+                                        # uninitialized <span class="kw5">memory</span><span class="sy0">.</span>
+&#160;
+<span class="kw4">startup</span><span class="sy0">:</span>
+    movl  $<span class="br0">&#40;</span><span class="kw4">stack</span> <span class="sy0">+</span> STACKSIZE<span class="br0">&#41;</span><span class="sy0">,</span> <span class="sy0">%</span><span class="kw3">esp</span>    # Set up the <span class="kw4">stack</span>
+&#160;
+# The following saves the contents of the registers as they will likely be
+# overwritten because main is <span class="kw1">not</span> our actual entry point<span class="sy0">,</span> Bare_Bones is<span class="sy0">.</span> We
+# will use these <span class="nu0">2</span> symbols inside Bare_Bones<span class="sy0">.</span>
+&#160;
+    movl  <span class="sy0">%</span><span class="kw3">eax</span><span class="sy0">,</span> magic                   # <span class="kw3">EAX</span> indicates to the OS that it was loaded by a Multiboot<span class="sy0">-</span>compliant boot
+                                        # loader
+    movl  <span class="sy0">%</span><span class="kw3">ebx</span><span class="sy0">,</span> mbd                     # <span class="kw3">EBX</span> must contain the physical address of the Multiboot information
+                                        # structure
+&#160;
+    <span class="kw1">call</span>  main                          # <span class="kw1">Call</span> main <span class="br0">&#40;</span>created by gnatbind<span class="br0">&#41;</span>
+&#160;
+    <span class="kw1">cli</span>                                 # Disable interrupts<span class="sy0">.</span> then intentionally hang the system<span class="sy0">.</span>
+                                        # <span class="kw1">CLI</span> only affects the interrupt flag <span class="kw4">for</span> the processor on which it is
+                                        # executed<span class="sy0">.</span>
+&#160;
+hang<span class="sy0">:</span>
+    <span class="kw1">hlt</span>                                 # Because the <span class="kw1">HLT</span> instruction halts <span class="kw4">until</span> an interrupt occurs<span class="sy0">,</span> the
+                                        # combination of a <span class="kw1">CLI</span> followed by a <span class="kw1">HLT</span> is used to intentionally hang
+                                        # the computer <span class="kw4">if</span> the kernel returns<span class="sy0">.</span>
+                                        # <span class="kw1">HLT</span> is <span class="kw1">in</span> a <span class="kw1">loop</span> just <span class="kw1">in</span> case a single <span class="kw1">HLT</span> instruction fails to execute
+                                        # <span class="kw4">for</span> some reason<span class="sy0">,</span> <span class="br0">&#40;</span>such as <span class="kw1">in</span> the case of an NMI<span class="br0">&#41;</span><span class="sy0">.</span>
+    <span class="kw1">jmp</span>   hang</pre></div></div>
+<h3> <span class="mw-headline" id="multiboot.ads">multiboot.ads</span></h3>
+<p>I won't show the source to this package as  I have made it more Ada-like and it's quite large, so I will link to the current versions, <a rel="nofollow" class="external text" href="https://github.com/Lucretia/bare_bones/blob/master/src/pc/multiboot.ads">multiboot.ads</a> and <a rel="nofollow" class="external text" href="https://github.com/Lucretia/bare_bones/blob/master/src/pc/multiboot.adb">multiboot.adb</a>.
+</p>
+<h3> <span class="mw-headline" id="Console">Console</span></h3>
+<p><b>Disclaimer:</b> I wrote this package a long time ago and have reformatted it using my current Ada programming style. I have not gone too far into the code, so it may not be the best implementation of an console.
+</p><p>The following 2 files give you access to the VGA console at 80x25 characters. As they are PC specific, they go into the src/pc directory.
+</p>
+<h4> <span class="mw-headline" id="console.ads">console.ads</span></h4>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1"><span class="kw3">with</span> System;
+&#160;
+<span class="kw3">package</span> Console <span class="kw1">is</span>
+   <span class="kw3">pragma</span> Preelaborate <span class="br0">&#40;</span>Console<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw3">type</span> Background_Colour <span class="kw1">is</span>
+     <span class="br0">&#40;</span>Black,
+      Blue,
+      Green,
+      Cyan,
+      Red,
+      Magenta,
+      Brown,
+      Light_Grey<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw1">for</span> Background_Colour <span class="kw3">use</span>
+     <span class="br0">&#40;</span>Black      =&gt; <span class="nu0">16</span>#<span class="nu0">0</span>#,
+      Blue       =&gt; <span class="nu0">16</span>#<span class="nu0">1</span>#,
+      Green      =&gt; <span class="nu0">16</span>#<span class="nu0">2</span>#,
+      Cyan       =&gt; <span class="nu0">16</span>#<span class="nu0">3</span>#,
+      Red        =&gt; <span class="nu0">16</span>#<span class="nu0">4</span>#,
+      Magenta    =&gt; <span class="nu0">16</span>#<span class="nu0">5</span>#,
+      Brown      =&gt; <span class="nu0">16</span>#<span class="nu0">6</span>#,
+      Light_Grey =&gt; <span class="nu0">16</span>#<span class="nu0">7</span>#<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw1">for</span> Background_Colour'Size <span class="kw3">use</span> <span class="nu0">4</span>;
+&#160;
+   <span class="kw3">type</span> Foreground_Colour <span class="kw1">is</span>
+     <span class="br0">&#40;</span>Black,
+      Blue,
+      Green,
+      Cyan,
+      Red,
+      Magenta,
+      Brown,
+      Light_Grey,
+      Dark_Grey,
+      Light_Blue,
+      Light_Green,
+      Light_Cyan,
+      Light_Red,
+      Light_Magenta,
+      Yellow,
+      White<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw1">for</span> Foreground_Colour <span class="kw3">use</span>
+     <span class="br0">&#40;</span>Black         =&gt; <span class="nu0">16</span>#<span class="nu0">0</span>#,
+      Blue          =&gt; <span class="nu0">16</span>#<span class="nu0">1</span>#,
+      Green         =&gt; <span class="nu0">16</span>#<span class="nu0">2</span>#,
+      Cyan          =&gt; <span class="nu0">16</span>#<span class="nu0">3</span>#,
+      Red           =&gt; <span class="nu0">16</span>#<span class="nu0">4</span>#,
+      Magenta       =&gt; <span class="nu0">16</span>#<span class="nu0">5</span>#,
+      Brown         =&gt; <span class="nu0">16</span>#<span class="nu0">6</span>#,
+      Light_Grey    =&gt; <span class="nu0">16</span>#<span class="nu0">7</span>#,
+      Dark_Grey     =&gt; <span class="nu0">16</span>#<span class="nu0">8</span>#,
+      Light_Blue    =&gt; <span class="nu0">16</span>#<span class="nu0">9</span>#,
+      Light_Green   =&gt; <span class="nu0">16</span>#A#,
+      Light_Cyan    =&gt; <span class="nu0">16</span>#B#,
+      Light_Red     =&gt; <span class="nu0">16</span>#C#,
+      Light_Magenta =&gt; <span class="nu0">16</span>#D#,
+      Yellow        =&gt; <span class="nu0">16</span>#E#,
+      White         =&gt; <span class="nu0">16</span>#F#<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw1">for</span> Foreground_Colour'Size <span class="kw3">use</span> <span class="nu0">4</span>;
+&#160;
+   <span class="kw3">type</span> Cell_Colour <span class="kw1">is</span>
+      <span class="kw3">record</span>
+         Foreground&#160;: Foreground_Colour;
+         Background&#160;: Background_Colour;
+      <span class="kw1">end</span> <span class="kw3">record</span>;
+&#160;
+   <span class="kw1">for</span> Cell_Colour <span class="kw3">use</span>
+      <span class="kw3">record</span>
+         Foreground <span class="kw2">at</span> <span class="nu0">0</span> <span class="kw3">range</span> <span class="nu0">0</span> .. <span class="nu0">3</span>;
+         Background <span class="kw2">at</span> <span class="nu0">0</span> <span class="kw3">range</span> <span class="nu0">4</span> .. <span class="nu0">7</span>;
+      <span class="kw1">end</span> <span class="kw3">record</span>;
+&#160;
+   <span class="kw1">for</span> Cell_Colour'Size <span class="kw3">use</span> <span class="nu0">8</span>;
+&#160;
+   <span class="kw3">type</span> Cell <span class="kw1">is</span>
+      <span class="kw3">record</span>
+         Char  &#160;: Character;
+         Colour&#160;: Cell_Colour;
+      <span class="kw1">end</span> <span class="kw3">record</span>;
+&#160;
+   <span class="kw1">for</span> Cell'Size <span class="kw3">use</span> <span class="nu0">16</span>;
+&#160;
+   Screen_Width &#160;: <span class="kw3">constant</span> Natural&#160;:= <span class="nu0">80</span>;
+   Screen_Height&#160;: <span class="kw3">constant</span> Natural&#160;:= <span class="nu0">25</span>;
+&#160;
+   <span class="kw3">subtype</span> Screen_Width_Range  <span class="kw1">is</span> Natural <span class="kw3">range</span> <span class="nu0">1</span> .. <span class="me1">Screen_Width</span>;
+   <span class="kw3">subtype</span> Screen_Height_Range <span class="kw1">is</span> Natural <span class="kw3">range</span> <span class="nu0">1</span> .. <span class="me1">Screen_Height</span>;
+&#160;
+   <span class="kw3">type</span> Row    <span class="kw1">is</span> <span class="kw3">array</span> <span class="br0">&#40;</span>Screen_Width_Range<span class="br0">&#41;</span>  <span class="kw3">of</span> Cell;
+   <span class="kw3">type</span> Screen <span class="kw1">is</span> <span class="kw3">array</span> <span class="br0">&#40;</span>Screen_Height_Range<span class="br0">&#41;</span> <span class="kw3">of</span> Row;
+&#160;
+   Video_Memory&#160;: Screen;
+&#160;
+   <span class="kw1">for</span> Video_Memory'Address <span class="kw3">use</span> System'To_Address <span class="br0">&#40;</span><span class="nu0">16</span>#000B_8000#<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw3">pragma</span> Import <span class="br0">&#40;</span>Ada, Video_Memory<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw3">procedure</span> Put
+     <span class="br0">&#40;</span>Char      &#160;: <span class="kw3">in</span> Character;
+      X         &#160;: <span class="kw3">in</span> Screen_Width_Range;
+      Y         &#160;: <span class="kw3">in</span> Screen_Height_Range;
+      Foreground&#160;: <span class="kw3">in</span> Foreground_Colour&#160;:= White;
+      Background&#160;: <span class="kw3">in</span> Background_Colour&#160;:= Black<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw3">procedure</span> Put
+     <span class="br0">&#40;</span>Str       &#160;: <span class="kw3">in</span> String;
+      X         &#160;: <span class="kw3">in</span> Screen_Width_Range;
+      Y         &#160;: <span class="kw3">in</span> Screen_Height_Range;
+      Foreground&#160;: <span class="kw3">in</span> Foreground_Colour&#160;:= White;
+      Background&#160;: <span class="kw3">in</span> Background_Colour&#160;:= Black<span class="br0">&#41;</span>;
+&#160;
+   <span class="kw3">procedure</span> Clear <span class="br0">&#40;</span>Background&#160;: <span class="kw3">in</span> Background_Colour&#160;:= Black<span class="br0">&#41;</span>;
+<span class="kw1">end</span> Console;</pre></div></div>
+<h4> <span class="mw-headline" id="console.adb">console.adb</span></h4>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1"><span class="kw3">package</span> <span class="kw3">body</span> Console <span class="kw1">is</span>
+   <span class="kw3">procedure</span> Put
+     <span class="br0">&#40;</span>Char      &#160;: <span class="kw3">in</span> Character;
+      X         &#160;: <span class="kw3">in</span> Screen_Width_Range;
+      Y         &#160;: <span class="kw3">in</span> Screen_Height_Range;
+      Foreground&#160;: <span class="kw3">in</span> Foreground_Colour&#160;:= White;
+      Background&#160;: <span class="kw3">in</span> Background_Colour&#160;:= Black<span class="br0">&#41;</span> <span class="kw1">is</span>
+   <span class="kw1">begin</span>
+      Video_Memory <span class="br0">&#40;</span>Y<span class="br0">&#41;</span><span class="br0">&#40;</span>X<span class="br0">&#41;</span>.<span class="me1">Char</span>             &#160;:= Char;
+      Video_Memory <span class="br0">&#40;</span>Y<span class="br0">&#41;</span><span class="br0">&#40;</span>X<span class="br0">&#41;</span>.<span class="me1">Colour</span>.<span class="me1">Foreground</span>&#160;:= Foreground;
+      Video_Memory <span class="br0">&#40;</span>Y<span class="br0">&#41;</span><span class="br0">&#40;</span>X<span class="br0">&#41;</span>.<span class="me1">Colour</span>.<span class="me1">Background</span>&#160;:= Background;
+   <span class="kw1">end</span> Put;
+&#160;
+   <span class="kw3">procedure</span> Put
+      <span class="br0">&#40;</span>Str       &#160;: <span class="kw3">in</span> String;
+       X         &#160;: <span class="kw3">in</span> Screen_Width_Range;
+       Y         &#160;: <span class="kw3">in</span> Screen_Height_Range;
+       Foreground&#160;: <span class="kw3">in</span> Foreground_Colour&#160;:= White;
+       Background&#160;: <span class="kw3">in</span> Background_Colour&#160;:= Black<span class="br0">&#41;</span> <span class="kw1">is</span>
+   <span class="kw1">begin</span>
+      <span class="kw1">for</span> Index <span class="kw3">in</span> Str'First .. <span class="me1">Str</span>'Last <span class="kw1">loop</span>
+         Put <span class="br0">&#40;</span>Str <span class="br0">&#40;</span>Index<span class="br0">&#41;</span>,
+              X + Screen_Width_Range <span class="br0">&#40;</span>Index<span class="br0">&#41;</span> - <span class="nu0">1</span>,
+              Y,
+              Foreground,
+              Background<span class="br0">&#41;</span>;
+      <span class="kw1">end</span> <span class="kw1">loop</span>;
+   <span class="kw1">end</span> Put;
+&#160;
+   <span class="kw3">procedure</span> Clear <span class="br0">&#40;</span>Background&#160;: <span class="kw3">in</span> Background_Colour&#160;:= Black<span class="br0">&#41;</span> <span class="kw1">is</span>
+   <span class="kw1">begin</span>
+      <span class="kw1">for</span> X <span class="kw3">in</span> Screen_Width_Range'First .. <span class="me1">Screen_Width_Range</span>'Last <span class="kw1">loop</span>
+         <span class="kw1">for</span> Y <span class="kw3">in</span> Screen_Height_Range'First .. <span class="me1">Screen_Height_Range</span>'Last <span class="kw1">loop</span>
+            Put <span class="br0">&#40;</span>' ', X, Y, Background =&gt; Background<span class="br0">&#41;</span>;
+         <span class="kw1">end</span> <span class="kw1">loop</span>;
+      <span class="kw1">end</span> <span class="kw1">loop</span>;
+   <span class="kw1">end</span> Clear;
+<span class="kw1">end</span> Console;</pre></div></div>
+<h3> <span class="mw-headline" id="bare_bones.adb">bare_bones.adb</span></h3>
+<p>This is platform independent and therefore goes into the src directory.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1"><span class="kw3">with</span> Console; <span class="kw3">use</span> Console;
+&#160;
+<span class="kw3">procedure</span> Bare_Bones <span class="kw1">is</span>
+<span class="kw1">begin</span>
+   Clear;
+&#160;
+   Put <span class="br0">&#40;</span><span class="st0">&quot;Hello, bare bones in Ada.&quot;</span>,
+        Screen_Width_Range'First,
+        Screen_Height_Range'First<span class="br0">&#41;</span>;
+<span class="kw1">end</span> Bare_Bones;
+<span class="kw3">pragma</span> No_Return <span class="br0">&#40;</span>Bare_Bones<span class="br0">&#41;</span>;</pre></div></div>
+<h3> <span class="mw-headline" id="linker.ld">linker.ld</span></h3>
+<p>This is a PC specific script so goes into the src/pc directory.
+</p>
+<pre>
+OUTPUT_FORMAT(elf32-i386)
+
+/* Tell the linker which startup code to use, we do this as there is no way to do this (well not easily) from the GNAT tools. */
+STARTUP(startup.o)
+
+ENTRY (startup)
+
+SECTIONS
+{
+    . = 0x00100000;
+
+    .text&#160;:{
+        code = .; _code = .; __code = .;
+        *(.text)
+        *(.rodata)
+    }
+
+    .rodata ALIGN (0x1000)&#160;: {
+        *(.rodata)
+    }
+
+    .data ALIGN (0x1000)&#160;: {
+        data = .; _data = .; __data = .;
+        *(.data)
+    }
+
+    .bss&#160;: {
+        sbss = .;
+        bss = .; _bss = .; __bss = .;
+        *(COMMON)
+        *(.bss)
+        ebss = .;
+    }
+    end = .; _end = .; __end = .;
+}
+</pre>
+<h3> <span class="mw-headline" id="makefile">makefile</span></h3>
+<p>Place this file in the root directory.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="make source-make"><pre class="de1">ARCH		<span class="sy0">=</span>	i386
+RTS_DIR		<span class="sy0">=</span>	`pwd`<span class="sy0">/</span>rts<span class="sy0">/</span>boards<span class="sy0">/$</span><span class="br0">&#40;</span><span class="re2">ARCH</span><span class="br0">&#41;</span>
+&#160;
+<span class="kw1">ifeq</span> <span class="br0">&#40;</span><span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">ARCH</span><span class="br0">&#41;</span><span class="sy0">,</span>i386<span class="br0">&#41;</span>
+GNATMAKE	<span class="sy0">=</span>	gnatmake
+AS		<span class="sy0">=</span>	as
+ASFLAGS		<span class="sy0">=</span>	<span class="sy0">--</span><span class="nu0">32</span> <span class="sy0">-</span>march<span class="sy0">=</span>i386
+&#160;
+OBJS		<span class="sy0">=</span>	obj<span class="sy0">/</span>startup<span class="sy0">.</span>o obj<span class="sy0">/</span>multiboot<span class="sy0">.</span>o obj<span class="sy0">/</span>console<span class="sy0">.</span>o
+BOARD		<span class="sy0">=</span>	pc
+&#160;
+<span class="kw2">.PHONY</span><span class="sy0">:</span> obj<span class="sy0">/</span>multiboot<span class="sy0">.</span>o obj<span class="sy0">/</span>console<span class="sy0">.</span>o
+&#160;
+<span class="kw1">endif</span>
+&#160;
+all<span class="sy0">:</span> bare_bones
+&#160;
+bare_bones<span class="sy0">:</span> <span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">OBJS</span><span class="br0">&#41;</span> src<span class="sy0">/</span>bare_bones<span class="sy0">.</span>adb
+	<span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">GNATMAKE</span><span class="br0">&#41;</span> <span class="sy0">--</span>RTS<span class="sy0">=$</span><span class="br0">&#40;</span><span class="re2">RTS_DIR</span><span class="br0">&#41;</span> <span class="sy0">-</span>XBoard<span class="sy0">=$</span><span class="br0">&#40;</span><span class="re2">BOARD</span><span class="br0">&#41;</span> <span class="sy0">-</span>Pbare_bones<span class="sy0">.</span>gpr
+&#160;
+obj<span class="sy0">/</span>startup<span class="sy0">.</span>o<span class="sy0">:</span> src<span class="sy0">/$</span><span class="br0">&#40;</span><span class="re2">BOARD</span><span class="br0">&#41;</span><span class="sy0">/</span>startup<span class="sy0">.</span>s
+	<span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">AS</span><span class="br0">&#41;</span> <span class="sy0">$</span><span class="br0">&#40;</span><span class="re2">ASFLAGS</span><span class="br0">&#41;</span> src<span class="sy0">/$</span><span class="br0">&#40;</span><span class="re2">BOARD</span><span class="br0">&#41;</span><span class="sy0">/</span>startup<span class="sy0">.</span>s <span class="sy0">-</span>o obj<span class="sy0">/</span>startup<span class="sy0">.</span>o
+&#160;
+<span class="kw2">.PHONY</span><span class="sy0">:</span> clean
+&#160;
+clean<span class="sy0">:</span>
+	<span class="sy0">-</span>rm obj<span class="sy0">/*</span> <span class="sy0">*</span>~ bare_bones</pre></div></div>
+<h3> <span class="mw-headline" id="bare_bones.gpr">bare_bones.gpr</span></h3>
+<p>Place this file in the root directory.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="ada source-ada"><pre class="de1">project Bare_Bones <span class="kw1">is</span>
+   <span class="kw3">type</span> Arch_Name <span class="kw1">is</span> <span class="br0">&#40;</span><span class="st0">&quot;i386&quot;</span>, <span class="st0">&quot;arm&quot;</span><span class="br0">&#41;</span>;
+   <span class="kw3">type</span> Board_Name <span class="kw1">is</span> <span class="br0">&#40;</span><span class="st0">&quot;pc&quot;</span>, <span class="st0">&quot;rpi&quot;</span><span class="br0">&#41;</span>;
+&#160;
+   Arch &#160;: Arch_Name &#160;:= <span class="st0">&quot;i386&quot;</span>;
+   Board&#160;: Board_Name&#160;:= external <span class="br0">&#40;</span><span class="st0">&quot;Board&quot;</span><span class="br0">&#41;</span>;
+&#160;
+   <span class="co1">-- TODO: Add in a case statement that adds an arch dir to source.</span>
+&#160;
+   <span class="kw1">case</span> Board <span class="kw1">is</span>
+      <span class="kw3">when</span> <span class="st0">&quot;pc&quot;</span> =&gt;
+         <span class="kw1">for</span> Source_Dirs <span class="kw3">use</span> <span class="br0">&#40;</span><span class="st0">&quot;src&quot;</span>, <span class="st0">&quot;src/pc&quot;</span><span class="br0">&#41;</span>;
+      <span class="kw3">when</span> <span class="st0">&quot;rpi&quot;</span> =&gt;
+         <span class="kw1">for</span> Source_Dirs <span class="kw3">use</span> <span class="br0">&#40;</span><span class="st0">&quot;src&quot;</span>, <span class="st0">&quot;src/rpi&quot;</span><span class="br0">&#41;</span>;
+   <span class="kw1">end</span> <span class="kw1">case</span>;
+&#160;
+   <span class="kw1">for</span> Object_Dir <span class="kw3">use</span> <span class="st0">&quot;obj&quot;</span>;
+   <span class="kw1">for</span> Exec_Dir <span class="kw3">use</span> <span class="st0">&quot;.&quot;</span>;
+   <span class="kw1">for</span> Main <span class="kw3">use</span> <span class="br0">&#40;</span><span class="st0">&quot;bare_bones.adb&quot;</span><span class="br0">&#41;</span>;
+&#160;
+   <span class="kw3">package</span> Builder <span class="kw1">is</span>
+      Basic_Switches&#160;:= <span class="br0">&#40;</span><span class="st0">&quot;-gnat2005&quot;</span>, <span class="st0">&quot;-g&quot;</span>, <span class="st0">&quot;-x&quot;</span>, <span class="st0">&quot;-a&quot;</span>, <span class="st0">&quot;-gnatg&quot;</span>,
+                         <span class="st0">&quot;-gnatec=../gnat.adc&quot;</span>, <span class="st0">&quot;-gnaty-I&quot;</span>, <span class="st0">&quot;-gnaty+d&quot;</span><span class="br0">&#41;</span>;
+&#160;
+      <span class="kw1">case</span> Board <span class="kw1">is</span>
+         <span class="kw3">when</span> <span class="st0">&quot;pc&quot;</span> =&gt;
+            <span class="kw1">for</span> Default_Switches <span class="br0">&#40;</span><span class="st0">&quot;Ada&quot;</span><span class="br0">&#41;</span> <span class="kw3">use</span> Basic_Switches &amp;
+               <span class="br0">&#40;</span><span class="st0">&quot;-m32&quot;</span>, <span class="st0">&quot;-march=i386&quot;</span><span class="br0">&#41;</span>;
+         <span class="kw3">when</span> <span class="st0">&quot;rpi&quot;</span> =&gt;
+            <span class="kw1">for</span> Default_Switches <span class="br0">&#40;</span><span class="st0">&quot;Ada&quot;</span><span class="br0">&#41;</span> <span class="kw3">use</span> Basic_Switches &amp;
+               <span class="br0">&#40;</span><span class="st0">&quot;-march=armv6zk&quot;</span>, <span class="st0">&quot;-mfpu=vfp&quot;</span>, <span class="st0">&quot;-mfloat-abi=hard&quot;</span>, <span class="st0">&quot;-marm&quot;</span>,
+                <span class="st0">&quot;-mcpu=arm1176jzf-s&quot;</span>, <span class="st0">&quot;-mtune=arm1176jzf-s&quot;</span><span class="br0">&#41;</span>;
+      <span class="kw1">end</span> <span class="kw1">case</span>;
+   <span class="kw1">end</span> Builder;
+&#160;
+   <span class="kw3">package</span> Compiler <span class="kw1">is</span>
+      <span class="kw1">case</span> Board <span class="kw1">is</span>
+         <span class="kw3">when</span> <span class="st0">&quot;pc&quot;</span> =&gt;
+            <span class="kw1">for</span> Default_Switches <span class="br0">&#40;</span><span class="st0">&quot;Ada&quot;</span><span class="br0">&#41;</span> <span class="kw3">use</span>
+               <span class="br0">&#40;</span><span class="st0">&quot;-O0&quot;</span>, <span class="st0">&quot;-g&quot;</span>, <span class="st0">&quot;-ggdb&quot;</span>, <span class="st0">&quot;-ffunction-sections&quot;</span>, <span class="st0">&quot;-fdata-sections&quot;</span><span class="br0">&#41;</span>;
+         <span class="kw3">when</span> <span class="st0">&quot;rpi&quot;</span> =&gt;
+            <span class="kw1">for</span> Default_Switches <span class="br0">&#40;</span><span class="st0">&quot;Ada&quot;</span><span class="br0">&#41;</span> <span class="kw3">use</span>
+               <span class="br0">&#40;</span><span class="st0">&quot;-O0&quot;</span>, <span class="st0">&quot;-g&quot;</span>, <span class="st0">&quot;-ggdb&quot;</span>, <span class="st0">&quot;-ffunction-sections&quot;</span>, <span class="st0">&quot;-fdata-sections&quot;</span><span class="br0">&#41;</span>;
+&#160;
+      <span class="kw1">end</span> <span class="kw1">case</span>;
+   <span class="kw1">end</span> Compiler;
+&#160;
+<span class="co1">-- To reduce size of final binary.</span>
+   <span class="kw3">package</span> Linker <span class="kw1">is</span>
+      <span class="kw1">for</span> Default_Switches <span class="br0">&#40;</span><span class="st0">&quot;Ada&quot;</span><span class="br0">&#41;</span> <span class="kw3">use</span>
+         <span class="br0">&#40;</span><span class="st0">&quot;-Wl,--gc-sections&quot;</span>, <span class="st0">&quot;-static&quot;</span>, <span class="st0">&quot;-nostartfiles&quot;</span>, <span class="st0">&quot;-nodefaultlibs&quot;</span>,
+          <span class="st0">&quot;-T../src/&quot;</span> &amp; Board &amp; <span class="st0">&quot;/linker.ld&quot;</span>, <span class="st0">&quot;-v&quot;</span><span class="br0">&#41;</span>;
+   <span class="kw1">end</span> Linker;
+<span class="kw1">end</span> Bare_Bones;</pre></div></div>
+<h2> <span class="mw-headline" id="Targetting_GNAT_to_bare_metal">Targetting GNAT to bare metal</span></h2>
+<p><b>NOTE</b> As of GCC 5.x the code to make GNAT build for bare metal targets has been put back in, the relevant patch for 4.9.2 can be found <a rel="nofollow" class="external text" href="https://github.com/Lucretia/free-ada/blob/develop/files/gcc-4.9.2/0001-Applied-patch-from-latest-trunk-to-fix-bare-metal-bu.patch">here</a>
+</p><p>Then GNAT is built, it automatically builds:
+</p>
+<ol><li> The compiler
+</li><li> The runtime
+</li><li> The tools (gnatmake, gnatlink, gnatls, etc.).
+</li></ol>
+<p>Unfortunately, the toolchain cannot be built for bare machine targets (i.e. &lt;arch&gt;-elf|coff|pe) straight out of the box like a C compiler can be.
+</p><p>To enable this, a number of files need to be modified. I will show what needs to be done to support arm-elf, ready for the next section on the Raspberry Pi. This work is based on work done previously <a rel="nofollow" class="external autonumber" href="http://www.zsk.p.lodz.pl/~morawski/Dyplomy/Praca%20dyplomowa%20p.%20Horna.pdf">[2]</a>.
+</p>
+<h3> <span class="mw-headline" id="gcc.2Fada.2Fadaint.c">gcc/ada/adaint.c</span></h3>
+<h3> <span class="mw-headline" id="gcc.2Fada.2Fadaint.h">gcc/ada/adaint.h</span></h3>
+<h3> <span class="mw-headline" id="gcc.2Fada.2Fgcc-interface.2FMakefile.in">gcc/ada/gcc-interface/Makefile.in</span></h3>
+<h3> <span class="mw-headline" id="gcc.2Fada.2Fgsocket.h">gcc/ada/gsocket.h</span></h3>
+<h3> <span class="mw-headline" id="gcc.2Fada.2Fmlib-tgt-specific-bare.adb">gcc/ada/mlib-tgt-specific-bare.adb</span></h3>
+<p>Can we get rid of this?
+</p>
+<h3> <span class="mw-headline" id="gcc.2Fada.2Fs-oscons-tmplt.c">gcc/ada/s-oscons-tmplt.c</span></h3>
+<h3> <span class="mw-headline" id="gcc.2Fada.2Fsystem-bare-armel.ads">gcc/ada/system-bare-armel.ads</span></h3>
+<h3> <span class="mw-headline" id="gnattools.2Fconfigure.5B.ac.5D">gnattools/configure[.ac]</span></h3>
+<h2> <span class="mw-headline" id="Raspberry_Pi">Raspberry Pi</span></h2>
+<h3> <span class="mw-headline" id="Boot_process">Boot process</span></h3>
+<p>As stated in <a rel="nofollow" class="external autonumber" href="http://www.raspberrypi.org/phpBB3/viewtopic.php?f=63&amp;t=6685">[3]</a>, the RPi boot proces is as follows:
+</p>
+<ol><li> Power on starts the stage 1 boot loader which is on the SoC, which loads the stage 2 boot loader (bootcode.bin) into L2 cache (thus turning it on).
+</li><li> bootcode.bin enables SDRAM and loads the stage 3 boot loader (loader.bin).
+</li><li> loader.bin loads and executes the VideoCore firmware (start.elf).
+</li><li> start.elf loads config.txt, cmdline.txt and kernel.img.
+</li></ol>
+<p>The config.txt file can contain aline "kernel=&lt;name&gt;" where you can name the kernel image anything you like.
+</p><p>Ideally for development we would use an emulator or some kind of netbooting facility so we don't have to keep switching the SD Card from the Pi to the PC and vice versa, this would get tedious really fast.
+</p>
+<h3> <span class="mw-headline" id="U-Boot">U-Boot</span></h3>
+<p>Seems you need serial access to the board to do this, so I won't be atempting this yet.
+</p><p>By following the information starting on the <a rel="nofollow" class="external text" href="http://kernelnomicon.org/?p=92">FreeBSD</a> porting page, we can build u-boot for RPi.
+</p><p><br />
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">git clone</span> git:<span class="sy0">//</span>github.com<span class="sy0">/</span>gonzoua<span class="sy0">/</span>u-boot-pi.git
+&#160;
+<span class="kw3">cd</span> u-boot-pi
+<span class="kw2">make</span> rpi_b_config</pre></div></div>
+<h2> <span class="mw-headline" id="Testing">Testing</span></h2>
+<p>Make sure you have built the RTS above before this next stage otherwise you won't be able to compile the kernel.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">make</span> qemu</pre></div></div>
+<p>On the QEMU window, it should clear the screen, the the cursor won't move so it will be in the middle of the screen, in the top-left corner will be the message "Hello, bare bones in Ada."
+</p>
+<h2> <span class="mw-headline" id="Source_access">Source access</span></h2>
+<p>I have created a Git repository on <a rel="nofollow" class="external text" href="https://github.com/Lucretia/bare_bones">GitHub</a> containing the source above so you don't have to do it by hand if you don't want to.
+</p><p>In fact there have ben a lot of changes since I started this project and it is a better idea to grab the source from GitHub as it will be more up to date. I will leave the documents above so you can see how it's evolved and also how it works, maybe a bit clearer that it is now.
+</p>
+<h2> <span class="mw-headline" id="Future">Future</span></h2>
+<ol><li> Implement a secondary stack so we can use 'Image attributes.
+</li><li> Implement a 64-bit version (non EFI).
+</li><li> Implement a (U)EFI version.
+</li></ol>
+<p>stage
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 857/1000000
+Post-expand include size: 2901/2097152 bytes
+Template argument size: 2250/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3231-0!*!0!!en!2!* and timestamp 20180121035410 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Ada_Bare_bones&amp;oldid=20361">http://wiki.osdev.org/index.php?title=Ada_Bare_bones&amp;oldid=20361</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:Level_2_Tutorials" title="Category:Level 2 Tutorials">Level 2 Tutorials</a></li><li><a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a></li><li><a href="Category:Ada" title="Category:Ada">Ada</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Ada_Bare_bones" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Ada_Bare_bones"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Ada_Bare_bones"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Ada_Bare_bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Ada_Bare_bones" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Ada_Bare_bones&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Ada_Bare_bones&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Ada_Bare_bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Ada_Bare_bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Ada_Bare_bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Ada_Bare_bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Ada_Bare_bones&amp;oldid=20361" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 12:20.</li>
+											<li id="footer-info-viewcount">This page has been accessed 73,206 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.orskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Ada_Bare_bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Ada_Bare_bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Ada_Bare_bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Ada_Bare_bones&amp;oldid=20361" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 12:20.</li>
+											<li id="footer-info-viewcount">This page has been accessed 73,206 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.034 secs. -->
+	</body>
+</html>

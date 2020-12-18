@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>GUI - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "GUI", "wgTitle": "GUI", "wgCurRevisionId": 22109, "wgArticleId": 2346, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Video", "Graphical UI"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-cpp {line-height: normal;}
+.source-cpp li, .source-cpp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cpp
+ * CSS class: source-cpp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cpp.source-cpp .de1, .cpp.source-cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp.source-cpp  {font-family:monospace;}
+.cpp.source-cpp .imp {font-weight: bold; color: red;}
+.cpp.source-cpp li, .cpp.source-cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp.source-cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp.source-cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp.source-cpp .kw1 {color: #0000ff;}
+.cpp.source-cpp .kw2 {color: #0000ff;}
+.cpp.source-cpp .kw3 {color: #0000dd;}
+.cpp.source-cpp .kw4 {color: #0000ff;}
+.cpp.source-cpp .co1 {color: #666666;}
+.cpp.source-cpp .co2 {color: #339900;}
+.cpp.source-cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp.source-cpp .es0 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es1 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es2 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es3 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es4 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es5 {color: #006699; font-weight: bold;}
+.cpp.source-cpp .br0 {color: #008000;}
+.cpp.source-cpp .sy0 {color: #008000;}
+.cpp.source-cpp .sy1 {color: #000080;}
+.cpp.source-cpp .sy2 {color: #000040;}
+.cpp.source-cpp .sy3 {color: #000040;}
+.cpp.source-cpp .sy4 {color: #008080;}
+.cpp.source-cpp .st0 {color: #FF0000;}
+.cpp.source-cpp .nu0 {color: #0000dd;}
+.cpp.source-cpp .nu6 {color: #208080;}
+.cpp.source-cpp .nu8 {color: #208080;}
+.cpp.source-cpp .nu12 {color: #208080;}
+.cpp.source-cpp .nu16 {color:#800080;}
+.cpp.source-cpp .nu17 {color:#800080;}
+.cpp.source-cpp .nu18 {color:#800080;}
+.cpp.source-cpp .nu19 {color:#800080;}
+.cpp.source-cpp .me1 {color: #007788;}
+.cpp.source-cpp .me2 {color: #007788;}
+.cpp.source-cpp .ln-xtra, .cpp.source-cpp li.ln-xtra, .cpp.source-cpp div.ln-xtra {background-color: #ffc;}
+.cpp.source-cpp span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-GUI action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">GUI</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="GUI#mw-head">navigation</a>,
+					<a href="GUI#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>A <b>Graphical User Interface</b> or <b>GUI</b> uses graphics in combination with text to display output. GUIs usually require a mouse to be able to take input and to be used to their fullest extent.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="GUI#Requirements"><span class="tocnumber">1</span> <span class="toctext">Requirements</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="GUI#Techniques"><span class="tocnumber">2</span> <span class="toctext">Techniques</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="GUI#TODO"><span class="tocnumber">2.1</span> <span class="toctext">TODO</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="GUI#The_new_Alternative:_UEFI"><span class="tocnumber">3</span> <span class="toctext">The new Alternative: UEFI</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="GUI#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="GUI#Articles"><span class="tocnumber">4.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="GUI#Threads"><span class="tocnumber">4.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="GUI#External_links"><span class="tocnumber">4.3</span> <span class="toctext">External links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Requirements"> Requirements </span></h2>
+<p>Coding a GUI takes lots of time, knowledge, and patience. The OS has to have a graphics driver and a mouse driver at the very least, so it can check for mouse clicks on areas like buttons on the screen. Like with most other things, coding a GUI in real mode would probably be easier than in protected mode because of the availability of <a href="BIOS" title="BIOS">BIOS</a> interrupt calls.
+</p><p>You need to know how to get into a graphics mode and plot pixels, lines, and shapes on the screen for starters. You also need to know about the signals that <a href="Mouse_Input" title="Mouse Input">PS/2 mice</a> send when they are moved and buttons are pressed and held down, and how to implement a driver for handling all that stuff.
+</p>
+<h2> <span class="mw-headline" id="Techniques"> Techniques </span></h2>
+<p>There are many ways to write a GUI, the following technique is a simple, quick and dirty way to create a generic GUI for your OS.  The tutorial assumes the kernel is running in protected mode and the video resolution has been set using VBE in a linear frame buffer and multi-tasking is already enabled in your kernel.  The kernel should probe the BIOS for the VBE Mode Info Block (see <a href="Getting_VBE_Mode_Info" title="Getting VBE Mode Info" class="mw-redirect">Getting VBE Mode Info</a>), which returns information about the established video resolution mode.
+</p><p>The Screen module creates a Z-Buffer for off screen writing and exposes methods used by other modules to write to the buffer.  
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">void</span> InitScreen<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="kw4">void</span> PutPixel<span class="br0">&#40;</span><span class="kw4">int</span> X<span class="sy0">,</span> <span class="kw4">int</span> Y<span class="sy0">,</span> <span class="kw4">int</span> RGB<span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="kw4">void</span> PutRect<span class="br0">&#40;</span><span class="kw4">int</span> X<span class="sy0">,</span> <span class="kw4">int</span> Y<span class="sy0">,</span> <span class="kw4">int</span> Width<span class="sy0">,</span> <span class="kw4">int</span> Height<span class="sy0">,</span> <span class="kw4">int</span> RGB<span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="kw4">void</span> PutLine<span class="br0">&#40;</span><span class="kw4">int</span> X1<span class="sy0">,</span> <span class="kw4">int</span> Y1<span class="sy0">,</span> <span class="kw4">int</span> X2<span class="sy0">,</span> <span class="kw4">int</span> Y2<span class="sy0">,</span> <span class="kw4">int</span> RGB<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>Somewhere in real mode, the VESA BIOS Extentions were called to set the resolution (int 0x10 function 0x4f02) and the mode information was retrieved from VBE (int 0x10 function 0x4f01).  The mode info is stored in a VbeModeInfo struct as outlined in the VBE documentation and <a href="Getting_VBE_Mode_Info" title="Getting VBE Mode Info" class="mw-redirect"> here</a>.  This tutorial assumes a flat/linear frame buffer is selected (bit 14 of BX register is set when calling function 0x4f01).  This will map the video memory to the processors addess space making it accessible by the kernel (if the segment desciptors are setup right) This way no video page swapping is needed, just one giant memcpy.
+</p><p>During initialization, a Z-Buffer is allocated large enough to hold all the pixels and a thread is kicked off to refresh the screen.  The refresh proc just copies the data from the z-buffer to the video memory in a continuous loop:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">void</span> InitScreen<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+     ScreenBufferSize <span class="sy0">=</span> VbeModeInfoBlock.<span class="me1">XResolution</span> <span class="sy0">*</span> VbeModeInfoBlock.<span class="me1">YResolution</span> 
+                                                     <span class="sy0">*</span> <span class="br0">&#40;</span>VbeModeInfoBlock.<span class="me1">BitsPerPixel</span><span class="sy0">/</span><span class="nu0">8</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     ScreenZBuffer <span class="sy0">=</span> alloc<span class="br0">&#40;</span>ScreenBufferSize<span class="br0">&#41;</span><span class="sy0">;</span>
+     CreateThread<span class="br0">&#40;</span>ScreenRefreshProc<span class="sy0">,</span> NULL<span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="br0">&#125;</span>
+&#160;
+ <span class="kw4">void</span> ScreenRefreshProc<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="sy0">;;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        PaintDesktop<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//paints the desktop and all windows</span>
+        PaintCursor<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//finally paints the cursor so it's on top</span>
+ <span class="co2">#if WAIT_FOR_VERTICAL_RETRACE</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>inportb<span class="br0">&#40;</span><span class="nu12">0x3DA</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0x08</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="br0">&#40;</span>inportb<span class="br0">&#40;</span><span class="nu12">0x3DA</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0x08</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="co2">#endif</span>
+        <span class="kw3">memcpy</span><span class="br0">&#40;</span>VbeModeInfoBlock.<span class="me1">VideoBaseAddr</span><span class="sy0">,</span> ScreenZBuffer<span class="sy0">,</span> ScreenBufferSize<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+ <span class="br0">&#125;</span></pre></div></div>
+<p>Writing to RAM is generally faster than writing to video memory and many areas of the Z-buffer will be repeatidly over written during a single screen refresh operation, making a z-buffer neccessary.
+</p><p>Now a function to plot pixels to the z-buffer.  This will be used by other methods instead of writing directly to video memory:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">void</span> PutPixel<span class="br0">&#40;</span><span class="kw4">int</span> x<span class="sy0">,</span><span class="kw4">int</span> y<span class="sy0">,</span> <span class="kw4">int</span> color<span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="co1">//do not write memory outside the screen buffer, check parameters against the VBE mode info</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>x<span class="sy0">&lt;</span><span class="nu0">0</span> <span class="sy0">||</span> x<span class="sy0">&gt;</span>VbeModeInfoBlock.<span class="me1">XResolution</span> <span class="sy0">||</span> y<span class="sy0">&lt;</span><span class="nu0">0</span> <span class="sy0">||</span> y<span class="sy0">&gt;</span>VbeModeInfoBlock.<span class="me1">YResolution</span><span class="br0">&#41;</span> <span class="kw1">return</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>x<span class="br0">&#41;</span> x <span class="sy0">=</span> <span class="br0">&#40;</span>x<span class="sy0">*</span><span class="br0">&#40;</span>VbeModeInfoBlock.<span class="me1">BitsPerPixel</span><span class="sy0">&gt;&gt;</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>y<span class="br0">&#41;</span> y <span class="sy0">=</span> <span class="br0">&#40;</span>y<span class="sy0">*</span>VbeModeInfoBlock.<span class="me1">BytesPerScanLine</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw4">register</span> <span class="kw4">char</span> <span class="sy0">*</span> cTemp<span class="sy0">;</span>
+    cTemp <span class="sy0">=</span> <span class="sy0">&amp;</span>g_ScreenBuffer<span class="br0">&#91;</span>x<span class="sy0">+</span>y<span class="br0">&#93;</span><span class="sy0">;</span>
+    cTemp<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> color <span class="sy0">&amp;</span> <span class="nu12">0xff</span><span class="sy0">;</span>
+    cTemp<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>color<span class="sy0">&gt;&gt;</span><span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xff</span><span class="sy0">;</span>
+    cTemp<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>color<span class="sy0">&gt;&gt;</span><span class="nu0">16</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xff</span><span class="sy0">;</span>
+ <span class="br0">&#125;</span></pre></div></div>
+<p>PutLine() and PutRect() a should check the boundaries of the X and Y parameters to ensure no pixels are plotted outside the allocated memory area of the z-buffer.  This prevents memory corruption and the pixels wont be visible on the display anyway.  I'll leave the PutRect and PutLine implementation up to you or may come back and fill it in later.
+</p><p>In the RefreshScreenProc() method you'll notice the PaintDesktop() call.  This GUI method works by painting every object from the bottom up.  First the desktop background is painted then each window is painted on top of it (or one another depending on the z-order of the windows and their positions):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">void</span> PaintDesktop<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="co1">//fill the background of the desktop</span>
+    PutRect<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span>Screen.<span class="me1">Width</span><span class="sy0">,</span> Screen.<span class="me1">Height</span><span class="sy0">,</span> <span class="nu12">0xc0c0c0c0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">//now tell every child window to paint itself:</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> i<span class="sy0">&lt;</span>ChildWindows.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        ChildWindows<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">Paint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+ <span class="br0">&#125;</span></pre></div></div>
+<p>Each child window has it's own Paint() method as well and subsequently calls each of it's child window's Paint() method:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cpp source-cpp"><pre class="de1"> <span class="kw4">void</span> Window<span class="sy4">::</span><span class="me2">Paint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+     <span class="co1">//paint a navy blue window</span>
+     PutRect<span class="br0">&#40;</span>this<span class="sy2">-</span><span class="sy1">&gt;</span>Left, this<span class="sy2">-</span><span class="sy1">&gt;</span>Top, this<span class="sy2">-</span><span class="sy1">&gt;</span>Width, this<span class="sy2">-</span><span class="sy1">&gt;</span>Height, rgbNavy<span class="br0">&#41;</span><span class="sy4">;</span>
+     <span class="co1">//put a small red square in the top right hand corner of the window</span>
+     PutRect<span class="br0">&#40;</span>this<span class="sy2">-</span><span class="sy1">&gt;</span>Left <span class="sy2">+</span> this<span class="sy2">-</span><span class="sy1">&gt;</span>Width <span class="sy2">-</span> <span class="nu0">5</span>, this<span class="sy2">-</span><span class="sy1">&gt;</span>Top, <span class="nu0">5</span>, <span class="nu0">5</span>, rgbRed<span class="br0">&#41;</span><span class="sy4">;</span>
+     <span class="co1">//put the title bar text at the top of the window</span>
+     Put8x8String<span class="br0">&#40;</span>this<span class="sy2">-</span><span class="sy1">&gt;</span>Left<span class="sy2">+</span><span class="nu0">1</span>, this<span class="sy2">-</span><span class="sy1">&gt;</span>Top<span class="sy2">+</span><span class="nu0">1</span>, this<span class="sy2">-</span><span class="sy1">&gt;</span>Title, rgbBlack<span class="br0">&#41;</span><span class="sy4">;</span>
+     <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy1">=</span><span class="nu0">0</span> <span class="sy4">;</span> i<span class="sy1">&lt;</span>ChildWindows.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy4">;</span> i<span class="sy2">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        ChildWindows<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">Paint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+    <span class="br0">&#125;</span>
+ <span class="br0">&#125;</span></pre></div></div>
+<p>After the Paint() method of all the windows have been called, the RefreshScreenProc calls PaintCursor():
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">void</span> PaintCursor<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="co1">//just make a white box at the cursor position:</span>
+    PutRect<span class="br0">&#40;</span>Mouse.<span class="me1">X</span><span class="sy0">,</span> Mouse.<span class="me1">Y</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> rgbWhite<span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="TODO">TODO</span></h3>
+<p>Theres a lot that can be done to improve the quality and performance.  Using this bottom up approach means that each area of the screen could potentially be overwritten several times if multiple windows are stacked on top of one another.  There is a lot of overhead re-rendering the same windows for every refresh itteration.  While this technique has a low memory requirement, performance can be greatly improved by pre-rendering windows in a seperate buffer and copying the contents to the screen buffer.  Each Window would have it's own screen buffer where rendering is performed only when neccessary (creation, resize, etc).  A similar technique is used <a rel="nofollow" class="external text" href="http://www.osdever.net/tutorials/view/gui-development">here</a>.  In <a rel="nofollow" class="external text" href="http://www.osdever.net/tutorials/view/gui-development">this</a>example each window has it's own canvas and the contents are copied to the screen buffer during refresh operations and rendering is performed only once.  The downside to this technique is the additional memory requirements.
+</p><p>Some suggestions and things to watch out for: 
+</p>
+<ul><li>All drawing should be performed on the z-buffer. Drawing to the video memory will get overwritten by the ScreenRefreshProc.
+</li><li>You will need some way to keep track of child windows and to setup their z-order (display order), so top level windows get drawn last, bottom level windows get drawn first.
+</li><li>Make more calls in the window's Draw() method to make better looking windows. Add a border and some 3D effects.
+</li><li>Pixel plotting differs depending on resolution and color depth. You'll want fast pixel plotting methods for each resolution and color depth.
+</li><li>See <a href="Drawing_In_Protected_Mode" title="Drawing In Protected Mode">Drawing In Protected Mode</a> for writing strings using fixed width fonts.
+</li><li>See <a href="Simple_Scalable_Fonts" title="Simple Scalable Fonts">Simple Scalable Fonts</a> for a simple scalable font technique.
+</li><li>Use Bresenham's line drawing algorithms for best performance and visual appeal.
+</li><li>PutRect and PutLine should have their own pixel plotting (calling PutPixel on a large rect will slow rendering WAY down).
+</li><li>There are several ways to handle mouse and keyboard input. None are terribly difficult. Perhaps the easiest is for each Window to capture each mouse and keyboard event and determine whether or not to process them. Another way is for the mouse and keyboard modules to determine which windows to send messages or events to. These generally are implementation specific requirements.
+</li><li>Use an optimized version of memcpy. Otherwise, on emulators like Bochs, screen updates will be painfully slow. (See: <a href="http://forum.osdev.org/viewtopic.php?t=18119" class="extiw" title="topic:18119">Optimized memory functions</a>)
+</li></ul>
+<p><br />
+</p>
+<h2> <span class="mw-headline" id="The_new_Alternative:_UEFI"> The new Alternative: UEFI </span></h2>
+<p>Instead of using VBE or real mode BIOS calls, you can use the (U)EFI methods, provided that you make your OS run on (U)EFI and not on old clunky BIOS.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Text_UI" title="Text UI">Text UI</a>
+</li><li> <a href="Getting_VBE_Mode_Info" title="Getting VBE Mode Info" class="mw-redirect">Getting VBE Mode Info</a>
+</li><li> <a href="Drawing_In_Protected_Mode" title="Drawing In Protected Mode">Drawing In Protected Mode</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<ul><li> <a href="http://forum.osdev.org/viewtopic.php?t=27684" class="extiw" title="topic:27684">Alpha Blending</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_links"> External links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.osdever.net/tutorials/view/gui-development">GUI Development</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.trackze.ro/wsbe-complicated-rectangles/">Windowing Systems by Example (link seems to be dead)</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 122/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2346-0!*!0!!en!*!* and timestamp 20180121080111 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=GUI&amp;oldid=22109">http://wiki.osdev.org/index.php?title=GUI&amp;oldid=22109</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Video" title="Category:Video">Video</a></li><li><a href="Category:Graphical_UI" title="Category:Graphical UI">Graphical UI</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=GUI" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="GUI"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:GUI&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="GUI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="GUI" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=GUI&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=GUI&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="GUI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/GUI" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/GUI" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=GUI&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=GUI&amp;oldid=22109" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Graphical_User_Interface" title="Graphical User Interface">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 18 January 2018, at 15:32.</li>
+											<li id="footer-info-viewcount">This page has been accessed 51,642 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibitskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/GUI" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/GUI" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=GUI&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=GUI&amp;oldid=22109" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Graphical_User_Interface" title="Graphical User Interface">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 18 January 2018, at 15:32.</li>
+											<li id="footer-info-viewcount">This page has been accessed 51,642 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.111 secs. -->
+	</body>
+</html>

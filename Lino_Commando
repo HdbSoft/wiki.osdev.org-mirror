@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Lino Commando - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Lino_Commando", "wgTitle": "Lino Commando", "wgCurRevisionId": 21596, "wgArticleId": 1582, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Text UI", "Developer Archetype"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Lino_Commando action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Lino Commando</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Lino_Commando#mw-head">navigation</a>,
+					<a href="Lino_Commando#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>He's been impressed by the "naked beauty" of DOS/Unix times. The first thing he wants to be achieved is a blinking cursor after a "&gt;" symbol so that he can type commands. No matter if there's no way to start 2 programs at the same time: he just needs a text editor and a FAT12 driver. Maybe you prefer a <a href="What_order_should_I_make_things_in" title="What order should I make things in">different approach</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Lino_Commando#Reaching_Lino.27s_level"><span class="tocnumber">1</span> <span class="toctext">Reaching Lino's level</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Lino_Commando#A_first_shell"><span class="tocnumber">1.1</span> <span class="toctext">A first shell</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Lino_Commando#Starting_programs"><span class="tocnumber">1.2</span> <span class="toctext">Starting programs</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Lino_Commando#More_things"><span class="tocnumber">1.3</span> <span class="toctext">More things</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Lino_Commando#Going_further_than_Lino"><span class="tocnumber">2</span> <span class="toctext">Going further than Lino</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Lino_Commando#Lino.27s_bookshelf"><span class="tocnumber">3</span> <span class="toctext">Lino's bookshelf</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Lino_Commando#Lino_Commando.27s_opponents_position"><span class="tocnumber">4</span> <span class="toctext">Lino Commando's opponents position</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Lino_Commando#People_and_OSes_related_to_Lino_Commando"><span class="tocnumber">5</span> <span class="toctext">People and OSes related to Lino Commando</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Reaching_Lino.27s_level"> Reaching Lino's level </span></h2>
+<h3> <span class="mw-headline" id="A_first_shell"> A first shell </span></h3>
+<ol><li> Your first goal is an improved keyboard handler. Everything will start there. Make sure you leave room for a keyboard map (for instance easily compilable apart and loaded as a module by <a href="GRUB" title="GRUB">GRUB</a> so that beta-testers can load their own map).
+</li><li> Don't echo characters right from the start and keep track on what's on screen. Commands histories, completions and working character erasure will be a must.
+</li><li> just put a few "built-in" commands from the start, but keep your mind open to "how will further shell extension add commands?"... scanning a table rather than a switch statement? you're the one who knows.
+</li></ol>
+<h3> <span class="mw-headline" id="Starting_programs"> Starting programs </span></h3>
+<ol><li> Decide what programs will look like. The easiest model is to give them one data+code segment and let them run there.
+</li><li> Your programs will have to come from somewhere. Lino had used one GRUB module as a '<a href="http://wiki.osdev.org/index.php?title=Ramdisk&amp;action=edit&amp;redlink=1" class="new" title="Ramdisk (page does not exist)">ramdisk</a>' where programs were stored (he didn't tell whether using FAT or something even more simple for the internals). What is certain is that program see them as "real" files.
+</li><li> Provide your programs a simple API: open/close/read/write to files, read/write to the console, exit are enough at the start. Prevent your programs from writing directly to video memory.
+</li></ol>
+<h3> <span class="mw-headline" id="More_things"> More things </span></h3>
+<p>Real shells have parameters, environments and such things which can be easily defined as read-only segments. If your favourite language doesn't like multi-segments, add a library that will copy strings in a buffer at request.
+</p><p>Once this is done ask yourself how you'll start other programs from one program.
+This means implementing the <a href="http://wiki.osdev.org/index.php?title=System_calls&amp;action=edit&amp;redlink=1" class="new" title="System calls (page does not exist)">system(8) call</a>.
+</p>
+<h2> <span class="mw-headline" id="Going_further_than_Lino"> Going further than Lino </span></h2>
+<p>Well, in many aspects, Lino's OS looks like first steps of most Unix clones.
+</p><p>Because of the simple "start at offset 0 in CS/DS" approach, whether multiple programs share the same address space or not is not much complicated, but Lino still has to write <a href="Multitasking_Systems" title="Multitasking Systems">multitasking</a> support, which will require him a more sophisticated way of <a href="Memory_Management" title="Memory Management" class="mw-redirect">allocating and freeing memory</a>
+</p>
+<h2> <span class="mw-headline" id="Lino.27s_bookshelf"> Lino's bookshelf </span></h2>
+<p>Most books on the market will probably not be of interest (since they discuss "superfluous" things, like UNIX and multitasking). He'll probably look at <a rel="nofollow" class="external text" href="http://www.amazon.com/Emulator-Platform-Independence-Embedded-Development/dp/0879304367">"FreeDOS Kernel" by Pat Villani</a> and that would be enough. And sure, you can have some of the old volumes of MS-DOS reference manuals and infinite books by Dan Gookin lying around somewhere, don't you? And heck, why not, let's add <a rel="nofollow" class="external text" href="http://www.amazon.com/Inside-Windows-System-Nutshell-Handbook/dp/156592200X">"Inside The Windows 95 File System" by Stan Mitchell</a> or Microsoft's <a rel="nofollow" class="external text" href="http://www.osdever.net/documents/fatgen103.pdf?the_id=40">FAT specification</a>. And yes, most importantly, is <a rel="nofollow" class="external text" href="http://www.amazon.com/Peter-Norton-Programmers-Guide-IBM/dp/0914845462">The Peter Norton Programmer's Guide to the IBM PC</a>, which is appropriate for the time.
+</p>
+<h2> <span class="mw-headline" id="Lino_Commando.27s_opponents_position"> Lino Commando's opponents position </span></h2>
+<p>The issue with Lino's approach is that he risks facing the same problems as DOS did: monotasking, too tight coupling between programs and hardware, etc. Despite how good Lino's OS project may be, he'll have to make sure that he studies sufficient abstractions right from the start and that he can't forget that one day he'll want more than one program to run.
+</p>
+<h2> <span class="mw-headline" id="People_and_OSes_related_to_Lino_Commando"> People and OSes related to Lino Commando </span></h2>
+<ul><li> Inflater: <i>"That's me alright&#160;:) I just don't have fully working FAT12 driver for my real mode 16-bit Borland Pascal OS&#160;:D)"</i>
+</li><li> Piranha: <i>"Me too. Who needs graphics at this stage! Just making the internals work right is hard enough!"</i>
+</li><li> Troy: <i>"Text mode calls to me like bananas call to monkeys. Except with me there's no flinging of poo."</i>
+</li><li> iMate900: <i>Lino, here I come kicking myself with SauOS!!!! Oh, and I'm not even finished with my ATA driver&#160;:)</i>
+</li><li> KotuxGuy: <i>Yeah, this is most likely me too&#160;;) I don't have any filesystem support though</i>
+</li><li> bellezzasolo: <i>This is always the best way to start. Nice if it's a PMode shell though&#160;;)</i>
+</li><li> LifeDJIK: <i>Yes! That's definitely me! But I don't have FAT12 driver... I have FAT32 driver!</i>
+</li><li> Moondeck: <i>Graphics? VGA? Who needs that crap, I use serial!</i>
+</li><li> <i>Insert your name here</i>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 52/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1582-0!*!0!!en!*!* and timestamp 20180121064043 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Lino_Commando&amp;oldid=21596">http://wiki.osdev.org/index.php?title=Lino_Commando&amp;oldid=21596</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Text_UI" title="Category:Text UI">Text UI</a></li><li><a href="Category:Developer_Archetype" title="Category:Developer Archetype">Developer Archetype</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Lino_Commando" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Lino_Commando"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Lino_Commando&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Lino_Commando#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Lino_Commando" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Lino_Commando&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Lino_Commando&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Lino_Commando#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Lino_Commando" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Lino_Commando" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" askins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Lino_Commando" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Lino_Commando" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Lino_Commando&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Lino_Commando&amp;oldid=21596" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 October 2017, at 04:10.</li>
+											<li id="footer-info-viewcount">This page has been accessed 34,841 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

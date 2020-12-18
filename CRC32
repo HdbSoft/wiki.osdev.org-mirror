@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>CRC32 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "CRC32", "wgTitle": "CRC32", "wgCurRevisionId": 17432, "wgArticleId": 2582, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Common Algorithms"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-CRC32 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">CRC32</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="CRC32#mw-head">navigation</a>,
+					<a href="CRC32#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>CRC32 is a checksum/hashing algorithm that is very commonly used in kernels, and for Internet checksums. It is very similar to the <a href="http://wiki.osdev.org/index.php?title=MD5&amp;action=edit&amp;redlink=1" class="new" title="MD5 (page does not exist)">MD5</a> checksum algorithm.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="CRC32#The_Basic_Algorithm"><span class="tocnumber">1</span> <span class="toctext">The Basic Algorithm</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="CRC32#Building_the_Lookup_Table"><span class="tocnumber">2</span> <span class="toctext">Building the Lookup Table</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="CRC32#Example_Code"><span class="tocnumber">3</span> <span class="toctext">Example Code</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="CRC32#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="CRC32#External_Links"><span class="tocnumber">4.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h3> <span class="mw-headline" id="The_Basic_Algorithm">The Basic Algorithm</span></h3>
+<p>Start with a 32bit checksum with all bits set (0xffffffff). This helps to give an output value other than 0 for an input string of "0" bytes.
+</p><p>In a loop:
+Look up a "polynomial" (actually just a 32bit value) in a table, based on the next piece of input data (usually a byte), and the low N bits of the previous CRC value. (Where N is the size of the data you are operating on -- usually 8 bit bytes.)
+</p><p>Shift the previous 32bit CRC value down by N bits.
+</p><p>Exclusive-OR the "polynomial" together with the shifted CRC value to produce a new value.
+</p><p>-- At the end of the loop, exclusive-OR the calculated CRC value with 0xffffffff again (this is identical to doing a binary NOT on the CRC value). This is the final CRC32 result.
+</p>
+<h3> <span class="mw-headline" id="Building_the_Lookup_Table">Building the Lookup Table</span></h3>
+<p>This is a bit more complex of a process than actually calculating the checksum itself.
+</p><p>To build a 256 entry (byte) lookup table, take the 8 bit index and bit-reflect all the bits in that byte. Shift it to the upper 8 bits of a 32bit variable. Loop over those 8 bits. If the top (sign) bit is set, then exclusive-OR the entire uint32_t with the magic value 0x04C11DB7. Then shift the uint32_t up one bit, and repeat. When the loop is complete, bit-reflect the entire uint32_t. This is the value in the table.
+</p>
+<h3> <span class="mw-headline" id="Example_Code">Example Code</span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">// calculate a checksum on a buffer -- start address = p, length = bytelength</span>
+<span class="kw4">uint32_t</span> crc32_byte<span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span>p<span class="sy0">,</span> <span class="kw4">uint32_t</span> bytelength<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw4">uint32_t</span> crc <span class="sy0">=</span> <span class="nu12">0xffffffff</span><span class="sy0">;</span>
+	<span class="kw1">while</span> <span class="br0">&#40;</span>bytelength<span class="sy0">--</span> <span class="sy0">!=</span><span class="nu0">0</span><span class="br0">&#41;</span> crc <span class="sy0">=</span> poly8_lookup<span class="br0">&#91;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint8_t</span><span class="br0">&#41;</span> crc <span class="sy0">^</span> <span class="sy0">*</span><span class="br0">&#40;</span>p<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#93;</span> <span class="sy0">^</span> <span class="br0">&#40;</span>crc <span class="sy0">&gt;&gt;</span> <span class="nu0">8</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="co1">// return (~crc); also works</span>
+	<span class="kw1">return</span> <span class="br0">&#40;</span>crc <span class="sy0">^</span> <span class="nu12">0xffffffff</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">uint32_t</span> poly8_lookup<span class="br0">&#91;</span><span class="nu0">256</span><span class="br0">&#93;</span> <span class="sy0">=</span>
+<span class="br0">&#123;</span>
+ <span class="nu0">0</span><span class="sy0">,</span> <span class="nu12">0x77073096</span><span class="sy0">,</span> <span class="nu12">0xEE0E612C</span><span class="sy0">,</span> <span class="nu12">0x990951BA</span><span class="sy0">,</span>
+ <span class="nu12">0x076DC419</span><span class="sy0">,</span> <span class="nu12">0x706AF48F</span><span class="sy0">,</span> <span class="nu12">0xE963A535</span><span class="sy0">,</span> <span class="nu12">0x9E6495A3</span><span class="sy0">,</span>
+ <span class="nu12">0x0EDB8832</span><span class="sy0">,</span> <span class="nu12">0x79DCB8A4</span><span class="sy0">,</span> <span class="nu12">0xE0D5E91E</span><span class="sy0">,</span> <span class="nu12">0x97D2D988</span><span class="sy0">,</span>
+ <span class="nu12">0x09B64C2B</span><span class="sy0">,</span> <span class="nu12">0x7EB17CBD</span><span class="sy0">,</span> <span class="nu12">0xE7B82D07</span><span class="sy0">,</span> <span class="nu12">0x90BF1D91</span><span class="sy0">,</span>
+ <span class="nu12">0x1DB71064</span><span class="sy0">,</span> <span class="nu12">0x6AB020F2</span><span class="sy0">,</span> <span class="nu12">0xF3B97148</span><span class="sy0">,</span> <span class="nu12">0x84BE41DE</span><span class="sy0">,</span>
+ <span class="nu12">0x1ADAD47D</span><span class="sy0">,</span> <span class="nu12">0x6DDDE4EB</span><span class="sy0">,</span> <span class="nu12">0xF4D4B551</span><span class="sy0">,</span> <span class="nu12">0x83D385C7</span><span class="sy0">,</span>
+ <span class="nu12">0x136C9856</span><span class="sy0">,</span> <span class="nu12">0x646BA8C0</span><span class="sy0">,</span> <span class="nu12">0xFD62F97A</span><span class="sy0">,</span> <span class="nu12">0x8A65C9EC</span><span class="sy0">,</span>
+ <span class="nu12">0x14015C4F</span><span class="sy0">,</span> <span class="nu12">0x63066CD9</span><span class="sy0">,</span> <span class="nu12">0xFA0F3D63</span><span class="sy0">,</span> <span class="nu12">0x8D080DF5</span><span class="sy0">,</span>
+ <span class="nu12">0x3B6E20C8</span><span class="sy0">,</span> <span class="nu12">0x4C69105E</span><span class="sy0">,</span> <span class="nu12">0xD56041E4</span><span class="sy0">,</span> <span class="nu12">0xA2677172</span><span class="sy0">,</span>
+ <span class="nu12">0x3C03E4D1</span><span class="sy0">,</span> <span class="nu12">0x4B04D447</span><span class="sy0">,</span> <span class="nu12">0xD20D85FD</span><span class="sy0">,</span> <span class="nu12">0xA50AB56B</span><span class="sy0">,</span>
+ <span class="nu12">0x35B5A8FA</span><span class="sy0">,</span> <span class="nu12">0x42B2986C</span><span class="sy0">,</span> <span class="nu12">0xDBBBC9D6</span><span class="sy0">,</span> <span class="nu12">0xACBCF940</span><span class="sy0">,</span>
+ <span class="nu12">0x32D86CE3</span><span class="sy0">,</span> <span class="nu12">0x45DF5C75</span><span class="sy0">,</span> <span class="nu12">0xDCD60DCF</span><span class="sy0">,</span> <span class="nu12">0xABD13D59</span><span class="sy0">,</span>
+ <span class="nu12">0x26D930AC</span><span class="sy0">,</span> <span class="nu12">0x51DE003A</span><span class="sy0">,</span> <span class="nu12">0xC8D75180</span><span class="sy0">,</span> <span class="nu12">0xBFD06116</span><span class="sy0">,</span>
+ <span class="nu12">0x21B4F4B5</span><span class="sy0">,</span> <span class="nu12">0x56B3C423</span><span class="sy0">,</span> <span class="nu12">0xCFBA9599</span><span class="sy0">,</span> <span class="nu12">0xB8BDA50F</span><span class="sy0">,</span>
+ <span class="nu12">0x2802B89E</span><span class="sy0">,</span> <span class="nu12">0x5F058808</span><span class="sy0">,</span> <span class="nu12">0xC60CD9B2</span><span class="sy0">,</span> <span class="nu12">0xB10BE924</span><span class="sy0">,</span>
+ <span class="nu12">0x2F6F7C87</span><span class="sy0">,</span> <span class="nu12">0x58684C11</span><span class="sy0">,</span> <span class="nu12">0xC1611DAB</span><span class="sy0">,</span> <span class="nu12">0xB6662D3D</span><span class="sy0">,</span>
+ <span class="nu12">0x76DC4190</span><span class="sy0">,</span> <span class="nu12">0x01DB7106</span><span class="sy0">,</span> <span class="nu12">0x98D220BC</span><span class="sy0">,</span> <span class="nu12">0xEFD5102A</span><span class="sy0">,</span>
+ <span class="nu12">0x71B18589</span><span class="sy0">,</span> <span class="nu12">0x06B6B51F</span><span class="sy0">,</span> <span class="nu12">0x9FBFE4A5</span><span class="sy0">,</span> <span class="nu12">0xE8B8D433</span><span class="sy0">,</span>
+ <span class="nu12">0x7807C9A2</span><span class="sy0">,</span> <span class="nu12">0x0F00F934</span><span class="sy0">,</span> <span class="nu12">0x9609A88E</span><span class="sy0">,</span> <span class="nu12">0xE10E9818</span><span class="sy0">,</span>
+ <span class="nu12">0x7F6A0DBB</span><span class="sy0">,</span> <span class="nu12">0x086D3D2D</span><span class="sy0">,</span> <span class="nu12">0x91646C97</span><span class="sy0">,</span> <span class="nu12">0xE6635C01</span><span class="sy0">,</span>
+ <span class="nu12">0x6B6B51F4</span><span class="sy0">,</span> <span class="nu12">0x1C6C6162</span><span class="sy0">,</span> <span class="nu12">0x856530D8</span><span class="sy0">,</span> <span class="nu12">0xF262004E</span><span class="sy0">,</span>
+ <span class="nu12">0x6C0695ED</span><span class="sy0">,</span> <span class="nu12">0x1B01A57B</span><span class="sy0">,</span> <span class="nu12">0x8208F4C1</span><span class="sy0">,</span> <span class="nu12">0xF50FC457</span><span class="sy0">,</span>
+ <span class="nu12">0x65B0D9C6</span><span class="sy0">,</span> <span class="nu12">0x12B7E950</span><span class="sy0">,</span> <span class="nu12">0x8BBEB8EA</span><span class="sy0">,</span> <span class="nu12">0xFCB9887C</span><span class="sy0">,</span>
+ <span class="nu12">0x62DD1DDF</span><span class="sy0">,</span> <span class="nu12">0x15DA2D49</span><span class="sy0">,</span> <span class="nu12">0x8CD37CF3</span><span class="sy0">,</span> <span class="nu12">0xFBD44C65</span><span class="sy0">,</span>
+ <span class="nu12">0x4DB26158</span><span class="sy0">,</span> <span class="nu12">0x3AB551CE</span><span class="sy0">,</span> <span class="nu12">0xA3BC0074</span><span class="sy0">,</span> <span class="nu12">0xD4BB30E2</span><span class="sy0">,</span>
+ <span class="nu12">0x4ADFA541</span><span class="sy0">,</span> <span class="nu12">0x3DD895D7</span><span class="sy0">,</span> <span class="nu12">0xA4D1C46D</span><span class="sy0">,</span> <span class="nu12">0xD3D6F4FB</span><span class="sy0">,</span>
+ <span class="nu12">0x4369E96A</span><span class="sy0">,</span> <span class="nu12">0x346ED9FC</span><span class="sy0">,</span> <span class="nu12">0xAD678846</span><span class="sy0">,</span> <span class="nu12">0xDA60B8D0</span><span class="sy0">,</span>
+ <span class="nu12">0x44042D73</span><span class="sy0">,</span> <span class="nu12">0x33031DE5</span><span class="sy0">,</span> <span class="nu12">0xAA0A4C5F</span><span class="sy0">,</span> <span class="nu12">0xDD0D7CC9</span><span class="sy0">,</span>
+ <span class="nu12">0x5005713C</span><span class="sy0">,</span> <span class="nu12">0x270241AA</span><span class="sy0">,</span> <span class="nu12">0xBE0B1010</span><span class="sy0">,</span> <span class="nu12">0xC90C2086</span><span class="sy0">,</span>
+ <span class="nu12">0x5768B525</span><span class="sy0">,</span> <span class="nu12">0x206F85B3</span><span class="sy0">,</span> <span class="nu12">0xB966D409</span><span class="sy0">,</span> <span class="nu12">0xCE61E49F</span><span class="sy0">,</span>
+ <span class="nu12">0x5EDEF90E</span><span class="sy0">,</span> <span class="nu12">0x29D9C998</span><span class="sy0">,</span> <span class="nu12">0xB0D09822</span><span class="sy0">,</span> <span class="nu12">0xC7D7A8B4</span><span class="sy0">,</span>
+ <span class="nu12">0x59B33D17</span><span class="sy0">,</span> <span class="nu12">0x2EB40D81</span><span class="sy0">,</span> <span class="nu12">0xB7BD5C3B</span><span class="sy0">,</span> <span class="nu12">0xC0BA6CAD</span><span class="sy0">,</span>
+ <span class="nu12">0xEDB88320</span><span class="sy0">,</span> <span class="nu12">0x9ABFB3B6</span><span class="sy0">,</span> <span class="nu12">0x03B6E20C</span><span class="sy0">,</span> <span class="nu12">0x74B1D29A</span><span class="sy0">,</span>
+ <span class="nu12">0xEAD54739</span><span class="sy0">,</span> <span class="nu12">0x9DD277AF</span><span class="sy0">,</span> <span class="nu12">0x04DB2615</span><span class="sy0">,</span> <span class="nu12">0x73DC1683</span><span class="sy0">,</span>
+ <span class="nu12">0xE3630B12</span><span class="sy0">,</span> <span class="nu12">0x94643B84</span><span class="sy0">,</span> <span class="nu12">0x0D6D6A3E</span><span class="sy0">,</span> <span class="nu12">0x7A6A5AA8</span><span class="sy0">,</span>
+ <span class="nu12">0xE40ECF0B</span><span class="sy0">,</span> <span class="nu12">0x9309FF9D</span><span class="sy0">,</span> <span class="nu12">0x0A00AE27</span><span class="sy0">,</span> <span class="nu12">0x7D079EB1</span><span class="sy0">,</span>
+ <span class="nu12">0xF00F9344</span><span class="sy0">,</span> <span class="nu12">0x8708A3D2</span><span class="sy0">,</span> <span class="nu12">0x1E01F268</span><span class="sy0">,</span> <span class="nu12">0x6906C2FE</span><span class="sy0">,</span>
+ <span class="nu12">0xF762575D</span><span class="sy0">,</span> <span class="nu12">0x806567CB</span><span class="sy0">,</span> <span class="nu12">0x196C3671</span><span class="sy0">,</span> <span class="nu12">0x6E6B06E7</span><span class="sy0">,</span>
+ <span class="nu12">0xFED41B76</span><span class="sy0">,</span> <span class="nu12">0x89D32BE0</span><span class="sy0">,</span> <span class="nu12">0x10DA7A5A</span><span class="sy0">,</span> <span class="nu12">0x67DD4ACC</span><span class="sy0">,</span>
+ <span class="nu12">0xF9B9DF6F</span><span class="sy0">,</span> <span class="nu12">0x8EBEEFF9</span><span class="sy0">,</span> <span class="nu12">0x17B7BE43</span><span class="sy0">,</span> <span class="nu12">0x60B08ED5</span><span class="sy0">,</span>
+ <span class="nu12">0xD6D6A3E8</span><span class="sy0">,</span> <span class="nu12">0xA1D1937E</span><span class="sy0">,</span> <span class="nu12">0x38D8C2C4</span><span class="sy0">,</span> <span class="nu12">0x4FDFF252</span><span class="sy0">,</span>
+ <span class="nu12">0xD1BB67F1</span><span class="sy0">,</span> <span class="nu12">0xA6BC5767</span><span class="sy0">,</span> <span class="nu12">0x3FB506DD</span><span class="sy0">,</span> <span class="nu12">0x48B2364B</span><span class="sy0">,</span>
+ <span class="nu12">0xD80D2BDA</span><span class="sy0">,</span> <span class="nu12">0xAF0A1B4C</span><span class="sy0">,</span> <span class="nu12">0x36034AF6</span><span class="sy0">,</span> <span class="nu12">0x41047A60</span><span class="sy0">,</span>
+ <span class="nu12">0xDF60EFC3</span><span class="sy0">,</span> <span class="nu12">0xA867DF55</span><span class="sy0">,</span> <span class="nu12">0x316E8EEF</span><span class="sy0">,</span> <span class="nu12">0x4669BE79</span><span class="sy0">,</span>
+ <span class="nu12">0xCB61B38C</span><span class="sy0">,</span> <span class="nu12">0xBC66831A</span><span class="sy0">,</span> <span class="nu12">0x256FD2A0</span><span class="sy0">,</span> <span class="nu12">0x5268E236</span><span class="sy0">,</span>
+ <span class="nu12">0xCC0C7795</span><span class="sy0">,</span> <span class="nu12">0xBB0B4703</span><span class="sy0">,</span> <span class="nu12">0x220216B9</span><span class="sy0">,</span> <span class="nu12">0x5505262F</span><span class="sy0">,</span>
+ <span class="nu12">0xC5BA3BBE</span><span class="sy0">,</span> <span class="nu12">0xB2BD0B28</span><span class="sy0">,</span> <span class="nu12">0x2BB45A92</span><span class="sy0">,</span> <span class="nu12">0x5CB36A04</span><span class="sy0">,</span>
+ <span class="nu12">0xC2D7FFA7</span><span class="sy0">,</span> <span class="nu12">0xB5D0CF31</span><span class="sy0">,</span> <span class="nu12">0x2CD99E8B</span><span class="sy0">,</span> <span class="nu12">0x5BDEAE1D</span><span class="sy0">,</span>
+ <span class="nu12">0x9B64C2B0</span><span class="sy0">,</span> <span class="nu12">0xEC63F226</span><span class="sy0">,</span> <span class="nu12">0x756AA39C</span><span class="sy0">,</span> <span class="nu12">0x026D930A</span><span class="sy0">,</span>
+ <span class="nu12">0x9C0906A9</span><span class="sy0">,</span> <span class="nu12">0xEB0E363F</span><span class="sy0">,</span> <span class="nu12">0x72076785</span><span class="sy0">,</span> <span class="nu12">0x05005713</span><span class="sy0">,</span>
+ <span class="nu12">0x95BF4A82</span><span class="sy0">,</span> <span class="nu12">0xE2B87A14</span><span class="sy0">,</span> <span class="nu12">0x7BB12BAE</span><span class="sy0">,</span> <span class="nu12">0x0CB61B38</span><span class="sy0">,</span>
+ <span class="nu12">0x92D28E9B</span><span class="sy0">,</span> <span class="nu12">0xE5D5BE0D</span><span class="sy0">,</span> <span class="nu12">0x7CDCEFB7</span><span class="sy0">,</span> <span class="nu12">0x0BDBDF21</span><span class="sy0">,</span>
+ <span class="nu12">0x86D3D2D4</span><span class="sy0">,</span> <span class="nu12">0xF1D4E242</span><span class="sy0">,</span> <span class="nu12">0x68DDB3F8</span><span class="sy0">,</span> <span class="nu12">0x1FDA836E</span><span class="sy0">,</span>
+ <span class="nu12">0x81BE16CD</span><span class="sy0">,</span> <span class="nu12">0xF6B9265B</span><span class="sy0">,</span> <span class="nu12">0x6FB077E1</span><span class="sy0">,</span> <span class="nu12">0x18B74777</span><span class="sy0">,</span>
+ <span class="nu12">0x88085AE6</span><span class="sy0">,</span> <span class="nu12">0xFF0F6A70</span><span class="sy0">,</span> <span class="nu12">0x66063BCA</span><span class="sy0">,</span> <span class="nu12">0x11010B5C</span><span class="sy0">,</span>
+ <span class="nu12">0x8F659EFF</span><span class="sy0">,</span> <span class="nu12">0xF862AE69</span><span class="sy0">,</span> <span class="nu12">0x616BFFD3</span><span class="sy0">,</span> <span class="nu12">0x166CCF45</span><span class="sy0">,</span>
+ <span class="nu12">0xA00AE278</span><span class="sy0">,</span> <span class="nu12">0xD70DD2EE</span><span class="sy0">,</span> <span class="nu12">0x4E048354</span><span class="sy0">,</span> <span class="nu12">0x3903B3C2</span><span class="sy0">,</span>
+ <span class="nu12">0xA7672661</span><span class="sy0">,</span> <span class="nu12">0xD06016F7</span><span class="sy0">,</span> <span class="nu12">0x4969474D</span><span class="sy0">,</span> <span class="nu12">0x3E6E77DB</span><span class="sy0">,</span>
+ <span class="nu12">0xAED16A4A</span><span class="sy0">,</span> <span class="nu12">0xD9D65ADC</span><span class="sy0">,</span> <span class="nu12">0x40DF0B66</span><span class="sy0">,</span> <span class="nu12">0x37D83BF0</span><span class="sy0">,</span>
+ <span class="nu12">0xA9BCAE53</span><span class="sy0">,</span> <span class="nu12">0xDEBB9EC5</span><span class="sy0">,</span> <span class="nu12">0x47B2CF7F</span><span class="sy0">,</span> <span class="nu12">0x30B5FFE9</span><span class="sy0">,</span>
+ <span class="nu12">0xBDBDF21C</span><span class="sy0">,</span> <span class="nu12">0xCABAC28A</span><span class="sy0">,</span> <span class="nu12">0x53B39330</span><span class="sy0">,</span> <span class="nu12">0x24B4A3A6</span><span class="sy0">,</span>
+ <span class="nu12">0xBAD03605</span><span class="sy0">,</span> <span class="nu12">0xCDD70693</span><span class="sy0">,</span> <span class="nu12">0x54DE5729</span><span class="sy0">,</span> <span class="nu12">0x23D967BF</span><span class="sy0">,</span>
+ <span class="nu12">0xB3667A2E</span><span class="sy0">,</span> <span class="nu12">0xC4614AB8</span><span class="sy0">,</span> <span class="nu12">0x5D681B02</span><span class="sy0">,</span> <span class="nu12">0x2A6F2B94</span><span class="sy0">,</span>
+ <span class="nu12">0xB40BBE37</span><span class="sy0">,</span> <span class="nu12">0xC30C8EA1</span><span class="sy0">,</span> <span class="nu12">0x5A05DF1B</span><span class="sy0">,</span> <span class="nu12">0x2D02EF8D</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">; Note: _poly8_lookup is the symbolic address of the same table from the above example</span>
+<span class="co1">; Note2: to append to a precalculated crc, NOT the crc, then call asm_partial_crc32_byte</span>
+&#160;
+asm_crc32_byte<span class="sy0">:</span>
+	<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0xffffffff</span>		<span class="co1">; eax is running crc value</span>
+asm_partial_crc32_byte<span class="sy0">:</span>			<span class="co1">; entrypoint if modifying a precalculated crc</span>
+	<span class="kw1">push</span> <span class="kw3">esi</span>
+	<span class="kw1">push</span> <span class="kw3">ecx</span>
+	<span class="kw1">push</span> <span class="kw3">ebx</span>
+	<span class="kw1">push</span> <span class="kw3">edx</span>
+	<span class="kw1">mov</span> <span class="kw3">ebx</span><span class="sy0">,</span> _poly8_lookup		<span class="co1">; addy of crc table</span>
+	<span class="kw1">xor</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="kw3">edx</span>
+	<span class="kw1">jecxz</span> crcb_don
+crc_bl1<span class="sy0">:</span>
+	<span class="kw1">mov</span> <span class="kw3">dl</span><span class="sy0">,</span> <span class="kw3">al</span>			<span class="co1">; dx is the low byte of crc</span>
+	<span class="kw1">xor</span> <span class="kw3">dl</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">esi</span><span class="br0">&#93;</span>			<span class="co1">; xor it with &quot;*p&quot;</span>
+	<span class="kw1">inc</span> <span class="kw3">esi</span>				<span class="co1">; ++</span>
+	<span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">8</span>			<span class="co1">; high 3 bytes of crc for xor</span>
+	<span class="kw1">xor</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebx</span><span class="sy0">+</span><span class="kw3">edx</span><span class="sy0">*</span><span class="nu0">4</span><span class="br0">&#93;</span>		<span class="co1">; xor it with the polytable</span>
+	<span class="kw1">loop</span> crc_bl1			<span class="co1">; decrement ecx and loop</span>
+&#160;
+crcb_don<span class="sy0">:</span>
+	<span class="kw1">not</span> <span class="kw3">eax</span>				<span class="co1">; finally, flip all the crc bits</span>
+	<span class="kw1">pop</span> <span class="kw3">edx</span>
+	<span class="kw1">pop</span> <span class="kw3">ebx</span>
+	<span class="kw1">pop</span> <span class="kw3">ecx</span>
+	<span class="kw1">pop</span> <span class="kw3">esi</span>
+	<span class="kw1">ret</span></pre></div></div>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">; function input values: esi points to a 256 entry bit reflection table, aligned on a 256 byte boundary</span>
+build_16b_crc_tbl<span class="sy0">:</span>
+	<span class="kw1">mov</span> <span class="kw3">cx</span><span class="sy0">,</span> <span class="nu0">0xffff</span>
+	<span class="kw1">mov</span> <span class="kw3">edi</span><span class="sy0">,</span> Tbl_End		<span class="co1">; store going down from Tbl_End</span>
+<span class="sy0">.</span>crc_tbll<span class="sy0">:</span>
+	<span class="kw1">mov</span> <span class="kw3">ebx</span><span class="sy0">,</span> <span class="kw3">esi</span>
+	<span class="kw1">xor</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">eax</span>
+	<span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="kw3">cl</span>
+	<span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebx</span><span class="br0">&#93;</span>			<span class="co1">; bit-reflect the two input bytes</span>
+	<span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="kw3">ch</span>
+	<span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebx</span><span class="br0">&#93;</span>
+	<span class="kw1">bswap</span> <span class="kw3">eax</span>			<span class="co1">; and then put them at upper end of register</span>
+&#160;
+	<span class="kw1">mov</span> <span class="kw3">dl</span><span class="sy0">,</span> <span class="nu0">16</span>			<span class="co1">; loop over all 16 bits in upper eax</span>
+<span class="sy0">.</span>crc_bitl<span class="sy0">:</span>
+	<span class="kw1">shl</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">1</span>
+	<span class="kw1">jnc</span> <span class="sy0">.</span>crc_nply
+	<span class="kw1">xor</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0x04C11DB7</span>		<span class="co1">; if sign bit was set, xor eax with the &quot;poly&quot;</span>
+<span class="sy0">.</span>crc_nply<span class="sy0">:</span>
+	<span class="kw1">dec</span> <span class="kw3">dl</span>
+	<span class="kw1">jg</span> <span class="kw4">short</span> <span class="sy0">.</span>crc_bitl
+&#160;
+	<span class="kw1">mov</span> <span class="kw3">ebx</span><span class="sy0">,</span> <span class="kw3">esi</span>
+	<span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="kw3">ah</span>
+	<span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebx</span><span class="br0">&#93;</span>		<span class="co1">; lastly, bit-reflect the value in eax</span>
+	<span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="kw3">al</span>
+	<span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebx</span><span class="br0">&#93;</span>		<span class="co1">; start with ax</span>
+	<span class="kw1">bswap</span> <span class="kw3">eax</span>
+	<span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="kw3">ah</span>		<span class="co1">; bswap to put the bytes in the right place, and do ax again</span>
+	<span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebx</span><span class="br0">&#93;</span>
+	<span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="kw3">al</span>
+	<span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebx</span><span class="br0">&#93;</span>
+	<span class="kw1">lea</span> <span class="kw3">edi</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">edi</span> <span class="sy0">-</span> <span class="nu0">4</span><span class="br0">&#93;</span>
+	<span class="kw1">mov</span> <span class="br0">&#91;</span><span class="kw3">edi</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">eax</span>		<span class="co1">; store next crc in the CRC32 lookup table</span>
+	<span class="kw1">dec</span> <span class="kw3">ecx</span>
+	<span class="kw1">jge</span> <span class="kw4">short</span> <span class="sy0">.</span>crc_tbll	<span class="co1">; loop until ecx goes negative</span>
+	<span class="kw1">ret</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.programmersheaven.com/download/13761/download.aspx">A detailed theoretical explanation of CRC algorithms</a>
+</li></ul>
+<ul><li> <a rel="nofollow" class="external text" href="http://www34.brinkster.com/dizzyk/math-crc.asp">The mathematics behind the CRC32 algorithm</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 54/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2582-0!*!0!!en!*!* and timestamp 20180121074137 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=CRC32&amp;oldid=17432">http://wiki.osdev.org/index.php?title=CRC32&amp;oldid=17432</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Common_Algorithms" title="Category:Common Algorithms">Common Algorithms</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=CRC32" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="CRC32"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:CRC32&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="CRC32#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="CRC32" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=CRC32&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=CRC32&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="CRC32#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent chaskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/CRC32" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/CRC32" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=CRC32&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=CRC32&amp;oldid=17432" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 1 January 2015, at 13:56.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,470 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

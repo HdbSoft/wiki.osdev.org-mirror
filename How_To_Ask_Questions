@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>How To Ask Questions - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "How_To_Ask_Questions", "wgTitle": "How To Ask Questions", "wgCurRevisionId": 20017, "wgArticleId": 1883, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["OS Development"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-How_To_Ask_Questions action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">How To Ask Questions</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="How_To_Ask_Questions#mw-head">navigation</a>,
+					<a href="How_To_Ask_Questions#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>These are a few hints for the first-timers and other newbies to maximize your chances of getting a useful answer to your question and have the community pleased to help you rather than annoyed by your complaints. It has been inspired by the <a rel="nofollow" class="external text" href="http://www.catb.org/~esr/faqs/smart-questions.html">How To Ask Questions The Smart Way</a> document which you can easily retrieve with a web (Google) search. The guide here is only the subset of the "official" document by Eric S. Raymond that applies to web fora (and this forum in particular).
+</p><p><b>Note:</b> <i>While it should be obvious, it nonetheless comes up often enough that it needs to be said - Eric S. Raymond and Rick Moen should <b>never</b> be directly contacted for assistance with any software project which they are not personally involved in! The very fact that this occurs at all indicates that the readers of sites like this have not read and understood their recommendations. Since the authors have specifically asked that this warning be included with any link to their document, it needs to be emphasized at every possible opportunity.</i>  
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="How_To_Ask_Questions#Identification_and_User_Accounts"><span class="tocnumber">1</span> <span class="toctext">Identification and User Accounts</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="How_To_Ask_Questions#Title"><span class="tocnumber">2</span> <span class="toctext">Title</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="How_To_Ask_Questions#Grammar"><span class="tocnumber">3</span> <span class="toctext">Grammar</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="How_To_Ask_Questions#Programming_Background"><span class="tocnumber">4</span> <span class="toctext">Programming Background</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="How_To_Ask_Questions#Research"><span class="tocnumber">5</span> <span class="toctext">Research</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="How_To_Ask_Questions#Details"><span class="tocnumber">6</span> <span class="toctext">Details</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="How_To_Ask_Questions#Formatting"><span class="tocnumber">7</span> <span class="toctext">Formatting</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Identification_and_User_Accounts"> Identification and User Accounts </span></h2>
+<p>Take the time to set up a user account up front, with a recognizable user name and avatar. Trying to figure out if "aetroi" is the same guy as "sdfoiu" based on the problem description and IP address will lead to the same questions asked again and again. Your user account gives us a way to contact you in private, sending replies by e-mail if we feel the response would be off-topic or too long. A unique avatar helps recognizing your posts at one glance.
+</p><p><i>Note: Registration on the OSDev.org forums is compulsory. As a benefit of registration, you can also register to get wiki edit access.</i>
+</p>
+<h2> <span class="mw-headline" id="Title"> Title </span></h2>
+<p>This helps <i>us</i> identifying subjects we know about. "Kernel Question" is a bad thread title. "IVT Question" is a marginally better thread title. "Interrupt Handler Triple-Fault on Mouse Movement" is an excellent thread title. A lot of the forum regulars do not read every topic; forum traffic has now increased to the point where this is almost impossible (especially in the OS Development subforum). A good title will grab attention from the people who do know the topic.
+</p>
+<h2> <span class="mw-headline" id="Grammar"> Grammar </span></h2>
+<p>Bad grammar, spelling and/or punctuation makes your post <b>much</b> harder to understand. You will end up with people either ignoring your post or debugging your language instead of debugging your problem. Stay away from 1337 and SMS shortcuts, too. Basically, use proper English (whether that happens to be UK or US spelling is largely irrelevant).
+</p><p>As a side note, the OSDev.org forums do not currently have any subfora for languages other than English. This is deliberate. Splitting the forums up more means less people will read and be able to answer to each topic. Eric S. Raymond has also made the point that programming in general (and OS development in particular) is a topic with so many English words used that it is easier to communicate in English anyway.
+</p>
+<h2> <span class="mw-headline" id="Programming_Background"> Programming Background </span></h2>
+<p>OS development is not a reasonable place to learn how to program in C, Assembly, or any other language, something that is pointed both in this wiki and in the forum rules. These warnings are there for a reason, and asking a question that indicates to us that either you didn't read and understand those rules, or chose to ignore them, is unlikely to garner much sympathy here.
+</p><p>It is true that the OS development fora have a reputation for being harsh towards newbies. There's a reason for this: OS development isn't a topic that a newly-minted programmer can reasonably approach. A lot of people jump into the field too early - before they have the background and experience to really understand what they are doing - and get burned by their lack of preparedness. Unfortunately, this leads to us seeing a lot of the same mistakes and problems again and again, ones which could be avoided if the poster had simply read those warnings and followed their advice.
+</p><p>This is not a field that you can learn through simple tutorials, especially if you're do nothing but copying and pasting the tutorial code and trying to make it work without understanding it. The tutorials that do exist - and for most subjects in this area, there aren't any, and their cannot reasonably <i>be</i> any - are meant as guidelines, not cookbooks. Cutting and pasting code out of several different existing sources and expecting them to magically fit together is simply an unworkable approach to OS development. You will need to learn a lot, and thoroughly understand what you are doing, before you can expect to approach this field in a meaningful manner.
+</p>
+<h2> <span class="mw-headline" id="Research"> Research </span></h2>
+<p>The wiki is constantly extended and revised. The chances are good that the answer to your question is already in there. This is especially true if you are having problems early on in the development cycle: topics such as <a href="Interrupts" title="Interrupts">Interrupts</a>, setting up a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a> and <a href="Printing_to_Screen" title="Printing to Screen" class="mw-redirect">Printing to Screen</a> have <i>huge</i> amounts of information already in the wiki.
+</p><p>If you are using one of the more common tutorials/sample kernels your question is probably already answered in the forum. Use the forum search function and the answer will await.
+</p><p>If your question is "where can I find X", or "are there any programs that do Y", a search engine will almost certainly give you a faster, and possibly even better-informed answer than we here.
+</p><p>It is quite common to stick with a solution once you found one - many people around here could point you to one or two options, but might be missing the very one that would suit you best.
+</p><p>You're less likely to get the response you were looking for by asking general questions like "how do I read from a FAT disk?", "how do I load program?", or "are there any memory management tutorials?" Asking such questions shows a lack of an essential programming skill; a programmer should able to solve problems by him/her self, and is a clear indication that one has not done their research. A better example could be rephrasing the question as "I am trying to do X. I have done Y, but I do not fully understand Z."
+</p>
+<h2> <span class="mw-headline" id="Details"> Details </span></h2>
+<p>OS code is highly interdependent. If you give us only the source code for the interrupt handler that tripple-faults, we will be unable to find the bug in your IVT setup that actually <i>causes</i> the error. We also need to know what compiler / assembler / linker you are using, in which version, and which command line options you are using.
+</p><p>Creating an entry describing your project and environment in the <a href="Projects" title="Projects">OS Projects list</a>, and adding a link to that entry to your forum signature, will also allow us to quickly get answers to trivial questions such as "what compiler do you use?" or "what's your development environment?" or "are you using GRUB? Bochs? VMware?" etc.
+</p><p>Just as giving too little information, too much can be just as harmful. It is easy to give the wrong impression ("I have a problem, but cannot be bothered to narrow it down. Fix it for me!").
+</p><p>While your project structure might be completely logical and intuitive for you, others might still be confused, and no-one likes digging through several dozen source files to find out what's happening.
+</p><p>Try to find a minimum code subset sufficient to reproduce the problem. (That's also a good debug technique; you might locate the error yourself in the process.)
+</p><p>As always, one key component of any OS project should be an off-site source control repository; in addition to the advantages regarding code retention and backup, it allows responders to view the code in question without having to either wade through a large code post, or have to ask for the code to be posted over and over again. If you have such a repository (and you should), be certain to include a link to the location of the code section you are having trouble with. This will allow the forum-goers to see the latest version of the code, and refer to it directly. As already stated, you should limit code posts to exactly that part of the code that you are having problems with; if the problem proves to be elsewhere, the repo should permit that to be determined over time.
+</p>
+<h2> <span class="mw-headline" id="Formatting"> Formatting </span></h2>
+<p>The forum has a [code] ... [/code] formatting command that you can use to highlight your code snippets and avoid smilies/fontifying tags to mess up your post.
+</p><p>Split your post in paragraphs of a few sentences. Do not shout (e.g. WRITING IN CAPITALS) or use nifty but useless formatting (like glowing colored fonts, moving text, lines of smilies etc.). Use the 'preview' feature if possible.
+</p>
+<hr />
+<p>Following above guidelines significantly improves your chances to get a quick and helpful reply. (And it makes helping you more fun, so those with the know-how will stick around and still be available to help you tomorrow.)
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 43/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1883-0!*!0!!en!*!* and timestamp 20180121032227 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=How_To_Ask_Questions&amp;oldid=20017">http://wiki.osdev.org/index.php?title=How_To_Ask_Questions&amp;oldid=20017</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:OS_Development" title="Category:OS Development">OS Development</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=How_To_Ask_Questions" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="How_To_Ask_Questions"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:How_To_Ask_Questions"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="How_To_Ask_Questions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="How_To_Ask_Questions" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=How_To_Ask_Questions&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=How_To_Ask_Questions&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="How_To_Ask_Questions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/How_To_Ask_Questions" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/How_To_Ask_Questions" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=How_To_Ask_Questions&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=How_To_Ask_Questions&amp;oldid=20017" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 18 December 2016, at 09:20.</li>
+											<li id="footer-info-viewcount">This page has been accessed 54,911 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/How_To_Ask_Questions" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/How_To_Ask_Questions" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=How_To_Ask_Questions&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=How_To_Ask_Questions&amp;oldid=20017" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 18 December 2016, at 09:20.</li>
+											<li id="footer-info-viewcount">This page has been accessed 54,911 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

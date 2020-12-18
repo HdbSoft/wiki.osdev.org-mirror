@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Category talk:Hardware - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "Category_talk", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 15, "wgPageName": "Category_talk:Hardware", "wgTitle": "Hardware", "wgCurRevisionId": 9479, "wgArticleId": 1796, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-15 ns-talk page-Category_talk_Hardware action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Category talk:Hardware</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Category_talk:Hardware#mw-head">navigation</a>,
+					<a href="Category_talk:Hardware#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><h2> <span class="mw-headline" id="Revamp"> Revamp </span></h2>
+<p>Let me spam you guys first with an expansion of the hardware tree:
+</p>
+<dl><dd><dl><dd>Category:Architectures|Architectures
+</dd><dd><b><a href="PowerPC" title="PowerPC" class="mw-redirect">PowerPC</a></b>
+</dd><dd><a href="Category:X86" title="Category:X86">X86</a>
+<dl><dd><b><a href="AMD_K6_WriteBack_Optimisations" title="AMD K6 WriteBack Optimisations">AMD K6 WriteBack Optimisations</a></b>
+</dd><dd><b><a href="Bootloader" title="Bootloader">Bootloader</a></b>
+</dd><dd><b><a href="CPU_Bugs" title="CPU Bugs">CPU Bugs</a></b>
+</dd><dd>Category:Operating Modes|Operating Modes
+<dl><dd>Category:Protected Mode|Protected Mode
+<dl><dd><b><a href="Global_Descriptor_Table" title="Global Descriptor Table">Global Descriptor Table</a></b>
+</dd><dd><b><a href="Interrupt_Descriptor_Table" title="Interrupt Descriptor Table">Interrupt Descriptor Table</a></b>
+</dd><dd><b><a href="Protected_Mode" title="Protected Mode">Protected Mode</a></b>
+</dd><dd><b><a href="Virtual_8086_Mode" title="Virtual 8086 Mode">Virtual 8086 Mode</a></b>
+</dd><dd><b><a href="Virtual_Monitor" title="Virtual Monitor">Virtual Monitor</a></b>
+</dd></dl>
+</dd><dd>Category:Real Mode|Real Mode
+<dl><dd><b><a href="Interrupt_Vector_Table" title="Interrupt Vector Table">Interrupt Vector Table</a></b>
+</dd><dd><b><a href="Real_Mode" title="Real Mode">Real Mode</a></b>
+</dd></dl>
+</dd><dd><b><a href="Unreal_Mode" title="Unreal Mode">Unreal Mode</a></b>
+</dd></dl>
+</dd><dd><b>Category:System Initialization (x86)|System Initialization (x86)</b>
+<dl><dd><b><a href="MBR_(x86)" title="MBR (x86)">MBR (x86)</a></b>
+</dd></dl>
+</dd><dd><b>Tutorial:GDT</b>
+</dd><dd>Category:X86 Instructions|X86 Instructions
+<dl><dd><b><a href="CLI" title="CLI">CLI</a></b>
+</dd><dd><b><a href="CPUID" title="CPUID">CPUID</a></b>
+</dd><dd><b><a href="INT" title="INT" class="mw-redirect">INT</a></b>
+</dd><dd><b>INVLPG</b>
+</dd><dd><b>STI</b>
+</dd><dd><b>XCHG</b>
+</dd></dl>
+</dd><dd><b><a href="X86-64" title="X86-64">X86-64</a></b>
+</dd></dl>
+</dd></dl>
+</dd><dd><b><a href="BIOS" title="BIOS">BIOS</a></b>
+</dd><dd>Category:CPU|CPU
+<dl><dd><b><a href="AMD_K6_WriteBack_Optimisations" title="AMD K6 WriteBack Optimisations">AMD K6 WriteBack Optimisations</a></b>
+</dd><dd><b><a href="CPU_Bugs" title="CPU Bugs">CPU Bugs</a></b>
+</dd><dd><b><a href="Detecting_CPU_Speed" title="Detecting CPU Speed">Detecting CPU Speed</a></b>
+</dd><dd><b><a href="X86-64" title="X86-64">X86-64</a></b>
+</dd></dl>
+</dd><dd>Category:HardwareComm|HardwareComm
+<dl><dd><b><a href="3c556" title="3c556" class="mw-redirect">3c556</a></b>
+</dd><dd><b><a href="Ne2000" title="Ne2000">Ne2000</a></b>
+</dd><dd><b><a href="Serial_ports" title="Serial ports" class="mw-redirect">Serial ports</a></b>
+</dd></dl>
+</dd><dd><a href="Category:Interrupts" title="Category:Interrupts">Interrupts</a>
+<dl><dd><b><a href="Interrupt_Service_Routines" title="Interrupt Service Routines">Interrupt Service Routines</a></b>
+</dd><dd><b><a href="PIC" title="PIC" class="mw-redirect">PIC</a></b>
+</dd></dl>
+</dd><dd>Category:Memory|Memory
+<dl><dd><b><a href="A20_Line" title="A20 Line">A20 Line</a></b>
+</dd><dd><b><a href="CMOS" title="CMOS">CMOS</a></b>
+</dd></dl>
+</dd><dd><a href="Category:Networking" title="Category:Networking">Networking</a>
+<dl><dd><b><a href="3c556" title="3c556" class="mw-redirect">3c556</a></b>
+</dd><dd><b><a href="Ne2000" title="Ne2000">Ne2000</a></b>
+</dd></dl>
+</dd><dd><b><a href="PCI" title="PCI">PCI</a></b>
+</dd><dd>Category:Peripheral Buses
+<dl><dd><b><a href="USB" title="USB" class="mw-redirect">USB</a></b>
+</dd></dl>
+</dd><dd><b><a href="PIC" title="PIC" class="mw-redirect">PIC</a></b>
+</dd><dd><b>Category:PowerManagement</b>
+<dl><dd><b><a href="ACPI" title="ACPI">ACPI</a></b>
+</dd><dd><b><a href="APM" title="APM">APM</a></b>
+</dd><dd><b><a href="RSDP" title="RSDP">RSDP</a></b>
+</dd></dl>
+</dd><dd><b><a href="Programmable_Interval_Timer" title="Programmable Interval Timer">Programmable Interval Timer</a></b>
+</dd><dd><a href="Category:Storage" title="Category:Storage">Storage</a>
+<dl><dd><b><a href="ATA.1" title="ATA" class="mw-redirect">ATA</a></b>
+</dd><dd><b><a href="DMA" title="DMA" class="mw-redirect">DMA</a></b>
+</dd><dd><b><a href="Floppy_Driver" title="Floppy Driver" class="mw-redirect">Floppy Driver</a></b>
+</dd><dd><b><a href="Storage" title="Storage">Storage</a></b>
+</dd></dl>
+</dd><dd><a href="Category:Video" title="Category:Video">Video</a>
+<dl><dd><b><a href="Text_UI" title="Text UI">Text UI</a></b>
+</dd><dd><a href="Category:VGA" title="Category:VGA">VGA</a>
+<dl><dd><b><a href="VGA_Hardware" title="VGA Hardware">VGA Hardware</a></b>
+</dd><dd><b><a href="VGA_Resources" title="VGA Resources">VGA Resources</a></b>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<p>What I notice that there are a lot of topics out of place, topics in categories where they don't belong, duplicate categories, categories with same-named pages, single-topic categories, categories with a full article's contents, and naming inconsistencies: IMO one big mess.
+</p><p>Id like to propose a reorganisation of the category structure as well as some sort of manual of style related issues:
+At the root, i'd suggest having only concrete devices and directly related standards. (most definately no theory related pages) Like the following:
+</p>
+<dl><dd>Category:Architectures|Architectures
+</dd><dd><a href="Category:Common_Devices" title="Category:Common Devices">Common Devices</a> (motherboard resources, timers, RNGs, memory: DMA PIC PIT and APIC would go here)
+</dd><dd>Category:Communication|Communication (merge of hardwarecomm and networking)
+</dd><dd>Category:Input Devices|Input Devices (nonexistant, but useful. A good KBC article would go here)
+</dd><dd>Category:Peripheral Buses|Peripheral Buses
+</dd><dd><a href="Category:Sound" title="Category:Sound">Sound</a> (nonexistant)
+</dd><dd><a href="Category:Storage" title="Category:Storage">Storage</a>
+</dd><dd><a href="Category:Video" title="Category:Video">Video</a>
+</dd></dl>
+<p>as subcategories, and either no topics, or a list of ALL devices (for allowing a quick lookup of a device being documented) for which some wikipedia magic could be useful?
+</p><p>For the architectures category:
+</p>
+<dl><dd>X86 (category)
+<dl><dd> Operating Modes (as category, containing only PM, RM, UM, v8086 mode as articles, no subs)
+</dd><dd> Instructions (as category)
+</dd><dd> all other x86-specific topics would go as normal articles here, as well as the articles under CPU
+</dd></dl>
+</dd></dl>
+<p>and similarly for other architectures
+</p>
+<dl><dd>X86-64 (as category)
+<dl><dd> <a href="X86-64" title="X86-64">X86-64</a> (as article)
+</dd><dd> ...
+</dd></dl>
+</dd><dd>PowerPC (as category)
+<dl><dd><a href="PowerPC" title="PowerPC" class="mw-redirect">PowerPC</a> (as article)
+</dd><dd> ... 
+</dd></dl>
+</dd></dl>
+<p>The philosophy behind this is that it should be consistent, and obvious. (a lot of subclasses from x86 have been removed, and other architectures get their own category for any future expansion).
+</p><p>For the remaining topics:
+BIOS goes to X86 (possibly renamed as X86 BIOS)
+Text UI goes to OS Theory.
+ACPI and APM are a bit doubtful.
+</p><p>suggestions welcome
+</p><p>- <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 06:28, 20 January 2007 (CST)
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 4/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1796-0!*!0!*!*!*!* and timestamp 20180121080102 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Category_talk:Hardware&amp;oldid=9479">http://wiki.osdev.org/index.php?title=Category_talk:Hardware&amp;oldid=9479</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Category_talk%3AHardware" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-category"><span><a href="Category:Hardware"  title="View the category page [c]" accesskey="c">Category</a></span></li>
+					<li  id="ca-talk" class="selected"><span><a href="Category_talk:Hardware"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Category_talk:Hardware#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Category_talk:Hardware" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Category_talk:Hardware&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Category_talk:Hardware&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Category_talk:Hardware#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Category_talk:Hardware" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Category_talk:Hardware" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Category_talk:Hardware&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Category_talk:Hardware&amp;oldid=9479" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+		skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Category_talk:Hardware" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Category_talk:Hardware" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Category_talk:Hardware&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Category_talk:Hardware&amp;oldid=9479" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 December 2009, at 10:05.</li>
+											<li id="footer-info-viewcount">This page has been accessed 7,194 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.063 secs. -->
+	</body>
+</html>

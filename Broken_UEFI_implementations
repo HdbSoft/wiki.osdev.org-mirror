@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Broken UEFI implementations - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Broken_UEFI_implementations", "wgTitle": "Broken UEFI implementations", "wgCurRevisionId": 21777, "wgArticleId": 3807, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["UEFI"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Broken_UEFI_implementations action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Broken UEFI implementations</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Broken_UEFI_implementations#mw-head">navigation</a>,
+					<a href="Broken_UEFI_implementations#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>This page serves as a repository of information about any aspect of the system firmware which is broken on UEFI machines, but especially those directly related to UEFI itself.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Broken_UEFI_implementations#El_Torito_boot"><span class="tocnumber">1</span> <span class="toctext">El Torito boot</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Broken_UEFI_implementations#BGRT_Table"><span class="tocnumber">2</span> <span class="toctext">BGRT Table</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Broken_UEFI_implementations#Lenovo_X1_Carbon_.281st_gen.2C_346035U.29"><span class="tocnumber">2.1</span> <span class="toctext">Lenovo X1 Carbon (1st gen, 346035U)</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Broken_UEFI_implementations#Intel_strawberry_mountain_.28DQ67SW.29"><span class="tocnumber">2.2</span> <span class="toctext">Intel strawberry mountain (DQ67SW)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Broken_UEFI_implementations#The_Lenovo_ThinkCentre_M92p_and_maybe_some_related_products"><span class="tocnumber">3</span> <span class="toctext">The Lenovo ThinkCentre M92p and maybe some related products</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Broken_UEFI_implementations#Apple"><span class="tocnumber">4</span> <span class="toctext">Apple</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="Broken_UEFI_implementations#There.27s_additional_UI_presented_mixed_in_with_BDS"><span class="tocnumber">4.1</span> <span class="toctext">There's additional UI presented mixed in with BDS</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Broken_UEFI_implementations#CDs_are_wild_and_crazy"><span class="tocnumber">4.2</span> <span class="toctext">CDs are wild and crazy</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="Broken_UEFI_implementations#GIGABYTE_Hybrid_EFI"><span class="tocnumber">5</span> <span class="toctext">GIGABYTE Hybrid EFI</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Broken_UEFI_implementations#Piles_and_piles_of_Acer_hardware"><span class="tocnumber">6</span> <span class="toctext">Piles and piles of Acer hardware</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Broken_UEFI_implementations#MSI_motherboards_with_AMI_firmware"><span class="tocnumber">7</span> <span class="toctext">MSI motherboards with AMI firmware</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="Broken_UEFI_implementations#Runtime_services_accessing_boot_services_memory"><span class="tocnumber">8</span> <span class="toctext">Runtime services accessing boot services memory</span></a></li>
+</ul>
+</td></tr></table>
+<h1> <span class="mw-headline" id="El_Torito_boot"> El Torito boot </span></h1>
+<p>UEFI boot from CD is controlled using El Torito boot records in the CD
+</p>
+headers. Some machines get this wrong.  In particular, one common set of known issues stem from early CSM packages which don't correctly interpret multiple El Torito boot catalog entries.  The most common failure is the CSM's parser not recognizing the 0xEF platform ID, and instead of interpreting "I don't know this platform ID" correctly as "This is not for my platform" when there are multiple boot entries, some versions present you with a menu:<pre>1.
+2.
+Select CD-ROM boot type:</pre>
+<p>Which represents the boot catalog entries (cleverly unlabeled).  On some platforms (including some Apple laptops, among others) this happens without setting up any keyboard controller, and you are now stuck.
+</p>
+<h1> <span class="mw-headline" id="BGRT_Table"> BGRT Table </span></h1>
+<ul><li> BGRT is an ACPI table to tell us if and where UEFI firmware has drawn its logo on the screen.  Technically the BGRT is an ACPI 5 table, but its use corresponds with UEFI 2.4 deployments, and it goes hand in hand with the EFI Graphics Output Protocol and ESRT + UEFI UpdateCapsule and [<a rel="nofollow" class="external text" href="https://msdn.microsoft.com/en-us/library/dn917814%28v=vs.85%29.aspx">Microsoft's firmware update graphics capsule</a>].  In theory, "uint16_t version" (offset 0x24) should always be 1, and "uint8_t status" (offset 0x26) with 0x1 set means "valid data" - that is, if the firmware displayed a splash graphic, it sets the values in the table and sets status to 1; if not, status should be 0.
+</li></ul>
+<p>Here are some sample entries.  These are from real machines, but the problems are common across lots of hardware from lots of vendors:
+</p>
+<h3> <span class="mw-headline" id="Lenovo_X1_Carbon_.281st_gen.2C_346035U.29"> Lenovo X1 Carbon (1st gen, 346035U) </span></h3>
+<blockquote><pre>00000000  42 47 52 54 38 00 00 00  00 00 4c 45 4e 4f 56 4f  |BGRT8.....LENOVO|
+00000010  54 50 2d 47 36 20 20 20  00 27 00 00 50 54 4c 20  |TP-G6   .'..PTL |
+00000020  02 00 00 00 00 00 01 00  18 b0 7e d3 00 00 00 00  |..........~.....|
+00000030  0f 02 00 00 b4 00 00 00                           |........|</pre></blockquote>
+<p>This helpfully has version=0x0000 and status=0x01 i.e. some version that doesn't exist but the table claims its information is valid.
+</p>
+<h3> <span class="mw-headline" id="Intel_strawberry_mountain_.28DQ67SW.29"> Intel strawberry mountain (DQ67SW) </span></h3>
+<blockquote><pre>00000000  42 47 52 54 38 00 00 00  01 fe 49 4e 53 59 44 45  |BGRT8.....INSYDE|
+00000010  4d 48 42 20 43 52 42 20  01 00 00 00 41 43 50 49  |MHB CRB ....ACPI|
+00000020  00 00 04 00 01 00 00 00  00 d0 fd a7 00 00 00 00  |................|
+00000030  fa 00 00 00 4f 00 00 00                           |....O...|</pre></blockquote>
+<p>This particular firmware says it's version 1 but that the data is invalid; this implementation /always/ says the data is invalid, whether it displays the logo or not.
+</p>
+<h1> <span class="mw-headline" id="The_Lenovo_ThinkCentre_M92p_and_maybe_some_related_products"> The Lenovo ThinkCentre M92p and maybe some related products </span></h1>
+The Lenovo ThinkCentre M92p once shipped with a firmware which would only let you select boot entries where the Boot#### variable label was "Microsoft Windows" or "Red Hat Enterprise Linux".  This may have been fixed in firmware version 9SKT61A/9SJT61A , which says:<pre>CHANGES for 9SKT61A/9SJT61A
+- Fixes some Linux secure boot issues.
+- Updates Microcode M12306A9 to V17.  </pre>
+<p>Also the changelog says:
+</p>
+<pre>CHANGES for 9SKT51A/9SJT51A
+- Fixes the issue of installing Redhat 6.3.
+- Fixes the issue that sometimes the display cannot be full screen in text mode.</pre>
+<p>Which was probably when "Red Hat Enterprise Linux" was added to the list.
+</p>
+<h1> <span class="mw-headline" id="Apple"> Apple </span></h1>
+<p>Apple firmwares have a couple of funky things going on
+</p>
+<h3> <span class="mw-headline" id="There.27s_additional_UI_presented_mixed_in_with_BDS"> There's additional UI presented mixed in with BDS </span></h3>
+<p>The "option key" boot screen and such are basically between BootNext/BootOrder and any other BDS menus and such.  In effect they are the BDS menus, but they do a lot of non-BDS things.  So basically BootNext and BootOrder can override the normal boot selection from that menu without you ever seeing it, but the things that show up in that menu aren't strictly governed by Boot#### variables.
+</p><p>Instead, Apple requires a HFS+ filesystem to be present to use as the ESP, and it has to be set up in a particular way:
+</p>
+<ol><li> Your bootloader has to exist as /EFI/${vendor}/whatever.efi and has to be blessed with hfs-bless.
+</li><li> there needs to be a pixmap of the text label you want, named /EFI/${vendor}/.disk_label
+</li><li> There needs to be a pixmap of the logo you want as /.VolumeIcon.icns .
+</li><li> You need /System/Library/CoreServices/SystemVersion.plist to exist and describe your OS.
+</li><li> /mach_kernel must exist.
+</li></ol>
+<p>The <a rel="nofollow" class="external text" href="http://www.codon.org.uk/~mjg59/mactel-boot/">mactel-boot</a> utility can be used to set up these things.
+</p>
+<h3> <span class="mw-headline" id="CDs_are_wild_and_crazy"> CDs are wild and crazy </span></h3>
+<p>CDs can be booted through the option key menu if they're set up properly.  There are also some caveats.
+</p>
+<ol><li> On some machines, they need to be Apple Partition Map formatted.
+</li><li> This also means to make a disc that works on EFI+Apple+BIOS as both an ISO image /and/ an image on a USB stick, you need to actually /execute/ the APM header signature on BIOS machines.  Thankfully that's pretty safe, but it's a little squicky in your head.  <a rel="nofollow" class="external text" href="http://www.syslinux.org/wiki/index.php/The_Syslinux_Project">syslinux</a>]'s "isohybrid" utility has had this ability to build this sort of image since version 4.05 .
+</li><li> On some machines, there needs to be a special El Torito image for an HFS+ formatted ESP that conforms to what's above in <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=Broken_UEFI_implementations#There.27s_additional_UI_presented_mixed_in_with_BDS">There's additional UI presented mixed in with BDS</a> in order to have it show your UEFI-bootable image as anything other than "Windows".  This means there are /three/ El Torito entries - the "Validation Entry" of type 0x00 (80x86), which holds the BIOS code, and then *two* entries of type 0xef - the HFS+ and then the FAT one.  The HFS+ one needs to be last one.  Tools like mkisofs can make ISOs with multiple images with the several boot images using the "-eltorito-alt-boot" and "-e" options.  There's some examples <a rel="nofollow" class="external text" href="https://fedoraproject.org/wiki/User:Pjones/BootableCDsForBIOSAndUEFI">here</a>.
+</li><li> The menus will show the BIOS image as "Windows"
+</li><li> Unfortunately the menus will also show the FAT-based UEFI image as "Windows".
+</li><li> Some machines will not correctly boot the FAT-based UEFI image.  This means you need to tell your users that when they're trying to boot a CD or USB stick of your product, they need to pick the left-most correctly labeled one with an icon.
+</li></ol>
+<p>It's pretty easy to orchestrate getting all this correct with tools like <a rel="nofollow" class="external text" href="https://github.com/rhinstaller/lorax">Lorax</a>, which has scripts for doing it on RHEL and Fedora, and can be taught to do it on other things without excessive work.
+</p>
+<h1> <span class="mw-headline" id="GIGABYTE_Hybrid_EFI"> GIGABYTE Hybrid EFI </span></h1>
+<p>These motherboards claim to support other os, however it is not
+possible to use efibootmgr to write to nvram. Further, fdisk gpt
+partitioned drives with the standard efi system partition type and all
+known good default names will not be able to find a stub kernel
+image. Strangely they are able to find the /efi/boot/bootx64.efi image
+when it is located on a MBR formatted disk (which is how it was
+possible to run efibootmgr in the first place). These issues may be
+related to issues described here:
+<a rel="nofollow" class="external free" href="http://www.rodsbooks.com/gb-hybrid-efi/">http://www.rodsbooks.com/gb-hybrid-efi/</a>.
+</p><p><i>Another commenter adds:</i> "Hybrid EFI" is gigabyte's name for
+running an x64 uefi emulator on top of bios, which does not work at
+all well. Some boards with Hybrid EFI offer a beta real EFI upgrade
+as a firmware download, which fixes most of the serious issues, but
+not all. See
+<a rel="nofollow" class="external free" href="http://www.gigabyte.com/products/product-page.aspx?pid=3979#ov">http://www.gigabyte.com/products/product-page.aspx?pid=3979#ov</a> for an
+example of such a board. Version F7 is "Hybrid Efi" and doesn't work,
+U1G is the real thing but is marked beta.
+</p>
+<h1> <span class="mw-headline" id="Piles_and_piles_of_Acer_hardware"> Piles and piles of Acer hardware </span></h1>
+<p>Acer for some reason don't honor the BootOrder variable under most conditions.  This has been an ongoing issue forever, chronicled most recently here: <a rel="nofollow" class="external free" href="https://github.com/rhinstaller/efibootmgr/issues/19">https://github.com/rhinstaller/efibootmgr/issues/19</a>
+</p><p>Typical example (Acer Travelmate B116-M, Insyde BIOS V1.20)
+</p><p>Boots fine from USB UEFI formatted devices, once you disable Secure boot, which can only be done once you've set a bios password.
+Installing a Linux-only system shows no errors (including from efibootmgr), but then fails to boot at all. The BIOS shows no boot entries.
+Restoring the original windows EFI System Partition from backups "fixes" the problem, on next boot we have a new automagic entry called "Windwos Boot Manager". Creating new EFI boot entries after that using efibootmgr silently fails, the system ignores them. The only way to get it to boot something else is to replace <b>\EFI\Microsoft\Boot\bootmgfw.efi</b> with the distro-provided grubx64.efi.
+</p>
+<h1> <span class="mw-headline" id="MSI_motherboards_with_AMI_firmware"> MSI motherboards with AMI firmware </span></h1>
+<p>Some users have reported that on the MSI GE62 2QD Apache Pro (board model: MS-16J2) with AMI firmware, variables set with efibootmgr aren't persistent across reboots.
+</p>
+<h1> <span class="mw-headline" id="Runtime_services_accessing_boot_services_memory"> Runtime services accessing boot services memory </span></h1>
+<p>Many UEFI firmwares have the issue of runtime services accessing boot services memory. There is a series of patches at <a rel="nofollow" class="external free" href="https://lkml.org/lkml/2014/9/13/103">https://lkml.org/lkml/2014/9/13/103</a> to detect these bugs without breaking systems. 
+(Trivia: <a rel="nofollow" class="external free" href="https://lkml.org/lkml/2013/11/11/653">https://lkml.org/lkml/2013/11/11/653</a>, which uses a different approach, is written by HP that also locked access to firmware updates to paid customers not long afterwards)
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 107/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3807-0!*!*!!en!*!* and timestamp 20180121061623 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Broken_UEFI_implementations&amp;oldid=21777">http://wiki.osdev.org/index.php?title=Broken_UEFI_implementations&amp;oldid=21777</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:UEFI" title="Category:UEFI">UEFI</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Broken_UEFI_implementations" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Broken_UEFI_implementations"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Broken_UEFI_implementations"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Broken_UEFI_implementations#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Broken_UEFI_implementations" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Broken_UEFI_implementations&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Broken_UEFI_implementations&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Broken_UEFI_implementations#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Broken_UEFI_implementations" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Broken_UEFI_implementations" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Broken_UEFI_implementations&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Broken_UEFI_implementations&amp;oldid=21777" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 November 2017, at 09:52.</li>
+											<li id="footer-info-viewcount">This page has been accessed 20,730 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<scriskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Broken_UEFI_implementations" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Broken_UEFI_implementations" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Broken_UEFI_implementations&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Broken_UEFI_implementations&amp;oldid=21777" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 November 2017, at 09:52.</li>
+											<li id="footer-info-viewcount">This page has been accessed 20,730 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

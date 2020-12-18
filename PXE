@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>PXE - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "PXE", "wgTitle": "PXE", "wgCurRevisionId": 20845, "wgArticleId": 3013, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Bootloaders"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-PXE action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">PXE</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="PXE#mw-head">navigation</a>,
+					<a href="PXE#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Preboot eXecution Environment, or PXE, is the only way for <a href="Diskless_Booting" title="Diskless Booting">Diskless Booting</a> in PCs, and the standard is developed by Intel. It allows the Network Bootstrap Program (NBP) or the Bootloader to interface with the PXE, and load files via TFTP.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="PXE#State_of_the_Machine"><span class="tocnumber">1</span> <span class="toctext">State of the Machine</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="PXE#PXENV.2B"><span class="tocnumber">1.1</span> <span class="toctext">PXENV+</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="PXE#Recommended_Usage"><span class="tocnumber">1.1.1</span> <span class="toctext">Recommended Usage</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-4"><a href="PXE#.21PXE"><span class="tocnumber">1.2</span> <span class="toctext">!PXE</span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="PXE#Recommended_Usage_2"><span class="tocnumber">1.2.1</span> <span class="toctext">Recommended Usage</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="PXE#PXE_API"><span class="tocnumber">2</span> <span class="toctext">PXE API</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="PXE#Files.2C_via_TFTP"><span class="tocnumber">3</span> <span class="toctext">Files, via TFTP</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="PXE#Getting_.22Cached_Information.22"><span class="tocnumber">3.1</span> <span class="toctext">Getting "Cached Information"</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="PXE#Opening"><span class="tocnumber">3.2</span> <span class="toctext">Opening</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="PXE#Reading"><span class="tocnumber">3.3</span> <span class="toctext">Reading</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="PXE#Closing"><span class="tocnumber">3.4</span> <span class="toctext">Closing</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="PXE#Performance"><span class="tocnumber">3.5</span> <span class="toctext">Performance</span></a>
+<ul>
+<li class="toclevel-3 tocsection-13"><a href="PXE#TFTP_Block_Size"><span class="tocnumber">3.5.1</span> <span class="toctext">TFTP Block Size</span></a></li>
+<li class="toclevel-3 tocsection-14"><a href="PXE#TFTP_.22Sliding_Window.22"><span class="tocnumber">3.5.2</span> <span class="toctext">TFTP "Sliding Window"</span></a></li>
+<li class="toclevel-3 tocsection-15"><a href="PXE#Advanced.2FNon-standard_Approaches"><span class="tocnumber">3.5.3</span> <span class="toctext">Advanced/Non-standard Approaches</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="PXE#Cleaning_up"><span class="tocnumber">4</span> <span class="toctext">Cleaning up</span></a></li>
+<li class="toclevel-1 tocsection-17"><a href="PXE#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-18"><a href="PXE#Articles"><span class="tocnumber">5.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="PXE#External_Links"><span class="tocnumber">5.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="State_of_the_Machine">State of the Machine</span></h2>
+<p>Described by Section 4.4.5, Client State at Bootstrap Execution Time, the PXE is responsible for getting the boot code in the Client Machine. This is entirely similar to other boot devices, however, the BIOS Magic Signature, 0xAA55 isn't required, and the size of the boot file is limited to 32KiB, instead of the familiar 512 bytes.
+</p><p>Prior to Version 2.1 of the PXE specification, a PXENV+ Structure was given to the NBP. The PXE Entry Structure, or the&#160;!PXE structure, was introduced in Version 2.1, while the PXENV+ Structure has become obsolete. However, the address of the PXENV+ Structure is still given to the NBP during boot, to maintain compatibility with older NBPs.
+</p><p>The PXE Specification promises that the boot file is loaded at the address 0x0000:0x7C00, though it isn't trustable. Moreover,
+</p>
+<ul><li> <b>ES:BX</b>       ES:BX should point to the PXENV+ structure, to maintain backward compatibility.
+</li><li> <b>SS:SP</b>       SS:SP points to a valid stack, with at least 1.5KiB of free stack.
+</li><li> <b>SS:SP + 4</b>   SS:SP + 4 points to the newer&#160;!PXE structure, if and only the PXE Version is greater than or equal to 1.5.
+</li></ul>
+<h3> <span class="mw-headline" id="PXENV.2B">PXENV+</span></h3>
+<p>The structure of the PXENV+ structure is as follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">    <span class="co1">// The Signature of the PXENV+ structure - contains &quot;PXENV+&quot;.</span>
+    <span class="kw4">uint8_t</span>  Signature<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// The MSB contains the Major version number, while the LSB contains the minor version number.</span>
+    <span class="kw4">uint16_t</span> Version<span class="sy0">;</span>
+&#160;
+    <span class="co1">// The Length and the checksum of the structure, used for calculating the checksum.</span>
+    <span class="kw4">uint8_t</span>  Length<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span>  Checksum<span class="sy0">;</span>
+&#160;
+    <span class="co1">// A Far Pointer to the real mode PXE API entry point. </span>
+    <span class="kw4">uint32_t</span> RMEntry<span class="sy0">;</span>
+&#160;
+    <span class="co1">// 32-bit offset to the protected mode API entry point. Instead of this, the&#160;!PXE structure is recommended.</span>
+    <span class="kw4">uint32_t</span> PMOffset<span class="sy0">;</span>
+&#160;
+    <span class="co1">// The rest of the fields don't matter much, and the Specifications can be referred.</span>
+    <span class="kw4">uint16_t</span> PMSelector<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> StackSeg<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> StackSize<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> BCCodeSeg<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> BCCodeSize<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> BCDataSeg<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> BCDataSize<span class="sy0">;</span>
+&#160;
+    <span class="kw4">uint16_t</span> UNDIDataSeg<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> UNDIDataSize<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> UNDICodeSeg<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> UNDICodeSize<span class="sy0">;</span>
+&#160;
+    <span class="co1">// This is a far pointer to the &quot;!PXE&quot; structure, only present when the structure is present.</span>
+    <span class="kw4">uint32_t</span> PXEPtr<span class="sy0">;</span></pre></div></div>
+<h4> <span class="mw-headline" id="Recommended_Usage"> Recommended Usage </span></h4>
+<p>First of all, the integrity of the PXENV+ structure should be checked. This can be done by:
+</p>
+<ul><li> Checking the PXENV+ signature at the starting.
+</li><li> And, by checking the checksum of the structure.
+</li></ul>
+<p>If the structure fails to pass either of the above, boot should be aborted.
+</p><p>If the structure is good, the Version number should be checked. If it is higher than or equal to 0x0201 then the&#160;!PXE structure should be used. On the other hand, if it isn't, the PXENV+ structure should be used.
+</p>
+<h3> <span class="mw-headline" id=".21PXE">!PXE </span></h3>
+<p>The structure of the&#160;!PXE structure is as follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">    <span class="co1">// The Signature of the&#160;!PXE structure - contains &quot;!PXE&quot;.</span>
+    <span class="kw4">uint8_t</span>  Signature<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// The Length and the checksum of the structure, used for calculating the checksum.</span>
+    <span class="kw4">uint8_t</span>  Length<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span>  Checksum<span class="sy0">;</span>
+&#160;
+    <span class="co1">// Contains zero - both of them.</span>
+    <span class="kw4">uint8_t</span> Revision<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> Reserved<span class="sy0">;</span>
+&#160;
+    <span class="co1">// Far pointer to UNDI ROM ID structure and BC ROM ID structure.</span>
+    <span class="kw4">uint32_t</span> UNDIROMID<span class="sy0">;</span>
+    <span class="kw4">uint32_t</span> BCROMID<span class="sy0">;</span>
+&#160;
+    <span class="co1">// A Far Pointer to the real mode PXE API entry point. </span>
+    <span class="kw4">uint32_t</span> RMEntry<span class="sy0">;</span>
+&#160;
+    <span class="co1">// A Far Pointer to the protected mode API entry point. </span>
+    <span class="kw4">uint32_t</span> PMEntry<span class="sy0">;</span>
+&#160;
+    <span class="co1">// The rest of the fields don't matter much (in the rest of the article), and the Specifications can be referred.</span></pre></div></div>
+<h4> <span class="mw-headline" id="Recommended_Usage_2"> Recommended Usage </span></h4>
+<p>If the PXENV+ lists the revision as greater than or equal to 0x0201, then only must the&#160;!PXE stucture be relied upond. Then, the integrity of the&#160;!PXE structure should be checked. This can be done by:
+</p>
+<ul><li> Checking the&#160;!PXE signature at the starting.
+</li><li> And, by checking the checksum of the structure.
+</li></ul>
+<p>If the structure fails to pass either of the above, the PXENV+ structure should be used.
+</p>
+<h2> <span class="mw-headline" id="PXE_API">PXE API </span></h2>
+<p>The PXE Entry Point uses the Pascal calling convention - push the parameters on the stack, far call the entry point, clean up the stack - while the older PXENV+ Entry Point uses registers.
+</p><p>To access the API, a generic CallAPI function can be created, which eases out the calling. To do this, first of all, the address of the Entry Point, from either of the structures should be stored in a location (PXEAPI in the example). The PXE API accept the same parameters:
+</p>
+<ul><li> Opcode, or the API function number.
+</li><li> Segment:Offset address to a structure containing input data.
+</li></ul>
+<p>A example generic call function is as follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">; Calls the PXE API, and abstracts things such that it works on both old and new APIs.</span>
+<span class="co1">; @ds:di          The address of the input buffer.</span>
+<span class="co1">; @bx             The opcode.</span>
+<span class="co1">; NOTE: The above registers are what the legacy API also used, so it should cause no problem with it.</span>
+UsePXEAPI<span class="sy0">:</span>
+    <span class="co1">; And we push it over here, so that we have no problems with the new API.</span>
+    <span class="kw1">push</span> <span class="kw3">ds</span>
+    <span class="kw1">push</span> <span class="kw3">di</span>
+    <span class="kw1">push</span> <span class="kw3">bx</span>
+&#160;
+    <span class="kw1">call</span> <span class="kw5">far</span> <span class="br0">&#91;</span>PXEAPI<span class="br0">&#93;</span>
+&#160;
+    <span class="kw1">add</span> <span class="kw3">sp</span><span class="sy0">,</span> <span class="nu0">6</span>                         <span class="co1">; Clean up the stack.</span>
+    <span class="kw1">ret</span></pre></div></div>
+<p>The PXE API returns a status flag in AX and the beginning of the input buffer passed. It is recommended to test both of these, where a non zero value indicates failure.
+</p>
+<h2> <span class="mw-headline" id="Files.2C_via_TFTP">Files, via TFTP </span></h2>
+<p>Getting the files via TFTP require the TFTP server's IP address. Along with that, you might want the client machine's IP address, the DHCP server's IP address, the client's MAC address, and perhaps several other things.
+</p><p>While this might seem daunting at first, PXE defines a neat way to do this.
+</p>
+<h3> <span class="mw-headline" id="Getting_.22Cached_Information.22">Getting "Cached Information"</span></h3>
+<p>The PXE API's Get Cached Information function, with opcode 0x0071, requires a "t_PXENV_CACHED_INFO" passed to it, and returns a "bootph" structure. This "bootph" structure contains important information about the client and server machine, which is what is exactly wanted.
+</p><p>The "t_PXENV_CACHED_INFO" follows the following structure:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">; Note - due to comfort reasons, the author has decided to provide the following snippet</span>
+<span class="co1">; in Intel (NASM) Assembly. If someone wishes to change it to a more generic format, he is welcome.</span>
+t_PXENV_GET_CACHED<span class="sy0">:</span>
+    <span class="sy0">.</span>Status       <span class="kw4">dw</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>PacketType   <span class="kw4">dw</span> <span class="nu0">2</span>
+    <span class="sy0">.</span>BufferSize   <span class="kw4">dw</span> <span class="nu0">0</span>
+       <span class="sy0">.</span>BufferOff <span class="kw4">dw</span> <span class="nu0">0</span> 
+       <span class="sy0">.</span>BufferSeg <span class="kw4">dw</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>BufferLimit  <span class="kw4">dw</span> <span class="nu0">0</span></pre></div></div>
+<ul><li> <b>.Status</b>. This should be zero, and returns the status after the function call.
+</li></ul>
+<ul><li> <b>.PacketType</b>. This is the type of the packet, and 2 means "PXENV_PACKET_TYPE_DHCP_ACK", which is what we require. For further information, read the specifications.
+</li></ul>
+<ul><li> <b>.BufferSize</b>. The number of bytes copied into the segment and offset field given.
+</li></ul>
+<ul><li> <b>.BufferOff/Seg</b>. This gives the output buffer, to which to copy the bootph structure to. If you want, keep this to zero, and PXE would return the address of the Bootph structure in the BC data segment.
+</li></ul>
+<p>To do a call, put the address of the above structure in ES:DI, put the opcode, 0x0071, in BX, and call the generic call function. A example call to the above function is, as follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">di</span><span class="sy0">,</span> t_PXENV_GET_CACHED
+    <span class="kw1">mov</span> <span class="kw3">bx</span><span class="sy0">,</span> GET_CACHED_INFO           <span class="co1">; 0x0071.</span>
+&#160;
+    <span class="kw1">call</span> UsePXEAPI                    <span class="co1">; Ask for the cached info.</span>
+&#160;
+    <span class="kw1">or</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="br0">&#91;</span>t_PXENV_GET_CACHED<span class="br0">&#93;</span>       <span class="co1">; Get the status into AX.</span>
+    <span class="kw1">test</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="kw3">ax</span>
+    <span class="kw1">jnz</span> <span class="sy0">.</span><span class="kw5">Error</span></pre></div></div>
+<p>Bootph has a little complex structure, and the Specification should be referenced to know more about it. For now, the following is what you may require:
+</p>
+<ul><li> uint8_t CIP[4].  The Client IP address, at offset 12.
+</li><li> uint8_t YIP[4].  "Your" IP address, at offset 16.
+</li><li> uint8_t SIP[4].  Server IP address, at offset 20.
+</li><li> uint8_t GIP[4].  Relay agent IP address, at offset 24.
+</li><li> uint8_t MAC[16]. The MAC IP address, present at offset 28.
+</li><li> uint8_t SER[64]. The server host name, a asciiz string, at offset 40.
+</li><li> uint8_t BOO[128]. The Boot File name, a asciiz string, at offset 104.
+</li></ul>
+<h3> <span class="mw-headline" id="Opening">Opening</span></h3>
+<p>PXE offers "TFTP Open", "TFTP Read" and "TFTP Close", which could be used like other common file I/O operations. It also offers a "TFTP Read File" - but it is recommended to use the former, which is more <i>configurable</i>.
+</p><p>PXENV_TFTP_OPEN, with opcode 0x0020 is required to open a file via TFTP. It takes a t_PXENV_TFTP_OPEN structure as a parameter, which has the following format:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">t_PXENV_TFTP_OPEN<span class="sy0">:</span>
+    <span class="sy0">.</span>Status       <span class="kw4">dw</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>SIP          <span class="kw4">dd</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>GIP          <span class="kw4">dd</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>Filename     times <span class="nu0">128</span> <span class="kw4">db</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>Port         <span class="kw4">dw</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>PacketSize   <span class="kw4">dw</span> <span class="nu0">0</span></pre></div></div>
+<ul><li> <b>.Status</b>. The status word.
+</li></ul>
+<ul><li> <b>.SIP</b>. The Server IP, which we just obtained.
+</li></ul>
+<ul><li> <b>.Filename</b>. A null terminated string, of the name of the file to open.
+</li></ul>
+<ul><li> <b>.Port</b>. This should contain 69, or the UDP Port.
+</li></ul>
+<ul><li> <b>.PacketSize</b>.  This contains the size of each packet read. Sizes of 512, 1024 and something small are recommended. Usually, bigger sizes load the file faster, but aren't supported much. See the section on performance below for more information relating to packet size.
+</li></ul>
+<p>NOTE: The SIP, GIP (0 means default) and Port are all big endian.
+</p>
+<h3> <span class="mw-headline" id="Reading">Reading</span></h3>
+<p>The PXENV_TFTP_READ function, with opcode 0x0022, reads a single packet from the currently opened file. The size of the packet is set in the Open call, while the function requires a t_PXENV_TFTP_READ structure.
+</p><p>The t_PXENV_TFTP_READ has the following structure:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">t_PXENV_TFTP_READ<span class="sy0">:</span>
+    <span class="sy0">.</span>Status       <span class="kw4">dw</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>PacketNumber <span class="kw4">dw</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>BufferSize   <span class="kw4">dw</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>BufferOff    <span class="kw4">dw</span> <span class="nu0">0</span>
+    <span class="sy0">.</span>BufferSeg    <span class="kw4">dw</span> <span class="nu0">0</span></pre></div></div>
+<ul><li> <b>.Status</b>. This contains the status returned after the function call.
+</li></ul>
+<ul><li> <b>.PacketNumber</b>. This contains the packet number sent by the TFTP server. This is used to read packets in a order. Think of it like a index into the packets of the file - used to track of the current index.
+</li></ul>
+<ul><li> <b>.BufferSize</b>. The buffer size - number of bytes written in the packet buffer. It is the last packet if this is less than the size of the packet negotiated.
+</li></ul>
+<ul><li> <b>.BufferOff/Seg</b>. The address where you want to read the file packet.
+</li></ul>
+<p>What you want to do here is to keep reading packets from the file by increasing the '.BufferOff/Seg' address, and checking if the size of the packet read is less than the size negotiated in TFTP_OPEN. It can be concluded that several implementations use 0 to indicate EOF, while other implementations give a 'packet read' size less than the size negotiated.
+</p><p>With the above point in mind, the following pseudo code can be used to read a file:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw1">while</span> <span class="br0">&#40;</span>bytes_left <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    call_api<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// AX register contains whether it failed or not, while Status contains the detailed status.</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>status <span class="sy0">||</span> asm<span class="br0">&#40;</span><span class="st0">&quot;ax&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>                  
+        panic<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="kw1">if</span> <span class="br0">&#40;</span>bytes_read <span class="sy0">&lt;</span> PACKET_SIZE<span class="br0">&#41;</span>
+        <span class="kw2">break</span><span class="sy0">;</span>
+&#160;
+    bytes_left <span class="sy0">-=</span> PACKET_SIZE<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Closing">Closing</span></h3>
+<p>The PXENV_TFTP_CLOSE, with opcode 0x0021, is perhaps the simplest function. It requires a input buffer, with the following format, to be passed to it:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">t_PXENV_TFTP_CLOSE<span class="sy0">:</span>
+    <span class="sy0">.</span>Status       <span class="kw4">dw</span> <span class="nu0">0</span></pre></div></div>
+<ul><li> <b>.Status</b>. The Status returned after calling the function. The function would most probably ONLY fail if there is no active TFTP connection. 
+</li></ul>
+<h3> <span class="mw-headline" id="Performance">Performance</span></h3>
+<p>The original TFTP protocol is a very simple protocol (mostly because it was designed to be implemented easily on tiny embedded systems). The consequence is that it's relative slow (the "stop and wait" nature of it means that the network connection's bandwidth is significantly under-utilised). For larger files this can noticeably effect boot times.
+</p><p>There are 3 approaches for improving performance.
+</p>
+<h4> <span class="mw-headline" id="TFTP_Block_Size">TFTP Block Size</span></h4>
+<p>In 1998 a "TFTP Blocksize option" was introduced. The basic idea is to improve performance by increasing the block/packet size (and reducing the number of data packets and the number of acknowledgement packets). This is supported by the PXE specification.
+</p><p>In theory when you open a file via "TFTP Open" you're supposed to set the "PacketSize" field to what you're requesting, and (where possible) PXE is supposed to negotiate an appropriate packet size with the TFTP server and then set the  "PacketSize" field to size of the packet that both the PXE code in the client and the TFTP server agreed upon. This means that (e.g.) you should be able to set "PacketSize" to 65535 bytes and PXE will change it to the maximum size that is supported.
+</p><p>In practice this only works on some/most network cards, and some networking cards are broken and don't work correctly. For example, the implementation of PXE that comes with various RealTek cards will simply return an "Unknown error" if the requested packet size is too large (even though the PXE specification says otherwise, and even though PXE defines more appropriate status codes).
+</p><p>It is possible to work around this. The recommended work-around is:
+</p>
+<ul><li> If the "Version" field of the PXENV+ structure is less than "version 2.1"; be cautious and use a 512 byte packet size.
+</li><li> Use the "UNDI GET INFORMATION" function to get information about the network adapter. The returned information includes an MTU (Max. Transmission Unit) field. If this fails be cautious and use a 512 byte packet size.
+</li><li> Check if the MTU field is sane (within a reasonable range). If it's not within a reasonable range be cautious and use a 512 byte packet size.
+</li><li> Subtract the size of an IPv4 header (20 bytes), the size of the UDP header (8 byte), the size of the TFTP header (4 bytes) and 16 more bytes just in case from the MTU. This gives you the maximum packet size you can safely use.
+</li></ul>
+<h4> <span class="mw-headline" id="TFTP_.22Sliding_Window.22">TFTP "Sliding Window"</span></h4>
+<p>In 2015 a "TFTP Window Size" option was introduced. The basic idea here is to use "sliding window" (like TCP) instead of "stop and wait" to increase network bandwidth utilisation. Unfortunately, at this time I doubt any network cards support this.
+</p>
+<h4> <span class="mw-headline" id="Advanced.2FNon-standard_Approaches">Advanced/Non-standard Approaches</span></h4>
+<p>The PXE API exposes lower level functionality, including the ability to send arbitrary packets and to intercept received packets (via. a callback/"ISR"). In theory it would be possible for a boot loader to use these to implement any protocol it likes (e.g. use FTP or HTTP instead of TFTP) as long as the server is setup to support the protocol (in addition to TFTP that would still be needed to download the boot loader).
+</p><p>The most extreme approach would be to design your own protocol and implement your own server. In this case (in theory) you would be able to maximize network bandwidth utilisation, and the client could also offload processing to the server. With a massive amount of over-engineering you could significantly reduce boot times this way.
+</p>
+<h2> <span class="mw-headline" id="Cleaning_up">Cleaning up </span></h2>
+<p>After you have finished reading files via PXE, the best idea would be to shutdown PXE and reclaim any memory it was using. PXE support is unloaded by using the "PXEAPI_UNDI_SHUTDOWN" function to restore the network adapter to it's default state, followed by the "PXENV_UNLOAD_STACK" function to unhook any IRQ handlers. 
+</p><p>Lastly, PXE needs to prepare itself to be removed from memory (unhook interrupt 0x1A) using the "PXENV_STOP_UNDI" function (for PXE) or the "PXENV_UNDI_CLEANUP" function (for PXENV+).
+</p><p>Once PXE is unloaded, memory can be reclaimed by checking the UNDI code segment and UNDI data segment start addresses and sizes (in the PXENV+ data structure), calculating "start address + size" and selecting the highest value. This value is the "new" number of bytes of RAM starting at 0x00000000 (or the amount of conventional memory), and can be used directly and/or the value at 0x40:0x13 (or 0x00000413) can be changed to reflect the new number of 1 KB blocks of conventional memory. 
+</p><p>Please note that it's probably a good idea to calculate the amount of conventional memory before you unload PXE, because some of the functions above may clear the segment addresses and sizes in the PXENV+ structure.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles">Articles </span></h3>
+<ul><li> <a href="Diskless_Booting" title="Diskless Booting">Diskless Booting</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links </span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf">PXE Specification</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 180/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3013-0!*!0!!en!*!* and timestamp 20180121052000 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=PXE&amp;oldid=20845">http://wiki.osdev.org/index.php?title=PXE&amp;oldid=20845</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Bootloaders" title="Category:Bootloaders">Bootloaders</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=PXE" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="PXE"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:PXE&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="PXE#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="PXE" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=PXE&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=PXE&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="PXE#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/PXE" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/PXE" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=PXE&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=PXE&amp;oldid=20845" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In otherskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/PXE" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/PXE" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=PXE&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=PXE&amp;oldid=20845" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/PXE" title="PXE">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 June 2017, at 04:01.</li>
+											<li id="footer-info-viewcount">This page has been accessed 15,860 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

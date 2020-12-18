@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>C++ Exception Support - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "C++_Exception_Support", "wgTitle": "C++ Exception Support", "wgCurRevisionId": 19252, "wgArticleId": 3018, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["C++"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-cpp {line-height: normal;}
+.source-cpp li, .source-cpp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cpp
+ * CSS class: source-cpp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cpp.source-cpp .de1, .cpp.source-cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp.source-cpp  {font-family:monospace;}
+.cpp.source-cpp .imp {font-weight: bold; color: red;}
+.cpp.source-cpp li, .cpp.source-cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp.source-cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp.source-cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp.source-cpp .kw1 {color: #0000ff;}
+.cpp.source-cpp .kw2 {color: #0000ff;}
+.cpp.source-cpp .kw3 {color: #0000dd;}
+.cpp.source-cpp .kw4 {color: #0000ff;}
+.cpp.source-cpp .co1 {color: #666666;}
+.cpp.source-cpp .co2 {color: #339900;}
+.cpp.source-cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp.source-cpp .es0 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es1 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es2 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es3 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es4 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es5 {color: #006699; font-weight: bold;}
+.cpp.source-cpp .br0 {color: #008000;}
+.cpp.source-cpp .sy0 {color: #008000;}
+.cpp.source-cpp .sy1 {color: #000080;}
+.cpp.source-cpp .sy2 {color: #000040;}
+.cpp.source-cpp .sy3 {color: #000040;}
+.cpp.source-cpp .sy4 {color: #008080;}
+.cpp.source-cpp .st0 {color: #FF0000;}
+.cpp.source-cpp .nu0 {color: #0000dd;}
+.cpp.source-cpp .nu6 {color: #208080;}
+.cpp.source-cpp .nu8 {color: #208080;}
+.cpp.source-cpp .nu12 {color: #208080;}
+.cpp.source-cpp .nu16 {color:#800080;}
+.cpp.source-cpp .nu17 {color:#800080;}
+.cpp.source-cpp .nu18 {color:#800080;}
+.cpp.source-cpp .nu19 {color:#800080;}
+.cpp.source-cpp .me1 {color: #007788;}
+.cpp.source-cpp .me2 {color: #007788;}
+.cpp.source-cpp .ln-xtra, .cpp.source-cpp li.ln-xtra, .cpp.source-cpp div.ln-xtra {background-color: #ffc;}
+.cpp.source-cpp span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-C_Exception_Support action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">C++ Exception Support</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="C++_Exception_Support#mw-head">navigation</a>,
+					<a href="C++_Exception_Support#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>If the g++ that targets your operating system follows the <a rel="nofollow" class="external text" href="http://www.codesourcery.com/public/cxx-abi/abi-eh.html">Itanium C++ ABI</a> (GCC does so for almost all architectures), you can follow this article and add C++ exception support to your kernel.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="C++_Exception_Support#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="C++_Exception_Support#Port_libcxxrt"><span class="tocnumber">2</span> <span class="toctext">Port libcxxrt</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="C++_Exception_Support#Port_libgcc_eh"><span class="tocnumber">3</span> <span class="toctext">Port libgcc_eh</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="C++_Exception_Support#Rolling_your_own"><span class="tocnumber">4</span> <span class="toctext">Rolling your own</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="C++_Exception_Support#Function_stubs"><span class="tocnumber">5</span> <span class="toctext">Function stubs</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="C++_Exception_Support#malloc"><span class="tocnumber">5.1</span> <span class="toctext">malloc</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="C++_Exception_Support#pthread"><span class="tocnumber">5.2</span> <span class="toctext">pthread</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="C++_Exception_Support#dladdr"><span class="tocnumber">5.3</span> <span class="toctext">dladdr</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="C++_Exception_Support#Link_Script"><span class="tocnumber">6</span> <span class="toctext">Link Script</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="C++_Exception_Support#See_Also"><span class="tocnumber">7</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</td></tr></table>
+<h1> <span class="mw-headline" id="Introduction">Introduction</span></h1>
+<p>In the ABI, C++ exception is supported by the cooperation of three layers. The first layer is the compiler. The compiler translates the "try" "catch" "throw" statements into calls to specific functions in C++ runtime. The second layer is the C++ runtime. For exception support this layer is more or less a wrapper around the third layer. All the dirty work are done by the third layer: the unwind library. BTW, the second layer also adds support for RTTI &amp; dynamic_cast
+</p><p>So, in order to add C++ exception support, you just need to port the second and the third layer into you kernel, which means you need to either port libsupc++ or port libcxxrt and an unwind library. I prefer the second option, because libsupc++ is part of GCC, it's even not trivial to compile it separately. For the unwind library part, you have two options, libunwind and libgcc_eh. libunwind is more difficult to port, it depends on pthread and some type definitions in &lt;elf.h&gt; &lt;link.h&gt; and &lt;ucontext.h&gt;. The major reason you may want libunwind instead of libgcc_eh is that libgcc_eh is licensed under LGPL.
+</p><p>If you don't have any of the unix header files when compiling libcxxrt or libgcc_eh, e.g. &lt;unistd.h&gt;, create an empty one and try again. If you still can't compile libcxxrt or libgcc_eh, find a copy of the corresponding header file from a unix system and find out exactly what you are missing.
+</p>
+<h1> <span class="mw-headline" id="Port_libcxxrt">Port libcxxrt</span></h1>
+<p>libcxxrt can be downloaded <a rel="nofollow" class="external text" href="http://github.com/pathscale/libcxxrt">here</a>. libcxxrt is very easy to port, only 1 .c file and 8 .cc files. It depends on a few simple libc functions and a few pthread functions. If you don't need multi-thread support in your kernel (no smp, kernel code isn't preemptive), create some pthread stubs. Then copy all the source files and header files into your own kernel source tree and compile them with your existing build system, no special compiler flags are needed.
+</p>
+<h1> <span class="mw-headline" id="Port_libgcc_eh">Port libgcc_eh</span></h1>
+<p>libgcc_eh is more difficult. 
+</p>
+<ol><li> First thing is to try to cross compile GCC (you will fail, don't worry).
+</li><li> In the GCC build tree, you can find a directory named the same as your GCC target, e.g. i686-pc-linux-gnu.
+</li><li> Change to the sub-directory libgcc under the directory mentioned above.
+</li><li> Type command "make -k libgcc_eh.a" and record the console output of this command.
+</li><li> Check the console output and find out the exactly source files and compiler flags needed for libgcc_eh
+</li><li> Copy the source files into your kernel source tree except emutls.c(it's unnecessary), and add necessary compiler flags recorded in last step
+</li><li> Try to compile these source files, if any header file is missed, search GCC source tree and build tree for it.
+</li></ol>
+There is a generated file "gthr-default.h", most of the time it contains only one line: <pre>#include &quot;gthr-posix.h&quot;</pre>. If you don't need multi-thread support, change it to <pre>#include &quot;gthr-single.h&quot;</pre>
+<p>Note that you should *NOT* rename any source files from .c to .cpp. You need to compile these files as C-files, while (most of) the rest of your kernel is C++
+</p><p>Some of the compiler flags that affect code generation may cause stack unwinding to fail. In particular, flags like "-fomit-stack-pointer" and "-mregparms={n}" could break things. When debugging the ported code, try compiling without these flags first.
+</p>
+<h1> <span class="mw-headline" id="Rolling_your_own">Rolling your own</span></h1>
+<p>(NOTE: This is not yet complete, and hasn't been independently tested)
+If you're adverse to including external code in your OS (or just want the challenge), you should be able to write your own C++ library, which handles the dispatching and allocation of exceptions (stack backtracing is handed by libgcc, which you should already be including with your build). If you choose this route, make sure to run _init upon loading each module (library or executable) to properly register the exception handling frames with the unwind code.
+</p><p>The functions you'll need to implement all start with `__cxa_` and are documented in the Itanium C++ ABI (which is also used for x86 by GCC)
+You will also need to implement `__gxx_personality_v0` (which according to the clang docs, is the de-facto standard for C++), the structures used by this function to know what to do are documented in <a rel="nofollow" class="external text" href="http://mentorembedded.github.io/cxx-abi/exceptions.pdf">this</a> PDF.
+</p><p>It is also possible to create macros that implement exception-like control structures (especially useful if you use visual C++). You can implement exceptions with nothing more than setjmp and a linked list. However, you will need to create an exception class that all exceptions derive from, which implements some form of basic RTTI.
+</p><p>You can also implement the entire unwind library that matches the IA64 C++ Spec. Libc++ and Libc++abi provide great starting points for Layers 1 and 2. All thats needed is Layer 3 which provides the __Unwind_RaiseException logic which uses the "eh_frame" specs from LSB, DWARF4 spec, IA64 C++ spec and the System V spec. To see an example of how to do this, see <a rel="nofollow" class="external text" href="https://github.com/Bareflank/hypervisor/tree/master/bfunwind">here</a>
+</p>
+<h1> <span class="mw-headline" id="Function_stubs">Function stubs</span></h1>
+<p>If you don't have some of the needed funtions, try some of these stubs
+</p>
+<h2> <span class="mw-headline" id="malloc">malloc</span></h2>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cpp source-cpp"><pre class="de1"><span class="kw4">void</span><span class="sy2">*</span> <span class="kw3">malloc</span><span class="br0">&#40;</span><span class="kw4">size_t</span> size<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw4">static</span> <span class="kw4">char</span><span class="sy2">*</span> freeMemoryBase <span class="sy1">=</span> SOME_BASE_ADDRESS<span class="sy4">;</span>
+	size <span class="sy1">=</span> <span class="br0">&#40;</span>size <span class="sy2">+</span> <span class="nu0">7</span><span class="br0">&#41;</span> <span class="sy2">/</span> <span class="nu0">8</span> <span class="sy2">*</span> <span class="nu0">8</span><span class="sy4">;</span>
+	freeMemoryBase <span class="sy2">+</span><span class="sy1">=</span> size<span class="sy4">;</span>
+	<span class="kw1">return</span> freeMemoryBase <span class="sy2">-</span> size<span class="sy4">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="pthread">pthread</span></h2>
+<p>You may use the following stub for pthread, or you can just define LIBCXXRT_WEAK_LOCKS for libcxxrt, which will make libcxxrt treat all pthread functions as weak symbol, so you do not actually need to provide these functions, but only a single pthread.h with only declarations.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cpp source-cpp"><pre class="de1"><span class="kw2">namespace</span> <span class="br0">&#123;</span> <span class="kw4">void</span><span class="sy2">*</span> threadDataTable<span class="br0">&#91;</span><span class="nu0">64</span><span class="br0">&#93;</span><span class="sy4">;</span> <span class="kw4">int</span> freeEntry <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span><span class="br0">&#125;</span>
+<span class="kw4">int</span> pthread_key_create<span class="br0">&#40;</span>pthread_key_t<span class="sy2">*</span> key, <span class="kw4">void</span> <span class="br0">&#40;</span><span class="sy2">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">void</span><span class="sy2">*</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw3">assert</span><span class="br0">&#40;</span>freeEntry <span class="sy1">&lt;</span> <span class="nu0">64</span><span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+	<span class="sy2">*</span>key <span class="sy1">=</span> freeEntry<span class="sy4">;</span>
+	freeEntry<span class="sy2">++</span><span class="sy4">;</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">int</span> pthread_once<span class="br0">&#40;</span>pthread_once_t<span class="sy2">*</span> control, <span class="kw4">void</span> <span class="br0">&#40;</span><span class="sy2">*</span>init<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy2">*</span>control <span class="sy1">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+		<span class="br0">&#40;</span><span class="sy2">*</span>init<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+		<span class="sy2">*</span>control <span class="sy1">=</span> <span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">&#125;</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span><span class="sy2">*</span> pthread_getspecific<span class="br0">&#40;</span>pthread_key_t key<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw1">return</span> threadDataTable<span class="br0">&#91;</span>key<span class="br0">&#93;</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">int</span> pthread_setspecific<span class="br0">&#40;</span>pthread_key_t key, <span class="kw4">const</span> <span class="kw4">void</span><span class="sy2">*</span> data<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	threadDataTable<span class="br0">&#91;</span>key<span class="br0">&#93;</span> <span class="sy1">=</span> <span class="br0">&#40;</span><span class="kw4">void</span><span class="sy2">*</span><span class="br0">&#41;</span>data<span class="sy4">;</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">int</span> pthread_mutex_init<span class="br0">&#40;</span>pthread_mutex_t<span class="sy2">*</span> mutex, <span class="kw4">const</span> pthread_mutexattr_t<span class="sy2">*</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="sy2">*</span>mutex <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">int</span> pthread_mutex_lock<span class="br0">&#40;</span>pthread_mutex_t<span class="sy2">*</span> mutex<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw3">assert</span><span class="br0">&#40;</span><span class="sy2">*</span>mutex <span class="sy1">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy4">;</span>
+	<span class="sy2">*</span>mutex <span class="sy1">=</span> <span class="nu0">1</span><span class="sy4">;</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">int</span> pthread_mutex_unlock<span class="br0">&#40;</span>pthread_mutex_t<span class="sy2">*</span> mutex<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw3">assert</span><span class="br0">&#40;</span><span class="sy2">*</span>mutex <span class="sy3">!</span><span class="sy1">=</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy4">;</span>
+	<span class="sy2">*</span>mutex <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">int</span> pthread_cond_wait<span class="br0">&#40;</span>pthread_cond_t<span class="sy2">*</span>, pthread_mutex_t<span class="sy2">*</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">int</span> pthread_cond_signal<span class="br0">&#40;</span>pthread_cond_t<span class="sy2">*</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="dladdr">dladdr</span></h2>
+<p>This function is used for debugging by libcxxrt, not a big problem to simply return an error.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> dladdr<span class="br0">&#40;</span><span class="kw4">void</span><span class="sy0">*,</span> Dl_info<span class="sy0">*</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h1> <span class="mw-headline" id="Link_Script">Link Script</span></h1>
+<p>If you use a custom link script, make sure to place .eh_frame_hdr, .eh_frame and .gcc_except_table in the exact order in your final output. Otherwise sometimes you are not able to catch any exception.
+</p>
+<h1> <span class="mw-headline" id="See_Also"> See Also </span></h1>
+<ul><li> <a rel="nofollow" class="external free" href="http://www.codesourcery.com/cxx-abi/abi-eh.html">http://www.codesourcery.com/cxx-abi/abi-eh.html</a> (While sounding like being specific to the Itanium, this is the base for the common C++ ABI)
+</li></ul>
+<ul><li> <a rel="nofollow" class="external free" href="http://www.codeproject.com/cpp/exceptionhandler.asp">http://www.codeproject.com/cpp/exceptionhandler.asp</a> (Specific to VC++.)
+</li></ul>
+<ul><li> <a rel="nofollow" class="external free" href="http://www.microsoft.com/msj/0197/Exception/Exception.aspx">http://www.microsoft.com/msj/0197/Exception/Exception.aspx</a> (Article on SEH, the <a href="Stack#Unwinding_the_stack" title="Stack">stack-based unwinding</a> used by VC++ and most other Windows compilers. Any use of stack-based SEH may or may not be covered by USPTO patent #5,628,016, held by Borland International, Inc.; GCC and most other UNIX compilers use the same table-based mechanism on the x86 that is the rule on RISC architectures, thus being unaffected by the patent.)
+</li></ul>
+<ul><li> <a rel="nofollow" class="external free" href="http://www.kuzbass.ru:8086/docs/isocpp/except.html">http://www.kuzbass.ru:8086/docs/isocpp/except.html</a>
+</li></ul>
+<ul><li> The standard header <b>&lt;exception&gt;</b>, declaring several support functions.
+</li></ul>
+<ul><li> <a rel="nofollow" class="external free" href="http://llvm.org/docs/ExceptionHandling.html">http://llvm.org/docs/ExceptionHandling.html</a> (How LLVM/Clang handles C++ exceptions, references the C++ABI and the following document)
+</li><li> <a rel="nofollow" class="external free" href="http://mentorembedded.github.io/cxx-abi/exceptions.pdf">http://mentorembedded.github.io/cxx-abi/exceptions.pdf</a> (A document by HP on C++ exception handling)
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 95/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3018-0!*!0!!en!*!* and timestamp 20180121072732 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=C%2B%2B_Exception_Support&amp;oldid=19252">http://wiki.osdev.org/index.php?title=C%2B%2B_Exception_Support&amp;oldid=19252</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:C++" title="Category:C++">C++</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=C%2B%2B_Exception_Support" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="C++_Exception_Support"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:C++_Exception_Support"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="C++_Exception_Support#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="C++_Exception_Support" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=C%2B%2B_Exception_Support&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=C%2B%2B_Exception_Support&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="C++_Exception_Support#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/C%2B%2B_Exception_Support" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/C%2B%2B_Exception_Support" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=C%2B%2B_Exception_Support&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=C%2B%2B_Exception_Support&amp;oldid=19252" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 19 May 2016, at 08:03.</li>
+											<li id="footer-info-viewcount">This page has been accessed 13,692 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+							skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/C%2B%2B_Exception_Support" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/C%2B%2B_Exception_Support" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=C%2B%2B_Exception_Support&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=C%2B%2B_Exception_Support&amp;oldid=19252" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 19 May 2016, at 08:03.</li>
+											<li id="footer-info-viewcount">This page has been accessed 13,692 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.044 secs. -->
+	</body>
+</html>

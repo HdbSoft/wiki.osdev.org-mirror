@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Real mode assembly II - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Real_mode_assembly_II", "wgTitle": "Real mode assembly II", "wgCurRevisionId": 20173, "wgArticleId": 2451, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 1 Tutorials", "Real mode assembly"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Real_mode_assembly_II action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Real mode assembly II</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Real_mode_assembly_II#mw-head">navigation</a>,
+					<a href="Real_mode_assembly_II#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a><br />Beginner</td></tr></table>
+<p><i>In this second installment of the <a href="Real_mode_assembly_bare_bones" title="Real mode assembly bare bones" class="mw-redirect">real mode assembly bare bones</a> series we will cover hex functions and NASM directives and their usefulness.</i>
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Real_mode_assembly_II#WARNING"><span class="tocnumber">1</span> <span class="toctext">WARNING</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Real_mode_assembly_II#Hexadecimal_to_ASCII"><span class="tocnumber">2</span> <span class="toctext">Hexadecimal to ASCII</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Real_mode_assembly_II#The_code"><span class="tocnumber">2.1</span> <span class="toctext">The code</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="Real_mode_assembly_II#NASM:_Lord_of_Open-Source_Assemblers"><span class="tocnumber">3</span> <span class="toctext">NASM: Lord of Open-Source Assemblers</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Real_mode_assembly_II#Continuing_on"><span class="tocnumber">4</span> <span class="toctext">Continuing on</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="WARNING"> WARNING </span></h2>
+<p>Please see the <a href="Real_Mode_OS_Warning" title="Real Mode OS Warning">Real Mode OS Warning</a> page before continuing.
+</p>
+<h2> <span class="mw-headline" id="Hexadecimal_to_ASCII">Hexadecimal to ASCII</span></h2>
+<p>This is where things get fun. We're going to convert a value in al to two characters and print them out. The following code snippet from <a rel="nofollow" class="external free" href="http://www.df.lth.se/~john_e/gems/gem003a.html">http://www.df.lth.se/~john_e/gems/gem003a.html</a> shows how to convert the low nybble of al to an ASCII character.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> <span class="kw1">cmp</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">10</span>
+ <span class="kw1">sbb</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">69h</span>
+ <span class="kw1">das</span></pre></div></div>
+<p>Simple, but doesn't do that much. After all, it only converts the low nybble and can do weird things occasionally. So we need to shift (and rotate for the low nybble). Here's how I do it:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> <span class="kw1">shr</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">4</span>        <span class="co1">; Shift right four places to put upper nybble in lower spot</span>
+ <span class="kw1">cmp</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">10</span>
+ <span class="kw1">sbb</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">69h</span>
+ <span class="kw1">das</span>
+&#160;
+ <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span><span class="nu0">0Eh</span>   <span class="co1">; Print out upper nybble</span>
+ <span class="kw1">int</span> <span class="nu0">10h</span></pre></div></div>
+<p>Sure, it works, but it's only printing out the upper nybble and the low nybble disappears! Oh noes! So we have to store a copy of al in a variable first:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> <span class="kw1">mov</span> <span class="br0">&#91;</span><span class="sy0">.</span>temp<span class="br0">&#93;</span><span class="sy0">,</span><span class="kw3">al</span></pre></div></div>
+<p>And restore it after to do the second:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span><span class="br0">&#91;</span><span class="sy0">.</span>temp<span class="br0">&#93;</span></pre></div></div>
+<p>Now we rotate and shift to do the conversion for the low nybble:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> <span class="kw1">ror</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">4</span>
+ <span class="kw1">shr</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">4</span>
+ <span class="kw1">cmp</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">10</span>
+ <span class="kw1">sbb</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">69h</span>
+ <span class="kw1">das</span>
+&#160;
+ <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span><span class="nu0">0Eh</span>
+ <span class="kw1">int</span> <span class="nu0">10h</span></pre></div></div>
+<h3> <span class="mw-headline" id="The_code">The code</span></h3>
+<p>Now put that all together:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> print_hex_byte<span class="sy0">:</span> 
+   <span class="kw1">mov</span> <span class="br0">&#91;</span><span class="sy0">.</span>temp<span class="br0">&#93;</span><span class="sy0">,</span><span class="kw3">al</span>
+   <span class="kw1">shr</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">4</span>
+   <span class="kw1">cmp</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">10</span>
+   <span class="kw1">sbb</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">69h</span>
+   <span class="kw1">das</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span><span class="nu0">0Eh</span>
+   <span class="kw1">int</span> <span class="nu0">10h</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span><span class="br0">&#91;</span><span class="sy0">.</span>temp<span class="br0">&#93;</span>
+   <span class="kw1">ror</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">4</span>
+   <span class="kw1">shr</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">4</span>
+   <span class="kw1">cmp</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">10</span>
+   <span class="kw1">sbb</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">69h</span>
+   <span class="kw1">das</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span><span class="nu0">0Eh</span>
+   <span class="kw1">int</span> <span class="nu0">10h</span>
+&#160;
+   <span class="kw1">ret</span>
+&#160;
+ <span class="sy0">.</span>temp <span class="kw4">db</span> <span class="nu0">0</span></pre></div></div>
+<p>And that function is now callable! Using what you've learned, you can also write <b>your own</b> call to print all of ax and not just al. Try it, it's not that hard!
+</p>
+<h2> <span class="mw-headline" id="NASM:_Lord_of_Open-Source_Assemblers">NASM: Lord of Open-Source Assemblers</span></h2>
+<p><a href="NASM" title="NASM">NASM</a> has some great macro abilities, including automating tasks such as writing your db statements for you. Simple, multi-line macros go something like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> <span class="sy0">%</span><span class="kw4">macro</span> <span class="kw4">name</span> operands
+    <span class="co1">; code code code</span>
+ <span class="sy0">%</span>endmacro</pre></div></div>
+<p>You can use&#160;%1,&#160;%2, etc. to represent the contents of arguments passed to your macro. You can even emulate BASIC statements with macros, like discussed <a href="Printing_to_the_screen_without_a_db" title="Printing to the screen without a db">here</a>.
+</p><p>Even simpler macros are the single-line macros, or&#160;%define statements. They create assemble-time statements to be inserted, but they are more like constants than functions.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> <span class="sy0">%</span>define D_SIGNATURE <span class="nu0">0xCAFEF00D</span>
+ <span class="sy0">%</span>define D_INFO <span class="nu0">0x29A3B83D</span>
+&#160;
+ <span class="kw1">push</span> D_SIGNATURE
+ <span class="kw1">push</span> D_INFO
+ <span class="kw1">jmp</span> <span class="nu0">0x2000</span><span class="sy0">:</span><span class="nu0">0</span></pre></div></div>
+<p>Now, that's just example code, it could mean anything, but it depends on what's at 0x2000:0, of course. But the principle is the same,&#160;%define is used to create constants and the like.
+</p><p>NASM's macro features are discussed in a lot more detail in the manual: <a rel="nofollow" class="external free" href="http://www.nasm.us/doc/nasmdoc4.html">http://www.nasm.us/doc/nasmdoc4.html</a>
+</p>
+<h2> <span class="mw-headline" id="Continuing_on">Continuing on</span></h2>
+<p>This tutorial was more of a theory lesson and less of a water pipe spitting out gushes of source code. Future tutorials will have more application, but less copy-and-paste code.
+</p><p>Have fun developing your OS!
+</p>
+<pre>&lt;- <a href="Real_mode_assembly_I" title="Real mode assembly I">Real mode assembly I</a>  |  <a href="Real_mode_assembly_III" title="Real mode assembly III">Real mode assembly III</a> -&gt;
+</pre>
+<!-- 
+NewPP limit report
+Preprocessor node count: 168/1000000
+Post-expand include size: 340/2097152 bytes
+Template argument size: 44/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2451-0!*!0!!en!2!* and timestamp 20180121080139 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_II&amp;oldid=20173">http://wiki.osdev.org/index.php?title=Real_mode_assembly_II&amp;oldid=20173</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_1_Tutorials" title="Category:Level 1 Tutorials">Level 1 Tutorials</a></li><li><a href="Category:Real_mode_assembly" title="Category:Real mode assembly">Real mode assembly</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Real_mode_assembly_II" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Real_mode_assembly_II"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Real_mode_assembly_II&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Real_mode_assembly_II#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Real_mode_assembly_II" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_II&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_II&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Real_mode_assembly_II#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Real_mode_assembly_II" title="A list of all wiki pages that link here [j]skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Real_mode_assembly_II" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Real_mode_assembly_II" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_II&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_II&amp;oldid=20173" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 21 January 2017, at 01:15.</li>
+											<li id="footer-info-viewcount">This page has been accessed 24,859 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.159 secs. -->
+	</body>
+</html>

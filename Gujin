@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Gujin - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Gujin", "wgTitle": "Gujin", "wgCurRevisionId": 20387, "wgArticleId": 2272, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Bootloaders"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Gujin action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Gujin</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Gujin#mw-head">navigation</a>,
+					<a href="Gujin#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Gujin is a GPLed <a href="Bootloader" title="Bootloader">bootloader</a> for the PC.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Gujin#What_can_Gujin_do.3F"><span class="tocnumber">1</span> <span class="toctext">What can Gujin do?</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Gujin#See_Also"><span class="tocnumber">2</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Gujin#Articles"><span class="tocnumber">2.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Gujin#Threads"><span class="tocnumber">2.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Gujin#External_Links"><span class="tocnumber">2.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="What_can_Gujin_do.3F"> What can Gujin do? </span></h2>
+<p>It can read FAT12, FAT16, FAT32, ext2, ext3, ext4 (with constant inode size) and ISO 9660 filesystems.
+</p><p>It has a graphical user interface with mouse support, and can be installed on any media: floppy, hard/USB disk partitions, hard/USB disk MBR, CD/DVD-ROM, DVD-RAM (i.e. FAT with 2048 bytes/sectors). It can also use a serial port as input/ouput instead of the screen and keyboard.
+</p><p>Gujin can chain-load other bootloader, load Linux kernel, has an unfinished loader of Multiboot specification, but more importantly for our current interest it can load standard ELF files (more exactly GZIP compressed ELF files).
+</p><p>There is two major ELF variant on the PC: ELF32 (with 32 bits load address, sizes and entry point) and ELF64 (with 64 bits fields), Gujin loads any of them and switch the processor in protected mode to jump to the ELF entry point.
+</p><p>Gujin will not try to set-up memory paging at all, that is the job of the kernel to select which kind of paging it wants - so even the 64 bits ELF files will have to handle the transition from 32 bits to 64 bits themselves (because you need paging to go to 64 bits mode).
+</p><p>Same for interrupts, Gujin switches to protected mode but does not re-enable interrupts, that is the job of the kernel being booted to set-up the Interrupt Decriptor Table and handle each interrupts, because BIOS will not help the kernel any more.
+</p><p>Gujin can also relocate the ELF file if it contains relocation information, see option <a rel="nofollow" class="external text" href="http://sourceware.org/binutils/docs-2.19/ld/Options.html#index-g_t_002d_002demit_002drelocs-79">--emit-relocs</a> of the "ld" linker of the "Binutils" toolchain.
+</p><p>Because most applications will want to collect BIOS informations before the switch to protected mode, Gujin can call in real-mode a function of the ELF file, and if this function returns zero - continue the loading process - else display an error message (for instance: "trying to execute a 64 bits application on a processor without this feature!").
+</p><p>Moreover, in most cases the kernel can decide to return to the Gujin bootloader (if it did not erased it from memory), without forcing a reboot.
+</p><p>The Gujin bootloader is built using standard Linux tools, it does not need Linux to run (only a not-too-buggy BIOS) - but we have to assume you are running Linux to use the GNU toolchain: GCC, Binutils, GZIP... to produce the ELF file for the kernel.
+Also, Gujin installer needs either Linux 32 bits or Linux 64 bits to run and install the Gujin bootloader on a device.
+</p><p>Because Windows uses another executable format, you cannot install Cygwin/MinGW on windows and use the compilation toolchain directly, in this case you would have to generate a cross compiler toolchain to produce ELF files, and that is out of scope for this description (but not that difficult).
+</p>
+<hr />
+<p>So enough text description, let's try it!
+</p><p>The floppies being out-dated, let's say we want to use a USB stick as our test media. In some cases, we may want to use a SD card, basically the process is the same.
+</p><p>We first need to check that the target PC will be able to boot that USB stick or SD card, when Gujin is installed on it.
+</p><p>To have increased chances of success, we will ask the Gujin installer to reformat completely this USB disk or SD card, so first backup any interresting file you have in some other place.
+</p><p>Then, download this <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/install/2.8.2/install-2.8.2.tar.gz/install/gujin?extract=true">gujin executable</a> if you are using a 32 bits Linux, and that <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/install/2.8.2/install-2.8.2.tar.gz/install/gujin64?extract=true">gujin64 executable</a> if you are using a 64 bits Linux:
+</p><p>If you do not trust anybody, download the source file <a rel="nofollow" class="external text" href="http://sourceforge.net/projects/gujin/files/gujin/2.8.2/gujin-2.8.2.tar.gz/download">gujin-*.tar.gz</a>, extract it in a directory and type "make" - that will produce an executable named "gujin" (even on a 64 bits Linux).
+</p><p>Remember to visit <a rel="nofollow" class="external free" href="http://gujin.org">http://gujin.org</a> to check if there is a newer version of Gujin, and to increase Gujin author counters and keep him happy.
+</p><p>Then, we reformat that dedicated USB stick as a bootable FAT filesystem, erasing all its content: first go in "root" by typing "su" or "sudo" (distribution dependant), then get the device name of you USB stick (let's say it is /dev/sdg) (sometimes /dev/mmcblk0 for SD cards), and type:
+</p>
+<pre> ./gujin /dev/sdg --disk=BIOS:0x00,auto
+</pre>
+<p>Depending on the size of the USB stick, that will have created either a FAT16 or a FAT32 (or even a FAT12) filesystem, but that point is not really important.
+</p><p>You then unplug this device, and replug it: most distribution will automatically mount the filesystem and display a window of its content: only a single file which is the bootloader itself.
+</p><p>To check that this filesystem is correctly created, you can type:
+</p>
+<pre> /sbin/fsck.vfat /dev/sdg
+</pre>
+<p>With the Gujin installer parameters we used, that would have created a "superfloppy" format on our USB stick, that is currently the format most PC will be able to understand and boot from.
+</p><p>That does not mean your own PC will 100% boot it, due to BIOS bugs - so you need to test now that this USB stick is bootable by your PC or not: umount the USB stick, plug it in the test PC and power it on, see if Gujin is started (you will notice easily).
+</p><p>If it is not started try to check:
+</p>
+<pre> - that the boot order in the BIOS is set to boot USB devices first
+ - try the different USB devices if your BIOS has switchable items.
+ - try to tell the Gujin installer to use the Extended BIOS instead by typing (--disk=EBIOS:0x00,auto is the default):
+ ./gujin /dev/sdg
+ - try to tell the Gujin installer to generate a real disk and not a superfloppy by:
+ ./gujin --mbr /dev/sdg --disk=BIOS:0x00,auto
+ - try the two previous options together:
+ ./gujin --mbr /dev/sdg --disk=EBIOS:0x00,auto
+ - try to use another (smaller) USB stick, some BIOS will only accept to boot from a FAT16 superfloppy
+</pre>
+<p>By now you should know a lot more about your BIOS, and have a bootable USB stick.
+</p>
+<hr />
+<p>Then, we want to generate this ELF kernel - let's try to generate a "hello world":
+Create a file with that content:
+</p>
+<pre> const char msg1[] = "Hello protected-mode text world! please reboot ..."; 
+ #define STACKSIZE 64 * 1024 
+ static unsigned stack[STACKSIZE / 4] __attribute__ ((aligned(32))); 
+ 
+ void _start (void) 
+ { 
+ 	/* We are flat non-paged memory and interrupt disabled */ 
+ 	asm (" mov&#160;%0,%%esp "&#160;:&#160;: "i" (&amp;stack[STACKSIZE / 4])); 
+ 	volatile unsigned short *video_array = (volatile unsigned short *)0xB8000; 
+ 	unsigned cpt1; 
+ 
+ 	video_array += 10 * 80; /* few empty lines */ 
+ 	/* We want blue background color and lightgray foreground, so 0x1700: */ 
+ 	for (cpt1 = 0; cpt1 &lt; sizeof(msg1) - 1; cpt1++) 
+ 		video_array[cpt1] = 0x1700 + msg1[cpt1]; 
+ 
+ 	while (1) 
+ 		continue; 
+ } 
+</pre>
+<p>Then compile it like (you may need to add "-fno-stack-protector" too, distribution dependant):
+</p>
+<pre> $ gcc -m32 -Wall -O2 -s -static -nostartfiles -nodefaultlibs -Wl,-Ttext=0x110000 hello.c -o hello.elf 
+</pre>
+<p>and compress it by:
+</p>
+<pre> $ gzip -9 hello.elf -c &gt; hello.kgz 
+</pre>
+<p>You just need to copy that hello.kgz file into the USB stick, and reboot with this USB stick, you will get a menu with "hello.kgz" displayed.
+</p><p>If you click on this filename, you will have "Hello protected-mode text world! please reboot ..." displayed (Because this hello-world do not manage graphic modes, you have to "force start kernel in text mode" in Gujin configuration).
+</p><p>If you want a bit more complex "hello world" applications, you should download Gujin <a rel="nofollow" class="external text" href="http://sourceforge.net/projects/gujin/files/install/2.8.2/install-2.8.2.tar.gz/download">install*.tar.gz</a> pack .
+</p><p>you will find there few KGZ files, like previous example but with some addresses displayed to show the exact position of the application in memory.
+</p><p>You will see <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/install/2.8.2/install-2.8.2.tar.gz/install/hello_32bits.kgz?extract=true">hello_32bits.kgz</a> and <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/install/2.8.2/install-2.8.2.tar.gz/install/hello_32bits_r.kgz?extract=true">hello_32bits_r.kgz</a> to show the effect of relocation, and <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/install/2.8.2/install-2.8.2.tar.gz/install/hello_64bits.kgz?extract=true">hello_64bits.kgz</a> and <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/install/2.8.2/install-2.8.2.tar.gz/install/hello_64bits_r.kgz?extract=true">hello_64bits_r.kgz</a> to show 64 bits applications.
+</p><p>To get the source code, just download the file <a rel="nofollow" class="external text" href="http://sourceforge.net/projects/gujin/files/gujin/2.8.2/gujin-2.8.2.tar.gz/download">gujin*.tar.gz</a>, and extract the corresponding c files.
+</p><p>To see the command used to compile them, just search the string "hello_32bits.kgz:" (with semicolon) in the file <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/gujin/2.8.2/gujin-2.8.2.tar.gz/gujin/Makefile?extract=true">Makefile</a>.
+</p><p>If you just want a real mode "hello world", you can do that too with an ELF file where the load address is null for the code segment.
+</p><p>There is a limit of 64 Kbytes for real mode ELF file.
+</p><p>Just create a file which <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/gujin/2.8.2/gujin-2.8.2.tar.gz/gujin/hello_bios.c?extract=true">contains</a>:
+</p>
+<pre> /* hello_bios.c - public domain - no support whatsoever */
+ 
+ /* Constant entry block, max 64 KB code+data+stack, do not touch: */
+ asm (
+ "	.code16gcc				\n"
+ "	.section .init,\"ax\",@progbits		\n"
+ "	.global _start				\n"
+ "_start:					\n"
+ //  "int $3 # if debugging with borland td.exe, started by tiny.exe	\n"
+ "	pushw	%ds				\n"
+ "	pushw	%es				\n"
+ "	pushw	%fs				\n"
+ "	pushw	%gs				\n"
+ "	pushfl					\n"
+ "	pushal					\n"
+ "	movw	%ss,%cs:1f+1			\n"
+ "	movw	%sp,%cs:2f+2			\n"
+ "	movw	%cs,%ax				\n"
+ "	movw	%ax,%ds				\n"
+ "	movw	%ax,%es				\n"
+ "	movw	%ax,%fs				\n"
+ "	movw	%ax,%gs				\n"
+ "	movw	%ax,%ss				\n"
+ "	movl	$0,%esp				\n"
+ "	cld					\n"
+ "	calll	main				\n"
+ "	movl	%eax,%cs:3f+2			\n"
+ "1:	movw	$0,%ax				\n"
+ "	movw	%ax,%ss				\n"
+ "2:	movl	$0,%esp				\n"
+ "	popal					\n"
+ "	popfl					\n"
+ "	popw	%gs				\n"
+ "	popw	%fs				\n"
+ "	popw	%es				\n"
+ "	popw	%ds				\n"
+ "3:	movl	$0,%eax				\n"
+ "	lretw					\n"
+ "	.previous				\n"
+ );
+ 
+ /* For information about asm() construct, see GCC manual:
+ <a rel="nofollow" class="external free" href="http://gcc.gnu.org/onlinedocs/gcc-4.5.0/gcc/Extended-Asm.html">http://gcc.gnu.org/onlinedocs/gcc-4.5.0/gcc/Extended-Asm.html</a>
+   For information about BIOS services, see
+ <a rel="nofollow" class="external free" href="http://stanislavs.org/helppc/">http://stanislavs.org/helppc/</a>
+ */
+ enum standard_color {
+ 	black,		blue,		green,		cyan,
+ 	red,		magenta,	brown,		lightgray,
+ 	darkgray,	lightblue,	lightgreen,	lightcyan,
+ 	lightred,	lightmagenta,	yellow,		white
+ 	};
+ 
+ /* This assumes 16 colors modes, text or graphic - i.e. not 256 colors: */
+ static inline void
+ VGA_writestring (const char *string, unsigned char row, unsigned char col)
+ {
+ 	unsigned short page_attribute = 16 * blue + lightgray, strlen_string;
+ 	const char *endstring = string;
+ 
+ 	/* We cannot rely on libc to provide strlen(): */
+ 	while (*endstring)
+ 		endstring++;
+ 	strlen_string = endstring - string;
+ 
+ 	asm (
+ "	xchgl	%%ebp,%4		\n"
+ "	int	$0x10 # writestring	\n"
+ "	xchgl	%%ebp,%4		\n"
+ 		:&#160;: "a" (0x1301), "b" (page_attribute),
+ 		"c" (strlen_string), "d" (((unsigned short)row &lt;&lt; 8) | col),
+ 		"r" (string)	/* in fact&#160;%es:%bp, but "B" (string) doesn't work */
+ 		);
+ }
+ 
+ static inline void BIOS_wait (unsigned nb_microsecond)
+ {
+ 	unsigned short status;
+ 
+ 	/* Use volatile when there is at least one result, but even if the result
+ 		is not used, the code has to be inserted (status is the result): */
+ 	asm volatile ("	int	$0x15	"
+ 		: "=a" (status)
+ 		:  "a" (0x8600), "d" (nb_microsecond &amp; 0xFFFF), "c" (nb_microsecond &gt;&gt; 16)
+ 		);
+ }
+ 
+ int main (void)
+ {
+ 	VGA_writestring ("Hello BIOS world! Please wait...\r\n", 0, 0);
+ 	BIOS_wait (3 * 1000 * 1000); /* 3 seconds before returning to Gujin*/
+ //	return 0x80000000; /* to return to Gujin menu */
+ 	return 0xA0000000; /* to return to Gujin menu, do not display "press a key to continue" */
+ }
+</pre>
+<p><br />
+And then compile it by:
+</p>
+<pre> $ gcc -m32 -Wall -Os -s -static -nostartfiles -nodefaultlibs -Wa,-R -Wl,--section-start,.init=0 hello_bios.c -o hello_bios.elf
+</pre>
+<p>and compress it:
+</p>
+<pre> $ gzip -9 hello_bios.elf -c &gt; hello_bios.kgz
+</pre>
+<p>you can copy this hello_bios.kgz to the USB stick and run it, I hope the different functions of the source file are obvious.
+</p><p>The Gujin bootloader is willing to let the real mode and protected mode kernel to access the bootloader internal data (like what is the current video mode, how to display strings...) as long as the kernel is licensed under the GPL license - i.e. when the GZIP kernel contains a GZIP comment describing its license. That is illustrated by <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/install/2.8.2/install-2.8.2.tar.gz/install/cleandisk.kgz?extract=true">cleandisk.kgz</a> compiled form this <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/gujin/2.8.2/gujin-2.8.2.tar.gz/gujin/cleandisk.c?extract=true">cleandisk.c</a> source code and linked with this <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/gujin/2.8.2/gujin-2.8.2.tar.gz/gujin/cleandisk.ld?extract=true">linker file</a>.
+</p><p>The main point about the GPL license is that it is not possible to draw a line in between Gujin possible bug and a closed source application: it is no allowed to modify Gujin data while in real mode - but there isn't any enforcement by hardware.
+</p><p>Obviously, Gujin will enable you to run an ELF file with a real mode part AND a protected mode part, just have a look at the example <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/install/2.8.2/install-2.8.2.tar.gz/install/hello_gpl.kgz?extract=true">hello_gpl.kgz</a> and its source code <a rel="nofollow" class="external text" href="http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/g/project/gu/gujin/gujin/2.8.2/gujin-2.8.2.tar.gz/gujin/hello_gpl.c?extract=true">hello_gpl.c</a>.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Bootloader" title="Bootloader">Bootloader</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://gujin.sourceforge.net">Gujin</a> at sourceforge.net
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 29/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2272-0!*!0!!en!*!* and timestamp 20180121033208 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Gujin&amp;oldid=20387">http://wiki.osdev.org/index.php?title=Gujin&amp;oldid=20387</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Bootloaders" title="Category:Bootloaders">Bootloaders</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Gujin" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Gujin"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Gujin"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Gujin#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Gujin" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Gujin&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Gujin&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Gujin#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Gujin" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Gujin" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Gujin&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Gujin&amp;oldid=20387" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 14:41.</li>
+											<li id="footer-info-viewcount">This page has been accessed 31,571 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

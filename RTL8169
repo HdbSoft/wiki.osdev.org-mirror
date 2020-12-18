@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>RTL8169 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "RTL8169", "wgTitle": "RTL8169", "wgCurRevisionId": 17429, "wgArticleId": 2349, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Stubs", "Network Hardware", "Standards"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-RTL8169 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">RTL8169</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="RTL8169#mw-head">navigation</a>,
+					<a href="RTL8169#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=RTL8169&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p><b>Programming Guide for the RTL8169(S)-32/64 Network Interface Chipsets</b> 
+</p><p>The RTL8169 is Realtek's next generation of high-performance network cards.  This particular chipset is designed to operate at 10/100/1000 Mbps speeds.  
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="RTL8169#Basic_Startup"><span class="tocnumber">1</span> <span class="toctext">Basic Startup</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="RTL8169#Get_the_MAC_Address"><span class="tocnumber">1.1</span> <span class="toctext">Get the MAC Address</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="RTL8169#Reset_the_Chip"><span class="tocnumber">1.2</span> <span class="toctext">Reset the Chip</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="RTL8169#Setting_up_the_Rx_Descriptors"><span class="tocnumber">2</span> <span class="toctext">Setting up the Rx Descriptors</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="RTL8169#Configuring_RxConfig_and_TxConfig"><span class="tocnumber">3</span> <span class="toctext">Configuring RxConfig and TxConfig</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="RTL8169#.28Un.29locking_Registers"><span class="tocnumber">3.1</span> <span class="toctext">(Un)locking Registers</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="RTL8169#TxConfig"><span class="tocnumber">3.2</span> <span class="toctext">TxConfig</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="RTL8169#RxConfig"><span class="tocnumber">3.3</span> <span class="toctext">RxConfig</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="RTL8169#Max_Packet_Sizes"><span class="tocnumber">4</span> <span class="toctext">Max Packet Sizes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="RTL8169#Max_Transmit_Packet_Size"><span class="tocnumber">4.1</span> <span class="toctext">Max Transmit Packet Size</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="RTL8169#Receive_Packet_Maximum_Size"><span class="tocnumber">4.2</span> <span class="toctext">Receive Packet Maximum Size</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="RTL8169#Full_Reset_Example"><span class="tocnumber">5</span> <span class="toctext">Full Reset Example</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="RTL8169#External_Links"><span class="tocnumber">6</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Basic_Startup"> Basic Startup </span></h2>
+<h3> <span class="mw-headline" id="Get_the_MAC_Address"> Get the MAC Address </span></h3>
+<p>First things first, we need to get the NIC's physical MAC address. Normally we should go through the EEPROM to access the MAC address, but in this case we will take a shortcut and obtain the address from the MAC0-6 registers.  The MAC registers start at offset 0x00 and should be accessed in 8-bit segments. 
+</p><p>ex:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">char</span> i<span class="sy0">;</span>
+ <span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">6</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+ <span class="br0">&#123;</span>
+    mac_address<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> inportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> i<span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/*ioaddr is the base address obtainable from the PCI device configuration space.*/</span>
+ <span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Reset_the_Chip"> Reset the Chip </span></h3>
+<p>It is necessary to reset the RTL8169 to put the registers in a known default state, as well as begin powering up the chip.  We need to send the reset command to Chip Command register at offset 0x37.  The reset bit is at offset 0x10, therefore we need to do an 'outportb' using those offsets to tell the chip to begin the resetting process.  Once we have sent that command, it will take some time for the chip to complete the operation, and because it is altering registers we should stop all further writes/reads to registers until it has completed.  The reset bit in the Command Register will self-clear once the operation is finished, that's what we should check for before proceeding setting up the chip. 
+</p><p>ex: 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> outportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x37</span><span class="sy0">,</span> <span class="nu12">0x10</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/*set the Reset bit (0x10) to the Command Register (0x37)*/</span>
+ <span class="kw1">while</span><span class="br0">&#40;</span>inportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x37</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0x10</span><span class="br0">&#41;</span>
+   <span class="sy0">;</span><span class="coMULTI">/*setting a timeout could be useful if the card is problematic*/</span></pre></div></div>
+<h2> <span class="mw-headline" id="Setting_up_the_Rx_Descriptors"> Setting up the Rx Descriptors </span></h2>
+<p>One of the new features introduced with this new-gen chip is that it is completely descriptor-based.  The chip supports up to 3 unique descriptor sets with 1024 descriptors available per set; 1024 for receiving packets, 1024 for normal transmission, and 1024 for high-priority transmission packets.  It is not required to use all of the descriptors per set, or even use all three sets.  Each descriptor is 16-bytes wide and contains a 64-bit buffer address (to store data for transmission or to tell the reception process where to dump the data) and Command uint32_t.
+</p><p>Rx Descriptors are used to tell the NIC where to put packets once received.  Because this is an asynchronous operation, we must setup the descriptors before we enable the reception of packets so that the NIC knows where to put things.  A major function of descriptors is to tell the NIC which descriptors are owned by the OS (host) and which ones are owned by the NIC.  If the descriptor is owned by the NIC, the NIC can then read it and use it for the next packet it receives, if not, it either skips over it or sends a RDU (Rx Descriptor Unavailable) interrupt and halts all further Rx operations.  Because there can be multiple descriptors used, there is also a EOR (End of Rx descriptor Ring) bit used when the NIC has reached the end of the descriptors and needs to loop back to the beginning of the descriptors.  There is one more big 'gotcha' with all of this, the beginning of the descriptor arrays must be aligned on a 256-byte boundary. 
+</p><p>eg: 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">struct</span> Descriptor
+ <span class="br0">&#123;</span>
+     <span class="kw4">unsigned</span> <span class="kw4">int</span> command<span class="sy0">,</span>  <span class="coMULTI">/* command/status uint32_t */</span>
+                  vlan<span class="sy0">,</span>     <span class="coMULTI">/* currently unused */</span>
+                  low_buf<span class="sy0">,</span>  <span class="coMULTI">/* low 32-bits of physical buffer address */</span>
+                  high_buf<span class="sy0">;</span> <span class="coMULTI">/* high 32-bits of physical buffer address */</span>
+ <span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+ <span class="kw4">struct</span> Descriptor <span class="sy0">*</span>Rx_Descriptors <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">struct</span> Descriptor <span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x100000</span><span class="sy0">;</span> <span class="coMULTI">/* 1MB Base Address of Rx Descriptors */</span>
+&#160;
+ <span class="kw4">void</span> setup_rx_descriptors<span class="br0">&#40;</span><span class="br0">&#41;</span>
+ <span class="br0">&#123;</span>
+     <span class="coMULTI">/* rx_buffer_len is the size (in bytes) that is reserved for incoming packets */</span>
+     <span class="kw4">unsigned</span> <span class="kw4">int</span> OWN <span class="sy0">=</span> <span class="nu12">0x80000000</span><span class="sy0">,</span> EOR <span class="sy0">=</span> <span class="nu12">0x40000000</span><span class="sy0">;</span> <span class="coMULTI">/* Bit offsets */</span>
+     <span class="kw4">int</span> i<span class="sy0">;</span>
+     <span class="kw1">for</span><span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> num_of_rx_descriptors<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="coMULTI">/* num_of_rx_descriptors can be up to 1024 */</span>
+     <span class="br0">&#123;</span>
+         <span class="kw1">if</span><span class="br0">&#40;</span>i <span class="sy0">==</span> <span class="br0">&#40;</span>num_of_rx_descriptors <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="coMULTI">/* Last descriptor? if so, set the EOR bit */</span>
+           Rx_Descriptors<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">command</span> <span class="sy0">=</span> <span class="br0">&#40;</span>OWN <span class="sy0">|</span> EOR <span class="sy0">|</span> <span class="br0">&#40;</span>rx_buffer_len <span class="sy0">&amp;</span> <span class="nu12">0x3FFF</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="kw1">else</span>
+           Rx_Descriptors<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">command</span> <span class="sy0">=</span> <span class="br0">&#40;</span>OWN <span class="sy0">|</span> <span class="br0">&#40;</span>rx_buffer_len <span class="sy0">&amp;</span> <span class="nu12">0x3FFF</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="coMULTI">/* VLAN adjustments are not part of this guide at the moment - leave as zeros for normal operation */</span>
+         Rx_Descriptors<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">low_buf</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">int</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>packet_buffer_address<span class="sy0">;</span> <span class="coMULTI">/* This is where the packet data will go */</span>
+         <span class="coMULTI">/* If you are programming for a 64-bit OS, put the high memory location in the 'high_buf' descriptor area */</span>
+     <span class="br0">&#125;</span>
+ <span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Configuring_RxConfig_and_TxConfig"> Configuring RxConfig and TxConfig </span></h2>
+<h3> <span class="mw-headline" id=".28Un.29locking_Registers"> (Un)locking Registers </span></h3>
+<p>In order to use some critical registers, we must 'unlock' them to alter their states and then 'lock' them after we are done to prevent accidental alterations to those registers during operation.  The 9346CR register is at offset 0x50 and is used as a key to those critical registers.  In order to 'unlock' them, we must set the card in "Config register write enable" mode.  This is done by setting both the EEM (operating mode) bits.  Once that has been done, it is then ok to finish setting up the card.  Once configuration is done and the OS begins proceeding as normal, the EEM bits should be set low to set the card in "normal" mode and lock the config registers. 
+</p>
+<h3> <span class="mw-headline" id="TxConfig"> TxConfig </span></h3>
+<p>The Transmit Configuration register is at offset 0x40 and contains the configuration data for things such as DMA thresholds and the loopback status.  There are only two bits that we should be primarily concerned with, the MXDMA and the IFG bits.  The MXDMA bits are used for setting the DMA transfer threshold for transmit bursts.  I usually set this to unlimited burst data (one full packet).  This can be set to lower if you have proper handling through the host OS.  The IFG (Inter-Frame Gap) is the amount of time that elapses between each packet operation.  This can be set to the standard (96/960/9600ns) or you may increase the time (for reasons unknown to me) by increments of 8ns. 
+</p><p>eg:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> outportl<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x40</span><span class="sy0">,</span> <span class="nu12">0x03000700</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* IFG: normal, MXDMA: unlimited */</span></pre></div></div>
+<h3> <span class="mw-headline" id="RxConfig"> RxConfig </span></h3>
+<p>The Receive Configuration register is at offset 0x44 and contains the configuration data for things such as DMA thresholds, FIFO thresholds, and packet reception rules.  The RXFTH bits are used for setting the Rx Fifo Threshold.  This threshold determines how much data is required in the buffers to begin telling the host OS that there is data ready.  I normally set this to unlimited data as it means that the NIC will tell the OS that data is ready as soon as a full packet is in the on-card FIFO buffer.  The MXDMA is based off the same explanation given for the Tx MXDMA. I set the MXDMA to unlimited.  The AB/AM/APM/AAP bits are used for setting packet filters.  I usually set this to a promiscuous mode with all of the previous bits set to allow the card to receive and process any packets that physically reach the NIC. 
+</p><p>eg:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> outportl<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x44</span><span class="sy0">,</span> <span class="nu12">0x0000E70F</span><span class="br0">&#41;</span> <span class="coMULTI">/* RXFTH: unlimited, MXDMA: unlimited, AAP: set (promisc. mode set) */</span></pre></div></div>
+<h2> <span class="mw-headline" id="Max_Packet_Sizes"> Max Packet Sizes </span></h2>
+<h3> <span class="mw-headline" id="Max_Transmit_Packet_Size"> Max Transmit Packet Size </span></h3>
+<p>The MTPS register is located at offset 0xEC and is used for setting the maximum packet size that can be transmitted from the RTL8169.  The maximum value that we can provide here is 0x3B.  That value is enough to cover 'jumbo' packets and still allow for a stable FIFO operation (no underruns).  This value can be set lower if need be, but for normal usage the maximum value is fine.  
+</p><p>eg:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> outportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0xEC</span><span class="sy0">,</span> <span class="nu12">0x3B</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Maximum tx packet size */</span></pre></div></div>
+<h3> <span class="mw-headline" id="Receive_Packet_Maximum_Size"> Receive Packet Maximum Size </span></h3>
+<p>The RMS register is located at offset 0xDA and is used for setting the maximum packet size that can be received into the NIC.  If set to zero, the NIC will accept no packets (must be set prior to normal operation!).  The maximum size that can be set is 0x3FFF (16k - 1), but if a packet larger than 8k is received error bits are set and a lengthier process must be started in order to determine if the packet is actually good or not.  I keep this value to 0x1FFF (8k - 1) as it is rare to receive such large packets and it also ensures that error packets are actually error packets and not false positives.  
+</p><p>eg:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> outportw<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0xDA</span><span class="sy0">,</span> <span class="nu12">0x1FFF</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Maximum rx packet size */</span></pre></div></div>
+<h2> <span class="mw-headline" id="Full_Reset_Example"> Full Reset Example </span></h2>
+<p>This is a barebones example of how to reset the RTL8169 without anything like auto-negotiation (explained later) or (G)MII interactions.  
+</p><p>eg: 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">struct</span> Descriptor
+ <span class="br0">&#123;</span>
+     <span class="kw4">unsigned</span> <span class="kw4">int</span> command<span class="sy0">,</span>  <span class="coMULTI">/* command/status uint32_t */</span>
+                  vlan<span class="sy0">,</span>     <span class="coMULTI">/* currently unused */</span>
+                  low_buf<span class="sy0">,</span>  <span class="coMULTI">/* low 32-bits of physical buffer address */</span>
+                  high_buf<span class="sy0">;</span> <span class="coMULTI">/* high 32-bits of physical buffer address */</span>
+ <span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+ <span class="coMULTI">/** 
+  * Note that this assumes 16*1024=16KB (4 pages) of physical memory at 1MB and 2MB is identity mapped to 
+  * the same linear address range
+  */</span>
+ <span class="kw4">struct</span> Descriptor <span class="sy0">*</span>Rx_Descriptors <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">struct</span> Descriptor <span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x100000</span><span class="sy0">;</span> <span class="coMULTI">/* 1MB Base Address of Rx Descriptors */</span>
+ <span class="kw4">struct</span> Descriptor <span class="sy0">*</span>Tx_Descriptors <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">struct</span> Descriptor <span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x200000</span><span class="sy0">;</span> <span class="coMULTI">/* 2MB Base Address of Tx Descriptors */</span>
+&#160;
+ <span class="kw4">unsigned</span> <span class="kw4">long</span> num_of_rx_descriptors <span class="sy0">=</span> <span class="nu0">1024</span><span class="sy0">,</span> num_of_tx_descriptors <span class="sy0">=</span> <span class="nu0">1024</span><span class="sy0">;</span>
+&#160;
+ <span class="kw4">void</span> setup_rx_descriptors<span class="br0">&#40;</span><span class="br0">&#41;</span>
+ <span class="br0">&#123;</span>
+     <span class="coMULTI">/* rx_buffer_len is the size (in bytes) that is reserved for incoming packets */</span>
+     <span class="kw4">unsigned</span> <span class="kw4">int</span> OWN <span class="sy0">=</span> <span class="nu12">0x80000000</span><span class="sy0">,</span> EOR <span class="sy0">=</span> <span class="nu12">0x40000000</span><span class="sy0">;</span> <span class="coMULTI">/* bit offsets */</span>
+     <span class="kw4">int</span> i<span class="sy0">;</span>
+     <span class="kw1">for</span><span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> num_of_rx_descriptors<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="coMULTI">/* num_of_rx_descriptors can be up to 1024 */</span>
+     <span class="br0">&#123;</span>
+         <span class="kw1">if</span><span class="br0">&#40;</span>i <span class="sy0">==</span> <span class="br0">&#40;</span>num_of_rx_descriptors <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="coMULTI">/* Last descriptor? if so, set the EOR bit */</span>
+           Rx_Descriptors<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">command</span> <span class="sy0">=</span> <span class="br0">&#40;</span>OWN <span class="sy0">|</span> EOR <span class="sy0">|</span> <span class="br0">&#40;</span>rx_buffer_len <span class="sy0">&amp;</span> <span class="nu12">0x3FFF</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="kw1">else</span>
+           Rx_Descriptors<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">command</span> <span class="sy0">=</span> <span class="br0">&#40;</span>OWN <span class="sy0">|</span> <span class="br0">&#40;</span>rx_buffer_len <span class="sy0">&amp;</span> <span class="nu12">0x3FFF</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+         <span class="coMULTI">/** packet_buffer_address is the *physical* address for the buffer */</span>
+         Rx_Descriptors<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">low_buf</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">int</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>packet_buffer_address<span class="sy0">;</span>
+         Rx_Descriptors<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">high_buf</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+         <span class="coMULTI">/* If you are programming for a 64-bit OS, put the high memory location in the 'high_buf' descriptor area */</span>
+     <span class="br0">&#125;</span>
+ <span class="br0">&#125;</span>
+&#160;
+ <span class="kw4">void</span> reset<span class="br0">&#40;</span><span class="br0">&#41;</span>
+ <span class="br0">&#123;</span>
+     <span class="kw4">unsigned</span> <span class="kw4">int</span> i<span class="sy0">;</span>
+     <span class="kw4">unsigned</span> <span class="kw4">char</span> mac_address<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&#160;
+     outportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x37</span><span class="sy0">,</span> <span class="nu12">0x10</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Send the Reset bit to the Command register */</span>
+     <span class="kw1">while</span><span class="br0">&#40;</span>inportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x37</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0x10</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="br0">&#125;</span> <span class="coMULTI">/* Wait for the chip to finish resetting */</span>
+&#160;
+     <span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">6</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+       mac_address<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> inportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> i<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+     setup_rx_descriptors<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     outportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x50</span><span class="sy0">,</span> <span class="nu12">0xC0</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Unlock config registers */</span>
+     outportl<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x44</span><span class="sy0">,</span> <span class="nu12">0x0000E70F</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* RxConfig = RXFTH: unlimited, MXDMA: unlimited, AAP: set (promisc. mode set) */</span>
+     outportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x37</span><span class="sy0">,</span> <span class="nu12">0x04</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Enable Tx in the Command register, required before setting TxConfig */</span>
+     outportl<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x40</span><span class="sy0">,</span> <span class="nu12">0x03000700</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* TxConfig = IFG: normal, MXDMA: unlimited */</span>
+     outportw<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0xDA</span><span class="sy0">,</span> <span class="nu12">0x1FFF</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Max rx packet size */</span>
+     outportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0xEC</span><span class="sy0">,</span> <span class="nu12">0x3B</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* max tx packet size */</span>
+&#160;
+     <span class="coMULTI">/* offset 0x20 == Transmit Descriptor Start Address Register 
+        offset 0xE4 == Receive Descriptor Start Address Register 
+&#160;
+        Again, these are *physical* addresses. This code assumes physical==linear, this is
+        typically not the case in real world kernels
+     */</span>
+     outportl<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x20</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">long</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>Tx_Descriptors<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="coMULTI">/* Tell the NIC where the first Tx descriptor is */</span>
+     outportl<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0xE4</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">long</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>Rx_Descriptors<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="coMULTI">/* Tell the NIC where the first Rx descriptor is */</span>
+&#160;
+     outportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x37</span><span class="sy0">,</span> <span class="nu12">0x0C</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Enable Rx/Tx in the Command register */</span>
+     outportb<span class="br0">&#40;</span>ioaddr <span class="sy0">+</span> <span class="nu12">0x50</span><span class="sy0">,</span> <span class="nu12">0x00</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Lock config registers */</span>
+ <span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="External_Links"> External Links </span></h2>
+<ul><li> <a rel="nofollow" class="external free" href="http://www.magnesium.net/~wpaul/rt/RTL8110S_8169S_DataSheet_1.3.pdf">http://www.magnesium.net/~wpaul/rt/RTL8110S_8169S_DataSheet_1.3.pdf</a>, Datasheet for the RTL8169S and RTL8110S chipsets.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 143/1000000
+Post-expand include size: 447/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2349-0!*!0!!en!2!* and timestamp 20180121050945 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=RTL8169&amp;oldid=17429">http://wiki.osdev.org/index.php?title=RTL8169&amp;oldid=17429</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Stubs" title="Category:Stubs">Stubs</a></li><li><a href="Category:Network_Hardware" title="Category:Network Hardware">Network Hardware</a></li><li><a href="Category:Standards" title="Category:Standards">Standards</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=RTL8169" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="RTL8169"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:RTL8169&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="RTL8169#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="RTL8169" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=RTL8169&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=RTL8169&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="RTL8169#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/RTL8169" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/RTL8169" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=RTL8169&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=RTL8169&amp;oldid=17429" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 1 January 2015, at 13:51.</li>
+											<li id="footer-info-viewcount">This page has been accessed 47,032 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-iskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/RTL8169" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/RTL8169" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=RTL8169&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=RTL8169&amp;oldid=17429" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 1 January 2015, at 13:51.</li>
+											<li id="footer-info-viewcount">This page has been accessed 47,032 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

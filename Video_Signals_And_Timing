@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Video Signals And Timing - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Video_Signals_And_Timing", "wgTitle": "Video Signals And Timing", "wgCurRevisionId": 18071, "wgArticleId": 2533, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Video"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Video_Signals_And_Timing action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Video Signals And Timing</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Video_Signals_And_Timing#mw-head">navigation</a>,
+					<a href="Video_Signals_And_Timing#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #bfcfcf; padding: .0em .25em .0em; background-color: #fff0f0; text-align: center;">
+<tr>
+<td>
+<p><font color="black"><b>WARNING: Improperly changing CRTC or hardware settings can be harmful to the video card and attached monitor.</b> Configuring graphics hardware may be a rewarding process, and many have achieved their goals with success and have even tampered with them well beyond their original specifications. Fact remains that there are <i>several</i> known instances of monitors - CRT and LCD alike - burning out after being fed poor data. Similarly, the video card might lack similar safeguards against accidental misconfiguration. 
+</p><p><b>DISCLAIMER: The information provided might not be accurate, and using it is to be done entirely at your own risk</b>. There have not been any reported mishaps in the entire history of OSDev.org, but in the odd chance you break something, we are <a href="OSDev_Wiki:Copyrights" title="OSDev Wiki:Copyrights">not responsible</a>.</font>
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>To make the video card and monitor independent of each other, there is a standard in communication. This page describes the technical parts of that link with the necessary information to program a video card and have it render properly on the attached screen. 
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Video_Signals_And_Timing#Display_Signal"><span class="tocnumber">1</span> <span class="toctext">Display Signal</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Video_Signals_And_Timing#Display_Composition"><span class="tocnumber">2</span> <span class="toctext">Display Composition</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Video_Signals_And_Timing#Frequencies"><span class="tocnumber">3</span> <span class="toctext">Frequencies</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Video_Signals_And_Timing#General_Timing_Formula"><span class="tocnumber">4</span> <span class="toctext">General Timing Formula</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Video_Signals_And_Timing#Common_parts_of_the_GTF_formulas"><span class="tocnumber">4.1</span> <span class="toctext">Common parts of the GTF formulas</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Video_Signals_And_Timing#GTF_Using_resolution_and_refresh_rate"><span class="tocnumber">4.2</span> <span class="toctext">GTF Using resolution and refresh rate</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Video_Signals_And_Timing#GTF_Using_resolution_and_pixel_clock"><span class="tocnumber">4.3</span> <span class="toctext">GTF Using resolution and pixel clock</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Video_Signals_And_Timing#GTF_Using_resolution_and_horizontal_frequency"><span class="tocnumber">4.4</span> <span class="toctext">GTF Using resolution and horizontal frequency</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Video_Signals_And_Timing#Variable_reference"><span class="tocnumber">4.5</span> <span class="toctext">Variable reference</span></a>
+<ul>
+<li class="toclevel-3 tocsection-10"><a href="Video_Signals_And_Timing#Hardware_properties"><span class="tocnumber">4.5.1</span> <span class="toctext">Hardware properties</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-11"><a href="Video_Signals_And_Timing#.3D_Video_mode_inputs"><span class="tocnumber">4.6</span> <span class="toctext">= Video mode inputs</span></a>
+<ul>
+<li class="toclevel-3 tocsection-12"><a href="Video_Signals_And_Timing#Outputs"><span class="tocnumber">4.6.1</span> <span class="toctext">Outputs</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="Video_Signals_And_Timing#Intermediates"><span class="tocnumber">4.6.2</span> <span class="toctext">Intermediates</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-14"><a href="Video_Signals_And_Timing#Brendan.27s_Sidenotes"><span class="tocnumber">4.7</span> <span class="toctext">Brendan's Sidenotes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="Video_Signals_And_Timing#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-16"><a href="Video_Signals_And_Timing#Forum"><span class="tocnumber">5.1</span> <span class="toctext">Forum</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="Video_Signals_And_Timing#External_Links"><span class="tocnumber">5.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Display_Signal"> Display Signal </span></h2>
+<p>There are 15 pins in a standard VGA Cable. When your video card sends its video data to the monitor, it uses 5 data channels:
+</p>
+<ul><li> Analog Red
+</li><li> Analog Green
+</li><li> Analog Blue
+</li><li> Horizontal Sync
+</li><li> Vertical Sync
+</li></ul>
+<p>The screen is built up scanline by scanline, by sending the appropriate RGB values over the connection. However, only having a stream of colours will not tell you which part of the stream belongs to the top-left-pixel on the screen. To solve this they added two more signals: the horizontal sync which pulses when a horizontal line is done, and the vertical sync, which pulses when all rows have been completed. Thus, each frame corresponds to a single vertical synchronisation pulse. Since each frame has the same amount of pixels, the time between consecutive pulses is a constant. The monitor times the frequency of the pulses, then based on that it knows at what time the color data should be sent to what position on the screen.
+</p><p>The system is however not that simple. The first monitors were CRTs, which used magnetic fields to project electron beams onto a phosphoric layer, making them visible for a short period of time. The magnetic fields of a CRT had some inertia - they couldn't be set from a random location to another random location in the time available for one pixel. Hence the video signal has to have some gaps to cope with the time a monitor needs to alter the magnetic fields and point the electron beam back to the other side of the screen. In the meantime there could be no color signal, or you might have gotten stripes on the screen.
+</p><p>CRTs have improved a lot since then, and are now being superseded by the highly intelligent LCD display. The standard for signaling hasn't changed since. Since the original standard was made for CRTs, the rest of the document will implicitly assume an (old) CRT. LCD displays basically decode a CRT signal and then restructure it to fit their own screen grid under analog signaling methods. Similarly, in many other references you will see that the display unit of a video card is referred to as the "CRTC" or "CRT Controller"
+</p>
+<h2> <span class="mw-headline" id="Display_Composition"> Display Composition </span></h2>
+<p>All frames of a video signal have a specific layout, and video cards have a semi-standard way of thinking about these signals. Basically, you will have to provide the video card with enough information to be able to derive all sizes present in the following diagram. <a href="VGA_Hardware" title="VGA Hardware">VGA Hardware</a> explains how you can give these sizes to a VGA compatible. For other hardware, you should check your card's documentation on how these values are stored within them.
+</p><p><a href="File:VGA_crtc.gif" class="image"><img alt="VGA crtc.gif" src="images/b/ba/VGA_crtc.gif" width="725" height="595" /></a>
+</p><p>Both horizontally and vertically, there are 6 states, and hence, 6 sizes. Each size is in pixels. Most of the emitted data is part of the active display, the area of x resolution * y resolution pixels. Each of the cuts are where:
+</p>
+<ul><li> active display goes into overscan
+</li><li> where overscan goes into blanking
+</li><li> where blanking gets the synchronization line changed
+</li><li> where the sync is restored to its original value
+</li><li> where the blanking goes back into overscan
+</li><li> where the overscan goes into active display, where the scanline or frame is completed and the next one is started.
+</li></ul>
+<p>Video cards usually gives you the following registers to program (both horizontally and vertically)
+</p>
+<ul><li> Resolution (pixel size of active display)
+</li><li> Total (total number of 'pixels' in a single run)
+</li><li> Blanking start and end (or start and size) - marks the location of the blanking. The are that is neither blanking nor active display becomes the overscan area.
+</li><li> Sync start and end (or start and size) - marks the location of the synchronization pulse
+</li></ul>
+<h2> <span class="mw-headline" id="Frequencies"> Frequencies </span></h2>
+<p>When you increase the resolution, you will need to send more pixels to the display. If you would keep sending pixels at the same rate, the time to transmit one frame will go up, and consequently the amount of frames in a certain timespan will go down. Since a CRT displayed pixel only gives light for a short time before running out of energy, it needs to be repeatedly refreshed. If this is done fast enough (at about 60Hz, 60 times a second) the screen appears almost constant to the human eye. This improves further when the refresh rate goes up to a point where it doesn't matter to the human eye. However when it drops too much, the screen starts appearing flashing, causing headaches to the user. Hence, we need to keep the frequency at at least 60Hz for user's sanity, and below some other rate dictated by the monitor's capabilities. To make a full frame of pixels fit within one sixtieth of a second, we will have to adjust the speed at which these pixels are transmitted. This speed is called the pixel clock, or dot clock. For example, a VGA's dot clock is either 25MHz or 28MHz, corresponding to 25 million pixels per second or 28 million pixels per second, the latter one being only just enough to display a resolution of 720x480 at 60Hz (recall that the active display is only a part of the frame). Most higher resolution video can therefore use a wide range of dot clocks, well above 25MHz, with the current range allowing enough bandwith to easily exceed 1600x1200 at a 100Hz. 
+</p><p>While the resolution is limited by the video card, In most non-VGA scenario's, it is the monitor that can not handle the speed of the signal. The monitor has a allowed vertical frequency (the amount of frames per second, usually listed in Hz), and horizontal frequency (listed in KHz). Some CRTs are fixed frequency, only allowing certain frequencies to be used both horizontally and vertically. Old VGA displays are infamous for burning out when you feed them a signal that doesn't exactly match these rates. While modern CRTs are mostly protected from bad signaling, you must know that you can break hardware in this fashion, and that you need to be careful.
+</p>
+<h2> <span class="mw-headline" id="General_Timing_Formula"> General Timing Formula </span></h2>
+<p>In order to cope with all the CRT antiquities, VESA has produced a set of equations that allows you to compute the various display settings you need, given the desired resolution. There are three separate sets of formulas: One to compute all settings from resolution and desired refresh rate, one taking resolution and horizontal frequency, and one taking resolution and dot clock. 
+</p><p>Normally before setting a mode you would do the following:
+</p>
+<ul><li> Compute the horizontal refresh rate and pixel clock from resolution and frequency
+</li><li> Check the video card for the nearest pixel clock it can give you
+</li><li> Compute all settings given the resolution and pixel clock.
+</li><li> Check if the horizontal and vertical frequencies are within the monitor's allowed range.
+</li></ul>
+<p>If the frequencies happen to be out of range, you will have to adjust the refresh rate and or resolution. Since the refresh rate can go down a bit without giving issues, that's usually the first choice to fix. Hence:
+</p>
+<ul><li> Clamp the horizontal frequency to its limit
+</li><li> Compute pixel clock and vertical frequency from resolution and the new horizontal frequency
+</li><li> Select the appropriate pixel clock the video card has (making sure you are rounding away from the limit, so round down if you use the maximum horizontal frequency)
+</li><li> Compute the horizontal and vertical frequency given the new dot clock
+</li><li> Check if the frequencies are within range.
+</li></ul>
+<p>The horizontal frequency should now be correct, you can decide whether or not to allow the new mode because the vertical rate has dropped below an acceptable rate, and you can inform the user that the mode is not supported.
+</p><p>The formula's provided by VESA use various scales of constants. Brendan's working on changing the scales to units. Right now, the scale space is still unknown.
+</p>
+<h3> <span class="mw-headline" id="Common_parts_of_the_GTF_formulas"> Common parts of the GTF formulas </span></h3>
+<p><tt><a href="Video_Signals_And_Timing#H_PIXELS_RND">H_PIXELS_RND</a> = ( <i>ROUND</i> ( <a href="Video_Signals_And_Timing#H_PIXELS">H_PIXELS</a> / <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a> ) ) * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a>
+</p><p><b>if</b> ( <a href="Video_Signals_And_Timing#INTERLACE_REQUIRED">INTERLACE_REQUIRED</a> == <b>true</b> ) <br />
+{<br />
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#V_LINES_RND">V_LINES_RND</a> = <i>ROUND</i> ( <a href="Video_Signals_And_Timing#V_LINES">V_LINES</a> / 2 )<br />
+</dd><dd><a href="Video_Signals_And_Timing#V_FIELD_RATE_REQUIRED">V_FIELD_RATE_REQUIRED</a> = <a href="Video_Signals_And_Timing#REFRESH_RATE_REQUIRED">REFRESH_RATE_REQUIRED</a> * 2<br />
+</dd><dd><a href="Video_Signals_And_Timing#INTERLACE">INTERLACE</a> = 0.5<br />
+</dd></dl>
+<p>} <b>else</b> {<br />
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#V_LINES_RND">V_LINES_RND</a> = <i>ROUND</i> ( <a href="Video_Signals_And_Timing#V_LINES">V_LINES</a>) )<br />
+</dd><dd><a href="Video_Signals_And_Timing#V_FIELD_RATE_REQUIRED">V_FIELD_RATE_REQUIRED</a> = <a href="Video_Signals_And_Timing#REFRESH_RATE_REQUIRED">REFRESH_RATE_REQUIRED</a><br />
+</dd><dd><a href="Video_Signals_And_Timing#INTERLACE">INTERLACE</a> = 0<br />
+</dd></dl>
+<p>}<br />
+</p><p><b>if</b> ( <a href="Video_Signals_And_Timing#MARGINS_REQUIRED">#MARGINS_REQUIRED</a> == <b>true</b> ) {<br />
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#TOP_MARGIN_LINES">TOP_MARGIN_LINES</a> = <i>ROUND</i> ( <a href="Video_Signals_And_Timing#MARGIN_PERCENT">MARGIN_PERCENT</a> / 100 * <a href="Video_Signals_And_Timing#V_LINES_RND">V_LINES_RND</a> )<br />
+</dd><dd><a href="Video_Signals_And_Timing#BOTTOM_MARGIN_LINES">BOTTOM_MARGIN_LINES</a> = <i>ROUND</i> ( <a href="Video_Signals_And_Timing#MARGIN_PERCENT">MARGIN_PERCENT</a> / 100 * <a href="Video_Signals_And_Timing#V_LINES_RND">V_LINES_RND</a> )<br />
+</dd><dd><a href="Video_Signals_And_Timing#LEFT_MARGIN_PIXELS">LEFT_MARGIN_PIXELS</a> = ( <i>ROUND</i> ( <a href="Video_Signals_And_Timing#H_PIXELS_RND">H_PIXELS_RND</a> * <a href="Video_Signals_And_Timing#MARGIN_PERCENT">MARGIN_PERCENT</a> / 100 / <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a> ) ) * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a><br />
+</dd><dd><a href="Video_Signals_And_Timing#RIGHT_MARGIN_PIXELS">RIGHT_MARGIN_PIXELS</a> = ( <i>ROUND</i> ( <a href="Video_Signals_And_Timing#H_PIXELS_RND">H_PIXELS_RND</a> * <a href="Video_Signals_And_Timing#MARGIN_PERCENT">MARGIN_PERCENT</a> / 100 / <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a> ) ) * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a><br />
+</dd></dl>
+<p>} <b>else</b> {<br />
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#TOP_MARGIN_LINES">TOP_MARGIN_LINES</a> = 0<br />
+</dd><dd><a href="Video_Signals_And_Timing#BOTTOM_MARGIN_LINES">BOTTOM_MARGIN_LINES</a> = 0<br />
+</dd><dd><a href="Video_Signals_And_Timing#LEFT_MARGIN_PIXELS">LEFT_MARGIN_PIXELS</a> = 0<br />
+</dd><dd><a href="Video_Signals_And_Timing#RIGHT_MARGIN_PIXELS">RIGHT_MARGIN_PIXELS</a> = 0<br />
+</dd></dl>
+<p>}
+</p><p><b>/* use one of the GTF equations here */</b>
+</p><p><a href="Video_Signals_And_Timing#V_FRONT_PORCH">V_FRONT_PORCH</a> = <a href="Video_Signals_And_Timing#MIN_PORCH_RND">MIN_PORCH_RND</a> + <a href="Video_Signals_And_Timing#INTERLACE">INTERLACE</a><br />
+<a href="Video_Signals_And_Timing#H_SYNC">H_SYNC</a> = ( <i>ROUND</i> ( <a href="Video_Signals_And_Timing#H_SYNC_PERCENT">H_SYNC_PERCENT</a> / 100 * <a href="Video_Signals_And_Timing#H_TOTAL">H_TOTAL</a> / <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a>  ) ) * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a><br />
+<a href="Video_Signals_And_Timing#H_FRONT_PORCH">H_FRONT_PORCH</a> = <a href="Video_Signals_And_Timing#H_TOTAL">H_TOTAL</a> / 2 - <a href="Video_Signals_And_Timing#H_SYNC">H_SYNC</a><br />
+<a href="Video_Signals_And_Timing#H_BACK_PORCH">H_BACK_PORCH</a> = <a href="Video_Signals_And_Timing#H_FRONT_PORCH">H_FRONT_PORCH</a> + <a href="Video_Signals_And_Timing#H_SYNC">H_SYNC</a> <br />
+</tt>
+</p>
+<h3> <span class="mw-headline" id="GTF_Using_resolution_and_refresh_rate"> GTF Using resolution and refresh rate </span></h3>
+<p><tt>
+<a href="Video_Signals_And_Timing#H_PERIOD_ESTIMATE">H_PERIOD_ESTIMATE</a> = ( 1 / <a href="Video_Signals_And_Timing#V_FIELD_RATE_REQUIRED">V_FIELD_RATE_REQUIRED</a> - <a href="Video_Signals_And_Timing#MIN_V_SYNC_AND_BACK_PORCH">MIN_V_SYNC_AND_BACK_PORCH</a> / 1000000 ) 
+</p>
+<dl><dd>/ ( <a href="Video_Signals_And_Timing#V_LINES_RND">V_LINES_RND</a> + 2 * <a href="Video_Signals_And_Timing#TOP_MARGIN_LINES">TOP_MARGIN_LINES</a> + <a href="Video_Signals_And_Timing#MIN_PORCH_RND">MIN_PORCH_RND</a> + <a href="Video_Signals_And_Timing#INTERLACE">INTERLACE</a> ) * 1000000
+</dd></dl>
+<p><br />
+<a href="Video_Signals_And_Timing#V_SYNC_AND_BACK_PORCH">V_SYNC_AND_BACK_PORCH</a> = <i>ROUND</i> ( <a href="Video_Signals_And_Timing#MIN_V_SYNC_AND_BACK_PORCH">MIN_V_SYNC_AND_BACK_PORCH</a> / <a href="Video_Signals_And_Timing#H_PERIOD_ESTIMATE">H_PERIOD_ESTIMATE</a> )
+</p><p><a href="Video_Signals_And_Timing#V_BACK_PORCH">V_BACK_PORCH</a> = <a href="Video_Signals_And_Timing#V_SYNC_AND_BACK_PORCH">V_SYNC_AND_BACK_PORCH</a> - <a href="Video_Signals_And_Timing#V_SYNC_RND">V_SYNC_RND</a>
+</p><p><a href="Video_Signals_And_Timing#TOTAL_V_LINES">TOTAL_V_LINES</a> = <a href="Video_Signals_And_Timing#V_LINES_RND">V_LINES_RND</a> + 
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#TOP_MARGIN_LINES">TOP_MARGIN_LINES</a> + <a href="Video_Signals_And_Timing#BOTTOM_MARGIN_LINES">BOTTOM_MARGIN_LINES</a> + 
+</dd><dd><a href="Video_Signals_And_Timing#V_SYNC_AND_BACK_PORCH">V_SYNC_AND_BACK_PORCH</a> + <a href="Video_Signals_And_Timing#INTERLACE">INTERLACE</a> + <a href="Video_Signals_And_Timing#MIN_PORCH_RND">MIN_PORCH_RND</a>
+</dd></dl>
+<p><br />
+<a href="Video_Signals_And_Timing#V_FIELD_RATE_ESTIMATE">V_FIELD_RATE_ESTIMATE</a> = 1000000 / <a href="Video_Signals_And_Timing#H_PERIOD_ESTIMATE">H_PERIOD_ESTIMATE</a> / <a href="Video_Signals_And_Timing#TOTAL_V_LINES">TOTAL_V_LINES</a>
+</p><p><a href="Video_Signals_And_Timing#H_PERIOD">H_PERIOD</a> = <a href="Video_Signals_And_Timing#H_PERIOD_ESTIMATE">H_PERIOD_ESTIMATE</a> * <a href="Video_Signals_And_Timing#V_FIELD_RATE_ESTIMATE">V_FIELD_RATE_ESTIMATE</a> / <a href="Video_Signals_And_Timing#V_FIELD_RATE_REQUIRED">V_FIELD_RATE_REQUIRED</a>
+</p><p><a href="Video_Signals_And_Timing#V_FIELD_RATE">V_FIELD_RATE</a> = 1000000 / <a href="Video_Signals_And_Timing#H_PERIOD">H_PERIOD</a> / <a href="Video_Signals_And_Timing#TOTAL_V_LINES">TOTAL_V_LINES</a>
+</p><p><b>if</b> ( <a href="Video_Signals_And_Timing#INTERLACE_REQUIRED">INTERLACE_REQUIRED</a> == <b>true</b> ) {<br />
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#V_FRAME_RATE">V_FRAME_RATE</a> = <a href="Video_Signals_And_Timing#V_FIELD_RATE">V_FIELD_RATE</a> / 2<br />
+</dd></dl>
+<p>} <b>else</b> {<br />
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#V_FRAME_RATE">V_FRAME_RATE</a> = <a href="Video_Signals_And_Timing#V_FIELD_RATE">V_FIELD_RATE</a><br />
+</dd></dl>
+<p>}<br />
+</p><p><a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> = <a href="Video_Signals_And_Timing#H_PIXELS_RND">H_PIXELS_RND</a> + <a href="Video_Signals_And_Timing#LEFT_MARGIN_PIXELS">LEFT_MARGIN_PIXELS</a> + <a href="Video_Signals_And_Timing#RIGHT_MARGIN_PIXELS">RIGHT_MARGIN_PIXELS</a>
+</p><p><a href="Video_Signals_And_Timing#IDEAL_DUTY_CYCLE">IDEAL_DUTY_CYCLE</a> = <a href="Video_Signals_And_Timing#C_PRIME">C_PRIME</a> - <a href="Video_Signals_And_Timing#M_PRIME">M_PRIME</a> * <a href="Video_Signals_And_Timing#H_PERIOD">H_PERIOD</a> / 1000
+</p><p><a href="Video_Signals_And_Timing#H_BLANK_PIXELS">H_BLANK_PIXELS</a> = ( <i>ROUND</i> ( 
+</p>
+<dl><dd><dl><dd>( <a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> * <a href="Video_Signals_And_Timing#IDEAL_DUTY_CYCLE">IDEAL_DUTY_CYCLE</a> / ( 100 - <a href="Video_Signals_And_Timing#IDEAL_DUTY_CYCLE">IDEAL_DUTY_CYCLE</a> ) / ( 2 * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a> ) ) 
+</dd></dl>
+</dd><dd>) ) * 2 * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a>
+</dd></dl>
+<p><a href="Video_Signals_And_Timing#H_TOTAL">H_TOTAL</a> = <a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> + <a href="Video_Signals_And_Timing#H_BLANK_PIXELS">H_BLANK_PIXELS</a>
+</p><p><a href="Video_Signals_And_Timing#PIXEL_FREQ">PIXEL_FREQ</a> = <a href="Video_Signals_And_Timing#H_TOTAL">H_TOTAL</a> / <a href="Video_Signals_And_Timing#H_PERIOD">H_PERIOD</a> * 1000000
+</p><p><a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a> = 1 / <a href="Video_Signals_And_Timing#H_PERIOD">H_PERIOD</a>
+</tt>
+</p>
+<h3> <span class="mw-headline" id="GTF_Using_resolution_and_pixel_clock"> GTF Using resolution and pixel clock </span></h3>
+<p><tt>
+<a href="Video_Signals_And_Timing#PIXEL_FREQ">PIXEL_FREQ</a> = <a href="Video_Signals_And_Timing#PIXEL_FREQ_REQUIRED">PIXEL_FREQ_REQUIRED</a><br />
+<a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> = <a href="Video_Signals_And_Timing#H_PIXELS_RND">H_PIXELS_RND</a> + <a href="Video_Signals_And_Timing#RIGHT_MARGIN_PIXELS">RIGHT_MARGIN_PIXELS</a> + <a href="Video_Signals_And_Timing#LEFT_MARGIN_PIXELS">LEFT_MARGIN_PIXELS</a><br />
+</p><p><a href="Video_Signals_And_Timing#IDEAL_H_PERIOD">IDEAL_H_PERIOD</a> = ( ( <a href="Video_Signals_And_Timing#C_PRIME">C_PRIME</a> - 100 ) + ( <i>SQRT</i> ( ( ( 100 - <a href="Video_Signals_And_Timing#C_PRIME">C_PRIME</a> ) ^ 2 ) + 
+</p>
+<dl><dd>( 0.4 * <a href="Video_Signals_And_Timing#M_PRIME">M_PRIME</a> * ( <a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> + <a href="Video_Signals_And_Timing#RIGHT_MARGIN_PIXELS">RIGHT_MARGIN_PIXELS</a> + <a href="Video_Signals_And_Timing#LEFT_MARGIN_PIXELS">LEFT_MARGIN_PIXELS</a> ) / <a href="Video_Signals_And_Timing#PIXEL_FREQ">PIXEL_FREQ</a> / 1000000 ) ) )
+</dd><dd>) ) / 2 / <a href="Video_Signals_And_Timing#M_PRIME">M_PRIME</a> * 1000<br />
+</dd></dl>
+<p><a href="Video_Signals_And_Timing#IDEAL_DUTY_CYCLE">IDEAL_DUTY_CYCLE</a> = <a href="Video_Signals_And_Timing#C_PRIME">C_PRIME</a> - ( <a href="Video_Signals_And_Timing#M_PRIME">#M_PRIME</a> * <a href="Video_Signals_And_Timing#IDEAL_H_PERIOD">IDEAL_H_PERIOD</a> / 1000 )<br />
+</p><p><a href="Video_Signals_And_Timing#H_BLANK_PIXELS">H_BLANK_PIXELS</a> = ( <i>ROUND</i> ( <a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> * <a href="Video_Signals_And_Timing#IDEAL_DUTY_CYCLE">IDEAL_DUTY_CYCLE</a> / ( 100 - <a href="Video_Signals_And_Timing#IDEAL_DUTY_CYCLE">IDEAL_DUTY_CYCLE</a> ) / ( 2 * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a> ) ) ) * 2 * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a><br />
+</p><p><a href="Video_Signals_And_Timing#H_TOTAL">H_TOTAL</a> = <a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> + <a href="Video_Signals_And_Timing#H_BLANK_PIXELS">H_BLANK_PIXELS</a><br />
+<a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a> = <a href="Video_Signals_And_Timing#PIXEL_FREQ">PIXEL_FREQ</a> / <a href="Video_Signals_And_Timing#H_TOTAL">H_TOTAL</a><br />
+<a href="Video_Signals_And_Timing#H_PERIOD">H_PERIOD</a> = 1 / <a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a><br />
+<a href="Video_Signals_And_Timing#V_SYNC_AND_BACK_PORCH">V_SYNC_AND_BACK_PORCH</a> = <i>ROUND</i> ( <a href="Video_Signals_And_Timing#MIN_V_SYNC_AND_BACK_PORCH">MIN_V_SYNC_AND_BACK_PORCH</a> * <a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a> / 1000000 )<br />
+<a href="Video_Signals_And_Timing#V_BACK_PORCH">V_BACK_PORCH</a> = <a href="Video_Signals_And_Timing#V_SYNC_AND_BACK_PORCH">V_SYNC_AND_BACK_PORCH</a> - <a href="Video_Signals_And_Timing#V_SYNC_RND">V_SYNC_RND</a><br />
+<a href="Video_Signals_And_Timing#TOTAL_V_LINES">TOTAL_V_LINES</a> = <a href="Video_Signals_And_Timing#V_LINES_RND">V_LINES_RND</a> + <a href="Video_Signals_And_Timing#TOP_MARGIN_LINES">TOP_MARGIN_LINES</a> + <a href="Video_Signals_And_Timing#BOTTOM_MARGIN_LINES">BOTTOM_MARGIN_LINES</a> + <a href="Video_Signals_And_Timing#INTERLACE">INTERLACE</a> + <a href="Video_Signals_And_Timing#V_SYNC_AND_BACK_PORCH">V_SYNC_AND_BACK_PORCH</a> + <a href="Video_Signals_And_Timing#MIN_PORCH_RND">MIN_PORCH_RND</a><br />
+<a href="Video_Signals_And_Timing#V_FIELD_RATE">V_FIELD_RATE</a> = <a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a> / <a href="Video_Signals_And_Timing#TOTAL_V_LINES">TOTAL_V_LINES</a><br />
+</p><p><b>if</b> ( <a href="Video_Signals_And_Timing#INTERLACE_REQUIRED">INTERLACE_REQUIRED</a> == <b>true</b>) 
+{
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#V_FRAME_RATE">V_FRAME_RATE</a> = <a href="Video_Signals_And_Timing#V_FIELD_RATE">V_FIELD_RATE</a> / 2
+</dd></dl>
+<p>} <b>else</b> {
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#V_FRAME_RATE">V_FRAME_RATE</a> = <a href="Video_Signals_And_Timing#V_FIELD_RATE">V_FIELD_RATE</a>
+</dd></dl>
+<p>}</tt>
+</p>
+<h3> <span class="mw-headline" id="GTF_Using_resolution_and_horizontal_frequency"> GTF Using resolution and horizontal frequency </span></h3>
+<p><tt>
+</p><p><a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a> = <a href="Video_Signals_And_Timing#H_FREQ_REQUIRED">H_FREQ_REQUIRED</a><br />
+<a href="Video_Signals_And_Timing#V_SYNC_AND_BACK_PORCH">V_SYNC_AND_BACK_PORCH</a> = <i>ROUND</i> ( <a href="Video_Signals_And_Timing#MIN_V_SYNC_AND_BACK_PORCH">MIN_V_SYNC_AND_BACK_PORCH</a> * <a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a> / 1000000 )<br />
+<a href="Video_Signals_And_Timing#V_BACK_PORCH">V_BACK_PORCH</a> = <a href="Video_Signals_And_Timing#V_SYNC_AND_BACK_PORCH">V_SYNC_AND_BACK_PORCH</a> - <a href="Video_Signals_And_Timing#V_SYNC_RND">V_SYNC_RND</a><br />
+<a href="Video_Signals_And_Timing#TOTAL_V_LINES">TOTAL_V_LINES</a> = <a href="Video_Signals_And_Timing#V_LINES_RND">V_LINES_RND</a> + <a href="Video_Signals_And_Timing#TOP_MARGIN_LINES">TOP_MARGIN_LINES</a> + <a href="Video_Signals_And_Timing#BOTTOM_MARGIN_LINES">BOTTOM_MARGIN_LINES</a> + <a href="Video_Signals_And_Timing#INTERLACE">INTERLACE</a> + <a href="Video_Signals_And_Timing#V_SYNC_AND_BACK_PORCH">V_SYNC_AND_BACK_PORCH</a> + <a href="Video_Signals_And_Timing#MIN_PORCH_RND">MIN_PORCH_RND</a><br />
+<a href="Video_Signals_And_Timing#V_FIELD_RATE">V_FIELD_RATE</a> = <a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a> / <a href="Video_Signals_And_Timing#TOTAL_V_LINES">TOTAL_V_LINES</a><br />
+</p><p><b>if</b> ( <a href="Video_Signals_And_Timing#INTERLACE_REQUIRED">INTERLACE_REQUIRED</a> == <b>true</b>) <br />
+{
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#V_FRAME_RATE">V_FRAME_RATE</a> = <a href="Video_Signals_And_Timing#V_FIELD_RATE">V_FIELD_RATE</a> / 2
+</dd></dl>
+<p>} <b>else</b> {
+</p>
+<dl><dd><a href="Video_Signals_And_Timing#V_FRAME_RATE">V_FRAME_RATE</a> = <a href="Video_Signals_And_Timing#V_FIELD_RATE">V_FIELD_RATE</a>
+</dd></dl>
+<p>}
+</p><p><a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> = <a href="Video_Signals_And_Timing#H_PIXELS_RND">H_PIXELS_RND</a> + <a href="Video_Signals_And_Timing#RIGHT_MARGIN_PIXELS">RIGHT_MARGIN_PIXELS</a> + <a href="Video_Signals_And_Timing#LEFT_MARGIN_PIXELS">LEFT_MARGIN_PIXELS</a><br />
+<a href="Video_Signals_And_Timing#IDEAL_DUTY_CYCLE">IDEAL_DUTY_CYCLE</a> = <a href="Video_Signals_And_Timing#C_PRIME">C_PRIME</a> - ( <a href="Video_Signals_And_Timing#M_PRIME">M_PRIME</a> / <a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a> )<br />
+<a href="Video_Signals_And_Timing#H_BLANK_PIXELS">H_BLANK_PIXELS</a> = ( <i>ROUND</i> ( <a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> * <a href="Video_Signals_And_Timing#IDEAL_DUTY_CYCLE">IDEAL_DUTY_CYCLE</a> / ( 100 - <a href="Video_Signals_And_Timing#IDEAL_DUTY_CYCLE">IDEAL_DUTY_CYCLE</a> ) / ( 2 * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a> ) ) ) * 2 * <a href="Video_Signals_And_Timing#CELL_GRAN_RND">CELL_GRAN_RND</a><br />
+<a href="Video_Signals_And_Timing#H_TOTAL">H_TOTAL</a> = <a href="Video_Signals_And_Timing#TOTAL_ACTIVE_PIXELS">TOTAL_ACTIVE_PIXELS</a> + <a href="Video_Signals_And_Timing#H_BLANK_PIXELS">H_BLANK_PIXELS</a><br />
+<a href="Video_Signals_And_Timing#H_PERIOD">H_PERIOD</a> = 1 / <a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a><br />
+<a href="Video_Signals_And_Timing#PIXEL_FREQ">PIXEL_FREQ</a> = <a href="Video_Signals_And_Timing#H_TOTAL">H_TOTAL</a> * <a href="Video_Signals_And_Timing#H_FREQ">H_FREQ</a><br />
+</tt>
+</p>
+<h3> <span class="mw-headline" id="Variable_reference"> Variable reference </span></h3>
+<p>These are the variables used in the equations above:
+</p>
+<h4> <span class="mw-headline" id="Hardware_properties"> Hardware properties </span></h4>
+<p>These are constant for a given monitor. They describe the capabilities and limitations of a CRT. 
+</p><p><span id="C_PRIME"></span>
+<b> C_PRIME </b>
+</p>
+<dl><dd>Defaults to 40, the actual value can be computed from EDID data.
+</dd></dl>
+<p><span id="M_PRIME"></span>
+<b> M_PRIME </b>
+</p>
+<dl><dd>Defaults to 600, the actual value can be computed from EDID data.
+</dd></dl>
+<p><span id="CELL_GRAN_RND"></span>
+<b>CELL_GRAN_RND</b>
+</p>
+<dl><dd>Cell granularity - the amount of pixels the timings should be aligned to. For example, a VGA uses horizontal timings in multiples of the character clock, each character being 8 (graphics and some text modes) or 9 (most text modes) pixels wide. For a VGA graphics mode, you'll want to supply 8 here because of that. Depending on your specific hardware, the common values are either 8 or 1.
+</dd></dl>
+<p><span id="MIN_PORCH_RND"></span>
+<b>MIN_PORCH_RND</b>
+</p>
+<dl><dd>Usually 1. Probably used to force at least one unit of blanking around the sync period in order to not confuse graphics hardware that can not handle an absence of blanking around the synchronisation pulse.
+</dd></dl>
+<p><span id="MIN_V_SYNC_AND_BACK_PORCH"></span>
+<b>MIN_V_SYNC_AND_BACK_PORCH</b>
+</p>
+<dl><dd>The time in microseconds the monitor needs to detect the vertical synchronisation signal and subsequently retrace to the top-left corner of the screen. Defaults to 550.
+</dd></dl>
+<p><span id="V_SYNC_RND"></span>
+<b>V_SYNC_RND</b>
+</p>
+<dl><dd>The amount of scanlines with the vertical synchronisation pulse active. <b>Todo</b> Seems to depend on something VESA doesn't tell you. Equals 3, although two scanlines are used in legacy VGA mode 12/13.
+</dd></dl>
+<p><span id="H_SYNC_PERCENT"></span>
+<b>H_SYNC_PERCENT</b>
+</p>
+<dl><dd> The percentage of a scanline that should have the synchronisation pulse active. Equals 8%
+</dd></dl>
+<h3> <span class="mw-headline" id=".3D_Video_mode_inputs">= Video mode inputs </span></h3>
+<p>These form the request of the user/programmer.
+</p><p><span id="MARGINS_REQUIRED"></span>
+<b>MARGINS_REQUIRED</b>
+</p>
+<dl><dd>The margins are used to add a visible black surrounding to the displayed picture. I assume small margins are intended to make sure the entire picture is still visible when the picture isn't perfectly centered on the screen.
+</dd></dl>
+<dl><dd>In theory it would be possible to use margins to simulate a small screen on a larger screen, or to simulate different aspect ratios perfectly. For example, if you were setting up a 640 * 480 video mode on a 16:10 display you could make the left and right margin 64 pixels each (with no top or bottom margins), so that it looks exactly the same as it would on a 4:3 display, rather than being stretched to fit. The opposite is also possible (e.g. displaying 16:10 video data on a 4:3 display with "letterboxing"). Unfortunately the GTF calculations don't actually support different sized left/right and top/bottom margins.
+</dd></dl>
+<p><span id="MARGIN_PERCENT"></span>
+<b>MARGIN_PERCENT</b>
+</p>
+<dl><dd><b>(Fixme: Percentage!)</b> Amount of margins you want to have around your screen. VESA suggests a default of 1.8 to allow for screens that do not perfectly fit the image to the center.
+</dd></dl>
+<p><span id="INTERLACE_REQUIRED"></span>
+<b>INTERLACE_REQUIRED</b>
+</p>
+<dl><dd>There are two kinds of video modes, interlaced and progressive modes. Progressive modes display the full frame in one go, while interlaced modes display each other scanline in each run, taking two frames to render the complete picture. Normally, you don't want this, and several video cards don't support it, so you will normally want to supply <b>false</b> here.
+</dd></dl>
+<p><span id="V_LINES"></span>
+<b>V_LINES </b>
+</p>
+<dl><dd>Vertical resolution of the display you want. For a 640x480 resolution, supply 480.
+</dd></dl>
+<p><span id="H_PIXELS"></span>
+<b>H_PIXELS </b>
+</p>
+<dl><dd>Horizontal resolution of the display you want. For a 640x480 resolution, supply 640. Note that video cards will usually want this to be a multiple of eight because of <a href="Video_Signals_And_Timing#CELL_GRAN_RND">cell granularity</a>.
+</dd></dl>
+<p><span id="PIXEL_FREQ_REQUIRED"></span>
+<b>PIXEL_FREQ_REQUIRED</b>
+</p>
+<dl><dd>The speed of the dot clock (or pixel clock), in pixels per second. This is usually the same as the dot clock's frequency in Hz, but in some cases there's a factor two difference (2x the frequency when the clock is being doubled, half the frequency when pixels are emitted every other cycle) The dot clock is usually limited by the video card, as higher clocks are needed for higher framerates and resolutions. 
+</dd></dl>
+<p><span id="REFRESH_RATE_REQUIRED"></span>
+<b>REFRESH_RATE_REQUIRED </b>
+</p>
+<dl><dd>The amount of fields per second in Hz. This is also the number of frames per second for non-interlaced modes, or twice the number of frames per second for interlaced modes.
+</dd></dl>
+<p><span id="H_FREQ_REQUIRED"></span>
+<b>H_FREQ_REQUIRED</b>
+</p>
+<dl><dd>The desired horizontal frequency in Hz. In the most common use, you'll want this to be the maximum horizontal frequency of the monitor, to find the best refresh rate possible that doesn't violate monitor limitations. 
+</dd></dl>
+<h4> <span class="mw-headline" id="Outputs"> Outputs </span></h4>
+<p>The final results of the GTF formula. These correspond to the parameters of the VGA CRTC model.
+</p><p><span id="PIXEL_FREQ"></span>
+<b>PIXEL_FREQ</b>
+</p>
+<dl><dd>The dot clock required (check units?)
+</dd></dl>
+<p><span id="H_TOTAL"></span>
+<b>H_TOTAL</b>
+</p>
+<dl><dd>Amount of pixels in a scanline
+</dd></dl>
+<p><span id="LEFT_MARGIN_PIXELS"></span>
+<b>LEFT_MARGIN_PIXELS </b>
+</p>
+<dl><dd>Amount of margin at the left
+</dd></dl>
+<p><span id="RIGHT_MARGIN_PIXELS"></span>
+<b>RIGHT_MARGIN_PIXELS </b>
+</p>
+<dl><dd>Amount of margin at the right
+</dd></dl>
+<p><span id="H_SYNC"></span>
+<b>H_TOTAL</b>
+</p>
+<dl><dd>The duration of horizontal sync in pixels
+</dd></dl>
+<p><span id="H_BACK_PORCH"></span>
+<b>H_BACK_PORCH</b>
+</p>
+<dl><dd>The amount of pixels between the horizontal sync pulse and the start of the next scanline
+</dd></dl>
+<p><span id="H_FRONT_PORCH"></span>
+<b>H_BACK_PORCH</b>
+</p>
+<dl><dd>The amount of pixels between the end of active display and the start of the horizontal sync pulse
+</dd></dl>
+<p><span id="TOTAL_V_LINES"></span>
+<b>TOTAL_V_LINES</b>
+</p>
+<dl><dd>The amount of scanlines in a frame
+</dd></dl>
+<p><span id="TOP_MARGIN_LINES"></span>
+<b>TOP_MARGIN_LINES </b>
+</p>
+<dl><dd>Amount of margin at the top. 
+</dd></dl>
+<p><span id="BOTTOM_MARGIN_LINES"></span>
+<b>BOTTOM_MARGIN_LINES </b>
+</p>
+<dl><dd>Amount of margin at the bottom
+</dd></dl>
+<p><span id="V_BACK_PORCH"></span>
+<b>V_BACK_PORCH</b>
+</p>
+<dl><dd>The amount of scanlines between the Vertical Sync pulse and the start of the next field
+</dd></dl>
+<p><span id="V_FRONT_PORCH"></span>
+<b>V_FRONT_PORCH</b>
+</p>
+<dl><dd>The amount of scanlines between the end of the field and the start of vertical retrace
+</dd></dl>
+<p>The remaining three components needed to generate a complete signal are inputs. For reference, these are: <a href="Video_Signals_And_Timing#H_PIXELS">H_PIXELS</a>, <a href="Video_Signals_And_Timing#V_LINES">V_LINES</a> which form the resolution, and <a href="Video_Signals_And_Timing#V_SYNC_RND">V_SYNC_RND</a>, which is a constant for a given monitor.
+</p>
+<h4> <span class="mw-headline" id="Intermediates"> Intermediates </span></h4>
+<p>Other results that are either byproducts, but may be useful for error and compatibility checking.
+</p><p><span id="V_LINES_RND"></span>
+<b>V_LINES_RND </b>
+</p>
+<dl><dd>Amount of active display scanlines per frame. Equals <a href="Video_Signals_And_Timing#V_LINES">the Y resolution</a> unless interlaced modes are used.
+</dd></dl>
+<p><span id="H_PIXELS_RND"></span>
+<b>H_PIXELS_RND </b>
+</p>
+<dl><dd>Actual horizontal resolution used. Basically contains <a href="Video_Signals_And_Timing#H_PIXELS">the X resolution</a> rounded to the nearest allowed boundary. 
+</dd></dl>
+<p><span id="V_FIELD_RATE_REQUIRED"></span>
+<b>V_FIELD_RATE_REQUIRED </b>
+</p>
+<dl><dd>Rate of complete images being sent to the monitor per second. Unless interlaced mode is used, equals the refresh rate.
+</dd></dl>
+<p><span id="H_FREQ"></span>
+<b>H_FREQ</b>
+</p>
+<dl><dd>The horizontal frequency in Hz
+</dd></dl>
+<p><span id="H_PERIOD"></span>
+<b>H_PERIOD</b>
+</p>
+<dl><dd>The time in seconds spent on a scanline
+</dd></dl>
+<p><span id="H_PERIOD_ESTIMATE"></span>
+<b>H_PERIOD</b>
+</p>
+<dl><dd>The initial estimate of time in seconds spent on a scanline
+</dd></dl>
+<p><span id="INTERLACE"></span>
+<b>INTERLACE</b>
+</p>
+<dl><dd>Interlaced modes are indicated by skipping half a scanline, so that the horizontal sync shifts half a period. Equals 0 or 0.5 depending on whether the interlace signal is included.
+</dd></dl>
+<p><span id="V_SYNC_AND_BACK_PORCH"></span>
+<b>V_SYNC_AND_BACK_PORCH</b>
+</p>
+<dl><dd>The number of scanlines spent on VSync and bottom blanking
+</dd></dl>
+<p><span id="V_FIELD_RATE_ESTIMATE"></span>
+<b>V_FIELD_RATE_ESTIMATE</b>
+</p>
+<dl><dd>The initial estimate of fields per second (check unit?)
+</dd></dl>
+<p><span id="V_FIELD_RATE"></span>
+<b>V_FIELD_RATE</b>
+</p>
+<dl><dd>The number of fields per second (check unit?)
+</dd></dl>
+<p><span id="V_FRAME_RATE"></span>
+<b>V_FRAME_RATE</b>
+</p>
+<dl><dd>The number of frames per second (check unit?)
+</dd></dl>
+<p><span id="TOTAL_ACTIVE_PIXELS"></span>
+<b>TOTAL_ACTIVE_PIXELS</b>
+</p>
+<dl><dd>The amount of horizontally visible pixels, which equals the active display plus overscan
+</dd></dl>
+<p><span id="IDEAL_DUTY_CYCLE"></span>
+<b>IDEAL_DUTY_CYCLE</b>
+</p>
+<dl><dd>Percentage. One of the steps to compute the amount of horizontal blanking.
+</dd></dl>
+<p><span id="IDEAL_H_PERIOD"></span>
+<b>IDEAL_H_PERIOD</b>
+</p>
+<dl><dd>Optimal time to spend on a scanline. This can usually not be achieved since a scanline is a integer number of pixels.
+</dd></dl>
+<p><span id="H_BLANK_PIXELS"></span>
+<b>H_BLANK_PIXELS</b>
+</p>
+<dl><dd>The total amount of blank pixels horizontally (including horizontal sync)
+</dd></dl>
+<h3> <span class="mw-headline" id="Brendan.27s_Sidenotes"> Brendan's Sidenotes </span></h3>
+<p>Quoted:
+</p><p>I think part of the problem is that the original GTF formulas from VESA are copied from their spreadsheet, so that (for a silly example) instead of doing something like:
+</p>
+<pre>frequency = 10000000
+period = 1 / frequency seconds
+</pre>
+<p>They'll do:
+</p>
+<pre>frequency_in_MHz = 10
+period_in_ms = 1 / (frequency_in_MHz * 1000000) * 1000
+</pre>
+<p>And then simplify it to:
+</p>
+<pre>frequency_in_MHz = 10
+period_in_ms = 1 / frequency_in_MHz / 1000
+</pre>
+<p>And then they'll remove any indication of what they've done:
+</p>
+<pre>frequency = 10
+period = 1 / frequency / 1000
+</pre>
+<p>So that in the end, the formulas from VESA end up being a confusing mess where you're never too sure if there's a hidden scaling factor or not. Another simple example (that isn't made up) is "MARGINS_PERCENT", which is a value that would range from 0 to 50 that's typically divided by 100; and isn't a value that ranges from 0 to 0.5 that doesn't need scaling.
+</p><p>I plan on going through the formulas again, and making sure that all variables are either in pixels, lines, seconds or hertz (with no implied/hidden milliseconds, microseconds, kilohertz, megahertz or "percent" scaling factors).
+</p><p>I've also noticed that some of the calculations are the same in each formula. Rather than having 3 independent/larger pieces of code, it can be split into 3 smaller pieces of code that all use the same subroutines for common things. For example, you'd be able to replace about 10 lines from each formula with "call do_precalculations" to avoid code duplication (triplication?).
+</p><p>Also, I only posted "primary formulas". There's also a "secondary formula" where the results from the first set of calculations are used to find additional parameters; and there's another calculation (called the "blanking formula") for finding the values for "C_PRIME" and "M_PRIME" from some variables called C, M, J and K that's used for "secondary timings". I want to do the same for these formulas as I'm doing for the primary calculations. Then I need to go through all of these parameters and figure out which ones are actually useful (both for setting a video mode using VBE, and for setting a video mode in a "bare metal" video driver), and then work backwards removing redundant calculations (i.e. calculations that are only used to create information that you don't need anyway). After I've done this, I can combine it with the "common subroutines" idea, so that the entire "secondary formula" ends up being part of the "do_postcalculations()" routine, and so that the entire blanking formula becomes part of the "do_precalculations()" routine.
+</p><p>Then I want to find the valid ranges for all variables used in all calculations. This is mostly because of how I'm planning to implement it. For example, if I knew that "H_FREQ" ranges from 50000 to 1000000 then I'd be able to use "20:12" fixed point for this variable to improve the accuracy I get from a 32-bit integer.
+</p><p>Finally, all of these calculations can be simplified a lot if you assume that the "default GTF values" are being used. I want to provide simplified versions of the formulas, because most of the time you can use the default GTF values and can skip a lot of work.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Forum"> Forum </span></h3>
+<ul><li> <a href="http://forum.osdev.org/viewtopic.php?t=19119" class="extiw" title="topic:19119">Getting a list of usable video modes</a> - with emphasis on <i>usable</i> 
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external free" href="http://www.cs.unc.edu/Research/stc/FAQs/Video/GTF_V1R1.xls">http://www.cs.unc.edu/Research/stc/FAQs/Video/GTF_V1R1.xls</a> is one of the GTF spreadsheets you can find on the web.
+</li><li> <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/VGA_connector">VGA connector</a> on wikipedia
+</li><li> <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/EDID">EDID</a> on wikipedia
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 866/1000000
+Post-expand include size: 2350/2097152 bytes
+Template argument size: 578/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2533-0!*!0!!en!2!* and timestamp 20180121063438 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Video_Signals_And_Timing&amp;oldid=18071">http://wiki.osdev.org/index.php?title=Video_Signals_And_Timing&amp;oldid=18071</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Video" title="Category:Video">Video</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Video_Signals_And_Timing" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Video_Signals_And_Timing"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Video_Signals_And_Timing&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Video_Signals_And_Timing#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Video_Signals_And_Timing" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Video_Signals_And_Timing&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Video_Signals_And_Timing&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Video_Signals_And_Timing#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Video_Signals_And_Timing" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Video_Signals_And_Timing" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Vskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Video_Signals_And_Timing" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Video_Signals_And_Timing" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Video_Signals_And_Timing&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Video_Signals_And_Timing&amp;oldid=18071" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 14 May 2015, at 00:26.</li>
+											<li id="footer-info-viewcount">This page has been accessed 91,021 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

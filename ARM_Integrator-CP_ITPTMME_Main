@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ARM Integrator-CP ITPTMME Main - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ARM_Integrator-CP_ITPTMME_Main", "wgTitle": "ARM Integrator-CP ITPTMME Main", "wgCurRevisionId": 15958, "wgArticleId": 3504, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ARM_Integrator-CP_ITPTMME_Main action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ARM Integrator-CP ITPTMME Main</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ARM_Integrator-CP_ITPTMME_Main#mw-head">navigation</a>,
+					<a href="ARM_Integrator-CP_ITPTMME_Main#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><h2> <span class="mw-headline" id="ARM_Tutorial_Series_By_Demonstration_And_Explanation"> ARM Tutorial Series By Demonstration And Explanation </span></h2>
+<p>This consists of a series of pages building a minimal kernel and OS specifically for the ARM architecture. Each page builds on the previous state of the kernel. By following each step you should eventually reach a point of a functional kernel. The design is of a micro-kernel and follows a non-standard design which aims to keep the reader interested and challenges them to solve non-standard problems. Each step does not provide a linear progression, but instead demonstrates minimal and sometimes non-optimal solutions in order to slowly increase the functionality and performance of the kernel. At specific points a system may be replaced with a better one leaving the reader with the choice of replacing something and continuing forward or keeping the original design and deviating from the series or allows them to integrate back into the series at some point if they deviate.
+</p><p>Most explanations are provided in code if they are simplistic, and more complicated systems or code blocks are described both in code and text. The reader is assumed to have an adequate understanding of assembly and the C language. Also GCC, binutils, and QEMU are expected. 
+</p><p><i>I use some specific features of GCC to produce code and I apologize if you use a different compiler, but GCC is ported to many operating systems and is widely available making it an attractive choice. It is also full featured.</i>
+</p><p>Different hardware than that provided by the Integrator-CP board can be used but will require slightly changing hardware implementation code. I expect to completely remove the hardware dependent code from the kernel at later stages and incorporate modules to provide hardware in a common interface for the kernel to use (example of PIC and timers used for scheduling). However, this would complicate the demonstrations too early in the beginning stages so it is delayed until later. It should also be noted that the hardware dependent code is very minimal and localized.
+</p><p><i>The only hardware used by the kernel is the PIC and timer for task switching. Just about any board or SoC should come with some kind of timer but it may be slightly different in how you program it. The PIC can also be different, but generally its going to be very similar and only a few lines of code are needed to talk to it (same with timer). So do not become discouraged if you use a different board. As I stated I will eventually move the code external to the kernel sometime after module loading, and may incorporate both the PIC and timer into one module. Normally, user applications do not care what timer is used as long as it provides the required accuracy and hardware really does not care how interrupts are mapped as long as it can handle the interrupt making the PIC and timer a nice set to just combine into a single module for the SoC or board.</i>
+</p><p>Later parts of the series provide full code from a GIT repository, but are designed with the hope that everything can be implemented by reading the page alone, and the repository is provided instead for the reader to see a working implementation if they run into difficulties in implementing the functionality displayed by the code or explained by the text. This allows the reader to download a working copy and actually see it working and then inspect it.
+</p><p>The reader is also expected to not rely solely on the methods and designs used but instead supplement their learning by using other sources of development and design material such as other tutorials, books, courses, and readings. This is because the methods and designs used in the series are not expected to be optimal, viable, or realistic but instead be adequate to demonstrate a kernel and operating system that has a sufficient amount of functionality to be usable in an educational or research type manner.
+</p><p><i>I might make mistakes in my implementations and I want you the reader to understand that you need to consult external sources and do your own thinking. My goal is simply to get you into it and to a point where you feel like branching off and doing your own design. Also part of that goal is providing you with a hard example of doing something in the event you run into trouble getting something to work such as exception tables, interrupts, task switching, virtual memory, hardware, and many other things. I also encourage you to put your own twist on things but if you like to copy and paste then you are welcome to do so.</i>
+</p><p>If you are looking for the standard, accepted, normal, correct, or proven designs and methods then this serial of tutorials may not be what you want. If you are looking for an interesting and different approach to development of a kernel suited to someone who does this as a hobby then this is the right place for you.
+</p><p><i>Many people frown on using code to explain things, but I am a code kind of guy. I can read code faster than an explanation and maybe that is because I have been coding in C for many years. I can also read documentation too, but when I see an example in code it just clicks for me faster because I literally see a practical implementation of something. Since this is being written in assembly and C it is just natural that anyone who is going to follow along and comprehend be proficient in C (or at least willing to learn). By all means if your new to C and assembly do not let me discourage you because learning to read code now is better than later, and it actually helps you learn to read your own code well which helps with debugging.</i>
+</p>
+<table class="wikitable">
+<tr>
+<th> Step
+</th>
+<th> Page
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 1
+</td>
+<td> <a href="ARM_Integrator-CP_IRQTimerAndPIC" title="ARM Integrator-CP IRQTimerAndPIC">IRQ, Timer, And PIC</a>
+</td>
+<td> Basic system software demonstrating handling IRQs with timer and PIC.
+</td></tr>
+<tr>
+<td> 2
+</td>
+<td> <a href="ARM_Integrator-CP_IRQTimerAndPICAndTaskSwitch" title="ARM Integrator-CP IRQTimerAndPICAndTaskSwitch">IRQ, Timer, PIC, And Tasks</a>
+</td>
+<td> Added ability to run tasks using timer.
+</td></tr>
+<tr>
+<td> 3
+</td>
+<td> <a href="http://wiki.osdev.org/User:Pancakes/ARM_Integrator-CP_IRQTimerPICTasksAndMM" title="User:Pancakes/ARM Integrator-CP IRQTimerPICTasksAndMM">IRQ, Timer, PIC, Tasks, And MM</a>
+</td>
+<td> Added memory management and virtual memory support. Identity mapped kernel.
+</td></tr>
+<tr>
+<td> 4
+</td>
+<td> <a href="http://wiki.osdev.org/User:Pancakes/ARM_Integrator-CP_VMM2" title="User:Pancakes/ARM Integrator-CP VMM2">IRQ, Timer, PIC, Tasks, MM (Paged Kernel)</a>
+</td>
+<td> More advanced and flexible virtual memory support with paged kernel.
+</td></tr>
+<tr>
+<td> 5
+</td>
+<td> <a href="ARM_Integrator-CP_IRQTimerPICTasksMMAndMods" title="ARM Integrator-CP IRQTimerPICTasksMMAndMods">Attached Modules And Minimal ELF Loading</a>
+</td>
+<td> Usage of modules attached to kernel image, and loading of ELF32 modules into protected user address space.
+</td></tr>
+<tr>
+<td> 6
+</td>
+<td> <a href="ARM_Integrator-CP_ITPTMME_Phase2" title="ARM Integrator-CP ITPTMME Phase2">Tasks To Processes And Threads With System Calls</a>
+</td>
+<td> Addition of process and thread design with minimal system calls for demonstration.
+</td></tr></table>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 4/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3504-0!*!0!*!*!*!* and timestamp 20180121080107 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_ITPTMME_Main&amp;oldid=15958">http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_ITPTMME_Main&amp;oldid=15958</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ARM_Integrator-CP_ITPTMME_Main" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ARM_Integrator-CP_ITPTMME_Main"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:ARM_Integrator-CP_ITPTMME_Main&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ARM_Integrator-CP_ITPTMME_Main#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ARM_Integrator-CP_ITPTMME_Main" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_ITPTMME_Main&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_ITPTMME_Main&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ARM_Integrator-CP_ITPTMME_Main#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/ARM_Integrator-CP_ITPTMME_Main" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/ARM_Integrator-CP_ITPTMME_Main" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=ARM_Integrator-CP_ITPTMME_Main&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=ARM_Integskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ARM_Integrator-CP_ITPTMME_Main" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ARM_Integrator-CP_ITPTMME_Main" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_ITPTMME_Main&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_ITPTMME_Main&amp;oldid=15958" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 8 April 2014, at 19:08.</li>
+											<li id="footer-info-viewcount">This page has been accessed 2,940 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.041 secs. -->
+	</body>
+</html>

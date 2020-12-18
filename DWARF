@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>DWARF - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "DWARF", "wgTitle": "DWARF", "wgCurRevisionId": 18939, "wgArticleId": 3878, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "Level 2 Tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-text {line-height: normal;}
+.source-text li, .source-text pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for text
+ * CSS class: source-text, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.text.source-text .de1, .text.source-text .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.text.source-text  {font-family:monospace;}
+.text.source-text .imp {font-weight: bold; color: red;}
+.text.source-text li, .text.source-text .li1 {font-weight: normal; vertical-align:top;}
+.text.source-text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.text.source-text .li2 {font-weight: bold; vertical-align:top;}
+.text.source-text .ln-xtra, .text.source-text li.ln-xtra, .text.source-text div.ln-xtra {background-color: #ffc;}
+.text.source-text span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-DWARF action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">DWARF</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="DWARF#mw-head">navigation</a>,
+					<a href="DWARF#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a><br />Medium</td></tr></table><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="Executable_Formats" title="Executable Formats">Executable Formats</a></th></tr><tr><th>Microsoft</th></tr><tr><td><div>
+<p><b>16 bit:</b><br />
+<a href="COM" title="COM">COM</a><br />
+<a href="MZ" title="MZ">MZ</a><br />
+<a href="NE" title="NE">NE</a><br />
+<b>32/64 bit:</b><br />
+<a href="PE" title="PE">PE</a><br />
+<b>Mixed (16/32 bit):</b><br />
+<a href="LE" title="LE">LE</a><br />
+</p>
+</div></td></tr><tr><th>*nix</th></tr><tr><td><div>
+<p><a href="A.out" title="A.out">A.out</a><br />
+<a href="ELF" title="ELF">ELF</a><br />
+</p>
+</div></td></tr></table>
+<p>When debugging, chances are you will need debugging information. For instance, you can use GCC utility <b>addr2line</b> to convert an address into an actual location in your code, but it is much more convenient if your OS can display a stack trace with as much debugging information as possible, e.g.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">[0x00106F39] process_command (utils/shell.c at line 270)
+[0x001077F3] process_char (utils/shell.c at line 477)
+[0x001079ED] shell (utils/shell.c at line 526)
+[0x00100DD6] main (kernel/kernel.c at line 84)</pre></div></div>
+<p>DWARF is a debugging data format designed along with ELF, and allows you to find all that information.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="DWARF#Generating_the_debug_symbols"><span class="tocnumber">1</span> <span class="toctext">Generating the debug symbols</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="DWARF#Relocation"><span class="tocnumber">2</span> <span class="toctext">Relocation</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="DWARF#Mapping_an_address_to_a_line_number_.28.debug_line_section.29"><span class="tocnumber">3</span> <span class="toctext">Mapping an address to a line number (.debug_line section)</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="DWARF#Binary_representation"><span class="tocnumber">3.1</span> <span class="toctext">Binary representation</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="DWARF#Mapping_an_address_to_a_function_.28.debug_info_section.29"><span class="tocnumber">4</span> <span class="toctext">Mapping an address to a function (.debug_info section)</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="DWARF#The_.debug_abbrev_section"><span class="tocnumber">5</span> <span class="toctext">The .debug_abbrev section</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="DWARF#Binary_representation_2"><span class="tocnumber">5.1</span> <span class="toctext">Binary representation</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="DWARF#LEB128"><span class="tocnumber">6</span> <span class="toctext">LEB128</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="DWARF#See_Also"><span class="tocnumber">7</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="DWARF#Articles"><span class="tocnumber">7.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="DWARF#External_Links"><span class="tocnumber">7.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Generating_the_debug_symbols">Generating the debug symbols</span></h2>
+<p>You will need to pass the <b>-g</b> to GCC and to ld to generate DWARF information. GCC also allows you to specify the exact DWARF version, e.g. <b>gcc -gdwarf-4</b>.
+</p><p>Once this is done, running <b>objdump -h</b> on your executable will show several .debug sections. Those are standard ELF sections that you access the same way as any ELF binary. Running <b>objdump -g</b> on your binary will generate a text dump of the debug symbols.
+</p>
+<h2> <span class="mw-headline" id="Relocation">Relocation</span></h2>
+<p>The addresses provided by DWARF are the addresses provided by ELF. You should take into account any relocation if any.
+</p>
+<h2> <span class="mw-headline" id="Mapping_an_address_to_a_line_number_.28.debug_line_section.29">Mapping an address to a line number (.debug_line section)</span></h2>
+<p>The <b>.debug_line</b> section allows to determine the source code file and line number for a given address in memory. The content is broken down by Compilation Units (CU) representing one main source code file.
+</p><p>Each CU has a header:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>packed<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw4">uint32_t</span> length<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> version<span class="sy0">;</span>
+    <span class="kw4">uint32_t</span> header_length<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> min_instruction_length<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> default_is_stmt<span class="sy0">;</span>
+    <span class="kw4">int8_t</span> line_base<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> line_range<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> opcode_base<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> std_opcode_lengths<span class="br0">&#91;</span><span class="nu0">12</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> DebugLineHeader<span class="sy0">;</span></pre></div></div>
+<p>followed by a list of directories, a list of files (referencing what directory they are in), and a series of line number statements, e.g.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">  Offset:                      0x11f
+  Length:                      103
+  DWARF Version:               2
+  Prologue Length:             52
+  Minimum Instruction Length:  1
+  Initial value of 'is_stmt':  1
+  Line Base:                   -5
+  Line Range:                  14
+  Opcode Base:                 13
+&#160;
+ Opcodes:
+  Opcode 1 has 0 args
+  Opcode 2 has 1 args
+  Opcode 3 has 1 args
+  Opcode 4 has 1 args
+  Opcode 5 has 1 args
+  Opcode 6 has 0 args
+  Opcode 7 has 0 args
+  Opcode 8 has 0 args
+  Opcode 9 has 1 args
+  Opcode 10 has 0 args
+  Opcode 11 has 0 args
+  Opcode 12 has 1 args
+&#160;
+ The Directory Table (offset 0x13a):
+  1	kernel
+  2	./lib
+&#160;
+ The File Name Table (offset 0x148):
+  Entry	Dir	Time	Size	Name
+  1	1	0	0	heap.c
+  2	2	0	0	libc.h
+&#160;
+ Line Number Statements:
+  [0x0000015d]  Extended opcode 2: set Address to 0x100ad1
+  [0x00000164]  Advance Line by 15 to 16
+  [0x00000166]  Copy
+  [0x00000167]  Special opcode 48: advance Address by 3 to 0x100ad4 and Line by 1 to 17
+  [0x00000168]  Special opcode 50: advance Address by 3 to 0x100ad7 and Line by 3 to 20
+  ...</pre></div></div>
+<p>In order to decode the information from <b>.debug_line</b>, you will need to implement a small state machine with a few registers. The most important registers are:
+</p>
+<ul><li> Address: the address in memory
+</li><li> File: the source code file
+</li><li> Line: the line number in that file (starts at 1)
+</li></ul>
+<p>Each line number statement starts with a 1-byte opcode, optionally followed by an argument. Each opcode tells what state machine register(s) to change:
+</p>
+<ul><li> Standard opcodes (1 to 12): see section 6.2.5.2 of the <a rel="nofollow" class="external text" href="http://dwarfstd.org/doc/DWARF4.pdf">The DWARF Debugging Information Format</a> to see what those opcodes are doing and what parameters they take
+</li><li> Extended opcodes (0): the next byte is an unsigned LEB128-encoded number that tells how many bytes after that are used by the extended opcode. The byte after that tells the extended opcode number, followed by any argument. See section 6.2.5.3 of the <a rel="nofollow" class="external text" href="http://dwarfstd.org/doc/DWARF4.pdf">The DWARF Debugging Information Format</a>
+</li><li> Special opcodes (13 or greater): these are one-character instructions that tell to change the Address and Line registers. If the Address can only increase, note that the Line may decrease. The way to compute this is a bit tricky (see section 6.2.5.1 of the <a rel="nofollow" class="external text" href="http://dwarfstd.org/doc/DWARF4.pdf">The DWARF Debugging Information Format</a>), but relies on the Line Base, Line Range and Opcode base from the header and goes something line this:
+</li></ul>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">Address += ((Opcode - Opcode base) / Line range) * Min instruction length
+Line += Line base + (Opcode - Opcode base)&#160;% Line range</pre></div></div>
+<p>In the example above, Special opcode 48 (stored in the file as 48 + 13 = 0x3D) tells to increase the Address by 48 / 14 = 3 bytes (thus moving from 0x100ad1 to 0x100ad4) and the Line by -5 + 48&#160;% 14 = 1 (thus moving from 16 to 17)
+</p>
+<h3> <span class="mw-headline" id="Binary_representation">Binary representation</span></h3>
+<p>The above CU is store as follows in a 32-bit ELF binary:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">67 00 00 00   02 00 34 00   00 00 01 01   FB 0E 0D 00
+01 01 01 01   00 00 00 01   00 00 01 6B   65 72 6E 65
+6C 00 2E 2F   6C 69 62 00   00 68 65 61   70 2E 63 00
+01 00 00 6C   69 62 63 2E   68 00 02 00   00 00 00 05
+02 D1 0A 10   00 03 0F 01   3D3F...</pre></div></div>
+<ul><li> 0x67000000: the size of the CU (after this)
+</li><li> 0x0200: DWARF version
+</li><li> 0x34000000: Header Length, which indicates how many bytes after this number does the first opcode start
+</li><li> 0x01: Minimum Instruction Length
+</li><li> 0x01: Default is_stmt value
+</li><li> 0xFB: Line Base (signed int)
+</li><li> 0x0E: Line Range
+</li><li> 0x0D: Opcode Base
+</li><li> 0x00010101 01000000 01000001: the number of arguments for the 12 standard opcodes
+</li><li> 0x6B65726E 656C00: "kernel" (first directory)
+</li><li> 0x2E2F6C69 6200: "./lib" (second directory)
+</li><li> 0x00: end of the directories
+</li><li> 0x68656170 2E6300: "heap.c" (first file)
+</li><li> 0x010000: Dir=1 ("kernel"), Time=0, Size=0
+</li><li> 0x6C696263 2E6800: "libc.h" (second file)
+</li><li> 0x020000: Dir=2 ("./lib"), Time=0, Size=0
+</li><li> 0x00: end of the files
+</li><li> 0x00: Signals an extended opcode
+</li><li> 0x05: number of bytes after this used by the extended opcode (unsigned LEB128 encoded)
+</li><li> 0x02: Extended opcode 2 (DW_LNE_set_address)
+</li><li> 0xD10A1000: opcode argument (address 0x00100ad1)
+</li><li> 0x03: Standard opcode 3 (DW_LNS_advance_line)
+</li><li> 0x0F: opcode argument, encoded as a signed LEB128 (15)
+</li><li> 0x01: Standard opcode 1 (DW_LNS_copy)
+</li><li> 0x3D: Special opcode 48 (0x3D - 13 = 48)
+</li><li> 0x3F: Special opcode 50
+</li></ul>
+<h2> <span class="mw-headline" id="Mapping_an_address_to_a_function_.28.debug_info_section.29">Mapping an address to a function (.debug_info section)</span></h2>
+<p>The <b>.debug_info</b>, allows -among others- to determine the address range occupied by various parts of the code. It is complemented by the <b>.debug_abbrev</b> and <b>.debug_str</b> sections.
+</p><p>the <b>.debug_info</b> section is a series of Compilation Units (CU). Each compilation unit starts with a header followed by Debugging Information Entries (DIEs):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">Contents of the .debug_info section:
+&#160;
+  Compilation Unit @ offset 0x0:
+   Length:        0x6b7 (32-bit)
+   Version:       4
+   Abbrev Offset: 0x0
+   Pointer Size:  4
+ &lt;0&gt;&lt; b&gt;: Abbrev Number: 1 (DW_TAG_compile_unit)
+    &lt;c&gt;   DW_AT_producer   &#160;: (indirect string, offset: 0x107): GNU C99 5.3.0 -m32 -mtune=generic -march=pentiumpro -g -std=gnu99 -ffreestanding
+    &lt;10&gt;   DW_AT_language   &#160;: 12	(ANSI C99)
+    &lt;11&gt;   DW_AT_name       &#160;: (indirect string, offset: 0x1b8): kernel/main.c
+    &lt;15&gt;   DW_AT_comp_dir   &#160;: (indirect string, offset: 0x158): /usr/opsys
+    &lt;19&gt;   DW_AT_low_pc     &#160;: 0x1002dd
+    &lt;1d&gt;   DW_AT_high_pc    &#160;: 0x7f4
+    &lt;21&gt;   DW_AT_stmt_list  &#160;: 0x0
+ &lt;1&gt;&lt;25&gt;: Abbrev Number: 2 (DW_TAG_typedef)
+    &lt;26&gt;   DW_AT_name       &#160;: (indirect string, offset: 0xa5): uint
+    &lt;2a&gt;   DW_AT_decl_file  &#160;: 2
+    &lt;2b&gt;   DW_AT_decl_line  &#160;: 4
+    &lt;2c&gt;   DW_AT_type       &#160;: &lt;0x30&gt;
+ &lt;1&gt;&lt;30&gt;: Abbrev Number: 3 (DW_TAG_base_type)
+    &lt;31&gt;   DW_AT_byte_size  &#160;: 4
+    &lt;32&gt;   DW_AT_encoding   &#160;: 7	(unsigned)
+    &lt;33&gt;   DW_AT_name       &#160;: (indirect string, offset: 0x23a): unsigned int</pre></div></div>
+<p>So the first thing when reading the <b>.debug_info</b> section is to look at the compilation unit header which contains the following fields:
+</p>
+<ul><li> unit_length: the size of the unit
+</li><li> version: the DWARF version
+</li><li> debug_abbrev_offset: the offset inside the <b>.debug_abbrev</b> table of the DIE schemas for that CU
+</li><li> address_size: the pointer size
+</li></ul>
+<p>The header is followed by a series of DIEs. First first byte of each DIE indicates its type number, followed by its concatenated attributes. All the DIEs of the same type have the same schema within the same CU, but the number of types (and their schema) varies for each CU.
+</p><p>So you need to:
+</p>
+<ul><li> Read the CU header. This will tell you the end of the CU, as well as the Abbrev Offset.
+<ul><li> The Abbrev offset is an offset inside the <b>.debug_abbrev</b> section
+</li><li> Read from the <b>.debug_abbrev</b> section the number of DIE types, as well as the schema for each type (see the next section for further information)
+<ul><li> The first character of each DIE tells its type. Based on the type you can derive what attribute does the DIE has, and how much space occupies each attribute
+</li><li> If the DIE type tag is DW_TAG_subprogram, then look for the attributes DW_AT_NAME (function name), DW_AT_low_pc (the address where the function starts) and DW_AT_high_pc (the amount of memory occupied by the function)
+</li></ul>
+</li><li> Repeat until you reach the end of the CU
+</li></ul>
+</li><li> Read the next CU header
+</li><li> Repeat until you reach the end of the .debug_info section
+</li></ul>
+<h2> <span class="mw-headline" id="The_.debug_abbrev_section">The .debug_abbrev section</span></h2>
+<p>This section contains the schema for all the DIE types from the <b>.debug_info</b> section.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">Contents of the .debug_abbrev section:
+&#160;
+  Number TAG (0x0)
+   1      DW_TAG_compile_unit    [has children]
+    DW_AT_producer     DW_FORM_strp
+    DW_AT_language     DW_FORM_data1
+    DW_AT_name         DW_FORM_strp
+    DW_AT_comp_dir     DW_FORM_strp
+    DW_AT_low_pc       DW_FORM_addr
+    DW_AT_high_pc      DW_FORM_data4
+    DW_AT_stmt_list    DW_FORM_sec_offset
+    DW_AT value: 0     DW_FORM value: 0
+   2      DW_TAG_typedef    [no children]
+    DW_AT_name         DW_FORM_strp
+    DW_AT_decl_file    DW_FORM_data1
+    DW_AT_decl_line    DW_FORM_data1
+    DW_AT_type         DW_FORM_ref4
+    DW_AT value: 0     DW_FORM value: 0
+   3      DW_TAG_base_type    [no children]
+    DW_AT_byte_size    DW_FORM_data1
+    DW_AT_encoding     DW_FORM_data1
+    DW_AT_name         DW_FORM_strp
+    DW_AT value: 0     DW_FORM value: 0
+    ...</pre></div></div>
+<p>The first byte is the type number followed by its tag. The next byte is whether the type has children or not. Then are stored all the attributes for this type as name / type two-bytes pairs followed by 0x0000. See Figure 21 from the <a rel="nofollow" class="external text" href="http://dwarfstd.org/doc/DWARF4.pdf">The DWARF Debugging Information Format</a> for the list of attribute names and their hex codes and Figure 20 for attribute types. The attribute type tells how many bytes will it occupy in the <b>.debug_info</b> section.
+</p><p>If most attributes have a fixed size, a few attributes need to have some special handling:
+</p>
+<ul><li> DW_FORM_string attributes are a small zero-terminated string (so of variable length)
+</li><li> DW_FORM_strp attributes represent the offset inside the <b>.debug_str</b> section of the desired string
+</li><li> DW_FORM_exprloc attributes are multibytes blocks (so of variable length) composed of an unsigned LEB128 number which tells the block length followed by the said block
+</li></ul>
+<p>The list of DIE types for a particular Compilation Unit is over when the next type number is 0.
+</p>
+<h3> <span class="mw-headline" id="Binary_representation_2">Binary representation</span></h3>
+<p>The above is encoded as follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">01 11 01 25   0E 13 0B 03   0E 1B 0E 11   01 12 06 10
+17 00 00 02   16 00 03 0E   3A 0B 3B 0B   49 13 00 00
+03 24 00 0B   0B 3E 0B 03   0E 00 00 04   24 00 0B 0B
+...</pre></div></div>
+<ul><li> 0x01 0x11: Type number 1 / DW_TAG_compile_unit
+</li><li> 0x01: has children
+</li><li> 0x25 0x0E: DW_AT_producer / DW_FORM_strp
+</li><li> 0x13 0x0B: DW_AT_language / DW_FORM_data1
+</li><li> ...
+</li><li> 0x00 0x00: end of Type number 1
+</li><li> 0x02 0x16: Type number 2 / DW_TAG_typedef
+</li><li> 0x00: no children
+</li><li> ...
+</li><li> 0x00 0x00: end of Type number n
+</li><li> 0x00: end of the schema for that Compilation Unit
+</li></ul>
+<h2> <span class="mw-headline" id="LEB128">LEB128</span></h2>
+<p>DWARF is sometimes storing data using LEB128 (Little-Endian Base 128), a variable-length compression algorithm. You can find multiple implementations online, whose functions will typically look like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">uint32_t</span> decodeULEB128<span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">uint8_t</span> <span class="sy0">*</span>p<span class="sy0">,</span> <span class="kw4">uint32_t</span> <span class="sy0">*</span>n<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw4">int32_t</span> decodeSLEB128<span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">uint8_t</span> <span class="sy0">*</span>p<span class="sy0">,</span> <span class="kw4">uint32_t</span> <span class="sy0">*</span>n<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>The above functions take a pointer to a data stream as an argument, return the decoded value (respectively unsigned and signed LEB128) and store in <b>n</b> the number of characters used to decompress the data.
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="ELF" title="ELF">ELF</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://dwarfstd.org/doc/DWARF4.pdf">The DWARF Debugging Information Format</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 525/1000000
+Post-expand include size: 2009/2097152 bytes
+Template argument size: 627/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3878-0!*!0!!en!2!* and timestamp 20180121080101 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=DWARF&amp;oldid=18939">http://wiki.osdev.org/index.php?title=DWARF&amp;oldid=18939</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:Level_2_Tutorials" title="Category:Level 2 Tutorials">Level 2 Tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=DWARF" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="DWARF"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:DWARF&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="DWARF#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="DWARF" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=DWARF&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=DWARF&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="DWARF#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/DWARF" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/DWARF" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/DWARF" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=DWARF&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=DWARF&amp;oldid=18939" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 12 February 2016, at 10:28.</li>
+											<li id="footer-info-viewcount">This page has been accessed 3,912 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.149 secs. -->
+	</body>
+</html>

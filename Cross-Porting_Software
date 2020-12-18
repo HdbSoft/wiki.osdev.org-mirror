@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Cross-Porting Software - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Cross-Porting_Software", "wgTitle": "Cross-Porting Software", "wgCurRevisionId": 19481, "wgArticleId": 3628, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 3 Tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Cross-Porting_Software action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Cross-Porting Software</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Cross-Porting_Software#mw-head">navigation</a>,
+					<a href="Cross-Porting_Software#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_3.png" class="image"><img alt="Difficulty 3.png" src="images/c/c1/Difficulty_3.png" width="46" height="14" /></a><br />Advanced</td></tr></table>
+<p>This page is notes on how to port software to your operating system by cross-compiling it. Many core packages use autoconf-generated ./configure script that provide a convenient interface for our purposes. This assumes your operating is somewhat Unix-like. There is a lot of subtle semantics that first-time porters often get wrong and particular packages occasionally misbehave. This tutorial assumes you are porting a package using a conventional configure script (generated with autoconf), but the principles can be adapted to other build systems.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Cross-Porting_Software#Prerequisites"><span class="tocnumber">1</span> <span class="toctext">Prerequisites</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Cross-Porting_Software#System_Root"><span class="tocnumber">2</span> <span class="toctext">System Root</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Cross-Porting_Software#Prefixes"><span class="tocnumber">3</span> <span class="toctext">Prefixes</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Cross-Porting_Software#Dependencies"><span class="tocnumber">4</span> <span class="toctext">Dependencies</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Cross-Porting_Software#Patches"><span class="tocnumber">5</span> <span class="toctext">Patches</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Cross-Porting_Software#Source_Code"><span class="tocnumber">6</span> <span class="toctext">Source Code</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Cross-Porting_Software#pkg-config"><span class="tocnumber">7</span> <span class="toctext">pkg-config</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Cross-Porting_Software#Build"><span class="tocnumber">8</span> <span class="toctext">Build</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Cross-Porting_Software#Porting"><span class="tocnumber">9</span> <span class="toctext">Porting</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Cross-Porting_Software#Runtime"><span class="tocnumber">10</span> <span class="toctext">Runtime</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Cross-Porting_Software#Problems"><span class="tocnumber">11</span> <span class="toctext">Problems</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="Cross-Porting_Software#libtool_.la_files"><span class="tocnumber">11.1</span> <span class="toctext">libtool .la files</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Cross-Porting_Software#Dumb_pkg-config_use"><span class="tocnumber">11.2</span> <span class="toctext">Dumb pkg-config use</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="Cross-Porting_Software#foo-config"><span class="tocnumber">11.3</span> <span class="toctext">foo-config</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="Cross-Porting_Software#Running_Cross-Compiled_Programs"><span class="tocnumber">11.4</span> <span class="toctext">Running Cross-Compiled Programs</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="Cross-Porting_Software#Assuming_the_Worst"><span class="tocnumber">11.5</span> <span class="toctext">Assuming the Worst</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="Cross-Porting_Software#Gnulib"><span class="tocnumber">11.6</span> <span class="toctext">Gnulib</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="Cross-Porting_Software#Custom_Configure_Script"><span class="tocnumber">11.7</span> <span class="toctext">Custom Configure Script</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="Cross-Porting_Software#No_DESTDIR"><span class="tocnumber">11.8</span> <span class="toctext">No DESTDIR</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="Cross-Porting_Software#Packages_Containing_Dependencies"><span class="tocnumber">11.9</span> <span class="toctext">Packages Containing Dependencies</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="Cross-Porting_Software#Exotic_problems"><span class="tocnumber">11.10</span> <span class="toctext">Exotic problems</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-22"><a href="Cross-Porting_Software#Upstreaming_Local_Patches"><span class="tocnumber">12</span> <span class="toctext">Upstreaming Local Patches</span></a></li>
+<li class="toclevel-1 tocsection-23"><a href="Cross-Porting_Software#Patch_Collections"><span class="tocnumber">13</span> <span class="toctext">Patch Collections</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Prerequisites"> Prerequisites </span></h2>
+<p>This is an advanced matter and your operating system needs to have an established user-space and a dedicated toolchain:
+</p>
+<ul><li> You need a <a href="OS_Specific_Toolchain" title="OS Specific Toolchain">OS Specific Toolchain</a> like <tt>x86_64-myos</tt>.
+</li><li> You need a <a href="C_Library" title="C Library">standard library</a> implementation that provides what the third party software needs.
+</li></ul>
+<h2> <span class="mw-headline" id="System_Root"> System Root </span></h2>
+<dl><dd>Please read this <a href="Meaty_Skeleton#System_Root" title="Meaty Skeleton">article's section on sysroots</a>.
+</dd></dl>
+<p>Your build process needs to involve a system root, a fake root directory for your operating system. Your cross-compiler must be set up to search this directory tree for libraries and headers. I recommend for your build system to look through each of your subprojects and <i>make install</i> them into this system root, then do the same for ports, and finally your build system extracts the desired files from the system root and makes a boot-able image. We will be installing ports into this directory tree. Futher ports may depend on previous ones and it's crucial the system root is searched.
+</p>
+<h2> <span class="mw-headline" id="Prefixes"> Prefixes </span></h2>
+<p>The build systems of the software installs the software somewhere. This is normally in <tt>${PREFIX}/bin</tt>, <tt>${PREFIX}/lib</tt> and so on. The packages often defaults to <tt>/usr/local</tt>, but this is generally used for site-specific files rather than vendor-provided files (you are a vendor now). Note how if you want to install packages into <tt>/bin</tt> and <tt>/lib</tt>, you set the prefix to the empty string, not a single slash. A prefix is not a directory path in its own right, but something that is added in front of a real directory path.
+</p>
+<h2> <span class="mw-headline" id="Dependencies"> Dependencies </span></h2>
+<p>Before porting a package, you need to port its dependencies first (and transitively their dependencies as well). You can often find a list of dependencies in the documentation (perhaps look for README or INSTALL files). Try also to run <tt>./configure --help</tt>, this will often list <tt>--with-foo</tt> options if the package depends on libfoo, it will also list which dependencies are optional. See also guides like <a rel="nofollow" class="external text" href="http://www.linuxfromscratch.org/blfs/">Beyond Linux from Scratch</a> as it contains useful dependency information.
+</p><p>You should be able to construct a nice directed acylic graph of packages and their dependencies (some edges being optional) and use it to decide the order packages are built. If you are not interested in optional dependencies, you can skip them, but beware: Later package may hard-depend on the package you skipped, and may assume a library was built with support for the packager you skipped.
+</p>
+<h2> <span class="mw-headline" id="Patches"> Patches </span></h2>
+<p>It is very likely that you will need to patch the packages you port. You need to set yourself up such that you can easily patch the packages with no to low cost in effort. You can help other people by hosting your patch collection somewhere public. It is often nicer to actually fix misbehaving packages than working around the problem in your build system in complex manners.
+</p>
+<h2> <span class="mw-headline" id="Source_Code"> Source Code </span></h2>
+<p>You need to find the source code for the package you wish to port. This is rather obvious. Generally, it's best to find the latest stable tarball of the package use that. This is preferable to using a git checkout of the package. It's a good idea to save a copy of the original tarball.
+</p><p>It's advisable to check whether this is a real release or whether it has been maliciously modified. Many projects provide hash values of their releases or otherwise sign their releases. Configure scripts are highly convenient places to hide malware (if you have the autoconf skills, you can regenerate the configure script and other files and see if they match). Man-in-the-middle attacking in insecure http/ftp download of a tarball is trivial, you can mitigate this danger by downloading from multiple networks and verifying what other people have.
+</p><p>You also definitely wish to to read the license for the software and whether it even permits the efforts we are taking here.
+</p><p>You extract the source code somewhere appropriate:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="co0"># Use --extract --file if you have a hard time surviving xkcd 1168.</span>
+<span class="kw2">tar</span> <span class="re5">-xf</span> libfoo-<span class="nu0">4.2</span>.tar.xz</pre></div></div>
+<h2> <span class="mw-headline" id="pkg-config"> pkg-config </span></h2>
+<p>Libraries increasingly provide pkg-config files that describe where the headers are installed and how to link against the library (and private library dependencies if statically linked). Working with pkg-config is preferable to fighting it (see below on packages rolling their own foo-config program) and it nicely supports system roots and is cross-compile aware. It's possible to compile a custom cross-pkg-config, or you can simply wrap your system one. Make a <tt>x86_64-myos-pkg-config</tt> executable shell script and put it somewhere in your path for the duration of the cross-compilation:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="co0">#!/bin/sh</span>
+<span class="co0"># Fill these in appropriately:</span>
+<span class="kw3">export</span> <span class="re2">PKG_CONFIG_SYSROOT_DIR</span>=<span class="re1">$MYOS_SYSROOT</span>
+<span class="kw3">export</span> <span class="re2">PKG_CONFIG_LIBDIR</span>=<span class="re1">$MYOS_SYSROOT</span><span class="sy0">/</span>usr<span class="sy0">/</span>lib<span class="sy0">/</span>pkgconfig
+<span class="co0"># TODO: If it works this should probably just be set to the empty string.</span>
+<span class="kw3">export</span> <span class="re2">PKG_CONFIG_PATH</span>=<span class="re1">$PKG_CONFIG_LIBDIR</span>
+<span class="co0"># Use --static here if your OS only has static linking.</span>
+<span class="co0"># TODO: Perhaps it's a bug in the libraries if their pkg-config files doesn't</span>
+<span class="co0">#       record that only static libraries were built.</span>
+<span class="kw3">exec</span> pkg-config <span class="re5">--static</span> <span class="st0">&quot;$@&quot;</span></pre></div></div>
+<p>You then set <tt>PKG_CONFIG=x86_64-myos-pkg-config</tt> to packages use your custom pkg-config instead, and <tt>PKG_CONFIG_FOR_BUILD=pkg-config</tt> so packages that wish to compile local programs use the system pkg-config.
+</p>
+<h2> <span class="mw-headline" id="Build"> Build </span></h2>
+<p>This section lists the steps that are sufficient for an ideal port, but see below.
+</p><p>First you wish to find the <tt>config.sub</tt> file. The GNU coding conventions usually place it at <tt>build-aux/config.sub</tt> to avoid clutter in the main directory. You wish to add your operating system's target name to it, as you did in the <a href="OS_Specific_Toolchain" title="OS Specific Toolchain">OS Specific Toolchain</a> article. This change is required, or otherwise the <tt>--host</tt> value will be rejected. This simple fact means that you likely have to have a small patch for every single port.
+</p><p>Secondly, you cross-build the package in this manner:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="co0"># Potentially unset CC and such here (see configure --help) to prevent local</span>
+<span class="co0"># tools from being mistakenly used as cross-tools. Alternatively, set them to</span>
+<span class="co0"># your cross-tools unconditionally. Note also the existence of CC_FOR_BUILD in</span>
+<span class="co0"># the case of packages that needs to build local tools to build themselves.</span>
+&#160;
+.<span class="sy0">/</span>configure <span class="re5">--host</span>=x86_64-myos <span class="re5">--prefix</span>=<span class="sy0">/</span>usr
+<span class="kw2">make</span>
+<span class="kw2">make</span> <span class="re2">DESTDIR</span>=<span class="re1">$SYSROOT</span> <span class="kw2">install</span></pre></div></div>
+<p>This will cross-compile the software and install it under <tt>/usr</tt> on your system, inside your system root as the temporary installation location. Note how many packages remember <tt>--prefix</tt> and use it at runtime to locate their data files. You must not do <tt>--prefix=$SYSROOT/usr</tt> as that means libfoo would look files in <tt>/home/myuser/myos/sysroot/usr/share/libfoo</tt> while running on your operating system instead of <tt>/usr/share/libfoo</tt>. The <tt>DESTDIR</tt> acts as a second prefix for the purpose of installation, it's not revealed to the package before the install step, so it won't mistakenly remember it.
+</p><p>Alternatively, instead of setting <tt>DESTDIR</tt> to the system root, you can set it to a temporary location and create an installable binary package from it, and then install the binary package into the system root.
+</p>
+<h2> <span class="mw-headline" id="Porting"> Porting </span></h2>
+<p>The <tt>make</tt> command likely didn't succeed. You'll need to investigate the build errors and improve your standard library, or improve the package if it is unreasonable.
+</p>
+<h2> <span class="mw-headline" id="Runtime"> Runtime </span></h2>
+<p>After you cross-compiled the package and installed it onto your operating system, it's time to try it out. If you implemented your operating system and standard library well, it should now work. Likely, especially if you made your own custom standard library, your first real ports won't. You now need to learn to debug programs you know nothing about on your new operating system. Have fun! Suddenly it'll work and you have something to talk about in the 'Aww, Yeah!' forum thread.
+</p>
+<h2> <span class="mw-headline" id="Problems"> Problems </span></h2>
+<p>Unfortunately, this is the real world and some packages misbehave in manners that breaks our naive cross-compilation. This is a bug in such packages; the practice described so far should be sufficient for well-made packages. Fortunately, community members likely know of such issues and generally work to upstream fixes, see the patch collections below. This section lists common problems and solutions.
+</p><p>In case it's a bug in these packages, it's advisable to patch the packages to fix the bug and upstream the bugfix (or report the issue), rather than poorly working around the issues in your build system (in ways that tend to get more and more complex). Generally, the best approach is to make the packages implement the interface we rely on above.
+</p>
+<h3> <span class="mw-headline" id="libtool_.la_files"> libtool .la files </span></h3>
+<p>Many libraries use libtool and install .la files into the system library directory. These work somewhat like pkg-config files, except often semantically wrong as they are not sysroot aware (but research the <tt>--with-sysroot</tt> option that libtool-aware configure scripts provide, it might save the system root path in the .la files which is wrong). The files can cause the build system to add library directories to the link command that weren't prefixed with the system root, causing the command link with the <tt>/usr/lib</tt> files from your local operating system.
+</p><p>It's entirely safe to delete these files, so set up your post-install build steps to delete any .la files on sight. The libraries generally install pkg-config files as well and the programs generally use pkg-config to locate libraries anyways (if not, it's perhaps a bug).
+</p>
+<h3> <span class="mw-headline" id="Dumb_pkg-config_use"> Dumb pkg-config use </span></h3>
+<p>Some packages simply invoke pkg-config with the raw <tt>pkg-config</tt> command, rather than using the <tt>PKG_CONFIG</tt> and <tt>PKG_CONFIG_FOR_BUILD</tt> variables. That is a bug. The correct logic is to use the variables if they exist and fall back on the raw command otherwise. The shell expression <tt>${PKG_CONFIG:=pkg-config}</tt> is useful as if it is set and non-empty, then it is used, otherwise pkg-config us used.
+</p>
+<h3> <span class="mw-headline" id="foo-config"> foo-config </span></h3>
+<p>Some packages (like libfreetype, libpng, libsdl, libxml2, and more) install a custom program like <tt>freetype-config</tt> into the bin directory. The idea is packages depending on libfreetype can run <tt>freetype-config --cflags --libs</tt> and it gets the compiler options needed to use the library. This scheme fails horribly in practice, as the bin directory of your operating system is not in your PATH (neither should it be!) and instead the <tt>freetype-config</tt> program of your distribution is used instead. The programs are not even sysroot-aware so it's not added in front of the compiler options. Suddenly your otherwise-nicely cross-compiled programs got linked with a Linux libfreetype with the Linux version of the headers.
+</p><p>The solution is to nuke these programs on sight. They're broken and should never be used or installed on your operating system. Tell the upstream developers to stop providing them and provide pkg-config files, and projects using them to use pkg-config instead. This is supposedly why pkg-config was created, to do this once and for all in a proper way. If you see programs using the foo-config programs, patch the configure script so they use pkg-config instead.
+</p>
+<h3> <span class="mw-headline" id="Running_Cross-Compiled_Programs"> Running Cross-Compiled Programs </span></h3>
+<p>Some packages are not cross-compile aware and use the standard compiler (your cross-compiler) to build a local program that generates parts of the program and then runs the program. This doesn't work, it runs a cross-compiled executable and it won't run on your local operating system. The results vary from execve returning an error, infinite loops, or mysterious crashes. The bug is that the package should have used a variable like <tt>CC_FOR_BUILD</tt> to compile programs for the local system.
+</p><p>This occasionally also takes the form of configure tests that are mistakenly run (not just compiled and linked) when cross-compiling. A while ago, a lot of packages checked for Japanese locales by unconditionally running such tests when cross-compiling leading to fun results. The correct behavior is to attempt running this test, and if we are cross-compiling, then assume something reasonable (or delaying the test until the program is actually run).
+</p>
+<h3> <span class="mw-headline" id="Assuming_the_Worst"> Assuming the Worst </span></h3>
+<p>Some packages take portability to the levels where they want to support broken operating systems and do compatibility magic in these cases. This is often to work around a bug in a particular release of a particular operating system. This compatibility occasionally takes the form of a configure test that needs to be executed. In the event of cross-compilation, these tests needs to assume something. The developers made the error of assuming unknown systems are terribly broken, instead of just using a heuristic that FooBSD (before release 5) is broken and assuming the best about all other systems.
+</p><p>The correct solution is for packages to assume the best about unknown operating systems. This shifts the punishment from the good systems to the bad systems (so they break and they have the opportunity to fix bugs). This is not a problem for existing systems, because if the developers care about FooBSD, that's not an unknown system.
+</p>
+<h3> <span class="mw-headline" id="Gnulib"> Gnulib </span></h3>
+<p>The GNU portability layer takes the form of a collection of files that everyone copies into their packages and then neglect to update often. These files are often deeply integrated into the package (i.e. hard to disable properly). The principle of replacing standard library functions if broken or missing is not too terribly bad - but Gnulib mixes it with a huge paranoia that the host system is terribly broken and assumes the very worst when cross-compiling. The result is that when you cross-compile these ports, huge amounts of compatibility code gets compiled in, and much of this compatibility code does not even work on unknown platforms. Of particular fun is code that needs to integrate deeply into stdio internals or when it replaces your printf. The result is that as you port packages, you often find yourself fixing the same gnulib code over and over (each time subtly different depending on when it was forked). When you improve your stdio implementation to be more standards-compliant, you find yourself needing to fix all those gnulib stdio-internals-aware files all over again, because some silly internal changed.
+</p><p>The solution is to scream in horror at how troublesome and unnecessary this scheme is as obviously you are capable of implementing a correct operating system. This racketeering scheme has <tt>#error</tt> statements that tell you to upstream preprocessor conditionals for your operating system, so they can relish in even more complexity that didn't need to exist in the first place.
+</p><p><a href="http://wiki.osdev.org/User:Sortie" title="User:Sortie">Sortie</a> has developed a <a rel="nofollow" class="external text" href="https://gitlab.com/sortix/sortix/wikis/Gnulib">gnulib policy for his OS</a> that describes how to handle gnulib and it has a long list of secret autoconf variables that makes gnulib assume everything is perfect.
+</p>
+<h3> <span class="mw-headline" id="Custom_Configure_Script"> Custom Configure Script </span></h3>
+<p>Some packages considers autoconf to be hellish and refuses to use it. They occasionally replace an autoconf-generated configure script with a hand-written one. This is well, but they unfortunately often fail to completely implement the same interface and don't support cross-compilation. You can attempt to patch the configure script to it implements the same interface, or do whatever else gets the job done. You probably want to yell at the developers.
+</p>
+<h3> <span class="mw-headline" id="No_DESTDIR"> No DESTDIR </span></h3>
+<p>The package might not support the <tt>DESTDIR</tt> variable. You should patch the <tt>Makefile</tt> (perhaps <tt>Makefile.in</tt>) to support it and tell the upstream developers. Perhaps it's called something else like <tt>INSTALLROOT</tt>, you can rename it in the Makefile or add <tt>INSTALLROOT&#160;?= $(DESTDIR)</tt>.
+</p>
+<h3> <span class="mw-headline" id="Packages_Containing_Dependencies"> Packages Containing Dependencies </span></h3>
+<p>Sometimes packages contain copies of their dependencies as subdirectories. If you are really unlucky, they get used instead of the real deal. That means you have to port a two year old version all over again. If you are more unlucky, you get something that actually compiles on your operating system, but contains unfixed bugs and has security issues and this gets silently used. Extra fun is if they fixed bugs or enhanced the library and this is not in the upstream version. Tell upstream projects to get their act together if you see it, it's your responsibility to provide dependencies for a good reason.
+</p>
+<h3> <span class="mw-headline" id="Exotic_problems"> Exotic problems </span></h3>
+<p>As you start porting packages that rarely get ported or cross-compiled, you'll likely start finding some seriously messed up packages. For instance, I once found a library that stores the path to the compiler and the compiler options in a header, so other libraries/programs depending on it could locate the compiler that way (and they did) - despite the fact they also had a full and generated configure script. At some point, you should reconsider whether this is actually software you want to port.
+</p>
+<h2> <span class="mw-headline" id="Upstreaming_Local_Patches"> Upstreaming Local Patches </span></h2>
+<p>As you port more packages, you gradually get a patch collection. Many of these patches likely works around issues in your system, but other patches solves general issues in the packages. Ideally, you should not need to patch packages at all. Though, your operating system is not terribly important to support in the upstream version and any patches will likely go stale soon as your operating system improves. However, the patches not related to your operating system is likely of value upstream (or to the other osdever's that also port stuff). You should send such patches upstream or file bug reports. In the long run, it decreases the size of your patch collection and makes it more maintainable.
+</p>
+<h2> <span class="mw-headline" id="Patch_Collections"> Patch Collections </span></h2>
+<p>It is probable that other community members have already ported a particular package. Their patches likely contain insight into how troublesome it is to do a port and what needs to be done. You can often find a collection of all their local patches in a central location.
+</p>
+<ul><li> <a href="http://wiki.osdev.org/User:Sortie" title="User:Sortie">Sortie</a> has a <a rel="nofollow" class="external text" href="https://users-cs.au.dk/sortie/sortix/release/nightly/patches/">large collection of patches</a> and <a rel="nofollow" class="external text" href="https://gitlab.com/sortix/sortix/wikis/Ports">notes on each port</a>.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 267/1000000
+Post-expand include size: 372/2097152 bytes
+Template argument size: 84/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3628-0!*!0!!en!2!* and timestamp 20180121063502 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Cross-Porting_Software&amp;oldid=19481">http://wiki.osdev.org/index.php?title=Cross-Porting_Software&amp;oldid=19481</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Level_3_Tutorials" title="Category:Level 3 Tutorials">Level 3 Tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Cross-Porting_Software" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Cross-Porting_Software"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Cross-Porting_Software&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Cross-Porting_Software#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Cross-Porting_Software" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Cross-Porting_Software&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Cross-Porting_Software&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Cross-Porting_Software#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage">skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Cross-Porting_Software" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Cross-Porting_Software" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Cross-Porting_Software&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Cross-Porting_Software&amp;oldid=19481" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 15 July 2016, at 16:16.</li>
+											<li id="footer-info-viewcount">This page has been accessed 7,677 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

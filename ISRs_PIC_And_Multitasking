@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ISRs PIC And Multitasking - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ISRs_PIC_And_Multitasking", "wgTitle": "ISRs PIC And Multitasking", "wgCurRevisionId": 18053, "wgArticleId": 3792, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Interrupts"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ISRs_PIC_And_Multitasking action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ISRs PIC And Multitasking</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ISRs_PIC_And_Multitasking#mw-head">navigation</a>,
+					<a href="ISRs_PIC_And_Multitasking#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="ISRs_PIC_And_Multitasking#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="ISRs_PIC_And_Multitasking#Basic_ISR_function"><span class="tocnumber">2</span> <span class="toctext">Basic ISR function</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="ISRs_PIC_And_Multitasking#The_first_goto"><span class="tocnumber">2.1</span> <span class="toctext">The first goto</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="ISRs_PIC_And_Multitasking#The_second_goto"><span class="tocnumber">2.2</span> <span class="toctext">The second goto</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="ISRs_PIC_And_Multitasking#Macros"><span class="tocnumber">3</span> <span class="toctext">Macros</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="ISRs_PIC_And_Multitasking#Differences"><span class="tocnumber">3.1</span> <span class="toctext">Differences</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="ISRs_PIC_And_Multitasking#Declaring_the_functions"><span class="tocnumber">3.2</span> <span class="toctext">Declaring the functions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="ISRs_PIC_And_Multitasking#Required_functions.2C_variables.2C_and_types"><span class="tocnumber">4</span> <span class="toctext">Required functions, variables, and types</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="ISRs_PIC_And_Multitasking#Variables"><span class="tocnumber">4.1</span> <span class="toctext">Variables</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="ISRs_PIC_And_Multitasking#Required_functions"><span class="tocnumber">4.2</span> <span class="toctext">Required functions</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="ISRs_PIC_And_Multitasking#Additional_required_functions"><span class="tocnumber">4.3</span> <span class="toctext">Additional required functions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="ISRs_PIC_And_Multitasking#Installing_the_handlers"><span class="tocnumber">5</span> <span class="toctext">Installing the handlers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="ISRs_PIC_And_Multitasking#Low_level"><span class="tocnumber">5.1</span> <span class="toctext">Low level</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="ISRs_PIC_And_Multitasking#High_level"><span class="tocnumber">5.2</span> <span class="toctext">High level</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="ISRs_PIC_And_Multitasking#Stack_layout"><span class="tocnumber">6</span> <span class="toctext">Stack layout</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>This tutorial explains how to make interrupt service routines for the x86 platform using GCC and inline assembly. No external assembly is needed for this code to work. The code presented here allows easy handling of IRQs, software interrupts, exceptions without error code, and exceptions with error code, while being compatible with software multitasking. The IRQ handler in this article is only valid for handling IRQs received using the <a href="8259_PIC" title="8259 PIC">8259 PIC</a>, so it will need to be modified or extended when compatibility with the <a href="APIC" title="APIC">APIC</a> is required.
+</p>
+<h2> <span class="mw-headline" id="Basic_ISR_function"> Basic ISR function </span></h2>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> <span class="sy0">*</span>irq0handler<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw4">volatile</span> <span class="kw4">void</span> <span class="sy0">*</span>addr<span class="sy0">;</span> <span class="co1">// what we're going to return</span>
+	asm <span class="kw1">goto</span><span class="br0">&#40;</span><span class="st0">&quot;jmp&#160;%l[endofISR]&quot;</span> <span class="sy0">:::</span> <span class="st0">&quot;memory&quot;</span> <span class="sy0">:</span> endofISR<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// skip ISR code when calling C function</span>
+	asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot;.align 16&quot;</span> <span class="sy0">:::</span> <span class="st0">&quot;memory&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// useful align</span>
+	startofISR<span class="sy0">:</span>
+	asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot;pushal<span class="es1">\n</span><span class="es1">\t</span>pushl&#160;%%ebp<span class="es1">\n</span><span class="es1">\t</span>movl&#160;%%esp,&#160;%%ebp<span class="es1">\n</span><span class="es1">\t</span>cld&quot;</span> <span class="sy0">:::</span> <span class="st0">&quot;memory&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// save registers, stack frame</span>
+	asm <span class="kw4">volatile</span><span class="br0">&#40;</span>
+		<span class="st0">&quot;pushl&#160;%%ds       <span class="es1">\n</span><span class="es1">\t</span>&quot;</span> <span class="co1">// save segment registers</span>
+		<span class="st0">&quot;pushl&#160;%%es       <span class="es1">\n</span><span class="es1">\t</span>&quot;</span>
+		<span class="st0">&quot;movw $16,&#160;%%cx   <span class="es1">\n</span><span class="es1">\t</span>&quot;</span> <span class="co1">// set segment registers for kernel</span>
+		<span class="st0">&quot;movw&#160;%%cx,&#160;%%ds  <span class="es1">\n</span><span class="es1">\t</span>&quot;</span>
+		<span class="st0">&quot;movw&#160;%%cx,&#160;%%es  <span class="es1">\n</span><span class="es1">\t</span>&quot;</span>
+		<span class="st0">&quot;pushl&#160;%%ebp      <span class="es1">\n</span><span class="es1">\t</span>&quot;</span> <span class="co1">// push previous stack pointer (points to the saved ESP), this is the context parameter</span>
+		<span class="st0">&quot;addl $4, (%%esp) <span class="es1">\n</span><span class="es1">\t</span>&quot;</span> <span class="co1">// add 4 to it (now it correctly points to the PUSHAD structure)</span>
+		<span class="st0">&quot;pushl&#160;%%ebx      <span class="es1">\n</span><span class="es1">\t</span>&quot;</span> <span class="co1">// this is the IRQ number parameter</span>
+		<span class="st0">&quot;call *%%eax      <span class="es1">\n</span><span class="es1">\t</span>&quot;</span> <span class="co1">// call the IRQ function</span>
+		<span class="st0">&quot;addl $8,&#160;%%esp       &quot;</span> <span class="co1">// pop the 2 parameters</span>
+		<span class="sy0">::</span> <span class="st0">&quot;a&quot;</span><span class="br0">&#40;</span>irqfunc<span class="br0">&#41;</span><span class="sy0">,</span> <span class="st0">&quot;b&quot;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="sy0">:</span> <span class="st0">&quot;memory&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot;popl&#160;%%es<span class="es1">\n</span><span class="es1">\t</span>popl&#160;%%ds<span class="es1">\n</span><span class="es1">\t</span>leave<span class="es1">\n</span><span class="es1">\t</span>popal<span class="es1">\n</span><span class="es1">\t</span>iret&quot;</span> <span class="sy0">:::</span> <span class="st0">&quot;memory&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// restore everything and iret</span>
+	endofISR<span class="sy0">:</span>
+	<span class="co1">//return startofISR</span>
+	asm <span class="kw1">goto</span><span class="br0">&#40;</span>
+		<span class="st0">&quot;.intel_syntax noprefix<span class="es1">\n</span><span class="es1">\t</span>&quot;</span>
+		<span class="st0">&quot;mov eax, offset&#160;%l[startofISR]<span class="es1">\n</span><span class="es1">\t</span>&quot;</span>
+		<span class="st0">&quot;mov [ebx], eax<span class="es1">\n</span><span class="es1">\t</span>&quot;</span>
+		<span class="st0">&quot;.att_syntax&quot;</span>
+		<span class="sy0">::</span> <span class="st0">&quot;b&quot;</span><span class="br0">&#40;</span><span class="sy0">&amp;</span>addr<span class="br0">&#41;</span> <span class="sy0">:</span> <span class="st0">&quot;eax&quot;</span><span class="sy0">,</span> <span class="st0">&quot;memory&quot;</span> <span class="sy0">:</span> startofISR<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="kw1">return</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">void</span> <span class="sy0">*</span><span class="br0">&#41;</span> addr<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>This code uses <a href="Inline_Assembly#asm_goto" title="Inline Assembly">asm goto</a>, which is the only way to write this kind of functions without requiring to link external assembly files. Also, as can be seen, the function clears the direction flag (CLD instruction). This is necessary because the ABI GCC uses requires it, so functions will assume the direction flag is clear.
+</p>
+<h3> <span class="mw-headline" id="The_first_goto"> The first goto </span></h3>
+<p>It is needed to be able to skip the ISR code without letting the optimizer remove it. Code which is known to be skipped may be removed in the optimization stage depending on the compiling options. Since the compiler doesn't know what the assembly statement does, it won't remove the ISR code.
+</p>
+<h3> <span class="mw-headline" id="The_second_goto"> The second goto </span></h3>
+<p>GCC doesn't allow to obtain the address of a C label. However, it is possible to obtain it by using "asm goto", an inline assembly statement that is able to accept one or more C labels. What to do with the address of those labels is up to the programmer. In our case, the "startofISR" label is being used to put that address in the "addr" variable so that it can be returned by the function.
+Note, that an "asm goto" statement is not allowed to produce outputs because it's considered a control transfer statement, which can't have any output due to the way GCC works internally. However, it is possible to produce an output via side effect. As can be seen in the code, the address of the "addr" variable is being given in the EBX register, then the address of the "startofISR" label is being put in [EBX], thus modifying the "addr" variable.
+</p>
+<h2> <span class="mw-headline" id="Macros"> Macros </span></h2>
+<p>In order to easily manage the low-level ISRs which may be many depending on the implementation, C macros can be used to create them.
+</p><p>The following macro creates ISRs for handling IRQs:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">// Macro to create hardware interrupt handling functions.</span>
+<span class="co1">// It will call &quot;irqfunc&quot; with the register context and the IRQ number as parameters.</span>
+<span class="co2">#define DEFIRQWRAPPER(irqnum)\
+void *irq##irqnum##handler(void)\
+{\
+	volatile void *addr;\
+	asm goto(&quot;jmp&#160;%l[endofISR]&quot;&#160;::: &quot;memory&quot;&#160;: endofISR);\
+	asm volatile(&quot;.align 16&quot;&#160;::: &quot;memory&quot;);\
+	startofISR:\
+	asm volatile(&quot;pushal\n\tpushl&#160;%%ebp\n\tmovl&#160;%%esp,&#160;%%ebp\n\tcld&quot;&#160;::: &quot;memory&quot;);\
+	asm volatile(\
+		&quot;pushl&#160;%%ds       \n\t&quot;\
+		&quot;pushl&#160;%%es       \n\t&quot;\
+		&quot;movw $16,&#160;%%cx   \n\t&quot;\
+		&quot;movw&#160;%%cx,&#160;%%ds  \n\t&quot;\
+		&quot;movw&#160;%%cx,&#160;%%es  \n\t&quot;\
+		&quot;pushl&#160;%%ebp      \n\t&quot;\
+		&quot;addl $4, (%%esp) \n\t&quot;\
+		&quot;pushl&#160;%%ebx      \n\t&quot;\
+		&quot;call *%%eax      \n\t&quot;\
+		&quot;addl $8,&#160;%%esp       &quot;\
+		:: &quot;a&quot;(irqfunc), &quot;b&quot;((uint32_t) irqnum)&#160;: &quot;memory&quot;);\
+	asm volatile(&quot;popl&#160;%%es\n\tpopl&#160;%%ds\n\tleave\n\tpopal\n\tiret&quot;&#160;::: &quot;memory&quot;);\
+	endofISR:\
+	asm goto(\
+		&quot;.intel_syntax noprefix         \n\t&quot;\
+		&quot;mov eax, offset&#160;%l[startofISR] \n\t&quot;\
+		&quot;mov [ebx], eax                 \n\t&quot;\
+		&quot;.att_syntax                        &quot;\
+		:: &quot;b&quot;(&amp;addr)&#160;: &quot;eax&quot;, &quot;memory&quot;&#160;: startofISR);\
+	return((void *) addr);\
+}</span></pre></div></div>
+<p>The following macro creates ISRs for handling software interrupts and exceptions without error code:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">// Macro to create sotfware interrupt handling functions.</span>
+<span class="co1">// It will call &quot;intfunc&quot; with the register context and the interrupt number as parameters.</span>
+<span class="co2">#define DEFINTWRAPPER(intnum)\
+void *int##intnum##handler(void)\
+{\
+	volatile void *addr;\
+	asm goto(&quot;jmp&#160;%l[endofISR]&quot;&#160;::: &quot;memory&quot;&#160;: endofISR);\
+	asm volatile(&quot;.align 16&quot;&#160;::: &quot;memory&quot;);\
+	startofISR:\
+	asm volatile(&quot;pushal\n\tpushl&#160;%%ebp\n\tmovl&#160;%%esp,&#160;%%ebp\n\tcld&quot;&#160;::: &quot;memory&quot;);\
+	asm volatile(\
+		&quot;pushl&#160;%%ds       \n\t&quot;\
+		&quot;pushl&#160;%%es       \n\t&quot;\
+		&quot;movw $16,&#160;%%cx   \n\t&quot;\
+		&quot;movw&#160;%%cx,&#160;%%ds  \n\t&quot;\
+		&quot;movw&#160;%%cx,&#160;%%es  \n\t&quot;\
+		&quot;pushl&#160;%%ebp      \n\t&quot;\
+		&quot;addl $4, (%%esp) \n\t&quot;\
+		&quot;pushl&#160;%%ebx      \n\t&quot;\
+		&quot;call *%%eax      \n\t&quot;\
+		&quot;addl $8,&#160;%%esp       &quot;\
+		:: &quot;a&quot;(intfunc), &quot;b&quot;((uint32_t) intnum)&#160;: &quot;memory&quot;);\
+	asm volatile(&quot;popl&#160;%%es\n\tpopl&#160;%%ds\n\tleave\n\tpopal\n\tiret&quot;&#160;::: &quot;memory&quot;);\
+	endofISR:\
+	asm goto(\
+		&quot;.intel_syntax noprefix         \n\t&quot;\
+		&quot;mov eax, offset&#160;%l[startofISR] \n\t&quot;\
+		&quot;mov [ebx], eax                 \n\t&quot;\
+		&quot;.att_syntax                        &quot;\
+		:: &quot;b&quot;(&amp;addr)&#160;: &quot;eax&quot;, &quot;memory&quot;&#160;: startofISR);\
+	return((void *) addr);\
+}</span></pre></div></div>
+<p>The following macro creates ISRs for handling exceptions with error code:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">// Macro to create exception handling functions, for exceptions with error code.</span>
+<span class="co1">// It will call intfunc_err, with the error code, the register context, and the interrupt number as parameters.</span>
+<span class="co2">#define DEFINTWRAPPER_ERR(intnum)\
+void *int##intnum##handler(void)\
+{\
+	volatile void *addr;\
+	asm goto(&quot;jmp&#160;%l[endofISR]&quot;&#160;::: &quot;memory&quot;&#160;: endofISR);\
+	asm volatile(&quot;.align 16&quot;&#160;::: &quot;memory&quot;);\
+	startofISR:\
+	asm volatile(\
+		&quot;pushal                \n\t&quot;\
+		&quot;pushl&#160;%%ebp           \n\t&quot;\
+		&quot;movl&#160;%%esp,&#160;%%ebp     \n\t&quot;\
+		&quot;pushl&#160;%%ds            \n\t&quot;\
+		&quot;pushl&#160;%%es            \n\t&quot;\
+		&quot;movw $16,&#160;%%cx        \n\t&quot;\
+		&quot;movw&#160;%%cx,&#160;%%ds       \n\t&quot;\
+		&quot;movw&#160;%%cx,&#160;%%es       \n\t&quot;\
+		&quot;movl 36(%%ebp),&#160;%%edx \n\t&quot;\
+		&quot;movl&#160;%%ebp,&#160;%%esi     \n\t&quot;\
+		&quot;addl $32,&#160;%%esi       \n\t&quot;\
+		&quot;movl&#160;%%esi,&#160;%%edi     \n\t&quot;\
+		&quot;addl $4,&#160;%%edi        \n\t&quot;\
+		&quot;movl $11,&#160;%%ecx       \n\t&quot;\
+		&quot;std                   \n\t&quot;\
+		&quot;rep movsl             \n\t&quot;\
+		&quot;add $4,&#160;%%esp         \n\t&quot;\
+		&quot;cld                       &quot;\
+		::: &quot;memory&quot;);\
+	asm volatile(\
+		&quot;pushl&#160;%%edx       \n\t&quot;\
+		&quot;pushl&#160;%%ebp       \n\t&quot;\
+		&quot;addl $8, (%%esp)  \n\t&quot;\
+		&quot;pushl&#160;%%ebx       \n\t&quot;\
+		&quot;call *%%eax       \n\t&quot;\
+		&quot;addl $12,&#160;%%esp       &quot;\
+		:: &quot;a&quot;(intfunc_err), &quot;b&quot;((uint32_t) intnum)&#160;: &quot;memory&quot;);\
+	asm volatile(&quot;popl&#160;%%es\n\tpopl&#160;%%ds\n\tleave\n\tpopal\n\tiret&quot;&#160;::: &quot;memory&quot;);\
+	endofISR:\
+	asm goto(\
+		&quot;.intel_syntax noprefix         \n\t&quot;\
+		&quot;mov eax, offset&#160;%l[startofISR] \n\t&quot;\
+		&quot;mov [ebx], eax                 \n\t&quot;\
+		&quot;.att_syntax                        &quot;\
+		:: &quot;b&quot;(&amp;addr)&#160;: &quot;eax&quot;, &quot;memory&quot;&#160;: startofISR);\
+	return((void *) addr);\
+}</span></pre></div></div>
+<h3> <span class="mw-headline" id="Differences"> Differences </span></h3>
+<p>Here are the differences between these three macros:
+</p>
+<ul><li> DEFINTWRAPPER is different from DEFIRQWRAPPER in that it calls "intfunc" instead of "irqfunc", so no IRQ will be acknowledged, since it is for software interripts, not for hardware ones.
+</li><li> DEFINTWRAPPER_ERR is different from DEFINTWRAPPER in that it calls "intfunc_err" instead of "intfunc" and also pushes the exception error code as an additional parameter. It is also different in that it needs to reorder the stack in order to have the correct layout. This is because an error code was pushed by the processor, and it is between the PUSHAD structure (general purpose registers) and the IRET structure (what will be popped from stack when returning from the interrupt). The ISR has to obtain the error code, and then move the PUSHAD structure next to the IRET structure. The complete structure (PUSHAD+IRET), will not only be used for returning to the interrupted code, but also for saving the interrupted task context for doing software multitasking.
+</li></ul>
+<h3> <span class="mw-headline" id="Declaring_the_functions"> Declaring the functions </span></h3>
+<p>Here is the suggested way to use the above macros:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">//IRQs (the 16 IRQs the PIC has)</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">6</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">7</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">8</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">9</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">11</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">12</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">13</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">14</span><span class="br0">&#41;</span>
+DEFIRQWRAPPER<span class="br0">&#40;</span><span class="nu0">15</span><span class="br0">&#41;</span>
+&#160;
+<span class="co1">//exceptions without error code</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="co1">//division by 0</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="co1">//debug</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="co1">//NMI</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="co1">//breakpoint</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="co1">//INTO</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="co1">//BOUND</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">6</span><span class="br0">&#41;</span><span class="co1">//invalid opcode</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">7</span><span class="br0">&#41;</span><span class="co1">//coprocessor not available</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">9</span><span class="br0">&#41;</span><span class="co1">//coprocessor segment overrun</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu0">16</span><span class="br0">&#41;</span><span class="co1">//coprocessor error</span>
+&#160;
+<span class="co1">//exceptions with error code</span>
+DEFINTWRAPPER_ERR<span class="br0">&#40;</span><span class="nu0">8</span><span class="br0">&#41;</span><span class="co1">//double fault</span>
+DEFINTWRAPPER_ERR<span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span><span class="co1">//TSS error</span>
+DEFINTWRAPPER_ERR<span class="br0">&#40;</span><span class="nu0">11</span><span class="br0">&#41;</span><span class="co1">//segment not present</span>
+DEFINTWRAPPER_ERR<span class="br0">&#40;</span><span class="nu0">12</span><span class="br0">&#41;</span><span class="co1">//stack fault</span>
+DEFINTWRAPPER_ERR<span class="br0">&#40;</span><span class="nu0">13</span><span class="br0">&#41;</span><span class="co1">//general protection fault</span>
+DEFINTWRAPPER_ERR<span class="br0">&#40;</span><span class="nu0">14</span><span class="br0">&#41;</span><span class="co1">//page fault</span>
+&#160;
+<span class="co1">//software interrupts</span>
+DEFINTWRAPPER<span class="br0">&#40;</span><span class="nu12">0x80</span><span class="br0">&#41;</span><span class="co1">//system call</span></pre></div></div>
+<p>Bear in mind that calling the macro "DEFINTWRAPPER(0)" will create a function called "int0handler", and calling "DEFINTWRAPPER(0x80)" will create "int0x80handler" and NOT "int128handler".
+</p>
+<h2> <span class="mw-headline" id="Required_functions.2C_variables.2C_and_types"> Required functions, variables, and types </span></h2>
+<p>The code presented here calls some functions and needs some types. The called functions also depend on other functions and variables. Here, the dependencies will be shown.
+</p>
+<h3> <span class="mw-headline" id="Variables"> Variables </span></h3>
+<p>The arrays of pointers to functions need to be allocated. These are just ponters to pointers to functions, the actual arrays are in the memory the programmer allocates for them.
+</p>
+<ul><li> "irqfuncs" requires 16*sizeof(void *) bytes, for the 16 pointers.
+</li><li> "intfuncs" requires 256*sizeof(void *) bytes, for the 256 pointers.
+</li><li> "intfuncs_err" requires 32*sizeof(void *) bytes, for the 32 pointers.
+</li></ul>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> <span class="sy0">*</span><span class="br0">&#40;</span><span class="sy0">**</span>irqfuncs<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">void</span> <span class="sy0">*</span>ctx<span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//array of pointers to functions for the IRQs</span>
+<span class="kw4">void</span> <span class="sy0">*</span><span class="br0">&#40;</span><span class="sy0">**</span>intfuncs<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">void</span> <span class="sy0">*</span>ctx<span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//array of pointers to functions for the interrupts</span>
+<span class="kw4">void</span> <span class="sy0">*</span><span class="br0">&#40;</span><span class="sy0">**</span>intfuncs_err<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">void</span> <span class="sy0">*</span>ctx<span class="sy0">,</span> <span class="kw4">uint32_t</span> errcode<span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//array of pointers to functions for the exceptions with error code</span></pre></div></div>
+<h3> <span class="mw-headline" id="Required_functions"> Required functions </span></h3>
+<p>This code has (of course, because it is unavoidably in x86), one low-level ISR per interrupt. Those are the functions declared in the macros. They call centralized functions which will dispatch to the appropriate high-level handler. The high-level handlers are pointed to by the corresponding array item. There are three mid-level centralized functions. The low-level ISRs always call the mid-level functions. The mid-level functions call a high-level hancdlers only when the pointer to it is not NULL. Here, a NULL pointer means there's no high-level handler for a specific interrupt, and the code will return without any problem. In case of the IRQ mid-level function, the corresponding hardware interrupt will be acknowledged. Of course, if it was a <a rel="nofollow" class="external text" href="8259_PIC#Spurious_IRQs">spourious interrupt</a>, the high-level handler is NOT called, and the interrupt is acknowledged in a different way. Additionally, if the pointer to the register context returned by a high-level handler is not NULL, the mid-level functions will call the "taskswitch" function, which will pop the registers from this context (it is used a stack) and then do an IRET. If the pointer to the register context returned by a high-level handler is NULL (or if the handler was not called because it doesn't exist), the "taskswitch" function will not be called, and the code will just go on until the POPAD+IRET instructions, which will return to the interrupted task.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">//this function is called in all the IRQs</span>
+<span class="co1">//it will call the corresponding function in the irqfuncs array, as long as it's not NULL (and the interrupt is not spourious)</span>
+<span class="co1">//if the called function returns a non-NULL pointer, that pointer will be used as a stack to switch the task</span>
+<span class="co1">//this function correctly acknowledges normal and spourious hardware interrupts</span>
+<span class="kw4">void</span> irqfunc<span class="br0">&#40;</span><span class="kw4">uint32_t</span> irqnum<span class="sy0">,</span> <span class="kw4">void</span> <span class="sy0">*</span>ctx<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw4">void</span> <span class="sy0">*</span>stack <span class="sy0">=</span> NULL<span class="sy0">;</span>
+	<span class="kw1">if</span><span class="br0">&#40;</span>PIC_isnormalIRQ<span class="br0">&#40;</span>irqnum<span class="br0">&#41;</span><span class="br0">&#41;</span>
+	<span class="br0">&#123;</span>
+		<span class="kw1">if</span><span class="br0">&#40;</span>irqfuncs<span class="br0">&#91;</span>irqnum<span class="br0">&#93;</span> <span class="sy0">!=</span> NULL<span class="br0">&#41;</span>
+			stack <span class="sy0">=</span> irqfuncs<span class="br0">&#91;</span>irqnum<span class="br0">&#93;</span><span class="br0">&#40;</span>ctx<span class="br0">&#41;</span><span class="sy0">;</span>
+		PIC_EOI<span class="br0">&#40;</span>irqnum<span class="br0">&#41;</span><span class="sy0">;</span>
+		<span class="kw1">if</span><span class="br0">&#40;</span>stack<span class="br0">&#41;</span>
+			taskswitch<span class="br0">&#40;</span>stack<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+	<span class="kw1">else</span>
+	<span class="br0">&#123;</span>
+		PIC_EOI_spurious<span class="br0">&#40;</span>irqnum<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co1">//this function is called in all the software interrupts, and in exceptions without error code</span>
+<span class="co1">//it will call the corresponding function in the intfuncs array, as long as it's not NULL</span>
+<span class="co1">//if the called function returns a non-NULL pointer, that pointer will be used as a stack to switch the task</span>
+<span class="kw4">void</span> intfunc<span class="br0">&#40;</span><span class="kw4">uint32_t</span> intnum<span class="sy0">,</span> <span class="kw4">void</span> <span class="sy0">*</span>ctx<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw4">void</span> <span class="sy0">*</span>stack <span class="sy0">=</span> NULL<span class="sy0">;</span>
+	<span class="kw1">if</span><span class="br0">&#40;</span>intfuncs<span class="br0">&#91;</span>intnum<span class="br0">&#93;</span> <span class="sy0">!=</span> NULL<span class="br0">&#41;</span>
+		stack <span class="sy0">=</span> intfuncs<span class="br0">&#91;</span>intnum<span class="br0">&#93;</span><span class="br0">&#40;</span>ctx<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="kw1">if</span><span class="br0">&#40;</span>stack<span class="br0">&#41;</span>
+		taskswitch<span class="br0">&#40;</span>stack<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co1">//this function is called in exceptions with error code</span>
+<span class="co1">//it will call the corresponding function in the intfuncs_err array, as long as it's not NULL</span>
+<span class="co1">//if the called function returns a non-NULL pointer, that pointer will be used as a stack to switch the task</span>
+<span class="kw4">void</span> intfunc_err<span class="br0">&#40;</span><span class="kw4">uint32_t</span> intnum<span class="sy0">,</span> <span class="kw4">void</span> <span class="sy0">*</span>ctx<span class="sy0">,</span> <span class="kw4">uint32_t</span> errcode<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw4">void</span> <span class="sy0">*</span>stack <span class="sy0">=</span> NULL<span class="sy0">;</span>
+	<span class="kw1">if</span><span class="br0">&#40;</span>intfuncs_err<span class="br0">&#91;</span>intnum<span class="br0">&#93;</span> <span class="sy0">!=</span> NULL<span class="br0">&#41;</span>
+		stack <span class="sy0">=</span> intfuncs_err<span class="br0">&#91;</span>intnum<span class="br0">&#93;</span><span class="br0">&#40;</span>ctx<span class="sy0">,</span> errcode<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="kw1">if</span><span class="br0">&#40;</span>stack<span class="br0">&#41;</span>
+		taskswitch<span class="br0">&#40;</span>stack<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Additional_required_functions"> Additional required functions </span></h3>
+<p>There are still some functions to be implemented. These are:
+</p>
+<ul><li> void taskswitch(void *ctx): Gets a register context and uses it to switch to another task. The format of the context is the same as what the processor expects to correctly go to another task by executing a POPAD instruction and then an IRET. This function should also set DS and ES to the user-mode data segment selector, and FS and GS to 0.
+</li><li> int PIC_isnormalIRQ(uint8_t irqnum): Returns whether an IRQ was normal (returns 0) or spourious (returns 1).
+</li><li> void PIC_EOI(uint8_t irqnum): Acknowledges a normal interrupt.
+</li><li> void PIC_EOI_spourious(uint8_t irqnum): Acknowledges a spourious interrupt.
+</li></ul>
+<h2> <span class="mw-headline" id="Installing_the_handlers"> Installing the handlers </span></h2>
+<p>In order to get the handlers called, they have to be installed. It's assumed that the basic system tables (mainly the <a href="Interrupt_Descriptor_Table" title="Interrupt Descriptor Table">IDT</a>) are already initialized.
+</p>
+<h3> <span class="mw-headline" id="Low_level"> Low level </span></h3>
+<p>The following code uses a function called "fillidte", which fills an entry in the IDT. This function is not shown here, but what it does is self-explaining.
+</p><p>Its parameters are the following:
+</p>
+<ul><li> Pointer to the IDT entry to modify.
+</li><li> ISR code selector. Should be at privilege level 0.
+</li><li> ISR code offset. As can be seen, it is the return value of one of the functions which were created using the macros.
+</li><li> Gate type. It is higly recommended to use only 0xe, which is for an interrupt gate.
+</li><li> Privilege level. This sets which privilege levels are allowed to call this interrupt gate. They are all 0, except for the system calls, where it's 3 so that user-mode programs can use the interrupt without causing an exception.
+</li></ul>
+<p>This code assumes that the PIC is mapped so that IRQs 0-15 will cause interrupts 32-47.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">32</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq0handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//IRQ handlers</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">33</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq1handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">34</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq2handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">35</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq3handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">36</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq4handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">37</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq5handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">38</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq6handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">39</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq7handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">40</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq8handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">41</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq9handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">42</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq10handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">43</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq11handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">44</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq12handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">45</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq13handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">46</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq14handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">47</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> irq15handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int0handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//exception handlers</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int1handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int2handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int3handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int4handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">5</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int5handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">6</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int6handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">7</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int7handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">8</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int8handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">9</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int9handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int10handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">11</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int11handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">12</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int12handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">13</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int13handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">14</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int14handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu0">16</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int16handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+fillidte<span class="br0">&#40;</span>idt<span class="sy0">+</span><span class="nu12">0x80</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> int0x80handler<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu12">0xe</span><span class="sy0">,</span> <span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//system call handler</span></pre></div></div>
+<h3> <span class="mw-headline" id="High_level"> High level </span></h3>
+<p>The high-level handlers are referenced in the previously mentioned arrays. These arrays sould be zeroed after allocating space for them, so that they are initialized with NULL pointers. The following code shows an example of how to install the handlers so they will be called when an interrupt occurs:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">irqfuncs<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> timer0handler<span class="sy0">;</span><span class="co1">//IRQ 0</span>
+irqfuncs<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> kbhandler<span class="sy0">;</span><span class="co1">//IRQ 1</span>
+&#160;
+intfuncs<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> div0handler<span class="sy0">;</span><span class="co1">//interrupt 0</span>
+intfuncs<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> debughandler<span class="sy0">;</span><span class="co1">//interrupt 1</span>
+intfuncs<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> NMIhandler<span class="sy0">;</span><span class="co1">//interrupt 2</span>
+intfuncs<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> INT3handler<span class="sy0">;</span><span class="co1">//interrupt 3</span>
+intfuncs<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> INTOhandler<span class="sy0">;</span><span class="co1">//interrupt 4</span>
+intfuncs<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span> <span class="sy0">=</span> BOUNDhandler<span class="sy0">;</span><span class="co1">//interrupt 5</span>
+intfuncs<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span> <span class="sy0">=</span> invopcodehandler<span class="sy0">;</span><span class="co1">//interrupt 6</span>
+intfuncs<span class="br0">&#91;</span><span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">=</span> noFPUhandler<span class="sy0">;</span><span class="co1">//interrupt 7</span>
+intfuncs<span class="br0">&#91;</span><span class="nu0">9</span><span class="br0">&#93;</span> <span class="sy0">=</span> FPUseghandler<span class="sy0">;</span><span class="co1">//interrupt 9</span>
+intfuncs<span class="br0">&#91;</span><span class="nu0">16</span><span class="br0">&#93;</span> <span class="sy0">=</span> FPUerrhandler<span class="sy0">;</span><span class="co1">//interrupt 16</span>
+&#160;
+intfuncs_err<span class="br0">&#91;</span><span class="nu0">8</span><span class="br0">&#93;</span> <span class="sy0">=</span> dblflthandler<span class="sy0">;</span><span class="co1">//interrupt 8</span>
+intfuncs_err<span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span> <span class="sy0">=</span> invTSShandler<span class="sy0">;</span><span class="co1">//interrupt 10</span>
+intfuncs_err<span class="br0">&#91;</span><span class="nu0">11</span><span class="br0">&#93;</span> <span class="sy0">=</span> segnphandler<span class="sy0">;</span><span class="co1">//interrupt 11</span>
+intfuncs_err<span class="br0">&#91;</span><span class="nu0">12</span><span class="br0">&#93;</span> <span class="sy0">=</span> stackflthandler<span class="sy0">;</span><span class="co1">//interrupt 12</span>
+intfuncs_err<span class="br0">&#91;</span><span class="nu0">13</span><span class="br0">&#93;</span> <span class="sy0">=</span> GPFhandler<span class="sy0">;</span><span class="co1">//interrupt 13</span>
+intfuncs_err<span class="br0">&#91;</span><span class="nu0">14</span><span class="br0">&#93;</span> <span class="sy0">=</span> pgflthandler<span class="sy0">;</span><span class="co1">//interrupt 14</span>
+&#160;
+intfuncs<span class="br0">&#91;</span><span class="nu12">0x80</span><span class="br0">&#93;</span> <span class="sy0">=</span> sysinthandler<span class="sy0">;</span><span class="co1">//system call (0x80)</span></pre></div></div>
+<p>This is how the high-level handler functions have to be declared so that they can be correctly called:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">//IRQ handler</span>
+<span class="kw4">void</span> <span class="sy0">*</span>timer0handler<span class="br0">&#40;</span><span class="kw4">void</span> <span class="sy0">*</span>ctx<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="co1">//code goes here</span>
+	<span class="kw1">return</span><span class="br0">&#40;</span>NULL<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co1">//exception with error code handler</span>
+<span class="kw4">void</span> <span class="sy0">*</span>GPFhandler<span class="br0">&#40;</span><span class="kw4">void</span> <span class="sy0">*</span>ctx<span class="sy0">,</span> <span class="kw4">uint32_t</span> errcode<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="co1">//code goes here</span>
+	<span class="kw1">return</span><span class="br0">&#40;</span>NULL<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>For software interrupts and exceptions without error code, the high-level handlers are declared the same way as IRQ handlers.
+</p><p>When the interrupted task is to be resumed, the handlers would return NULL. When the system has to jump to another task, the handlers would save the current context (ctx parameter) in the task control block for the current task, and then return a pointer to the context of the next task. This way, software multitasking can be eslily implemented.
+</p>
+<h2> <span class="mw-headline" id="Stack_layout"> Stack layout </span></h2>
+<p>Here the stack layout is presented so that it's easier to understand what needs to be in a task switch stack in order to correctly perform a task switch.
+</p><p>This is just an example of a task control block structure. It starts with the same information which was pushed when an interrupt occured (or has to be popped when switching the task in the "taskswitch" function).
+</p><p>These are the CPU registers in the stack, from lower to upper address:
+</p>
+<ul><li> PUSHAD structure (EDI, ESI, EBP, unused ESP, EBX, EDX, ECX, EAX). To be popped by POPAD.
+</li><li> Registers always pushed in an interrupt (EIP, CS, EFLAGS). IRET always pops them.
+</li><li> Registers pushed only when interrupting from less-privileged to more-privileged level (ESP, SS). IRET only pops them when going from a more-privileged to a less-privileged level.
+</li><li> Registers pushed only when interrupting from v86 mode to kernel mode (ES, DS, FS, GS). IRET only pops them when going from kernel mode to v86 mode, thats to say, the EFLAGS field in the stack contains the VM flag set to 1.
+</li></ul>
+<p>Note: v86 tasks are considered to be running always at privilege level 3.
+</p><p>The other fields in this structure are just a suggestion and can be modified to meet the needs of the OS multitasking engine.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">//task control block (structure to be used in a 2-way linked list)</span>
+<span class="kw4">typedef</span> <span class="kw4">struct</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>packed<span class="br0">&#41;</span><span class="br0">&#41;</span> task_t
+<span class="br0">&#123;</span>
+	<span class="kw4">uint32_t</span> edi<span class="sy0">;</span><span class="co1">//CPU registers (same format as in the interrupted task stack)</span>
+	<span class="kw4">uint32_t</span> esi<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> ebp<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> esp_discarded<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> ebx<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> edx<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> ecx<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> eax<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> eip<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> cs<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> eflags<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> esp<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> ss<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> es<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> ds<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> fs<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> gs<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> taskflags<span class="sy0">;</span><span class="co1">//b0=paused, b1=exception waiting to be handled by the monitor, b2=error, b3=successfully finished</span>
+	<span class="kw4">uint32_t</span> ticks<span class="sy0">;</span><span class="co1">//number of ticks the task has been executing since it started its turn</span>
+	<span class="kw4">uint32_t</span> maxticks<span class="sy0">;</span><span class="co1">//maximum number of ticks allowed per turn, when ticks==maxticks, set ticks to 0 and switch to next task</span>
+	<span class="kw4">uint32_t</span> excep_num<span class="sy0">;</span><span class="co1">//(for exceptions) exception number which interrupted the task</span>
+	<span class="kw4">uint32_t</span> excep_code<span class="sy0">;</span><span class="co1">//(for exceptions) exception error code</span>
+	<span class="kw4">struct</span> task_t <span class="sy0">*</span>prev<span class="sy0">;</span><span class="co1">//pointer to previous task control block</span>
+	<span class="kw4">struct</span> task_t <span class="sy0">*</span>next<span class="sy0">;</span><span class="co1">//pointer to next task control block</span>
+<span class="br0">&#125;</span> task_t<span class="sy0">;</span></pre></div></div>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 175/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3792-0!*!0!!en!*!* and timestamp 20180121032825 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ISRs_PIC_And_Multitasking&amp;oldid=18053">http://wiki.osdev.org/index.php?title=ISRs_PIC_And_Multitasking&amp;oldid=18053</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Interrupts" title="Category:Interrupts">Interrupts</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ISRs_PIC_And_Multitasking" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ISRs_PIC_And_Multitasking"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:ISRs_PIC_And_Multitasking"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ISRs_PIC_And_Multitasking#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ISRs_PIC_And_Multitasking" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ISRs_PIC_And_Multitasking&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ISRs_PIC_And_Multitasking&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ISRs_PIC_And_Multitasking#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/ISRs_PIC_And_Multitasking" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/ISRs_PIC_And_Multitasking" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=ISRs_PIC_And_Multitasking&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=ISRs_PIC_And_Multitasking&amp;oldid=18053" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ISRs_PIC_And_Multitasking" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ISRs_PIC_And_Multitasking" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ISRs_PIC_And_Multitasking&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ISRs_PIC_And_Multitasking&amp;oldid=18053" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 9 May 2015, at 00:11.</li>
+											<li id="footer-info-viewcount">This page has been accessed 8,161 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

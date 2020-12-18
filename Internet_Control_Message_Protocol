@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Internet Control Message Protocol - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Internet_Control_Message_Protocol", "wgTitle": "Internet Control Message Protocol", "wgCurRevisionId": 11490, "wgArticleId": 2979, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Network Protocols"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Internet_Control_Message_Protocol action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Internet Control Message Protocol</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Internet_Control_Message_Protocol#mw-head">navigation</a>,
+					<a href="Internet_Control_Message_Protocol#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Internet Control Message Protocol, commonly referred to as ICMP, is one of the fundamental protocols in a typical <a href="http://wiki.osdev.org/index.php?title=IPv4&amp;action=edit&amp;redlink=1" class="new" title="IPv4 (page does not exist)">IPv4</a>-capable network stack. The protocol gives nodes on a network the ability to share information and errors without utilising an upper-layer protocol which may have been compromised. For example, if a TCP connection is having packets dropped due to their time-to-live being too low, there is no way for either host to determine the fault. The only way either host can resolve the problem is if an out-of-band information message is transmitted to them, informing them that their time-to-live is too low and a router is dropping the packets. This is the purpose of ICMP.
+</p><p>Most people will have used ICMP at least once indirectly, by utilising the "ping" tool of their favourite operating system.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Internet_Control_Message_Protocol#RFC"><span class="tocnumber">1</span> <span class="toctext">RFC</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Internet_Control_Message_Protocol#Packet_Layout"><span class="tocnumber">2</span> <span class="toctext">Packet Layout</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Internet_Control_Message_Protocol#Checksum"><span class="tocnumber">3</span> <span class="toctext">Checksum</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Internet_Control_Message_Protocol#ICMP_Types"><span class="tocnumber">4</span> <span class="toctext">ICMP Types</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Internet_Control_Message_Protocol#Echo_Request_.26_Reply"><span class="tocnumber">4.1</span> <span class="toctext">Echo Request &amp; Reply</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="Internet_Control_Message_Protocol#Echo_Request_.28type_8.29"><span class="tocnumber">4.1.1</span> <span class="toctext">Echo Request (type 8)</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="Internet_Control_Message_Protocol#Echo_Reply_.28type_0.29"><span class="tocnumber">4.1.2</span> <span class="toctext">Echo Reply (type 0)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-8"><a href="Internet_Control_Message_Protocol#Destination_Unreachables_.28type_3.29"><span class="tocnumber">4.2</span> <span class="toctext">Destination Unreachables (type 3)</span></a>
+<ul>
+<li class="toclevel-3 tocsection-9"><a href="Internet_Control_Message_Protocol#Framentation_Required_.28code_4.29"><span class="tocnumber">4.2.1</span> <span class="toctext">Framentation Required (code 4)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="RFC"> RFC </span></h2>
+<p>ICMP is defined in <a rel="nofollow" class="external text" href="http://tools.ietf.org/html/rfc792">RFC792</a>. <a rel="nofollow" class="external text" href="http://tools.ietf.org/html/rfc1122">RFC1122</a> defines the relationship between <a href="http://wiki.osdev.org/index.php?title=IPv4&amp;action=edit&amp;redlink=1" class="new" title="IPv4 (page does not exist)">IPv4</a> and ICMP.
+</p>
+<h2> <span class="mw-headline" id="Packet_Layout"> Packet Layout </span></h2>
+<p>Note that all structures in this article are intended to show the layout of a packet in memory rather than be usable as C code (although most of them should be able to be copied verbatim).
+</p><p>An example C structure for an ICMP packet is:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> icmp_packet <span class="br0">&#123;</span>
+    <span class="kw4">uint8_t</span> icmp_type<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> icmp_code<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> checksum<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Checksum"> Checksum </span></h2>
+<p>An ICMP checksum is performed over the header and data in the same manner as an <a href="http://wiki.osdev.org/index.php?title=IPv4&amp;action=edit&amp;redlink=1" class="new" title="IPv4 (page does not exist)">IPv4</a> checksum. There is no IPv4 psuedo-header required.
+</p><p>Essentially, the algorithm is as follows:
+</p>
+<pre>
+1. Add all 16-bit words in the data to calculate a checksum for. This should be done in a 32-bit counter.
+2. Add any stray bytes in the case of an uneven length.
+3. Fold the sum into one 16-bit word (add the top 16 bits to the bottom 16 bits until the top 16 bits are zero).
+4. Return the 16-bit 1's complement of the result.
+</pre>
+<p>When verifying an incoming packet, you should perform the checksum over the header and data without modifying any data in the packet. Your calculated checksum will be zero if the checksum is valid, and non-zero if the checksum is invalid.
+</p>
+<h2> <span class="mw-headline" id="ICMP_Types"> ICMP Types </span></h2>
+<p>There are a variety of message types defined for ICMP.
+</p>
+<h3> <span class="mw-headline" id="Echo_Request_.26_Reply"> Echo Request &amp; Reply </span></h3>
+<p>These packets have an additional header after the ICMP header with information related to echo replies and requests:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> icmp_echo_packet <span class="br0">&#123;</span>
+    <span class="kw4">uint16_t</span> echo_id<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> echo_seq<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<p>Following this header is an arbitrary length of data.
+</p><p>The ICMP code for an echo request or reply is always zero.
+</p>
+<h4> <span class="mw-headline" id="Echo_Request_.28type_8.29"> Echo Request (type 8) </span></h4>
+<p>An echo request is sent to a host in order to request an "Echo Reply" response. These are typically used to determine if a host on the network is reachable, or to determine latency in a link or route.
+</p><p>The ID and Sequence values can be set to an arbitrary value, but should be meaningful to the implementation sending the echo request.
+</p><p>The packet data should be a number of bytes (typically enough to pad the packet to 64 or so bytes) that you expect to receive back from the host. Windows seems to just use the lower-case alphabet from 'a' to 'z' - it really is up to you what data goes here!
+</p>
+<h4> <span class="mw-headline" id="Echo_Reply_.28type_0.29"> Echo Reply (type 0) </span></h4>
+<p>An echo reply is sent to a host in response to an "Echo Request" message. All features of the reply are the same as the echo request, except for the destination and source addresses. The ID and Sequence values <b>must not be changed</b>. These are how a received response is tied to a previous request.
+</p>
+<h3> <span class="mw-headline" id="Destination_Unreachables_.28type_3.29"> Destination Unreachables (type 3) </span></h3>
+<p>These packets are sent by a host or router to notify another host that the destination it is attempting to send packets to is unreachable, for a variety of possible reasons.
+</p><p>The packet format is as follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> dest_unreachable_packet <span class="br0">&#123;</span>
+    <span class="kw4">uint16_t</span> empty<span class="sy0">;</span>
+    <span class="kw4">uint16_t</span> next_mtu<span class="sy0">;</span>
+    iphdr original_header<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> original_payload<span class="br0">&#91;</span><span class="nu0">8</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// First eight bytes of the original IPv4 payload.</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<p>Note that it may be better to <i>not</i> define your structure containing an IP header structure and these extra bytes depending on your operating system and individual needs.
+</p><p>The <b>next_mtu</b> field contains the MTU for the next hop if this message is a Fragmentation Required message.
+</p><p>A host uses the original IP header transmitted in the destination unreachable packet to determine which packet failed. This is a good reason to use valid and tracked IDs in your <a href="http://wiki.osdev.org/index.php?title=IPv4&amp;action=edit&amp;redlink=1" class="new" title="IPv4 (page does not exist)">IPv4</a> packets.
+</p><p>Destination Unreachable messages use the ICMP code field rather than the ICMP type field to define individual message types.
+</p>
+<h4> <span class="mw-headline" id="Framentation_Required_.28code_4.29"> Framentation Required (code 4) </span></h4>
+<p>A host or router sends this packet to a host when the packet is larger than the MTU for a link, and the "Don't Fragment" (DF) bit in the <a href="http://wiki.osdev.org/index.php?title=IPv4&amp;action=edit&amp;redlink=1" class="new" title="IPv4 (page does not exist)">IPv4</a> header is set. Were the DF bit to be unset, the router or host would fragment the packet automatically in order to transmit it.
+</p><p>One common use of this message is in Path MTU Discovery, which determines the MTU for a complete route from one host to another by sending out packets with decreasing size (with DF set) until a Fragmentation Required message does not get sent for the packet. Rather than "guess-and-check", a host should use the "Next MTU" field of the destination unreachable header to determine the next MTU to attempt. Keep this in mind when writing code to route packets; you may need to implement the infrastructure required to handle this (very important) message.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 91/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2979-0!*!0!!en!*!* and timestamp 20180121080147 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Internet_Control_Message_Protocol&amp;oldid=11490">http://wiki.osdev.org/index.php?title=Internet_Control_Message_Protocol&amp;oldid=11490</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Network_Protocols" title="Category:Network Protocols">Network Protocols</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Internet_Control_Message_Protocol" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Internet_Control_Message_Protocol"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Internet_Control_Message_Protocol&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Internet_Control_Message_Protocol#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Internet_Control_Message_Protocol" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Internet_Control_Message_Protocol&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Internet_Control_Message_Protocol&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Internet_Control_Message_Protocol#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Internet_Control_Message_Protocol" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Internet_Control_Message_Protocol" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Internet_Control_Message_Protocol&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Internet_Control_Message_Protocol&amp;oldid=11490" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 10 May 2011, at 22:42.</li>
+											<li id="footer-info-viewcount">This page has been accessed 5,960 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

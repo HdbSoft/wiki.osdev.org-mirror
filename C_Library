@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>C Library - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "C_Library", "wgTitle": "C Library", "wgCurRevisionId": 21766, "wgArticleId": 3192, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-C_Library action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">C Library</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="C_Library#mw-head">navigation</a>,
+					<a href="C_Library#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The C standard library provides string manipulation (string.h), basic I/O (stdio.h), memory allocation (stdlib.h), and other basic functionality to <a href="C" title="C">C</a> programs. The interface is described in the C standard, with further additions described in <a href="http://wiki.osdev.org/index.php?title=POSIX&amp;action=edit&amp;redlink=1" class="new" title="POSIX (page does not exist)">POSIX</a> as well as vendor extensions. On Unix platforms, the library is named <tt>libc</tt> and is linked automatically into every executable.
+</p><p>You need a C standard library implementation with the necessary features to run C programs on your operating system. <a href="C++" title="C++">C++</a> programs can usually use the C standard library as well and the <a href="C++" title="C++">C++</a> implementation is normally built on top of libc. It is possible to use the C standard interface in a kernel if the library implementation supports this.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="C_Library#Freestanding_and_Hosted"><span class="tocnumber">1</span> <span class="toctext">Freestanding and Hosted</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="C_Library#Implementations"><span class="tocnumber">2</span> <span class="toctext">Implementations</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="C_Library#MyOS_libc"><span class="tocnumber">2.1</span> <span class="toctext">MyOS libc</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="C_Library#Glibc"><span class="tocnumber">2.2</span> <span class="toctext">Glibc</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="C_Library#Musl"><span class="tocnumber">2.3</span> <span class="toctext">Musl</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="C_Library#Newlib"><span class="tocnumber">2.4</span> <span class="toctext">Newlib</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="C_Library#PDCLib"><span class="tocnumber">2.5</span> <span class="toctext">PDCLib</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="C_Library#uClibc"><span class="tocnumber">2.6</span> <span class="toctext">uClibc</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="C_Library#Diet_Libc"><span class="tocnumber">2.7</span> <span class="toctext">Diet Libc</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="C_Library#Google.27s_Bionic"><span class="tocnumber">2.8</span> <span class="toctext">Google's Bionic</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="C_Library#Sortix_Libc"><span class="tocnumber">2.9</span> <span class="toctext">Sortix Libc</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="C_Library#Libc11"><span class="tocnumber">2.10</span> <span class="toctext">Libc11</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="C_Library#Standards"><span class="tocnumber">3</span> <span class="toctext">Standards</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="C_Library#Specification_Stores"><span class="tocnumber">3.1</span> <span class="toctext">Specification Stores</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="C_Library#Specifications"><span class="tocnumber">3.2</span> <span class="toctext">Specifications</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Freestanding_and_Hosted"> Freestanding and Hosted </span></h2>
+<p>There are two flavors of the C compilation environment: Hosted, where the standard library is available; and freestanding, where only a few headers are usable that contains only defines and types. The hosted environment is meant for user-space programming while freestanding is meant for kernel programming. The hosted environment is default, but you can switch to the freestanding by passing <tt>-ffreestanding</tt> to your compiler.
+</p><p>The <tt>__STDC_HOSTED__</tt> macro expands to <tt>1</tt> on hosted implementations, or <tt>0</tt> on freestanding ones. The freestanding headers are: <tt>&lt;float.h&gt;</tt>, <tt>&lt;iso646.h&gt;</tt>, <tt>&lt;limits.h&gt;</tt>, <tt>&lt;stdalign.h&gt;</tt>, <tt>&lt;stdarg.h&gt;</tt>, <tt>&lt;stdbool.h&gt;</tt>, <tt>&lt;stddef.h&gt;</tt>, <tt>&lt;stdint.h&gt;</tt>, and <tt>&lt;stdnoreturn.h&gt;</tt>. You should be familiar with these headers as they contain useful declarations you shouldn't do yourself. GCC also comes with additional freestanding headers for <a href="CPUID" title="CPUID">CPUID</a>, <a href="SSE" title="SSE">SSE</a> and such.
+</p>
+<h2> <span class="mw-headline" id="Implementations"> Implementations </span></h2>
+<p>There are several open-source C library packages available, and using one may be a viable solution for you. All of them will require some degree of modification to suit your needs.
+</p><p>There is a <a rel="nofollow" class="external text" href="http://www.etalabs.net/compare_libcs.html">comparison table</a> of some of these.
+</p>
+<h3> <span class="mw-headline" id="MyOS_libc"> MyOS libc </span></h3>
+<dl><dd><i>Main article:</i> <a href="Creating_a_C_Library" title="Creating a C Library">Creating a C Library</a>
+</dd></dl>
+<p>The best option, in terms of code quality and integration with your operating system, is to write your own C library. You can aim for making a clean and high-quality implementation that follows standards well. It will integrate cleanly with your kernel as no portability layer is needed. You can be secure and robust. You can surpass the limits of what you can do with existing implementations. You can add vendor-extensions that replace bad interfaces and do things better. You can break a lot of code because you followed the standards and applications didn't, then fix the applications as well. It can be better than the competition if you make that your goal.
+</p><p>This is the idealist path and most in the osdev spirit. It has a lot of advantages, but has the steep price of requiring a lot of effort. This may very well be worth it if your goal is to make a <i>good</i> operating system, not just <i>a</i> operating system. You don't have to be a libc expert when starting out, but you'll be one when you're done. You might just realize much of the competition out there isn't very good.
+</p><p>Creating your own minimal C library is relatively easy. Providing all the primitives needed by real program is a much larger task, but straightforward as you can attempt to cross-compile the software and implement all the missing features causing compilation errors.
+</p>
+<h3> <span class="mw-headline" id="Glibc"> <a rel="nofollow" class="external text" href="https://www.gnu.org/software/libc/">Glibc</a> </span></h3>
+<ul><li> GPL license
+</li><li> Should be absolutely complete (even has all the bloat)
+</li><li> Supports almost every architecture
+</li><li> Generates large programs
+</li></ul>
+<h3> <span class="mw-headline" id="Musl"> <a rel="nofollow" class="external text" href="https://www.etalabs.net/musl/">Musl</a> </span></h3>
+<ul><li> MIT license
+</li><li> No kernel portability layer, uses the Linux system calls directly. You can add your own layer between musl and the kernel to translate Linux system calls into native system calls, which is the method used by <a rel="nofollow" class="external text" href="http://midipix.org">midipix</a>.
+</li><li> A full set of math and printf functions
+</li><li> Support for about 1200 functions
+</li><li> Many system calls needs to be implemented as it assumes you are a full Linux
+</li></ul>
+<h3> <span class="mw-headline" id="Newlib"> <a rel="nofollow" class="external text" href="https://sourceware.org/newlib/">Newlib</a> </span></h3>
+<ul><li> The license is unrestricted (not GPL or LGPL), but each file likely has a different copyright notice.
+</li><li> Requires threading, so is more appropriate for a runtime library
+</li><li> About 400 functions supported
+</li></ul>
+<h3> <span class="mw-headline" id="PDCLib"> <a rel="nofollow" class="external text" href="https://pdclib.e43.eu/">PDCLib</a> </span></h3>
+<ul><li> Creative Commons Zero license (public domain)
+</li><li> Under active development, and not at full working release 1.0 yet
+</li><li> Good for linking into kernels
+</li><li> Support for about 120 functions, currently
+</li><li> 10 (plus one optional) required syscalls need to be implemented
+</li><li> No ASM -- should be fully portable
+</li></ul>
+<h3> <span class="mw-headline" id="uClibc"> <a rel="nofollow" class="external text" href="https://www.uclibc.org/">uClibc</a> </span></h3>
+<ul><li> LGPL license
+</li></ul>
+<h3> <span class="mw-headline" id="Diet_Libc"> <a rel="nofollow" class="external text" href="https://www.fefe.de/dietlibc/">Diet Libc</a> </span></h3>
+<ul><li> GPL 2 license
+</li><li> Optimized for small size
+</li><li> Many features missing
+</li></ul>
+<h3> <span class="mw-headline" id="Google.27s_Bionic"> <a rel="nofollow" class="external text" href="https://android.googlesource.com/platform/bionic/">Google's Bionic</a> </span></h3>
+<ul><li> BSD license
+</li><li> No support for locales
+</li><li> No libthread_db or libm implementation
+</li><li> Its own smallish implementation of pthreads based on Linux futexes
+</li><li> Support for x86, ARM and ARM thumb CPU instruction sets and kernel interfaces
+</li></ul>
+<h3> <span class="mw-headline" id="Sortix_Libc"> <a rel="nofollow" class="external text" href="https://sortix.org/source/sortix/tree/master/libc">Sortix Libc</a> </span></h3>
+<ul><li> ISC license.
+</li><li> Implements large parts of the C and POSIX standards.
+</li><li> Subset can be built as the kernel standard library libk.
+</li><li> Supports over <a rel="nofollow" class="external text" href="https://gitlab.com/sortix/sortix/wikis/Ports">70 pieces of third party software</a>.
+</li><li> The source code is well organized and fairly straightforward.
+</li><li> Static linking only at this time.
+</li><li> Part of <a rel="nofollow" class="external text" href="https://sortix.org">Sortix</a> and assumes the Sortix system call ABI, which makes it cleaner.
+</li><li> Some modification is required to support other system call ABIs depending on how similar the ABI is.
+</li></ul>
+<h3> <span class="mw-headline" id="Libc11"> <a rel="nofollow" class="external text" href="http://libc11.org/">Libc11</a> </span></h3>
+<ul><li> Public domain
+</li><li> Written for the new C11 standards.
+</li><li> Under development since November 2014. Currently still severely lacking in functionality.
+</li></ul>
+<h2> <span class="mw-headline" id="Standards"> Standards </span></h2>
+<p>Especially if you want to roll your own C lib, you may want to buy the ISO/IEC 9899 specification to work from.
+It is not free. Expect a PDF to cost somewhere around $250 (US) or 250 Swiss Francs, depending on currency conversions.
+</p><p>On the other hand, the INCITS republishes these standards for a lot less: INCITS/ISO/IEC 9899-2011 can be purchased for about $60 (US) from the ANSI web store or from TechStreet.
+</p><p>The older standards (C89/C90, C99) are not commercially available anymore. To find the current standard, go to one of the
+following sites and search for document "ISO/IEC 9899".
+</p><p>By the way, you can use latest draft of standard, it's publicly available for free and exactly the same as approved version. This is a path chosen by most open-source software, especially GCC and GLIBC relies on drafts published by ISO/IEC. Latest version of C2011 draft has the name ISO/IEC 9899 N1570 and can be downloaded <a rel="nofollow" class="external text" href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">here (PDF)</a>
+</p>
+<h3> <span class="mw-headline" id="Specification_Stores"> Specification Stores </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://webstore.ansi.org">From ANSI</a>
+</li><li> <a rel="nofollow" class="external text" href="http://infostore.saiglobal.com/store">From SAI Global</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.iso.org/iso/home/store">From ISO Store</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Specifications"> Specifications </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://webstore.ansi.org/RecordDetail.aspx?sku=INCITS%2FISO%2FIEC+9899-2012">INCITS/ISO/IEC 9899-2011 at ANSI's eStandards Store</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.techstreet.com/products/1852924">INCITS/ISO/IEC 9899-2011 at Thomson Reuters TechStreet</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 93/1000000
+Post-expand include size: 43/2097152 bytes
+Template argument size: 20/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3192-0!*!0!!en!*!* and timestamp 20180121044746 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=C_Library&amp;oldid=21766">http://wiki.osdev.org/index.php?title=C_Library&amp;oldid=21766</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=C_Library" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="C_Library"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:C_Library"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="C_Library#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="C_Library" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=C_Library&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=C_Library&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="C_Library#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/C_Library" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+	skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/C_Library" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/C_Library" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=C_Library&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=C_Library&amp;oldid=21766" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 26 November 2017, at 11:00.</li>
+											<li id="footer-info-viewcount">This page has been accessed 34,188 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.028 secs. -->
+	</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Code Management - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Code_Management", "wgTitle": "Code Management", "wgCurRevisionId": 21638, "wgArticleId": 3405, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Organization", "OS Development"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Code_Management action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Code Management</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Code_Management#mw-head">navigation</a>,
+					<a href="Code_Management#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>An Operating System is, by its very nature, a quite large project. As such, it requires proper code management, otherwise your code base is likely to turn into a big mess that will only keep getting harder to maintain as the project grows, and you will end up rewriting your code base every month because it has become impossible to maintain, instead of actually implementing new features. On the other hand, code management must be scaled to the project: a project that doesn't mean to grow very big does not need a complicated organization.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Code_Management#Consistency_in_the_codebase"><span class="tocnumber">1</span> <span class="toctext">Consistency in the codebase</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Code_Management#At_the_source_level"><span class="tocnumber">1.1</span> <span class="toctext">At the source level</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Code_Management#In_the_source_tree"><span class="tocnumber">1.2</span> <span class="toctext">In the source tree</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Code_Management#In_the_versioning_scheme"><span class="tocnumber">1.3</span> <span class="toctext">In the versioning scheme</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Code_Management#Interfaces.2C_Implementations_and_Black_Boxes"><span class="tocnumber">2</span> <span class="toctext">Interfaces, Implementations and Black Boxes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Code_Management#Interface"><span class="tocnumber">2.1</span> <span class="toctext">Interface</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Code_Management#Implementation"><span class="tocnumber">2.2</span> <span class="toctext">Implementation</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Code_Management#Black_Boxes"><span class="tocnumber">2.3</span> <span class="toctext">Black Boxes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="Code_Management#Working_across_changes"><span class="tocnumber">3</span> <span class="toctext">Working across changes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="Code_Management#Version_Control_Systems"><span class="tocnumber">3.1</span> <span class="toctext">Version Control Systems</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Consistency_in_the_codebase"> Consistency in the codebase </span></h2>
+<p>The first step in writing a codebase that is easy to maintain whatever the count of people working on it, is to ensure consistency. This applies to various fields, which will be detailed within this section.
+</p>
+<h3> <span class="mw-headline" id="At_the_source_level"> At the source level </span></h3>
+<p>In a large project, it is important that all source files be written the same way. It starts with the coding style. Everybody has his own and likes to use it, but large projects need to impose one coding style for the whole project, or people willing to contribute will spend all their time deciphering the coding styles of the others, and lose any will to help out, resulting on your project to be abandoned. Most projects also impose that each source file contains a heading comments which typically contains a description of the file's purpose, its filename, and its licensing conditions (or a reference to the license, in case of long licenses like the GPL). Additionally, projects should impose other aspects of the coding standard, such as the tab policy (the way indentation is performed through tab characters or spaces, and how many spaces per indentation level), the preferred comment style (either C++-style <i>//</i> or C-style <i>/* ... */</i> for which purpose), or the encoding (pure ASCII, UTF-8, etc.) of all source files.
+</p><p>Perhaps the most essential thing to define is the naming convention (that is, how functions, structures, types, macros, variables etc. are named) in the interface (see <a href="Code_Management#Interfaces.2C_Implementations.2C_and_Black_Boxes">Interfaces, Implementations and Black Boxes</a> below for more details). This is less important for internal (e.g. <i>static</i> in C) functions which are not exposed, though it's good practice to keep the same standards everywhere.
+</p><p>The last concern is the method that is used to accomplish certain tasks that are used in multiple places across the OS. For example, the C++ language allows two ways of allocating memory (<i>new</i> and the C standard <i>malloc</i>). A good project has well-defined conventions that are followed throughout the project.
+</p><p>Fortunately, with the evolution of modern IDEs, following the coding conventions of a project has become a simple matter of setting up the IDE to use the correct encoding/tab policy/headers, and using the IDE's automated source formatting utilities to produce correctly formatted source files. Some IDEs can even create the heading comment block directly at the start of each source file you create, so that you only have to fill in the gaps.
+</p>
+<h3> <span class="mw-headline" id="In_the_source_tree"> In the source tree </span></h3>
+<p>The other place where it is essential to have a consistent organization is in the project tree.  In other words, the way files are classified in subdirectories <b>must be consistent</b>. This is more of a concern in big projects, and becomes essential when developing an operating system. Because one day or another you will want to port your operating system to other architectures, it is necessary to place source files that are architecture-dependent (e.g. x86-specific paging management) apart from architecture-independent ones (e.g. your command-line shell) (see <a href="Portability" title="Portability">Portability</a>)). <a href="GRUB" title="GRUB">GRUB</a> does that with an "<i>arch</i>" directory aside from the source files containing subdirectories for different platforms (e.g. x86, ARM, SPARC, MIPS...). Then, you should name your source files in a uniform manner. For example, C++ headers must have the same extension (<i>.h</i>, <i>.hpp</i>, <i>.hxx</i>) throughout the project. Here's another example: let's say you have an extensible command-line shell, and have commands implemented in different source files. You must decide whether you're going to create a subdirectory specifically for each commands (which would be better, e.g. "cmd/xxxxxx.c" and "cmd/yyyyy.c") or name them <i>cmdxxxxx.c</i> and "cmdyyyyy.c", or some other naming scheme.
+</p>
+<h3> <span class="mw-headline" id="In_the_versioning_scheme"> In the versioning scheme </span></h3>
+<p>Although this is usually less important than the previous concern, you need to keep the way different versions are numbered consistent. Some number versions sequentially (e.g. <i>0.1</i>, then <i>0.2</i>, then <i>0.3</i>...) while others increment the minor version (e.g. the <i>2</i> in <i>1.2</i>) number sequentially for small updates and only increment the major version number (the first number in the version) only when they add a major improvement to the projects. Some also add revision and build numbers, which are incremented by some random number every time a change is made to a file, which gives weird version numbers such as <i>2.2.11127.56150</i>, which are hard to remember.
+</p><p>Additionally, you may give each release a special name.  Projects that use that strategy include Mac OS X (e.g. Leopard, Lion, Mountain Lion...), Android (e.g. Gingerbread, Jelly Bean, Ice Cream Sandwich...), Windows (e.g. Millenim, XP, Vista), and probably others I don't know about. Just pick the one you prefer, or something completely different, or even more simple, such as <i>MyOS 1</i>, then <i>MyOS 2</i>, then <i>MyOS 3</i>... it's your project, after all!
+</p><p><a rel="nofollow" class="external text" href="http://semver.org/">"Semantic Versioning"</a> is an attempt to unify versioning schemes. You probably already use a scheme that is close to this one.
+</p>
+<h2> <span class="mw-headline" id="Interfaces.2C_Implementations_and_Black_Boxes"> Interfaces, Implementations and Black Boxes </span></h2>
+<p>When dealing with a large codebase, such as that of an operating system, code can quickly turn into a big mess. In order to avoid that, you need proper code organization. Note that it's still perfectly possible to code without using this organization, but organizing your codebase highly increases the chances that your project to succeed, and be stable.
+</p><p>It's all about splitting the <i>interface</i> from the <i>implementation</i>. The <i>interface</i> is made of function prototypes, structure definitions, typedefs, structures and possibly preprocessor macros in C, plus classes in C++. Note that different languages support different interfaces: while some languages such as <a href="D" title="D">D</a> or <a href="http://wiki.osdev.org/index.php?title=Java&amp;action=edit&amp;redlink=1" class="new" title="Java (page does not exist)">Java</a> provide built-in support for that through special keywords and constructs, while other languages don't (assembly is an example, though few OS's are written completely in assembly).
+</p>
+<h3> <span class="mw-headline" id="Interface"> Interface </span></h3>
+<p>The interface is the part that is visible to the user. It is usually present in header files, and consists, for the C language at least, of function prototypes, structure and type definitions, and preprocessor symbols and macros. This part should not contain any code, except for small inline functions that usually defer the call to other functions, with different arguments formatting. An example of that are the ubiquitous utility <i>inb/inw/inl/outb/outw/outl</i> inline assembly functions.
+</p><p>When writing an operating system kernel, one usually wants the interface to be platform-independent. This can be achieved by using <i>typedef</i>s to represent each element. For example, when implementing paging, you may use a specific typedef for physical addresses, and another for linear addresses. If you refer to physical addresses as "phys_addr_t"'s, you will be able to reuse the same interface when adapting your kernel to x86_64 (assuming a start with the x86) by simply changing the typedef of "phys_addr_t" from <i>uint32_t</i> to <i>uint64_t</i>.  You can also just use conditional compilation, or some similar feature your language of choice provides.
+</p><p>It is very important that the interface be completely independent of the implementation. That will allow you to write a second implementation of your Hardware Abstraction Layer (the part of a kernel that abstracts the hardware, for beginners) for a different platform later, without having to change the interface. And assuming that your interface is platform-independent enough, and your kernel uses it <b>and only it</b> to access the hardware, then porting to a new platform will simply be a matter of writing a new HAL, and the rest will magically compile and work perfectly on the new architecture (for more info, see <a href="Portability" title="Portability">Portability</a>).
+</p><p>For this to work, you also have to ensure that the rest of the kernel is really platform-independent. In fact, the interface of your kernel should never directly use fixed-width types (such as <i>uint32_t</i>). If the fixed-width is required by the platform (such as special registers), then you should have a special typedef for it (e.g. special_register_t). Otherwise, if you just want to ensure a given capacity, then use the standard type that is closest to what you want. A good example of that is the C standard library, which uses special type for file offsets, sizes, times, etc, but uses (unsigned) char/int/long when necessary. And as you can see, the interface to the C library remains the same through countless different platforms. A well-designed kernel interface allows the same thing to apply to... your kernel.
+</p>
+<h3> <span class="mw-headline" id="Implementation"> Implementation </span></h3>
+<p>The implementation is the opposite of the interface. That is, it contains the actual <i>implementation</i> of the functions defined in the interface. The implementation is allowed (and in fact, has to, in the context of a kernel) depend on the platform. It is in the implementation that you write code that directly accesses specific hardware (most notably inline assembly). (Code that addresses specific hardware should be placed in separate drivers, according to your kernel design). However, if you want your code to remain readable, I suggest that you still use the C preprocessor for <i>magic</i> values, such as fixed addresses of memory-mapped devices (e.g. the 0xB8000 address of the VGA's text mode video memory), with explicit names (e.g. VGA_TEXT_MEMORY).
+</p><p>The implementation can be as ugly as it wants or needs to be, as long as it properly implements the interface. However, to achieve proper isolation between interface and implementation, it is important that functions that are internal to the implementation <i>not</i> be accessible from outside it. The C language provides the <i>static</i> keyword for that.
+</p><p>A special case are bigger components, whose implementation can be considered as a separate library. In that case, a common practice is to have an internal implementation-specific interface. However, and since internal functions can't be declared <i>static</i>, it's up to the developer to ensure that they are not used from outside the implementation. There are countless professional libraries using such techniques. Good examples are the industry-standard <i>boost C++ libraries</i> with their "<i>detail</i>" directories. An example of such components are complicated device drivers, such as those for hardware-accelerated video cards, or complicated filesystems.
+</p>
+<h3> <span class="mw-headline" id="Black_Boxes"> Black Boxes </span></h3>
+<p>In time, you will probably want to extend your development team, if not already done. But once you will have more people working on the codebase, you will face a problem: the more they are, the longer it takes to develop. The reason for that is that each developer in charge of one part of the kernel needs to take in account the code written by other developers in charge of other parts of the kernel. That's when black boxes come into play.
+The <i>Black Boxes</i> approach consists in treating your kernel as a set of separate libraries (the Hardware Abstraction Layer is a library, the VFS is another etc.). Once your project is properly divided into pieces, you can give each developer his library, and no longer worry about conflicts. Combined to interface and implementation isolation, you will have each team try to implement its part of the interface as well as possible. With a properly-designed interface, this will make the development process much faster and easier to manage, for the project leader.
+</p><p>That approach will also help you during the recruitment process of your development team. In effect, you will realize that there are many people who decided to start their own OS project with the goal of making the best possible GUI, but lose any will to continue that project when they realize that they have to implement countless other things before. If you announce on the forum that you are looking for people to design a GUI under an already mature kernel, these people will be happy to join your project, since it allows them to work only on what they like, without to worry about the rest.
+</p><p>It will also make it easier to fix bugs. Because each part of the kernel is clearly separate from the rest, it's easy to locate an individual problem with the code, and fix it, without also having to modify a lot of other parts of the kernel which relied on it, due to a lack of precise interface. Due to that, your kernel has chances to be more stable than average in the end.
+</p><p>Now comes the problem of the interface. Since every component is neatly isolated from the rest, and implements the interface, you need to have a well-designed interface, and clear rules about who can modify it. If anybody can change the interface, it is useless to have one, because your team will spend its time adapting the implementation to suit the new interface, instead of actually coding things. A (good) scheme that proved to work is to have, on your project page, a forum with a topic dedicated to discussing the interface. Then, when somebody wants to change the interface, he will need to present his change to the whole developer community, with arguments, and then it will be up to you to decide whether the change should be done or not.
+</p>
+<h2> <span class="mw-headline" id="Working_across_changes"> Working across changes </span></h2>
+<p>It is obvious that your code will have to change, and sometimes a change is not as good as you thought it would be. In this case, you will want to roll back the change. You may also encounter situations where you remove a part of your code (e.g. you want to completely change your scheduler) and later want to see that code again (e.g. your new scheduler supports different methods and you now want to re-include your old scheduler's code).
+</p>
+<dl><dd><b>Note:</b> <i>If you are already using a version control system, you'd better skip this section&#160;:)</i>
+</dd></dl>
+<h3> <span class="mw-headline" id="Version_Control_Systems"> Version Control Systems </span></h3>
+<p>A <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Version_control">Version Control system</a> (VCS) is a program that manages changes to your source files (for OSX users, this is much like Time Machine, but enhanced for source code). Concretely, you perform a <i>commit</i> operation after each significant change  (e.g. after you rewrote your scheduler, or added a new driver, don't commit after each modified line), and the VCS will remember the state of the files before and after the changes. This means that if you change your mind and want to see your code again, then the VCS will be able to give it back. A VCS also enables you to generate <i>patches</i>, which are files that contain only the differences between two versions of a same file.
+</p><p>But the main point in using a VCS is that it enables two (or more) persons to work on the same codebase at once without interfering with each other. A VCS also allows you to place your source code on the Internet and have your whole team co-operate using a single server. Many source code hosting websites (such as Google Code) support accessing your codebase through a VCS, and using such tools for your code gives you more chances to get people to contribute to your project.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 62/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3405-0!*!0!!en!*!* and timestamp 20180121045022 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Code_Management&amp;oldid=21638">http://wiki.osdev.org/index.php?title=Code_Management&amp;oldid=21638</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="http://wiki.osdev.org/index.php?title=Category:Organization&amp;action=edit&amp;redlink=1" class="new" title="Category:Organization (page does not exist)">Organization</a></li><li><a href="Category:OS_Development" title="Category:OS Development">OS Development</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Code_Management" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Code_Management"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Code_Management&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Code_Management#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Code_Management" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Code_Management&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Code_Management&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Code_Management#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Code_Management" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Code_Management" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Code_Management&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Code_Management&amp;oldid=21638" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 October 2017, at 20:46.</li>
+											<li id="footer-info-viewcount">This page has been accessed 22,554 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Code_Management" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Code_Management" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Code_Management&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Code_Management&amp;oldid=21638" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 October 2017, at 20:46.</li>
+											<li id="footer-info-viewcount">This page has been accessed 22,554 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.044 secs. -->
+	</body>
+</html>

@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ISO 9660 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ISO_9660", "wgTitle": "ISO 9660", "wgCurRevisionId": 19082, "wgArticleId": 2211, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Filesystems"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ISO_9660 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ISO 9660</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ISO_9660#mw-head">navigation</a>,
+					<a href="ISO_9660#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="File_Systems" title="File Systems">Filesystems</a></th></tr><tr><th>Virtual Filesystems</th></tr><tr><td><div>
+<p><a href="VFS" title="VFS">VFS</a><br />
+</p>
+</div></td></tr><tr><th>Disk Filesystems</th></tr><tr><td><div>
+<p><a href="FAT" title="FAT">FAT</a> <a href="FAT12" title="FAT12" class="mw-redirect">12</a>/<a href="FAT16" title="FAT16" class="mw-redirect">16</a>/<a href="FAT32" title="FAT32" class="mw-redirect">32</a>, <a href="VFAT" title="VFAT" class="mw-redirect">VFAT</a><br />
+<a href="Ext2" title="Ext2">Ext 2</a>/<a href="Ext3" title="Ext3">3</a>/<a href="Ext4" title="Ext4">4</a><br />
+<a href="LEAN" title="LEAN">LEAN</a><br />
+<a href="HPFS" title="HPFS">HPFS</a><br />
+<a href="NTFS" title="NTFS">NTFS</a><br />
+<a href="HFS" title="HFS">HFS</a><br />
+<a href="HFS+" title="HFS+">HFS+</a><br />
+<a href="MFS" title="MFS">MFS</a><br />
+<a href="ReiserFS" title="ReiserFS">ReiserFS</a><br />
+<a href="FFS_(Amiga)" title="FFS (Amiga)">FFS (Amiga)</a><br />
+<a href="FFS_(BSD)" title="FFS (BSD)" class="mw-redirect">FFS (BSD)</a>/<a href="UFS" title="UFS">UFS</a><br />
+<a href="BeFS" title="BeFS">BeFS</a><br />
+<a href="BFS" title="BFS">BFS</a><br />
+<a href="XFS" title="XFS">XFS</a><br />
+<a href="SFS" title="SFS">SFS</a><br />
+<a href="ZFS" title="ZFS">ZFS</a><br />
+<a href="USTAR" title="USTAR">USTAR</a><br />
+</p>
+</div></td></tr><tr><th>CD/DVD Filesystems</th></tr><tr><td><div>
+<p><strong class="selflink">ISO 9660</strong><br />
+<a href="Joliet" title="Joliet">Joliet</a><br />
+<a href="UDF" title="UDF">UDF</a><br />
+</p>
+</div></td></tr><tr><th><a href="Category:Network_Filesystems" title="Category:Network Filesystems">Network Filesystems</a></th></tr><tr><td><div>
+<p><a href="NFS" title="NFS">NFS</a><br />
+<a href="RFS" title="RFS">RFS</a><br />
+<a href="AFS" title="AFS">AFS</a><br />
+</p>
+</div></td></tr><tr><th>Flash Filesystems</th></tr><tr><td><div>
+<p><a href="JFFS2" title="JFFS2">JFFS2</a><br />
+<a href="YAFFS" title="YAFFS">YAFFS</a><br />
+</p>
+</div></td></tr></table>
+<p><b>ISO 9660</b> is the standard file system for CD-ROMs. It is also widely used
+on DVD and BD media and may as well be present on USB sticks or hard disks. 
+Its specifications are available for free under the name <b>ECMA-119</b>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="ISO_9660#Overview_and_caveats"><span class="tocnumber">1</span> <span class="toctext">Overview and caveats</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="ISO_9660#Sector_size"><span class="tocnumber">1.1</span> <span class="toctext">Sector size</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="ISO_9660#Numerical_formats"><span class="tocnumber">1.2</span> <span class="toctext">Numerical formats</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="ISO_9660#Date.2Ftime_format"><span class="tocnumber">1.3</span> <span class="toctext">Date/time format</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="ISO_9660#String_format"><span class="tocnumber">1.4</span> <span class="toctext">String format</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="ISO_9660#Filenames"><span class="tocnumber">1.5</span> <span class="toctext">Filenames</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="ISO_9660#Size_Limitations"><span class="tocnumber">1.6</span> <span class="toctext">Size Limitations</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="ISO_9660#System_Area"><span class="tocnumber">2</span> <span class="toctext">System Area</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="ISO_9660#Volume_Descriptors"><span class="tocnumber">3</span> <span class="toctext">Volume Descriptors</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="ISO_9660#Volume_Descriptor_Type_Codes"><span class="tocnumber">3.1</span> <span class="toctext">Volume Descriptor Type Codes</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="ISO_9660#The_Boot_Record"><span class="tocnumber">3.2</span> <span class="toctext">The Boot Record</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="ISO_9660#The_Primary_Volume_Descriptor"><span class="tocnumber">3.3</span> <span class="toctext">The Primary Volume Descriptor</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="ISO_9660#Volume_Descriptor_Set_Terminator"><span class="tocnumber">3.4</span> <span class="toctext">Volume Descriptor Set Terminator</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-14"><a href="ISO_9660#The_Path_Table"><span class="tocnumber">4</span> <span class="toctext">The Path Table</span></a></li>
+<li class="toclevel-1 tocsection-15"><a href="ISO_9660#Directories"><span class="tocnumber">5</span> <span class="toctext">Directories</span></a></li>
+<li class="toclevel-1 tocsection-16"><a href="ISO_9660#Locating_Data_on_the_CD"><span class="tocnumber">6</span> <span class="toctext">Locating Data on the CD</span></a>
+<ul>
+<li class="toclevel-2 tocsection-17"><a href="ISO_9660#Searching_the_Path_Table"><span class="tocnumber">6.1</span> <span class="toctext">Searching the Path Table</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="ISO_9660#Recursing_from_the_Root_Directory"><span class="tocnumber">6.2</span> <span class="toctext">Recursing from the Root Directory</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-19"><a href="ISO_9660#Rock_Ridge_and_Joliet"><span class="tocnumber">7</span> <span class="toctext">Rock Ridge and Joliet</span></a></li>
+<li class="toclevel-1 tocsection-20"><a href="ISO_9660#See_Also"><span class="tocnumber">8</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-21"><a href="ISO_9660#Articles"><span class="tocnumber">8.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="ISO_9660#External_links"><span class="tocnumber">8.2</span> <span class="toctext">External links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Overview_and_caveats"> Overview and caveats </span></h2>
+<p>ISO 9660 is not a complex file system, but has a few quirks that are worth remembering. It seems that some operating systems also create non-compliant CDs, so beware! The main example of this is the character set that is available for file names. Strictly,filenames may only consist of uppercase letters A-Z, digits,
+dots, and underscores. Further there is a semicolon which separates the visible file name from its version number suffix. Many operating systems also allow lower case letters and other characters. Linux's <a href="VFS" title="VFS">VFS</a> displays lower case filenames to the user despite the CD contents actually containing upper case characters.
+</p>
+<h3> <span class="mw-headline" id="Sector_size"> Sector size </span></h3>
+<p>An ISO 9660 sector is normally 2 KiB long. Although the specification allows for alternative sector sizes, you will rarely find anything other than 2 KiB.
+</p>
+<h3> <span class="mw-headline" id="Numerical_formats"> Numerical formats </span></h3>
+<p>Another quirk of the system is that it has several numbering formats and multi-byte numbers are often represented in <i>both-endian</i> format. The ISO 9660 standard specifies three ways to encode 16 and 32-bit integers, using either little-endian (least-significant byte first), big-endian (most-significant byte first), or a combination of both (little-endian followed by big-endian). Both-endian (LSB-MSB) fields are therefore twice as wide. For this reason, 32-bit LBA's often appear as 8 byte fields. Where a both-endian format is present, the x86 architecture makes use of the first little-endian sequence and ignores the big-endian sequence.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Encoding
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> int8 </td>
+<td> Unsigned 8-bit integer.
+</td></tr>
+<tr>
+<td> sint8 </td>
+<td> Signed 8-bit integer.
+</td></tr>
+<tr>
+<td> int16_LSB </td>
+<td> Little-endian encoded unsigned 16-bit integer.
+</td></tr>
+<tr>
+<td> int16_MSB </td>
+<td> Big-endian encoded unsigned 16-bit integer.
+</td></tr>
+<tr>
+<td> int16_LSB-MSB </td>
+<td> Little-endian followed by big-endian encoded unsigned 16-bit integer.
+</td></tr>
+<tr>
+<td> sint16_LSB </td>
+<td> Little-endian encoded signed 16-bit integer.
+</td></tr>
+<tr>
+<td> sint16_MSB </td>
+<td> Big-endian encoded signed 16-bit integer.
+</td></tr>
+<tr>
+<td> sint16_LSB-MSB </td>
+<td> Little-endian followed by big-endian encoded signed 16-bit integer.
+</td></tr>
+<tr>
+<td> int32_LSB </td>
+<td> Little-endian encoded unsigned 32-bit integer.
+</td></tr>
+<tr>
+<td> int32_MSB </td>
+<td> Big-endian encoded unsigned 32-bit integer.
+</td></tr>
+<tr>
+<td> int32_LSB-MSB </td>
+<td> Little-endian followed by big-endian encoded unsigned 32-bit integer.
+</td></tr>
+<tr>
+<td> sint32_LSB </td>
+<td> Little-endian encoded signed 32-bit integer.
+</td></tr>
+<tr>
+<td> sint32_MSB </td>
+<td> Big-endian encoded signed 32-bit integer.
+</td></tr>
+<tr>
+<td> sint32_LSB-MSB </td>
+<td> Little-endian followed by big-endian encoded signed 32-bit integer.
+</td></tr></table>
+<p><br />
+</p>
+<h3> <span class="mw-headline" id="Date.2Ftime_format"> Date/time format </span></h3>
+<p>The date/time format used in the <i>Primary Volume Descriptor</i> is denoted as <i>dec-datetime</i> and uses ASCII digits to represent the main parts of the date/time:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th>Offset
+</th>
+<th>Size
+</th>
+<th>Datatype
+</th>
+<th>Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> 4 </td>
+<td> strD </td>
+<td> Year from 1 to 9999.
+</td></tr>
+<tr>
+<td> 4 </td>
+<td> 2 </td>
+<td> strD </td>
+<td> Month from 1 to 12.
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> 2 </td>
+<td> strD </td>
+<td> Day from 1 to 31.
+</td></tr>
+<tr>
+<td> 8 </td>
+<td> 2 </td>
+<td> strD </td>
+<td> Hour from 0 to 23.
+</td></tr>
+<tr>
+<td> 10 </td>
+<td> 2 </td>
+<td> strD </td>
+<td> Minute from 0 to 59.
+</td></tr>
+<tr>
+<td> 12 </td>
+<td> 2 </td>
+<td> strD </td>
+<td> Second from 0 to 59.
+</td></tr>
+<tr>
+<td> 14 </td>
+<td> 2 </td>
+<td> strD </td>
+<td> Hundredths of a second from 0 to 99.
+</td></tr>
+<tr>
+<td> 16 </td>
+<td> 1 </td>
+<td> int8 </td>
+<td> Time zone offset from GMT in 15 minute intervals, starting at interval -48 (west) and running up to interval 52 (east). So value 0 indicates interval -48 which equals GMT-12 hours, and value 100 indicates interval 52 which equals GMT+13 hours.
+</td></tr></table>
+<p>All fields except for the offset from GMT are in ASCII digits. When the date and time is not specified, all string fields are ASCII '0' (for a total of 16 ASCII zeroes) and the last field is binary zero.
+</p>
+<h3> <span class="mw-headline" id="String_format"> String format </span></h3>
+<p>Character strings are encoded with ASCII encoding. The specification does not permit all characters. It defines two sets of characters: 'a-characters' and 'd-characters'. You will see these terms used in the descriptor tables throughout this article. The character sets are:
+</p>
+<pre>
+a-characters: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9 _ 
+             &#160;! &quot;&#160;% &amp; ' ( ) * + , - . /&#160;:&#160;; &lt; = &gt;&#160;?
+</pre>
+<pre>
+d-characters: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9 _
+</pre>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Encoding
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> strA </td>
+<td> String with only ASCII a-characters, padded to the right with spaces.
+</td></tr>
+<tr>
+<td> strD </td>
+<td> String with only ASCII d-characters, padded to the right with spaces.
+</td></tr></table>
+<p>Note that not all CDs strictly adhere to the character sets specified in ISO 9660.
+</p>
+<h3> <span class="mw-headline" id="Filenames"> Filenames </span></h3>
+<p>Filenames must use d-character encoding (strD), plus dot and semicolon
+which have to occur exactly once per filename.
+Filenames are composed of a File Name, a dot, a File Name Extension,
+a semicolon; and a version number in decimal digits. The latter two
+are usually not displayed to the user.
+</p><p>There are three Levels of Interchange defined. Level 1 allows filenames
+with a File Name length of 8 and an extension length of 3 (like MS-DOS).
+Levels 2 and 3 allow File Name and File Name Extension to have a combined
+length of up to 30 characters.
+</p><p>The ECMA-119 Directory Record format can hold composed names of up to 222
+characters. This would violate the specs but must nevertheless be handled
+by a reader of the filesystem.
+</p>
+<h3> <span class="mw-headline" id="Size_Limitations"> Size Limitations </span></h3>
+<p>ISO 9660 filesystems can have up to 2 exp 32 blocks, i.e. 8 TiB.
+Normally they will be restricted to the size of optical media.
+(Currently up to 100 GiB with 4-layer BD-R.)
+</p><p>The maximum size of data files depends on the Level of Interchange
+that is intended for the ISO filesystem. Levels 1 and 2 allow for
+4 GiB - 1, because a single Directory Record can claim up to that 
+number of bytes. Level 3 allows to have multiple consequtive
+Directory Records with the same name. They all are to be concatenated
+to a single data file. This means that a single data file can nearly
+fill up the full 8 TiB of image size.
+</p>
+<h2> <span class="mw-headline" id="System_Area"> System Area </span></h2>
+<p>An ISO 9660 filesystem begins by 32 KiB which may be used for arbitrary
+data. This is often used to store boot information for the case that
+the ISO 9660 filesystem is not stored on optical media, but rather on
+a hard-disk-like device, e.g. on a USB stick.
+</p><p>So be prepared to find at that location a Master Boot Record
+(MBR, for BIOS), a GUID Partition Table (GPT, for EFI), or an
+Apple Partition Map (APM).
+</p>
+<h2> <span class="mw-headline" id="Volume_Descriptors"> Volume Descriptors </span></h2>
+<p>When preparing to mount a CD, your first action will be reading the volume descriptors (specifically, you will be looking for the <i>Primary Volume Descriptor</i>).
+</p><p>Since sectors 0x00-0x0F of the CD are reserved as System Area,
+the Volume Descriptors can be found starting at sector 0x10. The format of the volume descriptors is as follows:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset
+</th>
+<th> Length (bytes)
+</th>
+<th> Field name
+</th>
+<th> Datatype
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> 1 </td>
+<td> Type </td>
+<td> int8 </td>
+<td> Volume Descriptor type code (see below).
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> 5 </td>
+<td> Identifier </td>
+<td> strA </td>
+<td> Always 'CD001'.
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> 1 </td>
+<td> Version </td>
+<td> int8 </td>
+<td> Volume Descriptor Version (0x01).
+</td></tr>
+<tr>
+<td> 7 </td>
+<td> 2041 </td>
+<td> Data </td>
+<td> - </td>
+<td> Depends on the volume descriptor type.
+</td></tr></table>
+<p>This means that each volume descriptor is therefore one sector (2 KiB) long.
+</p>
+<h3> <span class="mw-headline" id="Volume_Descriptor_Type_Codes"> Volume Descriptor Type Codes </span></h3>
+<p>The Volume Descriptor Type field specifies the type of Volume Descriptor:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Value
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> Boot Record
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> Primary Volume Descriptor
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> Supplementary Volume Descriptor
+</td></tr>
+<tr>
+<td> 3 </td>
+<td> Volume Partition Descriptor
+</td></tr>
+<tr>
+<td> 4-254 </td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 255 </td>
+<td> Volume Descriptor Set Terminator
+</td></tr></table>
+<p>When starting out with a basic CD, we are going to be interested in the Primary Volume Descriptor, which points us to the root directory and path tables, which both allow us to find any file on the CD. Using the path table is ideal for minimal implementations which do not wish to search the directory hierarchy node by node. This is slower (string comparisons across the entire file system) but easier to implement.
+</p>
+<h3> <span class="mw-headline" id="The_Boot_Record"> The Boot Record </span></h3>
+<p>The first type of Volume Descriptor is the "Boot Record". The descriptor format is as follows:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset
+</th>
+<th> Length (bytes)
+</th>
+<th> Field name
+</th>
+<th> Datatype
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> 1 </td>
+<td> Type </td>
+<td> int8 </td>
+<td> Zero indicates a boot record.
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> 5 </td>
+<td> Identifier </td>
+<td> strA </td>
+<td> Always "CD001".
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> 1 </td>
+<td> Version </td>
+<td> int8 </td>
+<td> Volume Descriptor Version (0x01).
+</td></tr>
+<tr>
+<td> 7 </td>
+<td> 32 </td>
+<td> Boot System Identifier </td>
+<td> strA </td>
+<td> ID of the system which can act on and boot the system from the boot record.
+</td></tr>
+<tr>
+<td> 39 </td>
+<td> 32 </td>
+<td> Boot Identifier </td>
+<td> strA </td>
+<td> Identification of the boot system defined in the rest of this descriptor.
+</td></tr>
+<tr>
+<td> 71 </td>
+<td> 1977 </td>
+<td> Boot System Use </td>
+<td> - </td>
+<td> Custom - used by the boot system.
+</td></tr></table>
+<p>The most common Boot System Use specification is <a href="El-Torito" title="El-Torito">El Torito</a>.
+It records at bytes 71 to 74 as little-endian 32-bit number the 
+block address of the El Torito Boot Catalog. This catalog lists the 
+available boot images, which serve as starting points of booting systems.
+</p>
+<h3> <span class="mw-headline" id="The_Primary_Volume_Descriptor"> The Primary Volume Descriptor </span></h3>
+<p>This is a lengthy descriptor, but it contains some very useful information for reading the rest of the file system.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset
+</th>
+<th> Length (bytes)
+</th>
+<th> Field name
+</th>
+<th> Datatype
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> 1 </td>
+<td> Type Code </td>
+<td> int8 </td>
+<td> Always 0x01 for a Primary Volume Descriptor.
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> 5 </td>
+<td> Standard Identifier </td>
+<td> strA </td>
+<td> Always 'CD001'.
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> 1 </td>
+<td> Version </td>
+<td> int8 </td>
+<td> Always 0x01.
+</td></tr>
+<tr>
+<td> 7 </td>
+<td> 1 </td>
+<td> Unused </td>
+<td> - </td>
+<td> Always 0x00.
+</td></tr>
+<tr>
+<td> 8 </td>
+<td> 32 </td>
+<td> System Identifier </td>
+<td> strA </td>
+<td> The name of the system that can act upon sectors 0x00-0x0F for the volume.
+</td></tr>
+<tr>
+<td> 40 </td>
+<td> 32 </td>
+<td> Volume Identifier </td>
+<td> strD </td>
+<td> Identification of this volume.
+</td></tr>
+<tr>
+<td> 72 </td>
+<td> 8 </td>
+<td> Unused Field </td>
+<td> - </td>
+<td> All zeroes.
+</td></tr>
+<tr>
+<td> 80 </td>
+<td> 8 </td>
+<td> Volume Space Size </td>
+<td> int32_LSB-MSB </td>
+<td> Number of Logical Blocks in which the volume is recorded.
+</td></tr>
+<tr>
+<td> 88 </td>
+<td> 32 </td>
+<td> Unused Field </td>
+<td> - </td>
+<td> All zeroes.
+</td></tr>
+<tr>
+<td> 120 </td>
+<td> 4 </td>
+<td> Volume Set Size </td>
+<td> int16_LSB-MSB </td>
+<td> The size of the set in this logical volume (number of disks).
+</td></tr>
+<tr>
+<td> 124 </td>
+<td> 4 </td>
+<td> Volume Sequence Number </td>
+<td> int16_LSB-MSB </td>
+<td> The number of this disk in the Volume Set.
+</td></tr>
+<tr>
+<td> 128 </td>
+<td> 4 </td>
+<td> Logical Block Size </td>
+<td> int16_LSB-MSB </td>
+<td>  The size in bytes of a logical block. NB: This means that a logical block on a CD could be something other than 2 KiB!
+</td></tr>
+<tr>
+<td> 132 </td>
+<td> 8 </td>
+<td> Path Table Size </td>
+<td> int32_LSB-MSB </td>
+<td> The size in bytes of the path table.
+</td></tr>
+<tr>
+<td> 140 </td>
+<td> 4 </td>
+<td> Location of Type-L Path Table </td>
+<td> int32_LSB </td>
+<td> LBA location of the path table. The path table pointed to contains only little-endian values.
+</td></tr>
+<tr>
+<td> 144 </td>
+<td> 4 </td>
+<td> Location of the Optional Type-L Path Table </td>
+<td> int32_LSB </td>
+<td> LBA location of the optional path table. The path table pointed to contains only little-endian values. Zero means that no optional path table exists.
+</td></tr>
+<tr>
+<td> 148 </td>
+<td> 4 </td>
+<td> Location of Type-M Path Table </td>
+<td> int32_MSB </td>
+<td> LBA location of the path table. The path table pointed to contains only big-endian values.
+</td></tr>
+<tr>
+<td> 152 </td>
+<td> 4 </td>
+<td> Location of Optional Type-M Path Table </td>
+<td> int32_MSB </td>
+<td> LBA location of the optional path table. The path table pointed to contains only big-endian values. Zero means that no optional path table exists.
+</td></tr>
+<tr>
+<td> 156 </td>
+<td> 34 </td>
+<td> Directory entry for the root directory </td>
+<td> - </td>
+<td> Note that this is not an LBA address, it is the actual Directory Record, which contains a single byte Directory Identifier (0x00), hence the fixed 34 byte size.
+</td></tr>
+<tr>
+<td> 190 </td>
+<td> 128 </td>
+<td> Volume Set Identifier </td>
+<td> strD </td>
+<td> Identifier of the volume set of which this volume is a member.
+</td></tr>
+<tr>
+<td> 318 </td>
+<td> 128 </td>
+<td> Publisher Identifier </td>
+<td> strA </td>
+<td> The volume publisher. For extended publisher information, the first byte should be 0x5F, followed by the filename of a file in the root directory. If not specified, all bytes should be 0x20.
+</td></tr>
+<tr>
+<td> 446 </td>
+<td> 128 </td>
+<td> Data Preparer Identifier </td>
+<td> strA </td>
+<td> The identifier of the person(s) who prepared the data for this volume. For extended preparation information, the first byte should be 0x5F, followed by the filename of a file in the root directory. If not specified, all bytes should be 0x20.
+</td></tr>
+<tr>
+<td> 574 </td>
+<td> 128 </td>
+<td> Application Identifier </td>
+<td> strA </td>
+<td> Identifies how the data are recorded on this volume. For extended information, the first byte should be 0x5F, followed by the filename of a file in the root directory. If not specified, all bytes should be 0x20.
+</td></tr>
+<tr>
+<td> 702 </td>
+<td> 38 </td>
+<td> Copyright File Identifier </td>
+<td> strD </td>
+<td> Filename of a file in the root directory that contains copyright information for this volume set. If not specified, all bytes should be 0x20.
+</td></tr>
+<tr>
+<td> 740 </td>
+<td> 36 </td>
+<td> Abstract File Identifier </td>
+<td> strD </td>
+<td> Filename of a file in the root directory that contains abstract information for this volume set. If not specified, all bytes should be 0x20.
+</td></tr>
+<tr>
+<td> 776 </td>
+<td> 37 </td>
+<td> Bibliographic File Identifier </td>
+<td> strD </td>
+<td> Filename of a file in the root directory that contains bibliographic information for this volume set. If not specified, all bytes should be 0x20.
+</td></tr>
+<tr>
+<td> 813 </td>
+<td> 17 </td>
+<td> Volume Creation Date and Time </td>
+<td> dec-datetime </td>
+<td> The date and time of when the volume was created.
+</td></tr>
+<tr>
+<td> 830 </td>
+<td> 17 </td>
+<td> Volume Modification Date and Time </td>
+<td> dec-datetime </td>
+<td> The date and time of when the volume was modified.
+</td></tr>
+<tr>
+<td> 847 </td>
+<td> 17 </td>
+<td> Volume Expiration Date and Time </td>
+<td> dec-datetime </td>
+<td> The date and time after which this volume is considered to be obsolete. If not specified, then the volume is never considered to be obsolete.
+</td></tr>
+<tr>
+<td> 864 </td>
+<td> 17 </td>
+<td> Volume Effective Date and Time </td>
+<td> dec-datetime </td>
+<td> The date and time after which the volume may be used. If not specified, the volume may be used immediately.
+</td></tr>
+<tr>
+<td> 881 </td>
+<td> 1 </td>
+<td> File Structure Version </td>
+<td> int8 </td>
+<td> The directory records and path table version (always 0x01).
+</td></tr>
+<tr>
+<td> 882 </td>
+<td> 1 </td>
+<td> Unused </td>
+<td> - </td>
+<td> Always 0x00.
+</td></tr>
+<tr>
+<td> 883 </td>
+<td> 512 </td>
+<td> Application Used </td>
+<td> - </td>
+<td> Contents not defined by ISO 9660.
+</td></tr>
+<tr>
+<td> 1395 </td>
+<td> 653 </td>
+<td> Reserved </td>
+<td> - </td>
+<td> Reserved by ISO.
+</td></tr></table>
+<h3> <span class="mw-headline" id="Volume_Descriptor_Set_Terminator"> Volume Descriptor Set Terminator </span></h3>
+<p>The Volume Descriptor Set Terminator does not currently define bytes 7-2047 of its Volume Descriptor. This means that the only fields in use for the volume set terminator are the type code (255), the standard identifier ('CD001') and the descriptor version (0x01).
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset
+</th>
+<th> Length (bytes)
+</th>
+<th> Field name
+</th>
+<th> Datatype
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> 1 </td>
+<td> Type </td>
+<td> int8 </td>
+<td> 255 indicates a Volume Descriptor Set Terminator.
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> 5 </td>
+<td> Identifier </td>
+<td> strA </td>
+<td> Always "CD001".
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> 1 </td>
+<td> Version </td>
+<td> int8 </td>
+<td> Volume Descriptor Version (0x01).
+</td></tr></table>
+<h2> <span class="mw-headline" id="The_Path_Table"> The Path Table </span></h2>
+<p>The Path Table contains a well-ordered sequence of records describing every directory extent on the CD. There are some exceptions with this: the Path Table can only contain 65536 records, due to the length of the "Parent Directory Number" field. If there are more than this number of directories on the disc, some CD authoring software will ignore this limit and create a non-compliant CD (this applies to some earlier versions of Nero, for example). If your file system uses the path table, you should be aware of this possibility. Windows uses the Path Table and will fail with such non-compliant CD's (additional nodes exist but appear as zero-byte). Linux, which uses the directory tables is not affected by this issue.
+</p><p>The location of the path tables can be found in the Primary Volume Descriptor. There are two table types - the L-Path table (relevant to x86) and the M-Path table. The only difference between these two tables is that multi-byte values in the L-Table are LSB-first and the values in the M-Table are MSB-first.
+</p><p>The structure of a Path Table Entry is as follows:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th>Offset
+</th>
+<th>Size
+</th>
+<th>Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> 1 </td>
+<td> Length of Directory Identifier
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> 1 </td>
+<td> Extended Attribute Record Length
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> 4 </td>
+<td> Location of Extent (LBA). This is in a different format depending on whether this is the L-Table or M-Table (see explanation above).
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> 2 </td>
+<td> Directory number of parent directory (an index in to the path table). This is the field that limits the table to 65536 records.
+</td></tr>
+<tr>
+<td> 8 </td>
+<td> (variable) </td>
+<td> Directory Identifier (name) in d-characters.
+</td></tr>
+<tr>
+<td> (variable) </td>
+<td> 1 </td>
+<td> Padding Field - contains a zero if the Length of Directory Identifier field is odd, not present otherwise. This means that each table entry will always start on an even byte number.
+</td></tr></table>
+<p>The path table is in ascending order of directory level and is alphabetically sorted within each directory level.
+</p>
+<h2> <span class="mw-headline" id="Directories"> Directories </span></h2>
+<p>At some point when reading from an ISO 9660 CD, you will need a directory record to locate a file, even if you generally use the path table to locate the directory initially. Unlike the path tables, there is only one version of each directory table, and multi byte numbers are in both-endian format. A directory record is laid out as follows:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th>Offset
+</th>
+<th>Size
+</th>
+<th>Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> 1 </td>
+<td> Length of Directory Record.
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> 1 </td>
+<td> Extended Attribute Record length.
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> 8 </td>
+<td> Location of extent (LBA) in both-endian format.
+</td></tr>
+<tr>
+<td> 10 </td>
+<td> 8 </td>
+<td> Data length (size of extent) in both-endian format.
+</td></tr>
+<tr>
+<td> 18 </td>
+<td> 7 </td>
+<td> Recording date and time (see format below).
+</td></tr>
+<tr>
+<td> 25 </td>
+<td> 1 </td>
+<td> File flags (see below).
+</td></tr>
+<tr>
+<td> 26 </td>
+<td> 1 </td>
+<td> File unit size for files recorded in interleaved mode, zero otherwise.
+</td></tr>
+<tr>
+<td> 27 </td>
+<td> 1 </td>
+<td> Interleave gap size for files recorded in interleaved mode, zero otherwise.
+</td></tr>
+<tr>
+<td> 28 </td>
+<td> 4 </td>
+<td> Volume sequence number - the volume that this extent is recorded on, in 16 bit both-endian format.
+</td></tr>
+<tr>
+<td> 32 </td>
+<td> 1 </td>
+<td> Length of file identifier (file name). This terminates with a ';' character followed by the file ID number in ASCII coded decimal ('1').
+</td></tr>
+<tr>
+<td> 33 </td>
+<td> (variable) </td>
+<td> File identifier.
+</td></tr>
+<tr>
+<td> (variable) </td>
+<td> 1 </td>
+<td> Padding field - zero if length of file identifier is even, otherwise, this field is not present. This means that a directory entry will always start on an even byte number.
+</td></tr>
+<tr>
+<td> (variable) </td>
+<td> (variable) </td>
+<td>
+<p>System Use - 
+The remaining bytes up to the maximum record size of 255 may be used
+for extensions of ISO 9660. The most common one is the System Use Share
+Protocol (SUSP) and its application, the Rock Ridge Interchange Protocol
+(RRIP).
+</p>
+</td></tr></table>
+<p>Even if a directory spans multiple sectors, the directory entries are not permitted to cross the sector boundary (unlike the path table). Where there is not enough space to record an entire directory entry at the end of a sector, that sector is zero-padded and the next consecutive sector is used. Some of the above fields need explanation. Unfortunately, the date/time format is different from that used in the Primary Volume Descriptor. The Date/Time format is:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th>Offset
+</th>
+<th>Size
+</th>
+<th>Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> 1 </td>
+<td> Number of years since 1900.
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> 1 </td>
+<td> Month of the year from 1 to 12.
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> 1 </td>
+<td> Day of the month from 1 to 31.
+</td></tr>
+<tr>
+<td> 3 </td>
+<td> 1 </td>
+<td> Hour of the day from 0 to 23.
+</td></tr>
+<tr>
+<td> 4 </td>
+<td> 1 </td>
+<td> Minute of the hour from 0 to 59.
+</td></tr>
+<tr>
+<td> 5 </td>
+<td> 1 </td>
+<td> Second of the minute from 0 to 59.
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> 1 </td>
+<td> Offset from GMT in 15 minute intervals from -48 (West) to +52 (East).
+</td></tr></table>
+<p>This is quite a contrast to the PVD which contains ASCII encoded decimal values, but this format is presumably used to save disc space over a large number of entries.
+</p><p>The other field that needs some explanation is the File Flags field. This is represented by one bit flags as follows:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th>Bit
+</th>
+<th>Description
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> If set, the existence of this file need not be made known to the user (basically a 'hidden' flag.
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> If set, this record describes a directory (in other words, it is a subdirectory extent).
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> If set, this file is an  "Associated File".
+</td></tr>
+<tr>
+<td> 3 </td>
+<td> If set, the extended attribute record contains information about the format of this file.
+</td></tr>
+<tr>
+<td> 4 </td>
+<td> If set, owner and group permissions are set in the extended attribute record.
+</td></tr>
+<tr>
+<td> 5 &amp; 6 </td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 7 </td>
+<td> If set, this is not the final directory record for this file (for files spanning several extents, for example files over 4GiB long.
+</td></tr></table>
+<h2> <span class="mw-headline" id="Locating_Data_on_the_CD"> Locating Data on the CD </span></h2>
+<p>By now, you should be able to see that there are two main ways to navigate to a file record. You an either search the path table, or you can search the full directory structure. You may find it more convenient and faster to cache the path table, loading directories only when necessary.
+</p>
+<h3> <span class="mw-headline" id="Searching_the_Path_Table"> Searching the Path Table </span></h3>
+<p>If you are using the Path Table method, you will still need to know about Directory Records to find the file you are looking for. Basically, you search the path in a reverse order, following the "Parent Directory" links in the Path Table. Once you have located the directory containing the file you want, load that Directory and scan it for the appropriate file name.
+</p>
+<h3> <span class="mw-headline" id="Recursing_from_the_Root_Directory"> Recursing from the Root Directory </span></h3>
+<p>Alternatively, you can ignore the Path Table and just cache the root directory from the Primary Volume Descriptor. You then load each directory in turn. For example, for the path '/BOOT/MYLOADER/STAGE2.BIN'
+</p>
+<ol><li> Read the PVD in to memory. Bytes 156-189 contain the root directory entry.
+</li><li> Load the root directory by reading the LBA and Length values in this root directory entry.
+</li><li> Scan the directory entry identifiers for 'BOOT;1'.
+</li><li> If found, use the LBA and length values to load the 'BOOT' directory in to memory.
+</li><li> Repeat steps 3 and 4 for the file identifier 'MYLOADER;1'.
+</li><li> Scan the 'MYLOADER' directory for 'STAGE2.BIN;1'. If found, you can now use the LBA value to load your file in to memory.
+</li></ol>
+<h2> <span class="mw-headline" id="Rock_Ridge_and_Joliet"> Rock Ridge and Joliet </span></h2>
+<p>There are two enhancements for ISO 9660 which make it more suitable for
+the worlds of Unix and of MS-Windows. Both can be combined in the same
+filesystem. So the reader often has the choice between three file name
+spaces: Plain ISO, Rock Ridge, Joliet.
+</p><p>ISO and Rock Ridge will show the same tree of files but with different names.
+Joliet can show a completely different tree than ISO.
+</p><p>Rock Ridge allows for file names of up to 255 characters of 8 bit. Only
+the 0-byte and the slash ("/") may not be used. Further it adds the
+file attributes which are specified by POSIX (owner, group, permissions,...)
+and it allows for symbolic links.
+</p><p>Rock Ridge is an application of SUSP. It may be accompanied by other
+SUSP applications like zisofs (compression of data files, Linux
+specific), Apple ISO 9660 Extensions, Amiga AS entries, or Arbitrary
+Attribute Interchange Protocol (AAIP: Extended Attributes and ACLs).
+A reader of SUSP entries shall simply ignore all entry types
+which it does not expect.
+</p><p>Joliet was defined by Microsoft Inc. to allow for filenames with
+up to 64 UCS-2 characters (16 bit). It is implemented as separate
+tree of Directory Records which begins by a root record in a
+Supplementary Volume Descriptor. That descriptor is similar to a
+Primary Volume Descriptor, but has a Type Code of 2.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="El-Torito" title="El-Torito">El-Torito</a>, a standard for creating bootable CD-ROMs
+</li><li> <a href="Mkisofs" title="Mkisofs">Mkisofs</a>, about ISO 9660 producing programs: mkisofs, genisoimage, xorriso
+</li><li> <a href="Optical_Drive" title="Optical Drive">Optical Drive</a>, an overview about how to operate optical drives and media
+</li></ul>
+<h3> <span class="mw-headline" id="External_links"> External links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-119.pdf">ISO 9660 (ECMA-119) specification</a>
+</li><li> <a href="http://wikipedia.org/wiki/ISO_9660" class="extiw" title="wikipedia:ISO 9660">ISO 9960 on Wikipedia</a>
+</li><li> <a rel="nofollow" class="external text" href="http://bazaar.launchpad.net/~libburnia-team/libisofs/scdbackup/view/head:/doc/boot_sectors.txt">Boot entry points in ISO 9660 filesystems</a>
+</li><li> <a rel="nofollow" class="external text" href="ftp://ftp.ymi.com/pub/rockridge/susp112.ps">SUSP 1.12 (entries CE , PD , SP , ST , ER , ES)</a>
+</li><li> <a rel="nofollow" class="external text" href="ftp://ftp.ymi.com/pub/rockridge/rrip112.ps">Rock Ridge: RRIP 1.12 (SUSP entries PX , PN , SL , NM , CL , PL , RE , TF , SF , obsolete: RR)</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.estamos.de/makecd/Rock_Ridge_Amiga_Specific">Amiga SUSP entry AS</a>
+</li><li> <a rel="nofollow" class="external text" href="http://bazaar.launchpad.net/~libburnia-team/libisofs/scdbackup/view/head:/doc/susp_aaip_2_0.txt">libisofs SUSP application AAIP (SUSP entry AL)</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.buildorbuy.org/pdf/joliet.pdf">Joliet addon-on specifications</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 504/1000000
+Post-expand include size: 5130/2097152 bytes
+Template argument size: 2331/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2211-0!*!0!!en!*!* and timestamp 20180121063124 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ISO_9660&amp;oldid=19082">http://wiki.osdev.org/index.php?title=ISO_9660&amp;oldid=19082</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Filesystems" title="Category:Filesystems">Filesystems</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ISO_9660" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ISO_9660"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:ISO_9660"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ISO_9660#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ISO_9660" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ISO_9660&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ISO_9660&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ISO_9660#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/ISO_9660" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/ISO_9660" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=ISO_9660&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=ISO_9660&amp;oldid=19082" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/ISO9660" title="ISO9660">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 18 April 2016, at 02:21.</li>
+											<li id="footer-info-viewcount">This page has been accessed 69,363 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script srcskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ISO_9660" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ISO_9660" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ISO_9660&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ISO_9660&amp;oldid=19082" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/ISO9660" title="ISO9660">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 18 April 2016, at 02:21.</li>
+											<li id="footer-info-viewcount">This page has been accessed 69,363 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.036 secs. -->
+	</body>
+</html>

@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Exceptions - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Exceptions", "wgTitle": "Exceptions", "wgCurRevisionId": 21948, "wgArticleId": 2400, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Interrupts"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Exceptions action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Exceptions</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Exceptions#mw-head">navigation</a>,
+					<a href="Exceptions#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table align="right">
+<tr>
+<td> <table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Exceptions#Exceptions"><span class="tocnumber">1</span> <span class="toctext">Exceptions</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Exceptions#Faults"><span class="tocnumber">1.1</span> <span class="toctext">Faults</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="Exceptions#Divide-by-zero_Error"><span class="tocnumber">1.1.1</span> <span class="toctext">Divide-by-zero Error</span></a></li>
+<li class="toclevel-3 tocsection-4"><a href="Exceptions#Bound_Range_Exceeded"><span class="tocnumber">1.1.2</span> <span class="toctext">Bound Range Exceeded</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="Exceptions#Invalid_Opcode"><span class="tocnumber">1.1.3</span> <span class="toctext">Invalid Opcode</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="Exceptions#Device_Not_Available"><span class="tocnumber">1.1.4</span> <span class="toctext">Device Not Available</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="Exceptions#Invalid_TSS"><span class="tocnumber">1.1.5</span> <span class="toctext">Invalid TSS</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="Exceptions#Segment_Not_Present"><span class="tocnumber">1.1.6</span> <span class="toctext">Segment Not Present</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="Exceptions#Stack-Segment_Fault"><span class="tocnumber">1.1.7</span> <span class="toctext">Stack-Segment Fault</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="Exceptions#General_Protection_Fault"><span class="tocnumber">1.1.8</span> <span class="toctext">General Protection Fault</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="Exceptions#Page_Fault"><span class="tocnumber">1.1.9</span> <span class="toctext">Page Fault</span></a>
+<ul>
+<li class="toclevel-4 tocsection-12"><a href="Exceptions#Error_code"><span class="tocnumber">1.1.9.1</span> <span class="toctext">Error code</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-13"><a href="Exceptions#x87_Floating-Point_Exception"><span class="tocnumber">1.1.10</span> <span class="toctext">x87 Floating-Point Exception</span></a></li>
+<li class="toclevel-3 tocsection-14"><a href="Exceptions#Alignment_Check"><span class="tocnumber">1.1.11</span> <span class="toctext">Alignment Check</span></a></li>
+<li class="toclevel-3 tocsection-15"><a href="Exceptions#SIMD_Floating-Point_Exception"><span class="tocnumber">1.1.12</span> <span class="toctext">SIMD Floating-Point Exception</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-16"><a href="Exceptions#Traps"><span class="tocnumber">1.2</span> <span class="toctext">Traps</span></a>
+<ul>
+<li class="toclevel-3 tocsection-17"><a href="Exceptions#Debug"><span class="tocnumber">1.2.1</span> <span class="toctext">Debug</span></a></li>
+<li class="toclevel-3 tocsection-18"><a href="Exceptions#Breakpoint"><span class="tocnumber">1.2.2</span> <span class="toctext">Breakpoint</span></a></li>
+<li class="toclevel-3 tocsection-19"><a href="Exceptions#Overflow"><span class="tocnumber">1.2.3</span> <span class="toctext">Overflow</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-20"><a href="Exceptions#Aborts"><span class="tocnumber">1.3</span> <span class="toctext">Aborts</span></a>
+<ul>
+<li class="toclevel-3 tocsection-21"><a href="Exceptions#Double_Fault"><span class="tocnumber">1.3.1</span> <span class="toctext">Double Fault</span></a></li>
+<li class="toclevel-3 tocsection-22"><a href="Exceptions#Machine_Check"><span class="tocnumber">1.3.2</span> <span class="toctext">Machine Check</span></a></li>
+<li class="toclevel-3 tocsection-23"><a href="Exceptions#Triple_Fault"><span class="tocnumber">1.3.3</span> <span class="toctext">Triple Fault</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-24"><a href="Exceptions#Selector_Error_Code"><span class="tocnumber">2</span> <span class="toctext">Selector Error Code</span></a>
+<ul>
+<li class="toclevel-2 tocsection-25"><a href="Exceptions#Legacy"><span class="tocnumber">2.1</span> <span class="toctext">Legacy</span></a>
+<ul>
+<li class="toclevel-3 tocsection-26"><a href="Exceptions#FPU_Error_Interrupt"><span class="tocnumber">2.1.1</span> <span class="toctext">FPU Error Interrupt</span></a></li>
+<li class="toclevel-3 tocsection-27"><a href="Exceptions#Coprocessor_Segment_Overrun"><span class="tocnumber">2.1.2</span> <span class="toctext">Coprocessor Segment Overrun</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-28"><a href="Exceptions#See_Also"><span class="tocnumber">3</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-29"><a href="Exceptions#External_Links"><span class="tocnumber">3.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+</td></tr></table>
+<p><b>Exceptions</b> as described in this article are generated by the CPU when an 'error' occurs. Some exceptions are not really errors in most cases, such as <a href="Exceptions#Page_Fault">page faults</a>. Exceptions are a type of <a href="Interrupt" title="Interrupt" class="mw-redirect">interrupt</a>.
+</p><p>Exceptions are classified as:
+</p>
+<ul><li> <b>Faults</b>: These can be corrected and the program may continue as if nothing happened.
+</li><li> <b>Traps</b>: Traps are reported immediately after the execution of the trapping instruction.
+</li><li> <b>Aborts</b>: Some severe unrecoverable error.
+</li></ul>
+<p>Some exceptions will push a 32-bit "error code" on to the top of the stack, which provides additional information about the error.  This value must be pulled from the stack before returning control back to the currently running program.  (i.e. before calling IRET)
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Name
+</th>
+<th> Vector nr.
+</th>
+<th> Type
+</th>
+<th> Mnemonic
+</th>
+<th> Error code?
+</th></tr>
+<tr>
+<th> <a href="Exceptions#Divide-by-zero_Error">Divide-by-zero Error</a>
+</th>
+<td> 0 (0x0)
+</td>
+<td> Fault
+</td>
+<td> #DE
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Debug">Debug</a>
+</th>
+<td> 1 (0x1)
+</td>
+<td> Fault/Trap
+</td>
+<td> #DB
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Non_Maskable_Interrupt" title="Non Maskable Interrupt">Non-maskable Interrupt</a>
+</th>
+<td> 2 (0x2)
+</td>
+<td> Interrupt
+</td>
+<td> -
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Breakpoint">Breakpoint</a>
+</th>
+<td> 3 (0x3)
+</td>
+<td> Trap
+</td>
+<td> #BP
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Overflow">Overflow</a>
+</th>
+<td> 4 (0x4)
+</td>
+<td> Trap
+</td>
+<td> #OF
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Bound_Range_Exceeded">Bound Range Exceeded</a>
+</th>
+<td> 5 (0x5)
+</td>
+<td> Fault
+</td>
+<td> #BR
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Invalid_Opcode">Invalid Opcode</a>
+</th>
+<td> 6 (0x6)
+</td>
+<td> Fault
+</td>
+<td> #UD
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Device_Not_Available">Device Not Available</a>
+</th>
+<td> 7 (0x7)
+</td>
+<td> Fault
+</td>
+<td> #NM
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Double_Fault">Double Fault</a>
+</th>
+<td> 8 (0x8)
+</td>
+<td> Abort
+</td>
+<td> #DF
+</td>
+<td> Yes (Zero)
+</td></tr>
+<tr>
+<th> <strike><a href="Exceptions#Coprocessor_Segment_Overrun">Coprocessor Segment Overrun</a></strike>
+</th>
+<td> 9 (0x9)
+</td>
+<td> Fault
+</td>
+<td> -
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Invalid_TSS">Invalid TSS</a>
+</th>
+<td> 10 (0xA)
+</td>
+<td> Fault
+</td>
+<td> #TS
+</td>
+<td> Yes
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Segment_Not_Present">Segment Not Present</a>
+</th>
+<td> 11 (0xB)
+</td>
+<td> Fault
+</td>
+<td> #NP
+</td>
+<td> Yes
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Stack-Segment_Fault">Stack-Segment Fault</a>
+</th>
+<td> 12 (0xC)
+</td>
+<td> Fault
+</td>
+<td> #SS
+</td>
+<td> Yes
+</td></tr>
+<tr>
+<th> <a href="Exceptions#General_Protection_Fault">General Protection Fault</a>
+</th>
+<td> 13 (0xD)
+</td>
+<td> Fault
+</td>
+<td> #GP
+</td>
+<td> Yes
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Page_Fault">Page Fault</a>
+</th>
+<td> 14 (0xE)
+</td>
+<td> Fault
+</td>
+<td> #PF
+</td>
+<td> Yes
+</td></tr>
+<tr>
+<th> Reserved
+</th>
+<td> 15 (0xF)
+</td>
+<td> -
+</td>
+<td> -
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#x87_Floating-Point_Exception">x87 Floating-Point Exception</a>
+</th>
+<td> 16 (0x10)
+</td>
+<td> Fault
+</td>
+<td> #MF
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Alignment_Check">Alignment Check</a>
+</th>
+<td> 17 (0x11)
+</td>
+<td> Fault
+</td>
+<td> #AC
+</td>
+<td> Yes
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Machine_Check">Machine Check</a>
+</th>
+<td> 18 (0x12)
+</td>
+<td> Abort
+</td>
+<td> #MC
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#SIMD_Floating-Point_Exception">SIMD Floating-Point Exception</a>
+</th>
+<td> 19 (0x13)
+</td>
+<td> Fault
+</td>
+<td> #XM/#XF
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Virtualization_Exception"> Virtualization Exception</a>
+</th>
+<td> 20 (0x14)
+</td>
+<td> Fault
+</td>
+<td> #VE
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> Reserved
+</th>
+<td> 21-29  (0x15-0x1D)
+</td>
+<td> -
+</td>
+<td> -
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Security_Exception">Security Exception</a>
+</th>
+<td> 30 (0x1E)
+</td>
+<td> -
+</td>
+<td> #SX
+</td>
+<td> Yes
+</td></tr>
+<tr>
+<th> Reserved
+</th>
+<td> 31 (0x1F)
+</td>
+<td> -
+</td>
+<td> -
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <a href="Exceptions#Triple_Fault">Triple Fault</a>
+</th>
+<td> -
+</td>
+<td> -
+</td>
+<td> -
+</td>
+<td> No
+</td></tr>
+<tr>
+<th> <strike><a href="Exceptions#FPU_Error_Interrupt">FPU Error Interrupt</a></strike>
+</th>
+<td> IRQ 13
+</td>
+<td> Interrupt
+</td>
+<td> #FERR
+</td>
+<td> No
+</td></tr></table>
+<h2> <span class="mw-headline" id="Exceptions"> Exceptions </span></h2>
+<h3> <span class="mw-headline" id="Faults"> Faults </span></h3>
+<h4> <span class="mw-headline" id="Divide-by-zero_Error"> Divide-by-zero Error </span></h4>
+<p>The <b>Divide-by-zero Error</b> occurs when dividing any number by 0 using the DIV or IDIV instruction. Many OS developers use this exception to test whether their exception handling code works. This exception may also occur when the result is too large to be represented in the destination.
+</p><p>The saved instruction pointer points to the DIV or IDIV instruction which caused the exception.
+</p>
+<h4> <span class="mw-headline" id="Bound_Range_Exceeded"> Bound Range Exceeded </span></h4>
+<p>This exception can occur when the BOUND instruction is executed. The BOUND instruction compares an array index with the lower and upper bounds of an array. When the index is out of bounds, the Bound Range Exceeded exception occurs.
+</p><p>The saved instruction pointer points to the BOUND instruction which caused the exception.
+</p>
+<h4> <span class="mw-headline" id="Invalid_Opcode"> Invalid Opcode </span></h4>
+<p>The Invalid Opcode exception occurs when the processor tries to execute an invalid or undefined opcode, or an instruction with invalid prefixes. It also occurs when an instruction exceeds 15 bytes, but this only occurs with redundant prefixes.
+</p><p>The saved instruction pointer points to the instruction which caused the exception.
+</p>
+<h4> <span class="mw-headline" id="Device_Not_Available"> Device Not Available </span></h4>
+<p>The Device Not Available exception occurs when an FPU instruction is attempted but there is no FPU.  This is not likely, as modern processors have built-in FPUs. However, there are flags in the CR0 register that disable the FPU/MMX/SSE instructions, causing this exception when they are attempted. This feature is useful because the operating system can detect when a user program uses the FPU or XMM registers and then save/restore them appropriately when multitasking.
+</p><p>The saved instruction pointer points to the instruction that caused the exception.
+</p>
+<h4> <span class="mw-headline" id="Invalid_TSS"> Invalid TSS </span></h4>
+<p>An Invalid TSS exception occurs when an invalid segment selector is referenced as part of a task which, or as a result of a control transfer through a gate descriptor, which results in an invalid stack-segment reference using an SS selector in the TSS.
+</p><p>When the exception occurred before loading the segment selectors from the TSS, the saved instruction pointer points to the instruction which caused the exception. Otherwise, and this is more common, it points to the first instruction in the new task.
+</p><p><b>Error code:</b> The Invalid TSS exception sets an error code, which is a <a href="Exceptions#Selector_Error_Code">selector index</a>.
+</p>
+<h4> <span class="mw-headline" id="Segment_Not_Present"> Segment Not Present </span></h4>
+<p>The Segment Not Present exception occurs when trying to load a segment or gate which has it's Present-bit set to 0.
+However when loading a stack-segment selector which references a descriptor which is not present, a <a href="Exceptions#Stack-Segment_Fault">Stack-Segment Fault</a> occurs.
+</p><p>The saved instruction pointer points to the instruction which caused the exception.
+</p><p><b>Error code:</b> The Segment Not Present exception sets an error code, which is the <a href="Exceptions#Selector_Error_Code">segment selector index</a> of the segment descriptor which caused the exception.
+</p>
+<h4> <span class="mw-headline" id="Stack-Segment_Fault"> Stack-Segment Fault </span></h4>
+<p>The Stack-Segment Fault occurs when:
+</p>
+<ul><li> Loading a stack-segment referencing a segment descriptor which is not present.
+</li><li> Any PUSH or POP instruction or any instruction using ESP or EBP as a base register is executed, while the stack address is not in canonical form.
+</li><li> When the stack-limit check fails.
+</li></ul>
+<p>This exeption is not part of segment not present exeption because of the need to push eip,cs,eflags,esp,ss to the stack is no longer valid becuase of the ss's gdt entry (or the ss itself) had to be buggy in the first place for this exeption to occur , so one must declare this exeption as a task switch interrupt and setting up tss for it. 
+The saved instruction pointer points to the instruction which caused the exception.
+</p><p><br />
+<b>Error code:</b> The Stack-Segment Fault sets an error code, which is the stack <a href="Exceptions#Selector_Error_Code">segment selector index</a> when a non-present segment descriptor was referenced. Otherwise, 0.
+</p>
+<h4> <span class="mw-headline" id="General_Protection_Fault"> General Protection Fault </span></h4>
+<p>A General Protection Fault may occur for various reasons. The most common are:
+</p>
+<ul><li> Segment error (privilege, type, limit, read/write rights).
+</li><li> Executing a privileged instruction while CPL&#160;!= 0.
+</li><li> Writing a 1 in a reserved register field.
+</li><li> Referencing or accessing a null-descriptor.
+</li><li> Trying to access an unimplamented register (like: mov cr6,eax) 
+</li></ul>
+<p>The saved instruction pointer points to the instruction which caused the exception.
+</p><p><b>Error code:</b> The General Protection Fault sets an error code, which is the <a href="Exceptions#Selector_Error_Code">segment selector index</a> when the exception is segment related. Otherwise, 0.
+</p>
+<h4> <span class="mw-headline" id="Page_Fault"> Page Fault </span></h4>
+<dl><dd><i>Main article:</i> <a href="Page_fault" title="Page fault" class="mw-redirect">Page fault</a>
+</dd></dl>
+<p>A Page Fault occurs when:
+</p>
+<ul><li> A <a href="Paging" title="Paging">page directory or table</a> entry is not present in physical memory.
+</li><li> Attempting to load the instruction TLB with a translation for a non-executable page.
+</li><li> A protection check (privileges, read/write) failed.
+</li><li> A reserved bit in the page directory or table entries is set to 1.
+</li></ul>
+<p>The saved instruction pointer points to the instruction which caused the exception.
+</p>
+<h5> <span class="mw-headline" id="Error_code"> Error code </span></h5>
+<p>The Page Fault sets an error code:
+</p>
+<pre>
+ 31              4               0
++---+--  --+---+---+---+---+---+---+
+|   Reserved   | I | R | U | W | P |
++---+--  --+---+---+---+---+---+---+
+</pre>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th>
+</th>
+<th> Length
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr valign="top">
+<th align="left"> P
+</th>
+<td> 1 bit
+</td>
+<td> Present
+</td>
+<td> When set, the page fault was caused by a page-protection violation. When not set, it was caused by a non-present page.
+</td></tr>
+<tr valign="top">
+<th align="left"> W
+</th>
+<td> 1 bit
+</td>
+<td> Write
+</td>
+<td> When set, the page fault was caused by a page write. When not set, it was caused by a page read.
+</td></tr>
+<tr valign="top">
+<th align="left"> U
+</th>
+<td> 1 bit
+</td>
+<td> User
+</td>
+<td> When set, the page fault was caused while CPL = 3. This does not necessarily mean that the page fault was a privilege violation.
+</td></tr>
+<tr valign="top">
+<th align="left"> R
+</th>
+<td> 1 bit
+</td>
+<td> Reserved write
+</td>
+<td> When set, the page fault was caused by writing a 1 in a reserved field.
+</td></tr>
+<tr valign="top">
+<th align="left"> I
+</th>
+<td> 1 bit
+</td>
+<td> Instruction Fetch
+</td>
+<td> When set, the page fault was caused by an instruction fetch.
+</td></tr></table>
+<p>In addition, it sets the value of the CR2 register to the virtual address which caused the Page Fault.
+</p>
+<h4> <span class="mw-headline" id="x87_Floating-Point_Exception"> x87 Floating-Point Exception </span></h4>
+<p>The x87 Floating-Point Exception occurs when the FWAIT or WAIT instruction, or any waiting floating-point instruction is executed, and the following conditions are true:
+</p>
+<ul><li> <a href="CR0" title="CR0" class="mw-redirect">CR0.NE</a> is 1;
+</li><li> an unmasked x87 floating point exception is pending (i.e. the exception bit in the x87 floating point status-word register is set to 1).
+</li></ul>
+<p>The saved instruction pointer points to the instruction which is about to be executed when the exception occurred. The x87 instruction pointer register contains the address of the last instruction which caused the exception.
+</p><p><b>Error Code:</b> The exception does not push an error code. However, exception information is available in the x87 status word register.
+</p>
+<h4> <span class="mw-headline" id="Alignment_Check"> Alignment Check </span></h4>
+<p>An Alignment Check exception occurs when alignment checking is enabled and an unaligned memory data reference is performed. Alignment checking is only performed in CPL 3.
+</p><p>Alignment checking is disabled by default. To enable it, set the <a href="CR0" title="CR0" class="mw-redirect">CR0.AM</a> and <a href="RFLAGS" title="RFLAGS" class="mw-redirect">RFLAGS.AC</a> bits both to 1.
+</p><p>The saved instruction pointer points to the instruction which caused the exception.
+</p>
+<h4> <span class="mw-headline" id="SIMD_Floating-Point_Exception"> SIMD Floating-Point Exception </span></h4>
+<p>The SIMD Floating-Point Exception occurs when an unmasked 128-bit media floating-point exception occurs and the <a href="CR4" title="CR4" class="mw-redirect">CR4.OSXMMEXCPT</a> bit is set to 1.  If the OSXMMEXCPT flag is not set, then SIMD floating-point exceptions will cause an Undefined Opcode exception instead of this.
+</p><p>The saved instruction pointer points to the instruction which caused the exception.
+</p><p><b>Error Code:</b> The exception does not push an error code. However, exception information is available in the MXCSR register.
+</p>
+<h3> <span class="mw-headline" id="Traps"> Traps </span></h3>
+<h4> <span class="mw-headline" id="Debug"> Debug </span></h4>
+<p>The Debug exception occurs on the following conditions:
+</p>
+<ul><li> Instruction fetch breakpoint (Fault)
+</li><li> General detect condition (Fault)
+</li><li> Data read or write breakpoint (Trap)
+</li><li> I/O read or write breakpoint (Trap)
+</li><li> Single-step (Trap)
+</li><li> Task-switch (Trap)
+</li></ul>
+<p>When the exception is a fault, the saved instruction pointer points to the instruction which caused the exception. When the exception is a trap, the saved instruction pointer points to the instruction after the instruction which caused the exception.
+</p><p><b>Error code:</b> The Debug exception does not set an error code. However, exception information is provided in the debug registers.
+</p>
+<h4> <span class="mw-headline" id="Breakpoint"> Breakpoint </span></h4>
+<p>A Breakpoint exception occurs at the execution of the INT3 instruction. Some debug software replace an instruction by the INT3 instruction. When the breakpoint is trapped, it replaces the INT3 instruction with the original instruction, and decrements the instruction pointer by one.
+</p><p>The saved instruction pointer points to the byte after the INT3 instruction.
+</p>
+<h4> <span class="mw-headline" id="Overflow"> Overflow </span></h4>
+<p>An Overflow exception is raised when the INTO instruction is executed while the overflow bit in RFLAGS is set to 1, or when the result of div/idiv insructions is bigger than 64 bit /32 bit / 16 bit  /8bit depending on the instruction operand size .( only if bigger than the operand size.)
+</p><p>The saved instruction pointer points to the instruction after the INTO instruction, or when an div/idiv is the cuase of the exeption , the insruction pointer that pushed points to the faulty insruction.
+</p>
+<h3> <span class="mw-headline" id="Aborts"> Aborts </span></h3>
+<h4> <span class="mw-headline" id="Double_Fault"> Double Fault </span></h4>
+<p>A Double Fault occurs when an exception is unhandled or when an exception occurs while the CPU is trying to call an exception handler.  Normally, two exception at the same time are handled one after another, but in some cases that is not possible.  For example, if a page fault occurs, but the exception handler is located in a not-present page, two page faults would occur and neither can be handled.  A double fault would occur.
+</p><p>A double fault will always generate an error code with a value of zero.
+</p><p>The saved instruction pointer is undefined.  A double fault cannot be recovered.  The faulting process must be terminated.
+</p><p>In several starting hobby OSes, a double fault is also quite often a <a href="I_Cant_Get_Interrupts_Working" title="I Cant Get Interrupts Working" class="mw-redirect">misdiagnosed IRQ0</a> in the cases where the <a href="PIC" title="PIC" class="mw-redirect">PIC</a> hasn't been reprogrammed yet.
+</p>
+<h4> <span class="mw-headline" id="Machine_Check"> Machine Check </span></h4>
+<p>The Machine Check exception is model specific and processor implementations are not required to support it. It uses <a href="Model_Specific_Registers" title="Model Specific Registers">model-specific registers</a> to provide error information. It is disabled by default. To enable it, set the <a href="CR4" title="CR4" class="mw-redirect">CR4.MCE</a> bit to 1.
+</p><p>Machine check exceptions occur when the processor detects internal errors, such as bad memory, bus errors, cache errors, etc.
+</p><p>The value of the saved instruction pointer depends on the implementation and the exception.
+</p>
+<h4> <span class="mw-headline" id="Triple_Fault"> Triple Fault </span></h4>
+<dl><dd><i>Main article:</i> <a href="Triple_Fault" title="Triple Fault">Triple Fault</a>
+</dd></dl>
+<p>The Triple Fault is not really an exception, because it does not have an associated vector number. Nonetheless, a triple fault occurs when an exception is generated when attempt to call the double fault exception handler. It results in the processor resetting. See the main article for more information about possible causes and how to avoid them.
+</p>
+<h2> <span class="mw-headline" id="Selector_Error_Code"> Selector Error Code </span></h2>
+<pre>
+ 31         16   15         3   2   1   0
++---+--  --+---+---+--  --+---+---+---+---+
+|   Reserved   |    Index     |  Tbl  | E |
++---+--  --+---+---+--  --+---+---+---+---+
+</pre>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th>
+</th>
+<th> Length
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr valign="top">
+<th align="left"> E
+</th>
+<td> 1 bit
+</td>
+<td> External
+</td>
+<td> When set, the exception originated externally to the processor.
+</td></tr>
+<tr valign="top">
+<th align="left"> Tbl
+</th>
+<td> 2 bits
+</td>
+<td> IDT/GDT/LDT table
+</td>
+<td> This is one of the following values:
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Value
+</th>
+<th> Description
+</th></tr>
+<tr>
+<th> 0b00
+</th>
+<td> The Selector Index references a descriptor in the GDT.
+</td></tr>
+<tr>
+<th> 0b01
+</th>
+<td> The Selector Index references a descriptor in the IDT.
+</td></tr>
+<tr>
+<th> 0b10
+</th>
+<td> The Selector Index references a descriptor in the LDT.
+</td></tr>
+<tr>
+<th> 0b11
+</th>
+<td> The Selector Index references a descriptor in the IDT.
+</td></tr></table>
+</td></tr>
+<tr valign="top">
+<th align="left"> Index
+</th>
+<td> 13 bits
+</td>
+<td> Selector Index
+</td>
+<td> The index in the GDT, IDT or LDT.
+</td></tr></table>
+<h3> <span class="mw-headline" id="Legacy"> Legacy </span></h3>
+<p>The following exceptions happen on outdated technology, but are no longer used or should be avoided. They apply mostly to the intel 386 and earlier, and might include CPUs from other manufacturers around the same time.
+</p>
+<h4> <span class="mw-headline" id="FPU_Error_Interrupt">FPU Error Interrupt</span></h4>
+<p>In the old days, the floating point unit was a dedicated chip that could be attached to the processor. It lacked direct wiring of FPU errors to the processor, so instead it used <a href="PIC" title="PIC" class="mw-redirect">IRQ 13</a>, allowing the CPU to deal with errors at it's own leasure. When the 486 was developed and multiprocessor support was added, the <a href="FPU" title="FPU">FPU</a> was embedded on die and a global interrupt for FPUs became undesirable, instead getting an option for direct error handling. By default, this method is not enabled at boot for backwards compatibility, but an OS should update the settings accordingly.
+</p>
+<h4> <span class="mw-headline" id="Coprocessor_Segment_Overrun">Coprocessor Segment Overrun</span></h4>
+<p>When the FPU was still external to the processor, it had separate segment checking in protected mode. Since the 486 this is handled by a <a href="Exceptions#General_Protection_Fault">GPF</a> instead like it already did with non-FPU memory accesses.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-manual-325462.pdf">Intel® 64 and IA-32 Architectures Software Developer's Manual</a>, Volume 3 (System Programming Guide), Chapter 6 (Interrupt and exception handling)
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 273/1000000
+Post-expand include size: 716/2097152 bytes
+Template argument size: 22/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2400-0!*!0!!en!*!* and timestamp 20180121032844 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Exceptions&amp;oldid=21948">http://wiki.osdev.org/index.php?title=Exceptions&amp;oldid=21948</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Interrupts" title="Category:Interrupts">Interrupts</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Exceptions" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Exceptions"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Exceptions"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Exceptions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Exceptions" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Exceptions&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Exceptions&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Exceptions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Exceptions" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Exceptions" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Exceptions&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Exceptions&amp;oldid=21948" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Exception" title="Exception">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 17 December 2017, at 14:01.</li>
+											<li id="footer-info-viewcount">Thiskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Exceptions" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Exceptions" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Exceptions&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Exceptions&amp;oldid=21948" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Exception" title="Exception">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 17 December 2017, at 14:01.</li>
+											<li id="footer-info-viewcount">This page has been accessed 100,321 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

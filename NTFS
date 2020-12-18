@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>NTFS - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "NTFS", "wgTitle": "NTFS", "wgCurRevisionId": 20898, "wgArticleId": 1508, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Filesystems"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-NTFS action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">NTFS</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="NTFS#mw-head">navigation</a>,
+					<a href="NTFS#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="File_Systems" title="File Systems">Filesystems</a></th></tr><tr><th>Virtual Filesystems</th></tr><tr><td><div>
+<p><a href="VFS" title="VFS">VFS</a><br />
+</p>
+</div></td></tr><tr><th>Disk Filesystems</th></tr><tr><td><div>
+<p><a href="FAT" title="FAT">FAT</a> <a href="FAT12" title="FAT12" class="mw-redirect">12</a>/<a href="FAT16" title="FAT16" class="mw-redirect">16</a>/<a href="FAT32" title="FAT32" class="mw-redirect">32</a>, <a href="VFAT" title="VFAT" class="mw-redirect">VFAT</a><br />
+<a href="Ext2" title="Ext2">Ext 2</a>/<a href="Ext3" title="Ext3">3</a>/<a href="Ext4" title="Ext4">4</a><br />
+<a href="LEAN" title="LEAN">LEAN</a><br />
+<a href="HPFS" title="HPFS">HPFS</a><br />
+<strong class="selflink">NTFS</strong><br />
+<a href="HFS" title="HFS">HFS</a><br />
+<a href="HFS+" title="HFS+">HFS+</a><br />
+<a href="MFS" title="MFS">MFS</a><br />
+<a href="ReiserFS" title="ReiserFS">ReiserFS</a><br />
+<a href="FFS_(Amiga)" title="FFS (Amiga)">FFS (Amiga)</a><br />
+<a href="FFS_(BSD)" title="FFS (BSD)" class="mw-redirect">FFS (BSD)</a>/<a href="UFS" title="UFS">UFS</a><br />
+<a href="BeFS" title="BeFS">BeFS</a><br />
+<a href="BFS" title="BFS">BFS</a><br />
+<a href="XFS" title="XFS">XFS</a><br />
+<a href="SFS" title="SFS">SFS</a><br />
+<a href="ZFS" title="ZFS">ZFS</a><br />
+<a href="USTAR" title="USTAR">USTAR</a><br />
+</p>
+</div></td></tr><tr><th>CD/DVD Filesystems</th></tr><tr><td><div>
+<p><a href="ISO_9660" title="ISO 9660">ISO 9660</a><br />
+<a href="Joliet" title="Joliet">Joliet</a><br />
+<a href="UDF" title="UDF">UDF</a><br />
+</p>
+</div></td></tr><tr><th><a href="Category:Network_Filesystems" title="Category:Network Filesystems">Network Filesystems</a></th></tr><tr><td><div>
+<p><a href="NFS" title="NFS">NFS</a><br />
+<a href="RFS" title="RFS">RFS</a><br />
+<a href="AFS" title="AFS">AFS</a><br />
+</p>
+</div></td></tr><tr><th>Flash Filesystems</th></tr><tr><td><div>
+<p><a href="JFFS2" title="JFFS2">JFFS2</a><br />
+<a href="YAFFS" title="YAFFS">YAFFS</a><br />
+</p>
+</div></td></tr></table>
+<p>NTFS (<b>New Technology File System</b>) is Windows NT's native file system. It is not only based on <a href="HPFS" title="HPFS">HPFS</a>, but also supports security features such as access control. Since Windows NT is entirely unicode, NTFS is a unicode filesystem, with each character (e.g. in names) being 16-bits instead of 8-bits. 
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="NTFS#About"><span class="tocnumber">1</span> <span class="toctext">About</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="NTFS#Implementation"><span class="tocnumber">2</span> <span class="toctext">Implementation</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="NTFS#Structure"><span class="tocnumber">3</span> <span class="toctext">Structure</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="NTFS#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="NTFS#External_Links"><span class="tocnumber">4.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="About"> About </span></h2>
+<p>NTFS doesn't only add security features to <a href="HPFS" title="HPFS">HPFS</a>. In NTFS, there is a lot more built-in redundancy. For example: in <a href="HPFS" title="HPFS">HPFS</a>, wiping out a sector in the wrong place can render the entire volume inaccessible. Support for multiple hard-links to a file (before NTFS, the only easy access was through the POSIX subsystem, but Windows 2000 (NT 5) added this to Win32 as well) was also added.
+</p><p>NTFS supports an arbitrary number of file forks (much like Mac OS, except Mac OS always has exactly 2 forks for each file).
+</p><p><a href="HPFS" title="HPFS">HPFS</a> decrees that a cluster is always 512 bytes long and a cluster is always one sector. For the sake of performance and compatibility with some (especially Japanese) machines, NTFS allows sectors of different sizes. It also supports clusters of more than one sector, which can be beneficial on performance.
+</p><p>In short, NTFS' most significant changes:
+</p>
+<ul><li> Better and more security.
+</li><li> Multiple hard-links to one file.
+</li><li> An arbitrary number of forks.
+</li><li> Variable cluster and sectors sizes (usually resulting in better performance).
+</li></ul>
+<h2> <span class="mw-headline" id="Implementation"> Implementation </span></h2>
+<p>NTFS is probably one of the most difficult file system to deal with, especially because of the lack of hacking experience and reliable documents. A read-only stable driver can be found in the Linux source code base since kernel 2.4, while an experimental read-write driver is coming with linux 2.6.
+</p><p>The NTFS-3G project apparently has a read/write implementation for Linux/FreeBSD/BeOS that is currently in <b>beta</b> development status.
+</p>
+<h2> <span class="mw-headline" id="Structure"> Structure </span></h2>
+<p>The NTFS format is built around "file" tables that allow both pre-defined and custom attributes to be stored and read by the operating system.
+</p><p>The NTFS boot sector is similar to other file systems, like FAT.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Field
+</th>
+<th> Type
+</th></tr>
+<tr>
+<td>JMP </td>
+<td> int8_t[3]
+</td></tr>
+<tr>
+<td>OEM System </td>
+<td> char[8]
+</td></tr>
+<tr>
+<td>Bytes Per Sector </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Sectors Per Cluster </td>
+<td> int8_t
+</td></tr>
+<tr>
+<td>Reserved Sector Count </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Table Count </td>
+<td> int8_t
+</td></tr>
+<tr>
+<td>Root Entry Count </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Sector Count </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Media Type </td>
+<td> int8_t
+</td></tr>
+<tr>
+<td>Sectors Per Table </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Sectors Per Track </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Heads </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Hidden Sector Count </td>
+<td> uint32_t
+</td></tr>
+<tr>
+<td>Sector Count (32-bit) </td>
+<td> uint32_t
+</td></tr>
+<tr>
+<td>Reserved </td>
+<td> uint32_t
+</td></tr>
+<tr>
+<td>Sector Count (64-bit) </td>
+<td> uint64_t
+</td></tr></table>
+<p>This is followed immediately by a NTFS specific header.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th>Field
+</th>
+<th>Type
+</th></tr>
+<tr>
+<td>Master File Table Cluster </td>
+<td> uint64_t
+</td></tr>
+<tr>
+<td>Master File Table Mirror Cluster </td>
+<td> uint64_t
+</td></tr>
+<tr>
+<td>Clusters Per Record </td>
+<td> int8_t
+</td></tr>
+<tr>
+<td>Reserved </td>
+<td> int8_t[3]
+</td></tr>
+<tr>
+<td>Clusters Per Index Buffer </td>
+<td> int8_t
+</td></tr>
+<tr>
+<td>Reserved </td>
+<td> int8_t[3]
+</td></tr>
+<tr>
+<td>Serial Number </td>
+<td> uint64_t
+</td></tr>
+<tr>
+<td>Checksum </td>
+<td> uint32_t
+</td></tr></table>
+<p>Using the "Master File Table Cluster" and "Sectors Per Cluster" values, you can find the Master File Table.  This table contains entries for every object in the file system, including files, folders, and the tables themselves.  The size of each record in the Master File Table can be calculated using the "Clusters Per Record" and "Sectors Per Cluster" fields from the boot sector.
+</p><p>Each record starts with the same header structure.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Field
+</th>
+<th> Type
+</th></tr>
+<tr>
+<td>Record Type </td>
+<td> char[4]
+</td></tr>
+<tr>
+<td>Update Sequence Offset </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Update Sequence Length </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Log File Sequence Number </td>
+<td> uint64_t
+</td></tr>
+<tr>
+<td>Record Sequence Number </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Hard Link Count </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Attributes Offset </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Flags </td>
+<td> uint16_t
+</td></tr>
+<tr>
+<td>Bytes In Use </td>
+<td> uint32_t
+</td></tr>
+<tr>
+<td>Bytes Allocated </td>
+<td> uint32_t
+</td></tr>
+<tr>
+<td>Parent Record Number </td>
+<td> uint64_t
+</td></tr>
+<tr>
+<td>Next Attribute Index </td>
+<td> uint32_t
+</td></tr>
+<tr>
+<td>Reserved </td>
+<td> uint32_t
+</td></tr>
+<tr>
+<td>Record Number </td>
+<td> uint64_t
+</td></tr></table>
+<p>The remainder of the file record contains additional tables and data for this record.  The "Attributes Offset" field contains the byte offset (from the start of the record) of the beginning of the attribute list for this record.
+</p><p>Attributes have a variable length, but always start with the same sequence.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Field
+</th>
+<th> Type
+</th></tr>
+<tr>
+<td> Attribute Type </td>
+<td> uint32_t
+</td></tr></table>
+<p>If the "Attribute Type" field contains the value 0xffffffff, this marks the end of the attribute list.  Otherwise, the attribute sequence continues with the length of the attribute "record".
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Field
+</th>
+<th> Type
+</th></tr>
+<tr>
+<td> Attribute Length </td>
+<td> uint32_t
+</td></tr></table>
+<p>This length value defines the total length of the attribute record, including the "Attribute Type" and "Attribute Length" fields.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.linux-ntfs.org/">The Linux NTFS project</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.ntfs-3g.org/">NTFS-3G Read/Write Drivers For Linux/FreeBSD/BeOS</a>
+</li><li> <a rel="nofollow" class="external text" href="http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=tree;f=fs/ntfs;hb=HEAD">Linux fs/ntfs tree</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.opensource.apple.com/source/ntfs/">Apple Open Source NTFS site</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 378/1000000
+Post-expand include size: 3996/2097152 bytes
+Template argument size: 2331/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1508-0!*!0!!en!*!* and timestamp 20180121040353 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=NTFS&amp;oldid=20898">http://wiki.osdev.org/index.php?title=NTFS&amp;oldid=20898</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Filesystems" title="Category:Filesystems">Filesystems</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=NTFS" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="NTFS"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:NTFS"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="NTFS#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="NTFS" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=NTFS&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=NTFS&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="NTFS#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/NTFS" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/NTFS" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=NTFS&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=NTFS&amp;oldid=20898" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/NTFS" title="NTFS">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 13 June 2017, at 04:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 43,702 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-placeskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/NTFS" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/NTFS" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=NTFS&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=NTFS&amp;oldid=20898" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/NTFS" title="NTFS">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 13 June 2017, at 04:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 43,702 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.044 secs. -->
+	</body>
+</html>

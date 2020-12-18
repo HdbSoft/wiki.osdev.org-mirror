@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Intel Ethernet i217 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Intel_Ethernet_i217", "wgTitle": "Intel Ethernet i217", "wgCurRevisionId": 20338, "wgArticleId": 3768, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Network Hardware"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Intel_Ethernet_i217 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Intel Ethernet i217</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Intel_Ethernet_i217#mw-head">navigation</a>,
+					<a href="Intel_Ethernet_i217#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Intel_Ethernet_i217#Network_Driver_for_Intel_Ethernet_Cards_I217_and_82577LM"><span class="tocnumber">1</span> <span class="toctext">Network Driver for Intel Ethernet Cards I217 and 82577LM</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Intel_Ethernet_i217#Card_Addresses_and_Data_Structures"><span class="tocnumber">2</span> <span class="toctext">Card Addresses and Data Structures</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Intel_Ethernet_i217#The_Driver_Class_Header_.28Class_Definition.29"><span class="tocnumber">3</span> <span class="toctext">The Driver Class Header (Class Definition)</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Intel_Ethernet_i217#How_the_Gears_Move_.28Class_methods_implementation.29"><span class="tocnumber">4</span> <span class="toctext">How the Gears Move (Class methods implementation)</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Intel_Ethernet_i217#Summary_and_Wrap_Up"><span class="tocnumber">5</span> <span class="toctext">Summary and Wrap Up</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Intel_Ethernet_i217#Manuals"><span class="tocnumber">6</span> <span class="toctext">Manuals</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Network_Driver_for_Intel_Ethernet_Cards_I217_and_82577LM"> Network Driver for Intel Ethernet Cards I217 and 82577LM </span></h2>
+<p>I am writing this Wiki as a demonstration of my own experience of getting a working driver for the Intel I217 and 82577LM network cards to work, on a real native bare metal hardware, namely Thinkpads W540 and W510. Linux uses the e1000e network driver for those cards. I have started from a working e1000 driver that I have developed for my OS and which is operational on Qemu, Bochs, and VirtualBox. The main objective of this Wiki is to try to highlight the differences and the addition needed on an operations e1000 driver to work handle network cards that work with the e1000e. So the provided knowledge in this wiki might be applicable on other Intel interfaces. For completion, I will present in this wiki my e1000 driver with the additions that made it work on those native NICs, I217 and 82577LM. I built my original e1000 driver based on information from OSDev and some hobby operating systems on github.
+</p><p>It is very important to highlight that this wiki does not utilize all the features in the above NICs, but it show how to configure the NICs for basic functionality such as initialization, read packets, and write packets. 
+</p>
+<h2> <span class="mw-headline" id="Card_Addresses_and_Data_Structures"> Card Addresses and Data Structures </span></h2>
+<p>To start with, lets state some macro definitions that we are going to use in the code.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define INTEL_VEND     0x8086  // Vendor ID for Intel </span>
+<span class="co2">#define E1000_DEV      0x100E  // Device ID for the e1000 Qemu, Bochs, and VirtualBox emmulated NICs</span>
+<span class="co2">#define E1000_I217     0x153A  // Device ID for Intel I217</span>
+<span class="co2">#define E1000_82577LM  0x10EA  // Device ID for Intel 82577LM</span>
+&#160;
+&#160;
+<span class="co1">// I have gathered those from different Hobby online operating systems instead of getting them one by one from the manual</span>
+&#160;
+<span class="co2">#define REG_CTRL        0x0000</span>
+<span class="co2">#define REG_STATUS      0x0008</span>
+<span class="co2">#define REG_EEPROM      0x0014</span>
+<span class="co2">#define REG_CTRL_EXT    0x0018</span>
+<span class="co2">#define REG_IMASK       0x00D0</span>
+<span class="co2">#define REG_RCTRL       0x0100</span>
+<span class="co2">#define REG_RXDESCLO    0x2800</span>
+<span class="co2">#define REG_RXDESCHI    0x2804</span>
+<span class="co2">#define REG_RXDESCLEN   0x2808</span>
+<span class="co2">#define REG_RXDESCHEAD  0x2810</span>
+<span class="co2">#define REG_RXDESCTAIL  0x2818</span>
+&#160;
+<span class="co2">#define REG_TCTRL       0x0400</span>
+<span class="co2">#define REG_TXDESCLO    0x3800</span>
+<span class="co2">#define REG_TXDESCHI    0x3804</span>
+<span class="co2">#define REG_TXDESCLEN   0x3808</span>
+<span class="co2">#define REG_TXDESCHEAD  0x3810</span>
+<span class="co2">#define REG_TXDESCTAIL  0x3818</span>
+&#160;
+&#160;
+<span class="co2">#define REG_RDTR         0x2820 // RX Delay Timer Register</span>
+<span class="co2">#define REG_RXDCTL       0x3828 // RX Descriptor Control</span>
+<span class="co2">#define REG_RADV         0x282C // RX Int. Absolute Delay Timer</span>
+<span class="co2">#define REG_RSRPD        0x2C00 // RX Small Packet Detect Interrupt</span>
+&#160;
+&#160;
+&#160;
+<span class="co2">#define REG_TIPG         0x0410      // Transmit Inter Packet Gap</span>
+<span class="co2">#define ECTRL_SLU        0x40        //set link up</span>
+&#160;
+&#160;
+<span class="co2">#define RCTL_EN                         (1 &lt;&lt; 1)    // Receiver Enable</span>
+<span class="co2">#define RCTL_SBP                        (1 &lt;&lt; 2)    // Store Bad Packets</span>
+<span class="co2">#define RCTL_UPE                        (1 &lt;&lt; 3)    // Unicast Promiscuous Enabled</span>
+<span class="co2">#define RCTL_MPE                        (1 &lt;&lt; 4)    // Multicast Promiscuous Enabled</span>
+<span class="co2">#define RCTL_LPE                        (1 &lt;&lt; 5)    // Long Packet Reception Enable</span>
+<span class="co2">#define RCTL_LBM_NONE                   (0 &lt;&lt; 6)    // No Loopback</span>
+<span class="co2">#define RCTL_LBM_PHY                    (3 &lt;&lt; 6)    // PHY or external SerDesc loopback</span>
+<span class="co2">#define RTCL_RDMTS_HALF                 (0 &lt;&lt; 8)    // Free Buffer Threshold is 1/2 of RDLEN</span>
+<span class="co2">#define RTCL_RDMTS_QUARTER              (1 &lt;&lt; 8)    // Free Buffer Threshold is 1/4 of RDLEN</span>
+<span class="co2">#define RTCL_RDMTS_EIGHTH               (2 &lt;&lt; 8)    // Free Buffer Threshold is 1/8 of RDLEN</span>
+<span class="co2">#define RCTL_MO_36                      (0 &lt;&lt; 12)   // Multicast Offset - bits 47:36</span>
+<span class="co2">#define RCTL_MO_35                      (1 &lt;&lt; 12)   // Multicast Offset - bits 46:35</span>
+<span class="co2">#define RCTL_MO_34                      (2 &lt;&lt; 12)   // Multicast Offset - bits 45:34</span>
+<span class="co2">#define RCTL_MO_32                      (3 &lt;&lt; 12)   // Multicast Offset - bits 43:32</span>
+<span class="co2">#define RCTL_BAM                        (1 &lt;&lt; 15)   // Broadcast Accept Mode</span>
+<span class="co2">#define RCTL_VFE                        (1 &lt;&lt; 18)   // VLAN Filter Enable</span>
+<span class="co2">#define RCTL_CFIEN                      (1 &lt;&lt; 19)   // Canonical Form Indicator Enable</span>
+<span class="co2">#define RCTL_CFI                        (1 &lt;&lt; 20)   // Canonical Form Indicator Bit Value</span>
+<span class="co2">#define RCTL_DPF                        (1 &lt;&lt; 22)   // Discard Pause Frames</span>
+<span class="co2">#define RCTL_PMCF                       (1 &lt;&lt; 23)   // Pass MAC Control Frames</span>
+<span class="co2">#define RCTL_SECRC                      (1 &lt;&lt; 26)   // Strip Ethernet CRC</span>
+&#160;
+<span class="co1">// Buffer Sizes</span>
+<span class="co2">#define RCTL_BSIZE_256                  (3 &lt;&lt; 16)</span>
+<span class="co2">#define RCTL_BSIZE_512                  (2 &lt;&lt; 16)</span>
+<span class="co2">#define RCTL_BSIZE_1024                 (1 &lt;&lt; 16)</span>
+<span class="co2">#define RCTL_BSIZE_2048                 (0 &lt;&lt; 16)</span>
+<span class="co2">#define RCTL_BSIZE_4096                 ((3 &lt;&lt; 16) | (1 &lt;&lt; 25))</span>
+<span class="co2">#define RCTL_BSIZE_8192                 ((2 &lt;&lt; 16) | (1 &lt;&lt; 25))</span>
+<span class="co2">#define RCTL_BSIZE_16384                ((1 &lt;&lt; 16) | (1 &lt;&lt; 25))</span>
+&#160;
+&#160;
+<span class="co1">// Transmit Command</span>
+&#160;
+<span class="co2">#define CMD_EOP                         (1 &lt;&lt; 0)    // End of Packet</span>
+<span class="co2">#define CMD_IFCS                        (1 &lt;&lt; 1)    // Insert FCS</span>
+<span class="co2">#define CMD_IC                          (1 &lt;&lt; 2)    // Insert Checksum</span>
+<span class="co2">#define CMD_RS                          (1 &lt;&lt; 3)    // Report Status</span>
+<span class="co2">#define CMD_RPS                         (1 &lt;&lt; 4)    // Report Packet Sent</span>
+<span class="co2">#define CMD_VLE                         (1 &lt;&lt; 6)    // VLAN Packet Enable</span>
+<span class="co2">#define CMD_IDE                         (1 &lt;&lt; 7)    // Interrupt Delay Enable</span>
+&#160;
+&#160;
+<span class="co1">// TCTL Register</span>
+&#160;
+<span class="co2">#define TCTL_EN                         (1 &lt;&lt; 1)    // Transmit Enable</span>
+<span class="co2">#define TCTL_PSP                        (1 &lt;&lt; 3)    // Pad Short Packets</span>
+<span class="co2">#define TCTL_CT_SHIFT                   4           // Collision Threshold</span>
+<span class="co2">#define TCTL_COLD_SHIFT                 12          // Collision Distance</span>
+<span class="co2">#define TCTL_SWXOFF                     (1 &lt;&lt; 22)   // Software XOFF Transmission</span>
+<span class="co2">#define TCTL_RTLC                       (1 &lt;&lt; 24)   // Re-transmit on Late Collision</span>
+&#160;
+<span class="co2">#define TSTA_DD                         (1 &lt;&lt; 0)    // Descriptor Done</span>
+<span class="co2">#define TSTA_EC                         (1 &lt;&lt; 1)    // Excess Collisions</span>
+<span class="co2">#define TSTA_LC                         (1 &lt;&lt; 2)    // Late Collision</span>
+<span class="co2">#define LSTA_TU                         (1 &lt;&lt; 3)    // Transmit Underrun</span></pre></div></div>
+<p>Now lets define the data structures for the transmit and receive buffers
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define E1000_NUM_RX_DESC 32</span>
+<span class="co2">#define E1000_NUM_TX_DESC 8</span>
+&#160;
+<span class="kw4">struct</span> e1000_rx_desc <span class="br0">&#123;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint64_t</span> addr<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint16_t</span> length<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint16_t</span> checksum<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint8_t</span> status<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint8_t</span> errors<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint16_t</span> special<span class="sy0">;</span>
+<span class="br0">&#125;</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>packed<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="kw4">struct</span> e1000_tx_desc <span class="br0">&#123;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint64_t</span> addr<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint16_t</span> length<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint8_t</span> cso<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint8_t</span> cmd<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint8_t</span> status<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint8_t</span> css<span class="sy0">;</span>
+        <span class="kw4">volatile</span> <span class="kw4">uint16_t</span> special<span class="sy0">;</span>
+<span class="br0">&#125;</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>packed<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>And finally some helper static methods for MMIO read/write operations and Ports I/O
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">class MMIOUtils
+<span class="br0">&#123;</span>
+    public<span class="sy0">:</span>
+        <span class="kw4">static</span> <span class="kw4">uint8_t</span> read8 <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">uint16_t</span> read16 <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">uint32_t</span> read32 <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">uint64_t</span> read64 <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">void</span> write8 <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="sy0">,</span><span class="kw4">uint8_t</span> p_value<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">void</span> write16 <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="sy0">,</span><span class="kw4">uint16_t</span> p_value<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">void</span> write32 <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="sy0">,</span><span class="kw4">uint32_t</span> p_value<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">void</span> write64 <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="sy0">,</span><span class="kw4">uint64_t</span> p_value<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="co2">#endif /* MMIOUTILS_H_ */</span>
+&#160;
+&#160;
+&#160;
+<span class="kw4">uint8_t</span> MMIOUtils<span class="sy0">::</span><span class="me2">read8</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="sy0">*</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint8_t</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>p_address<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw4">uint16_t</span> MMIOUtils<span class="sy0">::</span><span class="me2">read16</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="sy0">*</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint16_t</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>p_address<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="br0">&#125;</span>
+<span class="kw4">uint32_t</span> MMIOUtils<span class="sy0">::</span><span class="me2">read32</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="sy0">*</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint32_t</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>p_address<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="br0">&#125;</span>
+<span class="kw4">uint64_t</span> MMIOUtils<span class="sy0">::</span><span class="me2">read64</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="sy0">*</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint64_t</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>p_address<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>    
+<span class="br0">&#125;</span>
+<span class="kw4">void</span> MMIOUtils<span class="sy0">::</span><span class="me2">write8</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="sy0">,</span><span class="kw4">uint8_t</span> p_value<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint8_t</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>p_address<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">=</span><span class="br0">&#40;</span>p_value<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw4">void</span> MMIOUtils<span class="sy0">::</span><span class="me2">write16</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="sy0">,</span><span class="kw4">uint16_t</span> p_value<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint16_t</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>p_address<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">=</span><span class="br0">&#40;</span>p_value<span class="br0">&#41;</span><span class="sy0">;</span>    
+<span class="br0">&#125;</span>
+<span class="kw4">void</span> MMIOUtils<span class="sy0">::</span><span class="me2">write32</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="sy0">,</span><span class="kw4">uint32_t</span> p_value<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint32_t</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>p_address<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">=</span><span class="br0">&#40;</span>p_value<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="br0">&#125;</span>
+<span class="kw4">void</span> MMIOUtils<span class="sy0">::</span><span class="me2">write64</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span> p_address<span class="sy0">,</span><span class="kw4">uint64_t</span> p_value<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint64_t</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>p_address<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">=</span><span class="br0">&#40;</span>p_value<span class="br0">&#41;</span><span class="sy0">;</span>    
+<span class="br0">&#125;</span></pre></div></div>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#ifndef PORTS_H_</span>
+<span class="co2">#define PORTS_H_</span>
+&#160;
+&#160;
+class Ports
+<span class="br0">&#123;</span>
+    private<span class="sy0">:</span>
+    public<span class="sy0">:</span>
+        <span class="kw4">static</span> <span class="kw4">void</span> outportb <span class="br0">&#40;</span><span class="kw4">uint16_t</span> p_port<span class="sy0">,</span><span class="kw4">uint8_t</span> data<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">void</span> outportw <span class="br0">&#40;</span><span class="kw4">uint16_t</span> p_port<span class="sy0">,</span><span class="kw4">uint16_t</span> data<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">void</span> outportl <span class="br0">&#40;</span><span class="kw4">uint16_t</span> p_port<span class="sy0">,</span><span class="kw4">uint32_t</span> data<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">uint8_t</span> inportb<span class="br0">&#40;</span> <span class="kw4">uint16_t</span> p_port<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">uint16_t</span> inportw<span class="br0">&#40;</span> <span class="kw4">uint16_t</span> p_port<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">static</span> <span class="kw4">uint32_t</span> inportl<span class="br0">&#40;</span> <span class="kw4">uint16_t</span> p_port<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="co2">#endif /* PORTS_H_ */</span>
+&#160;
+&#160;
+<span class="coMULTI">/* void Ports::outportb (uint16_t p_port,uint8_t p_data)
+ * 
+ * This method outputs a byte to a hardware port.
+ * It uses an inline asm with the volatile keyword
+ * to disable compiler optimization.
+ * 
+ *  p_port: the port number to output the byte p_data to.
+ *  p_data: the byte to to output to the port p_port.
+ * 
+ * Notice the input constraint
+ *      &quot;dN&quot; (port)&#160;: indicates using the DX register to store the 
+ *                  value of port in it
+ *      &quot;a&quot;  (data)&#160;: store the value of data into 
+ * 
+ * The above constraint will instruct the compiler to generate assembly
+ * code that looks like that
+ *      mov   &#160;%edi,%edx
+ *      mov   &#160;%esi,%eax
+ *      out   &#160;%eax,(%dx)
+ * 
+ * According the ABI, the edi will have the value of p_port and esi will have
+ * the value of the p_data
+ * 
+ */</span>
+<span class="kw4">void</span> Ports<span class="sy0">::</span><span class="me2">outportb</span> <span class="br0">&#40;</span><span class="kw4">uint16_t</span> p_port<span class="sy0">,</span><span class="kw4">uint8_t</span> p_data<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    asm <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;outb&#160;%1,&#160;%0&quot;</span> <span class="sy0">:</span> <span class="sy0">:</span> <span class="st0">&quot;dN&quot;</span> <span class="br0">&#40;</span>p_port<span class="br0">&#41;</span><span class="sy0">,</span> <span class="st0">&quot;a&quot;</span> <span class="br0">&#40;</span>p_data<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/* void Ports::outportw (uint16_t p_port,uint16_t p_data)
+ * 
+ * This method outputs a word to a hardware port.
+ * 
+ *  p_port: the port number to output the byte p_data to.
+ *  p_data: the byte to to output to the port p_port.
+ * 
+ */</span>
+&#160;
+&#160;
+<span class="kw4">void</span> Ports<span class="sy0">::</span><span class="me2">outportw</span> <span class="br0">&#40;</span><span class="kw4">uint16_t</span> p_port<span class="sy0">,</span><span class="kw4">uint16_t</span> p_data<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    asm <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;outw&#160;%1,&#160;%0&quot;</span> <span class="sy0">:</span> <span class="sy0">:</span> <span class="st0">&quot;dN&quot;</span> <span class="br0">&#40;</span>p_port<span class="br0">&#41;</span><span class="sy0">,</span> <span class="st0">&quot;a&quot;</span> <span class="br0">&#40;</span>p_data<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/* void Ports::outportl (uint16_t p_port,uint32_t p_data)
+ * 
+ * This method outputs a double word to a hardware port.
+ * 
+ *  p_port: the port number to output the byte p_data to.
+ *  p_data: the byte to to output to the port p_port.
+ * 
+ */</span>
+&#160;
+&#160;
+<span class="kw4">void</span> Ports<span class="sy0">::</span><span class="me2">outportl</span> <span class="br0">&#40;</span><span class="kw4">uint16_t</span> p_port<span class="sy0">,</span><span class="kw4">uint32_t</span> p_data<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    asm <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;outl&#160;%1,&#160;%0&quot;</span> <span class="sy0">:</span> <span class="sy0">:</span> <span class="st0">&quot;dN&quot;</span> <span class="br0">&#40;</span>p_port<span class="br0">&#41;</span><span class="sy0">,</span> <span class="st0">&quot;a&quot;</span> <span class="br0">&#40;</span>p_data<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/* uint8_t Ports::inportb( uint16_t p_port)
+ * 
+ * This method reads a byte from a hardware port.
+ * 
+ *  p_port: the port number to read the byte from.
+ *  return value&#160;: a byte read from the port p_port.
+ * 
+ * Notice the output constraint &quot;=a&quot;, this tells the compiler 
+ * to expect the save the value of register AX into the variable l_ret
+ * The register AX should contain the result of the inb instruction.
+ * 
+ * 
+ */</span>
+&#160;
+<span class="kw4">uint8_t</span> Ports<span class="sy0">::</span><span class="me2">inportb</span><span class="br0">&#40;</span> <span class="kw4">uint16_t</span> p_port<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw4">uint8_t</span> l_ret<span class="sy0">;</span>
+    asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot;inb&#160;%1,&#160;%0&quot;</span> <span class="sy0">:</span> <span class="st0">&quot;=a&quot;</span> <span class="br0">&#40;</span>l_ret<span class="br0">&#41;</span> <span class="sy0">:</span> <span class="st0">&quot;dN&quot;</span> <span class="br0">&#40;</span>p_port<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> l_ret<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/* uint16_t Ports::inportw( uint16_t p_port)
+ * 
+ * This method reads a word from a hardware port.
+ * 
+ *  p_port: the port number to read the word from.
+ *  return value&#160;: a word read from the port p_port.
+ * 
+ */</span>
+&#160;
+&#160;
+<span class="kw4">uint16_t</span> Ports<span class="sy0">::</span><span class="me2">inportw</span><span class="br0">&#40;</span> <span class="kw4">uint16_t</span> p_port<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw4">uint16_t</span> l_ret<span class="sy0">;</span>
+    asm <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;inw&#160;%1,&#160;%0&quot;</span> <span class="sy0">:</span> <span class="st0">&quot;=a&quot;</span> <span class="br0">&#40;</span>l_ret<span class="br0">&#41;</span> <span class="sy0">:</span> <span class="st0">&quot;dN&quot;</span> <span class="br0">&#40;</span>p_port<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> l_ret<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+&#160;
+<span class="coMULTI">/* uint16_t Ports::inportl( uint16_t p_port)
+ * 
+ * This method reads a double word from a hardware port.
+ * 
+ *  p_port: the port number to read the double word from.
+ *  return value&#160;: a double word read from the port p_port.
+ * 
+ */</span>
+&#160;
+<span class="kw4">uint32_t</span> Ports<span class="sy0">::</span><span class="me2">inportl</span><span class="br0">&#40;</span> <span class="kw4">uint16_t</span> p_port<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw4">uint32_t</span> l_ret<span class="sy0">;</span>
+    asm <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;inl&#160;%1,&#160;%0&quot;</span> <span class="sy0">:</span> <span class="st0">&quot;=a&quot;</span> <span class="br0">&#40;</span>l_ret<span class="br0">&#41;</span> <span class="sy0">:</span> <span class="st0">&quot;dN&quot;</span> <span class="br0">&#40;</span>p_port<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> l_ret<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p><br />
+</p>
+<h2> <span class="mw-headline" id="The_Driver_Class_Header_.28Class_Definition.29"> The Driver Class Header (Class Definition)</span></h2>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">class E1000 <span class="sy0">:</span> public NetworkDriver
+<span class="br0">&#123;</span>
+    private<span class="sy0">:</span>
+&#160;
+        <span class="kw4">uint8_t</span> bar_type<span class="sy0">;</span>     <span class="co1">// Type of BOR0</span>
+        <span class="kw4">uint16_t</span> io_base<span class="sy0">;</span>     <span class="co1">// IO Base Address</span>
+        <span class="kw4">uint64_t</span>  mem_base<span class="sy0">;</span>   <span class="co1">// MMIO Base Address</span>
+        bool eerprom_exists<span class="sy0">;</span>  <span class="co1">// A flag indicating if eeprom exists</span>
+        <span class="kw4">uint8_t</span> mac <span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="sy0">;</span>      <span class="co1">// A buffer for storing the mack address</span>
+        <span class="kw4">struct</span> e1000_rx_desc <span class="sy0">*</span>rx_descs<span class="br0">&#91;</span>E1000_NUM_RX_DESC<span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// Receive Descriptor Buffers</span>
+        <span class="kw4">struct</span> e1000_tx_desc <span class="sy0">*</span>tx_descs<span class="br0">&#91;</span>E1000_NUM_TX_DESC<span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// Transmit Descriptor Buffers</span>
+        <span class="kw4">uint16_t</span> rx_cur<span class="sy0">;</span>      <span class="co1">// Current Receive Descriptor Buffer</span>
+        <span class="kw4">uint16_t</span> tx_cur<span class="sy0">;</span>      <span class="co1">// Current Transmit Descriptor Buffer</span>
+&#160;
+&#160;
+        <span class="co1">// Send Commands and read results From NICs either using MMIO or IO Ports</span>
+        <span class="kw4">void</span> writeCommand<span class="br0">&#40;</span> <span class="kw4">uint16_t</span> p_address<span class="sy0">,</span> <span class="kw4">uint32_t</span> p_value<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> readCommand<span class="br0">&#40;</span><span class="kw4">uint16_t</span> p_address<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+&#160;
+        bool detectEEProm<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Return true if EEProm exist, else it returns false and set the eerprom_existsdata member</span>
+        <span class="kw4">uint32_t</span> eepromRead<span class="br0">&#40;</span> <span class="kw4">uint8_t</span> addr<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Read 4 bytes from a specific EEProm Address</span>
+        bool readMACAddress<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// Read MAC Address</span>
+        <span class="kw4">void</span> startLink <span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>           <span class="co1">// Start up the network</span>
+        <span class="kw4">void</span> rxinit<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>               <span class="co1">// Initialize receive descriptors an buffers</span>
+        <span class="kw4">void</span> txinit<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>               <span class="co1">// Initialize transmit descriptors an buffers</span>
+        <span class="kw4">void</span> enableInterrupt<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// Enable Interrupts</span>
+        <span class="kw4">void</span> handleReceive<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>        <span class="co1">// Handle a packet reception.</span>
+    public<span class="sy0">:</span>
+&#160;
+        E1000<span class="br0">&#40;</span>PCIConfigHeader <span class="sy0">*</span> _pciConfigHeader<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Constructor. takes as a parameter a pointer to an object that encapsulate all he PCI configuration data of the device</span>
+        <span class="kw4">void</span> start <span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>                             <span class="co1">// perform initialization tasks and starts the driver</span>
+        <span class="kw4">void</span> fire <span class="br0">&#40;</span>InterruptContext <span class="sy0">*</span> p_interruptContext<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// This method should be called by the interrupt handler </span>
+        <span class="kw4">uint8_t</span> <span class="sy0">*</span> getMacAddress <span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>                         <span class="co1">// Returns the MAC address</span>
+        <span class="kw4">int</span> sendPacket<span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">void</span> <span class="sy0">*</span> p_data<span class="sy0">,</span> <span class="kw4">uint16_t</span> p_len<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// Send a packet</span>
+        ~E1000<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>                                             <span class="co1">// Default Destructor</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<h2> <span class="mw-headline" id="How_the_Gears_Move_.28Class_methods_implementation.29"> How the Gears Move (Class methods implementation) </span></h2>
+<p>First of all we need to be able to send commands and read results from the NIC. It is important to detect the type of BAR0 and based on that the correct communication mechanism should be adopted. The following two methods encapsulate the read/write commands and uses MMIO or IO ports based on the value in BAR0 which is reflected in bar_type data member flag.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> E1000<span class="sy0">::</span><span class="me2">writeCommand</span><span class="br0">&#40;</span> <span class="kw4">uint16_t</span> p_address<span class="sy0">,</span> <span class="kw4">uint32_t</span> p_value<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span> bar_type <span class="sy0">==</span> <span class="nu0">0</span> <span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        MMIOUtils<span class="sy0">::</span><span class="me2">write32</span><span class="br0">&#40;</span>mem_base<span class="sy0">+</span>p_address<span class="sy0">,</span>p_value<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">else</span>
+    <span class="br0">&#123;</span>
+        Ports<span class="sy0">::</span><span class="me2">outportl</span><span class="br0">&#40;</span>io_base<span class="sy0">,</span> p_address<span class="br0">&#41;</span><span class="sy0">;</span>
+        Ports<span class="sy0">::</span><span class="me2">outportl</span><span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu0">4</span><span class="sy0">,</span> p_value<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="kw4">uint32_t</span> E1000<span class="sy0">::</span><span class="me2">readCommand</span><span class="br0">&#40;</span> <span class="kw4">uint16_t</span> p_address<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span> bar_type <span class="sy0">==</span> <span class="nu0">0</span> <span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">return</span> MMIOUtils<span class="sy0">::</span><span class="me2">read32</span><span class="br0">&#40;</span>mem_base<span class="sy0">+</span>p_address<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">else</span>
+    <span class="br0">&#123;</span>
+        Ports<span class="sy0">::</span><span class="me2">outportl</span><span class="br0">&#40;</span>io_base<span class="sy0">,</span> p_address<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> Ports<span class="sy0">::</span><span class="me2">inportl</span><span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p><br />
+Now we need to detect if the card has an EEPROM or not. The Qemu and Bochs emulate EEPROM, but the I217 and 82577LM do not. The following first method tries to read the status field of the EEPROM, the status field should contain the value 0x10, and based on the result the internal data member eerprom_exists. The second method performs a 2-bytes read operation from the EEPROM
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">bool E1000<span class="sy0">::</span><span class="me2">detectEEProm</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw4">uint32_t</span> val <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_EEPROM<span class="sy0">,</span> <span class="nu12">0x1</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+&#160;
+    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">1000</span> <span class="sy0">&amp;&amp;</span> <span class="sy0">!</span> eerprom_exists<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+            val <span class="sy0">=</span> readCommand<span class="br0">&#40;</span> REG_EEPROM<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>val <span class="sy0">&amp;</span> <span class="nu12">0x10</span><span class="br0">&#41;</span>
+                    eerprom_exists <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+            <span class="kw1">else</span>
+                    eerprom_exists <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">return</span> eerprom_exists<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">uint32_t</span> E1000<span class="sy0">::</span><span class="me2">eepromRead</span><span class="br0">&#40;</span> <span class="kw4">uint8_t</span> addr<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw4">uint16_t</span> data <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> tmp <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span> eerprom_exists<span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            	writeCommand<span class="br0">&#40;</span> REG_EEPROM<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span>addr<span class="br0">&#41;</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">8</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+        	<span class="kw1">while</span><span class="br0">&#40;</span> <span class="sy0">!</span><span class="br0">&#40;</span><span class="br0">&#40;</span>tmp <span class="sy0">=</span> readCommand<span class="br0">&#40;</span>REG_EEPROM<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">4</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span>
+        <span class="br0">&#123;</span>
+            writeCommand<span class="br0">&#40;</span> REG_EEPROM<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span>addr<span class="br0">&#41;</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">while</span><span class="br0">&#40;</span> <span class="sy0">!</span><span class="br0">&#40;</span><span class="br0">&#40;</span>tmp <span class="sy0">=</span> readCommand<span class="br0">&#40;</span>REG_EEPROM<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+	data <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint16_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#40;</span>tmp <span class="sy0">&gt;&gt;</span> <span class="nu0">16</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xFFFF</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="kw1">return</span> data<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p><br />
+</p><p>The first thing you will need to do after detecting the BAR0 type and the existence of the EEPROM is to read the hardware MAC address of the NIC. The following method reads the hardware mac address based. If an EEPROM exists it will read it from the EEPROM else it will read it from address 0x5400 where it should be located in that case. It is very important to detect if an EEPROM exists or not prior to reading the MAC address.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">bool E1000<span class="sy0">::</span><span class="me2">readMACAddress</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span> eerprom_exists<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw4">uint32_t</span> temp<span class="sy0">;</span>
+        temp <span class="sy0">=</span> eepromRead<span class="br0">&#40;</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        mac<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> temp <span class="sy0">&amp;</span><span class="nu12">0xff</span><span class="sy0">;</span>
+        mac<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> temp <span class="sy0">&gt;&gt;</span> <span class="nu0">8</span><span class="sy0">;</span>
+        temp <span class="sy0">=</span> eepromRead<span class="br0">&#40;</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        mac<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> temp <span class="sy0">&amp;</span><span class="nu12">0xff</span><span class="sy0">;</span>
+        mac<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> temp <span class="sy0">&gt;&gt;</span> <span class="nu0">8</span><span class="sy0">;</span>
+        temp <span class="sy0">=</span> eepromRead<span class="br0">&#40;</span> <span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        mac<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> temp <span class="sy0">&amp;</span><span class="nu12">0xff</span><span class="sy0">;</span>
+        mac<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span> <span class="sy0">=</span> temp <span class="sy0">&gt;&gt;</span> <span class="nu0">8</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">else</span>
+    <span class="br0">&#123;</span>
+        <span class="kw4">uint8_t</span> <span class="sy0">*</span> mem_base_mac_8 <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>mem_base<span class="sy0">+</span><span class="nu12">0x5400</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> <span class="sy0">*</span> mem_base_mac_32 <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint32_t</span> <span class="sy0">*</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>mem_base<span class="sy0">+</span><span class="nu12">0x5400</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span> mem_base_mac_32<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">!=</span> <span class="nu0">0</span> <span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">6</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                mac<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> mem_base_mac_8<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p><br />
+Now, we need to configure the transmit and receive descriptor buffers, here are the implementation of the corresponding methods. The rxinit method is identical to the one I use for my e1000 driver. The difference is in txinit
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> E1000<span class="sy0">::</span><span class="me2">rxinit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw4">uint8_t</span> <span class="sy0">*</span> ptr<span class="sy0">;</span>
+    <span class="kw4">struct</span> e1000_rx_desc <span class="sy0">*</span>descs<span class="sy0">;</span>
+&#160;
+    <span class="co1">// Allocate buffer for receive descriptors. For simplicity, in my case khmalloc returns a virtual address that is identical to it physical mapped address.</span>
+    <span class="co1">// In your case you should handle virtual and physical addresses as the addresses passed to the NIC should be physical ones</span>
+&#160;
+    ptr <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>kmalloc_ptr<span class="sy0">-&gt;</span>khmalloc<span class="br0">&#40;</span><span class="kw4">sizeof</span><span class="br0">&#40;</span><span class="kw4">struct</span> e1000_rx_desc<span class="br0">&#41;</span><span class="sy0">*</span>E1000_NUM_RX_DESC <span class="sy0">+</span> <span class="nu0">16</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    descs <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">struct</span> e1000_rx_desc <span class="sy0">*</span><span class="br0">&#41;</span>ptr<span class="sy0">;</span>
+    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> E1000_NUM_RX_DESC<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        rx_descs<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">struct</span> e1000_rx_desc <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span><span class="br0">&#41;</span>descs <span class="sy0">+</span> i<span class="sy0">*</span><span class="nu0">16</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        rx_descs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">-&gt;</span>addr <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>kmalloc_ptr<span class="sy0">-&gt;</span>khmalloc<span class="br0">&#40;</span><span class="nu0">8192</span> <span class="sy0">+</span> <span class="nu0">16</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        rx_descs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">-&gt;</span>status <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&#160;
+    writeCommand<span class="br0">&#40;</span>REG_TXDESCLO<span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span>ptr <span class="sy0">&gt;&gt;</span> <span class="nu0">32</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_TXDESCHI<span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span>ptr <span class="sy0">&amp;</span> <span class="nu12">0xFFFFFFFF</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    writeCommand<span class="br0">&#40;</span>REG_RXDESCLO<span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span>ptr<span class="br0">&#41;</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_RXDESCHI<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    writeCommand<span class="br0">&#40;</span>REG_RXDESCLEN<span class="sy0">,</span> E1000_NUM_RX_DESC <span class="sy0">*</span> <span class="nu0">16</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    writeCommand<span class="br0">&#40;</span>REG_RXDESCHEAD<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_RXDESCTAIL<span class="sy0">,</span> E1000_NUM_RX_DESC<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    rx_cur <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_RCTRL<span class="sy0">,</span> RCTL_EN<span class="sy0">|</span> RCTL_SBP<span class="sy0">|</span> RCTL_UPE <span class="sy0">|</span> RCTL_MPE <span class="sy0">|</span> RCTL_LBM_NONE <span class="sy0">|</span> RTCL_RDMTS_HALF <span class="sy0">|</span> RCTL_BAM <span class="sy0">|</span> RCTL_SECRC  <span class="sy0">|</span> RCTL_BSIZE_2048<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="br0">&#125;</span>
+&#160;
+&#160;
+<span class="kw4">void</span> E1000<span class="sy0">::</span><span class="me2">txinit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>    
+    <span class="kw4">uint8_t</span> <span class="sy0">*</span>  ptr<span class="sy0">;</span>
+    <span class="kw4">struct</span> e1000_tx_desc <span class="sy0">*</span>descs<span class="sy0">;</span>
+    <span class="co1">// Allocate buffer for receive descriptors. For simplicity, in my case khmalloc returns a virtual address that is identical to it physical mapped address.</span>
+    <span class="co1">// In your case you should handle virtual and physical addresses as the addresses passed to the NIC should be physical ones</span>
+    ptr <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>kmalloc_ptr<span class="sy0">-&gt;</span>khmalloc<span class="br0">&#40;</span><span class="kw4">sizeof</span><span class="br0">&#40;</span><span class="kw4">struct</span> e1000_tx_desc<span class="br0">&#41;</span><span class="sy0">*</span>E1000_NUM_TX_DESC <span class="sy0">+</span> <span class="nu0">16</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    descs <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">struct</span> e1000_tx_desc <span class="sy0">*</span><span class="br0">&#41;</span>ptr<span class="sy0">;</span>
+    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> E1000_NUM_TX_DESC<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        tx_descs<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">struct</span> e1000_tx_desc <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint8_t</span><span class="sy0">*</span><span class="br0">&#41;</span>descs <span class="sy0">+</span> i<span class="sy0">*</span><span class="nu0">16</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        tx_descs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">-&gt;</span>addr <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        tx_descs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">-&gt;</span>cmd <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        tx_descs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">-&gt;</span>status <span class="sy0">=</span> TSTA_DD<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&#160;
+    writeCommand<span class="br0">&#40;</span>REG_TXDESCHI<span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span>ptr <span class="sy0">&gt;&gt;</span> <span class="nu0">32</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_TXDESCLO<span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span>ptr <span class="sy0">&amp;</span> <span class="nu12">0xFFFFFFFF</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+&#160;
+    <span class="co1">//now setup total length of descriptors</span>
+    writeCommand<span class="br0">&#40;</span>REG_TXDESCLEN<span class="sy0">,</span> E1000_NUM_TX_DESC <span class="sy0">*</span> <span class="nu0">16</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+&#160;
+    <span class="co1">//setup numbers</span>
+    writeCommand<span class="br0">&#40;</span> REG_TXDESCHEAD<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span> REG_TXDESCTAIL<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    tx_cur <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_TCTRL<span class="sy0">,</span>  TCTL_EN
+        <span class="sy0">|</span> TCTL_PSP
+        <span class="sy0">|</span> <span class="br0">&#40;</span><span class="nu0">15</span> <span class="sy0">&lt;&lt;</span> TCTL_CT_SHIFT<span class="br0">&#41;</span>
+        <span class="sy0">|</span> <span class="br0">&#40;</span><span class="nu0">64</span> <span class="sy0">&lt;&lt;</span> TCTL_COLD_SHIFT<span class="br0">&#41;</span>
+        <span class="sy0">|</span> TCTL_RTLC<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// This line of code overrides the one before it but I left both to highlight that the previous one works with e1000 cards, but for the e1000e cards </span>
+    <span class="co1">// you should set the TCTRL register as follows. For detailed description of each bit, please refer to the Intel Manual.</span>
+    <span class="co1">// In the case of I217 and 82577LM packets will not be sent if the TCTRL is not configured using the following bits.</span>
+    writeCommand<span class="br0">&#40;</span>REG_TCTRL<span class="sy0">,</span>  <span class="nu6">0b0110000000000111111000011111010</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_TIPG<span class="sy0">,</span>  <span class="nu12">0x0060200A</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="br0">&#125;</span></pre></div></div>
+<p><br />
+To enable interrupts 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> E1000<span class="sy0">::</span><span class="me2">enableInterrupt</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    writeCommand<span class="br0">&#40;</span>REG_IMASK <span class="sy0">,</span><span class="nu12">0x1F6DC</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_IMASK <span class="sy0">,</span><span class="nu12">0xff</span> <span class="sy0">&amp;</span> ~<span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    readCommand<span class="br0">&#40;</span><span class="nu12">0xc0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="br0">&#125;</span></pre></div></div>
+<p>As we have defined most of the building blocks and the helper methods lets define the main methods of the class.
+</p><p><br />
+The constructor is responsible for fetching PCI related data and initialize the object internal state
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">E1000<span class="sy0">::</span><span class="me2">E1000</span><span class="br0">&#40;</span>PCIConfigHeader <span class="sy0">*</span> p_pciConfigHeader<span class="br0">&#41;</span> <span class="sy0">:</span> NetworkDriver<span class="br0">&#40;</span>p_pciConfigHeader<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// Get BAR0 type, io_base address and MMIO base address</span>
+    bar_type <span class="sy0">=</span> pciConfigHeader<span class="sy0">-&gt;</span>getPCIBarType<span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    io_base <span class="sy0">=</span> pciConfigHeader<span class="sy0">-&gt;</span>getPCIBar<span class="br0">&#40;</span>PCI_BAR_IO<span class="br0">&#41;</span> <span class="sy0">&amp;</span> ~<span class="nu0">1</span><span class="sy0">;</span>
+    mem_base <span class="sy0">=</span> pciConfigHeader<span class="sy0">-&gt;</span>getPCIBar<span class="br0">&#40;</span> PCI_BAR_MEM<span class="br0">&#41;</span> <span class="sy0">&amp;</span> ~<span class="nu0">3</span><span class="sy0">;</span>    
+&#160;
+    <span class="co1">// Off course you will need here to map the memory address into you page tables and use corresponding virtual addresses</span>
+&#160;
+    <span class="co1">// Enable bus mastering</span>
+    pciConfigHeader<span class="sy0">-&gt;</span>enablePCIBusMastering<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    eerprom_exists <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>The start method basically detects the EEPROM, reads the MAC addresses, setup rx and tx buffers, register the interrupt handler, and enable NIC interrupts
+</p><p><br />
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">bool E1000<span class="sy0">::</span><span class="me2">start</span> <span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    detectEEProm <span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span> readMACAddress<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+    printMac<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    startLink<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu12">0x80</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+        writeCommand<span class="br0">&#40;</span><span class="nu12">0x5200</span> <span class="sy0">+</span> i<span class="sy0">*</span><span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span> interruptManager<span class="sy0">-&gt;</span>registerInterrupt<span class="br0">&#40;</span>IRQ0<span class="sy0">+</span>pciConfigHeader<span class="sy0">-&gt;</span>getIntLine<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span>this<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        enableInterrupt<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        rxinit<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        txinit<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>        
+        video.<span class="me1">putString</span><span class="br0">&#40;</span><span class="st0">&quot;E1000 card started<span class="es1">\n</span>&quot;</span><span class="sy0">,</span>COLOR_RED<span class="sy0">,</span>COLOR_WHITE<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">else</span> <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p><br />
+Your interrupt handler should eventually call the fire method which handles the NIC's events
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> E1000<span class="sy0">::</span><span class="me2">fire</span> <span class="br0">&#40;</span>InterruptContext <span class="sy0">*</span> p_interruptContext<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span> p_interruptContext<span class="sy0">-&gt;</span>getInteruptNumber<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> pciConfigHeader<span class="sy0">-&gt;</span>getIntLine<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span>IRQ0<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>        
+        <span class="kw4">uint32_t</span> status <span class="sy0">=</span> readCommand<span class="br0">&#40;</span><span class="nu12">0xc0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>status <span class="sy0">&amp;</span> <span class="nu12">0x04</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            startLink<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>status <span class="sy0">&amp;</span> <span class="nu12">0x10</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+           <span class="co1">// good threshold</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>status <span class="sy0">&amp;</span> <span class="nu12">0x80</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            handleReceive<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> E1000<span class="sy0">::</span><span class="me2">handleReceive</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw4">uint16_t</span> old_cur<span class="sy0">;</span>
+    bool got_packet <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+&#160;
+    <span class="kw1">while</span><span class="br0">&#40;</span><span class="br0">&#40;</span>rx_descs<span class="br0">&#91;</span>rx_cur<span class="br0">&#93;</span><span class="sy0">-&gt;</span>status <span class="sy0">&amp;</span> <span class="nu12">0x1</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+            got_packet <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+            <span class="kw4">uint8_t</span> <span class="sy0">*</span>buf <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span><span class="br0">&#41;</span>rx_descs<span class="br0">&#91;</span>rx_cur<span class="br0">&#93;</span><span class="sy0">-&gt;</span>addr<span class="sy0">;</span>
+            <span class="kw4">uint16_t</span> len <span class="sy0">=</span> rx_descs<span class="br0">&#91;</span>rx_cur<span class="br0">&#93;</span><span class="sy0">-&gt;</span>length<span class="sy0">;</span>
+&#160;
+            <span class="co1">// Here you should inject the received packet into your network stack</span>
+&#160;
+&#160;
+            rx_descs<span class="br0">&#91;</span>rx_cur<span class="br0">&#93;</span><span class="sy0">-&gt;</span>status <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            old_cur <span class="sy0">=</span> rx_cur<span class="sy0">;</span>
+            rx_cur <span class="sy0">=</span> <span class="br0">&#40;</span>rx_cur <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">%</span> E1000_NUM_RX_DESC<span class="sy0">;</span>
+            writeCommand<span class="br0">&#40;</span>REG_RXDESCTAIL<span class="sy0">,</span> old_cur <span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>    
+<span class="br0">&#125;</span></pre></div></div>
+<p>Finally we define the sendPacket method as follows
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> E1000<span class="sy0">::</span><span class="me2">sendPacket</span><span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">void</span> <span class="sy0">*</span> p_data<span class="sy0">,</span> <span class="kw4">uint16_t</span> p_len<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>    
+    tx_descs<span class="br0">&#91;</span>tx_cur<span class="br0">&#93;</span><span class="sy0">-&gt;</span>addr <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span>p_data<span class="sy0">;</span>
+    tx_descs<span class="br0">&#91;</span>tx_cur<span class="br0">&#93;</span><span class="sy0">-&gt;</span>length <span class="sy0">=</span> p_len<span class="sy0">;</span>
+    tx_descs<span class="br0">&#91;</span>tx_cur<span class="br0">&#93;</span><span class="sy0">-&gt;</span>cmd <span class="sy0">=</span> CMD_EOP <span class="sy0">|</span> CMD_IFCS <span class="sy0">|</span> CMD_RS <span class="sy0">|</span> CMD_RPS<span class="sy0">;</span>
+    tx_descs<span class="br0">&#91;</span>tx_cur<span class="br0">&#93;</span><span class="sy0">-&gt;</span>status <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> old_cur <span class="sy0">=</span> tx_cur<span class="sy0">;</span>
+    tx_cur <span class="sy0">=</span> <span class="br0">&#40;</span>tx_cur <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">%</span> E1000_NUM_TX_DESC<span class="sy0">;</span>
+    writeCommand<span class="br0">&#40;</span>REG_TXDESCTAIL<span class="sy0">,</span> tx_cur<span class="br0">&#41;</span><span class="sy0">;</span>   
+    <span class="kw1">while</span><span class="br0">&#40;</span><span class="sy0">!</span><span class="br0">&#40;</span>tx_descs<span class="br0">&#91;</span>old_cur<span class="br0">&#93;</span><span class="sy0">-&gt;</span>status <span class="sy0">&amp;</span> <span class="nu12">0xff</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>    
+    <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p><br />
+This is an example of how to instantiate an object of this class and startup you driver. I assume that you have scanned your PCI buses and loaded the found devices parameters into some data structures; in our example this is done by the PCIConfigManager class, which is outside the scope of this tutorial
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">        pciConfigHeaderManager.<span class="me1">initialize</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Initialize the PCIConfigHeaderManager Object and scan PCI devices</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span> e1000PCIConfigHeader <span class="sy0">==</span> NULL <span class="br0">&#41;</span> e1000PCIConfigHeader <span class="sy0">=</span> pciConfigHeaderManager.<span class="me1">getPCIDevice</span><span class="br0">&#40;</span>INTEL_VEND<span class="sy0">,</span>E1000_I217<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span> e1000PCIConfigHeader <span class="sy0">==</span> NULL <span class="br0">&#41;</span> e1000PCIConfigHeader <span class="sy0">=</span> pciConfigHeaderManager.<span class="me1">getPCIDevice</span><span class="br0">&#40;</span>INTEL_VEND<span class="sy0">,</span>E1000_82577LM<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span> e1000PCIConfigHeader <span class="sy0">!=</span> NULL <span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            E1000 <span class="sy0">*</span> e1000 <span class="sy0">=</span> new E1000<span class="br0">&#40;</span>e1000PCIConfigHeader<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>e1000<span class="sy0">-&gt;</span>start<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+               <span class="co1">// Error starting the NIC</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span>
+        <span class="br0">&#123;</span>
+           <span class="co1">// Intel cards not found</span>
+        <span class="br0">&#125;</span></pre></div></div>
+<p><br />
+</p>
+<h2> <span class="mw-headline" id="Summary_and_Wrap_Up"> Summary and Wrap Up </span></h2>
+<p>I have presented in this Wiki the steps I followed to make an e1000 driver work with the two e1000e NICs Intel I217 and 82577LM. The wiki does not show how to utilize all the features of the NICs, but basically primitive setup and send/receive packets. Three important issues that I faced:
+</p>
+<ul><li> You need to detect the BAR0 type as some cards uses IO ports and others uses MMIO and you need to communincate with the NIC with the method appropriate to each.
+</li><li> You need to check if the card supports an EEPROM and read the MAC address from the EEPROM if the card supports it or read it from address 0x5400 if it does not support an EEPROM
+</li><li> You need to make sure to setup the card TCTRL register (Transmission Control Register) with the value 0b0110000000000111111000011111010. For more details reference the Intel manual for the meaning of the different bits of the register
+</li></ul>
+<h2> <span class="mw-headline" id="Manuals"> Manuals </span></h2>
+<p>These are the full Intel manuals:
+<a rel="nofollow" class="external text" href="http://www.intel.com/content/www/us/en/ethernet-controllers/ethernet-controller-i217-spec-update.html">Intel Ethernet i217 V</a>
+<a rel="nofollow" class="external text" href="http://www.intel.com/content/www/us/en/ethernet-controllers/82577-gbe-phy-datasheet.html">Intel 82577 Gigabit Ethernet PHY</a>
+</p><p>(Looks like the former manual was moved <a rel="nofollow" class="external text" href="http://www.intel.com/content/www/us/en/embedded/products/networking/i217-ethernet-controller-datasheet.html">here</a>).
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 164/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3768-0!*!*!!en!*!* and timestamp 20180121044700 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Intel_Ethernet_i217&amp;oldid=20338">http://wiki.osdev.org/index.php?title=Intel_Ethernet_i217&amp;oldid=20338</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Network_Hardware" title="Category:Network Hardware">Network Hardware</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Intel_Ethernet_i217" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Intel_Ethernet_i217"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Intel_Ethernet_i217&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Intel_Ethernet_i217#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Intel_Ethernet_i217" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Intel_Ethernet_i217&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Intel_Ethernet_i217&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Intel_Ethernet_i217#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Intel_Ethernet_i217" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Intel_Ethernet_i217" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Intel_Ethernet_i217" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Intel_Ethernet_i217" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Intel_Ethernet_i217&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Intel_Ethernet_i217&amp;oldid=20338" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 6 February 2017, at 01:59.</li>
+											<li id="footer-info-viewcount">This page has been accessed 11,677 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

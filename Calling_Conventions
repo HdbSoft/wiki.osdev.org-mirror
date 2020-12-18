@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Calling Conventions - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Calling_Conventions", "wgTitle": "Calling Conventions", "wgCurRevisionId": 20429, "wgArticleId": 1759, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["ABI", "C"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Calling_Conventions action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Calling Conventions</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Calling_Conventions#mw-head">navigation</a>,
+					<a href="Calling_Conventions#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Calling external functions in C, and calling C functions from other languages, is a common issue in OS programming, especially where the other language is assembly. This page will concentrate primarily on the latter case, but some consideration is made for other languages as well.
+</p><p>Some of what is described here is imposed by the x86 architecture, some is special to the GNU <a href="GCC" title="GCC">GCC</a> toolchain. Some is configurable, and you could be  making your own GCC target to support a different calling convention. Currently, this page makes no effort of differentiating which is what.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Calling_Conventions#Basics"><span class="tocnumber">1</span> <span class="toctext">Basics</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Calling_Conventions#Cheat_Sheets"><span class="tocnumber">2</span> <span class="toctext">Cheat Sheets</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Calling_Conventions#System_V_ABI"><span class="tocnumber">3</span> <span class="toctext">System V ABI</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Calling_Conventions#External_References"><span class="tocnumber">4</span> <span class="toctext">External References</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Calling_Conventions#Name_Mangling"><span class="tocnumber">5</span> <span class="toctext">Name Mangling</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Calling_Conventions#Registers"><span class="tocnumber">6</span> <span class="toctext">Registers</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Calling_Conventions#Passing_Function_Arguments"><span class="tocnumber">7</span> <span class="toctext">Passing Function Arguments</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Calling_Conventions#Accessing_Function_Arguments"><span class="tocnumber">8</span> <span class="toctext">Accessing Function Arguments</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Calling_Conventions#See_Also"><span class="tocnumber">9</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="Calling_Conventions#External_Links"><span class="tocnumber">9.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Basics">Basics</span></h2>
+<p>As a general rule, a function which follows the C calling conventions, and is appropriately declared (see below) in the C headers, can be called as a normal C function. Most of the burden for following the calling rules falls upon the assembly program.
+</p>
+<h2> <span class="mw-headline" id="Cheat_Sheets"> Cheat Sheets </span></h2>
+<p>Here is a quick overview of common calling conventions. Note that the calling conventions are usually more complex than represented here (for instance, how is a large struct returned? How about a struct that fits in two registers? How about va_list's?). Look up the specifications if you want to be certain. It may be useful to write a test function and use gcc -S to see how the compiler generates code, which may give a hint of how the calling convention specification should be interpreted.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Platform
+</th>
+<th> Return Value
+</th>
+<th> Parameter Registers
+</th>
+<th> Additional Parameters
+</th>
+<th> Stack Alignment
+</th>
+<th> Scratch Registers
+</th>
+<th> Preserved Registers
+</th>
+<th> Call List
+</th></tr>
+<tr>
+<td> System V i386 </td>
+<td> eax, edx </td>
+<td> none </td>
+<td> stack (right to left)<sup><a href="Calling_Conventions#Note1">1</a></sup> </td>
+<td> </td>
+<td> eax, ecx, edx </td>
+<td> ebx, esi, edi, ebp, esp </td>
+<td> ebp
+</td></tr>
+<tr>
+<td> System V X86_64<sup><a href="Calling_Conventions#Note2">2</a></sup> </td>
+<td> rax, rdx </td>
+<td> rdi, rsi, rdx, rcx, r8, r9 </td>
+<td> stack (right to left)<sup><a href="Calling_Conventions#Note1">1</a></sup>  </td>
+<td> 16-byte at call<sup><a href="Calling_Conventions#Not3">3</a></sup> </td>
+<td> rax, rdi, rsi, rdx, rcx, r8, r9, r10, r11 </td>
+<td> rbx, rsp, rbp, r12, r13, r14, r15 </td>
+<td> rbp
+</td></tr>
+<tr>
+<td> ARM </td>
+<td> r0, r1 </td>
+<td> r0, r1, r2, r3 </td>
+<td> stack </td>
+<td> 8 byte<sup><a href="Calling_Conventions#Note4">4</a></sup> </td>
+<td> r0, r1, r2, r3, r12 </td>
+<td> r4, r5, r6, r7, r8, r9, r10, r11, r13, r14 </td>
+<td>
+</td></tr></table>
+<p><small id="Note2">Note 1: The called function is allowed to modify the arguments on the stack and the caller must not assume the stack parameters are preserved. The caller should clean up the stack.</small>
+</p><p><small id="Note2">Note 2: There is a 128 byte area below the stack called the 'red zone', which may be used by leaf functions without increasing&#160;%rsp. This requires the kernel to increase&#160;%rsp by an additional 128 bytes upon signals in user-space. This is <em>not</em> done by the CPU - if interrupts use the current stack (as with kernel code), and the red zone is enabled (default), then interrupts will silently corrupt the stack. Always pass -mno-red-zone to kernel code (even support libraries such as libc's embedded in the kernel) if interrupts don't respect the red zone.</small>
+</p><p><small id="Note3">Note 3: Stack is 16 byte aligned at time of call. The call pushes&#160;%rip, so the stack is 16-byte aligned again if the callee pushes&#160;%rbp.</small>
+</p><p><small id="Note4">Note 4: Stack is 8 byte aligned at all times outside of prologue/epilogue of function.</small>
+</p>
+<h2> <span class="mw-headline" id="System_V_ABI"> System V ABI </span></h2>
+<dl><dd><i>Main article:</i> <a href="System_V_ABI" title="System V ABI">System V ABI</a>
+</dd></dl>
+<p>The System V ABI is one of the major ABIs in use today and is virtually universal among Unix systems. It is the calling convention used by toolchains such as <tt>i686-elf-gcc</tt> and <tt>x86_64-elf-gcc</tt>.
+</p>
+<h2> <span class="mw-headline" id="External_References">External References</span></h2>
+<p>In order to call a foreign function from C, it must have a correct C prototype. Thus, is if the function <tt>fee()</tt> takes the arguments fie, foe, and fum, in C calling order, and returns an integer value, then the corresponding header file should have the following prototype:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> fee<span class="br0">&#40;</span><span class="kw4">int</span> fie<span class="sy0">,</span> <span class="kw4">char</span> foe<span class="sy0">,</span> <span class="kw4">double</span> fum<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>Similarly, an global variables in the assembly code must be declared <tt>extern</tt>:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw2">extern</span> <span class="kw4">int</span> frotz<span class="sy0">;</span></pre></div></div>
+<p>C functions in assembly or other languages must be declared as appropriate for the language. For example, in NASM, the C function
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> foo<span class="br0">&#40;</span><span class="kw4">int</span> bar<span class="sy0">,</span> <span class="kw4">char</span> baz<span class="sy0">,</span> <span class="kw4">double</span> quux<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>would be declared
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw2">extern</span> foo</pre></div></div>
+<p>Also, in most assembly languages, a function or variable that it to be exported must be declared global:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">global foo
+global frotz</pre></div></div>
+<h2> <span class="mw-headline" id="Name_Mangling">Name Mangling</span></h2>
+<p>In some object formats (<a href="A.out" title="A.out">a.out</a>), the name of a C function is automagically mangled by prepending it with an underscore ("_"). Thus, to call a C function <tt>foo()</tt> in assembly with such a format, you must define it as <tt>extern _foo</tt> instead of <tt>extern foo</tt>. This requirement does not apply to most modern formats such as <a href="COFF" title="COFF">COFF</a>, <a href="PE" title="PE">PE</a>, and <a href="ELF" title="ELF">ELF</a>.
+</p><p>C++ name mangling is much more severe, as the C++ compiler encodes the type information from the parameter list into the symbol. (This is what enables function overloading in C++ in the first place.) The Binutils package contains the tool <tt>c++filt</tt> that can be used to determine the correct mangled name.
+</p>
+<h2> <span class="mw-headline" id="Registers">Registers</span></h2>
+<p>The general register <tt>EBX</tt>, <tt>ESI</tt>, <tt>EDI</tt>, <tt>EBP</tt>, <tt>DS</tt>, <tt>ES</tt>, and <tt>SS</tt>, must be preserved by the called function. If you use them, you must save them first and restore them afterwards. Conversely, <tt>EAX</tt> and <tt>EDX</tt> are used for return values, and thus should not be preserved. The other registers do not need to be saved by the called function, but if they are in use by the calling function, then the calling function should save them before the call is made, and restored afterwards.
+</p>
+<h2> <span class="mw-headline" id="Passing_Function_Arguments">Passing Function Arguments</span></h2>
+<p>GCC/x86 passes function arguments on the stack. These arguments are pushed in reverse order from their order in the argument list. Furthermore, since the x86 protected-mode stack operations operate on 32-bit values, the values are always pushed as a 32-bit value, even if the actual value is less than a full 32-bit value. Thus, for function <tt>foo()</tt>, the value of <tt>quux</tt> (a 48-bit FP value) is pushed first as two 32-bit values, low-32-bit-value first; the value of <tt>baz</tt> is pushed as the first byte of in 32-bit value; and then finally <tt>bar</tt> is pushed as a 32-bit value.
+</p><p>To pass arguments to a C function, the calling function must push the argument values as described above. Thus, to call foo() from a <a href="NASM" title="NASM">NASM</a> assembly program, you would do something like this
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">push</span> <span class="kw3">eax</span>   <span class="co1">; low 32-bit of quux</span>
+<span class="kw1">push</span> <span class="kw3">edx</span>   <span class="co1">; high 32-bit of quux</span>
+<span class="kw1">push</span> <span class="kw3">bl</span>    <span class="co1">; baz</span>
+<span class="kw1">push</span> <span class="kw3">ecx</span>   <span class="co1">; bar</span>
+<span class="kw1">call</span> foo</pre></div></div>
+<h2> <span class="mw-headline" id="Accessing_Function_Arguments">Accessing Function Arguments</span></h2>
+<p>In the GCC/x86 C calling convention, the first thing any function that accepts formal arguments should do is push the value of <tt>EBP</tt> (the frame base pointer of the calling function), then copy the value of <tt>ESP</tt> to <tt>EBP</tt>. This sets the function's own frame pointer, which is used to track both the arguments and (in C, or in any properly reentrant assembly code) the local variables.
+</p><p>To access arguments passed by a C function, you need to use the <tt>EBP</tt> an offset equal to 4 * (n + 2), where n is the number of the parameter in the argument list (not the number in the order it was pushed by), zero-indexed. The + 2 is an added offset for the calling function's saved frame pointer and return pointer (pushed automatically by <tt>CALL</tt>, and popped by <tt>RET</tt>).
+</p><p>Thus, in function <tt>fee</tt>, to move <tt>fie</tt> into <tt>EAX</tt>, <tt>foe</tt> into <tt>BL</tt>, and <tt>fum</tt> into <tt>EAX</tt> and <tt>EDX</tt>, you would write (in NASM):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebp</span> <span class="sy0">+</span> <span class="nu0">8</span><span class="br0">&#93;</span>  <span class="co1">; fie</span>
+<span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span>  <span class="br0">&#91;</span><span class="kw3">ebp</span> <span class="sy0">+</span> <span class="nu0">12</span><span class="br0">&#93;</span> <span class="co1">; foe</span>
+<span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebp</span> <span class="sy0">+</span> <span class="nu0">16</span><span class="br0">&#93;</span> <span class="co1">; low 32-bit of fum</span>
+<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">ebp</span> <span class="sy0">+</span> <span class="nu0">20</span><span class="br0">&#93;</span> <span class="co1">; high 32-bit of fum</span></pre></div></div>
+<p>As stated earlier, return values in GCC are passed using <tt>EAX</tt> and <tt>EDX</tt>. If a value exceeds 64 bits, it must be passed as a pointer.
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://www.delorie.com/djgpp/doc/ug/asm/calling.html">DJGPP FAQ: GCC calling conventions</a>
+</li><li><a rel="nofollow" class="external text" href="http://gul.ime.usp.br/Docs/docs/howto/other-formats/html/HOWTO-INDEX-html/Assembly-HOWTO-5.html">Linux Assembly Language HOWTO chapter 5</a>
+</li><li><a rel="nofollow" class="external free" href="http://files.osdev.org/mirrors/geezer/osd/libc/index.htm">http://files.osdev.org/mirrors/geezer/osd/libc/index.htm</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 150/1000000
+Post-expand include size: 197/2097152 bytes
+Template argument size: 12/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1759-0!*!0!!en!*!* and timestamp 20180121035809 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Calling_Conventions&amp;oldid=20429">http://wiki.osdev.org/index.php?title=Calling_Conventions&amp;oldid=20429</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:ABI" title="Category:ABI">ABI</a></li><li><a href="Category:C" title="Category:C">C</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Calling_Conventions" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Calling_Conventions"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Calling_Conventions"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Calling_Conventions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Calling_Conventions" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Calling_Conventions&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Calling_Conventions&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Calling_Conventions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Calling_Conventions" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Calling_Conventions" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Calling_Conventions&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Calling_Conventions&amp;oldid=20429" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Aufrufkonventionen" title="Aufrufkonventionen">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 14 February 2017, at 12:40.</li>
+											<li id="footer-info-viewcount">This page has been accessed 70,050 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title=skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Calling_Conventions" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Calling_Conventions" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Calling_Conventions&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Calling_Conventions&amp;oldid=20429" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Aufrufkonventionen" title="Aufrufkonventionen">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 14 February 2017, at 12:40.</li>
+											<li id="footer-info-viewcount">This page has been accessed 70,050 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

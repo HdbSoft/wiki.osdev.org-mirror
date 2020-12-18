@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Linker Scripts - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Linker_Scripts", "wgTitle": "Linker Scripts", "wgCurRevisionId": 19639, "wgArticleId": 2604, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "Linkers"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Linker_Scripts action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Linker Scripts</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Linker_Scripts#mw-head">navigation</a>,
+					<a href="Linker_Scripts#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>So what exactly is a linker script, and do I really need one? In all basic cases, you can technically do without, as you can specify a lot of options on the <a href="LD" title="LD">GNU ld</a> command line, but how fun is that to type 100 characters over and over? A linker script is basically a nice little file you can create that ld will parse and link according to it.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Linker_Scripts#Keywords"><span class="tocnumber">1</span> <span class="toctext">Keywords</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Linker_Scripts#ENTRY"><span class="tocnumber">1.1</span> <span class="toctext">ENTRY</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Linker_Scripts#OUTPUT_FORMAT"><span class="tocnumber">1.2</span> <span class="toctext">OUTPUT_FORMAT</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Linker_Scripts#STARTUP"><span class="tocnumber">1.3</span> <span class="toctext">STARTUP</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Linker_Scripts#SEARCH_DIR"><span class="tocnumber">1.4</span> <span class="toctext">SEARCH_DIR</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Linker_Scripts#INPUT"><span class="tocnumber">1.5</span> <span class="toctext">INPUT</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Linker_Scripts#OUTPUT"><span class="tocnumber">1.6</span> <span class="toctext">OUTPUT</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Linker_Scripts#MEMORY"><span class="tocnumber">1.7</span> <span class="toctext">MEMORY</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Linker_Scripts#SECTIONS"><span class="tocnumber">1.8</span> <span class="toctext">SECTIONS</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="Linker_Scripts#See_Also"><span class="tocnumber">2</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="Linker_Scripts#External_Links"><span class="tocnumber">2.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Keywords"> Keywords </span></h2>
+<p>I won't cover all of the keywords here, but I will cover the ones that will most likely be used.
+</p>
+<h4> <span class="mw-headline" id="ENTRY"> ENTRY </span></h4>
+<pre>
+ENTRY(main)
+ENTRY(MultibootEntry)
+</pre>
+<p>ENTRY takes one argument. That is the symbol name for the entry point of the linked program/kernel. This can be "start" or "__main" or whatever, it's really up to you, but this will be the very first byte of your loaded program(or the first byte of the .text section in <a href="ELF" title="ELF">ELF</a> and <a href="PE" title="PE">PE</a> binaries).
+</p>
+<h4> <span class="mw-headline" id="OUTPUT_FORMAT"> OUTPUT_FORMAT </span></h4>
+<pre>
+OUTPUT_FORMAT(elf64-x86-64)
+OUTPUT_FORMAT(&quot;pe-i386&quot;)
+</pre>
+<p>OUTPUT_FORMAT also takes one argument. It specifies what the output format of your executable will be. To find out what formats your binutils and GCC supports, just use 'objdump -i'. Some of the more common formats are
+</p>
+<ul><li> binary --This is just a flat binary with no formatting at all
+</li><li> elf32-i386 --This is just the ELF format, usually little endian too.
+</li><li> elf64-x86-64 --This is the ELF format for 64bit, usually little endian.
+</li><li> pe-i386 --The PE format
+</li></ul>
+<h4> <span class="mw-headline" id="STARTUP"> STARTUP </span></h4>
+<pre>
+STARTUP(Boot.o)
+STARTUP(crt0.o)
+</pre>
+<p>STARTUP takes one argument. It is which file you want to be linked to the very beginning of the executable. For userland programs, this is usually crt0.o or crtbegin.o. For kernels, it is usually the file that contains your assembly boilerplate that initiates the stack and in some cases GDT and such and then calls your kmain().
+</p>
+<h4> <span class="mw-headline" id="SEARCH_DIR"> SEARCH_DIR </span></h4>
+<pre>
+SEARCH_DIR(Directory)
+</pre>
+<p>This will add a path to your library search directory. The -nostdlib flag will cause any library found in this path to be effectively ignored. I'm not sure why, it just seems to be how ld works. It treats linker script specified search directories as standard directories, and therefore ignores them with -no-default-libs and such flags
+</p>
+<h4> <span class="mw-headline" id="INPUT"> INPUT </span></h4>
+<pre>
+INPUT(File1.o File2.o File3.o ...)
+INPUT
+(
+	File1.o
+	File2.o
+	File3.o
+	...
+)
+</pre>
+<p>INPUT is a 'in-linker script' replacement for adding object files to the command line. Where you would usually specify something like <i>ld File1.o File2.o</i>, the INPUT section can be used to do this inside the linker script instead.
+</p>
+<h4> <span class="mw-headline" id="OUTPUT"> OUTPUT </span></h4>
+<pre>
+OUTPUT(Kernel.bin)
+</pre>
+<p>OUTPUT specifies the file that has to be output by the linker. This is the name of the executable. For applications on Windows, for example, this is usually <i>.exe</i>.
+</p>
+<h4> <span class="mw-headline" id="MEMORY"> MEMORY </span></h4>
+<pre>
+MEMORY
+{
+...
+}
+</pre>
+<p>MEMORY declares one or more memory regions with attributes specifying whether the region can be written to, read from or executed. This is mostly used in embedded systems where different regions of address space may contain different access permissions.
+</p><p>For example:
+</p>
+<pre>
+MEMORY
+{
+    ROM (rx)&#160;: ORIGIN = 0, LENGTH = 256k
+    RAM (wx)&#160;: org = 0x00100000, len = 1M
+}
+</pre>
+<p>This script tells the linker that there are two memory regions.
+a) "ROM" starts at address 0x00000000, is 256kB in length, can be read and executed.
+b) "RAM" starts at address 0x00100000, is 1MB in length, can be written, read and executed.
+</p>
+<h4> <span class="mw-headline" id="SECTIONS"> SECTIONS </span></h4>
+<pre>
+SECTIONS
+{
+  .text.start (_KERNEL_BASE_)&#160;: {
+    startup.o( .text )
+  }
+
+  .text&#160;: ALIGN(0x1000) {
+_TEXT_START_ = .;
+    *(.text)
+_TEXT_END_ = .;
+  }
+
+  .data&#160;: ALIGN(0x1000) {
+_DATA_START_ = .;
+    *(.data)
+_DATA_END_ = .;
+  }
+
+  .bss&#160;: ALIGN(0x1000) {
+_BSS_START_ = .;
+    *(.bss)
+_BSS_END_ = .;
+  }
+
+
+}
+</pre>
+<p>This script tells the linker to place code from the ".text" section in startup.o at the beginning, starting at logical address _KERNEL_BASE_.
+This is then followed by page-aligned sections for all ".text", ".data" and ".bss" sections of all the other input files. Linker variables are
+defined for the start and end address of each section; C(++) code can refer to these using 'extern "C" void &lt;varname&gt;', and taking the address 
+(&amp;&lt;varname&gt;) to use the value.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="https://sourceware.org/binutils/docs/ld/Scripts.html#Scripts">GNU ld manual on linker scripts</a>
+</li><li> <a rel="nofollow" class="external text" href="https://sourceware.org/binutils/docs/ld/">GNU ld manual (full)</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.bravegnu.org/gnu-eprog/lds.html">GNU ld script example</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 145/1000000
+Post-expand include size: 347/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2604-0!*!0!!en!2!* and timestamp 20180121060056 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Linker_Scripts&amp;oldid=19639">http://wiki.osdev.org/index.php?title=Linker_Scripts&amp;oldid=19639</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:Linkers" title="Category:Linkers">Linkers</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Linker_Scripts" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Linker_Scripts"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Linker_Scripts"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Linker_Scripts#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Linker_Scripts" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Linker_Scripts&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Linker_Scripts&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Linker_Scripts#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Linker_Scripts" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Linker_Scripts" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" tiskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Linker_Scripts" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Linker_Scripts" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Linker_Scripts&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Linker_Scripts&amp;oldid=19639" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 31 July 2016, at 11:02.</li>
+											<li id="footer-info-viewcount">This page has been accessed 61,638 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

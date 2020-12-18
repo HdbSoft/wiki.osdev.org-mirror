@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>FPU - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "FPU", "wgTitle": "FPU", "wgCurRevisionId": 20884, "wgArticleId": 2427, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["X86"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-FPU action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">FPU</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="FPU#mw-head">navigation</a>,
+					<a href="FPU#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The x86 FPU was originally an optional addition to the processor that was able to perform floating point math in hardware, but has since been integrated into the CPU proper and has collected over the years the majority of math-heavy instructions. The modern FPU has become a legacy term for what is actually the vector processing units, which just happens to include the original floating point operations.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="FPU#x86_FPU_Legacy"><span class="tocnumber">1</span> <span class="toctext">x86 FPU Legacy</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="FPU#FPU_configuration"><span class="tocnumber">2</span> <span class="toctext">FPU configuration</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="FPU#Detecting_an_FPU"><span class="tocnumber">3</span> <span class="toctext">Detecting an FPU</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="FPU#FPU_control"><span class="tocnumber">4</span> <span class="toctext">FPU control</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="FPU#Vector_unit"><span class="tocnumber">5</span> <span class="toctext">Vector unit</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="FPU#Long_Mode"><span class="tocnumber">6</span> <span class="toctext">Long Mode</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="FPU#FPU_state"><span class="tocnumber">7</span> <span class="toctext">FPU state</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="FPU#Programming_the_FPU"><span class="tocnumber">8</span> <span class="toctext">Programming the FPU</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="FPU#Rent-a-coder"><span class="tocnumber">9</span> <span class="toctext">Rent-a-coder</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="FPU#See_Also"><span class="tocnumber">10</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="FPU#External_Links"><span class="tocnumber">10.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="x86_FPU_Legacy"> x86 FPU Legacy </span></h2>
+<p>Originally, the FPU was a dedicated coprocessor chip placed on top of the actual processor. Since it was performing calculations asynchronously from the core logic, it's results would have been available after the main processor has executed several other instructions. Since errors would also become available asynchronously, the original PC had the error line of the FPU wired to the <a href="PIC" title="PIC" class="mw-redirect">interrupt controller</a>. When the 486 added multiprocessor support, it became impossible to detect which of the FPUs has raised an exception, after which they integrated the FPU on-die and added an option to signal a regular exception rather than an interrupt. To provide backwards compatibility, the 486 was given a pin to replace the original FPU error line, which would be routed to the PIC and then back into the CPU's IRQ line to simulate the original setup with a dedicated coprocessor. This has the unfortunate consequence that by default, floating point exceptions will not operate as recommended by the manual.
+</p>
+<h2> <span class="mw-headline" id="FPU_configuration"> FPU configuration </span></h2>
+<p>Due to the many forms of FPUs and vector units, some logic is required to get them in the expected state.
+</p>
+<h2> <span class="mw-headline" id="Detecting_an_FPU"> Detecting an FPU </span></h2>
+<p>On 386s, FPUs were external and strictly optional. The 486 came in an FPU-included and an FPU-less package, with the "FPU upgrade" being just a modified 486 that disabled its lesser counterpart. From the Pentium onwards, FPUs were always integrated and present. To make things more tricky, 386s were capable of operating with both a 287 (the 286's FPU), and the 387 (the intended FPU)
+</p><p>There are two ways to detect an FPU:
+</p>
+<ol><li> Check the FPU bit in CPUID
+</li><li> Check the EM bit in CR0, if it is set then the FPU is not meant to be used.
+</li><li> Check the ET bit in CR0, if it is clear, then the CPU did not detect an 80387 on boot
+</li><li> Probe for an FPU
+</li></ol>
+<p>The correct order is a bit doubtful. The current official manuals state that attempts to use the FPU when one is not present will lock up the CPU. There are however many sources that contain probing code to various degrees of complexity, with the common consensus that fwait or actual calculations are not to be performed. Similarly, the EM and ET bits can be modified by code and might not have the right values. Different wirings on actual hardware may also cause 386s to not detect an FPU as a 80386, causing the ET bit to have the wrong value on boot.
+</p><p>The common way of testing the presence of an FPU is to have it write it's status somewhere and then check if it actually did.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">MOV</span> <span class="kw3">EDX</span><span class="sy0">,</span> <span class="kw3">CR0</span>                            <span class="co1">; Start probe, get CR0</span>
+<span class="kw1">AND</span> <span class="kw3">EDX</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">-</span> <span class="br0">&#40;</span>CR0_TS <span class="sy0">+</span> CR0_EM<span class="br0">&#41;</span>       <span class="co1">; clear TS and EM to force fpu access</span>
+<span class="kw1">MOV</span> <span class="kw3">CR0</span><span class="sy0">,</span> <span class="kw3">EDX</span>                            <span class="co1">; store control word</span>
+<span class="kw2">FNINIT</span>                                  <span class="co1">; load defaults to FPU</span>
+<span class="kw2">FNSTSW</span> <span class="br0">&#91;</span><span class="sy0">.</span>testword<span class="br0">&#93;</span>                      <span class="co1">; store status word</span>
+<span class="kw1">CMP</span> <span class="kw5">word</span> <span class="br0">&#91;</span><span class="sy0">.</span>testword<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0</span>                 <span class="co1">; compare the written status with the expected FPU state</span>
+<span class="kw1">JNE</span> <span class="sy0">.</span>nofpu                              <span class="co1">; jump if the FPU hasn't written anything (i.e. it's not there)</span>
+<span class="kw1">JMP</span> <span class="sy0">.</span>hasfpu
+&#160;
+<span class="sy0">.</span>testword<span class="sy0">:</span> <span class="kw4">DW</span> <span class="nu0">0x55AA</span>                    <span class="co1">; store garbage to be able to detect a change</span></pre></div></div>
+<p>To distinguish a 287 and a 387 FPU, you can try if it can see the difference between +infinity and -infinity.
+</p>
+<h2> <span class="mw-headline" id="FPU_control"> FPU control </span></h2>
+<p>If an FPU is found to be present, you should set up the control registers accordingly. If an FPU is not present, you should also set up the registers accordingly.
+</p><p><b>CR0.EM</b> (bit 2; counting starts at bit 0 making this the third bit)
+</p>
+<dl><dd>If the EM bit is set, all FPU and vector operations will cause a #UD so they can be <b>EM</b>ulated in software. Should be off to be actually able to use the FPU
+</dd></dl>
+<p><b>CR0.ET</b> (bit 4)
+</p>
+<dl><dd>This bit is used on the 386 to tell it how to communicate with the coprocessor, which is 0 for an 287, and 1 for a 387 or later. This bit is hardwired on 486+
+</dd></dl>
+<p><b>CR0.NE</b> (bit 5)
+</p>
+<dl><dd>When set, enables <b>N</b>ative <b>E</b>xception handling which will use the FPU exceptions. When cleared, an exception is sent via the interrupt controller. Should be on for 486+, but not on 386s because they lack that bit.
+</dd></dl>
+<p><b>CR0.TS</b> (bit 3)
+</p>
+<dl><dd>Task switched. The FPU state is designed to be lazily switched to save read and write cycles. If set, all meaningful operations will cause a #NM exception so that the OS can backup the FPU state. This bit is automatically set on a hardware task switch, and can be cleared with the CLTS opcode. Software task switching may want to manually set this bit on a reschedule if they want to lazily store FPU state.
+</dd></dl>
+<p><b>CR0.MP</b> (bit 1)
+</p>
+<dl><dd>This does little else other than saying if an FWAIT opcode is exempted from responding to the TS bit. Since FWAIT will force serialisation of exceptions, it should normally be set to the inverse of the EM bit, so that FWAIT will actually cause a FPU state update when FPU instructions are asynchronous, and not when they are emulated.
+</dd></dl>
+<p><b>CR4.OSFXSR</b> (bit 9)
+</p>
+<dl><dd>Enables 128-bit SSE support. When clear, most SSE instructions will cause an invalid opcode, and FXSAVE and FXRSTOR will only include the legacy FPU state. When set, SSE is allowed and the XMM and MXCSR registers are accessible, which also means that your OS should maintain those additional registers. Trying to set this bit on a CPU without SSE will cause an exception, so you should check for SSE (or long mode) support first.
+</dd></dl>
+<p><b>CR4.OSXMMEXCPT</b> (bit 10)
+</p>
+<dl><dd>Enables the #XF exception. When clear, SSE will work until an exception is generated, after which all SSE instructions will fail with an invalid opcode. When set, the exception handler is called instead and the problem may be diagnosed and reported. Again, you can't set this bit without ensuring SSE support is present
+</dd></dl>
+<p><b>CR4.OSXSAVE</b> (bit 18)
+</p>
+<dl><dd>Enables the XSAVE extension, which is able to save SSE state as well as other next-generation register states. Again, check CPUID before setting: Long mode support is not sufficient in this case.
+</dd></dl>
+<h2> <span class="mw-headline" id="Vector_unit"> Vector unit </span></h2>
+<p>MMX, 3DNow and the rare EMMI reuse the old FPU registers as vector units, aliasing them into 64 bit data registers. This means that they can be used safely without modifications of the FPU handling. SSE however adds a whole new set of registers, and therefore is disabled by default. To allow SSE instructions, CR4.OSFXSR should be set. Be careful though since writing it on a processor without SSE support causes an exception. When SSE is enabled, FXSAVE and FXRSTOR should be used to store the entire FPU and vector register file.
+It is good practice to enable the other SSE bit (CR4.OSXMMEXCPT) as well so that SSE exceptions are routed to the #XF handler, instead of your vector unit automatically disabling itself when an exception occurs.
+The state of the art includes AVX, which adds
+</p>
+<h2> <span class="mw-headline" id="Long_Mode"> Long Mode </span></h2>
+<p>Long mode demands that SSE and SSE2 are available, and compilers are free to use the SSE registers instead of the old FPU registers for floating point operations. This means that your kernel will need to have SSE enabled before using any floating point operations, whereas 32-bit mode might just happen to work without touching CR0/CR4. Also, long mode doubles the registers for SSE, giving you 16 XMM registers rather than the 8 available in 32-bit mode, which implies that more data is in need of saving.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="FPU_state"> FPU state </span></h2>
+<p>When the FPU is configured, the only thing left to do is to initialize its registers to their proper states. FNINIT will reset the user-visible part of the FPU stack. This will set precision to 64-bit and rounding to nearest, which should be correct for most operations. It will also mask all exceptions from causing an interrupt. You can change the control by issuing an FLDCW. To diagnose broken code, you usually want to enable exceptions for invalid operands and stack overflows (bit 0). Bit 2 allows you to catch divisions by zero as well. Some examples:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">; FLDCW requires a 16-bit memory operand, immediates do not work</span>
+<span class="kw2">FLDCW</span> <span class="br0">&#91;</span>value_37F<span class="br0">&#93;</span>   <span class="co1">; writes 0x37f into the control word: the value written by F(N)INIT</span>
+<span class="kw2">FLDCW</span> <span class="br0">&#91;</span>value_37E<span class="br0">&#93;</span>   <span class="co1">; writes 0x37e, the default with invalid operand exceptions enabled</span>
+<span class="kw2">FLDCW</span> <span class="br0">&#91;</span>value_37A<span class="br0">&#93;</span>   <span class="co1">; writes 0x37a, both division by zero and invalid operands cause exceptions.</span></pre></div></div>
+<p><br />
+Using the MMX aliases for the FPU registers will cause those registers to be invalidated for floating point use. The EMMS instruction will reset the registers to non-vector use. The x86 calling convention assumes that the stack is usable for either floating point or vector use, so you will need to call EMMS before calling or returning to regular compiler-generated code. Both MMX instructions and EMMS preserves the control word you set with FLDCW so you don't need to adjust it manually afterwards.
+</p><p>SSE operates mostly independent of the FPU registers. It has a separate MXCSR register which deals with control and exceptions, which should be written separately.
+</p>
+<h2> <span class="mw-headline" id="Programming_the_FPU"> Programming the FPU </span></h2>
+<p>The x87 FPU contains 8 floating point registers.  Each floating point register holds an 80-bit extended double value (1-bit sign, 15-bit exponent, and 64-bit fractional value), and each register has a matching 2-bit "tag" value in the Tag Register that acts as that registers flags.  The Tag Register contains information about whether each register is empty or not, whether its value is accurate or not, and whether its value is a special value, like "infinity" or "Nan" (Not a number).
+</p><p>The 8 floating point registers are organized in a "stack" configuration, and most FPU instructions operate on the current "top" of the stack, (which is register 0 by default).  The current "top" register index is stored in the FPU Status Register, and is updated automatically by the FPU when a PUSH (FLD) or POP (FST) instruction is executed.  When all 8 stack registers are full (i.e. all 8 tag registers are not marked as "empty"), and a PUSH instruction is executed, a FPU stack-overflow exception will occur.  If the stack-overflow exception interrupt has been enabled, the main CPU will also receive an interrupt.
+</p><p>Because the x87 FPU is a separate processor (and has its own clock), it can execute FPU instructions in parallel, at the same time as the CPU is executing its own instructions.  Applications that use the x87 FPU must first execute one or more FPU commands, then at some later point, it must instruct the main CPU to wait for the FPU to finish processing (FWAIT) in order to ensure that the FPU has finished executing those instructions.  Most of the x87 FPU instructions have a "wait" version and a "no wait" version, so that the programmer can specify at which points in the application that the two processors need to be synchronized.  After the FWAIT CPU instruction is executed (or a "wait" instruction is executed), any calculations performed by the FPU (or any exceptions that have been detected by the FPU) can be addressed by the application at that point.
+</p><p>Sending data to, and pulling data from the 8 FPU registers, ST(0) through ST(7), must be performed using system memory.  It is not possible to directly copy values from a CPU register to an FPU register.  The FPU can copy data from/to system memory in the following formats: 16-Bit Integer, 32-Bit Integer, 32-Bit Float (single), 64-Bit Float (double), and 80-bit Float (extended double).  The FPU also supports reading and writing a 80-bit Binary Coded Decimal (BCD) format, which contains a single "sign" bit, 7 reserved bits, and 18 four-bit hexadecimal "characters".
+</p><p>When reading values from system memory, the extended double format is copied directly into the FPU register, while the other formats are converted to the 80-Bit extended double format before being stored in the FPU register.  When writing values to system memory, the 80-bit value is copied directly when storing the extended double format, and is converted to the appropriate structure for the other formats.  This conversion includes rounding the value based on the current rounding settings in the FPU Control Register.
+</p>
+<h2> <span class="mw-headline" id="Rent-a-coder"> Rent-a-coder </span></h2>
+<p>These functions can be used with GCC (or TCC) to perform some FPU operations without resorting to dedicated assembly:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> fpu_load_control_word<span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">uint16_t</span> control<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot;fldcw&#160;%0;&quot;</span><span class="sy0">::</span><span class="st0">&quot;m&quot;</span><span class="br0">&#40;</span>control<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.website.masmforum.com/tutorials/fptute/">Simply FPU</a>, a practical guide covering the FPU basics in a userland perspective
+</li><li> <a rel="nofollow" class="external text" href="http://www.ragestorm.net/downloads/387intel.txt">Intel 80387 Programmer's Reference Manual</a>, complete with example code
+</li><li> <a rel="nofollow" class="external text" href="http://developer.amd.com/documentation/guides/pages/default.aspx#manuals">AMD Programmer's Manuals</a>, has FPU instruction reference conveniently ordered by processor component.
+</li><li> <a rel="nofollow" class="external text" href="http://www.intel.com/products/processor/manuals/">Intel 64-bit Manuals</a>, the Intel version of the manuals. More complete, but also more bloated.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 84/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2427-0!*!0!!en!*!* and timestamp 20180121045815 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=FPU&amp;oldid=20884">http://wiki.osdev.org/index.php?title=FPU&amp;oldid=20884</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:X86" title="Category:X86">X86</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=FPU" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="FPU"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:FPU&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="FPU#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="FPU" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=FPU&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=FPU&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="FPU#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/FPU" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/FPU" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=FPU&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=FPU&amp;oldid=20884" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/FPU_(x86)" title="FPU (x86)">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 8 June 2017, at 04:43.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,064 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<lskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/FPU" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/FPU" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=FPU&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=FPU&amp;oldid=20884" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/FPU_(x86)" title="FPU (x86)">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 8 June 2017, at 04:43.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,064 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

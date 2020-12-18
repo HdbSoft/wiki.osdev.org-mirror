@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ARM Integrator-CP IRQTimerAndPIC - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ARM_Integrator-CP_IRQTimerAndPIC", "wgTitle": "ARM Integrator-CP IRQTimerAndPIC", "wgCurRevisionId": 15757, "wgArticleId": 3468, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-text {line-height: normal;}
+.source-text li, .source-text pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for text
+ * CSS class: source-text, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.text.source-text .de1, .text.source-text .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.text.source-text  {font-family:monospace;}
+.text.source-text .imp {font-weight: bold; color: red;}
+.text.source-text li, .text.source-text .li1 {font-weight: normal; vertical-align:top;}
+.text.source-text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.text.source-text .li2 {font-weight: bold; vertical-align:top;}
+.text.source-text .ln-xtra, .text.source-text li.ln-xtra, .text.source-text div.ln-xtra {background-color: #ffc;}
+.text.source-text span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ARM_Integrator-CP_IRQTimerAndPIC action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ARM Integrator-CP IRQTimerAndPIC</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ARM_Integrator-CP_IRQTimerAndPIC#mw-head">navigation</a>,
+					<a href="ARM_Integrator-CP_IRQTimerAndPIC#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="ARM_Integrator-CP_IRQTimerAndPIC#ARM_Integrator-CP_IRQ.2C_Timer.2C_And_PIC"><span class="tocnumber">1</span> <span class="toctext">ARM Integrator-CP IRQ, Timer, And PIC</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="ARM_Integrator-CP_IRQTimerAndPIC#Author"><span class="tocnumber">1.1</span> <span class="toctext">Author</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="ARM_Integrator-CP_IRQTimerAndPIC#Source"><span class="tocnumber">1.2</span> <span class="toctext">Source</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="ARM_Integrator-CP_IRQTimerAndPIC#Linker_Script_.28file:_link.ld.29"><span class="tocnumber">1.3</span> <span class="toctext">Linker Script (file: link.ld)</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="ARM_Integrator-CP_IRQTimerAndPIC#Compile_And_Link"><span class="tocnumber">1.4</span> <span class="toctext">Compile And Link</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="ARM_Integrator-CP_IRQTimerAndPIC#Test"><span class="tocnumber">1.5</span> <span class="toctext">Test</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="ARM_Integrator-CP_IRQTimerAndPIC#Going_Further"><span class="tocnumber">1.6</span> <span class="toctext">Going Further</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="ARM_Integrator-CP_IRQ.2C_Timer.2C_And_PIC"> ARM Integrator-CP IRQ, Timer, And PIC </span></h2>
+<p>This demonstrates initializing the exceptions vector table, timer 0, and the programmable interrupt controller.
+</p>
+<table class="wikitable">
+<tr>
+<th> Tool
+</th></tr>
+<tr>
+<td> GCC
+</td></tr>
+<tr>
+<td> LD
+</td></tr>
+<tr>
+<td> OBJCOPY
+</td></tr></table>
+<p><i>I used GCC 4.4.5 and GCC 4.8.2 targeting the ARM EABI. Also, Binutils 2.23.91.20131118 and 2.20.1.</i>
+</p>
+<h3> <span class="mw-headline" id="Author"> Author </span></h3>
+<p>I <a href="http://wiki.osdev.org/User:Pancakes" title="User:Pancakes">Pancakes</a> wrote this to help jump start you into developing for the ARM using QEMU or even a real piece of hardware. I have wrote software for both emulators and real hardware, but this has only been tested on QEMU so far. Please make any needed changes if you find problems. Also let me know at <a rel="nofollow" class="external text" href="mailto:kmcg3413@gmail.com">kmcg3413@gmail.com</a> if you find this useful, have comments, or suggestions.
+</p><p><i>You might want to double check the exceptions other than FIQ, IRQ, and SWINT because I may not be manipulating the LR register for a correct return if needed.</i>
+</p><p><i>Also keep in mind that on a real board you may be flashing this code directly to FLASH (or ROM) (not RAM) and therefore you will not be able to write to global variables in your code (only read). You can avoid this by (1) not using global variables except only as read only. (2) Set the .bss and .data in the linker script to RAM, but then you will lose any initializers on that data. (3) Write a boot loader that loads this image in ELF (or similar) format. If it was placed in RAM there would be no problem.</i>
+</p><p>QEMU will load an ELF, but I designed this to be used not only with an emulator but also with real hardware. With QEMU you can actually write to your global variables but on real hardware you will not if they reside in FLASH.
+</p><p>Another trick to maintain a global state. Is to designate an area of memory to serve as a header for instance:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define KERNEL_HEAP    0x8000</span>
+<span class="co2">#define KERNEL_HEAPSZ  0x1000</span>
+&#160;
+<span class="kw4">typedef</span> <span class="kw4">struct</span> _KERNEL_STATE <span class="br0">&#123;</span>
+    HEAP        heap<span class="sy0">;</span>
+    <span class="kw4">uint32</span>      variable1<span class="sy0">;</span>
+    <span class="kw4">uint32</span>      variable2<span class="sy0">;</span>
+<span class="br0">&#125;</span> KERNEL_STATE<span class="sy0">;</span>
+&#160;
+KERNEL_STATE      <span class="sy0">*</span>ks<span class="sy0">;</span>
+&#160;
+ks <span class="sy0">=</span> <span class="br0">&#40;</span>KERNEL_STATE<span class="sy0">*</span><span class="br0">&#41;</span>KERNEL_HEAP<span class="sy0">;</span>
+&#160;
+heapInit<span class="br0">&#40;</span><span class="sy0">&amp;</span>ks<span class="sy0">-&gt;</span>heap<span class="br0">&#41;</span><span class="sy0">;</span>
+heapAddBlock<span class="br0">&#40;</span><span class="sy0">&amp;</span>ks<span class="sy0">-&gt;</span>heap<span class="sy0">,</span> KERNEL_HEAP <span class="sy0">+</span> <span class="kw4">sizeof</span><span class="br0">&#40;</span>KERNEL_STATE<span class="br0">&#41;</span><span class="sy0">,</span> KERNEL_HEAPSZ <span class="sy0">-</span> <span class="kw4">sizeof</span><span class="br0">&#40;</span>KERNEL_STATE<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/* load other areas of memory if needed */</span>
+heapAddBlock<span class="br0">&#40;</span><span class="sy0">&amp;</span>ks<span class="sy0">-&gt;</span>heap<span class="sy0">,</span> OTHERAREA<span class="sy0">,</span> OTHERAREASZ<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>This allows you to designate an area of memory as part of your heap, while designating a structure to
+exist at the beginning. Basically, KERNEL_STATE becomes your structure of global variables.
+</p>
+<h3> <span class="mw-headline" id="Source"> Source </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#ifdef B64</span>
+<span class="kw4">typedef</span> <span class="kw4">unsigned</span> <span class="kw4">long</span> <span class="kw4">long</span>  uintptr<span class="sy0">;</span>
+<span class="co2">#else</span>
+<span class="kw4">typedef</span> <span class="kw4">unsigned</span> <span class="kw4">int</span>		uintptr<span class="sy0">;</span>
+<span class="co2">#endif</span>
+<span class="kw4">typedef</span> <span class="kw4">unsigned</span> <span class="kw4">long</span> <span class="kw4">long</span>  <span class="kw4">uint64</span><span class="sy0">;</span>
+<span class="kw4">typedef</span> <span class="kw4">unsigned</span> <span class="kw4">int</span>		<span class="kw4">uint32</span><span class="sy0">;</span>
+<span class="kw4">typedef</span> <span class="kw4">unsigned</span> <span class="kw4">char</span>		<span class="kw4">uint8</span><span class="sy0">;</span>
+<span class="kw4">typedef</span> <span class="kw4">unsigned</span> <span class="kw4">short</span>		<span class="kw4">uint16</span><span class="sy0">;</span>
+&#160;
+<span class="co2">#define ARM4_XRQ_RESET   0x00</span>
+<span class="co2">#define ARM4_XRQ_UNDEF   0x01</span>
+<span class="co2">#define ARM4_XRQ_SWINT   0x02</span>
+<span class="co2">#define ARM4_XRQ_ABRTP   0x03</span>
+<span class="co2">#define ARM4_XRQ_ABRTD   0x04</span>
+<span class="co2">#define ARM4_XRQ_RESV1   0x05</span>
+<span class="co2">#define ARM4_XRQ_IRQ     0x06</span>
+<span class="co2">#define ARM4_XRQ_FIQ     0x07</span>
+&#160;
+<span class="co2">#define CTRL_ENABLE			0x80</span>
+<span class="co2">#define CTRL_MODE_FREE		0x00</span>
+<span class="co2">#define CTRL_MODE_PERIODIC	0x40</span>
+<span class="co2">#define CTRL_INT_ENABLE		(1&lt;&lt;5)</span>
+<span class="co2">#define CTRL_DIV_NONE		0x00</span>
+<span class="co2">#define CTRL_DIV_16			0x04</span>
+<span class="co2">#define CTRL_DIV_256		0x08</span>
+<span class="co2">#define CTRL_SIZE_32		0x02</span>
+<span class="co2">#define CTRL_ONESHOT		0x01</span>
+&#160;
+<span class="co2">#define REG_LOAD		0x00</span>
+<span class="co2">#define REG_VALUE		0x01</span>
+<span class="co2">#define REG_CTRL		0x02</span>
+<span class="co2">#define REG_INTCLR		0x03</span>
+<span class="co2">#define REG_INTSTAT		0x04</span>
+<span class="co2">#define REG_INTMASK		0x05</span>
+<span class="co2">#define REG_BGLOAD		0x06</span>
+&#160;
+<span class="co2">#define PIC_IRQ_STATUS			0x0</span>
+<span class="co2">#define PIC_IRQ_RAWSTAT			0x1</span>
+<span class="co2">#define PIC_IRQ_ENABLESET		0x2</span>
+<span class="co2">#define PIC_IRQ_ENABLECLR		0x3</span>
+<span class="co2">#define PIC_INT_SOFTSET			0x4</span>
+<span class="co2">#define PIC_INT_SOFTCLR			0x5</span>
+&#160;
+<span class="co2">#define PIC_FIQ_STATUS			8</span>
+<span class="co2">#define PIC_FIQ_RAWSTAT			9</span>
+<span class="co2">#define PIC_FIQ_ENABLESET		10</span>
+<span class="co2">#define PIC_FIQ_ENABLECLR		11</span>
+&#160;
+<span class="co2">#define KSTACKSTART 0x2000</span>
+<span class="co2">#define KSTACKEXC   0x4000</span>
+&#160;
+<span class="kw4">void</span> start<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/*
+    This could be non-standard behavior, but as long as this resides at the top of this source and it is the
+    first file used in the linking process (according to alphanumerical ordering) this code will start at the
+    beginning of the .text section.
+*/</span>
+<span class="kw4">void</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>naked<span class="br0">&#41;</span><span class="br0">&#41;</span> entry<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	asm<span class="br0">&#40;</span><span class="st0">&quot;mov sp,&#160;%[ps]&quot;</span> <span class="sy0">:</span> <span class="sy0">:</span> <span class="br0">&#91;</span>ps<span class="br0">&#93;</span><span class="st0">&quot;i&quot;</span> <span class="br0">&#40;</span>KSTACKSTART<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* send to serial output */</span>
+	asm<span class="br0">&#40;</span><span class="st0">&quot;mov r1, #0x16000000&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	asm<span class="br0">&#40;</span><span class="st0">&quot;mov r2, #65&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	asm<span class="br0">&#40;</span><span class="st0">&quot;str r2, [r1]&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* call main kernel function */</span>
+	asm<span class="br0">&#40;</span><span class="st0">&quot;bl	start&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co2">#define KEXP_TOPSWI \
+	uint32			lr; \
+	asm(&quot;mov sp,&#160;%[ps]&quot;&#160;:&#160;: [ps]&quot;i&quot; (KSTACKEXC)); \
+	asm(&quot;push {lr}&quot;); \
+	asm(&quot;push {r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12}&quot;); \
+	asm(&quot;mov&#160;%[ps], lr&quot;&#160;: [ps]&quot;=r&quot; (lr));</span>
+&#160;
+<span class="co2">#define KEXP_TOP3 \
+	uint32			lr; \
+	asm(&quot;mov sp,&#160;%[ps]&quot;&#160;:&#160;: [ps]&quot;i&quot; (KSTACKEXC)); \
+	asm(&quot;sub lr, lr, #4&quot;); \
+	asm(&quot;push {lr}&quot;); \
+	asm(&quot;push {r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12}&quot;); \
+	asm(&quot;mov&#160;%[ps], lr&quot;&#160;: [ps]&quot;=r&quot; (lr));</span>
+&#160;
+<span class="co2">#define KEXP_BOT3 \
+	asm(&quot;pop {r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12}&quot;); \
+	asm(&quot;LDM sp!, {pc}^&quot;)</span>
+&#160;
+<span class="co2">#define SERIAL_BASE 0x16000000</span>
+<span class="co2">#define SERIAL_FLAG_REGISTER 0x18</span>
+<span class="co2">#define SERIAL_BUFFER_FULL (1 &lt;&lt; 5)</span>
+&#160;
+<span class="kw4">void</span> k_serdbg_putc<span class="br0">&#40;</span><span class="kw4">char</span> c<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">while</span> <span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">unsigned</span> <span class="kw4">long</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>SERIAL_BASE <span class="sy0">+</span> SERIAL_FLAG_REGISTER<span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="br0">&#40;</span>SERIAL_BUFFER_FULL<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">unsigned</span> <span class="kw4">long</span><span class="sy0">*</span><span class="br0">&#41;</span>SERIAL_BASE <span class="sy0">=</span> c<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">uint32</span> arm4_cpsrget<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw4">uint32</span>      r<span class="sy0">;</span>
+&#160;
+    asm<span class="br0">&#40;</span><span class="st0">&quot;mrs&#160;%[ps], cpsr&quot;</span> <span class="sy0">:</span> <span class="br0">&#91;</span>ps<span class="br0">&#93;</span><span class="st0">&quot;=r&quot;</span> <span class="br0">&#40;</span>r<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> r<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> arm4_cpsrset<span class="br0">&#40;</span><span class="kw4">uint32</span> r<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    asm<span class="br0">&#40;</span><span class="st0">&quot;msr cpsr,&#160;%[ps]&quot;</span> <span class="sy0">:</span> <span class="sy0">:</span> <span class="br0">&#91;</span>ps<span class="br0">&#93;</span><span class="st0">&quot;r&quot;</span> <span class="br0">&#40;</span>r<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> arm4_xrqenable_fiq<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    arm4_cpsrset<span class="br0">&#40;</span>arm4_cpsrget<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> ~<span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">6</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> arm4_xrqenable_irq<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    arm4_cpsrset<span class="br0">&#40;</span>arm4_cpsrget<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> ~<span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">7</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> k_exphandler<span class="br0">&#40;</span><span class="kw4">uint32</span> lr<span class="sy0">,</span> <span class="kw4">uint32</span> type<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw4">uint32</span>			<span class="sy0">*</span>t0mmio<span class="sy0">;</span>
+	<span class="kw4">uint32</span>			swi<span class="sy0">;</span>
+&#160;
+	k_serdbg_putc<span class="br0">&#40;</span><span class="st0">'H'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+	<span class="coMULTI">/*      clear interrupt in timer HW so it will lower its line to the PIC
+                and therefore allow the PIC to lower its line to the CPU
+&#160;
+		if you do not clear it, an interrupt will
+		be immediantly raised apon return from this
+		interrupt
+	*/</span>
+	t0mmio <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint32</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x13000000</span><span class="sy0">;</span>
+&#160;
+	t0mmio<span class="br0">&#91;</span>REG_INTCLR<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+&#160;
+	<span class="coMULTI">/*
+		Get SWI argument (index).
+	*/</span>
+	<span class="kw1">if</span> <span class="br0">&#40;</span>type <span class="sy0">==</span> ARM4_XRQ_SWINT<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+		swi <span class="sy0">=</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">uint32</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#40;</span>uintptr<span class="br0">&#41;</span>lr <span class="sy0">-</span> <span class="nu0">4</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">&amp;</span> <span class="nu12">0xffff</span><span class="sy0">;</span>
+&#160;
+		<span class="kw1">if</span> <span class="br0">&#40;</span>swi <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+			k_serdbg_putc<span class="br0">&#40;</span><span class="st0">'@'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		<span class="br0">&#125;</span>
+	<span class="br0">&#125;</span>
+&#160;
+	<span class="kw1">if</span> <span class="br0">&#40;</span>type <span class="sy0">!=</span> ARM4_XRQ_IRQ <span class="sy0">&amp;&amp;</span> type <span class="sy0">!=</span> ARM4_XRQ_FIQ <span class="sy0">&amp;&amp;</span> type <span class="sy0">!=</span> ARM4_XRQ_SWINT<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+		<span class="coMULTI">/*
+			Ensure, the exception return code is correctly handling LR with the
+			correct offset. I am using the same return for everything except SWI, 
+			which requires that LR not be offset before return.
+		*/</span>
+		k_serdbg_putc<span class="br0">&#40;</span><span class="st0">'!'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		<span class="kw1">for</span><span class="br0">&#40;</span><span class="sy0">;;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+&#160;
+	<span class="kw1">return</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>naked<span class="br0">&#41;</span><span class="br0">&#41;</span> k_exphandler_irq_entry<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> KEXP_TOP3<span class="sy0">;</span> k_exphandler<span class="br0">&#40;</span>lr<span class="sy0">,</span> ARM4_XRQ_IRQ<span class="br0">&#41;</span><span class="sy0">;</span> KEXP_BOT3<span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="kw4">void</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>naked<span class="br0">&#41;</span><span class="br0">&#41;</span> k_exphandler_fiq_entry<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> KEXP_TOP3<span class="sy0">;</span>  k_exphandler<span class="br0">&#40;</span>lr<span class="sy0">,</span> ARM4_XRQ_FIQ<span class="br0">&#41;</span><span class="sy0">;</span> KEXP_BOT3<span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="kw4">void</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>naked<span class="br0">&#41;</span><span class="br0">&#41;</span> k_exphandler_reset_entry<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> KEXP_TOP3<span class="sy0">;</span> k_exphandler<span class="br0">&#40;</span>lr<span class="sy0">,</span> ARM4_XRQ_RESET<span class="br0">&#41;</span><span class="sy0">;</span> KEXP_BOT3<span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="kw4">void</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>naked<span class="br0">&#41;</span><span class="br0">&#41;</span> k_exphandler_undef_entry<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> KEXP_TOP3<span class="sy0">;</span> k_exphandler<span class="br0">&#40;</span>lr<span class="sy0">,</span> ARM4_XRQ_UNDEF<span class="br0">&#41;</span><span class="sy0">;</span> KEXP_BOT3<span class="sy0">;</span> <span class="br0">&#125;</span>	
+<span class="kw4">void</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>naked<span class="br0">&#41;</span><span class="br0">&#41;</span> k_exphandler_abrtp_entry<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> KEXP_TOP3<span class="sy0">;</span> k_exphandler<span class="br0">&#40;</span>lr<span class="sy0">,</span> ARM4_XRQ_ABRTP<span class="br0">&#41;</span><span class="sy0">;</span> KEXP_BOT3<span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="kw4">void</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>naked<span class="br0">&#41;</span><span class="br0">&#41;</span> k_exphandler_abrtd_entry<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> KEXP_TOP3<span class="sy0">;</span> k_exphandler<span class="br0">&#40;</span>lr<span class="sy0">,</span> ARM4_XRQ_ABRTD<span class="br0">&#41;</span><span class="sy0">;</span> KEXP_BOT3<span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="kw4">void</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>naked<span class="br0">&#41;</span><span class="br0">&#41;</span> k_exphandler_swi_entry<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> KEXP_TOPSWI<span class="sy0">;</span>   k_exphandler<span class="br0">&#40;</span>lr<span class="sy0">,</span> ARM4_XRQ_SWINT<span class="br0">&#41;</span><span class="sy0">;</span> KEXP_BOT3<span class="sy0">;</span> <span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> arm4_xrqinstall<span class="br0">&#40;</span><span class="kw4">uint32</span> ndx<span class="sy0">,</span> <span class="kw4">void</span> <span class="sy0">*</span>addr<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw4">char</span> buf<span class="br0">&#91;</span><span class="nu0">32</span><span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw4">uint32</span>      <span class="sy0">*</span>v<span class="sy0">;</span>
+&#160;
+    v <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint32</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x0</span><span class="sy0">;</span>
+	v<span class="br0">&#91;</span>ndx<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu12">0xEA000000</span> <span class="sy0">|</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="br0">&#40;</span>uintptr<span class="br0">&#41;</span>addr <span class="sy0">-</span> <span class="br0">&#40;</span><span class="nu0">8</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">4</span> <span class="sy0">*</span> ndx<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&gt;&gt;</span> <span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> start<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw4">uint32</span>		<span class="sy0">*</span>t0mmio<span class="sy0">;</span>
+	<span class="kw4">uint32</span>		<span class="sy0">*</span>picmmio<span class="sy0">;</span>
+&#160;
+	arm4_xrqinstall<span class="br0">&#40;</span>ARM4_XRQ_RESET<span class="sy0">,</span> <span class="sy0">&amp;</span>k_exphandler_reset_entry<span class="br0">&#41;</span><span class="sy0">;</span>
+	arm4_xrqinstall<span class="br0">&#40;</span>ARM4_XRQ_UNDEF<span class="sy0">,</span> <span class="sy0">&amp;</span>k_exphandler_undef_entry<span class="br0">&#41;</span><span class="sy0">;</span>
+	arm4_xrqinstall<span class="br0">&#40;</span>ARM4_XRQ_SWINT<span class="sy0">,</span> <span class="sy0">&amp;</span>k_exphandler_swi_entry<span class="br0">&#41;</span><span class="sy0">;</span>
+	arm4_xrqinstall<span class="br0">&#40;</span>ARM4_XRQ_ABRTP<span class="sy0">,</span> <span class="sy0">&amp;</span>k_exphandler_abrtp_entry<span class="br0">&#41;</span><span class="sy0">;</span>
+	arm4_xrqinstall<span class="br0">&#40;</span>ARM4_XRQ_ABRTD<span class="sy0">,</span> <span class="sy0">&amp;</span>k_exphandler_abrtd_entry<span class="br0">&#41;</span><span class="sy0">;</span>
+	arm4_xrqinstall<span class="br0">&#40;</span>ARM4_XRQ_IRQ<span class="sy0">,</span> <span class="sy0">&amp;</span>k_exphandler_irq_entry<span class="br0">&#41;</span><span class="sy0">;</span>
+	arm4_xrqinstall<span class="br0">&#40;</span>ARM4_XRQ_FIQ<span class="sy0">,</span> <span class="sy0">&amp;</span>k_exphandler_fiq_entry<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+	k_serdbg_putc<span class="br0">&#40;</span><span class="st0">'Z'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+	asm<span class="br0">&#40;</span><span class="st0">&quot;swi #4&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+	<span class="coMULTI">/* enable IRQ */</span>
+	arm4_cpsrset<span class="br0">&#40;</span>arm4_cpsrget<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> ~<span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">7</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+	<span class="coMULTI">/* initialize timer and PIC 
+&#160;
+		The timer interrupt line connects to the PIC. You can make
+		the timer interrupt an IRQ or FIQ just by enabling the bit
+		needed in either the IRQ or FIQ registers. Here I use the
+		IRQ register. If you enable both IRQ and FIQ then FIQ will
+		take priority and be used.
+	*/</span>
+	picmmio <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint32</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x14000000</span><span class="sy0">;</span>
+	picmmio<span class="br0">&#91;</span>PIC_IRQ_ENABLESET<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">&lt;&lt;</span><span class="nu0">5</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">&lt;&lt;</span><span class="nu0">6</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">&lt;&lt;</span><span class="nu0">7</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+	<span class="coMULTI">/*
+		See datasheet for timer initialization details.
+	*/</span>
+	t0mmio <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint32</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x13000000</span><span class="sy0">;</span>
+	t0mmio<span class="br0">&#91;</span>REG_LOAD<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu12">0xffffff</span><span class="sy0">;</span>
+	t0mmio<span class="br0">&#91;</span>REG_BGLOAD<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu12">0xffffff</span><span class="sy0">;</span>			
+	t0mmio<span class="br0">&#91;</span>REG_CTRL<span class="br0">&#93;</span> <span class="sy0">=</span> CTRL_ENABLE <span class="sy0">|</span> CTRL_MODE_PERIODIC <span class="sy0">|</span> CTRL_SIZE_32 <span class="sy0">|</span> CTRL_DIV_NONE <span class="sy0">|</span> CTRL_INT_ENABLE<span class="sy0">;</span>
+	t0mmio<span class="br0">&#91;</span>REG_INTCLR<span class="br0">&#93;</span> <span class="sy0">=</span> ~<span class="nu0">0</span><span class="sy0">;</span>		<span class="coMULTI">/* make sure interrupt is clear (might not be mandatory) */</span>
+&#160;
+	k_serdbg_putc<span class="br0">&#40;</span><span class="st0">'K'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	k_serdbg_putc<span class="br0">&#40;</span><span class="st0">'<span class="es1">\n</span>'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* infinite loop */</span>
+	<span class="kw1">for</span><span class="br0">&#40;</span><span class="sy0">;;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Linker_Script_.28file:_link.ld.29"> Linker Script (file: link.ld) </span></h3>
+<p>This is saved in a file named <i>link.ld</i> which is referenced by the linker. QEMU loads the image to 0x10000, but on a real piece of hardware it might be different. This load position by QEMU may have something to do with the integrator-cp board, but I am not sure. Most ARM code is actually position independent code because the branch instructions do not address 32-bits and this is because of the 32-bit size of all instructions in ARM mode. But, when your code references symbols in the other sections it will use absolute addressing. It is possible in theory for GCC to emit position independent data references but I have found no standard option. I have heard of patches that add this ability to GCC, but just keep this in mind. I also yank out the text section in the build scripts below to make a flat binary and this is why I place everything into the text section.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">ENTRY (entry)
+&#160;
+SECTIONS
+{	
+    . = 0x10000;
+    _BOI = .;
+    .text&#160;: { *(.text*) *(.rodata*) *(.data*) *(.bss*)}
+    _EOI = .;
+}</pre></div></div>
+<h3> <span class="mw-headline" id="Compile_And_Link"> Compile And Link </span></h3>
+<p>VERY IMPORTANT - I do not include linking with <i>LIBGCC</i> in this example because I know some of you may not be using a proper cross-compiler setup. BUT, you SHOULD link against <i>LIBGCC</i> because it is part of the GCC compiler. See <a href="ARM_Overview#Missing_Division_Functions_.28_aeabi_uidivmod.2C_aeabi_idiv.29_.2F_No_Division_Support" title="ARM Overview">ARM Overview (Missing Division Functions / LIBGCC)</a> and also <a href="Libgcc" title="Libgcc">Libgcc</a>.
+</p><p><i>I only left it out because I would rather wet your appetite instead of run you away with this being difficult to compile or link.</i>
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">arm-eabi-gcc <span class="re5">-s</span> -I.<span class="sy0">/</span>inc <span class="re5">-nostdlib</span> <span class="re5">-nostartfiles</span> <span class="re5">-ffreestanding</span> <span class="re5">-std</span>=gnu99 <span class="re5">-c</span> <span class="sy0">*</span>.c
+arm-eabi-ld <span class="re5">-T</span> link.ld <span class="re5">-o</span> __arm.bin <span class="sy0">*</span>.o
+arm-eabi-objcopy <span class="re5">-j</span> .text <span class="re5">-O</span> binary __arm.bin arm.bin</pre></div></div>
+<h3> <span class="mw-headline" id="Test"> Test </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">qemu-system-arm <span class="re5">-m</span> <span class="nu0">8</span> <span class="re5">-kernel</span> arm.bin <span class="re5">-serial</span> stdio</pre></div></div>
+<h3> <span class="mw-headline" id="Going_Further"> Going Further </span></h3>
+<p>I would take a good look at all the parts of this demonstration and ensure you understand what each part does. I would recommend you pay careful attention to the exception entry and exit routines and make sure that you understand each instruction and how it works. This will save you a headache later on when things
+are not acting quite right. But, here are some links to continue with. These are <i>not</i> the only links, but are just a few that I thought would be quite helpful.
+</p>
+<table class="wikitable">
+<tr>
+<th> Page
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> <a href="Heap" title="Heap">Heap</a>
+</td>
+<td> Information about implementing heap
+</td></tr>
+<tr>
+<td> <a href="Memory_management" title="Memory management">Memory Management</a>
+</td>
+<td> Information about higher level memory management
+</td></tr>
+<tr>
+<td> <a href="ARM_Overview" title="ARM Overview">ARM Overview</a>
+</td>
+<td> See more tutorials and starting points for other things.
+</td></tr>
+<tr>
+<td> <a rel="nofollow" class="external text" href="http://infocenter.arm.com/help/topic/com.arm.doc.dui0159b/DUI0159B_integratorcp_1_0_ug.pdf">Integrator Datasheet</a>
+</td>
+<td> Datasheet for the Integrator
+</td></tr>
+<tr>
+<td> <a href="ARM_Integrator-CP_IRQTimerAndPICAndTaskSwitch" title="ARM Integrator-CP IRQTimerAndPICAndTaskSwitch">IRQ, Timer, PIC, And Task Switch</a>
+</td>
+<td> This page is a continuation of the above source code. It adds in a very simple task switch.
+</td></tr></table>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 85/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3468-0!*!0!!en!*!* and timestamp 20180121080107 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_IRQTimerAndPIC&amp;oldid=15757">http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_IRQTimerAndPIC&amp;oldid=15757</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ARM_Integrator-CP_IRQTimerAndPIC" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ARM_Integrator-CP_IRQTimerAndPIC"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:ARM_Integrator-CP_IRQTimerAndPIC&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ARM_Integrator-CP_IRQTimerAndPIC#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ARM_Integrator-CP_IRQTimerAndPIC" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_IRQTimerAndPIC&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_IRQTimerAndPIC&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ARM_Integrator-CP_IRQTimerAndPIC#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/ARM_Integrator-CP_IRQTimerAndPIC" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/ARM_Integrator-CP_IRQTimerAndPIC" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=ARM_Integrator-CP_IRQTimerAndPIC&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=ARM_Integrator-CP_IRQTimerAndPIC&amp;oldid=15757" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 March 2014, at 16:44.</li>
+											<li id="footer-info-viewcount">This page has been accessed 5,483 times.</li>
+									</ul>
+							<ulskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ARM_Integrator-CP_IRQTimerAndPIC" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ARM_Integrator-CP_IRQTimerAndPIC" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_IRQTimerAndPIC&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ARM_Integrator-CP_IRQTimerAndPIC&amp;oldid=15757" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 March 2014, at 16:44.</li>
+											<li id="footer-info-viewcount">This page has been accessed 5,483 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.149 secs. -->
+	</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Sound - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Sound", "wgTitle": "Sound", "wgCurRevisionId": 10683, "wgArticleId": 2238, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "Sound"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Sound action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Sound</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Sound#mw-head">navigation</a>,
+					<a href="Sound#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center><div class="thumb tright"><div class="thumbinner" style="width:242px;"><a href="File:Old_Sound_Card.jpg" class="image"><img alt="" src="images/c/c6/Old_Sound_Card.jpg" width="240" height="180" class="thumbimage" /></a>  <div class="thumbcaption">An example of an older-style PCI sound card</div></div></div>
+<p>Sound is never noticed by users, until it isn't there. It forms an integral part of the user feedback experience. For example, the beeps produced by Windows Explorer, KDE and other desktop environments when users click on the wrong thing. It is also becoming a far more dominant part of the gaming and multimedia experience; with many games and movies now featuring 5.1 channel soundtracks. As such, it is becoming more important for hobby operating systems to support sound playback, at the very least.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Sound#A_Short_History_of_PC_Sound"><span class="tocnumber">1</span> <span class="toctext">A Short History of PC Sound</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Sound#Programming_for_Sound"><span class="tocnumber">2</span> <span class="toctext">Programming for Sound</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Sound#The_Sound_Architecture"><span class="tocnumber">2.1</span> <span class="toctext">The Sound Architecture</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="Sound#The_Simple_Approach"><span class="tocnumber">2.1.1</span> <span class="toctext">The Simple Approach</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="Sound#The_Ring.2FHub_Approach"><span class="tocnumber">2.1.2</span> <span class="toctext">The Ring/Hub Approach</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="Sound#Resources"><span class="tocnumber">3</span> <span class="toctext">Resources</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="A_Short_History_of_PC_Sound">A Short History of PC Sound</span></h2>
+<p>The original sound device on PCs was the <a href="PC_Speaker" title="PC Speaker">PC Speaker</a>, available as far back as the IBM PC (introduced in 1981). In the late 1980s several manufacturers started producing add-in sound devices, notably Creative (the Game Blaster) and AdLib (the AdLib Music Synthesizer Card). Of these, Creative was far more successful, and the <a href="Sound_Blaster_16" title="Sound Blaster 16">Sound Blaster 16</a> became a de-facto standard for more than half a decade. Almost all cards today still have some backwards compatibility with the Sound Blaster 16.
+</p><p>In 1997 Intel specified a new standard, <a href="AC97" title="AC97">AC97</a> (short for <i>Audio Codec 1997</i>), that virtually replaced the Sound Blaster standard by specifying higher quality sampling. In 2004 Intel produced yet another standard, this time the <a href="Intel_High_Definition_Audio" title="Intel High Definition Audio">Intel High Definition Audio</a> standard (codenamed <i>Azalia</i>), which specifies yet another improvement on previous standards' audio quality.
+</p><p>Sound cards and standards for the professional (and audiophile) markets have evolved separately from the mainstream cards. The important feature in these cards is not fancy features, but very low latency (&lt;5ms) and high quality sampling (24 bit sampling at 96KHz not being uncommon). <a href="http://wiki.osdev.org/index.php?title=MIDI&amp;action=edit&amp;redlink=1" class="new" title="MIDI (page does not exist)">MIDI</a> is an important part of professional audio today, and has been since the early 1990s. Cards can be from 2 channels through to 32 and more.
+</p>
+<h2> <span class="mw-headline" id="Programming_for_Sound">Programming for Sound</span></h2>
+<p>Programming sound support into your operating system is not simply a case of writing a driver for a fairly generic card (such as the <a href="Sound_Blaster_16" title="Sound Blaster 16">Sound Blaster 16</a>) and letting your userspace applications deal with it; it is a case of putting together an architecture that will support sound generation, transport (to and from different devices, applications and even computers), mixing, output, and control, all the while retaining low latencies and high quality. In this, there are several key problems:
+</p>
+<ul><li> Your sound transport architecture should be lossless, that is, 32 bit samples should be carried at 32 bits. Carrying these samples at 16 bits (for example) will lead to sound degradation, and is to be avoided.
+</li><li> The same transport mechanism should also provide support for varied sample rates. 44100Hz is the standard for CDs, but DVDs carry sound at a sample rate of 48000Hz. Treating these two as the same will lead to very strange noises being emitted from the speakers. In addition, these will need conversion to a common sample rate before being output.
+</li><li> Two applications <b>will</b> need access to the sound devices simultaneously. For example, notifications from an Instant Messaging program as well as the user's MP3 player. The operating system has the job of mixing these sound streams together and producing an intelligible result. 
+</li><li> Today's audio is not stereo, it can be any number of channels. Simpler applications still use mono sound, while DVD and High definition movies have 5.1 and 7.1 channel sound tracks. Your operating system will need to be able to route sound to any of these channels, and decide where to place mono and stereo sounds in the larger channel set. In addition, <a href="http://wiki.osdev.org/index.php?title=MIDI&amp;action=edit&amp;redlink=1" class="new" title="MIDI (page does not exist)">MIDI</a> audio also needs to be routed correctly to and from devices and applications.
+</li><li> Sound, like gaming graphics, must be completed in real time. Skipping audio caused by random hard disk or CPU usage is <i>very</i> noticeable. Unfortunately, simply increasing buffer size is not always the best solution, as this causes people listening to freshly-recorded audio ('monitoring' in the industry speak) to suffer delays.
+</li></ul>
+<p>Some (but not all) sound cards will have features allowing some of this processing to be done in hardware. Simple mixing and sample processing are the most common things to have dedicated hardware.
+</p><p>Some applications, such as games, will try to use the maximum number of channels possible. Older versions of Windows allowed applications to have 'exclusive' control over the sound hardware for low latency sound with guaranteed channels. However, since Windows Vista all sound (including volume) is software mixed supporting an unlimited number of channels.
+</p><p>Software mixing all sounds has several advantages for very little CPU overhead:
+</p>
+<ul><li> Easier to develop sound card drivers - all they must do is stream a buffer to the device rather than worry about channels, channel effects, channel volume, and what-not.
+</li><li> Provides a consistent environment across hardware - a game will know it will not run out of channels and all channel effects (echo, reverb, etc) will be supported.
+</li></ul>
+<h3> <span class="mw-headline" id="The_Sound_Architecture">The Sound Architecture</span></h3>
+<center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<h4> <span class="mw-headline" id="The_Simple_Approach">The Simple Approach</span></h4>
+<p><a href="File:Really_Simple_Audio_Architecture.png" class="image"><img alt="Really Simple Audio Architecture.png" src="images/9/9a/Really_Simple_Audio_Architecture.png" width="400" height="217" /></a>
+</p><p>This is the simplest of all architectures: a single application dealing with a single device through a single device driver. This would work well with a UNIX-based philosophy: read(), write() and ioctl() all have immediate and obvious effects. The application can read a number of samples from the sound device, process them (perhaps recording them to disk, adding a reverb, etc), and then write the resulting sound samples back out onto the device's speaker port.
+</p>
+<h4> <span class="mw-headline" id="The_Ring.2FHub_Approach">The Ring/Hub Approach</span></h4>
+<p>A more complex example of an audio architecture is based around a ring concept. The ring is responsible for transport of audio signals around the system, and each module plugged on to the ring acts on the signal in some way.
+</p><p>Each application, input or output, mixer, filter, or plugin of some sort could be represented on the ring, and audio travels around being modified by some or all of the other ring modules. This has been successfully implemented in hardware on Creative's line of X-Fi sound cards; see <a rel="nofollow" class="external text" href="http://www.pcper.com/article.php?aid=177&amp;type=expert&amp;pid=2">here</a> for more detail.
+</p><p>In a kernel this need not be implemented strictly as a ring: a hub architecture achieves roughly the same effect in a different manner.
+</p><p><b>ToDo: Describe additional methods, research and flesh out these ones more. See what is being used in today's kernels (information on how ALSA and co work is sketchy without reading the source).</b>
+</p>
+<h2> <span class="mw-headline" id="Resources">Resources</span></h2>
+<ul><li> <a href="http://wikipedia.org/wiki/Digital_audio" class="extiw" title="wikipedia:Digital audio">An overview of digital audio</a>
+</li><li> <a href="http://wikipedia.org/wiki/MIDI" class="extiw" title="wikipedia:MIDI">An overview of MIDI</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.alsa-project.org/">The ALSA project</a> has documentation that may be useful in designing a sound system, as well as GPLed drivers for many different sound cards.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 54/1000000
+Post-expand include size: 694/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2238-0!*!0!!en!2!* and timestamp 20180121032137 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Sound&amp;oldid=10683">http://wiki.osdev.org/index.php?title=Sound&amp;oldid=10683</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:Sound" title="Category:Sound">Sound</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Sound" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Sound"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Sound&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Sound#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Sound" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Sound&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Sound&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Sound#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Sound" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Sound" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Sound&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Sound&amp;oldid=10683" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 6 September 2010, at 10:00.</li>
+											<li id="footer-info-viewcount">This page has been accessed 42,990 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+			skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Sound" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Sound" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Sound&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Sound&amp;oldid=10683" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 6 September 2010, at 10:00.</li>
+											<li id="footer-info-viewcount">This page has been accessed 42,990 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.034 secs. -->
+	</body>
+</html>

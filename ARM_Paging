@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ARM Paging - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ARM_Paging", "wgTitle": "ARM Paging", "wgCurRevisionId": 21813, "wgArticleId": 4221, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "ARM", "Memory management"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ARM_Paging action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ARM Paging</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ARM_Paging#mw-head">navigation</a>,
+					<a href="ARM_Paging#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="ARM_Paging#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="ARM_Paging#ARMv7-A"><span class="tocnumber">2</span> <span class="toctext">ARMv7-A</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="ARM_Paging#Overview"><span class="tocnumber">2.1</span> <span class="toctext">Overview</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="ARM_Paging#Short_Format"><span class="tocnumber">2.1.1</span> <span class="toctext">Short Format</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="ARM_Paging#Long_Format"><span class="tocnumber">2.1.2</span> <span class="toctext">Long Format</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-6"><a href="ARM_Paging#Control_Registers"><span class="tocnumber">2.2</span> <span class="toctext">Control Registers</span></a>
+<ul>
+<li class="toclevel-3 tocsection-7"><a href="ARM_Paging#TTBCR"><span class="tocnumber">2.2.1</span> <span class="toctext">TTBCR</span></a>
+<ul>
+<li class="toclevel-4 tocsection-8"><a href="ARM_Paging#Accessing_the_TTBCR"><span class="tocnumber">2.2.1.1</span> <span class="toctext">Accessing the TTBCR</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-9"><a href="ARM_Paging#TTBR0"><span class="tocnumber">2.2.2</span> <span class="toctext">TTBR0</span></a>
+<ul>
+<li class="toclevel-4 tocsection-10"><a href="ARM_Paging#EAE.3D0"><span class="tocnumber">2.2.2.1</span> <span class="toctext">EAE=0</span></a></li>
+<li class="toclevel-4 tocsection-11"><a href="ARM_Paging#EAE_.3D_1"><span class="tocnumber">2.2.2.2</span> <span class="toctext">EAE = 1</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-12"><a href="ARM_Paging#TTBR1"><span class="tocnumber">2.2.3</span> <span class="toctext">TTBR1</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="ARM_Paging#Accessing_the_TTBRx_register"><span class="tocnumber">2.2.4</span> <span class="toctext">Accessing the TTBRx register</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-14"><a href="ARM_Paging#Page_Tables"><span class="tocnumber">2.3</span> <span class="toctext">Page Tables</span></a>
+<ul>
+<li class="toclevel-3 tocsection-15"><a href="ARM_Paging#Short_Descriptor:_Level_1"><span class="tocnumber">2.3.1</span> <span class="toctext">Short Descriptor: Level 1</span></a></li>
+<li class="toclevel-3 tocsection-16"><a href="ARM_Paging#Short_Descriptor:_Level_2"><span class="tocnumber">2.3.2</span> <span class="toctext">Short Descriptor: Level 2</span></a></li>
+<li class="toclevel-3 tocsection-17"><a href="ARM_Paging#Long_Descriptor:_Level_1.2F2"><span class="tocnumber">2.3.3</span> <span class="toctext">Long Descriptor: Level 1/2</span></a></li>
+<li class="toclevel-3 tocsection-18"><a href="ARM_Paging#Long_Descriptor:_Level_3"><span class="tocnumber">2.3.4</span> <span class="toctext">Long Descriptor: Level 3</span></a>
+<ul>
+<li class="toclevel-4 tocsection-19"><a href="ARM_Paging#Stage_1_Attributes"><span class="tocnumber">2.3.4.1</span> <span class="toctext">Stage 1 Attributes</span></a></li>
+<li class="toclevel-4 tocsection-20"><a href="ARM_Paging#Stage_2_Attributes"><span class="tocnumber">2.3.4.2</span> <span class="toctext">Stage 2 Attributes</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-21"><a href="ARM_Paging#Choice_Between_TTBR0_and_TTBR1"><span class="tocnumber">2.4</span> <span class="toctext">Choice Between TTBR0 and TTBR1</span></a>
+<ul>
+<li class="toclevel-3 tocsection-22"><a href="ARM_Paging#Short_format_2"><span class="tocnumber">2.4.1</span> <span class="toctext">Short format</span></a></li>
+<li class="toclevel-3 tocsection-23"><a href="ARM_Paging#Long_format_2"><span class="tocnumber">2.4.2</span> <span class="toctext">Long format</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-24"><a href="ARM_Paging#Recursive_Table_Mapping"><span class="tocnumber">2.5</span> <span class="toctext">Recursive Table Mapping</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-25"><a href="ARM_Paging#External_References"><span class="tocnumber">3</span> <span class="toctext">External References</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>ARM CPUs are used in smaller applications than x86 CPUs, although the line is blurring. Due to the number of different ARM architectures, details of which can differ significantly, this page is aimed at ARMv7-A and ARMv8. ARMv7-M does not have the same concept of virtual memory - it does not have an MMU. The author understands that paging on ARMv5 and ARMv6 is similar to ARMv7, but ARMv4 is somewhat different.
+</p>
+<h2> <span class="mw-headline" id="ARMv7-A"> ARMv7-A </span></h2>
+<p>ARMv7-A supports two different paging modes. These are the short descriptor format and long descriptor format described in B3.5 and B3.6 respectively of the ARMv7 reference manual.
+The long descriptor format is an ARM equivalent of the X86 <a href="PAE" title="PAE" class="mw-redirect">PAE</a> system. However, even the short descriptor format allows access to a 1TB physical address space, but only with a 16MB granularity. As is described in the ARM:
+</p>
+<h3> <span class="mw-headline" id="Overview"> Overview </span></h3>
+<p>Detecting paging support is done by consulting the "coprocessor" registers. It is represented in ID_MMFR0
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">mcr p15<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> c0<span class="sy0">,</span> c1<span class="sy0">,</span> <span class="nu0">4</span></pre></div></div>
+<p>The structure of the register is as follows:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 31-28
+</th>
+<th> 27-24
+</th>
+<th> 23-20
+</th>
+<th> 19-16
+</th>
+<th> 15-12
+</th>
+<th> 11-8
+</th>
+<th> 7-4
+</th>
+<th> 3-0
+</th></tr>
+<tr>
+<td> Innermost Shareability
+</td>
+<td> FCSE Support
+</td>
+<td> Auxillary Registers
+</td>
+<td> TCM Support
+</td>
+<td> Shareability levels
+</td>
+<td> Outermost Shareability
+</td>
+<td> PMSA Support
+</td>
+<td> VMSA Support
+</td></tr></table>
+<ul><li> VMSA support - the gold.
+<ul><li> 0b0000 - not supported (no paging)
+</li><li> 0b0001 - implementation defined. Weird MMU somewhere
+</li><li> 0b0010 - VMSAv6, with cache and TLB type registers. ARMv6 paging.
+</li><li> 0b0011 - VMSAv7, with support for remapping and access flag. ARMv7-A, as described in the following section.
+</li><li> 0b0100 - VMSAv7 with PXN bit supported.
+</li><li> 0b0101 - VMSAv7, PXN and long format descriptors. EPAE is supported.
+</li></ul>
+</li></ul>
+<h4> <span class="mw-headline" id="Short_Format"> Short Format </span></h4>
+<ul><li> Up to two levels of address lookup
+</li><li> 32 bit input addresses
+</li><li> Output addresses up to 40 bits
+</li><li> Supports &gt;32 bit Physical Addresses with supersections
+</li><li> Support for No access, Client and Manager domains
+</li><li> 32 bit table entries
+</li></ul>
+<h4> <span class="mw-headline" id="Long_Format"> Long Format </span></h4>
+<ul><li> Up to three levels of address lookup
+</li><li> Input addresses of up to 40 bits, when used for stage 2 translations
+</li><li> Output addresses of up to 40 bits
+</li><li> 4KB assignment granularity across the entire PA range
+</li><li> No support for domains, all memory regions are treated as in a Client domain
+</li><li> 64-bit table entries
+</li><li> Fixed 4KB table size, unless truncated by the size of the input address space
+</li></ul>
+<p>Note that the Large Physicsl Address Extension is an optional feature. Furthermore, if an implementation supports LPAE, it also supports the ARM multiprocessing extensions.
+The paging mode is controlled with the TTBCR (Translation Table Base Control Register).
+</p>
+<h3> <span class="mw-headline" id="Control_Registers"> Control Registers </span></h3>
+<h4> <span class="mw-headline" id="TTBCR"> TTBCR </span></h4>
+<table class="wikitable">
+
+<tr>
+<th> 31
+</th>
+<th> 30
+</th>
+<th> 29-28
+</th>
+<th> 27-26
+</th>
+<th> 25-24
+</th>
+<th> 23
+</th>
+<th> 22
+</th>
+<th> 21-19
+</th>
+<th> 18-16
+</th>
+<th> 15-14
+</th>
+<th> 13-12
+</th>
+<th> 11-10
+</th>
+<th> 9-8
+</th>
+<th> 7
+</th>
+<th> 6
+</th>
+<th> 5
+</th>
+<th> 4
+</th>
+<th> 3
+</th>
+<th> 2-0
+</th></tr>
+<tr>
+<td> EAE
+</td>
+<td> IDF
+</td>
+<td> SH1
+</td>
+<td> ORGN1
+</td>
+<td> IRGN1
+</td>
+<td> EPD1
+</td>
+<td> A1
+</td>
+<td> SBZP
+</td>
+<td> T1SZ
+</td>
+<td> SBZP
+</td>
+<td> SH0
+</td>
+<td> ORGN0
+</td>
+<td> IRGN0
+</td>
+<td> EPD0
+</td>
+<td> SBZP
+</td>
+<td> PD1
+</td>
+<td> PD0
+</td>
+<td> SBZP
+</td>
+<td> T0SZ
+</td></tr></table>
+<ul><li> EAE - Extended Address Enable. SBZP if LPAE is not supported
+</li></ul>
+<p><b>Following fields are SBZP if EAE=0</b>
+</p>
+<ul><li> IDF - Implementation Defined
+</li><li> SH1 - Shareability attribute for memory associated with translation table walks using TTBR1.
+</li></ul>
+<table class="wikitable">
+
+<tr>
+<th> 00
+</th>
+<th> 01
+</th>
+<th> 10
+</th>
+<th> 11
+</th></tr>
+<tr>
+<td> non-shareable
+</td>
+<td> unpredictable
+</td>
+<td> outer shareable
+</td>
+<td> inner shareable
+</td></tr></table>
+<ul><li> ORGN1 - Outer cacheability using TTBR1
+</li></ul>
+<table class="wikitable">
+
+<tr>
+<th> 00
+</th>
+<th> 01
+</th>
+<th> 10
+</th>
+<th> 11
+</th></tr>
+<tr>
+<td> outer non-cacheable
+</td>
+<td> outer write-back write-allocate cacheable
+</td>
+<td> outer write-through cacheable
+</td>
+<td> outer write-back no write-allocate cacheable
+</td></tr></table>
+<ul><li> IRGN1 - Inner cacheablility using TTBR1
+</li></ul>
+<table class="wikitable">
+
+<tr>
+<th> 00
+</th>
+<th> 01
+</th>
+<th> 10
+</th>
+<th> 11
+</th></tr>
+<tr>
+<td> inner non-cacheable
+</td>
+<td> inner write-back write-allocate cacheable
+</td>
+<td> inner write-through cacheable
+</td>
+<td> inner write-back no write-allocate cacheable
+</td></tr></table>
+<ul><li> EPD1 - Disable Page walks with TTBR1. If 0, table walks are performed. Otherwise, a translation fault is generated.
+</li><li> A1 - defines whether TTBR0 or TTBR1 defines the ASID, for 0 and 1 respectively. The ASID is the Address Space Identifier.
+</li><li> SBZP - Should Be Zero or Preserved. This is more commonly called RES0.
+</li><li> T1SZ - The size of the memory region addressed by TTBR1. 2^(32-T1SZ) is the size.
+</li><li> SH0 - like SH1, but for TTBR0.
+</li><li> ORGN0 - ""
+</li><li> IRGN0 - ""
+</li><li> EPD0 - ""
+</li></ul>
+<p><b>The following fields only apply when EAE is 0</b>
+</p>
+<ul><li> PD1 - like EPD1.
+</li><li> PD0 - like EPD0.
+</li></ul>
+<p><b>This field can take different meanings</b>
+</p>
+<ul><li> T0SZ - like T1SZ. If EAE=0, this is field N.
+</li><li> N - Indicated the width of the base address in TTBR0. The base address is bits [31:14-N]. If N=0, the format is compatible with ARMv5 and ARMv6. This field also determines whether TTBR0 or TTBR1 is used for the page walk.
+</li></ul>
+<h5> <span class="mw-headline" id="Accessing_the_TTBCR"> Accessing the TTBCR </span></h5>
+<p>To access TTBCR, software reads or writes the CP15 registers with &lt;opc1&gt; set to 0, &lt;CRn&gt; set to c2, &lt;CRm&gt; set to c0,
+and &lt;opc2&gt; set to 2. For example:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">MRC p15<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> c2<span class="sy0">,</span> c0<span class="sy0">,</span> <span class="nu0">2</span> <span class="co1">; Read TTBCR into Rt</span>
+MCR p15<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> c2<span class="sy0">,</span> c0<span class="sy0">,</span> <span class="nu0">2</span> <span class="co1">; Write RT to TTBCR</span></pre></div></div>
+<p>(ARMv7-A ARM, Section B4.1, page 1728)<br />
+Here RT denotes a register of your choice.
+</p>
+<h4> <span class="mw-headline" id="TTBR0"> TTBR0 </span></h4>
+<h5> <span class="mw-headline" id="EAE.3D0"> EAE=0 </span></h5>
+<table class="wikitable">
+
+<tr>
+<th> 31-x
+</th>
+<th>(x-1)-7
+</th>
+<th> 6
+</th>
+<th> 5
+</th>
+<th> 4-3
+</th>
+<th> 2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> TTB0A
+</td>
+<td> SBZP
+</td>
+<td> IRGN[0]
+</td>
+<td> NOS
+</td>
+<td> RGN
+</td>
+<td> IMP
+</td>
+<td> S
+</td>
+<td> C/IRGN[1]
+</td></tr></table>
+<ul><li>TTB0A - Bits [31:x] of the TTB0 table base address. Must be 2^x aligned, as determined in the TTBCR.
+</li><li> IRGN[0] - SBZP if Multiprocessor extensions are not present. Otherwise, bit zero of IRGN
+</li><li> NOS - Not Outer Shareable. If 1, region is only inner shareable. Ignored when TTBR0.S == 0, SBZP if no distinction between outer or inner shareable.
+</li><li> RGN - region bits. Outer cacheability attributes, see TTBCR.ORGN0.
+</li><li> IMP - Implementation Defined
+</li><li> S - Shareable. 0 - non-shareable, 1 - shareable.
+</li><li> C - Cacheable. 0 - inner non-cacheable, 1 - inner cacheable. If Multiprocessor extensions are present, this is bit 1 of IRGN
+</li><li> IRGN - inner region attributes. See TTBCR.IRGN0
+</li></ul>
+<h5> <span class="mw-headline" id="EAE_.3D_1"> EAE = 1 </span></h5>
+<table class="wikitable">
+
+<tr>
+<th> 63-56
+</th>
+<th> 55-48
+</th>
+<th> 47-40
+</th>
+<th> 39-x
+</th>
+<th> (x-1)-0
+</th></tr>
+<tr>
+<td> SBZP
+</td>
+<td> ASID
+</td>
+<td> SBZP
+</td>
+<td> BADDR
+</td>
+<td> SBZP
+</td></tr></table>
+<ul><li> ASID - Address Space Identifier
+</li><li> BADDR - Bits [39:x] of base address of table. Must be 2^x aligned.
+</li></ul>
+<h4> <span class="mw-headline" id="TTBR1"> TTBR1 </span></h4>
+<p>See <a href="ARM_Paging#TTBR0">#TTBR0</a>, except x is fixed to 14 when EAE=0.
+</p>
+<h4> <span class="mw-headline" id="Accessing_the_TTBRx_register"> Accessing the TTBRx register </span></h4>
+<p>To access TTBR0 in an implementation that does not include the Large Physical Address Extension, or bits[31:0]
+of TTBR0 in an implementation that includes the Large Physical Address Extension, software reads or writes the
+CP15 registers with &lt;opc1&gt; set to 0, &lt;CRn&gt; set to c2, &lt;CRm&gt; set to c0, and &lt;opc2&gt; set to 0. For example:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">MRC p15<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> c2<span class="sy0">,</span> c0<span class="sy0">,</span> <span class="nu0">0</span> <span class="co1">; Read 32-bit TTBR0 into Rt</span>
+MCR p15<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> c2<span class="sy0">,</span> c0<span class="sy0">,</span> <span class="nu0">0</span> <span class="co1">; Write Rt to 32-bit TTBR0</span></pre></div></div>
+<p>In an implementation that includes the Large Physical Address Extension, to access all 64 bits of TTBR0, software
+performs a 64-bit read or write of the CP15 registers with &lt;CRm&gt; set to c2 and &lt;opc1&gt; set to 0. For example:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">MRRC p15<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> &lt;Rt2&gt;<span class="sy0">,</span> c2 <span class="co1">; Read 64-bit TTBR0 into Rt (low word) and Rt2 (high word)</span>
+MCRR p15<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> &lt;Rt2&gt;<span class="sy0">,</span> c2 <span class="co1">; Write Rt (low word) and Rt2 (high word) to 64-bit TTBR0</span></pre></div></div>
+<p>In these MRRC and MCRR instructions, Rt holds the least-significant word of TTBR0, and Rt2 holds the most-significant
+word.
+</p><p>To access TTBR1 in an implementation that does not include the Large Physical Address Extension, or bits[31:0]
+of TTBR1 in an implementation that includes the Large Physical Address Extension, software reads or writes the
+CP15 registers with &lt;opc1&gt; set to 0, &lt;CRn&gt; set to c2, &lt;CRm&gt; set to c0, and &lt;opc2&gt; set to 1. For example:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">MRC p15<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> c2<span class="sy0">,</span> c0<span class="sy0">,</span> <span class="nu0">1</span> <span class="co1">; Read 32-bit TTBR1 into Rt</span>
+MCR p15<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> c2<span class="sy0">,</span> c0<span class="sy0">,</span> <span class="nu0">1</span> <span class="co1">; Write Rt to 32-bit TTBR1</span></pre></div></div>
+<p>In an implementation that includes the Large Physical Address Extension, to access all 64 bits of TTBR1, software
+performs a 64-bit read or write of the CP15 registers with &lt;CRm&gt; set to c2 and &lt;opc1&gt; set to 1. For example:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">MRRC p15<span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> &lt;Rt2&gt;<span class="sy0">,</span> c2 <span class="co1">; Read 64-bit TTBR1 into Rt (low word) and Rt2 (high word)</span>
+MCRR p15<span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> &lt;Rt&gt;<span class="sy0">,</span> &lt;Rt2&gt;<span class="sy0">,</span> c2 <span class="co1">; Write Rt (low word) and Rt2 (high word) to 64-bit TTBR1</span></pre></div></div>
+<p>In these MRRC and MCRR instructions, Rt holds the least-significant word of TTBR1, and Rt2 holds the most-significant
+word.
+</p>
+<h3> <span class="mw-headline" id="Page_Tables"> Page Tables </span></h3>
+<p>OK, so now we know how to set up the control registers, we need to know the in-memory structures.
+ARM is more flexible than x86 in terms of page size. While x86 supports 4KB and 4MB pages, ARM supports 4KB, 64KB and 1MB pages.
+It can also support 16MB pages, but this is optional (guaranteed
+The first level translation table is 16KB in size when N = 0. Generally, it is 2^(14-N).
+</p>
+<h4> <span class="mw-headline" id="Short_Descriptor:_Level_1"> Short Descriptor: Level 1 </span></h4>
+<p>Invalid:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 31-2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> Ignored
+</td>
+<td> 0
+</td>
+<td> 0
+</td></tr></table>
+<p>Page Table:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 31-10
+</th>
+<th> 9
+</th>
+<th> 8-5
+</th>
+<th> 4
+</th>
+<th> 3
+</th>
+<th> 2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> BADDR
+</td>
+<td> IMP
+</td>
+<td> Domain
+</td>
+<td> SBZ
+</td>
+<td> NS
+</td>
+<td> PXN
+</td>
+<td> 0
+</td>
+<td> 1
+</td></tr></table>
+<ul><li> BADDR - Page table base address, bits [31:10]. Must be 1KB aligned.
+</li><li> IMP - Implementation defined
+</li><li> Domain - used as a memory protection mechanism. 16 possible domains.
+</li><li> SBZ - Should be Zero
+</li><li> NS - Non-secure bit. This is used by the security extensions
+</li><li> PXN - Privileged Execute Never - SBZ if PXN is not supported
+</li></ul>
+<p>Section:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 31-20
+</th>
+<th> 19
+</th>
+<th> 18
+</th>
+<th> 17
+</th>
+<th> 16
+</th>
+<th> 15
+</th>
+<th> 14-12
+</th>
+<th> 11-10
+</th>
+<th> 9
+</th>
+<th> 8-5
+</th>
+<th> 4
+</th>
+<th> 3
+</th>
+<th> 2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> BADDR
+</td>
+<td> NS
+</td>
+<td> 0
+</td>
+<td> nG
+</td>
+<td> S
+</td>
+<td> AP[2]
+</td>
+<td> TEX[2:0]
+</td>
+<td> AP[1:0]
+</td>
+<td> IMP
+</td>
+<td> Domain
+</td>
+<td> XN
+</td>
+<td> C
+</td>
+<td> B
+</td>
+<td> 1
+</td>
+<td> PXN
+</td></tr></table>
+<ul><li> BADDR - Section Base Address [31:20]. Must be 1MB aligned.
+</li><li> XN - Execute never. Stops execution of page.
+</li><li> nG - not global. Determines how this is marked in the TLB.
+</li></ul>
+<p>Supersection:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 31-24
+</th>
+<th> 23-20
+</th>
+<th> 19
+</th>
+<th> 18
+</th>
+<th> 17
+</th>
+<th> 16
+</th>
+<th> 15
+</th>
+<th> 14-12
+</th>
+<th> 11-10
+</th>
+<th> 9
+</th>
+<th> 8-5
+</th>
+<th> 4
+</th>
+<th> 3
+</th>
+<th> 2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> BADDR
+</td>
+<td> BADDRM
+</td>
+<td> NS
+</td>
+<td> 1
+</td>
+<td> nG
+</td>
+<td> S
+</td>
+<td> AP[2]
+</td>
+<td> TEX[2:0]
+</td>
+<td> AP[1:0]
+</td>
+<td> IMP
+</td>
+<td> BADDRH
+</td>
+<td> XN
+</td>
+<td> C
+</td>
+<td> B
+</td>
+<td> 1
+</td>
+<td> PXN
+</td></tr></table>
+<ul><li> BADDR - Supersection Base address [31:24]. 16MB aligned.
+</li><li> BADDRM - Supersection base address [35:32], if supported.
+</li><li> BADDRH - Supersection base address [39:36], if supported.
+</li></ul>
+<h4> <span class="mw-headline" id="Short_Descriptor:_Level_2"> Short Descriptor: Level 2 </span></h4>
+<p>Invalid:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 31-2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> Ignored
+</td>
+<td> 0
+</td>
+<td> 0
+</td></tr></table>
+<p>Large Page:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 31-16
+</th>
+<th> 15
+</th>
+<th> 14-12
+</th>
+<th> 11
+</th>
+<th> 10
+</th>
+<th> 9
+</th>
+<th> 8-6
+</th>
+<th> 5-4
+</th>
+<th> 3
+</th>
+<th> 2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> BADDR
+</td>
+<td> XN
+</td>
+<td> TEX[2:0]
+</td>
+<td> nG
+</td>
+<td> S
+</td>
+<td> AP[2]
+</td>
+<td> SBZ
+</td>
+<td> AP[1:0]
+</td>
+<td> C
+</td>
+<td> B
+</td>
+<td> 0
+</td>
+<td> 1
+</td></tr></table>
+<ul><li> BADDR - Large Page Base Address [31:16]
+</li></ul>
+<p>Small page:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 31-12
+</th>
+<th> 11
+</th>
+<th> 10
+</th>
+<th> 9
+</th>
+<th> 8-6
+</th>
+<th> 5-4
+</th>
+<th> 3
+</th>
+<th> 2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> BADDR
+</td>
+<td> nG
+</td>
+<td> S
+</td>
+<td> AP[2]
+</td>
+<td> TEX[2:0]
+</td>
+<td> AP[1:0]
+</td>
+<td> C
+</td>
+<td> B
+</td>
+<td> 1
+</td>
+<td> XN
+</td></tr></table>
+<ul><li> BADDR - Small Page Base Address [31:12]
+</li></ul>
+<h4> <span class="mw-headline" id="Long_Descriptor:_Level_1.2F2"> Long Descriptor: Level 1/2 </span></h4>
+<p>Invalid:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 63-1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> Ignored
+</td>
+<td> 0
+</td></tr></table>
+<p>Block:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 63-52
+</th>
+<th> 51-40
+</th>
+<th> 39-n
+</th>
+<th> (n-1)-12
+</th>
+<th> 11-2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> UBAT
+</td>
+<td> SBZP
+</td>
+<td> ADDR
+</td>
+<td> SBZP
+</td>
+<td> LBAT
+</td>
+<td> 0
+</td>
+<td> 1
+</td></tr></table>
+<ul><li> UBAT - Upper Block Attributes
+</li><li> ADDR - Output Address [39:n]
+</li><li> LBAT - Lower Block Attributes
+</li><li> n - 30 for first level, 21 for 2nd level.
+</li></ul>
+<p>Table:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 63
+</th>
+<th> 62-61
+</th>
+<th> 60
+</th>
+<th> 59
+</th>
+<th> 58-52
+</th>
+<th> 51-40
+</th>
+<th> 39-12
+</th>
+<th> 11-2
+</th>
+<th> 1
+</th>
+<th> 1
+</th></tr>
+<tr>
+<td> NST
+</td>
+<td> APT
+</td>
+<td> XNT
+</td>
+<td> PXNT
+</td>
+<td> Ignored
+</td>
+<td> SBZP
+</td>
+<td> ADDR
+</td>
+<td> Ignored
+</td>
+<td> 1
+</td>
+<td> 1
+</td></tr></table>
+<p>Stage 1 attributes, SBZP at stage 2:
+</p>
+<ul><li> NST - NSTable. For secure memory accesses, determines type of next level. Otherwise ignored.
+</li><li> APT - APTable. Access permissions limit for next level lookup.
+</li><li> XNT - XNTable. XN limit for subsequent lookups.
+</li><li> PXNT - PXNTable. PXN limit for subsequent levels. SBZ for non-secure PL2 (hypervisor) level 1 translation tables.
+</li></ul>
+<p>Any stage:
+</p>
+<ul><li> ADDR - Next level table address [39:12].
+</li></ul>
+<h4> <span class="mw-headline" id="Long_Descriptor:_Level_3"> Long Descriptor: Level 3 </span></h4>
+<p>Invalid:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 63-1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> Ignored
+</td>
+<td> 0
+</td></tr></table>
+<p>Reserved:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 63-2
+</th>
+<th> 1
+</th>
+<th> 0
+</th></tr>
+<tr>
+<td> SBZP
+</td>
+<td> 0
+</td>
+<td> 1
+</td></tr></table>
+<p>Page
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 63-52
+</th>
+<th> 51-40
+</th>
+<th> 39-12
+</th>
+<th> 11-2
+</th>
+<th> 1
+</th>
+<th> 1
+</th></tr>
+<tr>
+<td> UPAT
+</td>
+<td> SBZP
+</td>
+<td> ADDR
+</td>
+<td> LPAT
+</td>
+<td> 1
+</td>
+<td> 1
+</td></tr></table>
+<ul><li> UPAT - Upper Page Attributes
+</li><li> ADDR - Output Address [39:12]
+</li><li> LPAT - Lower Page Attributes
+</li></ul>
+<h5> <span class="mw-headline" id="Stage_1_Attributes"> Stage 1 Attributes </span></h5>
+<p>Upper:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 63-59
+</th>
+<th> 58-55
+</th>
+<th> 54
+</th>
+<th> 53
+</th>
+<th> 52
+</th></tr>
+<tr>
+<td> Ignored
+</td>
+<td> Ignored
+</td>
+<td> XN
+</td>
+<td> PXN
+</td>
+<td> CONT
+</td></tr></table>
+<ul><li> CONT - Contiguous. 16 adjacent entries point to contiguous memory regions.
+</li></ul>
+<p>Lower:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 11
+</th>
+<th> 10
+</th>
+<th> 9-8
+</th>
+<th> 7-6
+</th>
+<th> 5
+</th>
+<th> 4-2
+</th></tr>
+<tr>
+<td> nG
+</td>
+<td> AF
+</td>
+<td> SH[1:0]
+</td>
+<td> AP[2:1]
+</td>
+<td> NS
+</td>
+<td> AttrIndex[2:0]
+</td></tr></table>
+<ul><li> AttrIndex - memory attributes index field
+</li></ul>
+<h5> <span class="mw-headline" id="Stage_2_Attributes"> Stage 2 Attributes </span></h5>
+<p>Upper:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 63-59
+</th>
+<th> 58-55
+</th>
+<th> 54
+</th>
+<th> 53
+</th>
+<th> 52
+</th></tr>
+<tr>
+<td> Ignored (system MMU)
+</td>
+<td> Ignored (software)
+</td>
+<td> XN
+</td>
+<td> 0
+</td>
+<td> CONT
+</td></tr></table>
+<p>Lower:
+</p>
+<table class="wikitable">
+
+<tr>
+<th> 11
+</th>
+<th> 10
+</th>
+<th> 9-8
+</th>
+<th> 7-6
+</th>
+<th> 5-2
+</th></tr>
+<tr>
+<td> 0
+</td>
+<td> AF
+</td>
+<td> SH[1:0]
+</td>
+<td> HAP[2:1]
+</td>
+<td> MemAttr[3:0]
+</td></tr></table>
+<ul><li> HAP - Stage 2 Access Permissions
+</li><li> MemAttr - Stage 2 memory attributes
+</li></ul>
+<h3> <span class="mw-headline" id="Choice_Between_TTBR0_and_TTBR1"> Choice Between TTBR0 and TTBR1 </span></h3>
+<h4> <span class="mw-headline" id="Short_format_2"> Short format </span></h4>
+<table class="wikitable">
+
+<tr>
+<th>
+</th>
+<th>
+</th>
+<th colspan="3"> TTBR0 table
+</th></tr>
+<tr>
+<th> TTBCR.N
+</th>
+<th>First address translated with TTBR1
+</th>
+<th> Size
+</th>
+<th> Index range
+</th></tr>
+<tr>
+<td> 0b000
+</td>
+<td> TTBR1 not used
+</td>
+<td> 16KB
+</td>
+<td> VA[31:20]
+</td></tr>
+<tr>
+<td> 0b001
+</td>
+<td> 0x80000000
+</td>
+<td> 8KB
+</td>
+<td> VA[30:20]
+</td></tr>
+<tr>
+<td> 0b010
+</td>
+<td> 0x40000000
+</td>
+<td> 4KB
+</td>
+<td> VA[29:20]
+</td></tr>
+<tr>
+<td> 0b011
+</td>
+<td> 0x20000000
+</td>
+<td> 2KB
+</td>
+<td> VA[28:20]
+</td></tr>
+<tr>
+<td> 0b100
+</td>
+<td> 0x10000000
+</td>
+<td> 1KB
+</td>
+<td> VA[27:20]
+</td></tr>
+<tr>
+<td> 0b101
+</td>
+<td> 0x08000000
+</td>
+<td> 512 bytes
+</td>
+<td> VA[26:20]
+</td></tr>
+<tr>
+<td> 0b110
+</td>
+<td> 0x04000000
+</td>
+<td> 256 bytes
+</td>
+<td> VA[25:20]
+</td></tr>
+<tr>
+<td> 0b111
+</td>
+<td> 0x02000000
+</td>
+<td> 128 bytes
+</td>
+<td> VA[24:20]
+</td></tr></table>
+<h4> <span class="mw-headline" id="Long_format_2"> Long format </span></h4>
+<table class="wikitable">
+
+<tr>
+<th colspan="2"> TTBCR
+</th>
+<th colspan="2"> Input address range
+</th></tr>
+<tr>
+<th> T0SZ
+</th>
+<th> T1SZ
+</th>
+<th> TTBR0
+</th>
+<th> TTBR1
+</th></tr>
+<tr>
+<td> 0b000
+</td>
+<td> 0b000
+</td>
+<td> All addresses
+</td>
+<td> Not used
+</td></tr>
+<tr>
+<td> M
+</td>
+<td> 0b000
+</td>
+<td> 0 to 2^(32-M)-1
+</td>
+<td> 2^(32-M) to maximum address
+</td></tr>
+<tr>
+<td> 0b000
+</td>
+<td> N
+</td>
+<td> 0 to (2^32-2^(32-N)-1)
+</td>
+<td> (2^32-2^(32-N)) to maximum
+</td></tr>
+<tr>
+<td> M
+</td>
+<td> N
+</td>
+<td> 0 to (2^(32-M)-1)
+</td>
+<td> 2^32-2^(32-N) to maximum
+</td></tr></table>
+<h3> <span class="mw-headline" id="Recursive_Table_Mapping"> Recursive Table Mapping </span></h3>
+<p>If you wish to use a recursive mapping trick, such as is done on x86, use the long format. The short format might be doable with much hastle. The long format has been designed with recursive mapping in mind, supports the full physical address space, and does not suffer from mismatching of the page size to table like the short format does. However, the basic structure is similar to PAE, so if you did this naively, 1GB of the address space would be wasted. Instead, use the support for eliminating the first stage by concatenating the 2nd stage. Then point the last few entries to the appropriate points in the table. This reaps all the benefits of the long format, while eliminating bloat of the recursive mapping.
+</p>
+<h2> <span class="mw-headline" id="External_References"> External References </span></h2>
+<p><a rel="nofollow" class="external text" href="http://www.embedded-bits.co.uk/2011/mmucode/">Turning on an ARM MMU</a>
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 187/1000000
+Post-expand include size: 347/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4221-0!*!0!!en!2!* and timestamp 20180121065205 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ARM_Paging&amp;oldid=21813">http://wiki.osdev.org/index.php?title=ARM_Paging&amp;oldid=21813</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:ARM" title="Category:ARM">ARM</a></li><li><a href="Category:Memory_management" title="Category:Memory management">Memory management</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ARM_Paging" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ARM_Paging"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:ARM_Paging&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ARM_Paging#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ARM_Paging" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ARM_Paging&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ARM_Paging&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ARM_Paging#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/ARM_Paging" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/ARM_Paging" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=ARM_Paging&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=ARM_Paging&amp;oldid=21813" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 December 2017, at 14:12.</li>
+											<li id="footer-info-viewcount">This page has been accessed 565 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ARM_Paging" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ARM_Paging" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ARM_Paging&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ARM_Paging&amp;oldid=21813" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 December 2017, at 14:12.</li>
+											<li id="footer-info-viewcount">This page has been accessed 565 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

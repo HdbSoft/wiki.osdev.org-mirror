@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Real mode assembly I - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Real_mode_assembly_I", "wgTitle": "Real mode assembly I", "wgCurRevisionId": 20172, "wgArticleId": 2493, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 1 Tutorials", "Real mode assembly"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-dos {line-height: normal;}
+.source-dos li, .source-dos pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for dos
+ * CSS class: source-dos, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.dos.source-dos .de1, .dos.source-dos .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.dos.source-dos  {font-family:monospace;}
+.dos.source-dos .imp {font-weight: bold; color: red;}
+.dos.source-dos li, .dos.source-dos .li1 {font-weight: normal; vertical-align:top;}
+.dos.source-dos .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.dos.source-dos .li2 {font-weight: bold; vertical-align:top;}
+.dos.source-dos .kw1 {color: #00b100; font-weight: bold;}
+.dos.source-dos .kw2 {color: #000000; font-weight: bold;}
+.dos.source-dos .kw3 {color: #b1b100; font-weight: bold;}
+.dos.source-dos .kw4 {color: #0000ff; font-weight: bold;}
+.dos.source-dos .co1 {color: #808080; font-style: italic;}
+.dos.source-dos .co2 {color: #b100b1; font-style: italic;}
+.dos.source-dos .co3 {color: #33cc33;}
+.dos.source-dos .es0 {color: #ff0000; font-weight: bold;}
+.dos.source-dos .br0 {color: #66cc66;}
+.dos.source-dos .sy0 {color: #33cc33;}
+.dos.source-dos .sy1 {color: #33cc33;}
+.dos.source-dos .st0 {color: #ff0000;}
+.dos.source-dos .nu0 {color: #cc66cc;}
+.dos.source-dos .re0 {color: #b100b1; font-weight: bold;}
+.dos.source-dos .re1 {color: #448844;}
+.dos.source-dos .re2 {color: #448888;}
+.dos.source-dos .re3 {color: #448888;}
+.dos.source-dos .ln-xtra, .dos.source-dos li.ln-xtra, .dos.source-dos div.ln-xtra {background-color: #ffc;}
+.dos.source-dos span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Real_mode_assembly_I action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Real mode assembly I</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Real_mode_assembly_I#mw-head">navigation</a>,
+					<a href="Real_mode_assembly_I#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a><br />Beginner</td></tr></table>
+<p><i>In this tutorial we will assemble a small 16-bit <a href="Assembly" title="Assembly">assembly language</a> kernel with <a href="NASM" title="NASM">NASM</a> and boot it.</i>
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Real_mode_assembly_I#WARNING"><span class="tocnumber">1</span> <span class="toctext">WARNING</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Real_mode_assembly_I#Overview"><span class="tocnumber">2</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Real_mode_assembly_I#So_what.27s_it_going_to_look_like.3F"><span class="tocnumber">3</span> <span class="toctext">So what's it going to look like?</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="Real_mode_assembly_I#But_I_want_a_GUI_and_sound_effects_and_all_the_Windows_games_to_work_on_my_OS..."><span class="tocnumber">3.1</span> <span class="toctext">But I want a GUI and sound effects and all the Windows games to work on my OS...</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Real_mode_assembly_I#So_where.27s_the_code.3F"><span class="tocnumber">4</span> <span class="toctext">So where's the code?</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Real_mode_assembly_I#What_next.3F"><span class="tocnumber">5</span> <span class="toctext">What next?</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="WARNING"> WARNING </span></h2>
+<p>Please see the <a href="Real_Mode_OS_Warning" title="Real Mode OS Warning">Real Mode OS Warning</a> page before continuing.
+</p>
+<h2> <span class="mw-headline" id="Overview"> Overview </span></h2>
+<p><b>EDIT #2: I've put a little "series box" at the bottom of each page to allow quick access to the previous and next tutorial in the series.</b>
+</p><p>You're probably going to sigh and dismiss yet <i>another</i> tutorial on writing operating systems in <a href="X86" title="X86" class="mw-redirect">x86</a> assembly language, especially since this one uses real mode. But there's a catch to this one; it actually does more than printing "Hello World" to the screen and halting.
+</p><p>For this, you'll need:
+</p>
+<ul><li> the latest version of NASM (2.05.01 as of November 28<sup>th</sup>, 2008)
+</li><li> PARTCOPY on Windows or dd on Linux
+</li><li> an emulator like <a href="QEMU" title="QEMU">QEMU</a>, <a href="Bochs" title="Bochs">Bochs</a>, or <a href="Microsoft_Virtual_PC" title="Microsoft Virtual PC">Microsoft Virtual PC</a>
+</li></ul>
+<h2> <span class="mw-headline" id="So_what.27s_it_going_to_look_like.3F"> So what's it going to look like? </span></h2>
+<p>Well, there will be a single source file, the kernel. What about a <a href="Bootloader" title="Bootloader">bootloader</a>? This is such a small kernel, we're not going to use a filesystem at all, we're just going to put the kernel into the first few sectors of the floppy!
+</p><p>The system will have a string printing call (of course), keyboard input, and a strcmp call similar to that of C, all packaged into less than a sector.
+</p>
+<h3> <span class="mw-headline" id="But_I_want_a_GUI_and_sound_effects_and_all_the_Windows_games_to_work_on_my_OS..."> But I want a GUI and sound effects and all the Windows games to work on my OS... </span></h3>
+<p><a href="Beginner_Mistakes" title="Beginner Mistakes">Beginner Mistakes</a>
+</p>
+<h2> <span class="mw-headline" id="So_where.27s_the_code.3F"> So where's the code? </span></h2>
+<p>Here you go, go wild.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"> <span class="kw4">org</span> <span class="nu0">0x7C00</span>   <span class="co1">; add 0x7C00 to label addresses</span>
+ bits <span class="nu0">16</span>      <span class="co1">; tell the assembler we want 16 bit code</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="nu0">0</span>  <span class="co1">; set up segments</span>
+   <span class="kw1">mov</span> <span class="kw3">ds</span><span class="sy0">,</span> <span class="kw3">ax</span>
+   <span class="kw1">mov</span> <span class="kw3">es</span><span class="sy0">,</span> <span class="kw3">ax</span>
+   <span class="kw1">mov</span> <span class="kw3">ss</span><span class="sy0">,</span> <span class="kw3">ax</span>     <span class="co1">; setup stack</span>
+   <span class="kw1">mov</span> <span class="kw3">sp</span><span class="sy0">,</span> <span class="nu0">0x7C00</span> <span class="co1">; stack grows downwards from 0x7C00</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">si</span><span class="sy0">,</span> welcome
+   <span class="kw1">call</span> print_string
+&#160;
+ mainloop<span class="sy0">:</span>
+   <span class="kw1">mov</span> <span class="kw3">si</span><span class="sy0">,</span> prompt
+   <span class="kw1">call</span> print_string
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">di</span><span class="sy0">,</span> buffer
+   <span class="kw1">call</span> get_string
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">si</span><span class="sy0">,</span> buffer
+   <span class="kw1">cmp</span> <span class="kw5">byte</span> <span class="br0">&#91;</span><span class="kw3">si</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0</span>  <span class="co1">; blank line?</span>
+   <span class="kw1">je</span> mainloop       <span class="co1">; yes, ignore it</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">si</span><span class="sy0">,</span> buffer
+   <span class="kw1">mov</span> <span class="kw3">di</span><span class="sy0">,</span> cmd_hi  <span class="co1">; &quot;hi&quot; command</span>
+   <span class="kw1">call</span> strcmp
+   <span class="kw1">jc</span> <span class="sy0">.</span>helloworld
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">si</span><span class="sy0">,</span> buffer
+   <span class="kw1">mov</span> <span class="kw3">di</span><span class="sy0">,</span> cmd_help  <span class="co1">; &quot;help&quot; command</span>
+   <span class="kw1">call</span> strcmp
+   <span class="kw1">jc</span> <span class="sy0">.</span>help
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">si</span><span class="sy0">,</span>badcommand
+   <span class="kw1">call</span> print_string 
+   <span class="kw1">jmp</span> mainloop  
+&#160;
+ <span class="sy0">.</span>helloworld<span class="sy0">:</span>
+   <span class="kw1">mov</span> <span class="kw3">si</span><span class="sy0">,</span> msg_helloworld
+   <span class="kw1">call</span> print_string
+&#160;
+   <span class="kw1">jmp</span> mainloop
+&#160;
+ <span class="sy0">.</span>help<span class="sy0">:</span>
+   <span class="kw1">mov</span> <span class="kw3">si</span><span class="sy0">,</span> msg_help
+   <span class="kw1">call</span> print_string
+&#160;
+   <span class="kw1">jmp</span> mainloop
+&#160;
+ welcome <span class="kw4">db</span> <span class="st0">'Welcome to My OS!'</span><span class="sy0">,</span> <span class="nu0">0x0D</span><span class="sy0">,</span> <span class="nu0">0x0A</span><span class="sy0">,</span> <span class="nu0">0</span>
+ msg_helloworld <span class="kw4">db</span> <span class="st0">'Hello OSDev World!'</span><span class="sy0">,</span> <span class="nu0">0x0D</span><span class="sy0">,</span> <span class="nu0">0x0A</span><span class="sy0">,</span> <span class="nu0">0</span>
+ badcommand <span class="kw4">db</span> <span class="st0">'Bad command entered.'</span><span class="sy0">,</span> <span class="nu0">0x0D</span><span class="sy0">,</span> <span class="nu0">0x0A</span><span class="sy0">,</span> <span class="nu0">0</span>
+ prompt <span class="kw4">db</span> <span class="st0">'&gt;'</span><span class="sy0">,</span> <span class="nu0">0</span>
+ cmd_hi <span class="kw4">db</span> <span class="st0">'hi'</span><span class="sy0">,</span> <span class="nu0">0</span>
+ cmd_help <span class="kw4">db</span> <span class="st0">'help'</span><span class="sy0">,</span> <span class="nu0">0</span>
+ msg_help <span class="kw4">db</span> <span class="st0">'My OS: Commands: hi, help'</span><span class="sy0">,</span> <span class="nu0">0x0D</span><span class="sy0">,</span> <span class="nu0">0x0A</span><span class="sy0">,</span> <span class="nu0">0</span>
+ buffer times <span class="nu0">64</span> <span class="kw4">db</span> <span class="nu0">0</span>
+&#160;
+ <span class="co1">; ================</span>
+ <span class="co1">; calls start here</span>
+ <span class="co1">; ================</span>
+&#160;
+ print_string<span class="sy0">:</span>
+   <span class="kw1">lodsb</span>        <span class="co1">; grab a byte from SI</span>
+&#160;
+   <span class="kw1">or</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="kw3">al</span>  <span class="co1">; logical or AL by itself</span>
+   <span class="kw1">jz</span> <span class="sy0">.</span>done   <span class="co1">; if the result is zero, get out</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="nu0">0x0E</span>
+   <span class="kw1">int</span> <span class="nu0">0x10</span>      <span class="co1">; otherwise, print out the character!</span>
+&#160;
+   <span class="kw1">jmp</span> print_string
+&#160;
+ <span class="sy0">.</span>done<span class="sy0">:</span>
+   <span class="kw1">ret</span>
+&#160;
+ get_string<span class="sy0">:</span>
+   <span class="kw1">xor</span> <span class="kw3">cl</span><span class="sy0">,</span> <span class="kw3">cl</span>
+&#160;
+ <span class="sy0">.</span><span class="kw1">loop</span><span class="sy0">:</span>
+   <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="nu0">0</span>
+   <span class="kw1">int</span> <span class="nu0">0x16</span>   <span class="co1">; wait for keypress</span>
+&#160;
+   <span class="kw1">cmp</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x08</span>    <span class="co1">; backspace pressed?</span>
+   <span class="kw1">je</span> <span class="sy0">.</span>backspace   <span class="co1">; yes, handle it</span>
+&#160;
+   <span class="kw1">cmp</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x0D</span>  <span class="co1">; enter pressed?</span>
+   <span class="kw1">je</span> <span class="sy0">.</span>done      <span class="co1">; yes, we're done</span>
+&#160;
+   <span class="kw1">cmp</span> <span class="kw3">cl</span><span class="sy0">,</span> <span class="nu0">0x3F</span>  <span class="co1">; 63 chars inputted?</span>
+   <span class="kw1">je</span> <span class="sy0">.</span><span class="kw1">loop</span>      <span class="co1">; yes, only let in backspace and enter</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="nu0">0x0E</span>
+   <span class="kw1">int</span> <span class="nu0">0x10</span>      <span class="co1">; print out character</span>
+&#160;
+   <span class="kw1">stosb</span>  <span class="co1">; put character in buffer</span>
+   <span class="kw1">inc</span> <span class="kw3">cl</span>
+   <span class="kw1">jmp</span> <span class="sy0">.</span><span class="kw1">loop</span>
+&#160;
+ <span class="sy0">.</span>backspace<span class="sy0">:</span>
+   <span class="kw1">cmp</span> <span class="kw3">cl</span><span class="sy0">,</span> <span class="nu0">0</span>	<span class="co1">; beginning of string?</span>
+   <span class="kw1">je</span> <span class="sy0">.</span><span class="kw1">loop</span>	<span class="co1">; yes, ignore the key</span>
+&#160;
+   <span class="kw1">dec</span> <span class="kw3">di</span>
+   <span class="kw1">mov</span> <span class="kw5">byte</span> <span class="br0">&#91;</span><span class="kw3">di</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0</span>	<span class="co1">; delete character</span>
+   <span class="kw1">dec</span> <span class="kw3">cl</span>		<span class="co1">; decrement counter as well</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="nu0">0x0E</span>
+   <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x08</span>
+   <span class="kw1">int</span> <span class="nu0">10h</span>		<span class="co1">; backspace on the screen</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="st0">' '</span>
+   <span class="kw1">int</span> <span class="nu0">10h</span>		<span class="co1">; blank character out</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x08</span>
+   <span class="kw1">int</span> <span class="nu0">10h</span>		<span class="co1">; backspace again</span>
+&#160;
+   <span class="kw1">jmp</span> <span class="sy0">.</span><span class="kw1">loop</span>	<span class="co1">; go to the main loop</span>
+&#160;
+ <span class="sy0">.</span>done<span class="sy0">:</span>
+   <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0</span>	<span class="co1">; null terminator</span>
+   <span class="kw1">stosb</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="nu0">0x0E</span>
+   <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x0D</span>
+   <span class="kw1">int</span> <span class="nu0">0x10</span>
+   <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x0A</span>
+   <span class="kw1">int</span> <span class="nu0">0x10</span>		<span class="co1">; newline</span>
+&#160;
+   <span class="kw1">ret</span>
+&#160;
+ strcmp<span class="sy0">:</span>
+ <span class="sy0">.</span><span class="kw1">loop</span><span class="sy0">:</span>
+   <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">si</span><span class="br0">&#93;</span>   <span class="co1">; grab a byte from SI</span>
+   <span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">di</span><span class="br0">&#93;</span>   <span class="co1">; grab a byte from DI</span>
+   <span class="kw1">cmp</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="kw3">bl</span>     <span class="co1">; are they equal?</span>
+   <span class="kw1">jne</span> <span class="sy0">.</span>notequal  <span class="co1">; nope, we're done.</span>
+&#160;
+   <span class="kw1">cmp</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0</span>  <span class="co1">; are both bytes (they were equal before) null?</span>
+   <span class="kw1">je</span> <span class="sy0">.</span>done   <span class="co1">; yes, we're done.</span>
+&#160;
+   <span class="kw1">inc</span> <span class="kw3">di</span>     <span class="co1">; increment DI</span>
+   <span class="kw1">inc</span> <span class="kw3">si</span>     <span class="co1">; increment SI</span>
+   <span class="kw1">jmp</span> <span class="sy0">.</span><span class="kw1">loop</span>  <span class="co1">; loop!</span>
+&#160;
+ <span class="sy0">.</span>notequal<span class="sy0">:</span>
+   <span class="kw1">clc</span>  <span class="co1">; not equal, clear the carry flag</span>
+   <span class="kw1">ret</span>
+&#160;
+ <span class="sy0">.</span>done<span class="sy0">:</span> 	
+   <span class="kw1">stc</span>  <span class="co1">; equal, set the carry flag</span>
+   <span class="kw1">ret</span>
+&#160;
+   times <span class="nu0">510</span><span class="sy0">-</span><span class="br0">&#40;</span>$<span class="sy0">-</span>$$<span class="br0">&#41;</span> <span class="kw4">db</span> <span class="nu0">0</span>
+   <span class="kw4">dw</span> <span class="nu0">0AA55h</span> <span class="co1">; some BIOSes require this signature</span></pre></div></div>
+<p>To assemble on Windows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="dos source-dos"><pre class="de1">nasm kernel.asm -f bin -o kernel.bin
+partcopy kernel.bin 0 200 -f0</pre></div></div>
+<p>Or on Linux:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">nasm</span> kernel.asm <span class="re5">-f</span> bin <span class="re5">-o</span> kernel.bin
+<span class="kw2">dd</span> <span class="re2">if</span>=kernel.bin <span class="re2">of</span>=<span class="sy0">/</span>dev<span class="sy0">/</span>fd0</pre></div></div>
+<p>Those commands assemble your kernel binary and write them to the first floppy disk. Go ahead and test out your operating system now!
+</p>
+<h2> <span class="mw-headline" id="What_next.3F"> What next? </span></h2>
+<p>Why, that's up to you of course! You could add more commands, expand your OS to another sector and learn to use the BIOS floppy functions, add a stack and improve the calls, etc.
+</p><p>Have fun with your OS, however you decide to write it!
+</p><p><b>EDIT on December 12 2008: I've written a second part to this tutorial at <a href="Real_mode_assembly_II" title="Real mode assembly II">Real mode assembly II</a>. This and future parts will have less code to copy and paste and more theory!</b>
+</p>
+<pre>&lt;- none  |  <a href="Real_mode_assembly_II" title="Real mode assembly II">Real mode assembly II</a> -&gt;
+</pre>
+<!-- 
+NewPP limit report
+Preprocessor node count: 138/1000000
+Post-expand include size: 340/2097152 bytes
+Template argument size: 44/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2493-0!*!0!!en!2!* and timestamp 20180121080027 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_I&amp;oldid=20172">http://wiki.osdev.org/index.php?title=Real_mode_assembly_I&amp;oldid=20172</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_1_Tutorials" title="Category:Level 1 Tutorials">Level 1 Tutorials</a></li><li><a href="Category:Real_mode_assembly" title="Category:Real mode assembly">Real mode assembly</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Real_mode_assembly_I" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Real_mode_assembly_I"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Real_mode_assembly_I&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Real_mode_assembly_I#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Real_mode_assembly_I" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_I&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_I&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Real_mode_assembly_I#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Real_mode_assembly_I" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Real_mode_assembly_I" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_I&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Real_mode_assembly_I&amp;oldid=20172" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 21 January 2017, at 01:15.</li>
+											<li id="footer-info-viewcount">This page has been accessed 76,267 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

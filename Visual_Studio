@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Visual Studio - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Visual_Studio", "wgTitle": "Visual Studio", "wgCurRevisionId": 19231, "wgArticleId": 1454, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["IDEs", "Compilers", "Visual C++"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-cpp {line-height: normal;}
+.source-cpp li, .source-cpp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cpp
+ * CSS class: source-cpp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cpp.source-cpp .de1, .cpp.source-cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp.source-cpp  {font-family:monospace;}
+.cpp.source-cpp .imp {font-weight: bold; color: red;}
+.cpp.source-cpp li, .cpp.source-cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp.source-cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp.source-cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp.source-cpp .kw1 {color: #0000ff;}
+.cpp.source-cpp .kw2 {color: #0000ff;}
+.cpp.source-cpp .kw3 {color: #0000dd;}
+.cpp.source-cpp .kw4 {color: #0000ff;}
+.cpp.source-cpp .co1 {color: #666666;}
+.cpp.source-cpp .co2 {color: #339900;}
+.cpp.source-cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp.source-cpp .es0 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es1 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es2 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es3 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es4 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es5 {color: #006699; font-weight: bold;}
+.cpp.source-cpp .br0 {color: #008000;}
+.cpp.source-cpp .sy0 {color: #008000;}
+.cpp.source-cpp .sy1 {color: #000080;}
+.cpp.source-cpp .sy2 {color: #000040;}
+.cpp.source-cpp .sy3 {color: #000040;}
+.cpp.source-cpp .sy4 {color: #008080;}
+.cpp.source-cpp .st0 {color: #FF0000;}
+.cpp.source-cpp .nu0 {color: #0000dd;}
+.cpp.source-cpp .nu6 {color: #208080;}
+.cpp.source-cpp .nu8 {color: #208080;}
+.cpp.source-cpp .nu12 {color: #208080;}
+.cpp.source-cpp .nu16 {color:#800080;}
+.cpp.source-cpp .nu17 {color:#800080;}
+.cpp.source-cpp .nu18 {color:#800080;}
+.cpp.source-cpp .nu19 {color:#800080;}
+.cpp.source-cpp .me1 {color: #007788;}
+.cpp.source-cpp .me2 {color: #007788;}
+.cpp.source-cpp .ln-xtra, .cpp.source-cpp li.ln-xtra, .cpp.source-cpp div.ln-xtra {background-color: #ffc;}
+.cpp.source-cpp span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Visual_Studio action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Visual Studio</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Visual_Studio#mw-head">navigation</a>,
+					<a href="Visual_Studio#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>It is possible to use Microsoft Visual C++ to write OS kernel, however keep in mind that all the Visual C++ compiler is able to output is <a href="http://wiki.osdev.org/index.php?title=OMF&amp;action=edit&amp;redlink=1" class="new" title="OMF (page does not exist)">OMF</a> format object files, and the linker can only produce <a href="PE_Binaries" title="PE Binaries" class="mw-redirect">PE Binaries</a>, so you will have to either use a bootloader which understands these formats or convert them to, for example, <a href="ELF" title="ELF">ELF</a> or flat binary.
+</p><p>See also <a rel="nofollow" class="external text" href="http://ksrenevasan.blogspot.com/2005/10/writing-multiboot-pe-kernels-using.html">Kaushik Srenevasan's blog</a> to see how you can "[Write] multiboot PE kernels using Visual C++". This is supplemented with <a rel="nofollow" class="external text" href="http://ksrenevasan.blogspot.com/2005/10/writing-multiboot-pe-kernels-using_03.html">part 2</a> which explains some of the things not covered in the first part.
+</p><p>MinGW32's objcopy should do the job (parameters go something like this: -x -g -X -S -Obinary kernel.bin). But you don't have to strip any information from PE file, the other option is to set section alignment in memory to 0x200 which is generally equal to the section alignment on disk and do some math:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">es</span><span class="sy0">:</span><span class="nu0">0x3c</span><span class="br0">&#93;</span>          <span class="co1">; PE header pointer in MZ header</span>
+<span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">es</span><span class="sy0">:</span><span class="kw3">eax</span><span class="sy0">+</span><span class="nu0">0x28</span><span class="br0">&#93;</span>      <span class="co1">; AddressOfEntryPoint in PE header</span></pre></div></div>
+<p>where es is loaded with base address of your <a href="PE_Binaries" title="PE Binaries" class="mw-redirect">PE</a> file in memory, ecx will be loaded with the entry point relative to base address of PE file.  Of course, if this is protected mode with a flat 4GB address space, use a register instead of using ES.
+</p><p><b>Note:</b>  The options and procedures described here are for VS.NET 2003.  Similar procedures should work on earlier versions.  Consult the MSDN or post to the forum if you have any questions.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Visual_Studio#Visual_C.2B.2B_vs_Visual_Studio"><span class="tocnumber">1</span> <span class="toctext">Visual C++ vs Visual Studio</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Visual_Studio#Creating_the_Project:"><span class="tocnumber">2</span> <span class="toctext">Creating the Project:</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Visual_Studio#Custom_C.2B.2B_Runtime"><span class="tocnumber">3</span> <span class="toctext">Custom C++ Runtime</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Visual_Studio#Some_basic_definitions:"><span class="tocnumber">4</span> <span class="toctext">Some basic definitions:</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Visual_Studio#Compiler_Options"><span class="tocnumber">5</span> <span class="toctext">Compiler Options</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Visual_Studio#General"><span class="tocnumber">5.1</span> <span class="toctext">General</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Visual_Studio#C.2FC.2B.2B_::_General"><span class="tocnumber">5.2</span> <span class="toctext">C/C++&#160;:: General</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Visual_Studio#C.2FC.2B.2B_::_Optimization"><span class="tocnumber">5.3</span> <span class="toctext">C/C++&#160;:: Optimization</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Visual_Studio#C.2FC.2B.2B_::_Preprocessor"><span class="tocnumber">5.4</span> <span class="toctext">C/C++&#160;:: Preprocessor</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Visual_Studio#C.2FC.2B.2B_::_Code_Generation"><span class="tocnumber">5.5</span> <span class="toctext">C/C++&#160;:: Code Generation</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="Visual_Studio#C.2FC.2B.2B_.28misc._options.29"><span class="tocnumber">5.6</span> <span class="toctext">C/C++ (misc. options)</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="Visual_Studio#Linker"><span class="tocnumber">5.7</span> <span class="toctext">Linker</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="Visual_Studio#Bootloader_Stuff"><span class="tocnumber">6</span> <span class="toctext">Bootloader Stuff</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="Visual_Studio#Multiboot"><span class="tocnumber">6.1</span> <span class="toctext">Multiboot</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="Visual_Studio#The_Rebase_Utility"><span class="tocnumber">7</span> <span class="toctext">The Rebase Utility</span></a></li>
+<li class="toclevel-1 tocsection-16"><a href="Visual_Studio#Express_64_bit_compilers"><span class="tocnumber">8</span> <span class="toctext">Express 64 bit compilers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-17"><a href="Visual_Studio#Quirks"><span class="tocnumber">8.1</span> <span class="toctext">Quirks</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="Visual_Studio#Intrinsics"><span class="tocnumber">9</span> <span class="toctext">Intrinsics</span></a></li>
+<li class="toclevel-1 tocsection-19"><a href="Visual_Studio#See_Also"><span class="tocnumber">10</span> <span class="toctext">See Also</span></a></li>
+<li class="toclevel-1 tocsection-20"><a href="Visual_Studio#Forum_Posts"><span class="tocnumber">11</span> <span class="toctext">Forum Posts</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Visual_C.2B.2B_vs_Visual_Studio"> Visual C++ vs Visual Studio </span></h2>
+<p>Visual C++ refers only to the Microsoft C++ IDE and compiler, where as Visual Studio refers to the entire Microsoft family of compilers and IDEs as a whole. In later version, such as the Visual Studio .NET series, all languages share the same IDE program, but in Visual C++ .NET, compatibility for all other languages are removed completely, except through configuring the IDE to manually use another compiler/assembler.
+</p><p>While the Microsoft compilers are free, Visual Studio is not. However, a free edition of Visual Studio is available, known as <a rel="nofollow" class="external text" href="http://www.visualstudio.com/en-US/products/visual-studio-express-vs">Visual Studio 2013 Express</a> is available for download from Microsoft's website, but must be activated (freely via e-mail) to continue use after 30-days.
+</p><p>The Microsoft compiler that is provided with the express edition of Visual C++ 2013 can build either native 32-bit or 64-bit PE files, or .NET assemblies.
+</p><p>Of course, you could disable the compiler and add a custom build event which runs a shell script and invokes Cygwin. If you are using Visual Studio (not Express), it is possible to use the Visual Studio SDK to create a "makefile project" that allows you to use a custom build script (such as invoking the <a href="Cygwin" title="Cygwin">Cygwin</a> tool chain) to compile your code, build your image, and launch the emulator (so you can just press F5 for the whole thing to build and the emulator to start). Compiling Bochs with debugging enabled may allow you to use the Visual Studio debugger (including line by line execution) except this hasn't yet been tested.
+</p>
+<h2> <span class="mw-headline" id="Creating_the_Project:"> Creating the Project: </span></h2>
+<p>For the kernel and any drivers, create a Win32 Project and select DLL, empty project.  Choose DLL if you want to have a kernel that can export functions using the standard Win32 method.  It is relatively simple to use this to export functions for use by device drivers...
+</p>
+<h2> <span class="mw-headline" id="Custom_C.2B.2B_Runtime"> Custom C++ Runtime </span></h2>
+<p>Since you can't use standard C/C++ runtime in your kernel, you'll need to write some of it's functionality yourself. The following article will help to <a href="Visual_C++_Runtime" title="Visual C++ Runtime">write your custom Visual C++ runtime</a>
+</p>
+<h2> <span class="mw-headline" id="Some_basic_definitions:"> Some basic definitions: </span></h2>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define EXTERN		extern &quot;C&quot;</span>
+<span class="co2">#define EXPORT		EXTERN __declspec(dllexport)    // exported from DLL</span>
+<span class="co2">#define IMPORT		EXTERN __declspec(dllimport)    // imported from DLL</span>
+<span class="co2">#define NAKED		__declspec(naked)		// no prolog or epilog code added</span>
+<span class="co2">#define NORETURN	__declspec(noreturn)</span>
+&#160;
+<span class="co1">// Some examples</span>
+EXTERN <span class="kw4">void</span> SomeFunction<span class="br0">&#40;</span><span class="kw4">int</span> this<span class="sy0">,</span> <span class="kw4">int</span> that<span class="br0">&#41;</span><span class="sy0">;</span>
+EXPORT <span class="kw4">int</span> AnotherFunction<span class="br0">&#40;</span><span class="kw4">unsigned</span> __int64 bigParam<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="co1">// In a .cpp file</span>
+EXPORT NAKED <span class="kw4">int</span> AnotherFunction<span class="br0">&#40;</span><span class="kw4">unsigned</span> __int64<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+  __asm
+  <span class="br0">&#123;</span>
+    mov eax<span class="sy0">,</span> dword ptr <span class="br0">&#91;</span>esp<span class="sy0">+</span><span class="nu0">4</span><span class="br0">&#93;</span>
+    xor eax<span class="sy0">,</span> dword ptr <span class="br0">&#91;</span>esp<span class="sy0">+</span><span class="nu0">8</span><span class="br0">&#93;</span>
+    ret
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>I use these to create functions that end up with reasonably undecorated names like <code>_SomeFunction@8</code> instead of <code>?@SomeFunction@YAKK000I@@Z</code> (as a __cdecl normal function would be named...)  The macros also allow easy import and export from a DLL.
+</p>
+<h2> <span class="mw-headline" id="Compiler_Options"> Compiler Options </span></h2>
+<p>Here is the meat of this article.  These are the compiler options (right-click project, select properties) that I use for my OS.
+</p>
+<h4> <span class="mw-headline" id="General"> General </span></h4>
+<ul><li> Output Directory: .
+</li></ul>
+<dl><dd> Add a post-build step to copy only the <i>real</i> output file to the bin directory. Otherwise VS puts .lib and some linker files there as well.
+</dd></dl>
+<ul><li> Intermediate Directory: .
+</li></ul>
+<h4> <span class="mw-headline" id="C.2FC.2B.2B_::_General"> C/C++&#160;:: General </span></h4>
+<ul><li> Additional Include Directories: &lt;set as needed&gt;
+</li><li> Debug Information Format: Disabled
+</li></ul>
+<dl><dd> At the stage my OS is in, I have no use for PDB files.  I am in the process of writing a debugger, though, so in the future this could change.
+</dd></dl>
+<ul><li> Warning Level: Level 4 (/W4)
+</li><li> Detect 64-bit Portability Issues: No
+</li></ul>
+<dl><dd> This relies on a special __w64 token in various typedefs.  I do not know how to use this with my OS.  Just be careful:  int and long are still 32-bit if compiling for a x64 target (using VS 2005)
+</dd></dl>
+<h4> <span class="mw-headline" id="C.2FC.2B.2B_::_Optimization"> C/C++&#160;:: Optimization </span></h4>
+<ul><li> Optimization: Minimize Size (/O1)
+</li></ul>
+<dl><dd> This is really up to you.  For me, space is more important than speed for now, but this can easily be changed.  If you are implementing source-level debugging, you might want to disable all optimizations.
+</dd></dl>
+<ul><li> Global Optimizations: Yes (/Og)
+</li></ul>
+<dl><dd> Again, enable only if not using a source-level debugger
+</dd></dl>
+<ul><li> Favor Size Or Speed: Favor Small Code (/Os)
+</li></ul>
+<dl><dd> Set as needed, only if /Og enabled
+</dd></dl>
+<ul><li> Optimize for Processor: Pentium Pro, II, III (/G6)
+</li></ul>
+<dl><dd> Set as needed
+</dd></dl>
+<h4> <span class="mw-headline" id="C.2FC.2B.2B_::_Preprocessor"> C/C++&#160;:: Preprocessor </span></h4>
+<ul><li> Ignore Standard Include Path: Yes (/X)
+</li></ul>
+<h4> <span class="mw-headline" id="C.2FC.2B.2B_::_Code_Generation"> C/C++&#160;:: Code Generation </span></h4>
+<ul><li> Enable String Pooling: Yes (/GF)
+</li></ul>
+<dl><dd> Places string literals in a read-only data section.  This doesn't mean much for OS code, but enable this ONLY if you do not modify string literals in-place, as this would change it in all instances.
+</dd></dl>
+<ul><li> Enable Minimal Rebuild: No
+</li></ul>
+<dl><dd> This option attempts to analyse header files and only rebuilds sources if what it uses has changed. Can speed up building, but also frequently makes mistakes leading to runtime errors. Also enabling this seems to add 0xCC pad bytes to the EXE, which causes bloating.
+</dd></dl>
+<ul><li> Enable C++ Exceptions: No
+</li></ul>
+<dl><dd> Unless you have an exceptional (pun intended) configuration, these require runtime support and are generally not needed anyways.
+</dd></dl>
+<ul><li> Basic Runtime Checks: Default
+</li></ul>
+<dl><dd> Enabling any runtime checks requires special support code.
+</dd></dl>
+<ul><li> Struct Member Alignment: 1 Byte (/Zp1)
+</li></ul>
+<dl><dd> This is really up to you, but most structs that I have need to be aligned this way. If you choose default (8 byte), you can use #pragma pack(push, 1) and #pragma pack(pop) to adjust the packing.  Consult MSDN for more info.
+</dd></dl>
+<ul><li> Buffer Security Check: No
+</li></ul>
+<dl><dd> Again, this requires runtime support code
+</dd></dl>
+<h4> <span class="mw-headline" id="C.2FC.2B.2B_.28misc._options.29"> C/C++ (misc. options) </span></h4>
+<ul><li> Language
+</li><li> Force Conformance in For Loop Scope: Yes (/Zc:forScope)
+</li></ul>
+<dl><dd> A Good Idea.  Makes the <i>i</i> in <i>for (int i = 0; ...)</i> local to the loop.
+</dd></dl>
+<ul><li> Output Files
+</li><li> Assembler Output: Assembly, Machine Code, and Source (/FAcs)
+</li></ul>
+<dl><dd> Outputs the assembly listing of the code to files in a given directory.  This is nice for assembly-level debugging, as it has the source code lines nearby.
+</dd></dl>
+<ul><li> ASM List Location: &lt;directory&gt;\
+</li></ul>
+<dl><dd> Make sure there is a terminating \, otherwise VS will try to put everything in one file.
+</dd></dl>
+<ul><li> Advanced
+</li><li> Calling Convention: __stdcall (/Gz)
+</li></ul>
+<dl><dd> Again, up to you, but I find the lack of name decoration handy for debugging.  Functions declared <tt>extern "C" void [[Do Something]](int p1, int p2)</tt> show up as <tt>_[[Do Something]]@8</tt> rather than <tt>?@[[Do Something]]@YAXZSASD</tt> or similar.
+</dd></dl>
+<ul><li> Command Line
+</li><li> /Oy-
+</li></ul>
+<dl><dd> Disables frame pointer (EBP) omission, included with optimization for size.  This is handy to get <a href="Stack#Stack_trace" title="Stack">stack backtraces</a> in case of a crash.
+</dd></dl>
+<h4> <span class="mw-headline" id="Linker"> Linker </span></h4>
+<ul><li> General
+</li><li> Output File: &lt;set as needed&gt;
+</li><li> Enable Incremental Linking: No (/INCREMENTAL:NO)
+</li></ul>
+<dl><dd> Reduces the bloat of the generated EXE or DLL.  Linking seems fast enough, anyways.
+</dd></dl>
+<ul><li> Additional Library Directories: &lt;set as needed&gt;
+</li><li> Input
+</li><li> Ignore All Default Libraries: Yes (/NODEFAULTLIB)
+</li></ul>
+<dl><dd> Ignores the default libc.lib, libcmt.lib, etc.
+</dd></dl>
+<ul><li> Debugging
+</li><li> Generate Debug Info: No
+</li></ul>
+<dl><dd> Until I create a better debugger for my OS, I have no use for this.  Set as needed.
+</dd></dl>
+<ul><li> Generate Map File: Yes (/MAP)
+</li></ul>
+<dl><dd> Generates a map file (function name and address) and actually <i>sorts</i> by ascending address, unlike GCC.
+</dd></dl>
+<ul><li> Map File Name: &lt;set as needed&gt;
+</li><li> Optimization
+</li><li> References: Eliminate Unreferenced Data
+</li><li> Enable COMDAT Folding: Remove Redundant COMDATs
+</li><li> Advanced
+</li><li> Entry Point: &lt;set as needed&gt;
+</li></ul>
+<dl><dd> The linker will complain if it is not __stdcall with 12 bytes of arguments (3 32-bit params), but is only a warning.
+</dd></dl>
+<ul><li> Fixed Base Address: Generate a relocation section
+</li></ul>
+<dl><dd> Images will be relocated later.  See below.
+</dd></dl>
+<ul><li> Command Line
+</li><li> /DRIVER
+</li><li> /ALIGN: 512
+</li></ul>
+<dl><dd> Together, they set the <a href="http://wiki.osdev.org/index.php?title=Section_Alignment&amp;action=edit&amp;redlink=1" class="new" title="Section Alignment (page does not exist)">Section Alignment</a> and <a href="http://wiki.osdev.org/index.php?title=File_Alignment&amp;action=edit&amp;redlink=1" class="new" title="File Alignment (page does not exist)">File Alignment</a> to 512 bytes.  My boot loader is not sophisticated enough to handle these being different.  The downside is that restrictions (read-only, etc) on sections are meaningless, as they require page-granularity for hopefully obvious reasons.
+</dd></dl>
+<h2> <span class="mw-headline" id="Bootloader_Stuff"> Bootloader Stuff </span></h2>
+<p>As part of the build process, I use a tool I wrote to rebase all the PE files.  The
+Microsoft rebase utility (and imagehlp api) only works on a 64K granularity, but I
+want one with page granularity.
+</p><p>My bootsector is aware of the FAT file system and loads the rest of the bootloader off of
+the floppy disk.  This bootloader reads a configuration file, loads the kernel to 0xC0000000,
+and then loads each driver on consecutive page-aligned addresses after the kernel.  It passes
+an array of these addresses (and filenames) to the kernel, which can then link the images
+to itself and call their entry points.
+</p><p>Another option is to use a separate linker such as <a href="WLink" title="WLink">WLink</a> with a linker script such as the one found on the <a href="Watcom" title="Watcom">Watcom</a> page.
+</p>
+<h3> <span class="mw-headline" id="Multiboot"> Multiboot </span></h3>
+<p>To be booted by GRUB, you can make your kernel multiboot. THis involves the embedding of a multiboot header in the first 8K of the image.
+This can be done as follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cpp source-cpp"><pre class="de1"><span class="co1">//Entry point goes here</span>
+&#160;
+<span class="co1">//The good ol' multiboot header</span>
+<span class="co2">#pragma pack(push,1)</span>
+<span class="kw4">struct</span> MULTIBOOT_HEADER <span class="br0">&#123;</span>
+    <span class="kw4">uint32_t</span> magic<span class="sy4">;</span>
+    <span class="kw4">uint32_t</span> flags<span class="sy4">;</span>
+    <span class="kw4">uint32_t</span> checksum<span class="sy4">;</span>
+    <span class="kw4">uint32_t</span> header_addr<span class="sy4">;</span>
+    <span class="kw4">uint32_t</span> load_addr<span class="sy4">;</span>
+    <span class="kw4">uint32_t</span> load_end_addr<span class="sy4">;</span>
+    <span class="kw4">uint32_t</span> bss_end_addr<span class="sy4">;</span>
+    <span class="kw4">uint32_t</span> entry_addr<span class="sy4">;</span>   
+<span class="br0">&#125;</span><span class="sy4">;</span>
+<span class="co2">#pragma pack(pop)</span>
+&#160;
+<span class="co2">#pragma code_seg(&quot;.a&quot;)</span>
+__declspec<span class="br0">&#40;</span>align<span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="br0">&#41;</span> MULTIBOOT_HEADER header <span class="br0">&#123;</span>
+    <span class="nu12">0x1BADB002</span>,
+    <span class="nu12">0x10003</span>,
+    <span class="sy2">-</span><span class="br0">&#40;</span><span class="nu12">0x1BADB002</span><span class="sy2">+</span><span class="nu12">0x10003</span><span class="br0">&#41;</span>,
+    <span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span><span class="sy3">&amp;</span>header <span class="sy2">-</span> BASE_ADDR <span class="sy2">+</span> LOADBASE,
+    LOAD_BASE,
+    <span class="nu0">0</span>,
+    <span class="nu0">0</span>,
+    <span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="br0">&#41;</span><span class="sy3">&amp;</span>entry <span class="sy2">-</span> BASE_ADDR <span class="sy2">+</span> LOADBASE
+<span class="br0">&#125;</span><span class="sy4">;</span></pre></div></div>
+<h2> <span class="mw-headline" id="The_Rebase_Utility"> The Rebase Utility </span></h2>
+<p>Attached to <a href="http://forum.osdev.org/viewtopic.php?t=10632" class="extiw" title="topic:10632">this thread</a> is the source code for a page-granular rebase utility.  It changes the base address of any PE file with a relocation section to the nearest page-aligned address and then removes the relocation section.  It compiles under Visual Studio .NET 2003 with default settings successfully, but should work fine on any Microsoft compiler.
+</p><p>To use it, create a text file that contains the relative paths and names of the PE files you wish to rebase, such as
+</p>
+<pre>
+system\kernel.sys
+driver\fat.sys
+driver\fd.sys
+driver\kbdmouse.sys
+driver\vga.sys
+</pre>
+<p>and call the utility from a batch file or the console as
+</p>
+<pre>
+mvrebase 0xC0000000 rebasefiles.txt
+</pre>
+<p>and, in the example given above, it will base kernel.sys at 0xC0000000 and will base subsequent files at the next page-aligned address.
+</p>
+<h2> <span class="mw-headline" id="Express_64_bit_compilers"> Express 64 bit compilers </span></h2>
+<p>You can gain 64 bit compilers by installing the Windows SDK VC++ compilers (please note for VC10 SP1 you need to install the update)
+</p>
+<h3> <span class="mw-headline" id="Quirks"> Quirks </span></h3>
+<p>In the 64 bit compilers you <b>cannot:</b>
+</p>
+<ul><li>Create naked functions
+</li><li>Do inline assembly - but it does come with <a href="MASM" title="MASM">MASM</a>, though you need to separate your C/C++ and assembly into separate source files.
+</li><li>Do non-fastcall calling
+</li></ul>
+<p>This is why if you intend to do 64 bit development in MSVC++ you should have an external assembly layer (seperate versions for 32 bit and 64 bit), or use somewhat more limited intrinsics, and for asm if you want to avoid name decoration you need to declare them in a header file like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cpp source-cpp"><pre class="de1"><span class="co2">#ifdef __cplusplus //if this is C++</span>
+<span class="kw4">extern</span> <span class="st0">&quot;C&quot;</span> <span class="br0">&#123;</span> <span class="co1">//declare as C functions</span>
+<span class="co2">#endif</span>
+ disable<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy4">;</span> <span class="co1">//a useful example. disables interrupts (duh!)</span>
+ <span class="co1">//your functions go here</span>
+<span class="co2">#ifdef __cplusplus</span>
+<span class="br0">&#125;</span> <span class="co1">//and if it was C++ we need to close the brackets</span>
+<span class="co2">#endif</span></pre></div></div>
+<p>And in your asm layer:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">BITS <span class="nu0">32</span> <span class="co1">;32 bit version</span>
+@disable@<span class="nu0">0</span><span class="sy0">:</span>
+<span class="kw1">cli</span>
+<span class="kw1">ret</span> 
+<span class="co1">;fastcall name decoration (@0 to be replaced by size of args (bytes)</span>
+<span class="co1">;Number of bytes is always prefixed by @</span>
+BITS <span class="nu0">64</span> <span class="co1">;64 bit version</span>
+disable<span class="sy0">:</span>
+<span class="kw1">cli</span>
+<span class="kw1">ret</span>  <span class="co1">;No decoration at all</span></pre></div></div>
+<h2> <span class="mw-headline" id="Intrinsics"> Intrinsics </span></h2>
+<p>For intrinsics, #include &lt;intrin.h&gt;. This IS suitable for a kernel, but don't ignore standard headers. An example follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cpp source-cpp"><pre class="de1"><span class="co1">//main body of intrinsics</span>
+<span class="co2">#include &lt;intrin.h&gt;</span>
+<span class="co1">//I/O operations</span>
+<span class="co2">#include &lt;conio.h&gt;</span>
+&#160;
+<span class="kw4">void</span> someFunc<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    __enable<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy4">;</span>  <span class="co1">//STI</span>
+    <span class="kw4">char</span> c <span class="sy1">=</span> __inbyte<span class="br0">&#40;</span><span class="nu12">0x60</span><span class="br0">&#41;</span><span class="sy4">;</span> <span class="co1">//IN</span>
+    <span class="kw4">unsigned</span> <span class="kw4">short</span> w <span class="sy1">=</span> __inpw<span class="br0">&#40;</span><span class="nu12">0x1F0</span><span class="br0">&#41;</span><span class="sy4">;</span>
+    <span class="kw4">unsigned</span> <span class="kw4">int</span> d <span class="sy1">=</span> __inp<span class="br0">&#40;</span><span class="nu12">0xCFC</span><span class="br0">&#41;</span><span class="sy4">;</span>
+    __disable<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy4">;</span>  <span class="co1">//CLI</span>
+    __halt<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy4">;</span>     <span class="co1">//HLT</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>From more intrinsics, see <a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/library/26td21ds.aspx">Compiler Intrinsics</a>
+Note that the very helpful __setReg, which is reference in some areas of MSDN, is no longer available.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<ul><li> <a href="C++" title="C++">C++</a>
+</li></ul>
+<h2> <span class="mw-headline" id="Forum_Posts"> Forum Posts </span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?f=1&amp;t=21260">Booting non-ELF kernel with GRUB tutorial</a>
+</li><li> <a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?f=2&amp;t=21859">MSVC Grub - A new way</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 233/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1454-0!*!0!!en!*!* and timestamp 20180121052316 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Visual_Studio&amp;oldid=19231">http://wiki.osdev.org/index.php?title=Visual_Studio&amp;oldid=19231</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:IDEs" title="Category:IDEs">IDEs</a></li><li><a href="Category:Compilers" title="Category:Compilers">Compilers</a></li><li><a href="Category:Visual_C++" title="Category:Visual C++">Visual C++</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Visual_Studio" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Visual_Studio"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Visual_Studio"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Visual_Studio#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Visual_Studio" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Visual_Studio&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Visual_Studio&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Visual_Studio#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" idskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Visual_Studio" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Visual_Studio" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Visual_Studio&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Visual_Studio&amp;oldid=19231" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 15 May 2016, at 07:53.</li>
+											<li id="footer-info-viewcount">This page has been accessed 83,370 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.036 secs. -->
+	</body>
+</html>

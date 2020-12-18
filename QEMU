@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>QEMU - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "QEMU", "wgTitle": "QEMU", "wgCurRevisionId": 20863, "wgArticleId": 1419, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Emulators"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-QEMU action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">QEMU</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="QEMU#mw-head">navigation</a>,
+					<a href="QEMU#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="Emulators" title="Emulators">Emulators</a></th></tr><tr><th>PC Emulators</th></tr><tr><td><div>
+<p><a href="Bochs" title="Bochs">Bochs</a><br />
+<strong class="selflink">QEMU</strong><br />
+</p>
+</div></td></tr><tr><th>PC Virtual Machine Monitors</th></tr><tr><td><div>
+<p><a href="http://wiki.osdev.org/index.php?title=KVM&amp;action=edit&amp;redlink=1" class="new" title="KVM (page does not exist)">KVM</a><br />
+<a href="Microsoft_Virtual_PC" title="Microsoft Virtual PC">Virtual PC</a><br />
+<a href="VirtualBox" title="VirtualBox">VirtualBox</a><br />
+<a href="VMware" title="VMware">VMware</a><br />
+</p>
+</div></td></tr><tr><th>PowerPC Emulators</th></tr><tr><td><div>
+<p><a href="PearPC" title="PearPC">PearPC</a><br />
+</p>
+</div></td></tr></table>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="QEMU#Features"><span class="tocnumber">1</span> <span class="toctext">Features</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="QEMU#Supported_VBE_modes"><span class="tocnumber">1.1</span> <span class="toctext">Supported VBE modes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="QEMU#Supported_Architectures"><span class="tocnumber">2</span> <span class="toctext">Supported Architectures</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="QEMU#Supported_Devices"><span class="tocnumber">3</span> <span class="toctext">Supported Devices</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="QEMU#Usage"><span class="tocnumber">4</span> <span class="toctext">Usage</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="QEMU#The_QEMU_Console"><span class="tocnumber">4.1</span> <span class="toctext">The QEMU Console</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="QEMU#The_QEMU_monitor"><span class="tocnumber">4.2</span> <span class="toctext">The QEMU monitor</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="QEMU#GDB-stub"><span class="tocnumber">4.3</span> <span class="toctext">GDB-stub</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="QEMU#Getting_detailed_logs"><span class="tocnumber">4.4</span> <span class="toctext">Getting detailed logs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="QEMU#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="QEMU#Articles"><span class="tocnumber">5.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="QEMU#External_Links"><span class="tocnumber">5.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Features">Features</span></h2>
+<ul><li> two operating modes: full system emulation (which interests us) and Linux user process emulation (which interests other people) and is a NxM platform emulator (multiple host, multiple targets).
+</li><li> it is faster than <a href="Bochs" title="Bochs">Bochs</a> because it uses 'just in time' code compilation technique (allowing reuse of previous interpretation)
+</li><li> lacks technical documentation so far (imho), which probably makes it less suitable for "baby steps".
+</li><li> provides native <a href="GDB" title="GDB">GDB</a> support and you can attach it to <a href="GDB" title="GDB">GDB</a>/<a href="http://wiki.osdev.org/index.php?title=DDD&amp;action=edit&amp;redlink=1" class="new" title="DDD (page does not exist)">DDD</a> by adding the "-s -S" switches to the command line and from the <a href="GDB" title="GDB">GDB</a> window start the debugging session with "target remote&#160;:1234" if QEMU is waiting on local port 1234.
+</li><li> support <a href="VBE" title="VBE" class="mw-redirect">VBE</a> 2.0. This can be checked if you use the <a href="GRUB" title="GRUB">GRUB</a> command line and type vbeprobe. The test returns:
+</li></ul>
+<p><br />
+</p>
+<h3> <span class="mw-headline" id="Supported_VBE_modes">Supported VBE modes</span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>0x101
+</td>
+<td>Packed pixel
+</td>
+<td>640x480x8
+</td></tr>
+<tr>
+<td>0x110
+</td>
+<td>Direct Color
+</td>
+<td>640x480x15
+</td></tr>
+<tr>
+<td>0x111
+</td>
+<td>Direct Color
+</td>
+<td>640x480x16
+</td></tr>
+<tr>
+<td>0x112
+</td>
+<td>Direct Color
+</td>
+<td>640x480x24
+</td></tr>
+<tr>
+<td>0x103
+</td>
+<td>Packed pixel
+</td>
+<td>800x600x8
+</td></tr>
+<tr>
+<td>0x113
+</td>
+<td>Direct Color
+</td>
+<td>800x600x15
+</td></tr>
+<tr>
+<td>0x114
+</td>
+<td>Direct Color
+</td>
+<td>800x600x16
+</td></tr>
+<tr>
+<td>0x115
+</td>
+<td>Direct Color
+</td>
+<td>800x600x24
+</td></tr>
+<tr>
+<td>0x105
+</td>
+<td>Packed pixel
+</td>
+<td>1024x768x8
+</td></tr>
+<tr>
+<td>0x116
+</td>
+<td>Direct Color
+</td>
+<td>1024x768x15
+</td></tr>
+<tr>
+<td>0x117
+</td>
+<td>Direct Color
+</td>
+<td>1024x768x16
+</td></tr>
+<tr>
+<td>0x118
+</td>
+<td>Direct Color
+</td>
+<td>1024x768x24
+</td></tr>
+<tr>
+<td>0x107
+</td>
+<td>Packed pixel
+</td>
+<td>1024x768x8
+</td></tr>
+<tr>
+<td>0x119
+</td>
+<td>Direct Color
+</td>
+<td>1024x768x15
+</td></tr>
+<tr>
+<td>0x11A
+</td>
+<td>Direct Color
+</td>
+<td>1024x768x16
+</td></tr></table>
+<h2> <span class="mw-headline" id="Supported_Architectures">Supported Architectures</span></h2>
+<ul><li><a href="Category:X86" title="Category:X86">x86</a>
+</li><li><a href="X86-64" title="X86-64">x86_64</a>
+</li><li><a href="Category:ARM" title="Category:ARM">ARM</a>
+</li><li>ARM64
+</li><li>LatticeMico32
+</li><li>Motorola 68000
+</li><li>MicroBlaze
+</li><li>MIPS
+</li><li>MIPS64
+</li><li>Moxie
+</li><li>PowerPC
+</li><li>PowerPC64
+</li><li>RISC-V
+</li><li>IBM System/390
+</li><li>SuperH
+</li><li><a href="Category:Sparc" title="Category:Sparc">SPARC</a>
+</li><li>SPARC64
+</li><li>TriCore
+</li><li>Unicore
+</li><li>Xtensa
+</li></ul>
+<h2> <span class="mw-headline" id="Supported_Devices">Supported Devices</span></h2>
+<ul><li> <a href="Ne2000" title="Ne2000">Ne2000</a> network card
+</li><li> <a href="Intel_Ethernet_i217" title="Intel Ethernet i217">e1000</a> network cards
+</li><li> <a href="RTL8139" title="RTL8139">RTL8139</a> network card
+</li><li> <a href="AMD_PCNET" title="AMD PCNET">AMD PCnet</a> network cards
+</li><li> <a href="PC_Speaker" title="PC Speaker">PC Speaker</a>
+</li><li> <a href="Sound_Blaster_16" title="Sound Blaster 16">Sound Blaster 16</a> sound cards
+</li><li> <a href="AC97" title="AC97">AC97</a>
+</li><li> <a href="Intel_High_Definition_Audio" title="Intel High Definition Audio">Intel High Definition Audio</a>
+</li><li> <a href="Virtio" title="Virtio">virtio</a> devices
+</li><li> PCI SVGA card (Cirrus Logic 5446)
+</li><li> PCI support (With BIOS32).
+</li></ul>
+<h2> <span class="mw-headline" id="Usage">Usage</span></h2>
+<p>QEMU is easy to use, it does not have a configuration script like Bochs. To use QEMU with your OS,
+</p>
+<pre> qemu -L .\ -fda my_disk_image.img -m 32
+</pre>
+<p>Or, if you use UNIX,
+</p>
+<pre> qemu -fda my_disk_image.img -m 32
+</pre>
+<p>The -L tells QEMU where to find its BIOS images, which is not necessary in a standard unix installation. The -m tells how many megabytes of memory to use; the default is 128
+</p><p>You can use -fda/-fdb for disk image files, and -hda/-hdb/-hdc/-hdd for hard disks. To change boot devices, use -boot {a/b/c/d}. a/b tell it to boot floppy a or b. c for hard disk and d for CDROM.
+</p><p>Alternatively you can point -hdc or use -cdrom to an ISO image file (2048 bytes per sector ISO format).
+</p><p>Whilst inside the emulator you can use CTRL-ALT-{1,2,3} to swap in/out of the emulation screen, the QEMU console and a serial console. The system console lets you change disk images and other things and do memory dumps etc.
+</p><p>In order to track down a triple fault, you can use the <tt>-d int</tt> option to show what interrupts happen. Work can be done even more easily when passing the <tt>-no-shutdown -no-reboot</tt> options, since that causes the virtual machine not to reboot, but instead halt. Then, in conjunction with the QEMU monitor (see below), you can debug the machine state more thoroughly.
+</p>
+<h3> <span class="mw-headline" id="The_QEMU_Console">The QEMU Console</span></h3>
+<p>It is possible to communicate with the QEMU console like one communicates with the Bochs console. However, this does not occur through port 0xE9 (which may be achieved by patching the source code however), but by using a serial port. ReactOS uses this to dump warning messages in the QEMU console. See <a rel="nofollow" class="external text" href="http://www.reactos.org/wiki/QEMU#Redirect_to_the_console">the ReactOS wiki</a> for details.
+</p>
+<h3> <span class="mw-headline" id="The_QEMU_monitor">The QEMU monitor</span></h3>
+<p>When you hit CTRL-ALT-2 you are placed in the QEMU monitor which is a command-line for querying information about the system while it is running.  It does not quite act as a debugger, but, used in combination with GDB-stub, you can get pretty much all the functionality you will need.  In Unix hosts, you can even redirect this monitor interface to the standard output using the
+</p>
+<pre> -monitor stdio
+</pre>
+<p>command-line option. Some useful commands:
+</p>
+<dl><dt> xp&#160;</dt><dd> eXamine Physical memory.  Much like GDB's <tt>x</tt> command, but with no address translation.
+</dd><dt> cpu n&#160;</dt><dd> switch to CPU n.  Note that GDB's threads are numbered from 1, but QEMU's CPUs are numbered from 0.
+</dd><dt> info registers&#160;</dt><dd> dump register state
+</dd><dt> info tlb&#160;</dt><dd> Show virtual memory translation state.
+</dd><dt> info mem&#160;</dt><dd> Show the page table mappings in a compact form.
+</dd><dt> help&#160;</dt><dd> List all commands -- keep in mind that there may be more commands available than those mentioned in the <a rel="nofollow" class="external text" href="http://www.qemu.org/qemu-doc.html#SEC12">QEMU documentation</a>.
+</dd></dl>
+<h3> <span class="mw-headline" id="GDB-stub">GDB-stub</span></h3>
+<p>When you supply the <tt>-s</tt> command line option, QEMU will listen on port localhost:1234 for a connection by GDB.  If you also supply the <tt>-S</tt> command line option, then QEMU will start as if you set a breakpoint at time zero, and you will need to use the GDB command "continue" to actually begin the simulation.
+</p><p>For convenience, I put a file called <tt>.gdbinit</tt> in the current working directory which automatically runs certain commands when you start GDB without the <tt>-n</tt> option.  For example:
+</p>
+<pre> file &lt;my-kernel-binary&gt;
+ target remote localhost:1234
+</pre>
+<p>will load into GDB your kernel and then connect to QEMU.  Be sure to compile your kernel with the GCC option <tt>-g</tt> for debugging symbols. (If you find that the debugger can't find local variables, try using the <tt>-fno-omit-frame-pointer</tt> option when compiling, or disable optimizations.) Now you may debug your kernel as a C program.
+If you have an SMP kernel, check out the <tt>info threads</tt> and <tt>thread</tt> commands. It is also possible to use the QEMU monitor and its commands using the <tt>monitor</tt> command in GDB. For a list of available commands and their description, check out <tt>monitor help</tt>.
+</p>
+<h3> <span class="mw-headline" id="Getting_detailed_logs">Getting detailed logs</span></h3>
+<p>Most of the QEMU source code has commented lines of the form:
+</p>
+<pre> // #define DEBUG_*
+</pre>
+<p>If you are willing to edit and recompile QEMU, then you can get a good deal of debugging info output to stdout by uncommenting those lines at the top of the files that implement the pieces of the simulation you need more info about.
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles">Articles</span></h3>
+<ul><li><a href="QEMU_and_GDB_in_long_mode" title="QEMU and GDB in long mode">QEMU and GDB in long mode</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://www.qemu.org/">QEMU homepage</a>
+</li><li><a rel="nofollow" class="external text" href="http://qemu-forum.ipi.fi/">QEMU forum</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 404/1000000
+Post-expand include size: 1792/2097152 bytes
+Template argument size: 905/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1419-0!*!0!!en!*!* and timestamp 20180121034217 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=QEMU&amp;oldid=20863">http://wiki.osdev.org/index.php?title=QEMU&amp;oldid=20863</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Emulators" title="Category:Emulators">Emulators</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=QEMU" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="QEMU"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:QEMU"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="QEMU#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="QEMU" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=QEMU&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=QEMU&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="QEMU#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<hskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/QEMU" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/QEMU" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=QEMU&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=QEMU&amp;oldid=20863" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/QEMU" title="QEMU">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 5 June 2017, at 03:20.</li>
+											<li id="footer-info-viewcount">This page has been accessed 95,891 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.046 secs. -->
+	</body>
+</html>

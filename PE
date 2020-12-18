@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>PE - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "PE", "wgTitle": "PE", "wgCurRevisionId": 21643, "wgArticleId": 1892, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Executable Formats"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-PE action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">PE</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="PE#mw-head">navigation</a>,
+					<a href="PE#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="Executable_Formats" title="Executable Formats">Executable Formats</a></th></tr><tr><th>Microsoft</th></tr><tr><td><div>
+<p><b>16 bit:</b><br />
+<a href="COM" title="COM">COM</a><br />
+<a href="MZ" title="MZ">MZ</a><br />
+<a href="NE" title="NE">NE</a><br />
+<b>32/64 bit:</b><br />
+<strong class="selflink">PE</strong><br />
+<b>Mixed (16/32 bit):</b><br />
+<a href="LE" title="LE">LE</a><br />
+</p>
+</div></td></tr><tr><th>*nix</th></tr><tr><td><div>
+<p><a href="A.out" title="A.out">A.out</a><br />
+<a href="ELF" title="ELF">ELF</a><br />
+</p>
+</div></td></tr></table>
+<p>With Windows 95/NT, a new executable file type was required. Thus was born the "PE" Portable Executable, which is still in use. Unlike its predecessors, WIN-PE is a true 32bit file format, supporting relocatable code. It does distinguish between TEXT, DATA, and BSS. It is, in fact, a bastardized version of the COFF format.
+</p><p>If you did set up a <a href="Cygwin" title="Cygwin">Cygwin</a> environment on your Windows machine, "PE" is the target format for your Cygwin GCC toolchain, which causes the unaware some headache when trying to link parts build under Cygwin with parts build under Linux or BSD (which use the ELF target by default). (Hint: You have to build a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a>)
+</p><p>The PE format is used by Windows 95 and higher, Windows NT 3.1 and higher, the Mobius and ReactOS. The PE format is also used as a container for .NET assemblies by both the Microsoft .Net CLI and Mono, in which case it doesn't actually store executable data but .Net metadata with IL attached to it.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="PE#Inside_the_PE_file"><span class="tocnumber">1</span> <span class="toctext">Inside the PE file</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="PE#Overview"><span class="tocnumber">1.1</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="PE#DOS_Stub"><span class="tocnumber">1.2</span> <span class="toctext">DOS Stub</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="PE#PE_header"><span class="tocnumber">1.3</span> <span class="toctext">PE header</span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="PE#Optional_header"><span class="tocnumber">1.3.1</span> <span class="toctext">Optional header</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="PE#Data_Directories"><span class="tocnumber">1.3.2</span> <span class="toctext">Data Directories</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-7"><a href="PE#Sections"><span class="tocnumber">1.4</span> <span class="toctext">Sections</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="PE#Section_header"><span class="tocnumber">1.4.1</span> <span class="toctext">Section header</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="PE#In_asm_linkage"><span class="tocnumber">1.4.2</span> <span class="toctext">In asm linkage</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="PE#Position_Independent_Code"><span class="tocnumber">1.4.3</span> <span class="toctext">Position Independent Code</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-11"><a href="PE#CLI_.2F_.Net"><span class="tocnumber">1.5</span> <span class="toctext">CLI / .Net</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="PE#Loading_a_PE_file"><span class="tocnumber">2</span> <span class="toctext">Loading a PE file</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="PE#64_bit_PE"><span class="tocnumber">3</span> <span class="toctext">64 bit PE</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="PE#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</td></tr></table>
+<h1> <span class="mw-headline" id="Inside_the_PE_file"> Inside the PE file </span></h1>
+<p>Below will attempt to explain the various concepts and parts that make up a PE file rather than the exact data structures inside of them since that would certainly take up too much space. The reasoning is that most resources on PE files tend to just dump a bunch of data structures in your face without fully explaining what they are for. So by reading the following and knowing what a PE file consists of you will have a better understanding of what to expect and how to utilize PE file resources.
+</p>
+<h2> <span class="mw-headline" id="Overview">Overview</span></h2>
+<p>The PE file consists of several parts. They are briefly sumarized below, then more detail is entered on each part.
+Here are the definitions for the field types. PE files are stored in little-endian order, the same byte order as an x86.
+</p>
+<div class="thumb tleft"><div class="thumbinner" style="width:310px;"><a href="File:PEFigure1.jpg" class="image"><img alt="" src="images/d/dd/PEFigure1.jpg" width="308" height="566" class="thumbimage" /></a>  <div class="thumbcaption">An overview of the format</div></div></div>
+<h2> <span class="mw-headline" id="DOS_Stub"> DOS Stub </span></h2>
+<p>The PE format begins with a MS-DOS stub (a header plus executable code) which makes it a valid MS-DOS executable. The MS-DOS header begins with the magic code 0x5A4D and is 64 bytes long, followed by real-mode executable code. The standard stub used almost universally is 128-bytes long (including header and executable code) and simply outputs "This program cannot be run in DOS mode." Despite many utilities that with PE files are hard coded to expect the PE header to start at exactly 128 bytes in, this is incorrect since in some linkers, including Microsoft's own <a href="Link" title="Link">Link</a>, it is possible to replace the MS-DOS stub with one of your own choosing, and many older programs did this to allow the developer to bundle a MS-DOS and Windows version into a single file. The correct way is to read a formerly reserved 4-byte address inside the MS-DOS header located at 0x3C (field commonly known as e_lfanew) which contains the address at which PE file signature is found, and PE file header follows immediately. Usually this is a pretty standard value (most of the time this field is set to 0xE8 by the default link.exe stub). Microsoft seemingly recommends aligning the PE header on an 8 byte boundary (<a rel="nofollow" class="external free" href="http://msdn.microsoft.com/en-us/gg463119.aspx">http://msdn.microsoft.com/en-us/gg463119.aspx</a>, page 10, figure 1).
+</p>
+<h2> <span class="mw-headline" id="PE_header"> PE header </span></h2>
+<p>The PE header contains information that concerns the entire file rather than individual pieces that will be coming up later. The bare minimum header contains a 4-byte signature (0x00004550), the machine type/architecture of the executable code inside, a time stamp, a pointer to symbols, as well as various flags (is the file an executable, DLL, can the application handle addresses above 2GB, does the file needed be copy to the swap file if ran from a removable device, etc). Unless you're using a really stripped down statically linked PE file to save memory with a hard coded entry point and no resources, then the PE header alone isn't enough.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">// 1 byte aligned</span>
+<span class="kw4">struct</span> PeHeader <span class="br0">&#123;</span>
+	<span class="kw4">uint32_t</span> mMagic<span class="sy0">;</span> <span class="co1">// PE\0\0 or 0x00004550</span>
+	<span class="kw4">uint16_t</span> mMachine<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mNumberOfSections<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mTimeDateStamp<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mPointerToSymbolTable<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mNumberOfSymbols<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mSizeOfOptionalHeader<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mCharacteristics<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Optional_header"> Optional header </span></h3>
+<p>The optional PE header follows directly after the standard PE header. It's size is specified in the PE header which you can also use to tell if the optional header exists. The optional PE header begins with a 2-byte magic code representing the architecture (0x010B for PE32, 0x020B for PE64, 0x0107 ROM). This can be used in conjunction with the machine type to see in the PE header to detect if the PE file is running on a compatible system. There are a few other useful memory-related variables including the size and virtual base of the code and data, as well as the application's version number  (completely user specified, some update utilities use this to detect if a newer version is available), entry point, and how many directories there are (see below).
+</p><p>Part of the optional header is NT-specific. This include the subsystem (console, driver, or GUI application), how much stack and heap space to reserve, and the minimum required Operating System, subsystem and Windows version. You can use your own values for all of these depending on the needs of your OS.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">// 1 byte aligned</span>
+<span class="kw4">struct</span> Pe32OptionalHeader <span class="br0">&#123;</span>
+	<span class="kw4">uint16_t</span> mMagic<span class="sy0">;</span> <span class="co1">// 0x010b - PE32, 0x020b - PE32+ (64 bit)</span>
+	<span class="kw4">uint8_t</span>  mMajorLinkerVersion<span class="sy0">;</span>
+	<span class="kw4">uint8_t</span>  mMinorLinkerVersion<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfCode<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfInitializedData<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfUninitializedData<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mAddressOfEntryPoint<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mBaseOfCode<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mBaseOfData<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mImageBase<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSectionAlignment<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mFileAlignment<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mMajorOperatingSystemVersion<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mMinorOperatingSystemVersion<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mMajorImageVersion<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mMinorImageVersion<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mMajorSubsystemVersion<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mMinorSubsystemVersion<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mWin32VersionValue<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfImage<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfHeaders<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mCheckSum<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mSubsystem<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mDllCharacteristics<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfStackReserve<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfStackCommit<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfHeapReserve<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfHeapCommit<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mLoaderFlags<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mNumberOfRvaAndSizes<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Data_Directories"> Data Directories </span></h3>
+<p>While technically part of the optional header and follows directly after it is a list of entries pointing to data directories. Because the optional header can vary in size, you only need to pay attention to the directories that exist and you expect, since it is likely that new data directories will be added to the PE specification in the future (.Net is an example of one that was recently added). Each data directory is referenced as an 8-byte entry in the optional header. The first 4 bytes is the Relative Virtual Address, or RVA (see Sections below), of the directory, and the last 4 bytes is the size of the directory.
+</p><p>Each data directory that the entries point to have their own format. Data directories are used to describe import tables for dynamic linking, a table of resources that are embedded inside of the PE file, debug information (line numbers and break points), the CLI .Net header.
+</p>
+<h2> <span class="mw-headline" id="Sections"> Sections </span></h2>
+<p>A PE file is made up of sections which consist of a name, offset within the file, virtual address to copy to, as well as the size of the section in the file and in virtual memory (which may differ, in which case the difference should be cleared 0s), and associated flags. The sections usually follow universal naming (".text", ".rsrc", etc), but this can also vary between linker and in some cases can be user-defined, so it is better to depend on the flags to tell if a section is executable or writable. However in saying that, if you have custom data that you wish to embed inside of the executable, then placing it inside of a section and identifying it by the section's name can be a good idea since you won't be changing the PE format and your executable will remain compatible with PE tools.
+</p><p>The Relative Virtual Base is a phrase that comes up a lot in PE documentation. The RVA is the address at where something exists once it's loaded into memory, rather than an offset into the file. To calculate the file's address from an RVA without actually loading the sections into memory, you can use the table of section entries. By using the virtual address and size of each section you can find which section the RVA belongs to, then subtract the difference between the section's virtual address and file offset.
+</p>
+<h3> <span class="mw-headline" id="Section_header"> Section header </span></h3>
+<p>Each section has an entry in section header table.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> IMAGE_SECTION_HEADER <span class="br0">&#123;</span> <span class="co1">// size 40 bytes</span>
+	<span class="kw4">char</span><span class="br0">&#91;</span><span class="nu0">8</span><span class="br0">&#93;</span>  mName<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mVirtualSize<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mVirtualAddress<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mSizeOfRawData<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mPointerToRawData<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mPointerToRealocations<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mPointerToLinenumbers<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mNumberOfRealocations<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> mNumberOfLinenumbers<span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> mCharacteristics<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<h3> <span class="mw-headline" id="In_asm_linkage">In asm linkage</span></h3>
+<p>if in nasm you declare a block of code like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw4">segment</span> <span class="kw4">.code</span>
+aAsmFunction<span class="sy0">:</span>
+<span class="co1">;Do whatever</span>
+<span class="kw1">mov</span> <span class="kw5">BYTE</span><span class="br0">&#91;</span>aData<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0</span>
+<span class="kw1">ret</span>
+<span class="kw4">segment</span> <span class="kw4">.data</span>
+aData<span class="sy0">:</span> <span class="kw4">db</span> <span class="nu0">0xFF</span></pre></div></div>
+<p>The <i>segments</i> will apear as <i>sections</i>. Using this it is possible to keep C and Asm seperate, as a linker will not automatically merge <i>.code</i> and <i>.text</i>, which is the normal output by C compilers.
+</p>
+<h3> <span class="mw-headline" id="Position_Independent_Code"> Position Independent Code </span></h3>
+<p>If each section specifies which virtual address to load it in to, you may be wondering how multiple DLLs can exist in one virtual address space without conflict. It is true that most code you'll find in a PE file (DLL or otherwise) is position dependent and linked to a specific address. However to resolve this issue there exist a structure called a Relocation Table that is attached to each section entry. The table is basically a HUGE long list of every address stored in that section so you can offset it to the location where you loaded the section.
+</p><p>Because addresses can point across section borders, relocations should be done after each section is loaded into memory. Then reiterate over each section, iterate through each address in the Relocation Table, find out what section that RVA exists in and add/subtract the offset between that section's linked virtual address and the section's virtual address you loaded it into.
+</p>
+<h2> <span class="mw-headline" id="CLI_.2F_.Net"> CLI / .Net </span></h2>
+<p>CLI works alongside the PE format. Rather than being an extension to the format, it really exists as its own format inside of a format with a completely different way of storing tables and values. All the .Net data and headers exist inside of sections that are loaded into memory (they are loaded into memory since CLI involves heavy language reflection requiring the metadata without thrashing the disk). The second reason that the .Net metadata exists inside of the sections rather than the PE headers is because the PE loader actually has no concept of .Net at all. (Exception: There is a data directory entry pointing to the RVA of the CLI header so tools can easily access the .Net data without loading it into virtual memory.) In fact, I highly doubt the Windows kernel has any sort of concept of .Net at all. The way .Net works is by dynamically linking against the .Net runtime (mscoree.dll), and setting the entry point to a symbol (_CorExeMain) that resolves to a location inside of mscoree.dll instead of the local executable. This means that Windows CE, WINE, and ReactOS can all load .Net assemblies once the .Net framework can be installed without any specific code.
+</p>
+<h1> <span class="mw-headline" id="Loading_a_PE_file"> Loading a PE file </span></h1>
+<p>To load a PE file is quite simple;
+</p><p>1. Extract from the header the entry point, heap and stack sizes.
+</p><p>2. Iterate through each section and copy it from the file into virtual memory (although not required, it is good to clear the difference between the section size in memory and in the file to 0).
+</p><p>3. Find the address of the entry point by finding the correct entry in the symbol table.
+</p><p>4. Create a new thread at that address and begin executing!
+</p><p>To load a PE file that requires a dynamic DLL you can do the same, but check the Import Table (referred to by the data directory) to find what symbols and PE files are required, the Export Table (also referred to by the data directory) inside of that PE file to see where those symbols are and match them up once you've loaded that PE's sections into memory (and relocated them!) And lastly, beware that you'll have to recursively resolve each DLL's Import Tables as well, and some DLLs can use tricks to reference a symbol in the DLL loading it so make sure you don't get your loader stuck in a loop! Registering symbols loaded and making them global might be a good solution.
+</p><p>It may also be a good idea to check the <i>Machine</i> and <i>Magic</i> fields for validity, not just the PE signature. This way your loader won't try loading a 64 bit binary into 32 bit mode (this would be certain to cause an exception).
+</p>
+<h1> <span class="mw-headline" id="64_bit_PE">64 bit PE</span></h1>
+<p>64 bit PE's are extremely similar to normal PE's, but the machine type, if AMD64, is 0x8664, not 0x14c. This field is directly after the PE signature. The magic number also changes from 0x10b to 0x20b. The magic field is at the beginning of the optional header.
+</p><p>Also several fields have been expanded to 64 bits (but not RVAs or offsets). An example of these is the Preffered Base Address
+</p>
+<h1> <span class="mw-headline" id="See_Also"> See Also </span></h1>
+<ul><li> MSDN Magazine: <a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/magazine/cc301805.aspx">Inside Windows: An In-Depth Look into the Win32 Portable Executable File Format</a>
+</li><li> PE Specification: <a rel="nofollow" class="external text" href="http://www.microsoft.com/whdc/system/platform/firmware/PECOFF.mspx">latest edition, OOXML format</a>, <a rel="nofollow" class="external text" href="http://download.microsoft.com/download/e/b/a/eba1050f-a31d-436b-9281-92cdfeae4b45/pecoff.doc">1999 edition, DOC format</a>
+</li><li> <a rel="nofollow" class="external free" href="http://perso.wanadoo.fr/pierrelib/exec_formats/PE_v1.0.html">http://perso.wanadoo.fr/pierrelib/exec_formats/PE_v1.0.html</a>
+</li><li> <a rel="nofollow" class="external free" href="http://perso.wanadoo.fr/pierrelib/exec_formats/OMF_v1.1.html">http://perso.wanadoo.fr/pierrelib/exec_formats/OMF_v1.1.html</a>
+</li><li> Someone's Perspective On PE32 Vs ELF32. - <a rel="nofollow" class="external free" href="http://forum.osdev.org/viewtopic.php?f=1&amp;t=17686&amp;p=133835#p133835">http://forum.osdev.org/viewtopic.php?f=1&amp;t=17686&amp;p=133835#p133835</a>
+</li><li> <a rel="nofollow" class="external free" href="http://www.ntcore.com/exsuite.php">http://www.ntcore.com/exsuite.php</a> - Great tool for Windows that lets you explore inside of a PE file (and .Net metadata) to understand how it's laid out.
+</li><li> <a rel="nofollow" class="external text" href="http://www.brokenthorn.com/Resources/OSDevPE.html">BrokenThorn on the topic</a>
+</li><li> <a rel="nofollow" class="external text" href="https://www.openrce.org/reference_library/files/reference/PE%20Format.pdf">Graphical layout of relevant structures</a>
+</li><li> <a rel="nofollow" class="external text" href="https://code.google.com/p/corkami/wiki/PE101">Illustrative walkthrough of simple PE executable</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/erocarrera/pefile">pefile</a> - handy python module for inspecting &amp; manipulating PE files
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 408/1000000
+Post-expand include size: 1320/2097152 bytes
+Template argument size: 575/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1892-0!*!0!!en!2!* and timestamp 20180121034156 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=PE&amp;oldid=21643">http://wiki.osdev.org/index.php?title=PE&amp;oldid=21643</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Executable_Formats" title="Category:Executable Formats">Executable Formats</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=PE" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="PE"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:PE"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="PE#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="PE" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=PE&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=PE&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="PE#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/PE" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/PE" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=PE&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=PE&amp;oldid=21643" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Microsoft_Portable_Executable_and_Common_Object_File_Format" title="Microsoft Portable Executable and Common Object File Format">Deutsch</a></li>
+		</ul>
+	</div>
+</divskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/PE" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/PE" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=PE&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=PE&amp;oldid=21643" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Microsoft_Portable_Executable_and_Common_Object_File_Format" title="Microsoft Portable Executable and Common Object File Format">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 21 October 2017, at 17:30.</li>
+											<li id="footer-info-viewcount">This page has been accessed 95,459 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.035 secs. -->
+	</body>
+</html>

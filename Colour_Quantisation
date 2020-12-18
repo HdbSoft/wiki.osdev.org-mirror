@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Colour Quantisation - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Colour_Quantisation", "wgTitle": "Colour Quantisation", "wgCurRevisionId": 16268, "wgArticleId": 2950, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Stubs", "Graphical UI"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Colour_Quantisation action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Colour Quantisation</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Colour_Quantisation#mw-head">navigation</a>,
+					<a href="Colour_Quantisation#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=Colour_Quantisation&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>In a graphical OS environment, there will come a time when you need to represent an image on a display device.  If the display device is unable to represent all the colours from the image, you will have to have a mechanism of mapping a colour from the image onto the closest displayable colour from the device palette.  The general term for such a colour mapping is Colour Quantisation.  The Colour Quantiser is the section of a system responsible for performing this action.
+</p><p>For the purposes of this article, the source image is considered to be a bitmapped image with 24 bits per pixel, eights bits for each of the red, green and blue components.  This is commonly the worst case scenario (outside of 48-bit photography processing) and any other scenario can be expressed as this.
+</p><p>While Colour Quantisation on its own can be used to produce a reasonable representation of the image, most applications may want to consider applying <a href="Dithering" title="Dithering">Dithering</a> to the image to produce a more accurate overall reproduction.
+</p><p>The term Colour Quantisation also refers to the process of calculating a low-colour palette from an image that preserves much of the colour detail, but that usage is not discussed here.
+</p><p><i>Disclaimer:  This article is not intended to be the final word nor give you the best solution for this issue, but rather to introduce the concept and hopefully provide something that will work in most cases.  The methods presented here should work to get your project over this hurdle in the short term to then be replaced and improved upon in future.</i>
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Colour_Quantisation#Non-paletted_Quantisation"><span class="tocnumber">1</span> <span class="toctext">Non-paletted Quantisation</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Colour_Quantisation#Colour_Contraction"><span class="tocnumber">1.1</span> <span class="toctext">Colour Contraction</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Colour_Quantisation#Colour_Extension"><span class="tocnumber">1.2</span> <span class="toctext">Colour Extension</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="Colour_Quantisation#Paletted_Quantisation"><span class="tocnumber">2</span> <span class="toctext">Paletted Quantisation</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Colour_Quantisation#Euclidean_Distance"><span class="tocnumber">2.1</span> <span class="toctext">Euclidean Distance</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Colour_Quantisation#Pre-calculated_map"><span class="tocnumber">2.2</span> <span class="toctext">Pre-calculated map</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="Colour_Quantisation#See_Also"><span class="tocnumber">3</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="Colour_Quantisation#External_Links"><span class="tocnumber">3.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Non-paletted_Quantisation"> Non-paletted Quantisation </span></h2>
+<p>If your display device is a non-paletted type but it cannot display all of the required colours, for example a 15-bit display with only 5 pixels per channel, colour quantisation is straightforward, but you may still want to consider <a href="Dithering" title="Dithering">Dithering</a> the image.
+</p>
+<h3> <span class="mw-headline" id="Colour_Contraction"> Colour Contraction </span></h3>
+<p>Trivially, to map a 24-bit colour onto a smaller colour space, logic and bit-shifting can be used to preserve the most significant bits in each channel from the source colour and compress them into a colour in the destimation space.
+</p><p>For example, given a 24-bit colour with the bits in the following form
+</p>
+<pre>   { R0, R1, R2, R3, R4, R5, R6, R7, G0, G1, G2, G3, G4, G5, G6, G7, B0, B1, B2, B3, B4, B5, B6, B7 }
+</pre>
+<p>(where R0 is the most significant bit in the eight bit Red component and R7 is the least significant bit), this can be made into a 15-bit colour by removing the least significant three bits from each channel, giving the following
+</p>
+<pre>   { R0, R1, R2, R3, R4, G0, G1, G2, G3, G4, B0, B1, B2, B3, B4 }.
+</pre>
+<p>Consideration could be given to the value of the sixth bit to be used to "round" the resultant value up or down as required, but this is unlikely to significantly affect the image quality.
+</p>
+<h3> <span class="mw-headline" id="Colour_Extension"> Colour Extension </span></h3>
+<p>A low bit colour can be converted into a high bit colour in a similar manner to the above by adding in additonal low-significance bits.  For example the 15-bit value
+</p>
+<pre>   { R0, R1, R2, R3, R4, G0, G1, G2, G3, G4, B0, B1, B2, B3, B4 }
+</pre>
+<p>could be converted into a 24-bit colour by inserting three zero bits into each channel, yielding
+</p>
+<pre>   { R0, R1, R2, R3, R4, 0, 0, 0, G0, G1, G2, G3, G4, 0, 0, 0, B0, B1, B2, B3, B4, 0, 0, 0 }.
+</pre>
+<h2> <span class="mw-headline" id="Paletted_Quantisation"> Paletted Quantisation </span></h2>
+<p>Colour Quantisation for a destination palette is by far the most useful application of this technique.  Any one of 16 million possible colours may have to be processed and displayed as a palette colour in order to recreate the image as accurately as possible.  If only a small number of colours is available, such as the 16 colours that are available with a VGA Mode 12h screen, a good method for colour quantisation is essential.  The various techniques can be extended to produce greyscale or even halftone (black and white) representations.
+</p>
+<h3> <span class="mw-headline" id="Euclidean_Distance"> Euclidean Distance </span></h3>
+<p>The most basic method of colour quantistion is the Euclidean Distance technique.  For each colour pixel in the image in turn, Euclid's formula (an extension of Pythagoras' theorem) can be applied to each colour in the palette in turn to determine which of the paletted colours is closest to the desired colour.  This palette colour is then used to represent the pixel.
+</p><p>In pseudo code, the algorithm is as follows:
+</p>
+<pre>   Define C as the source colour
+   Define ND as the nearest distance so far
+   Define NP as the nearest palette entry so far
+   
+   Set ND to a large value
+   For Each Palette Entry P
+   	Calculate D as Square of ( C.R - P.R ) plus Square of ( C.G - P.G ) plus Square of ( C.B - P.B )
+   	If D is less than ND
+   		Set ND = D
+   		Set NP = P
+   	End If
+   Next
+   Use NP as the result
+</pre>
+<p>While the implementation of this algorithm is very straightforward, the algorithm has to compare each pixel in the source image to each colour in the destination palette in turn using three squareing operators, meaning that it is very slow in operation.  (Note that the square root operator called for by the Euclidean algorithm can be omitted because it will not affect the result.)
+</p><p>The other main problem with using the Euclidean Distance is that it considers the Red-Green-Blue colour space to be a regular cube with a linear distribution, but this isn't the case.  Consider the Euclidean Distance algorithm being used to represent colours as a greyscale, a pure green and a pure blue will resolve to the same shade of grey, despite green being approximately seven times lighter than blue.  A keen implementer may want to modify this algorithm to take account of the variance in brightness.
+</p>
+<h3> <span class="mw-headline" id="Pre-calculated_map"> Pre-calculated map </span></h3>
+<p>A logical improvement of the Euclidean Distance method above is to pre-calculate a table of the nearest palette colour for a set of possible source colours.  This table can be calculated whenever the display palette is set or changed, and provides a fast lookup for the colour quantiser to significantly improve performance.
+</p><p>Each index of the lookup table will represent a point on a regular grid within the RGB colour cube, and the corresponding value will store the index of the nearest displayable palette entry.  The more points in the grid that are calculated will improve the accuracy of the quantisation, but will take more memory to store and more processing time to calculate.
+</p><p>The extreme case of this would be to use a grid of point that represents every possible combination of the 24-bit colourspace.  Doing this would require 16 million array elements (16Mb at one byte per palette index) and would take the same time to calculate as using the Euclidean algorithm to quantise a 4096x4096 pixel image.  At the other extreme, using too few elements will result in an inaccurate mapping.
+</p><p>The following table details the various grid size options and the resultant table size:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bits per channel
+</th>
+<th> Mapping table entries
+</th>
+<th> Calculated entries per Palette entry
+</th>
+<th> Comment
+</th></tr>
+<tr>
+<td> 1 </td>
+<td> 8 </td>
+<td> 0.5 </td>
+<td> Too few to be usable, doesn't even allowing mapping to each palette colour.
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> 64 </td>
+<td> 4 </td>
+<td> Minimum reasonable table size, will work as a quick procedure.
+</td></tr>
+<tr>
+<td> 3 </td>
+<td> 512 </td>
+<td> 32 </td>
+<td> Reasonable table.  Provides good mapping in little memory.
+</td></tr>
+<tr>
+<td> 4 </td>
+<td> 4096 </td>
+<td> 256 </td>
+<td> Very accurate table.  Neatly fits into one page of memory.
+</td></tr>
+<tr>
+<td> 5 </td>
+<td> 32768 </td>
+<td> 2048 </td>
+<td> Unreasonably accurate table for 16 colours.  Uses eight pages.
+</td></tr>
+<tr>
+<td> 8 </td>
+<td> 16777216 </td>
+<td> 1048576 </td>
+<td> Excessivly accurate table for 16 colours.  Uses 16Mb.
+</td></tr></table>
+<p>From this table, it would seem that storing 3 bits per channel would seem to be a good starting point for the 16-colour mode 12h screen.
+</p><p>As each index entry in the table represents a point within the RGB colourspace, calculating the colour mapping table is straightforward:
+</p>
+<pre>   Allocate the Colour Table
+   Loop the number of entries in the Colour table
+   	Calculate the colour in the grid that corresponds to this array index
+   	Use the Euclidean Distance calculation to find the nearest palette entry to the colour
+   	Store the Palette entry into the corresponding array element
+</pre>
+<p>Once the table is calculated, it can be stored and will not need to be recalculated unless one or more palette entries is changed.
+</p><p>When the quantiser is needed to represent an image on the display device, the following algorithm is applied:
+</p>
+<pre>   Loop each pixel in the source image
+   	Calculate the equivalent colour in the grid from the source colour by colour contraction (mentioned above)
+   	Access the colour table using the grid colour as the index
+   	Use the array element contents as the palette entry for that colour.
+</pre>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Color_quantization">Wikipedia page on the subject</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 57/1000000
+Post-expand include size: 645/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2950-0!*!0!!en!2!* and timestamp 20180121074030 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Colour_Quantisation&amp;oldid=16268">http://wiki.osdev.org/index.php?title=Colour_Quantisation&amp;oldid=16268</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Stubs" title="Category:Stubs">Stubs</a></li><li><a href="Category:Graphical_UI" title="Category:Graphical UI">Graphical UI</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Colour_Quantisation" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Colour_Quantisation"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Colour_Quantisation&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Colour_Quantisation#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Colour_Quantisation" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Colour_Quantisation&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Colour_Quantisation&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Colour_Quantisation#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body"skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Colour_Quantisation" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Colour_Quantisation" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Colour_Quantisation&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Colour_Quantisation&amp;oldid=16268" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 April 2014, at 23:31.</li>
+											<li id="footer-info-viewcount">This page has been accessed 5,277 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

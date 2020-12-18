@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Message Passing Tutorial - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Message_Passing_Tutorial", "wgTitle": "Message Passing Tutorial", "wgCurRevisionId": 19611, "wgArticleId": 3139, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["IPC"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Message_Passing_Tutorial action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Message Passing Tutorial</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Message_Passing_Tutorial#mw-head">navigation</a>,
+					<a href="Message_Passing_Tutorial#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>It's always a problem to decide if you use asynchronous or synchronous message passing. In this article I'll show you how to have both. I'll use a pseudo-code to describe the algorithm, so you can implement it to your language environment. Note that I refer sender and receiver as processes, it can be easily adopted to threads.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Message_Passing_Tutorial#Definitions"><span class="tocnumber">1</span> <span class="toctext">Definitions</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Message_Passing_Tutorial#Asynchronous"><span class="tocnumber">2</span> <span class="toctext">Asynchronous</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Message_Passing_Tutorial#Sending"><span class="tocnumber">2.1</span> <span class="toctext">Sending</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Message_Passing_Tutorial#Receiving"><span class="tocnumber">2.2</span> <span class="toctext">Receiving</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Message_Passing_Tutorial#Synchronous"><span class="tocnumber">3</span> <span class="toctext">Synchronous</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Message_Passing_Tutorial#Sending_2"><span class="tocnumber">3.1</span> <span class="toctext">Sending</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Message_Passing_Tutorial#Receiving_2"><span class="tocnumber">3.2</span> <span class="toctext">Receiving</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="Message_Passing_Tutorial#What_is_this_good_for.3F"><span class="tocnumber">4</span> <span class="toctext">What is this good for?</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Message_Passing_Tutorial#Pitfalls"><span class="tocnumber">5</span> <span class="toctext">Pitfalls</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Message_Passing_Tutorial#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="Message_Passing_Tutorial#Articles"><span class="tocnumber">6.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="Message_Passing_Tutorial#Threads"><span class="tocnumber">6.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Message_Passing_Tutorial#External_Links"><span class="tocnumber">6.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Definitions"> Definitions </span></h2>
+<p>You should have a structure to be sent to another process. I'll refer to this as the message, and I will assume you have these fields:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> message <span class="br0">&#123;</span>
+  src <span class="co1">//the source process that sends the message</span>
+  dst <span class="co1">//the destination process that receives</span>
+  body <span class="co1">//the body of the message (usually holds type and arguments, it's up to you)</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>Sending and receiving must be atomic. This means you must prevent task switches until it's finished. I have two different timers in my OS, one for the wallclock, and another for preemption. So for me this means masking the latter, and reenabling it at the end. You could also use a <a href="http://wiki.osdev.org/index.php?title=Mutex&amp;action=edit&amp;redlink=1" class="new" title="Mutex (page does not exist)">mutex</a> or <a href="Semaphore" title="Semaphore">semaphore</a> to accomplish mutual exclusion.
+</p><p>Blocking and non blocking: the sender can be blocked upon sending a message, but this does not necessarily have to be so. The receiver must block if there's no message waiting. Blocking means the OS will remove the process from ready queue, and won't allocate CPU resources for it until the blockade is cancelled. When it happens, it simply puts the process back into the ready queue (most likely to the top). Processes on the blocked queue will not use any CPU time. This prevents a <a href="http://wiki.osdev.org/index.php?title=Busy_loop&amp;action=edit&amp;redlink=1" class="new" title="Busy loop (page does not exist)">busy loop</a>.
+</p><p>You should maintain a queue for every process to record blocked waiting processes. This queue must not be a circular buffer, you can implement it as a simple chained list. I assume you have written the following functions already (they will be required by the tutorial):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> block<span class="br0">&#40;</span>processid<span class="br0">&#41;</span>               <span class="co1">//function to block a process</span>
+ awake<span class="br0">&#40;</span>processid<span class="br0">&#41;</span>               <span class="co1">//function to unblock a process</span>
+ isblocked<span class="br0">&#40;</span>processid<span class="br0">&#41;</span>           <span class="co1">//returns true if process is blocked</span>
+ pushwaitqueue<span class="br0">&#40;</span>recvpid<span class="sy0">,</span>sendpid<span class="br0">&#41;</span> <span class="co1">//put sendpid on recvpid process' sender waiting queue</span>
+ topwaitqueue<span class="br0">&#40;</span><span class="br0">&#41;</span>                 <span class="co1">//get the last pid in queue</span>
+ popwaitqueue<span class="br0">&#40;</span><span class="br0">&#41;</span>                 <span class="co1">//get the last pid in queue and remove it from queue</span></pre></div></div>
+<p>Now a few words on synchronization: if it's asynchronous, it means the sender is not interested whether the receiver accepts the message or not. It will send the message and move on (won't block). This also means the message could be lost, hence messaging is unreliable. On the other hand, a synchronous sender will wait (block) until the message is delivered, this creates a rendezvous point (so the sender process and the receiver process will run synchronized after the message is accepted). Also because the sender knows when and if the message has arrived, it's a reliable messaging system.
+</p><p>Finally, <a href="http://wiki.osdev.org/index.php?title=Circular_buffer&amp;action=edit&amp;redlink=1" class="new" title="Circular buffer (page does not exist)">circular buffer</a>. It's a FIFO (First In, First Out) buffer. It's implemented by pointers (or indeces) head and tail. If you push something in a FIFO, it will be stored at the memory pointed to by head, and head will be adjusted. On pop, the item will be read from the memory pointed to by tail, and tail will be adjusted. If head or tail reaches the end of the buffer, they will wrap around.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span> circbuff <span class="br0">&#123;</span>
+  <span class="kw4">int</span> head<span class="sy0">;</span>  <span class="co1">//index to queue start within buffer</span>
+  <span class="kw4">int</span> tail<span class="sy0">;</span>  <span class="co1">//index to queue end within buffer</span>
+  <span class="kw4">int</span> count<span class="sy0">;</span> <span class="co1">//number of elements in buff</span>
+  message buffer<span class="br0">&#91;</span>MAXITEMS<span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">//buffer to hold messages</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>You could calculate the number of items in the buffer using the head and tail variables, but as being circular, there's a special case which cannot be handled without a count variable: head will be equal to tail if the buffer is empty, and also when it's full.
+</p>
+<h2> <span class="mw-headline" id="Asynchronous"> Asynchronous </span></h2>
+<h3> <span class="mw-headline" id="Sending">Sending</span></h3>
+<p>Now let's start with sending a message, and not care about. This could lead to losing a message, which we can't afford, so we'll do a trick here. Despite of being asynchronous, we will block if receiver buffer is full, and we'll continue only after there's space for our message.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> async_send<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+  disable_task_switch<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  msg.<span class="me1">src</span><span class="sy0">=</span>current_process<span class="sy0">;</span> <span class="co1">//we must not rely on it's set</span>
+  tmpbuff<span class="sy0">=</span>map_buffer<span class="br0">&#40;</span>msg.<span class="me1">dst</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//temporarily map destination's buffer into sender process' address space</span>
+  <span class="kw1">if</span> <span class="br0">&#40;</span>tmpbuff.<span class="me1">count</span><span class="sy0">==</span>MAXITEMS<span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="co1">//if receiver buffer is full, block</span>
+    pushwaitqueue<span class="br0">&#40;</span>msg.<span class="me1">dst</span><span class="sy0">,</span>current_process<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//record this process in dst's sender queue</span>
+    block<span class="br0">&#40;</span>current_process<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  push<span class="br0">&#40;</span>tmpbuff<span class="sy0">,</span>msg<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>isblocked<span class="br0">&#40;</span>msg.<span class="me1">dst</span><span class="br0">&#41;</span><span class="br0">&#41;</span> awake<span class="br0">&#40;</span>msg.<span class="me1">dst</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">//if destination process is blocked for receiving, awake it</span>
+  unmap_buffer<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  enable_task_switch<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Receiving">Receiving</span></h3>
+<p>Doesn't matter whether it's synchronized or not, receiver must block if it's message queue is empty, and there's nothing to process.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">circbuff buff<span class="sy0">;</span>
+message async_recv<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+  message tmp<span class="sy0">=</span>NULL<span class="sy0">;</span>
+  disable_task_switch<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">if</span> <span class="br0">&#40;</span>buff.<span class="me1">count</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span> block<span class="br0">&#40;</span>current_process<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//if there's nothing to get, block</span>
+  tmp<span class="sy0">=</span>pop<span class="br0">&#40;</span>buff<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">while</span><span class="br0">&#40;</span>topwaitqueue<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span>NULL<span class="br0">&#41;</span> awake<span class="br0">&#40;</span>popwaitqueue<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//awake blocked processes waiting to send</span>
+  enable_task_switch<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">return</span> <span class="br0">&#40;</span>tmp<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>It's possible that under very rare circumstances you want a non-blocking receive that returns NULL if there's no message waiting. I highly discourage, because it leads to a polling busy loop, but just in case, here you are:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">message async_recvpoll<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+  message tmp<span class="sy0">=</span>NULL<span class="sy0">;</span>
+  disable_task_switch<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">if</span> <span class="br0">&#40;</span>buff.<span class="me1">count</span><span class="sy0">!=</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    tmp<span class="sy0">=</span>pop<span class="br0">&#40;</span>buff<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">while</span><span class="br0">&#40;</span>topwaitqueue<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span>NULL<span class="br0">&#41;</span> awake<span class="br0">&#40;</span>popwaitqueue<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  enable_task_switch<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">return</span> <span class="br0">&#40;</span>tmp<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>Note that we count on recv being blocking to implement synchronous transfer. If you use the non-blocking code above, you'll have to take care of that on your own.
+</p>
+<h2> <span class="mw-headline" id="Synchronous"> Synchronous </span></h2>
+<h3> <span class="mw-headline" id="Sending_2"> Sending </span></h3>
+<p>Okay, now that we have primitives for asynchronous sending and receiving, it's rather easy to implement synchronous transfer on top of them.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">message sync_send<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+  async_send<span class="br0">&#40;</span>msg<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//we send the message</span>
+  <span class="kw1">return</span><span class="br0">&#40;</span>async_recv<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//and we block waiting for the response</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Receiving_2"> Receiving </span></h3>
+<p>Likewise,
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">message consume<span class="br0">&#40;</span>message<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//function to do something with the message</span>
+<span class="kw4">void</span> sync_recv<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+  message tmp<span class="sy0">;</span>
+  tmp<span class="sy0">=</span>async_recv<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">//wait for a message to arrive</span>
+  tmp<span class="sy0">=</span>consume<span class="br0">&#40;</span>tmp<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">//process the message and return a response message</span>
+  async_send<span class="br0">&#40;</span>tmp<span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">//send it back to the caller</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="What_is_this_good_for.3F">What is this good for?</span></h2>
+<p>Synchronous messaging is often used to implement <a href="RPC" title="RPC" class="mw-redirect">Remote Procedure Calls</a>. You send the function code and it's arguments first, then consume() calls the appropriate function and creates a message with the results.
+</p><p>Most OS use some primitive messaging to implement more sophisticated IPC like <a href="http://wiki.osdev.org/index.php?title=Pipe&amp;action=edit&amp;redlink=1" class="new" title="Pipe (page does not exist)">pipes</a> or <a href="Socket" title="Socket">sockets</a>. Reading and writing from <a href="http://wiki.osdev.org/index.php?title=File&amp;action=edit&amp;redlink=1" class="new" title="File (page does not exist)">files</a> is also worked out by sending messages between the vfs process and the disk driver.
+</p>
+<h2> <span class="mw-headline" id="Pitfalls">Pitfalls</span></h2>
+<p>This may seem to be easy, but don't forget it's only a tutorial. In the real world, you'll have to work a lot before your messaging code can became useful. Some suggestions:
+</p>
+<ul><li> check the receiver actually wants to receive from the sender.
+</li><li> always check for loops: process A waiting for B to send, C waiting for A. Now it would be a disaster if B also waits for C.
+</li><li> you should implement an alarm for sending. If delivering fails within a timeout, you should check the reason(s), and maybe resend.
+</li><li> you should have an unique id in every message to detect retransmission.
+</li><li> normally userspace applications never have to receive messages without sending an acknowledge. So it's a good idea to tie asynchronous messaging to a capability flag or something similar.
+</li><li> you should have a matrix of process ids recording who is allowed to send messages to who. An application should never send messages to a driver process directly (only through a library or system call).
+</li></ul>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Remote_Procedure_Call" title="Remote Procedure Call">Remote Procedure Call (RPC)</a>
+</li><li> <a href="Message_Passing" title="Message Passing">Message Passing</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<ul><li><a href="http://forum.osdev.org/viewtopic.php?t=10116" class="extiw" title="topic:10116">passing messages through registers</a>
+</li><li><a href="http://forum.osdev.org/viewtopic.php?t=10922" class="extiw" title="topic:10922">RPC message size, handling oversized messages</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a href="http://wikipedia.org/wiki/Message_Passing" class="extiw" title="wikipedia:Message Passing"> Message Passing</a> on Wikipedia
+</li><li><a rel="nofollow" class="external text" href="http://stackoverflow.com/questions/827691/how-do-you-implement-a-circular-buffer-in-c">How do I implement curcular buffer in C</a>?
+</li><li>This is how <a rel="nofollow" class="external text" href="http://git.minix3.org/?p=minix.git;a=blob;f=kernel/proc.c;h=4595f08c2182c1ea9783b9b9cec3f499df0b5b2e;hb=HEAD#l799">Minix</a> does message passing (see functions mini_send, mini_receive well documented).
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 161/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3139-0!*!0!!en!*!* and timestamp 20180121080052 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Message_Passing_Tutorial&amp;oldid=19611">http://wiki.osdev.org/index.php?title=Message_Passing_Tutorial&amp;oldid=19611</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:IPC" title="Category:IPC">IPC</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Message_Passing_Tutorial" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Message_Passing_Tutorial"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Message_Passing_Tutorial&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Message_Passing_Tutorial#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Message_Passing_Tutorial" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Message_Passing_Tutorial&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Message_Passing_Tutorial&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Message_Passing_Tutorial#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Message_Passing_Tutorial" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Message_Passing_Tutorial" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Message_Passing_Tutorial&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Message_Passing_Tutorial&amp;oldid=19611" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 25 July 2016, at 12:36.</li>
+											<li id="footer-info-viewcount">This page has been accessed 13,032 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Message_Passing_Tutorial" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Message_Passing_Tutorial" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Message_Passing_Tutorial&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Message_Passing_Tutorial&amp;oldid=19611" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 25 July 2016, at 12:36.</li>
+											<li id="footer-info-viewcount">This page has been accessed 13,032 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.120 secs. -->
+	</body>
+</html>

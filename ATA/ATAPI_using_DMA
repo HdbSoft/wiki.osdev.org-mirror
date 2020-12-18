@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ATA/ATAPI using DMA - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ATA/ATAPI_using_DMA", "wgTitle": "ATA/ATAPI using DMA", "wgCurRevisionId": 19394, "wgArticleId": 2241, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Stubs", "ATA"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ATA_ATAPI_using_DMA action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ATA/ATAPI using DMA</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ATAPI_using_DMA#mw-head">navigation</a>,
+					<a href="ATAPI_using_DMA#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="ATAPI_using_DMA#ISA_DMA"><span class="tocnumber">1</span> <span class="toctext">ISA DMA</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="ATAPI_using_DMA#UDMA"><span class="tocnumber">2</span> <span class="toctext">UDMA</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="ATAPI_using_DMA#Verifying_CRC_errors"><span class="tocnumber">2.1</span> <span class="toctext">Verifying CRC errors</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="ATAPI_using_DMA#The_PRD_Table"><span class="tocnumber">3</span> <span class="toctext">The PRD Table</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="ATAPI_using_DMA#PRD_setup"><span class="tocnumber">3.1</span> <span class="toctext">PRD setup</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="ATAPI_using_DMA#The_Bus_Master_Register"><span class="tocnumber">4</span> <span class="toctext">The Bus Master Register</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="ATAPI_using_DMA#The_Command_Byte"><span class="tocnumber">4.1</span> <span class="toctext">The Command Byte</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="ATAPI_using_DMA#The_Status_Byte"><span class="tocnumber">4.2</span> <span class="toctext">The Status Byte</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="ATAPI_using_DMA#ATA.2FATAPI_Commands"><span class="tocnumber">5</span> <span class="toctext">ATA/ATAPI Commands</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="ATAPI_using_DMA#Handling_Errors"><span class="tocnumber">6</span> <span class="toctext">Handling Errors</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="ATAPI_using_DMA#Standard_Order_of_Sending_Commands"><span class="tocnumber">7</span> <span class="toctext">Standard Order of Sending Commands</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="ATAPI_using_DMA#Comments"><span class="tocnumber">8</span> <span class="toctext">Comments</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="ATAPI_using_DMA#See_Also"><span class="tocnumber">9</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="ATAPI_using_DMA#Articles"><span class="tocnumber">9.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="ATAPI_using_DMA#External_Links"><span class="tocnumber">9.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="ISA_DMA">ISA DMA</span></h2>
+<p>It is very important to understand that there are several different types of DMA on a machine. The DMA that is used for ATA drives is called PCI Busmastering DMA. It is very fast. It is completely different from ISA DMA, which is limited to 4MB per second. Anything you may have read about 8bit or 16bit DMA channels 0 through 7, <b>does not apply to disk DMA at all.</b>
+ATA singleword DMA, ATA multiword DMA, UDMA, and <a href="../ADMA" title="ADMA">ADMA</a> are all PCI Busmastering DMA types.
+</p>
+<h2> <span class="mw-headline" id="UDMA">UDMA</span></h2>
+<p>From the point of view of the OS, there is only a tiny difference between "regular" (Single/Multiword) DMA and any of the UDMA modes.
+Most of the actual differences involve precisely how, and how fast, data is transferred between the disk drive and the disk controller. OS software has no direct control over that part of the process. The driver software issues exactly the same commands, in exactly the same way, for all the DMA methods (except ADMA).
+</p><p>The only control the rest of the system has, lies in the initialization of the disk drive and disk controller to mutually compatible DMA modes, during bootup. This will hopefully always be done correctly by the BIOS.
+</p><p>If it is not done correctly by the BIOS, there is a chance that an OS can do the job after bootup. But it is a slim chance, and it is an ugly process. If you want to try it, then read the Intel ATA Controller chip manual linked below.
+</p><p>The one place where UDMA makes a difference to the driver is the concept of a UDMA CRC error. These happen when data blocks get corrupted between the drive and the PCI controller. No other form of DMA uses CRC. In case of an error during the DMA transfer, the driver needs to check if the error was CRC based, and retry the transfer at least once if it was.
+</p>
+<h3> <span class="mw-headline" id="Verifying_CRC_errors">Verifying CRC errors</span></h3>
+<p>Read the PCI Configuration Space uint16_t at offset 6 (Device Status) to get the error code.
+</p>
+<h2> <span class="mw-headline" id="The_PRD_Table">The PRD Table</span></h2>
+<p>You must set up at least one Physical Region Descriptor Table (PRDT) in memory per ATA bus, which contains some number of Physical Region Descriptors (PRDs).
+(The PRDT must be uint32_t aligned, contiguous in physical memory, and cannot cross a 64K boundary.)
+Then you need to store the physical address of the current PRDT in the Bus Master Register, of the Bus Mastering ATA Disk Controller on the PCI bus (see below).
+</p>
+<h3> <span class="mw-headline" id="PRD_setup">PRD setup</span></h3>
+<p>Half of each DMA transfer is encoded in one uint64_t PRD entry (8 bytes) in the table.
+(Why is it only half of a DMA transfer? Because the PRD does not contain any information about which LBAs to read from/write to the disk.
+That information is sent in an entirely separate way to the proper disk -- see below.)
+</p><p>The low uint32_t is a <b>physical</b> memory address of a data buffer. (Keep in mind on 64 bit systems that this address must fit in a uint32_t!)
+The next uint16_t is a <b>byte</b> count (not a sector count!) of the transfer size (64K maximum per PRD transfer).
+A byte count of 0 means 64K. The next uint16_t is reserved (should be 0) except for the MSB. If the MSB is set, that indicates that this PRD is the last entry in the PRDT, and the entire set of transfers is complete.
+The data buffers cannot cross a 64K boundary, and must be contiguous in physical memory (ie. they can't be "virtual" data buffers).
+The byte count on the data buffers must match the number of sectors transferred by the disk. If not, the controller will error out in various ways.
+</p>
+<h2> <span class="mw-headline" id="The_Bus_Master_Register">The Bus Master Register</span></h2>
+<p>The "address" of the Bus Master Register is stored in BAR4, in the PCI Configuration Space of the disk controller.
+The Bus Master Register is generally a set of 16 sequential IO ports. It can also be a 16 byte memory mapped space.
+</p><p>Format:
+</p>
+<pre>byte offset		function
+(Primary ATA bus)
+0x0			Command (byte)
+0x2			Status (byte)
+0x4-0x7			PRDT Address (uint32_t)
+(Secondary ATA bus)
+0x8			Command (byte)
+0xA			Status (byte)
+0xC-0xF			PRDT Address (uint32_t)
+</pre>
+<h3> <span class="mw-headline" id="The_Command_Byte">The Command Byte</span></h3>
+<p>The command byte has only 2 operational bits. All the rest should be 0.
+Bit 0 (value = 1) is the Start/Stop bit.
+Setting the bit puts the controller in DMA mode for that ATA channel, and it starts at the beginning of the respective PRDT.
+Clearing the bit terminates DMA mode for that ATA channel. If the controller was in the middle of a transfer, the remaining data is thrown away.
+Also, the controller does not remember how far it got in the PRDT. That information is lost, if the OS does not save it. The bit must be cleared when a transfer completes.
+</p><p>Bit 3 (value = 8) is the Read/Write bit. This bit is a huge problem. The disk controller does not automatically detect whether the next disk operation is a read or write. You have to <i>tell</i> it, in advance, by setting this bit. Note that when reading from the disk, you must set this bit to 1, and clear it when writing to the disk. You must first stop DMA transfers (by clearing bit 0) before you can change the Read/Write bit! Please note all the bad consequences of clearing bit 0, above! The controller loses its place in the PRDT.
+</p><p>In essence, this means that each PRDT must consist exclusively of either read or write entries. You set the Read/Write bit in advance, then "use up" the entire PRDT -- before you can do the opposite operation.
+</p>
+<h3> <span class="mw-headline" id="The_Status_Byte">The Status Byte</span></h3>
+<p>The bits in the status byte are not usually useful. However, you are required to read it after every IRQ on disk reads anyway.
+Reading this byte may perform a necessary final cache flush of the DMA data to memory.
+</p>
+<ul><li> Bit 7 (Simplex operation only) is completely obsolete. However, if you want your OS to support mid 90's era hardware, this bit means you can only use one ATA bus at a time for DMA. The other can only use PIO.
+</li><li> Perhaps bits 5 and 6 (values 0x20 and 0x40) will provide useful information if examined once. They are supposedly set by the BIOS if the Master or Slave drive on the bus (respectively) are capable of, and initialized for DMA operation. They are there only for your use. They serve no other purpose.
+</li><li> If bit 2 (value = 4) is not set after the OS receives an IRQ, then some other device sharing the IRQ generated the IRQ -- not the disk. (You might want to reset this bit after every IRQ, by writing a 4 to the Status Byte IO port.)
+</li><li> Bit 1 (value = 2) is set if any DMA memory transfer failed for any reason in this PRDT.
+</li><li> Bit 0 (value = 1) is set when the bus goes into DMA mode. It is cleared when the last PRD in the table has been used up. Generally, the OS should already know that this has happened, by receiving the proper number of IRQs from the disk.
+</li></ul>
+<h2> <span class="mw-headline" id="ATA.2FATAPI_Commands">ATA/ATAPI Commands</span></h2>
+<p>The PCI disk controller only handles the memory half of the DMA transfer, by interpreting the PRDT.
+The device driver must separately tell the drive to do its half of the work.
+</p><p>To use DMA with an ATAPI drive, write a 1 to the Features IO port (0x1F1 on the Primary bus), and the maxbytecount should be 0 -- when issuing the PACKET command to the drive.
+</p><p>For ATA, for each PRD entry in the PRDT, the driver must issue a Read/Write DMA command to the disk; specifying a StartLBA and a sector count.
+</p><p>When the drive completes each command it sends an IRQ (possibly also when transfer in progress), to let the driver know that it is ready to transfer the next batch of data to/from the disk controller. The driver should then read the Bus Master Register Status byte.
+</p><p>The formats of the commands are precisely the same as for the 28 and 48 bit PIO mode Read and Write commands, except for the value sent to the "Command" IO Port.
+</p>
+<pre>
+Command byte:		Function:
+0xC8			Read DMA (28 bit LBA)
+0x25			Read DMA (48 bit LBA)
+0xCA			Write DMA (28 bit LBA)
+0x35			Write DMA (48 bit LBA)
+</pre>
+<h2> <span class="mw-headline" id="Handling_Errors">Handling Errors</span></h2>
+<p>After a transfer, if the Bus Master Status byte has its ERR bit (bit 1, value = 2) set, then clear it by writing a 2 to that port.
+You can then read the LBA IO ports for the bus (0x1F3 through 0x1F6) to find out which sector failed.
+</p><p>For any error except a UDMA CRC error, it is recommended to do a Software Reset on the bus, in order to force all the devices to take the bus out of DMA mode.
+</p>
+<h2> <span class="mw-headline" id="Standard_Order_of_Sending_Commands">Standard Order of Sending Commands</span></h2>
+<ul><li> Prepare a PRDT in system memory.
+</li><li> Send the <b>physical</b> PRDT address to the Bus Master PRDT Register.
+</li><li> Set the direction of the data transfer by setting the Read/Write bit in the Bus Master Command Register.
+</li><li> Clear the Error and Interrupt bit in the Bus Master Status Register.
+</li><li> Select the drive.
+</li><li> Send the LBA and sector count to their respective ports.
+</li><li> Send the DMA transfer command to the ATA controller.
+</li><li> Set the Start/Stop bit on the Bus Master Command Register.
+</li><li> When an interrupt arrives (after the transfer is complete), respond by resetting the Start/Stop bit.
+</li><li> Read the controller and drive status to determine if the transfer completed successfully.
+</li></ul>
+<h2> <span class="mw-headline" id="Comments">Comments</span></h2>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles">Articles</span></h3>
+<ul><li> <a href="../ADMA" title="ADMA">ADMA</a>
+</li><li> <a href="../DMA" title="DMA" class="mw-redirect">DMA</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://bos.asmhackers.net/docs/ata/docs/29860001.pdf">Intel manual with DMA / UDMA / PCI configuration space details</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.osdever.net/downloads/docs/idems100.zip">Very simple original Busmaster DMA spec with PRDT spec</a>
+</li></ul>
+<center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="../File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="../images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="../Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=ATA/ATAPI_using_DMA&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 103/1000000
+Post-expand include size: 483/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2241-0!*!0!!en!2!* and timestamp 20180121041359 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ATA/ATAPI_using_DMA&amp;oldid=19394">http://wiki.osdev.org/index.php?title=ATA/ATAPI_using_DMA&amp;oldid=19394</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="../Category:Stubs" title="Category:Stubs">Stubs</a></li><li><a href="../Category:ATA" title="Category:ATA">ATA</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ATA%2FATAPI_using_DMA" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ATAPI_using_DMA"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="../Talk:ATA/ATAPI_using_DMA"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ATAPI_using_DMA#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ATAPI_using_DMA" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ATA/ATAPI_using_DMA&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ATA/ATAPI_using_DMA&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ATAPI_using_DMA#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="../Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/ATA/ATAPI_using_DMA" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/ATA/ATAPI_using_DMA" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=ATA/ATAPI_using_DMA&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=ATA/ATAPI_using_DMA&amp;oldid=19394" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 2 July 2016, at 14:51.</li>
+											<li id="footer-info-viewcount">This page has been accessed 36,783 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","di../skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="../Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="../Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="../Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="../OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="../OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="../OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ATA/ATAPI_using_DMA" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ATA/ATAPI_using_DMA" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ATA/ATAPI_using_DMA&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ATA/ATAPI_using_DMA&amp;oldid=19394" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 2 July 2016, at 14:51.</li>
+											<li id="footer-info-viewcount">This page has been accessed 36,783 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="../OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="../OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="../OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="../skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.035 secs. -->
+	</body>
+</html>

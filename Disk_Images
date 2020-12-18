@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Disk Images - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Disk_Images", "wgTitle": "Disk Images", "wgCurRevisionId": 21348, "wgArticleId": 1606, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["FAQ"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Disk_Images action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Disk Images</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Disk_Images#mw-head">navigation</a>,
+					<a href="Disk_Images#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The best way for hobbyist os developers to test their systems is to use programs like <a href="QEMU" title="QEMU">QEMU</a>, <a href="Bochs" title="Bochs">Bochs</a>, <a href="VMware" title="VMware">VMware</a> or <a href="Microsoft_Virtual_PC" title="Microsoft Virtual PC">Virtual PC</a>.
+</p><p>All of these common tools rely on using disk images (either floppy or hard disk). A disk image is nothing more than a file whose content reflects the layout of a disk and that the tool will use as if it was a physical device. E.g. A floppy image typically is 1.44MB large and its 512 first bytes consist of the 'floppy's boot sector. The different sub-pages should tell you how to create such images from real disks and use them under the most common operating systems.
+</p><p><br />
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Disk_Images#Tools"><span class="tocnumber">1</span> <span class="toctext">Tools</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Disk_Images#Floppy_disk_images"><span class="tocnumber">2</span> <span class="toctext">Floppy disk images</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Disk_Images#CD_images"><span class="tocnumber">3</span> <span class="toctext">CD images</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Disk_Images#Handling_of_Partition_Tables_in_images."><span class="tocnumber">4</span> <span class="toctext">Handling of Partition Tables in images.</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Disk_Images#Images_with_preinstalled_GRUB"><span class="tocnumber">5</span> <span class="toctext">Images with preinstalled GRUB</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Disk_Images#Links"><span class="tocnumber">6</span> <span class="toctext">Links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Tools"> Tools </span></h2>
+<p>These programs can help you with the management of disk images
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>
+</td>
+<th> Linux
+</th>
+<th> Windows
+</th>
+<th> BSD
+</th>
+<th> Mac OS X
+</th>
+<th> <a href="Category:Filesystems" title="Category:Filesystems">File Systems</a> Supported
+</th></tr>
+<tr>
+<td> <a href="BFI" title="BFI">BFI</a>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> <a href="FAT" title="FAT">FAT</a>
+</td></tr>
+<tr>
+<td> <a href="Fat_imgen" title="Fat imgen">fat_imgen</a>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> <a href="FAT12" title="FAT12" class="mw-redirect">FAT12</a>
+</td></tr>
+<tr>
+<td> <a href="File_Disk" title="File Disk">File Disk</a>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> Anything supported by Windows
+</td></tr>
+<tr>
+<td> <a href="Hdiutil" title="Hdiutil">hdiutil</a>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> <a href="HFS" title="HFS">HFS</a> HFS+ HFS+J HFSX <a href="FAT" title="FAT">FAT</a> <a href="UFS" title="UFS">UFS</a>
+</td></tr>
+<tr>
+<td> <a href="ImDisk" title="ImDisk">ImDisk</a>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> Anything supported by Windows
+</td></tr>
+<tr>
+<td> <a href="Loopback_Device" title="Loopback Device">Loopback Device</a>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> Anything supported by the kernel
+</td></tr>
+<tr>
+<td> <a href="MagicISO" title="MagicISO">MagicISO</a>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> ISO 9660, Rock Ridge, HFS/HFS+, Joilet, UDF, XBOX DVD FS
+</td></tr>
+<tr>
+<td> <a href="Mkisofs" title="Mkisofs">mkisofs</a>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> <a href="ISO_9660" title="ISO 9660">ISO 9660</a>
+</td></tr>
+<tr>
+<td> <a href="MTools" title="MTools">MTools</a>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> <a href="FAT" title="FAT">FAT</a>
+</td></tr>
+<tr>
+<td> <a href="Virtual_Floppy_Disk" title="Virtual Floppy Disk" class="mw-redirect">Virtual Floppy Disk</a>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> Anything supported by Windows
+</td></tr>
+<tr>
+<td> <a href="Win_Image" title="Win Image" class="mw-redirect">Win Image</a>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> <a href="FAT" title="FAT">FAT</a> <a href="ISO_9660" title="ISO 9660">ISO 9660</a>
+</td></tr></table>
+<p>If you want to write/burn an image to media you can use one of the following tools:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>
+</td>
+<th> Linux
+</th>
+<th> Windows
+</th>
+<th> BSD
+</th>
+<th> Mac OS X
+</th>
+<th> Notes
+</th></tr>
+<tr>
+<td> dd
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes (Using <a href="Cygwin" title="Cygwin">Cygwin</a>)
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<td> <a href="Rawwrite" title="Rawwrite">Rawwrite</a>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> Floppy images only
+</td></tr></table>
+<h2> <span class="mw-headline" id="Floppy_disk_images"> Floppy disk images </span></h2>
+<p>You can use 'dd' to create a blank floppy image.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">dd</span> <span class="re2">if</span>=<span class="sy0">/</span>dev<span class="sy0">/</span>zero <span class="re2">of</span>=floppy.flp <span class="re2">bs</span>=<span class="nu0">512</span> <span class="re2">count</span>=<span class="nu0">2880</span></pre></div></div>
+<h2> <span class="mw-headline" id="CD_images"> CD images </span></h2>
+<p>As of version 0.95, GNU <a href="GRUB" title="GRUB">GRUB</a> comes with support for no-emulation <a href="El-Torito" title="El-Torito">El-Torito</a> CD boot. Creating a CD image is much easier than working with floppy images and trying to stuff GRUB in them (and you get 650 meg more space too). Putting GRUB on a CD is now a simple matter of making a skeleton directory tree for the CD filesystem layout, copying the "stage2_eltorito" file in there, and running mkisofs with a specialized command line. See the GRUB 0.95 info node <a rel="nofollow" class="external text" href="http://www.gnu.org/software/grub/manual/html_node/Making-a-GRUB-bootable-CD_002dROM.html">Installation &gt; Making a GRUB bootable CD-ROM</a> for details. Much more humane than those floppy games.
+</p><p>There is also a tutorial about creating a <a href="Bootable_El-Torito_CD_with_GRUB_Legacy" title="Bootable El-Torito CD with GRUB Legacy">no-emulation El-Torito CD with GRUB</a>.
+</p>
+<h2> <span class="mw-headline" id="Handling_of_Partition_Tables_in_images."> Handling of Partition Tables in images. </span></h2>
+<p>At the time of writing, only Apple's <a href="Hdiutil" title="Hdiutil">hdiutil</a> can handle the mounting of partitions inside of an image cleanly. Linux users can use <a href="Loopback_Device" title="Loopback Device">a hack</a> to skip over the MBR sector. In general, you can solve the partitioning information problem by using a separate image for one partition, then insert it into a larger image with partitioning data at the right place. This works because offsets are generally relative to the start of the partition.
+</p>
+<h2> <span class="mw-headline" id="Images_with_preinstalled_GRUB"> Images with preinstalled GRUB </span></h2>
+<p>If you are looking for a ready-made floppy image with GRUB already installed, such has been set up by MartinBaute, and is available from the following mirrors:
+</p>
+<ul><li> RDOS project at <a rel="nofollow" class="external free" href="http://www.rdos.net/rdos/floppy.img">http://www.rdos.net/rdos/floppy.img</a> and <a rel="nofollow" class="external free" href="http://www.rdos.net/rdos/grub.iso">http://www.rdos.net/rdos/grub.iso</a> (GRUB 0.97)
+</li><li> LibOSDK project at <a rel="nofollow" class="external free" href="http://download.berlios.de/libosdk/fd.img.bz2">http://download.berlios.de/libosdk/fd.img.bz2</a> (GRUB 0.96)
+</li><li> Clicker project at <a rel="nofollow" class="external free" href="http://sourceforge.net/projects/clicker/files/miscellaneous/GRUB%20bootdisk%20(by%20Solar)/solar_grub_disk.zip/download">http://sourceforge.net/projects/clicker/files/miscellaneous/GRUB%20bootdisk%20(by%20Solar)/solar_grub_disk.zip/download</a> (GRUB 0.95)
+</li><li> Ubuntu "grub-rescue-pc" package at <a rel="nofollow" class="external free" href="http://packages.ubuntu.com/trusty/i386/grub-rescue-pc/download">http://packages.ubuntu.com/trusty/i386/grub-rescue-pc/download</a> (GRUB2 2.00)
+</li></ul>
+<p>The images have GRUB stage1 / stage2 and an empty config file set up, so all you have to do is adding your binaries and editing the config file (see the <a rel="nofollow" class="external text" href="http://www.gnu.org/software/grub/manual">GRUB manual</a> for details).
+</p><p>The CD/DVD image on rdos.net has an embedded bootable floppy image and the required files in the root directory.
+</p><p>The Ubuntu "grub-rescue-pc" package is GRUB2, and has floppy, CDROM, and USB images.
+</p>
+<h2> <span class="mw-headline" id="Links"> Links </span></h2>
+<ul><li> Related thread in the forum: <a href="http://forum.osdev.org/viewtopic.php?t=10549" class="extiw" title="topic:10549">Topic:10549</a> You gonna find a nifty trick Brendan uses to build his own iso images - with NASM. (download missing)
+</li><li> John Burger's <a href="http://wiki.osdev.org/User:Johnburger/Demo" title="User:Johnburger/Demo">Demonstration</a> uses <a href="User:Johnburger/Demo/Pad/ISO/ISO" title="User:Johnburger/Demo/Pad/ISO/ISO">NASM source code</a> to build his own ISO images too.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 271/1000000
+Post-expand include size: 2015/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1606-0!*!0!!en!*!* and timestamp 20180121043650 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Disk_Images&amp;oldid=21348">http://wiki.osdev.org/index.php?title=Disk_Images&amp;oldid=21348</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:FAQ" title="Category:FAQ">FAQ</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Disk_Images" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Disk_Images"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Disk_Images"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Disk_Images#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Disk_Images" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Disk_Images&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Disk_Images&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Disk_Images#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Disk_Images" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Disk_Images" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Disk_Images&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Disk_Images&amp;oldid=21348" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 28 August 2017, at 15:01.</li>
+											<li id="footer-info-viewcount">This page has been accessed 108,503 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Disk_Images" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Disk_Images" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Disk_Images&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Disk_Images&amp;oldid=21348" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 28 August 2017, at 15:01.</li>
+											<li id="footer-info-viewcount">This page has been accessed 108,503 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

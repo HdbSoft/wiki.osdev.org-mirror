@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>El-Torito - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "El-Torito", "wgTitle": "El-Torito", "wgCurRevisionId": 19948, "wgArticleId": 2476, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Bootloaders"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-El-Torito action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">El-Torito</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="El-Torito#mw-head">navigation</a>,
+					<a href="El-Torito#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><b>El-Torito</b> is a standard for creating bootable optical media
+like CD-ROMs, DVD, or BD. It is an add-on to the <a href="ISO_9660" title="ISO 9660">ISO 9660</a>
+filesystem.
+</p><p>El-Torito describes different ways of booting from an optical medium.
+The starting point can either be an emulated floppy drive, an
+emulated hard disk, or a plain block address in the ISO filesystem.
+</p><p>Oldfashioned ways of boot preparations are described in
+the articles about <a href="Bootable_CD" title="Bootable CD">bootable CD emulated as a floppy drive</a>
+and about <a href="Bootable_El-Torito_CD_with_GRUB_Legacy" title="Bootable El-Torito CD with GRUB Legacy">
+bootable CD using no emulation (via GRUB legacy)</a>.
+</p><p>More modern ways are no-emulation setups as made by
+<a rel="nofollow" class="external text" href="http://www.gnu.org/software/grub/manual/html_node/Making-a-GRUB-bootable-CD_002dROM.html">GRUB2 script grub-mkrescue</a>
+or as described by the
+<a rel="nofollow" class="external text" href="http://www.syslinux.org/wiki/index.php/ISOLINUX">ISOLINUX wiki</a>
+of the
+<a rel="nofollow" class="external text" href="http://www.syslinux.org/wiki/index.php/The_Syslinux_Project">Syslinux project</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="El-Torito#Document_Scope"><span class="tocnumber">1</span> <span class="toctext">Document Scope</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="El-Torito#El_Torito_Structure"><span class="tocnumber">2</span> <span class="toctext">El Torito Structure</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="El-Torito#Creating_the_Structure_in_the_ISO_filesystem"><span class="tocnumber">2.1</span> <span class="toctext">Creating the Structure in the ISO filesystem</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="El-Torito#Example_of_ISO_Filesystem_Production_Run_for_BIOS"><span class="tocnumber">2.2</span> <span class="toctext">Example of ISO Filesystem Production Run for BIOS</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="El-Torito#Hybrid_Setup_for_BIOS_and_EFI_from_CD.2FDVD_and_USB_stick"><span class="tocnumber">2.3</span> <span class="toctext">Hybrid Setup for BIOS and EFI from CD/DVD and USB stick</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="El-Torito#A_BareBones_Boot_Image_with_Boot_Information_Table"><span class="tocnumber">3</span> <span class="toctext">A BareBones Boot Image with Boot Information Table</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="El-Torito#Important_note.21"><span class="tocnumber">3.1</span> <span class="toctext">Important note!</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="El-Torito#What_Next.3F"><span class="tocnumber">3.2</span> <span class="toctext">What Next?</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="El-Torito#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="El-Torito#Articles"><span class="tocnumber">4.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="El-Torito#External_Links"><span class="tocnumber">4.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Document_Scope"> Document Scope </span></h2>
+<p>The intention of this document is to explain what you need to know
+from the El-Torito standard to create a bootable CD with your own
+boot image. Details about the options for ISO 9660 image production
+can be found on the <a href="Mkisofs" title="Mkisofs">Mkisofs</a> page.
+</p>
+<h2> <span class="mw-headline" id="El_Torito_Structure"> El Torito Structure </span></h2>
+<p>El Torito booting begins by the Boot Record of the ISO 9660
+filesystem at block address 0x11. See also article <a href="ISO_9660" title="ISO 9660">ISO 9660</a>.
+This Boot Record points to a Boot Catalog which is stored
+in one or more blocks inside the ISO 9660 filesystem.
+</p><p>The content of Boot Record and Boot Catalog is created during
+filesystem production by the ISO 9660 producing software.
+</p><p>The Boot Catalog lists the available boot images which may be
+prepared for multiple system architectures, called "platforms".
+These images are marked either as emulated floppies, or as
+emulated hard disks, or as no-emulation images.
+In any case they are the first stage in the boot process
+where custom code from the ISO filesystem can be executed.
+</p><p>While the emulated boot images are to be interpreted
+by the firmware as is supposed for floppies and hard disks,
+the no-emulation boot images are on their own:
+</p><p>PC-<a href="BIOS" title="BIOS">BIOS</a> reads from the Boot Catalog the number of
+blocks to load, loads them (usually to segment 07c0) and then
+executes them as code. As with a normal floppy or hard disk,
+the DL register contains the BIOS drive number.
+</p><p><a href="EFI" title="EFI" class="mw-redirect">EFI</a> interprets the boot image as <a href="FAT" title="FAT">FAT</a> filesystem and
+looks up a standardized file path for further processing. The
+file name depends on the processor type.
+E.g. /EFI/BOOT/BOOTIA32.EFI for 32 bit x86 and /EFI/BOOT/BOOTX64.EFI
+for 64 bit x86.
+</p><p>The original El Torito specification mentions platforms
+"80x86", "PowerPC", and "Mac".
+Boot setups based on GRUB2 and ISOLINUX use 0x00 = "80x86" for PC-BIOS,
+and platform id 0xef for EFI which is defined by the UEFI specification.
+</p>
+<h3> <span class="mw-headline" id="Creating_the_Structure_in_the_ISO_filesystem"> Creating the Structure in the ISO filesystem </span></h3>
+<p>The following text assumes that the ISO 9660 producing software is
+compatible to <a href="Mkisofs" title="Mkisofs">Mkisofs</a>. E.g. mkisofs, genisoimage, or xorrisofs.
+</p><p><a href="Mkisofs" title="Mkisofs">Mkisofs</a> expects that the boot images are submitted as
+data files like any other file in the emerging ISO 9660
+filesystem. Normally they are part of the directory trees
+which get copied into the filesystem.
+</p><p>In most cases the Boot Catalog is represented in the filesystem
+as data file, too. Its content is nevertheless composed by
+<a href="Mkisofs" title="Mkisofs">Mkisofs</a>.
+</p><p>The boot images of ISOLINUX and GRUB2 expect to contain
+some information about the ISO filesystem and their own
+location and length. This information is called Boot Info Table
+and gets inserted by <a href="Mkisofs" title="Mkisofs">Mkisofs</a>, if desired.
+Boot Info Table is not specified by El Torito, but is rather
+a convention introduced by boot loader developers.
+</p>
+<h3> <span class="mw-headline" id="Example_of_ISO_Filesystem_Production_Run_for_BIOS"> Example of ISO Filesystem Production Run for BIOS </span></h3>
+<p>Put all necessary directories and files underneath directory
+./prepared_for_iso . It will be copied as root directory of
+the ISO filesystem. Especially make the boot image for PC-BIOS
+available at path ./prepared_for_iso/boot/loader.sys ,
+so that it will appear in the ISO filesystem as /boot/loader.sys .
+</p><p>Choose an ISO 9660 producing program and eventually its
+mkisofs emulation command:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="re2">prog</span>=<span class="st0">&quot;mkisofs&quot;</span></pre></div></div>
+<p>or
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="re2">prog</span>=<span class="st0">&quot;genisoimage&quot;</span></pre></div></div>
+<p>or
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="re2">prog</span>=<span class="st0">&quot;xorriso -as mkisofs&quot;</span></pre></div></div>
+<p>Produce ISO 9660 filesystem image ./bootable.iso&#160;:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="re1">$prog</span> <span class="re5">-R</span> <span class="re5">-J</span> <span class="re5">-c</span> boot<span class="sy0">/</span>bootcat \
+      <span class="re5">-b</span> boot<span class="sy0">/</span>loader.sys <span class="re5">-no-emul-boot</span> <span class="re5">-boot-load-size</span> <span class="nu0">4</span> \
+      <span class="re5">-o</span> .<span class="sy0">/</span>bootable.iso .<span class="sy0">/</span>prepared_for_iso</pre></div></div>
+<p><b>-c boot/bootcat</b> - Makes the Boot Catalog accessible as
+data file.
+</p><p><b>-b boot/loader.sys -no-emul-boot</b> - Causes /boot/loader.sys
+to be listed in the emerging Boot Catalog as no-emulation
+boot image for PC-BIOS.
+</p><p><b>-boot-load-size 4</b> - Specifies the number of 512-bytes sectors
+to load. Four 512-byte sectors (2048 bytes) is one CD sector
+and is the number supported by most BIOS.
+</p><p>If your boot image needs updating of a Boot Info Table,
+then add option <b>-boot-info-table</b> after -boot-load-size 4.
+</p><p>After this production run, the emerged data file
+./bootable.iso can be burned onto optical media.
+</p><p><b>Warning</b>: Defaults of <b>xorriso -as mkisofs</b> emulation might deviate from those of <b>mkisofs</b>.
+E.g. not specifying <b>-boot-load-size</b> assumes a default of four sectors instead of the entire boot file.
+</p>
+<h3> <span class="mw-headline" id="Hybrid_Setup_for_BIOS_and_EFI_from_CD.2FDVD_and_USB_stick"> Hybrid Setup for BIOS and EFI from CD/DVD and USB stick </span></h3>
+<p>The EL Torito Boot Catalog can offer in the same ISO filesystem
+alternative boot images for PC-<a href="BIOS" title="BIOS">BIOS</a> and for <a href="EFI" title="EFI" class="mw-redirect">EFI</a>.
+</p><p>But El Torito is interpreted by the firmware only if presented on
+an optical medium: CD, DVD, BD. For booting PC-BIOS and EFI from
+USB stick or other hard-disk-like devices, there is need for an
+<a href="MBR" title="MBR" class="mw-redirect">MBR</a> and, if desired, for a <a href="GPT" title="GPT">GPT</a>.
+</p><p>The machine code of the MBR of SYSLINUX can be adjusted to jump with
+its execution onto the BIOS El Torito boot image of ISOLINUX. This is known
+as "isohybrid".
+The MBR and BIOS El Torito boot image written by grub-mkrescue have the same
+capability.
+The MBR partition table does not matter for the first stage of BIOS booting.
+</p><p>UEFI regulates the relation of MBR partition table and GPT. So for booting
+via EFI firmware, the partition tables do matter. The MBR machine code is to
+be ignored by EFI, unless in Legacy BIOS mode.
+</p><p>The most modern UEFI layout prescribes an MBR with a single partition which
+starts at Logical Block Address 1 and covers the whole image size.
+It shall have MBR partition type 0xee.
+In this case there is a GUID Partition Table (GPT) which in one of
+its partitions marks the EFI System Partition with the FAT filesystem.
+Neither MBR partition nor GPT partitions can lead to an address where 
+the ISO filesystem can be mounted, unless the ISO offers a second
+set of volume descriptors and file tree at a higher block address.
+Script grub-mkrescue produces this layout for booting via EFI.
+</p><p>The UEFI legacy partition layout (not to be confused with Legacy BIOS mode)
+prescribes that the EFI System Partition shall be marked by an MBR
+partition of type 0xef. Other MBR partitions are permissible. E.g.
+one which starts at Logical Block Address 0 to make the ISO mountable.
+It is not allowed, nevertheless, to let the ISO partition enclose the
+EFI System Partition.
+</p><p>Several popular Linux distributions offer a layout that does not comply
+to either of the UEFI alternatives. The MBR marks the whole ISO by a
+partition of type 0x00. Another MBR partition of type 0xef marks a
+data file inside the ISO filesystem with the image of the EFI System 
+Partition FAT filesystem. Nevertheless there is a GPT which also marks
+the EFI System Partition image file. This GPT is to be ignored by any
+UEFI compliant firmware. The nesting of the MBR partitions is made
+acceptable by giving the outer MBR partition the type 0x00, which UEFI
+specifies to be ignored.
+</p><p>Debian used for its installation image debian-7.1.0-amd64-netinst.iso
+the following options of xorriso's mkisofs emulation:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">xorriso <span class="re5">-as</span> mkisofs \
+  ... \
+  <span class="re5">-c</span> isolinux<span class="sy0">/</span>boot.cat \
+  <span class="re5">-b</span> isolinux<span class="sy0">/</span>isolinux.bin \
+  <span class="re5">-no-emul-boot</span> <span class="re5">-boot-load-size</span> <span class="nu0">4</span> <span class="re5">-boot-info-table</span> \
+  <span class="re5">-isohybrid-mbr</span> .<span class="sy0">/</span>syslinux<span class="sy0">/</span>usr<span class="sy0">/</span>lib<span class="sy0">/</span>syslinux<span class="sy0">/</span>isohdpfx.bin \
+  <span class="re5">-eltorito-alt-boot</span> \
+  <span class="re5">-e</span> boot<span class="sy0">/</span>grub<span class="sy0">/</span>efi.img \
+  <span class="re5">-no-emul-boot</span> <span class="re5">-isohybrid-gpt-basdat</span> \
+  ... \
+  .<span class="sy0">/</span>boot1 \
+  ...</pre></div></div>
+<p>Option -eltorito-alt-boot separates the settings
+for the BIOS boot image (-b) from those for the EFI
+boot image (-e).
+</p><p>The files isolinux/isolinux.bin and boot/grub/efi.img
+get into the ISO image from source directory ./boot1.
+</p><p>File ./syslinux/usr/lib/syslinux/isohdpfx.bin is copied
+directly from the SYSLINUX installation into the System
+Area of the ISO image. It contains the isohybrid MBR template.
+Option -isohybrid-gpt-basdat announces the FAT image
+boot/grub/efi.img as GPT partition.
+</p><p>See <a rel="nofollow" class="external text" href="http://www.gnu.org/software/xorriso/man_1_xorrisofs.html">man 1 xorrisofs</a>
+for details about the options which are in part not
+supported by mkisofs from cdrtools.
+</p>
+<h2> <span class="mw-headline" id="A_BareBones_Boot_Image_with_Boot_Information_Table"> A BareBones Boot Image with Boot Information Table </span></h2>
+<p>A Boot Information Table may be put into a boot image. It starts at offset 8 and is 56 bytes long. If you are familiar with Bios Parameter Blocks, you can think of the Boot Information Table as doing a similar job.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="br0">&#91;</span><span class="kw4">ORG</span> <span class="nu0">0x7C00</span><span class="br0">&#93;</span>
+<span class="br0">&#91;</span>BITS <span class="nu0">16</span><span class="br0">&#93;</span>
+start<span class="sy0">:</span>
+  <span class="kw1">jmp</span>	<span class="nu0">0x0000</span><span class="sy0">:</span>boot
+  times <span class="nu0">8</span><span class="sy0">-</span><span class="br0">&#40;</span>$<span class="sy0">-</span>$$<span class="br0">&#41;</span> <span class="kw4">db</span> <span class="nu0">0</span>
+&#160;
+  <span class="co1">;	Boot Information Table</span>
+  bi_PrimaryVolumeDescriptor  resd  <span class="nu0">1</span>    <span class="co1">; LBA of the Primary Volume Descriptor</span>
+  bi_BootFileLocation         resd  <span class="nu0">1</span>    <span class="co1">; LBA of the Boot File</span>
+  bi_BootFileLength           resd  <span class="nu0">1</span>    <span class="co1">; Length of the boot file in bytes</span>
+  bi_Checksum                 resd  <span class="nu0">1</span>    <span class="co1">; 32 bit checksum</span>
+  bi_Reserved                 resb  <span class="nu0">40</span>   <span class="co1">; Reserved 'for future standardization'</span>
+&#160;
+boot<span class="sy0">:</span>
+  <span class="co1">;	Boot code here - set segment registers etc...</span>
+  <span class="kw1">jmp</span> $</pre></div></div>
+<p>If you are already familiar with boot sectors for other media, this should look quite familiar already. As usual, the first thing that the code does is jump to a known segment:offset location, where it will presumably set data and stack segment registers. I have used the times macro to provide padding for the table. This has two distinct advantages: firstly, if you decide to add anything else before the table, it will continue to reside at offset 8. Secondly, if you place more than 8 bytes worth of code before the table, you will get an assembler error. The Boot Information Table may need some explanation:
+</p><p><b>bi_PrimaryVolumeDescriptor</b> contains the LBA address of the Primary Volume Descriptor, which contains information such as the address and length of the root directory. In practice, this value will normally be 0x10, because <a href="ISO_9660" title="ISO 9660">ISO 9660</a> reserves sectors 0x00-0x0F as a 'system area'. And yes - no more CHS calculations, for El-Torito no emulation mode on a modern PC, it's normally a safe bet that int 0x13 extensions are available!
+</p><p><b>bi_BootFileLocation</b> is another LBA address containing the location of the boot file on the CD. The size of the boot file can be found (in bytes) in the <b>bi_BootFileLength</b> field.
+</p><p><b>bi_Checksum</b> is a 32 bit checksum of all the 32-bit values in the boot file, starting at offset 64 (just after the boot information table).
+</p>
+<h3> <span class="mw-headline" id="Important_note.21"> Important note! </span></h3>
+<p>There are some BIOS bugs that might prevent No Emulation booting from working properly on certain machines.  A brief list of them is available <a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?f=1&amp;t=18911&amp;p=146444#p146433">here</a>
+</p>
+<h3> <span class="mw-headline" id="What_Next.3F"> What Next? </span></h3>
+<p>The rest of the CD boot process relies on <a href="ISO_9660" title="ISO 9660">ISO 9660</a> rather than the El-Torito standards. After you have done the 'normal' boot sector jobs, such as setting segment registers to known values and saving the contents of DL (which contains the BIOS boot drive number), you can start reading the file system. This must happen by code in the 2k that you have available in your boot sector. The Boot Info Table tells the Logical Block Address (LBA, in units of 2k) and size of the file from where the first 2k came. So you can load more machine code from it without already having an ISO 9660 filesystem driver.
+</p><p>Generally, you will want to load such a driver, so that you can find and load more files of your next stage loader. You have an option here - you can either use the path tables to find a file, or perform a full directory walk.
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles">Articles</span></h3>
+<ul><li> <a href="Genisoimage" title="Genisoimage" class="mw-redirect">Genisoimage</a>
+</li><li> <a href="ISO_9660" title="ISO 9660">ISO 9660</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li> <a href="http://wikipedia.org/wiki/El-Torito" class="extiw" title="wikipedia:El-Torito">El-Torito</a> on Wikipedia
+</li><li> <a rel="nofollow" class="external text" href="http://download.intel.com/support/motherboards/desktop/sb/specscdrom.pdf">El-Torito Specifications of Phoenix and IBM</a>
+</li><li> <a rel="nofollow" class="external text" href="http://littlesvr.ca/isomaster/eltoritosuppl.php">Boot Information Table format explained</a>
+</li><li> <a rel="nofollow" class="external text" href="http://bazaar.launchpad.net/~libburnia-team/libisofs/scdbackup/view/head:/doc/boot_sectors.txt">Byte level description of boot entry points in ISO 9660 filesystems</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.uefi.org/sites/default/files/resources/2_4_Errata_B.pdf">UEFI specifications, version 2.4 Errata B</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 149/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2476-0!*!0!!en!*!* and timestamp 20180121055855 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=El-Torito&amp;oldid=19948">http://wiki.osdev.org/index.php?title=El-Torito&amp;oldid=19948</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Bootloaders" title="Category:Bootloaders">Bootloaders</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=El-Torito" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="El-Torito"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:El-Torito"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="El-Torito#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="El-Torito" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=El-Torito&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=El-Torito&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="El-Torito#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/El-Torito" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/El-Torito" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></liskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/El-Torito" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/El-Torito" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=El-Torito&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=El-Torito&amp;oldid=19948" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 November 2016, at 08:11.</li>
+											<li id="footer-info-viewcount">This page has been accessed 45,621 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

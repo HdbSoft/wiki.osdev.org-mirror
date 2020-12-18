@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Beginner Mistakes - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Beginner_Mistakes", "wgTitle": "Beginner Mistakes", "wgCurRevisionId": 20649, "wgArticleId": 1879, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["OS Development"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Beginner_Mistakes action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Beginner Mistakes</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Beginner_Mistakes#mw-head">navigation</a>,
+					<a href="Beginner_Mistakes#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The idea to "write your own OS" brought you here. This Wiki is about giving you help, pointers, and references in your undertaking.
+</p><p>However, it is quite common that newcomers make certain mistakes, or have common misconceptions about what is involved in the topic. That is not bad -  many others made these beginner mistakes before, and many will do so in the future. This page is about making sure you know what you're about, before digging into the provided information.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Beginner_Mistakes#What_this_is_NOT"><span class="tocnumber">1</span> <span class="toctext">What this is NOT</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Beginner_Mistakes#A_Hard_Truth"><span class="tocnumber">1.1</span> <span class="toctext">A Hard Truth</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Beginner_Mistakes#Is_there_a_tutorial_on....3F"><span class="tocnumber">1.2</span> <span class="toctext">Is there a tutorial on...?</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="Beginner_Mistakes#Scope"><span class="tocnumber">2</span> <span class="toctext">Scope</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Beginner_Mistakes#Deadlines"><span class="tocnumber">2.1</span> <span class="toctext">Deadlines</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Beginner_Mistakes#End_Goal_Definition"><span class="tocnumber">2.2</span> <span class="toctext">End Goal Definition</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Beginner_Mistakes#Commercial_OSDev"><span class="tocnumber">2.3</span> <span class="toctext">Commercial OSDev</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Beginner_Mistakes#Assuming_It_Will_Go_Nowhere"><span class="tocnumber">2.4</span> <span class="toctext">Assuming It Will Go Nowhere</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Beginner_Mistakes#Avoid_Ignorance"><span class="tocnumber">2.5</span> <span class="toctext">Avoid Ignorance</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="Beginner_Mistakes#Design"><span class="tocnumber">3</span> <span class="toctext">Design</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="Beginner_Mistakes#GUI_Design"><span class="tocnumber">3.1</span> <span class="toctext">GUI Design</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="Beginner_Mistakes#Popularity"><span class="tocnumber">3.2</span> <span class="toctext">Popularity</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Beginner_Mistakes#Memory_usage"><span class="tocnumber">3.3</span> <span class="toctext">Memory usage</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="Beginner_Mistakes#OS_Emulation"><span class="tocnumber">3.4</span> <span class="toctext">OS Emulation</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="Beginner_Mistakes#Programming_Languages"><span class="tocnumber">3.5</span> <span class="toctext">Programming Languages</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="Beginner_Mistakes#Kernel_Image"><span class="tocnumber">4</span> <span class="toctext">Kernel Image</span></a>
+<ul>
+<li class="toclevel-2 tocsection-17"><a href="Beginner_Mistakes#Booting_Problems"><span class="tocnumber">4.1</span> <span class="toctext">Booting Problems</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="Beginner_Mistakes#Troubleshooting_.2F_Asking_for_Help"><span class="tocnumber">5</span> <span class="toctext">Troubleshooting / Asking for Help</span></a></li>
+<li class="toclevel-1 tocsection-19"><a href="Beginner_Mistakes#Promotion"><span class="tocnumber">6</span> <span class="toctext">Promotion</span></a>
+<ul>
+<li class="toclevel-2 tocsection-20"><a href="Beginner_Mistakes#Naming"><span class="tocnumber">6.1</span> <span class="toctext">Naming</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="Beginner_Mistakes#Project_Website"><span class="tocnumber">6.2</span> <span class="toctext">Project Website</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-22"><a href="Beginner_Mistakes#Teamwork"><span class="tocnumber">7</span> <span class="toctext">Teamwork</span></a>
+<ul>
+<li class="toclevel-2 tocsection-23"><a href="Beginner_Mistakes#Community_Projects"><span class="tocnumber">7.1</span> <span class="toctext">Community Projects</span></a></li>
+<li class="toclevel-2 tocsection-24"><a href="Beginner_Mistakes#Recruiting"><span class="tocnumber">7.2</span> <span class="toctext">Recruiting</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="What_this_is_NOT"> What this is NOT </span></h2>
+<p>This may look like a set of tutorials to copy &amp; paste, plus a forum to ask your questions whenever you get stuck. <b>This is not so.</b> We fully expect you to <a href="Required_Knowledge" title="Required Knowledge">carry your own weight</a>, and be an experienced programmer of user-space applications before you set out to write your own OS. We also expect you to have read about OS design, and that you have studied relevant documentation of your platform of choice. Do <b>not</b> expect this Wiki, or the forum, to be some kind of <i>complete guide to my own OS</i>, let alone a guide to programming skills in general.
+</p><p>What you find here is documentation left behind by those who came before you, who found out about these things by reading technical documentation, available source code, and forum postings as well as by trial &amp; error programming. Some of it was written so those people could look it up again later, some of it so that we could point to a Wiki article instead of explaining a subject all over <i>again</i>.
+</p><p>What you find here are little hints and roadsigns that might help you on your path. <i>It's not a complete map to Oz.</i> Nor should it be.
+</p><p>If you don't already have a good idea what a <a href="Stack" title="Stack"> stack</a> is, or how to use a <a href="GDB" title="GDB"> debugger</a>, we won't go out of our way to explain it to you. Visit those two pages; you will see that they mostly deal with OS specifics, not a general introduction to the topic. That is not a flaw, that's by design. If you are looking for general programming enlightenment, you should rather visit general programming sites like <a rel="nofollow" class="external text" href="http://www.stackoverflow.com">StackOverflow</a> and become a developer first before you aspire to become an <b>OS</b> developer.
+</p><p>This Wiki will <i>not</i> be expanded into a beginner's handbook, because that is not its purpose. It is for answering the <i>advanced</i> questions that arise when people feel they're ready for the plunge into kernel space programming.
+</p>
+<h3> <span class="mw-headline" id="A_Hard_Truth"> A Hard Truth </span></h3>
+<p><i><b>No one who isn't already a seasoned developer with years of experience in several languages and environments should even be considering OS Dev yet. A decade of programming, including a few years of low-level coding in assembly language and/or a systems language such as C, is pretty much the minimum necessary to even understand the topic well enough to work in it.</b></i>
+</p><p>What's more, this is growing ever more true by the year, as the number of different 'standards', computer and mobile device models, peripherals, and design concepts continues to expand. 
+</p><p>It was one thing for someone like Dennis Ritchie, Richard Greenblatt, Gary Kildall, or Steve Wozniak to write a simple OS for hardware which was relatively straight-forward in comparison to current machines, which they already knew intimately, and which had no standards specifications to adhere to or existing cruft to maintain backwards compatibility with. This is no longer true on current-generation stock hardware. Furthermore, each of them was already a seasoned engineer who had already done years of systems programming. Even then, they only provided the foundations for the systems; the bulk of the work was done by small armies of subordinate developers after the nucleus of the system - the kernel, in modern jargon - was in place.
+</p><p>There are exceptions to this rule, but not many; don't expect yourself to be that one in a thousand. If you think you are, read up on the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect">Dunning-Kruger Effect</a> and consider the matter again.
+</p><p>Oh, and for the record, Linus Torvalds wasn't quite one of them - he was a graduate student when he wrote the Linux kernel, and had been coding in C for years. While he was well short of that ten year mark, as a grad student who had turned his hobby into his master's thesis, he had more time on his hands to work on the project than most people would. In any case, the 'Linux 0.0.1' release he famously posted to USENET in 1991 was little more than a round-robin scheduler, nowhere close to a full system. Getting to that point took him a year. Get the picture?
+</p><p>While it is true that most of the contributors to this wiki started much sooner, for most of us,  that was a mistake born out of a lack of experience. Most of the pioneers of this group had no idea of the sheer scale and complexity of even a small OS project, no inkling of what they were getting themselves into. This was a difficult pill to swallow, especially back <b>before</b> resources like this Wiki were widely available. We cannot force you to learn from our mistakes, but at least we can pass on this warning.
+</p>
+<h3> <span class="mw-headline" id="Is_there_a_tutorial_on....3F"> Is there a tutorial on...? </span></h3>
+<p>Because this place can not and does not cater for beginner developers, the question for some other place that does provide a tutorial, good explanations or easy to understand reading is often requested. However, <b>they do not exist</b>. Difficult subjects can not be described with light prose, just like there are enough things that are too complicated for a monkey to properly learn. If you have trouble reading official documentation, this would be a good time to practice.
+</p><p>In fact, the vast majority of tutorials currently out there are known to be broken in at least one way, so you are generally better off not trusting them in the first place.
+</p>
+<h2> <span class="mw-headline" id="Scope"> Scope </span></h2>
+<h3> <span class="mw-headline" id="Deadlines"> Deadlines </span></h3>
+<p>Whether for university, hobby, or commercial uses, operating system development takes time. The Linux kernel took over one year of very dedicated work to get into a semblance of usefulness, and all Linus Torvalds did was <i>mimic</i> existing and well-documented behaviour to get an already-existing userspace to run on it. Moreover, for every project as successful as Linux, there are literally <i>hundreds</i> of projects that consumed a man-year or more of work without ever getting as far as hosting a functional shell.
+</p><p>Therefore, plan a reasonable road map of what you want to get done. Do not assume that in 3 months your OS will have a GUI and voice recognition, because operating system development does not contain any RAD tools in it at all. In fact, it is completely void of them. (<i>void</i>. It's a joke. Get it?) 
+</p>
+<h3> <span class="mw-headline" id="End_Goal_Definition"> End Goal Definition </span></h3>
+<p>When starting out a project you should estimate your end goals, your end users, the purpose for which the project is developed, etc. Operating system development is no different to this. Having a rough idea about your goals will give you motivation and the direction where you need to head. However, don't get stuck at your initial end goals when something better comes to your mind.
+</p><p>Unfortunately, many OS developers don't estimate how will their final OS look like, therefore they don't know in which direction to head and resort to asking "What next?".
+</p><p>It should be mentioned, however, that to estimate your end goals you should be aware of the whole (technical) concept of how existing operating systems work.
+</p>
+<h3> <span class="mw-headline" id="Commercial_OSDev"> Commercial OSDev </span></h3>
+<p>There really is no such topic. OSDev will probably never land you a job. (As shown in the "Jobs" section of the forum.)
+</p><p>Also, don't get your mind set that by building such a great OS that you'll be rich. If anything, history has shown us that the best operating systems never receive any commercial success, while the ones that have a near total lack of design and inspiration do, because of clever business moves and being in the right place, in the right time, with the right cover-up.
+</p>
+<h3> <span class="mw-headline" id="Assuming_It_Will_Go_Nowhere"> Assuming It Will Go Nowhere </span></h3>
+<p>In contrast to above, some people assume their OS will go nowhere. For this reason, their projects have ugly code, don't take important aspects into account and in general rely on ugly hacks. Worst of all, they take decisions that don't allow usability and extensibility. This way, their assumption becomes a self-fulfilling prophecy.
+</p><p>In reality, while the chances of getting your OS running outside of your test machines are low, there are enough advanced OS projects that started from this very community.
+</p>
+<h3> <span class="mw-headline" id="Avoid_Ignorance"> Avoid Ignorance </span></h3>
+<p>Beginners often ask "What is the <i>easiest</i> way to do X?" rather than "What is the best, proper, correct way to do X?". This is dangerous as the newcomer doesn't invest time into understanding the superior way to implement something, but instead picks a conceptually simpler method copied from a tutorial. Indeed, the simpler route is often <i>too simple</i> and ends up causing more problems in the long run, because the beginner is ignorant of the superior alternative and doesn't know when it is better to switch. What's so bad about taking the hard route instead?
+</p><p>Common examples include being too lazy to use a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">Cross-Compiler</a>, not understanding <a href="Real_Mode" title="Real Mode">Real Mode</a>, <a href="Unreal_Mode" title="Unreal Mode">Unreal Mode</a>, <a href="Protected_Mode" title="Protected Mode">Protected Mode</a> and <a href="Long_Mode" title="Long Mode" class="mw-redirect">Long Mode</a> and jumping far too fast from one to the other without understanding how to gather all of the vital configuration and use all of its capabilities fully first (specially detecting basic capabilities with the BIOS during boot and initialization), relying on <a href="BIOS" title="BIOS">BIOS</a> calls or DOS services that are not standard, not learning to write hardware drivers in your own OS and under Windows and Linux for greatest convenience and to open test capabilities globally, using flat binaries instead of <a href="ELF" title="ELF">ELF</a> or not learning about executable, archive, graphics, document and other file formats and compression algorithms, and so on.  Experienced developers use the superior alternatives for a reason, which you might not understand yet. Experienced developers are able to use the inferior method in some cases, but that's because they can carefully analyse whether it is appropriate, and they know when <i>not</i> to use it. As a beginner or intermediate developer you will likely not know these methods and technologies well enough to reason whether the inferior solution is good enough for you. Remember that if you oppose a method, you should know it well enough to know everything that is wrong (and right) with it. Either way, laziness and ignorance only leads to trouble down the road. When in doubt, pick what appears to be the conservative choice rather than the simpler.
+</p>
+<h2> <span class="mw-headline" id="Design"> Design </span></h2>
+<h3> <span class="mw-headline" id="GUI_Design"> GUI Design </span></h3>
+<p>It will likely take you several years, starting from scratch, to get to the point where you actually do anything GUI-related. And, the <i>looks</i> of a GUI are secondary at best, as they can easily be changed retroactively; what really decides the usability of a GUI is the <i>functionality</i>, and that isn't expressed in mock-up graphics. If your aim is creating a better look instead of a better OS, consider implementing an X Window Manager instead of a whole OS.
+</p>
+<h3> <span class="mw-headline" id="Popularity"> Popularity </span></h3>
+<p>"My OS will be more popular than Windows, Mac OS and Linux!"
+</p><p>That would not be possible. It will require quite a lot of time, money and knowledge. Not everyone will download your operating system because:
+</p><p>- Not knowing what an operating system is and how to install one
+- Security risks
+- Less applications
+- It is not fully functional (command line interface or bad GUI)
+</p><p>You will be lucky to get a few people use it. Everything looks simple. The only reason why these operating systems are popular is because they were since the 1980s and it was available at the time.
+</p>
+<h3> <span class="mw-headline" id="Memory_usage"> Memory usage </span></h3>
+<p><i>I want to use less than a couple of kilobytes for my OS!</i>
+</p><p>Sorry, that's probably impossible. An OS using such little memory will be almost unusable. Forget about filesystem drivers, disk drivers, usb drivers, etc. If you want to develop something small, just make a simple bootloader, not an OS.
+</p>
+<h3> <span class="mw-headline" id="OS_Emulation"> OS Emulation </span></h3>
+<p><i>My OS will be able to run programs from Windows, Mac OS, Linux, and even PDP-11 programs!!!</i>
+</p><p>I'm sorry to burst your bubble, but it probably won't. Emulating even just a single system takes years of work, especially when it's proprietary, such as Windows or Mac OS (Linux is probably the easiest out of the four.). <a rel="nofollow" class="external text" href="http://www.winehq.org/">Wine</a>, despite being in development since 1993 and being written in userspace, has still got problems with many programs.
+</p><p>So instead of focusing on emulating other systems, focus on your own. Design it, develop it, and be friends with it.
+</p>
+<h3> <span class="mw-headline" id="Programming_Languages"> Programming Languages </span></h3>
+<p>Some languages are well suited to write a kernel, others are less so. Read the page about <a href="Languages" title="Languages"> using some language other than C</a>.
+</p>
+<h2> <span class="mw-headline" id="Kernel_Image"> Kernel Image </span></h2>
+<h3> <span class="mw-headline" id="Booting_Problems"> Booting Problems </span></h3>
+<p>Especially in early stages and with a self-built bootloader, the reason is frequently that too few sectors are fetched from disk. Either adjust the amount of sectors you fetch from disk, or have the boot loader / second stage loader parse the file system.
+</p>
+<h2> <span class="mw-headline" id="Troubleshooting_.2F_Asking_for_Help"> Troubleshooting / Asking for Help </span></h2>
+<p>Before asking for help on the forums or IRC, you should be taking all the possible steps to diagnose the nature of the problem yourself. In the case of problems like triple faults or "random" exceptions, it's a common mistake to make assumptions about the cause of a problem, make use of a debugger or print statements to locate the exact point when an exception occurs. Using and emulator and a debugger (such as GDB and Bochs/QEMU) will help you to locate problems which are difficult to trace. If you provide some theory about the problem and actions you have already taken to solve it, people will be able to help you much easier (Even if your theory is not correct, it at least gives people an idea of your views on the problem and the strategies you might have already tried, as well as what you might have missed.)
+</p><p>In general, put as much work into solving a problem yourself before asking others for help. Before you post, ask yourself, "Have I done everything I can to diagnose and solve this problem?" Often you will learn a lot in the process, and you'll likely be able to solve the problem (and similar problems in the future) yourself, without the help of others, which is a good thing. When you ask for help, provide the code <b>relevant</b> to your problem. However, the problem may be located somewhere else, so give your others a way to look at the other parts of your code as well (if you're using something like GitHub or Bitbucket, this is slightly easier, but there are certainly many other ways.) 
+</p><p>In regards to the forum, <b>read the forum rules, they are required reading,</b> and will improve the quality of your posts and make people more likely to help you. On the IRC channel, if you ask a question, don't expect an answer within 10 seconds, or even 5 minutes, other people have lives too. If you need to leave to do something, and want to check if you missed anything, there are logs available for you to look through, see the links in the IRC topic for those. 
+</p><p>For a much more in depth guide on how to be a good community member when asking for help, consult <a rel="nofollow" class="external text" href="http://www.catb.org/~esr/faqs/smart-questions.html">How to ask questions</a>. It's a great read, and ideally, you should read the whole thing before asking for help anywhere (it's not that long, and well worth the read).
+</p>
+<h2> <span class="mw-headline" id="Promotion"> Promotion </span></h2>
+<h3> <span class="mw-headline" id="Naming"> Naming </span></h3>
+<p>Naming is usually the last problem to be solved, even while we all wish for a cool name to our cool concept. Since the "coolness" of a name is a matter of taste, we cannot help you finding it. Moreover, if you tie your project name to a certain feature, you might discover somewhere down the road that no concept is perfect and that you might want to change what you initially thought a key feature. Nothing would be more stupid not to evolve just because you "want to stick to a name"...
+</p><p>A lot of good information on naming can be found in <a href="http://forum.osdev.org/viewtopic.php?t=15250" class="extiw" title="topic:15250">this</a> thread. Simply put, naming your operating system &lt;name&gt;OS (JackOS, FredOS, etc) may seem like a good idea, until you get a second project member. A good idea (courtesy of Solar) is to choose a codename (like Longhorn, Chicago, etc) and then make up a better name closer to release time.
+</p>
+<h3> <span class="mw-headline" id="Project_Website"> Project Website </span></h3>
+<p>Many newcomers to osdev create project websites before they have anything worth showing on the website. There's no value in creating a website making dramatic claims about the future plans for your project before you've got any idea where your project is heading or any code, screenshots, or downloads to showcase what you've already produced - such a website looks dead and creates a bad reputation. Announcing your website (such as in the Announcements forum on the OSDev.org forums) or linking to it in your signature when there's nothing more than a "welcome to &lt;insert fancy project name here&gt;" message on it just makes people lose interest in your project before you've even started, and if/when you do eventually produce something worth showing off you'll be faced with an already-terrible reputation that will be hard to overcome.
+</p>
+<h2> <span class="mw-headline" id="Teamwork"> Teamwork </span></h2>
+<p>The number one beginner mistake seen in the Announcements forum. They usually come in one of two forms, although they have quite a bit of overlap:
+</p>
+<h3> <span class="mw-headline" id="Community_Projects"> Community Projects </span></h3>
+<p>Don't overestimate your chances of getting people interested in <i>your</i> project. Even the more successful <a href="Projects" title="Projects">projects</a> usually consist of one, perhaps two people actually working on the code. And that is not due to a lack of <i>need</i>.
+</p><p>Brooks' Law states that the more people on a project, the longer it takes. The only way around this is to split the project into parts that you get people working on and only on that part. Good luck.
+</p>
+<h3> <span class="mw-headline" id="Recruiting"> Recruiting </span></h3>
+<p>There are some things you need for standing a chance (and avoid being painfully told that you are a failure):
+</p>
+<ol><li> If you have no established codebase, people will not join because they can see you lack experience and expect the project to fail.
+</li><li> If you lack a (worked out) design, people will not join you because they can't see how your OS is more interesting than their own design.
+</li><li> If your reputation doesn't precede you, especially the more experienced people will be very wary of you and lack the trust to join.
+</li><li> If you don't have project management skills, the few rare people that <i>do</i> join will quit shortly because they are discussing stuff and do not get to code.
+</li></ol>
+<p>People that join nevertheless are usually worse programmers than the people for which this list was composed.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 148/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1879-0!*!0!!en!*!* and timestamp 20180121031449 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Beginner_Mistakes&amp;oldid=20649">http://wiki.osdev.org/index.php?title=Beginner_Mistakes&amp;oldid=20649</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:OS_Development" title="Category:OS Development">OS Development</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Beginner_Mistakes" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Beginner_Mistakes"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Beginner_Mistakes"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Beginner_Mistakes#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Beginner_Mistakes" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Beginner_Mistakes&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Beginner_Mistakes&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Beginner_Mistakes#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Loskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Beginner_Mistakes" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Beginner_Mistakes" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Beginner_Mistakes&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Beginner_Mistakes&amp;oldid=20649" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 March 2017, at 16:05.</li>
+											<li id="footer-info-viewcount">This page has been accessed 297,996 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

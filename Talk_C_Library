@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Talk:C Library - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "Talk", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 1, "wgPageName": "Talk:C_Library", "wgTitle": "C Library", "wgCurRevisionId": 13984, "wgArticleId": 3281, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-1 ns-talk page-Talk_C_Library action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Talk:C Library</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Talk:C_Library#mw-head">navigation</a>,
+					<a href="Talk:C_Library#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><h1> <span class="mw-headline" id="types">types</span></h1>
+<p>It sounds to me like the "types" section is totally backwards.
+<a href="http://wiki.osdev.org/index.php?title=User:Bewing&amp;action=edit&amp;redlink=1" class="new" title="User:Bewing (page does not exist)">Bewing</a> 20:00, 31 August 2012 (CDT)
+</p>
+<dl><dd>I changed the name of the section to the more appropriate "Versions," and slightly improved it. Do you have anything more specific in mind? --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 09:16, 2 September 2012 (CDT)
+</dd></dl>
+<dl><dd>The new wording with the extra information is better. However, first, the way osdev uses these libs, the words "hosted" and "freestanding" do not have useful meanings -- they add confusion. The words "kernel" and "userland runtime library" have much clearer meanings, and I think these words need to be added. Second, isn't the "hosted" library the small, incomplete, subset one that is linked into the kernel? The article text has it the other way around. If I have it wrong, that just shows how confusing the terms are.&#160;;) --<a href="http://wiki.osdev.org/index.php?title=User:Bewing&amp;action=edit&amp;redlink=1" class="new" title="User:Bewing (page does not exist)">Bewing</a> 15:24, 4 September 2012 (CDT)
+</dd></dl>
+<dl><dd><dl><dd>Damn, I knew I couldn't resist doing the occasional edit... so: The "freestanding" part of the library are all those headers that add defines and typedefs, <i>but no code</i>. As such, they require neither a runtime nor a linker. A "hosted" library is the whole of it, i.e. including those headers that require accompaining object code. This has <i>nothing</i> to do with kernel / userland. I would expect virtually every kernel to use (a subset of) the hosted lib. -- <a href="http://wiki.osdev.org/User:Solar" title="User:Solar">Solar</a> 23:57, 4 September 2012 (CDT)
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd>Thanks very much for the clarification. I think we should stick the paragraph you just wrote into the  article. I'd say the whole concept of a "freestanding" clib is pretty useless in the context of osdev, then. --<a href="http://wiki.osdev.org/index.php?title=User:Bewing&amp;action=edit&amp;redlink=1" class="new" title="User:Bewing (page does not exist)">Bewing</a> 02:42, 5 September 2012 (CDT)
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd>I was the one who wrote that paragraph. Freestanding implementations are not irrelevant to the world of OS development; they were introduced to the standard for this very purpose (and for embedded programming). The idea is that they don't need to communicate with the underlying environment and can thus always be used for functionality such as variadic functions and macros that indicate arithmetic type ranges; on the other hand, hosted implementations require a lot of rewriting and/or porting---this stuff cannot be used out of the box. E.g., the recommandation generally given to GCC users on this website is that they build a cross-compiler; at that point, they can only use the freestanding library.
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd>However, what Solar says is true---while most of the hosted library has no place in a kernel, some of it makes sense (most notably, string handling). There is an important distinction, though. The main purpose of the standard library is to allow for things to be done portably. As I've mentioned in the paragraph above, the hosted stuff is not portable and since it has to be part of the OS, the advantage of portability, that I've just mentioned, goes away. It thus follows that it doesn't matter whether the OS developer implements standard functions or rolls his/her own incompatible ones that have similar goals. On the other hand, the freestanding stuff should always be used because it's always portable and thus increases the portability of the OS as a whole.
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd>--<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 11:46, 5 September 2012 (CDT)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd>I think I disagree about the portability issue. In the end any OS is going to need a userland runtime C library -- as non-portable as that may be. Once a developer has gone to the work of creating that, they do not lose any portability by adding some of it into their kernel, too. Most developers that I know of add a C lib to their kernel in order to get printf functionality, and that's it. It's silly of them, because the variadic interface is a giant bug-filled security hole in your kernel, so you really don't want it there. A kernel does very little string handling. A kernel also does very little math, and therefore arithmetic type ranges are not useful, either. But if you think that freestanding C libs are something that developers should care about and use, then you should add another paragraph to the article explaining why, I think. Because it certainly isn't intuitively obvious to me. --<a href="http://wiki.osdev.org/index.php?title=User:Bewing&amp;action=edit&amp;redlink=1" class="new" title="User:Bewing (page does not exist)">Bewing</a> 16:32, 5 September 2012 (CDT)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd>I didn't mean that they lose portability because it's in the kernel. I meant that the freestanding library offers portability for free and should thus be used, whereas the hosted library's portability is the developer's responsability (regardless of where it is implemented) and is thus unimportant whether it is used or whether something else is used instead. Trying to come up with a new freestanding library would increase maintainability, whereas coming up with a new hosted library wouldn't. Other clarifications:
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd><ul><li> I don't see any reason to have I/O (such as <tt>printf</tt> or <tt>scanf</tt>) in the kernel.
+</li><li> You don't need to be math-intensive to need to know the type ranges (e.g., think of <tt>SIZE_MAX</tt>).
+</li><li> By string handling, I was mostly thinking of <tt>memset</tt>, <tt>memcpy</tt> and such, which are declared in <tt>&lt;string.h&gt;</tt>.
+</li></ul>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd><dl><dd>--<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 23:57, 5 September 2012 (CDT)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<p>I think talking about portability is missing the point. The "freestanding" part of the library is something that is <i>solely</i> depending on the implementation of the compiler. GCC, for example, provides its own versions of the freestanding C library headers. -- <a href="http://wiki.osdev.org/User:Solar" title="User:Solar">Solar</a> 04:38, 12 September 2012 (CDT)
+</p>
+<dl><dd>It's not missing the point at all. It offers information about the implementation which is used to compile the source for the purpose of portability. In the context of kernel development, code that uses the hosted features is not (as) portable because it requires either porting or implementing said hosted features. (Not sure what GCC has to do with anything.) --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 14:31, 13 September 2012 (CDT)
+</dd></dl>
+<h1> <span class="mw-headline" id="Is_Combuster_Being_Overly_Pedantic_Again">Is Combuster Being Overly Pedantic Again</span></h1>
+<p>The whole point of MIT and BSD licenses is that some MIT and Berkeley lawyers worked to create copyright licenses that were as close as humanly legally possible to "public domain" without actually using the words "public domain". You can use, modify, and sell the software to your heart's content, with the only restriction being to maintain the license. I say this is "basically public domain". Combuster says no, this does not meet the precise definition of public domain. Does anyone else wish to comment? <a href="http://wiki.osdev.org/index.php?title=User:Bewing&amp;action=edit&amp;redlink=1" class="new" title="User:Bewing (page does not exist)">Bewing</a> 20:48, 11 September 2012 (CDT)
+</p>
+<dl><dd>Then I hope you haven't stubbornly violating license agreements by omitting BSDs demand for <b>attribution</b>, even though in commercial contexts it's sadly standard practice. Yes BSD-style licenses are useful for many things, but contrary to public domain and the later CC0, WTFPL and such you are required to do legal bookkeeping, and from every snippet you grab from the web follows the consequence of needing an extra half a page in your LICENSES document.
+</dd><dd>Also, the direct consequence of your assumption is that BSD and MIT with all its paid lawyers failed epically at writing the appropriate license texts because the CC0 does things much better than that. Hence, I can't accept the factual accuracy of your statement. - <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 07:58, 12 September 2012 (CDT)
+</dd></dl>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 29/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3281-0!*!0!!*!*!* and timestamp 20180121073849 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Talk:C_Library&amp;oldid=13984">http://wiki.osdev.org/index.php?title=Talk:C_Library&amp;oldid=13984</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Talk%3AC_Library" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main"><span><a href="C_Library"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="selected"><span><a href="Talk:C_Library"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Talk:C_Library#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Talk:C_Library" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Talk:C_Library&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Talk:C_Library&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Talk:C_Library#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id=skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Talk:C_Library" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Talk:C_Library" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Talk:C_Library&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Talk:C_Library&amp;oldid=13984" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 13 September 2012, at 13:32.</li>
+											<li id="footer-info-viewcount">This page has been accessed 4,598 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.044 secs. -->
+	</body>
+</html>

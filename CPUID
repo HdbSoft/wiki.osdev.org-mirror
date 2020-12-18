@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>CPUID - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "CPUID", "wgTitle": "CPUID", "wgCurRevisionId": 20906, "wgArticleId": 1450, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Disputed Pages", "X86 CPU"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-CPUID action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">CPUID</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="CPUID#mw-head">navigation</a>,
+					<a href="CPUID#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The CPUID instruction can be used to retrieve various amount of information about your cpu, like its vendor string and model number, the size of internal caches and (more interesting), the list of CPU features supported.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="CPUID#How_to_use_CPUID"><span class="tocnumber">1</span> <span class="toctext">How to use CPUID</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="CPUID#Checking_CPUID_availability"><span class="tocnumber">1.1</span> <span class="toctext">Checking CPUID availability</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="CPUID#Basic_usage"><span class="tocnumber">1.2</span> <span class="toctext">Basic usage</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="CPUID#CPU_Vendor_ID_String"><span class="tocnumber">1.3</span> <span class="toctext">CPU Vendor ID String</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="CPUID#CPU_Features"><span class="tocnumber">1.4</span> <span class="toctext">CPU Features</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="CPUID#Using_CPUID_from_GCC"><span class="tocnumber">2</span> <span class="toctext">Using CPUID from GCC</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="CPUID#See_Also"><span class="tocnumber">3</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="CPUID#Articles"><span class="tocnumber">3.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="CPUID#Threads"><span class="tocnumber">3.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="CPUID#External_Links"><span class="tocnumber">3.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="How_to_use_CPUID"> How to use CPUID </span></h2>
+<h3> <span class="mw-headline" id="Checking_CPUID_availability"> Checking CPUID availability </span></h3>
+<p>Prior to using the CPUID instruction, you should also make sure the processor supports it by testing the 'ID' bit (0x200000) in eflags. This bit is modifiable only when the CPUID instruction is supported. For systems that don't support CPUID, changing the 'ID' bit will have no effect.
+</p><p><b>Note:</b> Implementing this routine in for example C can lead to issues, because the compiler may change EFLAGS at any time.
+</p><p>This assembly routine checks if CPUID is supported:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">pushfd</span>                               <span class="co1">;Save EFLAGS</span>
+    <span class="kw1">pushfd</span>                               <span class="co1">;Store EFLAGS</span>
+    <span class="kw1">xor</span> <span class="kw5">dword</span> <span class="br0">&#91;</span><span class="kw3">esp</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="nu0">0x00200000</span>           <span class="co1">;Invert the ID bit in stored EFLAGS</span>
+    <span class="kw1">popfd</span>                                <span class="co1">;Load stored EFLAGS (with ID bit inverted)</span>
+    <span class="kw1">pushfd</span>                               <span class="co1">;Store EFLAGS again (ID bit may or may not be inverted)</span>
+    <span class="kw1">pop</span> <span class="kw3">eax</span>                              <span class="co1">;eax = modified EFLAGS (ID bit may or may not be inverted)</span>
+    <span class="kw1">xor</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="br0">&#91;</span><span class="kw3">esp</span><span class="br0">&#93;</span>                        <span class="co1">;eax = whichever bits were changed</span>
+    <span class="kw1">popfd</span>                                <span class="co1">;Restore original EFLAGS</span>
+    <span class="kw1">and</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="nu0">0x00200000</span>                   <span class="co1">;eax = zero if ID bit can't be changed, else non-zero</span>
+    <span class="kw1">ret</span></pre></div></div>
+<p>Note 1: There are some old CPUs where CPUID is supported but the ID bit in EFLAGS is not (NexGen). The are also CPUs that support CPUID if and only if it has to be enabled first (Cyrix M1).
+</p><p>Note 2: You can simply attempt to execute the CPUID instruction and see if you get an invalid opcode exception. This avoids problems with CPUs that do support CPUID but don't support the ID bit in EFLAGS; and is likely to be faster for CPUs that do support CPUID (and slower for CPUs that don't).
+</p><p><br />
+</p>
+<h3> <span class="mw-headline" id="Basic_usage"> Basic usage </span></h3>
+<p>The idea of the CPUID instruction is that you can call it with different values in EAX, and it will return different information about the processor. For example, if we want the Vendor ID String (see below), we should code something like that:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0x0</span>
+<span class="kw1">cpuid</span></pre></div></div>
+<p>There are differences between AMD and Intel. According to the Intel CPUID application note, we should first check the Vendor ID String for "GenuineIntel" before taking out information, such as the Processor Signature, Processor Feature Flags, etc.
+</p>
+<h3> <span class="mw-headline" id="CPU_Vendor_ID_String"> CPU Vendor ID String </span></h3>
+<p>When called with EAX = 0, CPUID returns the vendor ID string in EBX, EDX and ECX. Writing these to memory in this order results in a 12-character string. These can be tested against known Vendor ID strings:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="coMULTI">/* Vendor-strings. */</span>
+<span class="co2">#define CPUID_VENDOR_OLDAMD       &quot;AMDisbetter!&quot; /* early engineering samples of AMD K5 processor */</span>
+<span class="co2">#define CPUID_VENDOR_AMD          &quot;AuthenticAMD&quot;</span>
+<span class="co2">#define CPUID_VENDOR_INTEL        &quot;GenuineIntel&quot;</span>
+<span class="co2">#define CPUID_VENDOR_VIA          &quot;CentaurHauls&quot;</span>
+<span class="co2">#define CPUID_VENDOR_OLDTRANSMETA &quot;TransmetaCPU&quot;</span>
+<span class="co2">#define CPUID_VENDOR_TRANSMETA    &quot;GenuineTMx86&quot;</span>
+<span class="co2">#define CPUID_VENDOR_CYRIX        &quot;CyrixInstead&quot;</span>
+<span class="co2">#define CPUID_VENDOR_CENTAUR      &quot;CentaurHauls&quot;</span>
+<span class="co2">#define CPUID_VENDOR_NEXGEN       &quot;NexGenDriven&quot;</span>
+<span class="co2">#define CPUID_VENDOR_UMC          &quot;UMC UMC UMC &quot;</span>
+<span class="co2">#define CPUID_VENDOR_SIS          &quot;SiS SiS SiS &quot;</span>
+<span class="co2">#define CPUID_VENDOR_NSC          &quot;Geode by NSC&quot;</span>
+<span class="co2">#define CPUID_VENDOR_RISE         &quot;RiseRiseRise&quot;</span>
+<span class="co2">#define CPUID_VENDOR_VORTEX       &quot;Vortex86 SoC&quot;</span>
+<span class="co2">#define CPUID_VENDOR_VIA          &quot;VIA VIA VIA &quot;</span>
+&#160;
+<span class="coMULTI">/*Vendor-strings from Virtual Machines.*/</span>
+<span class="co2">#define CPUID_VENDOR_VMWARE       &quot;VMwareVMware&quot;</span>
+<span class="co2">#define CPUID_VENDOR_XENHVM       &quot;XenVMMXenVMM&quot;</span>
+<span class="co2">#define CPUID_VENDOR_MICROSOFT_HV &quot;Microsoft Hv&quot;</span>
+<span class="co2">#define CPUID_VENDOR_PARALLELS    &quot; lrpepyh vr&quot;</span></pre></div></div>
+<p>You already know that the Vendor ID String is returned in EBX, ECX, EDX. Let us take an Intel processor. It should return "GenuineIntel". Look at the following text to see how the string is placed in the registers:
+</p>
+<pre>
+      MSB         LSB
+EBX = 'u' 'n' 'e' 'G'
+EDX = 'I' 'e' 'n' 'i'
+ECX = 'l' 'e' 't' 'n' 
+ 
+ Where, MSB stands for &quot;Most Significant Byte&quot; and LSB is the &quot;Least Significant Byte&quot;.
+</pre>
+<p>Also, EAX is set to the maximum EAX value supported for CPUID calls, as not all queries are supported on all processors.
+</p>
+<h3> <span class="mw-headline" id="CPU_Features"> CPU Features </span></h3>
+<p>When called with EAX = 1 (CPUID_GETFEATURES), CPUID returns a bit field in EDX containing the following values.
+Note that different brands of CPUs may have given different meanings to these. 
+Recent processors also use ECX for features (which form a different set), with which you should be very careful as some old CPUs return bogus information in this register.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw2">enum</span> <span class="br0">&#123;</span>
+    CPUID_FEAT_ECX_SSE3         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">0</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_PCLMUL       <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">1</span><span class="sy0">,</span>
+    CPUID_FEAT_ECX_DTES64       <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">2</span><span class="sy0">,</span>
+    CPUID_FEAT_ECX_MONITOR      <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">3</span><span class="sy0">,</span>  
+    CPUID_FEAT_ECX_DS_CPL       <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">4</span><span class="sy0">,</span>  
+    CPUID_FEAT_ECX_VMX          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">5</span><span class="sy0">,</span>  
+    CPUID_FEAT_ECX_SMX          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">6</span><span class="sy0">,</span>  
+    CPUID_FEAT_ECX_EST          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">7</span><span class="sy0">,</span>  
+    CPUID_FEAT_ECX_TM2          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">8</span><span class="sy0">,</span>  
+    CPUID_FEAT_ECX_SSSE3        <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">9</span><span class="sy0">,</span>  
+    CPUID_FEAT_ECX_CID          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">10</span><span class="sy0">,</span>
+    CPUID_FEAT_ECX_FMA          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">12</span><span class="sy0">,</span>
+    CPUID_FEAT_ECX_CX16         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">13</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_ETPRD        <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">14</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_PDCM         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">15</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_PCIDE        <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">17</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_DCA          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">18</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_SSE4_1       <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">19</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_SSE4_2       <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">20</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_x2APIC       <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">21</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_MOVBE        <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">22</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_POPCNT       <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">23</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_AES          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">25</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_XSAVE        <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">26</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_OSXSAVE      <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">27</span><span class="sy0">,</span> 
+    CPUID_FEAT_ECX_AVX          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">28</span><span class="sy0">,</span>
+&#160;
+    CPUID_FEAT_EDX_FPU          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">0</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_VME          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">1</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_DE           <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">2</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_PSE          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">3</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_TSC          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">4</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_MSR          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">5</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_PAE          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">6</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_MCE          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">7</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_CX8          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">8</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_APIC         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">9</span><span class="sy0">,</span>  
+    CPUID_FEAT_EDX_SEP          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">11</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_MTRR         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">12</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_PGE          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">13</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_MCA          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">14</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_CMOV         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">15</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_PAT          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">16</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_PSE36        <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">17</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_PSN          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">18</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_CLF          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">19</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_DTES         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">21</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_ACPI         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">22</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_MMX          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">23</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_FXSR         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">24</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_SSE          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">25</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_SSE2         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">26</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_SS           <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">27</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_HTT          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">28</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_TM1          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">29</span><span class="sy0">,</span> 
+    CPUID_FEAT_EDX_IA64         <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">30</span><span class="sy0">,</span>
+    CPUID_FEAT_EDX_PBE          <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">31</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Using_CPUID_from_GCC"> Using CPUID from GCC </span></h2>
+<center>
+<table style="border: 1px solid #cfcfbf; padding: .0em .25em .0em; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><font color="black">The factual accuracy of this article or section is <a href="Category:Disputed_Pages" title="Category:Disputed Pages">disputed</a>.</font><br /><small><font color="red">Please see the relevant discussion on the [[|talk page]].</font></small>
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>CPUID can be invoked with various request codes (in eax) and will return values in general registers (much as a built-in service interrupt). The following code is made Public Domain out of Clicker's x86/cpu.h
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="coMULTI">/* TODO: You should use the &lt;cpuid.h&gt; header that comes with GCC instead. */</span>
+&#160;
+<span class="kw2">enum</span> cpuid_requests <span class="br0">&#123;</span>
+  CPUID_GETVENDORSTRING<span class="sy0">,</span>
+  CPUID_GETFEATURES<span class="sy0">,</span>
+  CPUID_GETTLB<span class="sy0">,</span>
+  CPUID_GETSERIAL<span class="sy0">,</span>
+&#160;
+  CPUID_INTELEXTENDED<span class="sy0">=</span><span class="nu12">0x80000000</span><span class="sy0">,</span>
+  CPUID_INTELFEATURES<span class="sy0">,</span>
+  CPUID_INTELBRANDSTRING<span class="sy0">,</span>
+  CPUID_INTELBRANDSTRINGMORE<span class="sy0">,</span>
+  CPUID_INTELBRANDSTRINGEND<span class="sy0">,</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/** issue a single request to CPUID. Fits 'intel features', for instance
+ *  note that even if only &quot;eax&quot; and &quot;edx&quot; are of interest, other registers
+ *  will be modified by the operation, so we need to tell the compiler about it.
+ */</span>
+<span class="kw4">static</span> <span class="kw2">inline</span> <span class="kw4">void</span> cpuid<span class="br0">&#40;</span><span class="kw4">int</span> code<span class="sy0">,</span> <span class="kw4">uint32_t</span> <span class="sy0">*</span>a<span class="sy0">,</span> <span class="kw4">uint32_t</span> <span class="sy0">*</span>d<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot;cpuid&quot;</span><span class="sy0">:</span><span class="st0">&quot;=a&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span>a<span class="br0">&#41;</span><span class="sy0">,</span><span class="st0">&quot;=d&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span>d<span class="br0">&#41;</span><span class="sy0">:</span><span class="st0">&quot;a&quot;</span><span class="br0">&#40;</span>code<span class="br0">&#41;</span><span class="sy0">:</span><span class="st0">&quot;ecx&quot;</span><span class="sy0">,</span><span class="st0">&quot;ebx&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/** issue a complete request, storing general registers output as a string
+ */</span>
+<span class="kw4">static</span> <span class="kw2">inline</span> <span class="kw4">int</span> cpuid_string<span class="br0">&#40;</span><span class="kw4">int</span> code<span class="sy0">,</span> <span class="kw4">uint32_t</span> where<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot;cpuid&quot;</span><span class="sy0">:</span><span class="st0">&quot;=a&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span>where<span class="br0">&#41;</span><span class="sy0">,</span><span class="st0">&quot;=b&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span>where<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+               <span class="st0">&quot;=c&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span>where<span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="st0">&quot;=d&quot;</span><span class="br0">&#40;</span><span class="sy0">*</span><span class="br0">&#40;</span>where<span class="sy0">+</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">:</span><span class="st0">&quot;a&quot;</span><span class="br0">&#40;</span>code<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">return</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span>where<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="VMX" title="VMX">VMX</a> Intel's Virtual-Machine Extensions
+</li><li> <a href="Detecting_CPU_Topology_(80x86)" title="Detecting CPU Topology (80x86)">Detecting CPU Topology (80x86)</a> Detecting CPU Topology on 80x86
+</li></ul>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<ul><li> <a href="http://forum.osdev.org/viewtopic.php?t=11998" class="extiw" title="topic:11998">CPUID For OS Developers</a>, an implementation written by Brynet-Inc.
+</li><li> <a href="http://forum.osdev.org/viewtopic.php?t=12146" class="extiw" title="topic:12146">Forum topic about issues with CPUID</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li> You can check out <a rel="nofollow" class="external text" href="http://sandpile.org/x86/cpuid.htm">SandPile.org</a> for an exhaustive list of functions available through CPUID instruction.
+</li><li> Intel's <a rel="nofollow" class="external text" href="http://bochs.sourceforge.net/techspec/24161821.pdf">CPUID Specification</a>
+</li><li> AMD's <a rel="nofollow" class="external text" href="http://support.amd.com/TechDocs/25481.pdf">CPUID Specification</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 120/1000000
+Post-expand include size: 383/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1450-0!*!0!!en!*!* and timestamp 20180121034251 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=CPUID&amp;oldid=20906">http://wiki.osdev.org/index.php?title=CPUID&amp;oldid=20906</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Disputed_Pages" title="Category:Disputed Pages">Disputed Pages</a></li><li><a href="Category:X86_CPU" title="Category:X86 CPU">X86 CPU</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=CPUID" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="CPUID"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:CPUID"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="CPUID#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="CPUID" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=CPUID&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=CPUID&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="CPUID#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-Oskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/CPUID" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/CPUID" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=CPUID&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=CPUID&amp;oldid=20906" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/CPUID" title="CPUID">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 15 June 2017, at 05:35.</li>
+											<li id="footer-info-viewcount">This page has been accessed 79,949 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

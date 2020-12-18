@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Tool Comparison - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Tool_Comparison", "wgTitle": "Tool Comparison", "wgCurRevisionId": 21624, "wgArticleId": 1405, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Tools"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Tool_Comparison action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Tool Comparison</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Tool_Comparison#mw-head">navigation</a>,
+					<a href="Tool_Comparison#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>This is a comparison of various operating system development tools.
+</p>
+<h2> <span class="mw-headline" id="x86_Assemblers">x86 Assemblers</span></h2>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th>
+</th>
+<th colspan="2"> Syntax
+</th>
+<th colspan="4"> Output Format
+</th>
+<th colspan="3"> Instruction Set
+</th></tr>
+<tr>
+<th>
+</th>
+<th> <a href="Assembly#AT.26T_Syntax" title="Assembly">AT&amp;T</a>
+</th>
+<th> <a href="Assembly#Intel_Syntax" title="Assembly">Intel</a>
+</th>
+<th> <a href="ELF" title="ELF">ELF</a>
+</th>
+<th> <a href="A.out" title="A.out">a.out</a>
+</th>
+<th> <a href="COFF" title="COFF">COFF</a>
+</th>
+<th> flat
+</th>
+<th> 16 bit
+</th>
+<th> 32 bit
+</th>
+<th> 64 bit
+</th></tr>
+<tr>
+<th> <a href="GAS" title="GAS">GAS</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes<small><sup id="ref_1" class="plainlinks"><a rel="nofollow" class="external autonumber" href="Tool_Comparison#endnote_1">[1]</a></sup></small>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes<small><sup id="ref_2" class="plainlinks"><a rel="nofollow" class="external autonumber" href="Tool_Comparison#endnote_2">[2]</a></sup></small>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes<small><sup id="ref_3" class="plainlinks"><a rel="nofollow" class="external autonumber" href="Tool_Comparison#endnote_3">[3]</a></sup></small>
+</td></tr>
+<tr>
+<th> <a href="NASM" title="NASM">NASM</a>
+</th>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes<small><sup id="ref_4" class="plainlinks"><a rel="nofollow" class="external autonumber" href="Tool_Comparison#endnote_4">[4]</a></sup></small>
+</td></tr>
+<tr>
+<th> <a href="YASM" title="YASM">YASM</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="FASM" title="FASM">FASM</a>
+</th>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="JWASM" title="JWASM" class="mw-redirect">JWASM</a>
+</th>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="MASM" title="MASM">MASM</a><small><sup id="ref_5" class="plainlinks"><a rel="nofollow" class="external autonumber" href="Tool_Comparison#endnote_5">[5]</a></sup></small>
+</th>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes<small><sup id="ref_6" class="plainlinks"><a rel="nofollow" class="external autonumber" href="Tool_Comparison#endnote_6">[6]</a></sup></small>
+</td></tr>
+<tr>
+<th> <a href="Sol_asm" title="Sol asm">Sol_asm</a>
+</th>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes<small><sup id="ref_7" class="plainlinks"><a rel="nofollow" class="external autonumber" href="Tool_Comparison#endnote_7">[7]</a></sup></small>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> n/a
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="http://wiki.osdev.org/index.php?title=WASM&amp;action=edit&amp;redlink=1" class="new" title="WASM (page does not exist)">WASM</a>
+</th>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="AS86" title="AS86">AS86</a>
+</th>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td></tr>
+<tr>
+<th> <a href="LLVM" title="LLVM">llvm-mc</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr></table>
+<ul><li> <cite id="endnote_1" style="font-style: normal;"><a href="Tool_Comparison#ref_1"><span style="position:relative; bottom:0.25em; font-size:0.8em;">↑</span></a></cite>&#160; using the <code>.intel_syntax</code> directive. Several opcodes will still use the AT&amp;T name.
+</li><li> <cite id="endnote_2" style="font-style: normal;"><a href="Tool_Comparison#ref_2"><span style="position:relative; bottom:0.25em; font-size:0.8em;">↑</span></a></cite>&#160; While GAS normally writes only "pure" 32-bit i386 code, it has <a rel="nofollow" class="external text" href="http://sourceware.org/binutils/docs/as/i386_002d16bit.html">limited support</a> for writing code to run in real mode or in 16-bit protected mode code segments.
+</li><li> <cite id="endnote_3" style="font-style: normal;"><a href="Tool_Comparison#ref_3"><span style="position:relative; bottom:0.25em; font-size:0.8em;">↑</span></a></cite>&#160; You have to choose the instruction set at compile time (of the assembler). GAS can not assemble for more than one operating mode at a time, i.e. you would need one GAS for 32bit and one GAS for 64bit if you'd want to mix those two.
+</li><li> <cite id="endnote_4" style="font-style: normal;"><a href="Tool_Comparison#ref_4"><span style="position:relative; bottom:0.25em; font-size:0.8em;">↑</span></a></cite>&#160; 64-bit support is only available in NASM 2.x.
+</li><li> <cite id="endnote_5" style="font-style: normal;"><a href="Tool_Comparison#ref_5"><span style="position:relative; bottom:0.25em; font-size:0.8em;">↑</span></a></cite>&#160; Because of the license it may be illegal to use MASM for "non-windows development"
+</li><li> <cite id="endnote_6" style="font-style: normal;"><a href="Tool_Comparison#ref_6"><span style="position:relative; bottom:0.25em; font-size:0.8em;">↑</span></a></cite>&#160; 64-bit support is only available in a separate executable, named ml64.
+</li><li> <cite id="endnote_7" style="font-style: normal;"><a href="Tool_Comparison#ref_7"><span style="position:relative; bottom:0.25em; font-size:0.8em;">↑</span></a></cite>&#160; Sol_Asm uses its own syntax, which looks like the Intel syntax.
+</li></ul>
+<h2> <span class="mw-headline" id="Compilers">Compilers</span></h2>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th>
+</th>
+<th> Extensions
+</th>
+<th colspan="8"> Output format
+</th></tr>
+<tr>
+<th>
+</th>
+<th> Inline Assembly
+</th>
+<th> <a href="ELF" title="ELF">ELF</a>
+</th>
+<th> <a href="A.out" title="A.out">a.out</a>
+</th>
+<th> flat
+</th>
+<th> <a href="PE" title="PE">PE</a>
+</th>
+<th> COFF
+</th>
+<th> 16-bit code segments
+</th>
+<th> 32-bit code segments
+</th>
+<th> 64-bit code segments
+</th></tr>
+<tr>
+<th> <a href="GCC" title="GCC">GCC</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>&#160;?
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="LLVM" title="LLVM">Clang</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> msvc
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No<small><sup id="ref_4" class="plainlinks"><a rel="nofollow" class="external autonumber" href="Tool_Comparison#endnote_4">[8]</a></sup></small>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>  Version 4.X
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> icl
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="Watcom" title="Watcom">Watcom</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="Smaller_C" title="Smaller C">Smaller C</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes (incl. huge &amp; unreal mode(l)s)
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td></tr></table>
+<ul><li> <cite id="endnote_4" style="font-style: normal;"><a href="Tool_Comparison#ref_4"><span style="position:relative; bottom:0.25em; font-size:0.8em;">↑</span></a></cite>&#160; Visual Studio can emit <code>.COM</code> files.
+</li></ul>
+<h2> <span class="mw-headline" id="Linkers">Linkers</span></h2>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th rowspan="2"> Name
+</th>
+<th colspan="5"> Input
+</th>
+<th colspan="5"> Output
+</th>
+<th rowspan="2"> Flat Binary Images
+</th>
+<th rowspan="2"> Set Code Address
+</th>
+<th rowspan="2"> Library Support
+</th>
+<th rowspan="2"> Supports Debug Info
+</th>
+<th rowspan="2"> 32bit Code
+</th></tr>
+<tr>
+<th> OMF/ OBJ
+</th>
+<th> Win32/ COFF
+</th>
+<th> ELF
+</th>
+<th> A.OUT
+</th>
+<th> Others
+</th>
+<th> Win32/ PE
+</th>
+<th> Win32/ DLL
+</th>
+<th> ELF
+</th>
+<th> A.OUT
+</th>
+<th> Others
+</th></tr>
+<tr>
+<th> <a href="JLoc" title="JLoc">JLoc</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> DOS/COM
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> OMF/OBJ
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="ALink" title="ALink">ALink</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> DJGPP/COFF
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> DOS/COM DOS/EXE
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="LD" title="LD">LD</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> DJGPP/COFF OMF/COFF
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> various
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> ECOFF DWARF STABS
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="TLink" title="TLink">TLink</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> DOS/EXE DOS/COM
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> OMF/OBJ
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="Link" title="Link">Link</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> DOS/EXE DOS/COM LE
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> CODEVIEW DWARF
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="VAL" title="VAL">VAL</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> DOS/EXE
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td></tr>
+<tr>
+<th> <a href="WLink" title="WLink">WLink</a>
+</th>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td> DOS/EXE DOS/COM LE Pharlap Novell_NLM Causeway QNX
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> WATCOM CODEVIEW DWARF
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="Smlrl" title="Smlrl">smlrl</a>
+</th>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td> DOS/COM DOS/EXE MACH-O
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ffdddd"> No
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr>
+<tr>
+<th> <a href="LLVM" title="LLVM">LLD</a>
+</th>
+<td>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td style="background: #ddffdd"> Yes
+</td>
+<td>
+</td>
+<td style="background: #ddffdd"> Yes
+</td></tr></table>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 737/1000000
+Post-expand include size: 10707/2097152 bytes
+Template argument size: 32/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1405-0!*!0!!*!*!* and timestamp 20180121063339 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Tool_Comparison&amp;oldid=21624">http://wiki.osdev.org/index.php?title=Tool_Comparison&amp;oldid=21624</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Tools" title="Category:Tools">Tools</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Tool_Comparison" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Tool_Comparison"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Tool_Comparison"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Tool_Comparison#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Tool_Comparison" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Tool_Comparison&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Tool_Comparison&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Tool_Comparison#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Tool_Comparison" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Tool_Comparison" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Tool_Comparison&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Tool_Comparison&amp;oldid=21624" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 17 October 2017, at 05:29.</li>
+											<li id="footer-info-viewcount">This page has been accessed 49,746 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Tool_Comparison" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Tool_Comparison" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Tool_Comparison&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Tool_Comparison&amp;oldid=21624" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 17 October 2017, at 05:29.</li>
+											<li id="footer-info-viewcount">This page has been accessed 49,746 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

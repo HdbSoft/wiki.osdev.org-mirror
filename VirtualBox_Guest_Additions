@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>VirtualBox Guest Additions - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "VirtualBox_Guest_Additions", "wgTitle": "VirtualBox Guest Additions", "wgCurRevisionId": 19750, "wgArticleId": 3968, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-VirtualBox_Guest_Additions action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">VirtualBox Guest Additions</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="VirtualBox_Guest_Additions#mw-head">navigation</a>,
+					<a href="VirtualBox_Guest_Additions#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>This article aims to describe some of the more useful / easier to implement features of the VirtualBox Guest Additions.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="VirtualBox_Guest_Additions#The_VirtualBox_Guest_Device"><span class="tocnumber">1</span> <span class="toctext">The VirtualBox Guest Device</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="VirtualBox_Guest_Additions#Initializing_the_Device"><span class="tocnumber">2</span> <span class="toctext">Initializing the Device</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="VirtualBox_Guest_Additions#Auto-resize_Guest_Display"><span class="tocnumber">3</span> <span class="toctext">Auto-resize Guest Display</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="VirtualBox_Guest_Additions#Mouse_Integration"><span class="tocnumber">4</span> <span class="toctext">Mouse Integration</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="VirtualBox_Guest_Additions#Other_Stuff"><span class="tocnumber">5</span> <span class="toctext">Other Stuff</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="VirtualBox_Guest_Additions#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="VirtualBox_Guest_Additions#External_Links"><span class="tocnumber">6.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="The_VirtualBox_Guest_Device"> The VirtualBox Guest Device </span></h2>
+<p>The Guest Additions package operates through a PCI/mmio device provided by the VM. A combination of memory-mapped packets, MMIO port writes, and IRQs allow the guest to communicate its feature support to the VM and for the VM to communicate events such as display changes and mouse movement. The PCI device has the vendor ID <b>0x80EE</b>, same as the VirtualBox implementation of the Bochs display adapter, and a device ID of <b>0xCAFE</b>. BAR0 is the MMIO port and BAR1 is a memory region that contains some shared state for the device, such as a bit mask for what events the guest wishes to receive. The format for the latter is unimportant for the features described on this page - you need only know that the region can be interpreted as an array of 32-bit unsigned integers and offset 3 contains the IRQ mask.
+</p><p>Communication between the guest and the host happens through packets in memory. These can be anywhere in physical memory, and are relatively short. The MMIO operations that read or populate packets are synchronous, so setting up one page to pass back and forth is feasible. The basic process for sending a message to the VM is to prepare a packet and then write its (physical) address to the MMIO port. Receiving works the same way, as you must prepare a packet with a request type and provide its physical address; after the MMIO port write finishes, the packet will be populated with the appropriate values if the request was successful. Communication from the VM is primarily initiated by an IRQ on the PCI device's interrupt line, which should then be followed up by appropriate packet requests, one of which should be of a special "Acknowledge Events" type.
+</p><p>This page contains some struct definitions which could alternatively be obtained from headers provided by VirtualBox, but those headers are rather heavy and assume they are being used alongside a robust set of system headers, so instead we will define these structs ourselves.
+</p><p>Pseudo-code examples in the following sections will assume the availability of these functions; adjust them to match your environment:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> <span class="sy0">*</span> allocate_physical_page<span class="br0">&#40;</span><span class="kw4">uint32_t</span> <span class="sy0">*</span> physical<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Allocate one page of memory, providing its physical address as an output and virtual address as a return value.</span>
+<span class="kw4">void</span> <span class="sy0">*</span> map_physical_page<span class="br0">&#40;</span><span class="kw4">uint32_t</span> physical<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Map a physical page into the virtual memory space.</span>
+<span class="kw4">void</span> install_interrupt_handler<span class="br0">&#40;</span>irq<span class="sy0">,</span> <span class="kw4">int</span> <span class="br0">&#40;</span><span class="sy0">*</span>irq_function<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Install an interrupt request handler function.</span>
+<span class="kw4">void</span> outportl<span class="br0">&#40;</span>port<span class="sy0">,</span> value<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Write a 32-bit value to an MMIO port.</span>
+<span class="kw4">void</span> outports<span class="br0">&#40;</span>port<span class="sy0">,</span> value<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Write a 16-bit value to an MMIO port.</span>
+pci_device_t pci_find<span class="br0">&#40;</span>vendor<span class="sy0">,</span>device<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Return an object describing the requested PCI device, if found.</span>
+<span class="kw4">uint32_t</span> pci_read_field<span class="br0">&#40;</span>pci_device_t device<span class="sy0">,</span> field<span class="sy0">,</span> size<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Read a field from the given PCI device</span></pre></div></div>
+<h2> <span class="mw-headline" id="Initializing_the_Device"> Initializing the Device </span></h2>
+<p>Before we can do anything with the guest device, we need to tell it about ourselves. There are two protocols that current versions of VirtualBox support: 1.03 and 1.04. We will use 1.03, the so-called "Legacy Protocol", as it is slightly simpler.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define VBOX_VENDOR_ID 0x80EE</span>
+<span class="co2">#define VBOX_DEVICE_ID 0xCAFE</span>
+<span class="co2">#define VBOX_VMMDEV_VERSION 0x00010003</span>
+<span class="co2">#define VBOX_REQUEST_HEADER_VERSION 0x10001</span>
+&#160;
+<span class="co2">#define VBOX_REQUEST_GUEST_INFO 50</span>
+&#160;
+<span class="coMULTI">/* VBox Guest packet header */</span>
+<span class="kw4">struct</span> vbox_header <span class="br0">&#123;</span>
+        <span class="kw4">uint32_t</span> size<span class="sy0">;</span> <span class="coMULTI">/* Size of the entire packet (including this header) */</span>
+        <span class="kw4">uint32_t</span> version<span class="sy0">;</span> <span class="coMULTI">/* Version; always VBOX_REQUEST_HEADER_VERSION */</span>
+        <span class="kw4">uint32_t</span> requestType<span class="sy0">;</span> <span class="coMULTI">/* Request code */</span>
+        <span class="kw4">int32_t</span>  rc<span class="sy0">;</span> <span class="coMULTI">/* This will get filled with the return code from the requset */</span>
+        <span class="kw4">uint32_t</span> reserved1<span class="sy0">;</span> <span class="coMULTI">/* These are unused */</span>
+        <span class="kw4">uint32_t</span> reserved2<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/* VBox Guest Info packet (legacy) */</span>
+<span class="kw4">struct</span> vbox_guest_info <span class="br0">&#123;</span>
+        <span class="kw4">struct</span> vbox_header header<span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> version<span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> ostype<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="kw4">static</span> pci_device_t vbox_pci<span class="sy0">;</span>
+<span class="kw4">static</span> <span class="kw4">int</span> vbox_port<span class="sy0">;</span>
+<span class="kw4">static</span> <span class="kw4">uint32_t</span> <span class="sy0">*</span> vbox_vmmdev<span class="sy0">;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">void</span> vbox_guest_init<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="coMULTI">/* Find the guest device */</span>
+    pci_device_t vbox_pci <span class="sy0">=</span> pci_find<span class="br0">&#40;</span>VBOX_VENDOR_ID<span class="sy0">,</span> VBOX_DEVICE_ID<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="coMULTI">/* BAR0 is the IO port. */</span>
+    vbox_port <span class="sy0">=</span> pci_read_field<span class="br0">&#40;</span>vbox_pci<span class="sy0">,</span> PCI_BAR0<span class="sy0">,</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xFFFFFFF0</span><span class="sy0">;</span>
+&#160;
+    <span class="coMULTI">/* BAR1 is the memory-mapped &quot;vmmdevmem&quot; area. */</span>
+    vbox_vmmdev <span class="sy0">=</span> map_physical_page<span class="br0">&#40;</span>pci_read_field<span class="br0">&#40;</span>vbox_pci<span class="sy0">,</span> PCI_BAR1<span class="sy0">,</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xFFFFFFF0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="coMULTI">/* Allocate some space for our Guest Info packet */</span>
+    <span class="kw4">uint32_t</span> guest_info_phys<span class="sy0">;</span>
+    <span class="kw4">struct</span> vbox_guest_info <span class="sy0">*</span> guest_info <span class="sy0">=</span> allocate_physical_page<span class="br0">&#40;</span><span class="sy0">&amp;</span>guest_info_phys<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="coMULTI">/* Populate the packet */</span>
+    guest_info<span class="sy0">-&gt;</span>header.<span class="me1">size</span> <span class="sy0">=</span> <span class="kw4">sizeof</span><span class="br0">&#40;</span><span class="kw4">struct</span> vbox_guest_info<span class="br0">&#41;</span><span class="sy0">;</span>
+    guest_info<span class="sy0">-&gt;</span>header.<span class="me1">version</span> <span class="sy0">=</span> VBOX_REQUEST_HEADER_VERSION<span class="sy0">;</span>
+    guest_info<span class="sy0">-&gt;</span>header.<span class="me1">requestType</span> <span class="sy0">=</span> VBOX_REQUEST_GUEST_INFO<span class="sy0">;</span>
+    guest_info<span class="sy0">-&gt;</span>header.<span class="me1">rc</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    guest_info<span class="sy0">-&gt;</span>header.<span class="me1">reserved1</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    guest_info<span class="sy0">-&gt;</span>header.<span class="me1">reserved2</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    guest_info<span class="sy0">-&gt;</span>version <span class="sy0">=</span> VBOX_VMMDEV_VERSION<span class="sy0">;</span>
+    guest_info<span class="sy0">-&gt;</span>ostype <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="coMULTI">/* 0 = Unknown (32-bit); we don't need to lie about being another OS here */</span>
+&#160;
+    <span class="coMULTI">/* And send it to the VM */</span>
+    outportl<span class="br0">&#40;</span>vbox_port<span class="sy0">,</span> guest_info_phys<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="coMULTI">/* (We could check the return value here as well) */</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p><br />
+</p>
+<h2> <span class="mw-headline" id="Auto-resize_Guest_Display"> Auto-resize Guest Display </span></h2>
+<p>The first feature of the Guest Additions we'll look at is "Auto-resize Guest Display", which will allow your OS to be informed of the best resolution to use on the display adapter. The VirtualBox display adapter is itself based on the Bochs/Qemu display adapter, though it uses a different PCI vendor and device ID. It allows for any resolution to be set (in older versions, it required widths to be multiples of 4). With this capability enabled, we can receive interrupts when the host window size changes, and querying the guest device will tell us what resolution we should set the display to.
+</p><p>We'll need to define some new packets, install an interrupt handler, and also set some bits in the VMMDevMem space.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define VBOX_REQUEST_ACK_EVENTS 41</span>
+<span class="co2">#define VBOX_REQUEST_GET_DISPLAY_CHANGE 51</span>
+<span class="co2">#define VBOX_REQUEST_SET_GUEST_CAPS 55</span>
+&#160;
+<span class="coMULTI">/* VBox Guest Capabilities packet */</span>
+<span class="kw4">struct</span> vbox_guest_caps <span class="br0">&#123;</span>
+        <span class="kw4">struct</span> vbox_header header<span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> caps<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/* VBox Acknowledge Events packet */</span>
+<span class="kw4">struct</span> vbox_ack_events <span class="br0">&#123;</span>
+        <span class="kw4">struct</span> vbox_header header<span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> events<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/* VBox GetDisplayChange packet */</span>
+<span class="kw4">struct</span> vbox_display_change <span class="br0">&#123;</span>
+        <span class="kw4">struct</span> vbox_header header<span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> xres<span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> yres<span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> bpp<span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> eventack<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/* We'll use separate pages for our packets for simplicity. */</span>
+<span class="kw4">static</span> <span class="kw4">uint32_t</span> vbox_display_phys<span class="sy0">;</span>
+<span class="kw4">static</span> <span class="kw4">uint32_t</span> vbox_ack_phys<span class="sy0">;</span>
+<span class="kw4">static</span> vbox_display_change <span class="sy0">*</span> vbox_display<span class="sy0">;</span>
+<span class="kw4">static</span> vbox_ack_events <span class="sy0">*</span> vbox_ack<span class="sy0">;</span>
+&#160;
+<span class="coMULTI">/* Adjust as necessary for your interrupt handling. */</span>
+<span class="kw4">static</span> <span class="kw4">int</span> vbox_irq_handler<span class="br0">&#40;</span><span class="kw4">struct</span> regs <span class="sy0">*</span> r<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    outportl<span class="br0">&#40;</span>vbox_port<span class="sy0">,</span> vbox_display_phys<span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Request display change information. */</span>
+    outportl<span class="br0">&#40;</span>vbox_port<span class="sy0">,</span> vbox_ack_phys<span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* Acknowledge events */</span>
+&#160;
+    <span class="coMULTI">/* vbox_display now has information on our display size. If it changed we can tell our display driver to update. */</span>
+    set_new_graphics_mode_maybe<span class="br0">&#40;</span>vbox_display<span class="sy0">-&gt;</span>xres<span class="sy0">,</span> vbox_display<span class="sy0">-&gt;</span>yres<span class="sy0">,</span> vbox_display<span class="sy0">-&gt;</span>bpp<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="coMULTI">/* You probably want to make sure you have a way of informing your userspace that the
+       display resolution is changing, so your window manager or whatever updates. */</span>
+&#160;
+    <span class="coMULTI">/* Don't forget to acknowledge the interrupt itself if you need to. */</span>
+    <span class="kw1">return</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">void</span> vbox_guest_init<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    ...
+&#160;
+    <span class="coMULTI">/* Install an interrupt handler. */</span>
+    <span class="kw4">int</span> irq <span class="sy0">=</span> pci_read_field<span class="br0">&#40;</span>vbox_pci<span class="sy0">,</span> PCI_INTERRUPT_LINE<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    install_interrupt_handler<span class="br0">&#40;</span>irq<span class="sy0">,</span> vbox_irq_handler<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    ...
+&#160;
+    <span class="coMULTI">/* We need to tell the VM that we support this capability. The Guest Capabilities request tells the VM about our ability to support seamless and auto-resize modes. */</span>
+    <span class="kw4">uint32_t</span> guest_caps_phys<span class="sy0">;</span>
+    <span class="kw4">struct</span> vbox_guest_caps <span class="sy0">*</span> guest_caps <span class="sy0">=</span> allocate_physical_page<span class="br0">&#40;</span><span class="sy0">&amp;</span>guest_caps_phys<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    guest_caps<span class="sy0">-&gt;</span>header.<span class="me1">size</span> <span class="sy0">=</span> <span class="kw4">sizeof</span><span class="br0">&#40;</span><span class="kw4">struct</span> vbox_guest_caps<span class="br0">&#41;</span><span class="sy0">;</span>
+    guest_caps<span class="sy0">-&gt;</span>header.<span class="me1">version</span> <span class="sy0">=</span> VBOX_REQUEST_HEADER_VERSION<span class="sy0">;</span>
+    guest_caps<span class="sy0">-&gt;</span>header.<span class="me1">requestType</span> <span class="sy0">=</span> VBOX_REQUEST_SET_GUEST_CAPS<span class="sy0">;</span>
+    guest_caps<span class="sy0">-&gt;</span>header.<span class="me1">rc</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    guest_caps<span class="sy0">-&gt;</span>header.<span class="me1">reserved1</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    guest_caps<span class="sy0">-&gt;</span>header.<span class="me1">reserved2</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    guest_caps<span class="sy0">-&gt;</span>caps <span class="sy0">=</span> <span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">2</span><span class="sy0">;</span> <span class="coMULTI">/* set bit 2, which indicates we support &quot;graphics&quot; (auto-resize guest display). */</span>
+    outportl<span class="br0">&#40;</span>vbox_port<span class="sy0">,</span> guest_caps_phys<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="coMULTI">/* We'll also set up the packets we'll use later for AcknowledgeEvents and GetDisplayChange */</span>
+    vbox_ack <span class="sy0">=</span> allocate_physical_page<span class="br0">&#40;</span><span class="sy0">&amp;</span>vbox_ack_phys<span class="br0">&#41;</span><span class="sy0">;</span>
+    vbox_ack<span class="sy0">-&gt;</span>header.<span class="me1">size</span> <span class="sy0">=</span> <span class="kw4">sizeof</span><span class="br0">&#40;</span><span class="kw4">struct</span> vbox_ack_events<span class="br0">&#41;</span><span class="sy0">;</span>
+    vbox_ack<span class="sy0">-&gt;</span>header.<span class="me1">version</span> <span class="sy0">=</span> VBOX_REQUEST_HEADER_VERSION<span class="sy0">;</span>
+    vbox_ack<span class="sy0">-&gt;</span>header.<span class="me1">requestType</span> <span class="sy0">=</span> VBOX_REQUEST_ACK_EVENTS<span class="sy0">;</span>
+    vbox_ack<span class="sy0">-&gt;</span>header.<span class="me1">rc</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_ack<span class="sy0">-&gt;</span>header.<span class="me1">reserved1</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_ack<span class="sy0">-&gt;</span>header.<span class="me1">reserved2</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_ack<span class="sy0">-&gt;</span>events <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&#160;
+    vbox_display <span class="sy0">=</span> allocate_physical_page<span class="br0">&#40;</span><span class="sy0">&amp;</span>vbox_display_phys<span class="br0">&#41;</span><span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>header.<span class="me1">size</span> <span class="sy0">=</span> <span class="kw4">sizeof</span><span class="br0">&#40;</span><span class="kw4">struct</span> vbox_display_change<span class="br0">&#41;</span><span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>header.<span class="me1">version</span> <span class="sy0">=</span> VBOX_REQUEST_HEADER_VERSION<span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>header.<span class="me1">requestType</span> <span class="sy0">=</span> VBOX_REQUEST_GET_DISPLAY_CHANGE<span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>header.<span class="me1">rc</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>header.<span class="me1">reserved1</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>header.<span class="me1">reserved2</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>xres <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>yres <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>bpp <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_display<span class="sy0">-&gt;</span>eventack <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+&#160;
+    <span class="coMULTI">/* Finally, we need to enable interrupts for the capabilities we've advertised. We're just going to enable all of them. */</span>
+    vbox_vmmdev<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu12">0xFFFFFFFF</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Mouse_Integration"> Mouse Integration </span></h2>
+<p>Mouse Integration provides mouse position information using an absolute coordinate system. It does not provide information on mouse buttons, though, and that continues to go through the standard PS/2 (or USB) mouse devices. If your OS supports USB devices, mouse integration can implemented through a USB tablet devices instead of the mechanism described in this article.
+</p><p>Mouse Integration operates entirely over the guest device. Once enabled, mouse movements are sent to the guest through mouse packet requests and a corresponding interrupt. It is important to note that the format of the coordinates in these packets is based on a range from 0 to 0xFFFF which needs to be scaled to the display resolution. Why this approach was taken over using actual pixel coordinates (scaled or otherwise) is unknown.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define VBOX_REQUEST_GET_MOUSE 1</span>
+<span class="co2">#define VBOX_REQUEST_SET_MOUSE 2</span>
+&#160;
+<span class="coMULTI">/* The Mouse packet is used both to advertise our guest capabilities and to receive mouse movements. */</span>
+<span class="kw4">struct</span> vbox_mouse_absolute <span class="br0">&#123;</span>
+        <span class="kw4">struct</span> vbox_header header<span class="sy0">;</span>
+        <span class="kw4">uint32_t</span> features<span class="sy0">;</span>
+        <span class="kw4">int32_t</span> x<span class="sy0">;</span>
+        <span class="kw4">int32_t</span> y<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">uint32_t</span> vbox_mouse_phys<span class="sy0">;</span>
+<span class="kw4">static</span> vbox_mouse_absolute <span class="sy0">*</span> vbox_mouse<span class="sy0">;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">int</span> vbox_irq_handler<span class="br0">&#40;</span><span class="kw4">struct</span> regs <span class="sy0">*</span> r<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    ...
+&#160;
+    <span class="me1">outportl</span><span class="br0">&#40;</span>vbox_port<span class="sy0">,</span> vbox_mouse_phys<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    ...
+&#160;
+    <span class="coMULTI">/* The mouse coordinates are scaled to the range (0x0,0xFFFF) independently in each dimension, so let's convert to pixels.
+       If you prefer to have a more accurate mouse (subpixel support, etc.) you can convert to something else. */</span>
+    <span class="kw4">unsigned</span> <span class="kw4">int</span> x <span class="sy0">=</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">int</span><span class="br0">&#41;</span>vbox_mouse<span class="sy0">-&gt;</span>x <span class="sy0">*</span> display_resolution_width<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu12">0xFFFF</span><span class="sy0">;</span>
+    <span class="kw4">unsigned</span> <span class="kw4">int</span> y <span class="sy0">=</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">int</span><span class="br0">&#41;</span>vbox_mouse<span class="sy0">-&gt;</span>y <span class="sy0">*</span> display_resolution_height<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu12">0xFFFF</span><span class="sy0">;</span>
+    do_something_useful_with_mouse_coordinates<span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    ...
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">void</span> vbox_guest_init<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    ...
+&#160;
+    <span class="me1">vbox_mouse</span> <span class="sy0">=</span> allocate_physical_page<span class="br0">&#40;</span><span class="sy0">&amp;</span>vbox_mouse_phys<span class="br0">&#41;</span><span class="sy0">;</span>
+    vbox_mouse<span class="sy0">-&gt;</span>header.<span class="me1">size</span> <span class="sy0">=</span> <span class="kw4">sizeof</span><span class="br0">&#40;</span><span class="kw4">struct</span> vbox_mouse_absolute<span class="br0">&#41;</span><span class="sy0">;</span>
+    vbox_mouse<span class="sy0">-&gt;</span>header.<span class="me1">version</span> <span class="sy0">=</span> VBOX_REQUEST_HEADER_VERSION<span class="sy0">;</span>
+    vbox_mouse<span class="sy0">-&gt;</span>header.<span class="me1">requestType</span> <span class="sy0">=</span> VBOX_REQUEST_SET_MOUSE<span class="sy0">;</span>
+    vbox_mouse<span class="sy0">-&gt;</span>header.<span class="me1">rc</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_mouse<span class="sy0">-&gt;</span>header.<span class="me1">reserved1</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_mouse<span class="sy0">-&gt;</span>header.<span class="me1">reserved2</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_mouse<span class="sy0">-&gt;</span>features <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="coMULTI">/* bit 0 says &quot;guest supports (and wants) absolute mouse&quot;; bit 4 says we'll query absolute positions on interrupts */</span>
+    vbox_mouse<span class="sy0">-&gt;</span>x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    vbox_mouse<span class="sy0">-&gt;</span>y <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    outportl<span class="br0">&#40;</span>vbox_port<span class="sy0">,</span> vbox_mouse_phys<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    vbox_mouse<span class="sy0">-&gt;</span>header.<span class="me1">requestType</span> <span class="sy0">=</span> VBOX_REQUEST_GET_MOUSE<span class="sy0">;</span> <span class="coMULTI">/* Change the packet to a Get packet for use in the interrupt handler. */</span>
+&#160;
+    ...
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Other_Stuff"> Other Stuff </span></h2>
+<p>VirtualBox also provides a mechanism for writing to its log files, though this is not managed through the guest device. Simple writing bytes to port 0x504 will produce log entries.
+</p>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="https://github.com/klange/toaruos/blob/master/modules/vboxguest.c">ToaruOS VirtualBox guest driver</a>
+</li><li><a rel="nofollow" class="external text" href="https://www.virtualbox.org/browser/vbox/trunk/src/VBox/Devices/VMMDev/VMMDev.cpp">VirtualBox host implementation of the guest additions</a>
+</li><li><a rel="nofollow" class="external text" href="https://www.virtualbox.org/browser/vbox/trunk/src/VBox/Additions">VirtualBox guest implementations</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 71/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3968-0!*!*!!en!*!* and timestamp 20180121034034 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=VirtualBox_Guest_Additions&amp;oldid=19750">http://wiki.osdev.org/index.php?title=VirtualBox_Guest_Additions&amp;oldid=19750</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=VirtualBox_Guest_Additions" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="VirtualBox_Guest_Additions"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:VirtualBox_Guest_Additions&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="VirtualBox_Guest_Additions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="VirtualBox_Guest_Additions" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=VirtualBox_Guest_Additions&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=VirtualBox_Guest_Additions&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="VirtualBox_Guest_Additions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	<skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/VirtualBox_Guest_Additions" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/VirtualBox_Guest_Additions" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=VirtualBox_Guest_Additions&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=VirtualBox_Guest_Additions&amp;oldid=19750" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 30 August 2016, at 19:24.</li>
+											<li id="footer-info-viewcount">This page has been accessed 2,594 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

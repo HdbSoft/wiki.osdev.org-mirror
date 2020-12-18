@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>History - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "History", "wgTitle": "History", "wgCurRevisionId": 6735, "wgArticleId": 1409, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["OS Development"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-History action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">History</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="History#mw-head">navigation</a>,
+					<a href="History#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>This page covers the history of Operating System Development (OSDev) as it applies to amateur, educational and smaller operating systems. Other pages cover different aspects of the history of computer operating systems. A general history of mainstream OSes can be found on <a href="http://wikipedia.org/wiki/History_of_operating_systems" class="extiw" title="wikipedia:History of operating systems">Wikipedia</a>. A more detailed timeline and hierarchy of UNIX and similar OSes can be found at <a rel="nofollow" class="external text" href="http://www.levenez.com/unix/">the UNIX history page</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="History#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="History#About_the_word_.27OSDev.27"><span class="tocnumber">2</span> <span class="toctext">About the word 'OSDev'</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="History#Timeline_of_the_OSDev_Community"><span class="tocnumber">3</span> <span class="toctext">Timeline of the OSDev Community</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="History#Famous_Quotes_.2F_Usenet_Posts"><span class="tocnumber">4</span> <span class="toctext">Famous Quotes / Usenet Posts</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>Informal operating system development has been a growing hobby over the last few years, and has become an enjoyable pass-time. Many of the developers that frequent <a rel="nofollow" class="external text" href="http://www.osdev.org">osdev.org</a> are studying college (university) level computer science, but there are many also that have no formal background in computer science, and are self taught.
+</p><p>Several factors have brought about the upswing in popularity of developing operating systems. The first is the availability of open documentation, and the access to this provided by the Internet. The second factor is the availibility of cheap hardware that can be used personally for testing the systems on (since a computer must be restarted to test an operating system, this makes it hard to test on a system with multiple users).
+</p><p>Another possible factor is the recent popularity of GNU/Linux systems, and the <a rel="nofollow" class="external text" href="http://www.kernel.org">Linux kernel</a> in particular. The Linux kernel was not the first kernel to open its sources to the world, but it is (and has been for the last decade at least) the most popular. Since many programmers are aware of Linux's open state, they may be more inclined to delve deeper into the kernel than they would be with a closed kernel. Today Linux has become a mainstream kernel, with many companies investing in its development. It has become a good example of how a hobbyist kernel can become something big, given enough man hours and the right chances.
+</p>
+<h2> <span class="mw-headline" id="About_the_word_.27OSDev.27"> About the word 'OSDev' </span></h2>
+<p>The use of OSDev as an abbreviation for Operating System Development seems to have started well before osdev-related newsgroup traffic started in 1996. Prior to it's use with hobbyist development, OSDev also stood for other things; mainly On Screen Device. OSDev is now a common enough term that the <a href="http://wikipedia.org/wiki/Osdev" class="extiw" title="wikipedia:Osdev">wikipedia article</a> on osdev is about operating system development.
+</p>
+<h2> <span class="mw-headline" id="Timeline_of_the_OSDev_Community"> Timeline of the OSDev Community </span></h2>
+<p>This is a timeline includes historical information related to websites and other communities devoted to operating system development.
+</p>
+<ul><li> <b>1995</b>: The <a rel="nofollow" class="external text" href="http://www.nondot.org/sabre/os/articles">Operating System Resource Center</a> is launched. It is still online today.
+</li></ul>
+<ul><li> <b>Early 1996</b>: Informal operating system development that didn't directly connect to an academic project started to take off.
+</li></ul>
+<ul><li> <b>Sept/Oct 1996</b>: Malte Kroeger created a mailing list(os-list@aros.net) that grew to 30+ people in size.
+</li></ul>
+<ul><li> <b>Sept/Oct 1996</b>: The os-list mailing list discussions were moved over to the comp.os.misc newsgroup.
+</li></ul>
+<ul><li> <b>Sept 10 1996</b>: Michael Hobbs posts a message on comp.os.misc that stated <i>I'm beginning to believe that there exists at least 1 OS for each person who reads this group.</i> This pattern holds true 10 years later.
+</li></ul>
+<ul><li> <b>Sept 12 1996</b>: It is suggested on comp.os.misc that a dedicated os development newsgroup be created. Some of the suggested names include: comp.os.design, comp.os.homebrew.develop, comp.os.development, and alt.hobby.osdev. Two names are agreeded on; comp.os.development and comp.os.assembly. Eventually the names would change to use alt instead of comp. <a rel="nofollow" class="external text" href="http://groups.google.com/group/comp.lang.asm.x86/browse_thread/thread/3bac948d6839ce04/92a8429f1d67e831?q=osdev#92a8429f1d67e831">original discussion</a>
+</li></ul>
+<ul><li> <b>1997</b>: A web based message board was created at www.effect.net.au/os-dev/wwwboard/wwwboard.htm to host osdev discussions.
+</li></ul>
+<ul><li> <b>1997</b>: One of the first OS project lists is created that contains OSes built by single developers. There were 20 projects and Linux was listed as it was still considered a small OS. <a rel="nofollow" class="external text" href="http://web.archive.org/web/19970327091052/www.effect.net.au/os-dev/oslist.html">Internet Archive mirror</a>
+</li></ul>
+<ul><li> <b>Sept 11 1997</b>: One year after being suggested the newsgroups alt.os.development and alt.os.assembly are created. NASM is recommended as the assembler of choice. <a rel="nofollow" class="external text" href="http://web.archive.org/web/19971009075251/http://www.net1.demon.co.uk/alt.os/">Archive of the original announcement and group descriptions</a>
+</li></ul>
+<ul><li> <b>Dec 3 1998</b>: Stu George's OSFAQ is <a rel="nofollow" class="external text" href="http://groups.google.com/group/alt.os.development/browse_frm/thread/a511029156767157/43f0449f98fe5301?lnk=gst&amp;rnum=107#43f0449f98fe5301">announced</a>, hosted on a dialup account.
+</li></ul>
+<ul><li> <b>Nov 14 1999</b>: Mega-tokyo.com is <a rel="nofollow" class="external text" href="http://groups.google.com/group/alt.os.development/browse_frm/thread/a6fa18b8d02f721d/c98172c2134ec840?lnk=gst&amp;rnum=422#c98172c2134ec840">opened</a>, with Stu George's OSFAQ hosted there.
+</li></ul>
+<ul><li> <b>2000</b>: Forums are added to Mega-tokyo.com. For the next few years, these forums would grow to become the biggest OSDev forums. They would remain the biggest until the merger (this issue is currently under some debate in the <a href="http://forum.osdev.org/viewtopic.php?t=15219" class="extiw" title="topic:15219">forum</a>. Certainly, there were more posts per day at mega-tokyo.com).
+</li></ul>
+<ul><li> <b>Aug 2000</b>: The <a rel="nofollow" class="external free" href="http://www.osdev.org">http://www.osdev.org</a> is created as a place to contain os development information.
+</li></ul>
+<ul><li> <b>Oct 18 2006</b>: The two largest os development forums, Mega-Tokyo.com and OSDev.org, are merged in to one single forum creating the single largest community of operating system developers working on different OSes. The original OS development newsgroups are eclipsed by several orders of magnitude in traffic.
+</li></ul>
+<h2> <span class="mw-headline" id="Famous_Quotes_.2F_Usenet_Posts"> Famous Quotes / Usenet Posts</span></h2>
+<ul><li> <b>Aug 25 1991</b>: Linus Torvalds announces the Linux kernel for the first time on comp.os.minix. <a rel="nofollow" class="external autonumber" href="http://www.linux.org/info/linus.html">[1]</a>
+</li><li> <b>Oct 6 1991</b>: Linus Torvalds announces v0.02 of the Linux kernel. <a rel="nofollow" class="external autonumber" href="http://groups.google.com/group/comp.os.minix/browse_thread/thread/e3df794a2bce97da">[2]</a>
+</li><li> <b>Jan 30 1992</b>: The famous Microkernel vs. Monolithic kernel debate. <a rel="nofollow" class="external autonumber" href="http://groups.google.com/group/comp.os.minix/browse_frm/thread/c25870d7a41696d2/f447530d082cd95d#f447530d082cd95d">[3]</a>
+</li><li> Bill Gates: <i>The best way to prepare [to be a programmer] is to write programs, and to study great programs that other people have written. In my case, I went to the garbage cans at the Computer Science Center and fished out listings of their operating system.</i>
+</li><li> Brian Kernighan: <i>First make it run, then make it run fast.</i>
+</li><li> Dennis Ritchie: <i>UNIX is basically a simple operating system, but you have to be a genius to understand the simplicity.</i>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 26/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1409-0!*!*!!en!*!* and timestamp 20180121080021 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=History&amp;oldid=6735">http://wiki.osdev.org/index.php?title=History&amp;oldid=6735</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:OS_Development" title="Category:OS Development">OS Development</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=History" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="History"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:History"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="History#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="History" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=History&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=History&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="History#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/History" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/History" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=History&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=History&amp;oldid=6735" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 24 November 2008, at 17:21.</li>
+											<li id="footer-info-viewcount">This page has been accessed 42,472 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.047 secs. -->
+	</body>
+</html>

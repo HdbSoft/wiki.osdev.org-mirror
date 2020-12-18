@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Detecting CPU Speed - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Detecting_CPU_Speed", "wgTitle": "Detecting CPU Speed", "wgCurRevisionId": 21469, "wgArticleId": 1446, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Tone", "X86 CPU"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Detecting_CPU_Speed action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Detecting CPU Speed</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Detecting_CPU_Speed#mw-head">navigation</a>,
+					<a href="Detecting_CPU_Speed#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<p>This article's <b>tone or style</b> may not reflect the encyclopedic tone used throughout the wiki. See <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Wikipedia:Writing_better_articles#Tone">Wikipedia's article on tone</a> for suggestions.
+</p>
+</center>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Detecting_CPU_Speed#What_is_CPU_Speed"><span class="tocnumber">1</span> <span class="toctext">What is CPU Speed</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Detecting_CPU_Speed#General_Method"><span class="tocnumber">2</span> <span class="toctext">General Method</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Detecting_CPU_Speed#Waiting_for_a_given_amount_of_time"><span class="tocnumber">2.1</span> <span class="toctext">Waiting for a given amount of time</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Detecting_CPU_Speed#Knowing_how_many_cycles_your_loop_takes"><span class="tocnumber">2.2</span> <span class="toctext">Knowing how many cycles your loop takes</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Detecting_CPU_Speed#RDTSC_Instruction_Access"><span class="tocnumber">2.3</span> <span class="toctext">RDTSC Instruction Access</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Detecting_CPU_Speed#Working_Example_Code"><span class="tocnumber">2.4</span> <span class="toctext">Working Example Code</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Detecting_CPU_Speed#Without_Interrupts"><span class="tocnumber">2.5</span> <span class="toctext">Without Interrupts</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="Detecting_CPU_Speed#Asking_the_SMBios_for_CPU_speed"><span class="tocnumber">3</span> <span class="toctext">Asking the SMBios for CPU speed</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="Detecting_CPU_Speed#SMBios_Processor_Information"><span class="tocnumber">3.1</span> <span class="toctext">SMBios Processor Information</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Detecting_CPU_Speed#Getting_the_SMBIOS_Structure"><span class="tocnumber">3.2</span> <span class="toctext">Getting the SMBIOS Structure</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="Detecting_CPU_Speed#Links"><span class="tocnumber">4</span> <span class="toctext">Links</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="Detecting_CPU_Speed#Related_threads_in_the_forum"><span class="tocnumber">4.1</span> <span class="toctext">Related threads in the forum</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Detecting_CPU_Speed#Other_resources"><span class="tocnumber">4.2</span> <span class="toctext">Other resources</span></a>
+<ul>
+<li class="toclevel-3 tocsection-14"><a href="Detecting_CPU_Speed#Regarding_SMBIOS"><span class="tocnumber">4.2.1</span> <span class="toctext">Regarding SMBIOS</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="What_is_CPU_Speed">What is CPU Speed</span></h2>
+<p>There are several different things that could be called "CPU speed":
+</p>
+<ol><li> how quickly it can execute code (e.g. instructions per second)
+</li><li> how fast its clock is running (e.g. cycles per second)
+</li></ol>
+<p>How quickly a CPU can execute code is important for determining the CPU's performance. How fast a CPU's clock is running is only useful for specific cases (e.g. calibrating the CPU's TSC to use for measuring time).
+</p><p>There are also several different measurements for these different "CPU speeds":
+</p>
+<ol><li> best case
+</li><li> nominal case
+</li><li> average case
+</li><li> current case
+</li><li> worst case
+</li></ol>
+<p>For example, if you look at a modern Core i7 CPU (with turbo-boost, power management and hyper-threading), the best case instructions per second would occur  when there's no throttling/power saving at all, only one logical CPU is running (turbo-boost activated and hyper-threading not being used), you're executing simple instructions with no dependencies in a loop that fits in the CPU's "loop buffer", there are no branch mispredictions, and there are no accesses to memory (no data being transferred to/from caches or RAM). The worst case instructions per second would be the exact opposite; and may be several orders of magnitude worse (e.g. a best case of 4 billion instructions per second and a worst case of 100 million instructions per second). The nominal instructions per second is an estimation of "normal" - e.g. the normal average instructions per second you'd expect (note: "nominal cycles per second" is used more often). All of these things are fixed values - a specific CPU always has the same best case, worst case and nominal case, and these values don't change depending on CPU load, which instructions are/were executed, etc.
+</p><p>The current instructions per second is the instructions per second at a specific instant in time and must be somewhere between the best and worst cases. It can't actually be measured, but can be estimated by finding the average instructions per second for a very short period of time. The average case is something that has to be measured. Both the current instructions per second and the average instructions per second depend heavily on the code that was running. For example, the average instructions per second for a series of NOP instructions may be much higher that the average instructions per second for a series of DIV instructions.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="General_Method">General Method</span></h2>
+<p>In order to tell what's the CPU speed, we need two things:
+</p>
+<ol><li> being able to tell that a given (precise) amount of time has elapsed.
+</li><li> being able to know how much 'clock cycles' a portion of code took.
+</li></ol>
+<p>Once these two sub-problems are solved, one can easily tell the CPU speed
+using the following&#160;:
+</p>
+<pre>
+prepare_a_timer(X milliseconds ahead);
+while (timer has not fired) {
+   inc iterations_counter;
+}
+cpuspeed_mhz = (iteration_counter * clock_cycles_per_iteration)/1000;
+</pre>
+<p>Note that except for very special cases, using a busy-loop (even calibrated) to introduce delays is a bad idea and that it should be kept for very small delays
+(nano or micro seconds) that you must comply when programming hardware only.
+</p><p>Also note that PC emulators (like BOCHS, for instance) are rarely realtime and
+that you shouldn't be surprised if your clock appears to run faster than expected
+on those emulators.
+</p>
+<h3> <span class="mw-headline" id="Waiting_for_a_given_amount_of_time"> Waiting for a given amount of time </span></h3>
+<p>There are two circuits in a PC that allows you to deal with time: the <a href="PIT" title="PIT" class="mw-redirect">PIT</a> (Programmable Interval Timer, 8253 iirc) and the RTC (Real Time Clock). The PIT is probably the better of the two for this task.
+</p><p>The PIT has two operating mode that can be useful for telling the cpu speed:
+</p>
+<ol><li> the <i>periodic interrupt</i> mode (0x36), in which a signal is emitted to the interrupt controller at a fixed frequency. This is especially interesting on PIT channel 0 which is bound to IRQ0 on a PC.
+</li><li> the <i>one shot</i> mode (0x34), in which the PIT will decrease a counter at its top speed (1.19318 MHz) until the counter reaches zero.
+</li></ol>
+<p>Whether or not an IRQ is fired by channel0 in 0x34 mode should be checked
+</p><p>Note that theoretically, _one shot_ mode could be used with a _polling_ approach, reading the current count on the channel's data port, but I/O bus cycles have unpredictable latency and one should make sure the timestamp counter is not affected by this approach.
+</p>
+<h3> <span class="mw-headline" id="Knowing_how_many_cycles_your_loop_takes"> Knowing how many cycles your loop takes </span></h3>
+<p>This step depends on your CPU. On 286, 386 and 486, each instruction took
+a well-known and deterministic amount of clock cycles to execute. This allowed
+the programmer to tell exactly how many cycles a loop iteration took by looking
+up the timing of each instruction and then sum them up.
+</p><p>Since the multi-pipelined architecture of the Pentium, however, such numbers are
+no longer communicated (for a major part because the same instruction could have
+variable timings depending on its surrounding, which makes the timing almost useless).
+</p><p>It is possible to create code which is exceptionally pipeline hostile such as:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">xor</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="kw3">edx</span>
+<span class="kw1">xor</span> <span class="kw3">edx</span><span class="sy0">,</span><span class="kw3">eax</span>
+<span class="kw1">xor</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="kw3">edx</span>
+<span class="kw1">xor</span> <span class="kw3">edx</span><span class="sy0">,</span><span class="kw3">eax</span>
+<span class="sy0">...</span></pre></div></div>
+<p>A simple xor instruction takes one cycle, and it's guaranteed that the processor cannot pipeline this code as the current instructions operands depend on the results from the last calculation. One can check that, for a small count (tested from 16 to 64), RDTSC will show the instruction count is almost exactly (sometimes off by one) the cycles count. Unfortunately, when making the chain longer you'll start experiencing code cache misses, which will ruin the whole process.
+</p><p>E.g. <a rel="nofollow" class="external text" href="http://www.sylvain-ulg.be.tf/resources/speed.c">looping on a chain of 1550 XORs</a> may require a hundred of iterations before it stabilizes around 1575 clock cycles on a AMDx86-64, and I'm still waiting it to stabilize on my Pentium3
+</p><p>Despite this inaccuracy it gives relatively good results across the whole processor generation given a reasonably accurate timer but if very accurate measurements are needed the next method should prove more useful.
+</p><p>A Pentium developer has a much better tool to tell timings: the _Time Stamp Counter_: an internal counter that can be read using RDTSC special instruction
+</p><p><a rel="nofollow" class="external text" href="http://www.math.uwaterloo.ca/~~jamuir/rdtscpm1.pdf">rdtscpm1.pdf</a> explains how that feature can be used for performance monitoring and should provide the necessary information on how to access the TSC on a Pentium
+</p>
+<h3> <span class="mw-headline" id="RDTSC_Instruction_Access">RDTSC Instruction Access</span></h3>
+<p>The presence of the Time Stamp Counter (and thus the availability of RDTSC instruction) can be detected through the [CPUID] instruction. When calling CPUID with eax=1, you'll receive the features flags in edx. TSC is the bit #4 of that field.
+</p><p>Note that prior to use the CPUID instruction, you should also make sure the processor support it by testing the 'ID' bit in eflags (this is 0x200000 and is modifiable only when CPUID instruction is supported. For systems that doesn't support CPUID, writing a '1' at that place will have no effect)
+</p><p>In the case of a processor that does not support CPUID, you'll have to use more eflags-based tests to tell if you're running on a 486, 386, etc. and then pick up one of the 'calibrated loops' for that architecture (8086 through 80486 may have variable instruction timings).
+</p><p><br />
+</p>
+<h3> <span class="mw-headline" id="Working_Example_Code"> Working Example Code</span></h3>
+<p>There is a Real Mode Intel-copyrighted example in the above-mentioned application note ...
+Here comes another code submitted by DennisCGC that will give the total measured frequency of a Pentium processor.
+</p><p>Some notes:
+</p>
+<ul><li>  <i>irq0_count</i> is a variable, which increases each time when the timer interrupt is called.
+</li><li>  in this code it's assumed that the [PIT] is programmed to 100 hz (of course, I give the formula about how to calculate it
+</li><li>  it's assumed that the command CPUID is supported.
+</li></ul>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">;__get_speed__:</span>
+   <span class="co1">;first do a cpuid command, with eax=1</span>
+   <span class="kw1">mov</span>  <span class="kw3">eax</span><span class="sy0">,</span><span class="nu0">1</span>
+   <span class="kw1">cpuid</span>
+   <span class="kw1">test</span> <span class="kw3">edx</span><span class="sy0">,</span><span class="kw5">byte</span> <span class="nu0">0x10</span>      <span class="co1">; test bit #4. Do we have TSC&#160;?</span>
+   <span class="kw1">jz</span>   detect_end         <span class="co1">; no&#160;?, go to detect_end</span>
+   <span class="co1">;wait until the timer interrupt has been called.</span>
+   <span class="kw1">mov</span>  <span class="kw3">ebx</span><span class="sy0">,</span> ~<span class="br0">&#91;</span>irq0_count<span class="br0">&#93;</span>
+&#160;
+<span class="co1">;__wait_irq0__:</span>
+&#160;
+   <span class="kw1">cmp</span>  <span class="kw3">ebx</span><span class="sy0">,</span> ~<span class="br0">&#91;</span>irq0_count<span class="br0">&#93;</span>
+   <span class="kw1">jz</span>   wait_irq0
+   <span class="kw1">rdtsc</span>                   <span class="co1">; read time stamp counter</span>
+   <span class="kw1">mov</span>  ~<span class="br0">&#91;</span>tscLoDword<span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">eax</span>
+   <span class="kw1">mov</span>  ~<span class="br0">&#91;</span>tscHiDword<span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">edx</span>
+   <span class="kw1">add</span>  <span class="kw3">ebx</span><span class="sy0">,</span> <span class="nu0">2</span>             <span class="co1">; Set time delay value ticks.</span>
+   <span class="co1">; remember: so far ebx = ~[irq0]-1, so the next tick is</span>
+   <span class="co1">; two steps ahead of the current ebx&#160;;)</span>
+&#160;
+<span class="co1">;__wait_for_elapsed_ticks__:</span>
+&#160;
+   <span class="kw1">cmp</span>  <span class="kw3">ebx</span><span class="sy0">,</span> ~<span class="br0">&#91;</span>irq0_count<span class="br0">&#93;</span> <span class="co1">; Have we hit the delay?</span>
+   <span class="kw1">jnz</span>  wait_for_elapsed_ticks
+   <span class="kw1">rdtsc</span>
+   <span class="kw1">sub</span> <span class="kw3">eax</span><span class="sy0">,</span> ~<span class="br0">&#91;</span>tscLoDword<span class="br0">&#93;</span>  <span class="co1">; Calculate TSC</span>
+   <span class="kw1">sbb</span> <span class="kw3">edx</span><span class="sy0">,</span> ~<span class="br0">&#91;</span>tscHiDword<span class="br0">&#93;</span>
+   <span class="co1">; f(total_ticks_per_Second) =  (1 / total_ticks_per_Second) * 1,000,000</span>
+   <span class="co1">; This adjusts for MHz.</span>
+   <span class="co1">; so for this: f(100) = (1/100) * 1,000,000 = 10000</span>
+   <span class="kw1">mov</span> <span class="kw3">ebx</span><span class="sy0">,</span> <span class="nu0">10000</span>
+   <span class="kw1">div</span> <span class="kw3">ebx</span>
+   <span class="co1">; ax contains measured speed in MHz</span>
+   <span class="kw1">mov</span> ~<span class="br0">&#91;</span>mhz<span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">ax</span></pre></div></div>
+<p>See the intel manual (see links) for more information.
+</p>
+<dl><dd>- bugs report are welcome. IM to <a rel="nofollow" class="external text" href="http://www.mega-tokyo.com/forum/index.php?action=viewprofile;user=DennisCGc">DennisCGC</a>
+</dd></dl>
+<h3> <span class="mw-headline" id="Without_Interrupts"> Without Interrupts </span></h3>
+<p>I'd be tempted to say 'yes', though I haven't gave it a test nor heard of it elsewhere so far. Here is the trick:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">disable<span class="br0">&#40;</span><span class="br0">&#41;</span>     <span class="co1">// disable interrupts (if still not done)</span>
+outb<span class="br0">&#40;</span><span class="nu12">0x43</span><span class="sy0">,</span><span class="nu12">0x34</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// set PIT channel 0 to single-shot mode</span>
+outb<span class="br0">&#40;</span><span class="nu12">0x40</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+outb<span class="br0">&#40;</span><span class="nu12">0x40</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// program the counter will be 0x10000 - n after n ticks</span>
+<span class="kw4">long</span> stsc<span class="sy0">=</span>CPU<span class="sy0">::</span><span class="me2">readTimeStamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu12">0x1000</span><span class="sy0">;</span>i<span class="sy0">&gt;</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">--</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw4">long</span> etsc<span class="sy0">=</span>CPU<span class="sy0">::</span><span class="me2">readTimeStamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+outb<span class="br0">&#40;</span><span class="nu12">0x43</span><span class="sy0">,</span><span class="nu12">0x04</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// read PIT counter command&#160;??</span>
+byte lo<span class="sy0">=</span>inb<span class="br0">&#40;</span><span class="nu12">0x40</span><span class="br0">&#41;</span><span class="sy0">;</span>
+byte hi<span class="sy0">=</span>inb<span class="br0">&#40;</span><span class="nu12">0x40</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>Now, we know that
+</p>
+<ul><li> ticks=(0x10000 - (hi*256+lo)) periods of 1/1193180 seconds have elapsed at least and no more than ticks+1.
+</li><li> etsc-stsc clock cycles have elapsed during the same time.
+</li></ul>
+<p>Thus (etsc-stsc)*1193180 / ticks should be your CPU speed in Hz ...
+</p><p>As far as i can say, 0x1000 iterations lead to 10 PIT ticks on a 1GHz CPU and a bit less than 0x8000 ticks on the same CPU running BOCHS. This certainly means that on very high speed systems, the discovered speed may not be accurate at all, or worse, less than 1 tick could occur ...
+</p><p>This technique is currently under evaluation in [the forum|Forum:5849]
+</p>
+<dl><dd>- hope you like my technique /PypeClicker
+</dd></dl>
+<h2> <span class="mw-headline" id="Asking_the_SMBios_for_CPU_speed"> Asking the SMBios for CPU speed </span></h2>
+<p>The <a href="http://wiki.osdev.org/index.php?title=SMBios&amp;action=edit&amp;redlink=1" class="new" title="SMBios (page does not exist)">SMBios</a> (System Management BIOS) Specification addresses how motherboard and system vendors present management information about their products in a standard format by extending the BIOS interface on Intel architecture systems. The information is intended to allow generic instrumentation to deliver this information to management applications that use DMI, CIM or direct access, eliminating the need for error prone operations like probing system hardware for presence detection.
+</p>
+<h3> <span class="mw-headline" id="SMBios_Processor_Information">SMBios Processor Information</span></h3>
+<p>A Processor information (type 4) structure describes features of the CPU as detected by the SMBios. The exact structure is depicted in section 3.3.5 (p 39) of the <a rel="nofollow" class="external text" href="http://www.dmtf.org/standards/documents/SMBIOS/DSP0134.pdf">standard</a>. Within that information you will find the processor type, family, manufacturer etc. and also:
+</p>
+<ul><li> the External Clock (bus) frequency, which is a word at offset 0x12,
+</li><li> the Maximum CPU speed in MHz, which is a word at offset 0x14 (e.g. 0xe9 is a 233MHz processor),
+</li><li> the Current CPU speed in MHz, (word at offset 0x16).
+</li></ul>
+<h3> <span class="mw-headline" id="Getting_the_SMBIOS_Structure">Getting the SMBIOS Structure</span></h3>
+<p>SMBios provide a _Get SMBIOS Information_ function that tells you how many structures exists. You can then use _Get SMBIOS Structure_ function to read processor information.
+</p><p>As an alternative, you can locate the _SMBIOS Entry Point_ and then traverse manually the SMBIOS structure table, looking for type 4.
+</p><p>All this is depicted in 'Accessing SMBIOS Information' structure of the standard (p 11).
+</p><p><i>The SMBIOS Entry Point structure, described below, can be located by application software by searching for the anchor-string on paragraph (16-byte) boundaries within the physical memory address range 000F0000h to 000FFFFFh. This entry point encapsulates an intermediate anchor string that is used by some existing DMI browsers.</i>
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td>00-03
+</td>
+<td>Anchor String (_SM_ or 5f 53 4d 5f)
+</td></tr>
+<tr>
+<td>04
+</td>
+<td>Checksum
+</td></tr>
+<tr>
+<td>05
+</td>
+<td>Length
+</td></tr>
+<tr>
+<td>06
+</td>
+<td>major version
+</td></tr>
+<tr>
+<td>07
+</td>
+<td>minor version
+</td></tr>
+<tr>
+<td>08-09
+</td>
+<td>max structure size
+</td></tr>
+<tr>
+<td>0A
+</td>
+<td>entry point revision
+</td></tr>
+<tr>
+<td>0B-0F
+</td>
+<td>formatted area
+</td></tr>
+<tr>
+<td>10-14
+</td>
+<td>_DMI_ signature
+</td></tr>
+<tr>
+<td>15
+</td>
+<td>intermediate checksum
+</td></tr>
+<tr>
+<td>16-17
+</td>
+<td>structure table length
+</td></tr>
+<tr>
+<td>18-1B
+</td>
+<td>structure table (physical) address
+</td></tr>
+<tr>
+<td>1C-1D
+</td>
+<td>number of SMBIOS structures
+</td></tr>
+<tr>
+<td>1E
+</td>
+<td>SMBIOS revision (BCD)
+</td></tr>
+</table>
+<p>I don't feel like re-explaining the PnP calling convention etc. as chances are it will be useless in Protected Mode ...
+</p>
+<h2> <span class="mw-headline" id="Links">Links</span></h2>
+<h3> <span class="mw-headline" id="Related_threads_in_the_forum">Related threads in the forum</span></h3>
+<ul><li>Forum:5849
+</li><li>Forum:767
+</li><li>Forum:922
+</li><li>Forum:8949 featuring info on bogomips, how linux does it and durand's code.
+</li></ul>
+<p><br />
+</p>
+<h3> <span class="mw-headline" id="Other_resources">Other resources</span></h3>
+<ul><li> <a rel="nofollow" class="external free" href="http://cs.usfca.edu/~cruse/cs630s04/lesson23.ppt‎">http://cs.usfca.edu/~cruse/cs630s04/lesson23.ppt‎</a>, a crash course on PIT, and how to use it to compute CPU speed.
+</li><li> <a rel="nofollow" class="external free" href="http://www.sandpile.org/post/msgs/20004561.htm">http://www.sandpile.org/post/msgs/20004561.htm</a>
+</li><li> <a rel="nofollow" class="external free" href="http://www.midnightbeach.com/jon/pubs/rdtsc.htm">http://www.midnightbeach.com/jon/pubs/rdtsc.htm</a>
+</li></ul>
+<ul><li><a rel="nofollow" class="external free" href="ftp://download.intel.com/support/processors/procid/">ftp://download.intel.com/support/processors/procid/</a>
+</li></ul>
+<dl><dd>especially section 12: "Operating Frequency" on page 29 of <a rel="nofollow" class="external text" href="ftp://download.intel.com/support/processors/procid/24161815.pdf">24161815.pdf</a>
+</dd></dl>
+<h4> <span class="mw-headline" id="Regarding_SMBIOS">Regarding SMBIOS</span></h4>
+<ul><li><a rel="nofollow" class="external free" href="http://www.dmtf.org/standards/smbios">http://www.dmtf.org/standards/smbios</a>
+</li><li><a rel="nofollow" class="external free" href="http://www.dmtf.org/standards/documents/SMBIOS/DSP0134.pdf">http://www.dmtf.org/standards/documents/SMBIOS/DSP0134.pdf</a>
+</li><li><a rel="nofollow" class="external free" href="http://www.pcpitstop.com/faq/smbios.asp">http://www.pcpitstop.com/faq/smbios.asp</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 120/1000000
+Post-expand include size: 539/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1446-0!*!0!!en!*!* and timestamp 20180121051226 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Detecting_CPU_Speed&amp;oldid=21469">http://wiki.osdev.org/index.php?title=Detecting_CPU_Speed&amp;oldid=21469</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Tone" title="Category:Tone">Tone</a></li><li><a href="Category:X86_CPU" title="Category:X86 CPU">X86 CPU</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Detecting_CPU_Speed" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Detecting_CPU_Speed"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Detecting_CPU_Speed"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Detecting_CPU_Speed#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Detecting_CPU_Speed" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Detecting_CPU_Speed&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Detecting_CPU_Speed&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Detecting_CPU_Speed#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!--skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Detecting_CPU_Speed" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Detecting_CPU_Speed" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Detecting_CPU_Speed&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Detecting_CPU_Speed&amp;oldid=21469" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 September 2017, at 14:08.</li>
+											<li id="footer-info-viewcount">This page has been accessed 66,971 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.038 secs. -->
+	</body>
+</html>

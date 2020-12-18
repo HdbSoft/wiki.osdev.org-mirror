@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Rust - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Rust", "wgTitle": "Rust", "wgCurRevisionId": 21737, "wgArticleId": 3415, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Languages", "Rust"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Rust action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Rust</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Rust#mw-head">navigation</a>,
+					<a href="Rust#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><b>Rust</b> is a systems language sponsored by Mozilla, focused on three things: safety, speed, and concurrency. It accomplishes many of these goals through strong compile-time checks, allowing for very little overhead at runtime. Performance is comparable to C or C++, while being free of many of the problems caused by things like dangling pointers, buffer overflows, and iterator invalidation.
+</p><p>While Rust is very much a "curly-brace" language, it also takes many cues from ML. Almost everything is an expression, and there is a very strong type system including sum types and powerful generics.
+</p><p>Rust provides a mechanism to subvert its safety checks when necessary, by adding an 'unsafe' annotation to portions of your code. This allows you full access to raw pointers, while controlling exactly how they are used. Often, Rust code that uses unsafe will do so as an implementation detail, allowing for them to expose a safe interface.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Rust#Operating_System_Development"><span class="tocnumber">1</span> <span class="toctext">Operating System Development</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Rust#Active_Projects"><span class="tocnumber">2</span> <span class="toctext">Active Projects</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Rust#Past_Projects"><span class="tocnumber">3</span> <span class="toctext">Past Projects</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Rust#Libraries"><span class="tocnumber">4</span> <span class="toctext">Libraries</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Rust#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Operating_System_Development"> Operating System Development </span></h2>
+<p>Rust has a comparable amount of runtime to C and C++, and has set up its standard library to be amenable towards OS development. Specifically, the standard library is split into two parts: core and std. Core is the lowest-level aspects only, and doesn't include things like allocation, threading, and other higher-level features. Std builds on top of core to add them. Using only core is as easy as adding an annotation in your main source file.
+</p><p>Every Rust compiler is a cross-compiler, which makes setup easier.
+</p><p>There are still some rough edges when doing OSDev, and they require using nightly-only features. These are currently being worked on.
+</p>
+<h2> <span class="mw-headline" id="Active_Projects"> Active Projects </span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="https://os.phil-opp.com/">"Writing an OS in Rust"</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/thepowersgang/rust-barebones-kernel">Meaty Bare-Bones</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/thepowersgang/rust_os">"Tifflin"</a>
+<ul><li> Multiboot image for x86_64
+</li><li> has VFS and userland
+</li></ul>
+</li><li> <a rel="nofollow" class="external text" href="http://www.redox-os.org">Redox</a>
+<ul><li> One of the largest and most active Rust OS projects
+</li></ul>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/hackndev/zinc">Zinc</a>
+<ul><li> uses libcore
+</li><li> targets embedded MCUs, ARM only so far
+</li></ul>
+</li><li> <a rel="nofollow" class="external text" href="http://intermezzos.github.io/">intermezzOS</a>
+<ul><li> Small kernel + book, specifically for learning OSDev through Rust
+</li></ul>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/ryanra/RustOS">Ryanra's RustOS</a>
+<ul><li> Uses libcore/collections/alloc
+</li></ul>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/QuiltOS/QuiltOS">QuiltOS</a>
+<ul><li> Forked from Ryanra's RustOS
+</li><li> Main goal is demoing OS Dev libraries written in Rust.
+</li></ul>
+</li><li> <a rel="nofollow" class="external text" href="https://source.that.world/source/rux">Rux</a>
+</li><li> <a rel="nofollow" class="external text" href="http://github.com/lachlansneff/Metal">Metal</a>
+<ul><li> Has an end goal of running WebAssembly in the kernel for a performance increase
+</li></ul>
+</li></ul>
+<h2> <span class="mw-headline" id="Past_Projects"> Past Projects </span></h2>
+<p>Rust went through a long and public development process, and used to have a significantly larger runtime. There were lots of experiments pre-1.0, and so these projects are of historical interest but may not build.
+</p>
+<ul><li> <a rel="nofollow" class="external text" href="https://github.com/charliesome/rustboot">RustBoot</a> 
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/LeoTestard/Quasar">Quasar</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/miselin/rustic">Rustic</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/wbthomason/ironkernel">IronKernel</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/thiagopnts/rustico">Rustico</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/Arcterus/kRnel">kRnl</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/mahrz/rv6">rv6</a>
+</li></ul>
+<p><br />
+</p>
+<h2> <span class="mw-headline" id="Libraries"> Libraries </span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="https://github.com/gz/rust-x86">libx86</a>: Library to program x86 hardware.
+</li><li> <strike><a rel="nofollow" class="external text" href="https://github.com/Tobba/libcpu">libcpu</a>: Library to program CPUs.</strike> Now absorbed into libx86.
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/gz/rust-slabmalloc">slabmalloc</a>: Low-level memory allocator for liballoc.
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/gz/rust-multiboot">multiboot</a>: Library to read multiboot layout.
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/mvdnes/spin-rs">spin</a>: Various synchronization primitives implemented with spinning. Closely mimics `std::sync`'s interface. 
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/nathan7/libfringe">fringe</a>: Context switching agnostic to how stacks are allocated.
+</li></ul>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.rust-lang.org/">Rust Website</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/rust-lang/rust-wiki-backup/blob/master/Operating-system-development.md">Operating Systems Development in Rust</a>
+</li><li> <a rel="nofollow" class="external text" href="http://scialex.github.io/reenix.pdf">Reenix: Implementing a Unix-like OS in Rust</a>
+</li><li> <a rel="nofollow" class="external text" href="http://jvns.ca/blog/2014/03/12/the-rust-os-story/">Writing an OS in Rust in tiny steps (Steps 1-5)</a>
+</li><li> <a href="Rust_Bare_Bones" title="Rust Bare Bones">Rust Bare Bones</a>
+</li><li> <a rel="nofollow" class="external text" href="http://os.phil-opp.com/">Blog Series: Writing an OS in Rust</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.randomhacks.net/2015/11/11/bare-metal-rust-custom-target-kernel-space/">Retarget your compiler so interrupts are not evil</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 25/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3415-0!*!0!!en!*!* and timestamp 20180121033621 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Rust&amp;oldid=21737">http://wiki.osdev.org/index.php?title=Rust&amp;oldid=21737</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Languages" title="Category:Languages">Languages</a></li><li><a href="Category:Rust" title="Category:Rust">Rust</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Rust" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Rust"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Rust&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Rust#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Rust" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Rust&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Rust&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Rust#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Rust" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Rust" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Rust&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Rust&amp;oldid=21737" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Rust" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Rust" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Rust&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Rust&amp;oldid=21737" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 21 November 2017, at 21:25.</li>
+											<li id="footer-info-viewcount">This page has been accessed 24,531 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

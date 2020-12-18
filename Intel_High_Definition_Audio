@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Intel High Definition Audio - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Intel_High_Definition_Audio", "wgTitle": "Intel High Definition Audio", "wgCurRevisionId": 18750, "wgArticleId": 3313, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Sound"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Intel_High_Definition_Audio action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Intel High Definition Audio</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Intel_High_Definition_Audio#mw-head">navigation</a>,
+					<a href="Intel_High_Definition_Audio#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Intel High Definition Audio refers to the specification released by Intel for delivering high-definition audio that is capable of playing back more channels at higher quality than previous integrated audio codecs like <a href="AC97" title="AC97">AC97</a>.
+</p><p><br />
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Intel_High_Definition_Audio#Identifying_HDA_on_a_machine"><span class="tocnumber">1</span> <span class="toctext">Identifying HDA on a machine</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Intel_High_Definition_Audio#Overview"><span class="tocnumber">2</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Intel_High_Definition_Audio#Device_Registers"><span class="tocnumber">3</span> <span class="toctext">Device Registers</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Intel_High_Definition_Audio#CODECs_and_Nodes"><span class="tocnumber">4</span> <span class="toctext">CODECs and Nodes</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Intel_High_Definition_Audio#Node_Commands"><span class="tocnumber">5</span> <span class="toctext">Node Commands</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Intel_High_Definition_Audio#Node_Parameters"><span class="tocnumber">6</span> <span class="toctext">Node Parameters</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Intel_High_Definition_Audio#Setting_up_the_AFG_codec"><span class="tocnumber">7</span> <span class="toctext">Setting up the AFG codec</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Intel_High_Definition_Audio#Finding_all_useful_paths_through_the_codec"><span class="tocnumber">8</span> <span class="toctext">Finding all useful paths through the codec</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Intel_High_Definition_Audio#Playing_Audio"><span class="tocnumber">9</span> <span class="toctext">Playing Audio</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Intel_High_Definition_Audio#External_links"><span class="tocnumber">10</span> <span class="toctext">External links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Identifying_HDA_on_a_machine"> Identifying HDA on a machine </span></h2>
+<p>All HDA devices appear on the PCI bus with a specific VendorID and DeviceID.  Many HDA devices have a Vendor ID of 8086 (Intel), and a Device ID such as 2668 or 27D8, but other Vendor IDs are also in use, e.g. Vendor ID 1002 (AMD) and Device ID 4383.  If you find any others, please add them into this page. The best way to identify HDA is probably just to look for the Class code (4h) and subclass (3h), but the HDA specification doesn't tell you to do this.
+</p>
+<h2> <span class="mw-headline" id="Overview"> Overview </span></h2>
+<p>The HDA specification (link at the bottom of this page) spells out how to set up devices at the two ends of a link and there is no substitute for working from it, but it takes several readings through its 200+ pages before a clear picture eventually begins to emerge from it, so this overview is aimed at making the most frustrating parts clear from the outset.
+</p><p>You can communicate with the HDA device via memory-mapped ports, but much of the action takes place further away in hardware codecs containing many widgets, and the communication link through to them is rather slow. Setting things up at the near end is relatively easy, part of it being done by keyhole surgery through a couple of ordinary ports in the PCI device configuration space, while the rest is done through the memory mapped ports located at an address found at index 10-17h (though the lowest four bits should be taken as zeros). You may not need to change anything in the PCI configuration space at all, but there's a fair bit to do with the memory mapped ports to set up and control several DMA engines. Setting things up at the codec end is much more complicated though as you have to interrogate them to find out what they are and what functionality they offer, and then you have to work out how to set them up correctly to create active paths between devices (speakers and mic.s) and DACs/ADCs. All your communications with the codecs and the many widgets they contain will be done by sending special commands via the link.
+</p><p>Data and commands are sent across the link in frames with strict timings and bit limits, but the work of packaging the different kinds of data into packets to go into these frames is all done for you, so all you need to do is set up a number of buffers. Two of these buffers are called CORB (command output ring buffer) and RIRB (response input ring buffer) - each buffer has a DMA engine dedicated to it which will in one case send commands from the CORB buffer across the link to codecs, and in the other case will write responses from codecs into the RIRB buffer. There will in many implementations also be an immediate command port which allows you to send commands to codecs/widgets and to receive responses from them without going through the CORB and RIRB mechanisms, but this route should not be used at the same time as CORB/RIRB as they may conflict, so it should really be reserved for initial exploration while designing your driver. The purpose of CORB and RIRB is to allow large numbers of these relatively slow communications to take place in the background while the processor goes off to do something else.
+</p><p>There are also buffers and DMA engines dedicated to four input streams and four output streams (or at least, it's four of each in current implementations, but your software ought to check the actual number), each stream needing a descriptor buffer which must contain two or more descriptors (up to 256) which define a list of data buffers used by that stream, and the data buffers which these descriptors define will contain the actual sound samples (or have samples written into them) structured like the content of .wav files (though 20 and 24-bit samples must be padded out with zeros at the LSB end to make them all 32-bits long). The combined length of the sound data buffers can be anything up to 4GiB, so you could set things up to play or record a very long sound file and leave it going all by itself. In reality though, you'll probably work with chunks of memory a just few megabytes in size (or smaller) as one megabyte gives you room for about six seconds of 16-bit stereo data at 41.1KHz. For performance reasons, making the length of these data buffers a multiple of 128 bytes is recommended.
+</p><p>With all these buffers, the DMA engines jump back to the start and carry on running from there infinitely until you stop them, although with CORB there is a register which stores the last valid command which the DMA engine must stop at (after sending that command) and it will only move on again when that register is modified (by you) to enable more commands to be sent. It is the job of your software to collect data from input buffers before they are overwritten on the next lap. The set of sound data buffers defined by descriptors for a single stream collectively comprise a cyclic stream buffer, but it's divided up into chunks defined by descriptors to enable an interrupt to be generated at the end of each chunk (interrupt optional) to help you write new data into an output buffer that's just been sent before the DMA engine returns to that buffer on the next lap, or to copy data out of an input buffer that's just been written by a DMA engine to make way for more data to be written on the next lap.
+</p><p>At the codec end, you will need to start out by interrogating the root node of each of 15 possible codecs. The STATESTS register at offset 0Eh indicates which codec addresses have codecs at the end of them. The verb F00h will then be used with an 8-bit parameter to request information such as vendor ID, device ID and the starting node number and number of nodes for the function groups in the codec. Having found the function groups, you can use the same verb to interrogate them to find out the starting node number and number of nodes of their widgets, and also the type of the function group itself - AFG (audio function group) is the one you want (unless you're looking for a modem). You can then interrogate each widget to ask it what its type is (e.g. output converter (DAC), input converter (ADC), mixer, selector, pin complex, power widget, volume knob). Another verb, F02h, allows you to get a connection list of other widgets in the same function group directly connected to the widget you're interrogating, though you need to use verb F00h first and the parameter at 0Eh to get the connection list length. On the Netbook I program on there is only one codec, one function group (AFG) and 37 widgets (about half of which are vendor defined audio widgets, though many of those don't exist on the codec manufacturer's datasheet as they are just holding places for real widgets used on more advanced sound cards). Don't be surprised if you don't find a volume control widget - the volume can also be controlled by setting different amplifier levels at the input and output controllers.
+</p>
+<h2> <span class="mw-headline" id="Device_Registers"> Device Registers </span></h2>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (Hex)
+</th>
+<th> Name
+</th>
+<th> Description
+</th>
+<th> Notes
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> GCAP </td>
+<td> Global Capabilities </td>
+<td> (includes number of DMA engines for input and output streams)
+</td></tr>
+<tr>
+<td> 02 </td>
+<td> VMIN </td>
+<td> Minor Version </td>
+<td>
+</td></tr>
+<tr>
+<td> 03 </td>
+<td> VMAJ </td>
+<td> Major Version </td>
+<td>
+</td></tr>
+<tr>
+<td> 04 </td>
+<td> OUTPAY </td>
+<td> Output Payload Capacity </td>
+<td> (packet size limit for the/each output line)
+</td></tr>
+<tr>
+<td> 06 </td>
+<td> INPAY </td>
+<td> Input Payload Capacity </td>
+<td> (packet size limit for each input line)
+</td></tr>
+<tr>
+<td> 08 </td>
+<td> GCTL </td>
+<td> Global Control </td>
+<td> (used to reset the link and codec)
+</td></tr>
+<tr>
+<td> 0C </td>
+<td> WAKEEN </td>
+<td> Wake Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 0E </td>
+<td> STATESTS </td>
+<td> State Change Status </td>
+<td>
+</td></tr>
+<tr>
+<td> 10 </td>
+<td> GSTS </td>
+<td> Global Status </td>
+<td>
+</td></tr>
+<tr>
+<td> 18 </td>
+<td> OUTSTRMPAY </td>
+<td> Output Stream Payload Capability </td>
+<td>
+</td></tr>
+<tr>
+<td> 1A </td>
+<td> INSTRMPAY </td>
+<td> Input Stream Payload Capability </td>
+<td>
+</td></tr>
+<tr>
+<td> 20 </td>
+<td> INTCTL </td>
+<td> Interrupt Control </td>
+<td>
+</td></tr>
+<tr>
+<td> 24 </td>
+<td> INTSTS </td>
+<td> Interrupt Status </td>
+<td>
+</td></tr>
+<tr>
+<td> 30 </td>
+<td> COUNTER </td>
+<td> Wall Clock Counter </td>
+<td>
+</td></tr>
+<tr>
+<td> 34 </td>
+<td> SSYNC </td>
+<td> Stream Synchronization </td>
+<td> (set bits 0-29 to pause DMA streams 1-30)
+<p>Note: The HD Audio specifications list this register at offset 0x38, but this appears to be incorrect.
+</p>
+</td></tr>
+<tr>
+<td> 40 </td>
+<td> CORBLBASE </td>
+<td> CORB Lower Base Address </td>
+<td> (command output ring buffer address)
+</td></tr>
+<tr>
+<td> 44 </td>
+<td> CORBUBASE </td>
+<td> CORB Upper Base Address </td>
+<td>
+</td></tr>
+<tr>
+<td> 48 </td>
+<td> CORBWP </td>
+<td> CORB Write Pointer </td>
+<td>
+</td></tr>
+<tr>
+<td> 4a </td>
+<td> CORBRP </td>
+<td> CORB Read Pointer </td>
+<td>
+</td></tr>
+<tr>
+<td> 4c </td>
+<td> CORBCTL </td>
+<td> CORB Control </td>
+<td>
+</td></tr>
+<tr>
+<td> 4d </td>
+<td> CORBSTS </td>
+<td> CORB Status </td>
+<td>
+</td></tr>
+<tr>
+<td> 4e </td>
+<td> CORBSIZE </td>
+<td> CORB Size </td>
+<td>
+</td></tr>
+<tr>
+<td> 50 </td>
+<td> RIRBLBASE </td>
+<td> RIRB Lower Base Address </td>
+<td> (response input ring buffer address)
+</td></tr>
+<tr>
+<td> 54 </td>
+<td> RIRBUBASE </td>
+<td> RIRB Upper Base Address </td>
+<td>
+</td></tr>
+<tr>
+<td> 58 </td>
+<td> RIRBWP </td>
+<td> RIRB Write Pointer </td>
+<td>
+</td></tr>
+<tr>
+<td> 5a </td>
+<td> RINTCNT </td>
+<td> Response Interrupt Count </td>
+<td>
+</td></tr>
+<tr>
+<td> 5c </td>
+<td> RIRBCTL </td>
+<td> RIRB Control </td>
+<td>
+</td></tr>
+<tr>
+<td> 5d </td>
+<td> RIRBSTS </td>
+<td> RIRB Status </td>
+<td>
+</td></tr>
+<tr>
+<td> 5e </td>
+<td> RIRBSIZE </td>
+<td> RIRB Size </td>
+<td>
+</td></tr>
+<tr>
+<td> 60 </td>
+<td> </td>
+<td> Immediate Command Output Interface </td>
+<td>
+</td></tr>
+<tr>
+<td> 64 </td>
+<td> </td>
+<td> Immediate Response Input Interface </td>
+<td>
+</td></tr>
+<tr>
+<td> 68 </td>
+<td> </td>
+<td> Immediate Command Status </td>
+<td>
+</td></tr>
+<tr>
+<td> 70 </td>
+<td> DPLBASE </td>
+<td> DMA Position Lower Base Address </td>
+<td>
+</td></tr>
+<tr>
+<td> 74 </td>
+<td> DPUBASE </td>
+<td> DMA Position Upper Base Address </td>
+<td>
+</td></tr>
+<tr>
+<td> 80 </td>
+<td> </td>
+<td> Stream Descriptors </td>
+<td>
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="CODECs_and_Nodes"> CODECs and Nodes </span></h2>
+<p>Each HD Audio device contains one or more CODECs, and each CODEC contains a list of "nodes" that are connected together in a hierarchical structure.  You can find the available CODECs in the STATESTS register, and you can find the node count for each CODEC by sending a GetParameter command to the codec's root node (node 0) using the CORB ring buffer (or the Immediate Command Output Interface, if available).
+</p>
+<h2> <span class="mw-headline" id="Node_Commands"> Node Commands </span></h2>
+<p>Each entry in the CORB ring buffer has the following structure:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bits
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 31:28 </td>
+<td> Codec Address
+</td></tr>
+<tr>
+<td> 27:20 </td>
+<td> Node Index
+</td></tr>
+<tr>
+<td> 19:8 </td>
+<td> Command
+</td></tr>
+<tr>
+<td> 7:0 </td>
+<td> Data
+</td></tr>
+</table>
+<p>The following commands can be sent to specific CODEC nodes using the CORB ring buffer:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Hex
+</th>
+<th> Command
+</th>
+<th> Notes
+</th></tr>
+<tr>
+<td> f00 </td>
+<td> Get Parameter </td>
+<td>
+</td></tr>
+<tr>
+<td> f01 </td>
+<td> Get Selected Input </td>
+<td>
+</td></tr>
+<tr>
+<td> 701 </td>
+<td> Set Selected Input </td>
+<td>
+</td></tr>
+<tr>
+<td> f06 </td>
+<td> Get Stream Channel </td>
+<td>
+</td></tr>
+<tr>
+<td> 706 </td>
+<td> Set Stream Channel </td>
+<td>
+</td></tr>
+<tr>
+<td> f07 </td>
+<td> Get Pin Widget Control </td>
+<td>
+</td></tr>
+<tr>
+<td> 707 </td>
+<td> Set Pin Widget Control </td>
+<td>
+</td></tr>
+<tr>
+<td> f0f </td>
+<td> Get Volume Control </td>
+<td>
+</td></tr>
+<tr>
+<td> 70f </td>
+<td> Set Volume Control </td>
+<td>
+</td></tr>
+<tr>
+<td> f1c </td>
+<td> Get Configuration Default </td>
+<td>
+</td></tr>
+<tr>
+<td> f2d </td>
+<td> Get Converter Channel Count </td>
+<td>
+</td></tr>
+<tr>
+<td> 72d </td>
+<td> Set Converter Channel Count </td>
+<td>
+</td></tr>
+<tr>
+<td> 7ff </td>
+<td> Function Reset </td>
+<td>
+</td></tr>
+<tr>
+<td> 0x3 </td>
+<td> Set Amplifier Gain </td>
+<td> 4-bit command allows for a 16-bit payload
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Node_Parameters"> Node Parameters </span></h2>
+<p>The following parameters can be read using the GetParameter command above:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Hex
+</th>
+<th> Description
+</th>
+<th> Notes
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> Vendor ID / Device ID </td>
+<td>
+</td></tr>
+<tr>
+<td> 02 </td>
+<td> Revision ID </td>
+<td>
+</td></tr>
+<tr>
+<td> 04 </td>
+<td> Node Count </td>
+<td>
+</td></tr>
+<tr>
+<td> 05 </td>
+<td> Function Group Type </td>
+<td>
+</td></tr>
+<tr>
+<td> 08 </td>
+<td> Audio Group Capabilities </td>
+<td>
+</td></tr>
+<tr>
+<td> 09 </td>
+<td> Audio Widget Capabilities </td>
+<td>
+</td></tr>
+<tr>
+<td> 0a </td>
+<td> Supported PCM Rates </td>
+<td>
+</td></tr>
+<tr>
+<td> 0b </td>
+<td> Supported Formats </td>
+<td>
+</td></tr>
+<tr>
+<td> 0c </td>
+<td> Pin Capabilities </td>
+<td>
+</td></tr>
+<tr>
+<td> 0d </td>
+<td> Input Amplifier Capabilities </td>
+<td>
+</td></tr>
+<tr>
+<td> 12 </td>
+<td> Output Amplifier Capabilities </td>
+<td>
+</td></tr>
+<tr>
+<td> 0e </td>
+<td> Connection List Length </td>
+<td>
+</td></tr>
+<tr>
+<td> 0f </td>
+<td> Supported Power States </td>
+<td>
+</td></tr>
+<tr>
+<td> 10 </td>
+<td> Processing Capabilities </td>
+<td>
+</td></tr>
+<tr>
+<td> 11 </td>
+<td> GPIO Count </td>
+<td>
+</td></tr>
+<tr>
+<td> 13 </td>
+<td> Volume Capabilities </td>
+<td>
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Setting_up_the_AFG_codec"> Setting up the AFG codec </span></h2>
+<p>Each programmer will likely have their own way of going about this, but the main aim will be to set out to identify which pin complexes are connected to actual speakers, headphone sockets, microphones and microphone sockets before following the trail of connections back to the most appropriate DAC or ADC to handle the stream. How you end up connecting things up will depend on what you want to do: you could, for example, use the same DAC for the speakers as for the headphone jack, but there might be occasions when you want to send different sound streams to each. Similarly, you might use the same ADC for the built-in microphone as for the microphone jack, but you could use a different ADC for each if you need to collect different inputs from different microphones (perhaps using one to collect background noise to subtract from the other input). You might also want to send sound out through the microphone socket so that two people can listen to the same music at the same time on headphones, or you might want to use the headphone socket as an extra microphone socket, perhaps to set up a pair of stereo microphones in a tetrahedron arrangement in order to calculate the direction a sound is coming from. Try to make your driver flexible enough to cover all those cases, or at least to make it easy to adapt it to cover them later.
+</p><p>Here's an suggestion as to how the initial task might be broken down, but use it only as a rough guide:-
+</p><p><br />
+(1) Use verb F00h with parameter 4 and NID 0 (the root node) to find the number of function groups in the codec, then check those nodes using their NID and with verb F00h and parameter 5 to hunt for an AFG function group.
+</p><p>(2) Use verb F00h with parameter 4 and the correct NID for the AFG gunction group to get the start node (first widget) and number of nodes (widgets).
+</p><p>(3) Collect the following data for each widget: param 9h (primarily to get the widget type); Ch (pin capabilities); Dh (input amplifier details); 12h (output amplifier details); Eh (connection list length); 13h (volume knob capabilities). Also, use verb F1Ch to collect the configuration defaults, and verb F02h to collect the first few entries in the connection list. Don't worry about whether useful responses are available for each widget - they will send back all zeros wherever they are not relevant.
+</p><p>(4) Sort the results into groups of DACs, ADCs, mixers, pins, etc.
+</p><p>(5) Identify the pins with actual speakers, microphone and sockets for jacks by using the configuration defaults which you collected earlier. Bits 31-30 state which pins have devices attached to them, telling you whether they are integrated devices or sockets into which things can be plugged. Bits 23-20 tell you what the integrated device is or what kind of device will normally be plugged into the socket. Some machines may have multiple output sockets for sound and may in rare cases have more than one set of integrated speakers to play surround sound, so you might need to look at bits 7-4 (default-association) to find out which ones are grouped together as a set, and bits 3-1 (sequence) to determine which are the main speakers in that set. In a few badly configured machines which fail to provide correct information in some of these bits, EAPD capability may serve as an additional clue for tracking down the speakers.
+</p><p>(6) Make two lists of pins: one for those you want to send outputs to, and the other for inputs.
+</p><p>(7) Try to find the shortest paths from the speakers and headphone jacks back to DACs, though you may wish to use different DACs for different pins. See the section "Finding all useful paths through the codec" below for guidance on this, but the first connection in the connection list for a widgit should help you find the right paths for the most common uses, although you may need to explore more items in the connection lists for some of the widgets.
+</p><p>(8) Try to find the shortest paths from the ADCs to any built-in microphone and microphone jack. Again you may wish to use different ADCs for the different inputs or you may wish to share the same one.
+</p><p>(9) Set up the paths you want to use by setting an intitial volume/gain and turning off the mutes at every widget in the chain wherever there is one needing to be set. Use verb 2h to set Format for any DACs and ADCs you're going to use, and verb 706h to set the stream and the lowest channel. Verb 707 must be used to enable input/output at the pins (and read up on VrefEn for mic.s, if you can find any good information on this - I'm still searching for it). Remember to set Unsol for the jacks too if you want pins to report headphones/microphone being plugged in or removed, but you can poll them if you prefer.
+</p><p>(10) For each path, create a list of volume controls, mutes and the range of numbers that can be used with each volume/gain control to guide the creation of suitable controls for the user to manipulate in order to control each input/output.
+</p><p>(11) Set EAPD to enable the external amp for the speakers.
+</p><p>After you've done all that, get the near end of the link set up to get the DMA engines to handle the streams (read the specification carefully and act on it) and with luck you'll soon have sound coming in and out. If it doesn't happen that easily, you can set up the DMA position buffer to see if the DMA engines are actually running and looping correctly through the cyclic stream buffers. If all is well there, you might find it useful to use the codec ID to find the datasheet for it just to make sure you aren't missing anything out in the way you're setting it up. Also, feel free to improve the instructions on this page so that others can gain from your solutions to any problems you encounter.
+</p>
+<h2> <span class="mw-headline" id="Finding_all_useful_paths_through_the_codec"> Finding all useful paths through the codec </span></h2>
+<p>The paths that are potentially useful are the ones that lead from pins with output devices connected to them back to a DAC, plus all the paths from those same pins back to all other pins with an input device connected to them (some codecs allow inputs to be mixed into outputs for such purposes as karaoke, so your device driver might as well make this option available if the codec supports it), plus all the paths from ADCs to all pins with an input device connected. A socket for a jack can be both an output and input device, but not at the same time.
+</p><p>An algorithm guaranteed to find all useful paths is as follows. Write a routine to start at a pin with an attached output device and then call it for each such pin in turn. The routine will look at the association list for the pin it's starting at and follow the path to the first widget listed there. If it finds a DAC (or a pin with an input device attached), the path can be stored. Else, look at the association list for this widget and repeat the process to examine the next widget in the path. The search will backtrack to the previous widget in the chain once a DAC or pin has been reached, and then the next item in the association list for that previous widget tells you which widget to examine next. If there isn't a next item in the association list, backtrack again to the widget before it. In this way, all paths are explored, and the task is complete once you've run out of items in the association list to explore for the pin you started at. It may be wise to keep count of the number of links in the path just in case a codec sends you round in circles - you should abandon any paths that get too long (perhaps a ten link limit would be safe). For inputs the algorithm is much the same, but you start at each ACD and store any paths that link through to a pin which has an input device attached.
+</p><p>Once you have your list, you can select the first suitable one found for each purpose, while the rest can be offered to the user as alternative options accessed either via a user-interface for the device driver or from the interface of an advanced application which directly offers these other paths whenever they exist on the machine. An audio player could, for example, allow you to sing along with the music it's playing such that you hear your voice in the headphones (without any delay from the input being put through a conversion to digital and back).
+</p>
+<h2> <span class="mw-headline" id="Playing_Audio"> Playing Audio </span></h2>
+<p>The following steps must be performed to play audio on an HD Audio device:
+</p><p>(1) Create a buffer list structure, and add at least two buffer entries to the list.
+</p><p>(2) Setup an output stream descriptor, normally located at memory offset 0x100 in the register table above.  This descriptor contains the address of the buffer table from step 1, the audio format (44.1k stereo 16-bit, etc.), the total buffer length, the current buffer position, the number of buffers in the buffer list, and most importantly, the RUN bit that will start streaming data to any DACs currently configured to play audio from this stream.
+</p><p>(3) Find at least one speaker or headphone node in the CODEC that you want to use to play your audio, and turn it on by sending a SetPinWidgetControl command to it.
+</p><p>(4) Use the speaker node's connection table to find out which DAC node it is connected to.
+</p><p>(5) Configure the DAC to use the stream number that you configured above in step 2 by sending it a SetStreamChannel command.
+</p><p>(6) Make sure that the DAC is fully powered (in D0 state). The SetPowerState command is used for this.
+</p><p>(7) By default, the DAC's output amplifier is muted.  Clear the mute bit, and set the gain (volume) by sending the DAC node a SetAmplifierGain command. You can find the maximum gain value by reading the OutputAmplifierCapabilities property on the DAC node (or in some cases, its parent node). Do not be surprised if the maximum volume is the one with 0dB gain - the job of the amplifier at a DAC is to reduce the volume rather than to increase it, so all the other values will usually be negative.
+</p><p>(8) Enable the configured stream from step 1 by clearing its corresponding bit in the StreamSynchonization register.
+</p><p>The audio will play until the end of the last buffer in the buffer list, then it will begin playing the beginning of the first buffer again.  You can enable the proper interrupt to be notified when a buffer has been played, so that you can refill the buffer with the next block of audio data.
+</p>
+<h2> <span class="mw-headline" id="External_links"> External links </span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.intel.co.uk/content/www/us/en/standards/high-definition-audio-specification.html">Intel High Definition Audio Specification</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 66/1000000
+Post-expand include size: 648/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3313-0!*!0!!en!*!* and timestamp 20180121080111 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Intel_High_Definition_Audio&amp;oldid=18750">http://wiki.osdev.org/index.php?title=Intel_High_Definition_Audio&amp;oldid=18750</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Sound" title="Category:Sound">Sound</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Intel_High_Definition_Audio" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Intel_High_Definition_Audio"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Intel_High_Definition_Audio"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Intel_High_Definition_Audio#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Intel_High_Definition_Audio" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Intel_High_Definition_Audio&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Intel_High_Definition_Audio&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Intel_High_Definition_Audio#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Intel_High_Definition_Audio" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Intel_High_Definition_Audio" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Intel_High_Definition_Audio&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Intel_High_Definitskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Intel_High_Definition_Audio" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Intel_High_Definition_Audio" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Intel_High_Definition_Audio&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Intel_High_Definition_Audio&amp;oldid=18750" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 January 2016, at 09:17.</li>
+											<li id="footer-info-viewcount">This page has been accessed 13,164 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.088 secs. -->
+	</body>
+</html>

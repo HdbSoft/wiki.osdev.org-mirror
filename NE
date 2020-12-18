@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>NE - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "NE", "wgTitle": "NE", "wgCurRevisionId": 19957, "wgArticleId": 1957, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Stubs", "Executable Formats"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-cpp {line-height: normal;}
+.source-cpp li, .source-cpp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cpp
+ * CSS class: source-cpp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cpp.source-cpp .de1, .cpp.source-cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp.source-cpp  {font-family:monospace;}
+.cpp.source-cpp .imp {font-weight: bold; color: red;}
+.cpp.source-cpp li, .cpp.source-cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp.source-cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp.source-cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp.source-cpp .kw1 {color: #0000ff;}
+.cpp.source-cpp .kw2 {color: #0000ff;}
+.cpp.source-cpp .kw3 {color: #0000dd;}
+.cpp.source-cpp .kw4 {color: #0000ff;}
+.cpp.source-cpp .co1 {color: #666666;}
+.cpp.source-cpp .co2 {color: #339900;}
+.cpp.source-cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp.source-cpp .es0 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es1 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es2 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es3 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es4 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es5 {color: #006699; font-weight: bold;}
+.cpp.source-cpp .br0 {color: #008000;}
+.cpp.source-cpp .sy0 {color: #008000;}
+.cpp.source-cpp .sy1 {color: #000080;}
+.cpp.source-cpp .sy2 {color: #000040;}
+.cpp.source-cpp .sy3 {color: #000040;}
+.cpp.source-cpp .sy4 {color: #008080;}
+.cpp.source-cpp .st0 {color: #FF0000;}
+.cpp.source-cpp .nu0 {color: #0000dd;}
+.cpp.source-cpp .nu6 {color: #208080;}
+.cpp.source-cpp .nu8 {color: #208080;}
+.cpp.source-cpp .nu12 {color: #208080;}
+.cpp.source-cpp .nu16 {color:#800080;}
+.cpp.source-cpp .nu17 {color:#800080;}
+.cpp.source-cpp .nu18 {color:#800080;}
+.cpp.source-cpp .nu19 {color:#800080;}
+.cpp.source-cpp .me1 {color: #007788;}
+.cpp.source-cpp .me2 {color: #007788;}
+.cpp.source-cpp .ln-xtra, .cpp.source-cpp li.ln-xtra, .cpp.source-cpp div.ln-xtra {background-color: #ffc;}
+.cpp.source-cpp span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-NE action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">NE</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="NE#mw-head">navigation</a>,
+					<a href="NE#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=NE&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="Executable_Formats" title="Executable Formats">Executable Formats</a></th></tr><tr><th>Microsoft</th></tr><tr><td><div>
+<p><b>16 bit:</b><br />
+<a href="COM" title="COM">COM</a><br />
+<a href="MZ" title="MZ">MZ</a><br />
+<strong class="selflink">NE</strong><br />
+<b>32/64 bit:</b><br />
+<a href="PE" title="PE">PE</a><br />
+<b>Mixed (16/32 bit):</b><br />
+<a href="LE" title="LE">LE</a><br />
+</p>
+</div></td></tr><tr><th>*nix</th></tr><tr><td><div>
+<p><a href="A.out" title="A.out">A.out</a><br />
+<a href="ELF" title="ELF">ELF</a><br />
+</p>
+</div></td></tr></table>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="NE#NE"><span class="tocnumber">1</span> <span class="toctext">NE</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="NE#Introduction"><span class="tocnumber">1.1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="NE#Support"><span class="tocnumber">1.2</span> <span class="toctext">Support</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="NE#Inside_the_NE_file"><span class="tocnumber">2</span> <span class="toctext">Inside the NE file</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="NE#Overview"><span class="tocnumber">2.1</span> <span class="toctext">Overview</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="NE#DOS_Stub"><span class="tocnumber">2.1.1</span> <span class="toctext">DOS Stub</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="NE#NE_Header"><span class="tocnumber">2.1.2</span> <span class="toctext">NE Header</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-8"><a href="NE#See_Also"><span class="tocnumber">2.2</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-3 tocsection-9"><a href="NE#NE_2"><span class="tocnumber">2.2.1</span> <span class="toctext">NE</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="NE#Executables"><span class="tocnumber">2.2.2</span> <span class="toctext">Executables</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h1> <span class="mw-headline" id="NE">NE</span></h1>
+<h2> <span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>The WIN-NE executable format, designed for Windows 3.x, was the "NE", or "New Executable" format. Again, a 16bit format, it alleviated the maximum size restrictions that the <a href="MZ" title="MZ">MZ</a> format had.
+</p>
+<h2> <span class="mw-headline" id="Support">Support</span></h2>
+<p>Operating Systems that use it: Windows 1.01 through 3.xx.
+The format <b>can</b> be run on later 32 bit windows systems (in a VDM), but is not the native format.<br />
+Because of 64 bit lack of v8086, support is discarded on 64 bit windows.
+</p>
+<h1> <span class="mw-headline" id="Inside_the_NE_file">Inside the NE file</span></h1>
+<h2> <span class="mw-headline" id="Overview">Overview</span></h2>
+<h3> <span class="mw-headline" id="DOS_Stub">DOS Stub</span></h3>
+<p>The DOS stub is a valid <a href="MZ" title="MZ">MZ</a> exe. This enables the develper to package both an MS-DOS and Win16 version of the program, but nromally just prints "This Program requires Microsoft Windows". The e_lfanew field (offset 0x3C) points to the NE header.
+</p>
+<h3> <span class="mw-headline" id="NE_Header">NE Header</span></h3>
+<p>The NE header is a relatively large structure with multiple characteristics. Because of the age of the format some items are unclear in meaning. The structure is as below (some comments may be wrong. If so please change):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cpp source-cpp"><pre class="de1"><span class="kw4">struct</span> NE_header <span class="br0">&#123;</span>
+    <span class="kw4">char</span> sig<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy4">;</span>                 <span class="co1">//&quot;NE&quot;</span>
+    <span class="kw4">uint8_t</span> MajLinkerVersion<span class="sy4">;</span>    <span class="co1">//The major linker version</span>
+    <span class="kw4">uint8_t</span> MinLinkerVersion<span class="sy4">;</span>    <span class="co1">//The minor linker version</span>
+    <span class="kw4">uint16_t</span> EntryTableOffset<span class="sy4">;</span>   <span class="co1">//Offset of entry table, see below</span>
+    <span class="kw4">uint16_t</span> EntryTableLength<span class="sy4">;</span>   <span class="co1">//Length of entry table in bytes</span>
+    <span class="kw4">uint32_t</span> FileLoadCRC<span class="sy4">;</span>        <span class="co1">//32-bit CRC of entire contents of file</span>
+    <span class="kw4">uint8_t</span> ProgFlags<span class="sy4">;</span>           <span class="co1">//Program flags, bitmapped</span>
+    <span class="kw4">uint8_t</span> ApplFlags<span class="sy4">;</span>           <span class="co1">//Application flags, bitmapped</span>
+    <span class="kw4">uint8_t</span> AutoDataSegIndex<span class="sy4">;</span>    <span class="co1">//The automatic data segment index</span>
+    <span class="kw4">uint16_t</span> InitHeapSize<span class="sy4">;</span>       <span class="co1">//The intial local heap size</span>
+    <span class="kw4">uint16_t</span> InitStackSize<span class="sy4">;</span>      <span class="co1">//The inital stack size</span>
+    <span class="kw4">uint32_t</span> EntryPoint<span class="sy4">;</span>         <span class="co1">//CS:IP entry point, CS is index into segment table</span>
+    <span class="kw4">uint32_t</span> InitStack<span class="sy4">;</span>          <span class="co1">//SS:SP inital stack pointer, SS is index into segment table</span>
+    <span class="kw4">uint16_t</span> SegCount<span class="sy4">;</span>           <span class="co1">//Number of segments in segment table</span>
+    <span class="kw4">uint16_t</span> ModRefs<span class="sy4">;</span>            <span class="co1">//Number of module references (DLLs)</span>
+    <span class="kw4">uint16_t</span> NoResNamesTabSiz<span class="sy4">;</span>   <span class="co1">//Size of non-resident names table, in bytes (Please clarify non-resident names table)</span>
+    <span class="kw4">uint16_t</span> SegTableOffset<span class="sy4">;</span>     <span class="co1">//Offset of Segment table</span>
+    <span class="kw4">uint16_t</span> ResTableOffset<span class="sy4">;</span>     <span class="co1">//Offset of resources table</span>
+    <span class="kw4">uint16_t</span> ResidNamTable<span class="sy4">;</span>      <span class="co1">//Offset of resident names table</span>
+    <span class="kw4">uint16_t</span> ModRefTable<span class="sy4">;</span>        <span class="co1">//Offset of module reference table</span>
+    <span class="kw4">uint16_t</span> ImportNameTable<span class="sy4">;</span>    <span class="co1">//Offset of imported names table (array of counted strings, terminated with string of length 00h)</span>
+    <span class="kw4">uint32_t</span> OffStartNonResTab<span class="sy4">;</span>  <span class="co1">//Offset from start of file to non-resident names table</span>
+    <span class="kw4">uint16_t</span> MovEntryCount<span class="sy4">;</span>      <span class="co1">//Count of moveable entry point listed in entry table</span>
+    <span class="kw4">uint16_t</span> FileAlnSzShftCnt<span class="sy4">;</span>   <span class="co1">//File alligbment size shift count (0=9(default 512 byte pages))</span>
+    <span class="kw4">uint16_t</span> nResTabEntries<span class="sy4">;</span>     <span class="co1">//Number of resource table entries</span>
+    <span class="kw4">uint8_t</span> targOS<span class="sy4">;</span>              <span class="co1">//Target OS</span>
+    <span class="kw4">uint8_t</span> OS2EXEFlags<span class="sy4">;</span>         <span class="co1">//Other OS/2 flags</span>
+    <span class="kw4">uint16_t</span> retThunkOffset<span class="sy4">;</span>     <span class="co1">//Offset to return thunks or start of gangload area - what is gangload?</span>
+    <span class="kw4">uint16_t</span> segrefthunksoff<span class="sy4">;</span>    <span class="co1">//Offset to segment reference thunks or size of gangload area</span>
+    <span class="kw4">uint16_t</span> mincodeswap<span class="sy4">;</span>        <span class="co1">//Minimum code swap area size</span>
+    <span class="kw4">uint8_t</span> expctwinver<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy4">;</span>      <span class="co1">//Expected windows version (minor first)</span>
+<span class="br0">&#125;</span><span class="sy4">;</span>
+&#160;
+<span class="co1">//Program flags</span>
+<span class="co1">//DGroup type (what is this?)</span>
+<span class="kw2">enum</span> dgrouptype <span class="br0">&#123;</span>
+    none,         <span class="co1">//None</span>
+    sinshared,    <span class="co1">//single shared</span>
+    multiple,     <span class="co1">//Multiple</span>
+    null          <span class="co1">//(null)</span>
+<span class="br0">&#125;</span><span class="sy4">;</span>
+&#160;
+<span class="co2">#define GLOBINIT 1&lt;&lt;2     //global initialization</span>
+<span class="co2">#define PMODEONLY 1&lt;&lt;3    //Protetced mode only</span>
+<span class="co2">#define INSTRUC86 1&lt;&lt;4    //8086 instructions</span>
+<span class="co2">#define INSTRU286 1&lt;&lt;5    //80286 instructions</span>
+<span class="co2">#define INSTRU386 1&lt;&lt;6    //80386 instructions</span>
+<span class="co2">#define INSTRUx87 1&lt;&lt;7    //80x87 (FPU) instructions</span>
+&#160;
+<span class="co1">//Application flags</span>
+<span class="co1">//Application type</span>
+<span class="kw2">enum</span> apptype <span class="br0">&#123;</span>
+    none,
+    fullscreeen,    <span class="co1">//fullscreen (not aware of Windows/P.M. API)</span>
+    winpmcompat,    <span class="co1">//compatible with Windows/P.M. API</span>
+    winpmuses       <span class="co1">//uses Windows/P.M. API</span>
+<span class="br0">&#125;</span><span class="sy4">;</span>
+<span class="co2">#define OS2APP 1&lt;&lt;3    //OS/2 family application</span>
+<span class="co1">//bit 4 reserved?</span>
+<span class="co2">#define IMAGEERROR 1&lt;&lt;5    //errors in image/executable</span>
+<span class="co2">#define NONCONFORM 1&lt;&lt;6    //non-conforming program?</span>
+<span class="co2">#define DLL        1&lt;&lt;7    //DLL or driver (SS:SP invalid, CS:IP-&gt;Far INIT routine AX=HMODULE,returns AX==0 success, AX!=0 fail)</span>
+&#160;
+<span class="co1">//Target Operating System</span>
+<span class="kw2">enum</span> targetos <span class="br0">&#123;</span>
+    unknown,    <span class="co1">//Obvious&#160;;)</span>
+    os2,        <span class="co1">//OS/2 (as if you hadn't worked that out!)</span>
+    win,        <span class="co1">//Windows (Win16)</span>
+    dos4,       <span class="co1">//European DOS  4.x</span>
+    win386,     <span class="co1">//Windows for the 80386 (Win32s). 32 bit code.</span>
+    BOSS        <span class="co1">//The boss, a.k.a Borland Operating System Services</span>
+<span class="br0">&#125;</span><span class="sy4">;</span>
+<span class="co1">//Other OS/2 flags</span>
+<span class="co2">#define LFN 1        //OS/2 Long File Names (finally, no more 8.3 conversion&#160;:) )</span>
+<span class="co2">#define PMODE 1&lt;&lt;1   //OS/2 2.x Protected Mode executable</span>
+<span class="co2">#define PFONT 1&lt;&lt;2   //OS/2 2.x Proportional Fonts</span>
+<span class="co2">#define GANGL 1&lt;&lt;3   //OS/2 Gangload area</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="NE_2">NE</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://www.nondot.org/sabre/os/files/Executables/EXE-3.1.txt">OSRC</a>
+</li><li><a rel="nofollow" class="external text" href="http://www.fileformat.info/format/exe/corion-ne.htm">fileformat.info</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Executables">Executables</span></h3>
+<ul><li><a href="MZ" title="MZ">MZ</a>
+</li><li><a href="PE" title="PE">PE</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 365/1000000
+Post-expand include size: 1752/2097152 bytes
+Template argument size: 575/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1957-0!*!0!!en!2!* and timestamp 20180121034112 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=NE&amp;oldid=19957">http://wiki.osdev.org/index.php?title=NE&amp;oldid=19957</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Stubs" title="Category:Stubs">Stubs</a></li><li><a href="Category:Executable_Formats" title="Category:Executable Formats">Executable Formats</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=NE" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="NE"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:NE&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="NE#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="NE" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=NE&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=NE&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="NE#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/NE" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/NE" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=NE&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=NE&amp;oldid=19957" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+			skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/NE" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/NE" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=NE&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=NE&amp;oldid=19957" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 15 November 2016, at 01:40.</li>
+											<li id="footer-info-viewcount">This page has been accessed 28,255 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.040 secs. -->
+	</body>
+</html>

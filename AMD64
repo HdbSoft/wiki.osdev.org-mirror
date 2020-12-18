@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>x86-64 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="X86-64" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "X86-64", "wgTitle": "X86-64", "wgCurRevisionId": 19578, "wgArticleId": 1447, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["X86 CPU", "Operating Modes"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-X86-64 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">x86-64</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=AMD64&amp;redirect=no" title="AMD64">AMD64</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="AMD64#mw-head">navigation</a>,
+					<a href="AMD64#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>This article discusses <b>x86-64</b> CPUs (AMD64 and Intel's equivalent <a href="EM64T" title="EM64T">EM64T</a> implementation). <a href="IA-64" title="IA-64">IA-64</a> (Itanium) is <b>really</b> a different beast and not addressed here.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="AMD64#Features"><span class="tocnumber">1</span> <span class="toctext">Features</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="AMD64#Long_Mode"><span class="tocnumber">1.1</span> <span class="toctext">Long Mode</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="AMD64#Segmentation_in_Long_Mode"><span class="tocnumber">1.2</span> <span class="toctext">Segmentation in Long Mode</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="AMD64#Further_information"><span class="tocnumber">1.3</span> <span class="toctext">Further information</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="AMD64#Setting_up"><span class="tocnumber">2</span> <span class="toctext">Setting up</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="AMD64#How_do_I_detect_if_the_CPU_is_64_bits_.3F"><span class="tocnumber">2.1</span> <span class="toctext">How do I detect if the CPU is 64 bits&#160;?</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="AMD64#How_do_I_enable_Long_Mode_.3F"><span class="tocnumber">2.2</span> <span class="toctext">How do I enable Long Mode&#160;?</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="AMD64#Are_there_restrictions_on_32-bit_code_running_in_Legacy_Mode_.3F"><span class="tocnumber">2.3</span> <span class="toctext">Are there restrictions on 32-bit code running in Legacy Mode&#160;?</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="AMD64#Entering_Long_Mode_directly"><span class="tocnumber">2.4</span> <span class="toctext">Entering Long Mode directly</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="AMD64#Notifying_the_BIOS"><span class="tocnumber">2.5</span> <span class="toctext">Notifying the BIOS</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="AMD64#64_bit_Environment_Models"><span class="tocnumber">3</span> <span class="toctext">64 bit Environment Models</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="AMD64#Data_Types"><span class="tocnumber">3.1</span> <span class="toctext">Data Types</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="AMD64#Models_used_by_64bit_OSs"><span class="tocnumber">3.2</span> <span class="toctext">Models used by 64bit OSs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-14"><a href="AMD64#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-15"><a href="AMD64#Articles"><span class="tocnumber">4.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="AMD64#Wikipedia"><span class="tocnumber">4.2</span> <span class="toctext">Wikipedia</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="AMD64#External_Links"><span class="tocnumber">4.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Features"> Features </span></h2>
+<h3> <span class="mw-headline" id="Long_Mode">Long Mode</span></h3>
+<p>Long mode extends general registers to 64 bits (RAX, RBX, RIP, RSP, RFLAGS, etc), and adds eight additional integer registers (R8, R9, ..., R15) plus eight more SSE registers (XMM8 to XMM15) to the CPU. Linear addresses are extended to 64 bit (however, a given CPU may implement less than this) and the physical address space is extended to 52 bits (a given CPU may implement less than this). In essence long mode adds another mode to the CPU.
+</p><p>Long mode does not support hardware task switching or virtual 8086 tasks. In long mode the current CS determines if the code currently running is 64 bit code (true long mode) or 32 bit code (compatibility mode), or even 16-bit protected mode code (still in compatibility mode). Using paging has become mandatory, and segmentation has been stripped down for performance reasons.
+</p><p>The first 64 bit CPUs from both Intel and AMD support 40 bit physical addresses and 48 bit linear addresses.
+</p>
+<h3> <span class="mw-headline" id="Segmentation_in_Long_Mode"> Segmentation in Long Mode </span></h3>
+<p>Segmentation in long mode functions with a flat model with the exception of two registers: FS and GS.  Setting the base address for these two segment registers is possible via two specific <a href="MSR" title="MSR" class="mw-redirect">Model Specific Register (MSR)s</a>, FS.base (C000_0100h) and GS.base (C000_0101h).  
+</p><p>Additionally there is a long mode specific instruction called SWAPGS, which swaps the contents of GS.base and another MSR called KernelGSBase (C000_0102h).  This instruction is particularly useful for preserving kernel information for a specific logical processor core across context switches.  <b>Note: This is an exchange operation</b>.
+</p>
+<h3> <span class="mw-headline" id="Further_information"> Further information </span></h3>
+<p><i>This feature overview is incomplete. Please see the [<a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/X86-64">Wikipedia article on x86-64</a>] for more information.</i>
+</p>
+<h2> <span class="mw-headline" id="Setting_up">Setting up</span></h2>
+<h3> <span class="mw-headline" id="How_do_I_detect_if_the_CPU_is_64_bits_.3F">How do I detect if the CPU is 64 bits&#160;?</span></h3>
+<p>After calling CPUID with EAX=0x80000001, all AMD64 compliant processors have the longmode-capable-bit turned on in the extended feature flags (bit 29) in EDX. There are also other bits required by long mode; you can check them out in the CPUID docs in the <a rel="nofollow" class="external text" href="http://support.amd.com/us/Processor_TechDocs/24594.pdf">AMD general purpose instruction reference</a> (Link dead, the original author probably meant "AMD64 Architecture Programmer’s Manual Volume 3: General Purpose and System Instructions", found here: <a rel="nofollow" class="external free" href="http://developer.amd.com/resources/documentation-articles/developer-guides-manuals/">http://developer.amd.com/resources/documentation-articles/developer-guides-manuals/</a>)
+</p>
+<h3> <span class="mw-headline" id="How_do_I_enable_Long_Mode_.3F">How do I enable Long Mode&#160;?</span></h3>
+<p>The steps for enabling long mode are:
+</p>
+<ul><li> Disable paging
+</li><li> Set the PAE enable bit in CR4
+</li><li> Load CR3 with the physical address of the PML4
+</li><li> Enable long mode by setting the EFER.LME flag in MSR 0xC0000080
+</li><li> Enable paging
+</li></ul>
+<p>Now the CPU will be in compatibility mode, and instructions are still 32-bit.  To enter long mode, the D/B bit (bit 22, 2nd 32-bit value) of the GDT code segment must be clear (as it would be for a 16-bit code segment), and the L bit (bit 21, 2nd 32-bit value) of the GDT code segment must be set.  Once that is done, the CPU is in 64-bit long mode.
+</p>
+<h3> <span class="mw-headline" id="Are_there_restrictions_on_32-bit_code_running_in_Legacy_Mode_.3F"> Are there restrictions on 32-bit code running in Legacy Mode&#160;?</span></h3>
+<p>x86-64 processors can operate in a legacy mode, they still start in real mode and 16 and 32 bit protected mode is still available (along with the associated Virtual 8086 mode). This means an x86 operating system, even DOS, will still run just fine. The only difference is that physical addresses can be up to 52 bits (or as many bits as implemented by the CPU) when PAE is used.
+</p><p>However, <a href="Virtual_8086_Mode" title="Virtual 8086 Mode">Virtual 8086 Mode</a> does not exist in long/compatibility mode.
+</p><p>If you are running on a multi-processor system, you could send one processor a STARTUP IPI to a real mode memory address (see Intel MultiProcessor specification for more details) that loads a real mode program. The main problem with this approach is that it relies on multiple processors being present in the system.
+</p>
+<h3> <span class="mw-headline" id="Entering_Long_Mode_directly">Entering Long Mode directly</span></h3>
+<p>Protected mode must be entered before activating long mode. A minimal protected-mode environment must be established to allow long-mode initialization to take place. This environment must include the following:
+</p>
+<ul><li> A protected-mode IDT for vectoring interrupts and exceptions to the appropriate handlers while in protected mode.
+</li><li> The protected-mode interrupt and exception handlers referenced by the IDT.
+</li><li> Gate descriptors for each handler must be loaded in the IDT.
+</li></ul>
+<dl><dd>--<i>AMD64 docs, volume 2, section 14.4 (Enabling Protected Mode), 24593 Rev. 3.10 February 2005</i>
+</dd></dl>
+<p>That being said, <a href="http://forum.osdev.org/viewtopic.php?t=11093" class="extiw" title="topic:11093">we have a thread</a> where Brendan shows how to enable 64-bit long mode with no 32-bit IDT and no 32-bit segments - be assured, however, that any paging-related exception that occurs in long mode before you enable 64-bit IDT will cause the processor to reset due to a triple fault.
+</p><p>There is also <a href="Entering_Long_Mode_Directly" title="Entering Long Mode Directly">an example</a> of this implemented in a <a href="Bootloader" title="Bootloader">bootloader</a>.
+</p>
+<h3> <span class="mw-headline" id="Notifying_the_BIOS"> Notifying the BIOS </span></h3>
+<p>In order for the firmware built into the system to optimize itself for running in Long Mode, AMD recommends that the OS notify the BIOS about the intended target environment that the OS will be running in: 32-bit mode, 64-bit mode, or a mixture of both modes.  This can be done by calling the BIOS interrupt 15h from Real Mode with AX set to 0xEC00, and BL set to 1 for 32-bit Protected Mode, 2 for 64-bit Long Mode, or 3 if both modes will be used.
+</p>
+<h2> <span class="mw-headline" id="64_bit_Environment_Models"> 64 bit Environment Models </span></h2>
+<p>There are three 64 bit programming models you need to consider: LP64, ILP64, LLP64. Each model has its own pitfalls. The I/L/P stand for Int, Long, Pointer, respectively; the 64 is the number of bits in each.
+</p><p>LP64 means Longs (and Long Longs) and Pointers are 64 bits wide, Ints are 32 bits wide.
+LLP64 means Long Longs and Pointers are 64 bits wide, Longs and Ints are 32 bit wide.
+ILP64 means Ints, Longs (and Long Longs) and Pointers are 64 bit wide.
+</p><p>Most *nixes use the LP64 model, Windows uses the LLP64 convention. ILP64 is used very rarely.
+</p>
+<h3> <span class="mw-headline" id="Data_Types"> Data Types </span></h3>
+<p>This table lists the breakdown of sizes in the various programming models.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th>Datatype
+</th>
+<th>LP64
+</th>
+<th>ILP64
+</th>
+<th>LLP64
+</th>
+<th>ILP32
+</th>
+<th>LP32
+</th></tr>
+<tr>
+<th>char
+</th>
+<td>      8
+</td>
+<td>       8
+</td>
+<td>       8
+</td>
+<td>       8
+</td>
+<td>      8
+</td></tr>
+<tr>
+<th>short
+</th>
+<td>     16
+</td>
+<td>      16
+</td>
+<td>      16
+</td>
+<td>      16
+</td>
+<td>     16
+</td></tr>
+<tr>
+<th>_int
+</th>
+<td>     32
+</td>
+<td>      --
+</td>
+<td>      32
+</td>
+<td>      --
+</td>
+<td>     --
+</td></tr>
+<tr>
+<th>int
+</th>
+<td>     32
+</td>
+<td>      64
+</td>
+<td>      32
+</td>
+<td>      32
+</td>
+<td>     16
+</td></tr>
+<tr>
+<th>long
+</th>
+<td>     64
+</td>
+<td>      64
+</td>
+<td>      32
+</td>
+<td>      32
+</td>
+<td>     32
+</td></tr>
+<tr>
+<th>long long
+</th>
+<td>     --
+</td>
+<td>      --
+</td>
+<td>      64
+</td>
+<td>      --
+</td>
+<td>     --
+</td></tr>
+<tr>
+<th>pointer
+</th>
+<td>     64
+</td>
+<td>      64
+</td>
+<td>      64
+</td>
+<td>      32
+</td>
+<td>     32
+</td></tr></table>
+<h3> <span class="mw-headline" id="Models_used_by_64bit_OSs"> Models used by 64bit OSs </span></h3>
+<p>The following table lists what some current 64bit OS have as a programming model.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> OS
+</th>
+<th> Mode
+</th></tr>
+<tr>
+<td> Windows XP X64
+</td>
+<td> LLP64
+</td></tr>
+<tr>
+<td> Linux
+</td>
+<td>  LP64
+</td></tr>
+<tr>
+<td> FreeBSD/OpenBSD
+</td>
+<td>  LP64
+</td></tr>
+<tr>
+<td> Solaris
+</td>
+<td>  LP64
+</td></tr>
+<tr>
+<td> DEC OSF/1 Alpha
+</td>
+<td>  LP64
+</td></tr>
+<tr>
+<td> SGI Irix
+</td>
+<td>  LP64
+</td></tr>
+<tr>
+<td> HP UX 11
+</td>
+<td>  LP64
+</td></tr></table>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="EM64T" title="EM64T">Intel EM64T</a>
+</li><li> <a href="Creating_a_64-bit_kernel" title="Creating a 64-bit kernel">Creating a 64-bit kernel</a>
+</li><li> <a href="X86-64_Instruction_Encoding" title="X86-64 Instruction Encoding">X86-64 Instruction Encoding</a>
+</li><li> <a href="http://wiki.osdev.org/User:Stephanvanschaik/Setting_Up_Long_Mode" title="User:Stephanvanschaik/Setting Up Long Mode" class="mw-redirect">Setting up long mode</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Wikipedia"> Wikipedia </span></h3>
+<ul><li> <a href="http://wikipedia.org/wiki/AMD64" class="extiw" title="wikipedia:AMD64">AMD64</a>
+</li><li> <a href="http://wikipedia.org/wiki/64-bit" class="extiw" title="wikipedia:64-bit">64-bit</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.amd.com/us-en/assets/content_type/DownloadableAssets/dwamd_AMD64_Porting_FAQ.pdf">Porting to AMD64: FAQ</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.amdboard.com/hammerspecial.html">AMD64 Information</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.x86-64.org/documentation.html">x86-64 ABI and assembly guide</a>
+</li><li> <a rel="nofollow" class="external text" href="http://downloads.openwatcom.org/ftp/devel/docs/elf-64-gen.pdf">ELF-64 Object File Format (direct PDF link)</a>
+</li><li> <a rel="nofollow" class="external text" href="http://stackoverflow.com/questions/1753602/registers-for-x86-64-processors">StackOverflow x86_64 register assignment</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 123/1000000
+Post-expand include size: 324/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1447-0!*!0!!en!*!* and timestamp 20180121040352 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=X86-64&amp;oldid=19578">http://wiki.osdev.org/index.php?title=X86-64&amp;oldid=19578</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:X86_CPU" title="Category:X86 CPU">X86 CPU</a></li><li><a href="Category:Operating_Modes" title="Category:Operating Modes">Operating Modes</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=X86-64" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="X86-64"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:X86-64"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="AMD64#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="X86-64" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=X86-64&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=X86-64&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="AMD64#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/X86-64" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/X86-64" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=X86-64&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=X86-64&amp;oldid=19578" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Long_Mode" title="Long Mode">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 July 2016, at 16:27.</li>
+											<li id="footer-info-viewcount">This page has been accessed 171,776 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="fskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/X86-64" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/X86-64" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=X86-64&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=X86-64&amp;oldid=19578" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Long_Mode" title="Long Mode">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 July 2016, at 16:27.</li>
+											<li id="footer-info-viewcount">This page has been accessed 171,776 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.035 secs. -->
+	</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>D barebone with ldc2 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "D_barebone_with_ldc2", "wgTitle": "D barebone with ldc2", "wgCurRevisionId": 20364, "wgArticleId": 3292, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Bare bones tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-d {line-height: normal;}
+.source-d li, .source-d pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for d
+ * CSS class: source-d, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.d.source-d .de1, .d.source-d .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.d.source-d  {font-family:monospace;}
+.d.source-d .imp {font-weight: bold; color: red;}
+.d.source-d li, .d.source-d .li1 {font-weight: normal; vertical-align:top;}
+.d.source-d .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.d.source-d .li2 {font-weight: bold; vertical-align:top;}
+.d.source-d .kw1 {color: #b1b100;}
+.d.source-d .kw2 {color: #000000; font-weight: bold;}
+.d.source-d .kw3 {color: #aaaadd; font-weight: bold;}
+.d.source-d .kw4 {color: #993333;}
+.d.source-d .co1 {color: #808080; font-style: italic;}
+.d.source-d .co2 {color: #009933; font-style: italic;}
+.d.source-d .co3 {color: #009933; font-style: italic;}
+.d.source-d .co4 {color: #ff0000;}
+.d.source-d .co5 {color: #0040ff;}
+.d.source-d .coMULTI {color: #808080; font-style: italic;}
+.d.source-d .es0 {color: #000099; font-weight: bold;}
+.d.source-d .es1 {color: #000099; font-weight: bold;}
+.d.source-d .es2 {color: #660099; font-weight: bold;}
+.d.source-d .es3 {color: #660099; font-weight: bold;}
+.d.source-d .es4 {color: #660099; font-weight: bold;}
+.d.source-d .es5 {color: #006699; font-weight: bold;}
+.d.source-d .es6 {color: #666699; font-weight: bold; font-style: italic;}
+.d.source-d .br0 {color: #66cc66;}
+.d.source-d .sy0 {color: #66cc66;}
+.d.source-d .st0 {color: #ff0000;}
+.d.source-d .st_h {color: #ff0000;}
+.d.source-d .nu0 {color: #0000dd;}
+.d.source-d .nu6 {color: #208080;}
+.d.source-d .nu8 {color: #208080;}
+.d.source-d .nu12 {color: #208080;}
+.d.source-d .nu16 {color:#800080;}
+.d.source-d .nu17 {color:#800080;}
+.d.source-d .nu18 {color:#800080;}
+.d.source-d .nu19 {color:#800080;}
+.d.source-d .me1 {color: #006600;}
+.d.source-d .me2 {color: #006600;}
+.d.source-d .ln-xtra, .d.source-d li.ln-xtra, .d.source-d div.ln-xtra {background-color: #ffc;}
+.d.source-d span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-D_barebone_with_ldc2 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">D barebone with ldc2</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="D_barebone_with_ldc2#mw-head">navigation</a>,
+					<a href="D_barebone_with_ldc2#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="D_barebone_with_ldc2#D_Barebone_using_ldc2"><span class="tocnumber">1</span> <span class="toctext">D Barebone using ldc2</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="D_barebone_with_ldc2#Requirements"><span class="tocnumber">1.1</span> <span class="toctext">Requirements</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="D_barebone_with_ldc2#References"><span class="tocnumber">1.2</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="D_barebone_with_ldc2#Instructions_to_build_the_kernel"><span class="tocnumber">1.3</span> <span class="toctext">Instructions to build the kernel</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="D_barebone_with_ldc2#boot.s"><span class="tocnumber">1.4</span> <span class="toctext">boot.s</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="D_barebone_with_ldc2#load.s"><span class="tocnumber">1.5</span> <span class="toctext">load.s</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="D_barebone_with_ldc2#defines.mac"><span class="tocnumber">1.6</span> <span class="toctext">defines.mac</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="D_barebone_with_ldc2#kmain.d"><span class="tocnumber">1.7</span> <span class="toctext">kmain.d</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="D_Barebone_using_ldc2">D Barebone using ldc2</span></h2>
+<p>Note&#160;: this is a work in progress.
+</p>
+<h3> <span class="mw-headline" id="Requirements">Requirements</span></h3>
+<p>You'll need LDC2, Yasm and ld to compile the kernel.
+</p><p>GRUB, mkisofs and QEMU could be used to test it.
+</p>
+<h3> <span class="mw-headline" id="References">References</span></h3>
+<p>Most sources and information come from osdev wiki and Xomb wiki.
+</p><p><a rel="nofollow" class="external free" href="http://wiki.xomb.org/index.php?title=XOmB_Bare_Bones">http://wiki.xomb.org/index.php?title=XOmB_Bare_Bones</a>
+</p>
+<h3> <span class="mw-headline" id="Instructions_to_build_the_kernel">Instructions to build the kernel</span></h3>
+<pre>
+yasm -o boot.o boot.s -felf64
+yasm -o load.o load.s -felf64
+ldc2 -c -nodefaultlib -code-model=large -of=kmain.o kmain.d
+ld -nostdlib -nodefaultlibs -b elf64-x86-64 -T linker.ld -o kernel.bin boot.o load.o kmain.o
+</pre>
+<p>Build iso and test using QEMU
+</p>
+<pre>
+mkisofs -R -b boot/grub/stage2_eltorito -no-emul-boot -boot-load-size 16 \
+ -boot-info-table -input-charset UTF-8 -o xomb.iso ./iso
+qemu-system-x86_64 -cdrom xomb.iso
+</pre>
+<h3> <span class="mw-headline" id="boot.s">boot.s</span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">; boot.s</span>
+&#160;
+<span class="co1">; entry is from bootloader</span>
+&#160;
+section <span class="sy0">.</span>text
+bits <span class="nu0">32</span>
+&#160;
+<span class="sy0">%</span><span class="kw4">include</span> <span class="st0">&quot;defines.mac&quot;</span>
+&#160;
+<span class="co1">; externs given by the linker script</span>
+<span class="kw4">extern</span> _edata
+<span class="kw4">extern</span> _end
+&#160;
+<span class="co1">; extern to the load.s</span>
+<span class="kw4">extern</span> start64
+<span class="kw4">extern</span> <span class="kw4">stack</span>
+&#160;
+<span class="co1">; define the starting point for this module</span>
+global start
+global _start
+start<span class="sy0">:</span>
+_start<span class="sy0">:</span>
+&#160;
+	<span class="co1">; Stash values for multiboot we won't touch until 64 bit mode</span>
+	<span class="kw1">mov</span> <span class="kw3">esi</span><span class="sy0">,</span> <span class="kw3">ebx</span>
+	<span class="kw1">mov</span> <span class="kw3">edi</span><span class="sy0">,</span> <span class="kw3">eax</span>
+&#160;
+	<span class="kw1">jmp</span> start32
+&#160;
+	<span class="co1">; the multiboot header needs to be aligned at</span>
+	<span class="co1">; a 32 bit boundary</span>
+	<span class="kw4">align</span> <span class="nu0">4</span>
+&#160;
+	multiboot_header<span class="sy0">:</span>
+&#160;
+	<span class="kw4">dd</span> MULTIBOOT_HEADER_MAGIC
+	<span class="kw4">dd</span> MULTIBOOT_HEADER_FLAGS
+	<span class="kw4">dd</span> <span class="sy0">-</span><span class="br0">&#40;</span>MULTIBOOT_HEADER_MAGIC <span class="sy0">+</span> MULTIBOOT_HEADER_FLAGS<span class="br0">&#41;</span>
+	<span class="kw4">dd</span> multiboot_header
+	<span class="kw4">dd</span> _start
+	<span class="kw4">dd</span> <span class="br0">&#40;</span>_edata<span class="sy0">-</span>KERNEL_VMA_BASE<span class="br0">&#41;</span>
+	<span class="kw4">dd</span> <span class="br0">&#40;</span>_end<span class="sy0">-</span>KERNEL_VMA_BASE<span class="br0">&#41;</span>
+	<span class="kw4">dd</span> _start
+&#160;
+<span class="co1">; the 32 bit entry</span>
+global start32
+start32<span class="sy0">:</span>
+&#160;
+	<span class="co1">; disable interrupts</span>
+	<span class="kw1">cli</span>
+&#160;
+	<span class="co1">; enable 64-bit page translation table entries</span>
+	<span class="co1">; by setting CR4.PAE = 1.</span>
+	<span class="co1">;</span>
+	<span class="co1">; Paging is not enabled until long mode.</span>
+	<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> cr4
+	<span class="kw1">bts</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">5</span>
+	<span class="kw1">mov</span> cr4<span class="sy0">,</span> <span class="kw3">eax</span>
+&#160;
+	<span class="co1">; Create long mode page table and init CR3 to</span>
+	<span class="co1">; point to the base of the PML4 page table</span>
+	<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> pml4_base
+	<span class="kw1">mov</span> <span class="kw3">cr3</span><span class="sy0">,</span> <span class="kw3">eax</span>
+&#160;
+	<span class="co1">; Enable Long mode and SYSCALL / SYSRET instructions</span>
+	<span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">0xC0000080</span>
+	<span class="kw1">rdmsr</span>
+	<span class="kw1">bts</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">8</span>
+	<span class="kw1">bts</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0</span>
+	<span class="kw1">wrmsr</span>
+&#160;
+	<span class="co1">; Load the 32 bit GDT</span>
+	<span class="kw1">lgdt</span> <span class="br0">&#91;</span>pGDT32<span class="br0">&#93;</span>
+&#160;
+	<span class="co1">; Load the 32 bit IDT</span>
+	<span class="co1">; lidt [pIDT32]</span>
+&#160;
+	<span class="co1">; establish a stack for 32 bit code</span>
+	<span class="kw1">mov</span> <span class="kw3">esp</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">stack</span><span class="sy0">-</span>KERNEL_VMA_BASE<span class="br0">&#41;</span> <span class="sy0">+</span> STACK_SIZE
+&#160;
+	<span class="co1">; enable paging to activate long mode</span>
+	<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">cr0</span>
+	<span class="kw1">bts</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">31</span>
+	<span class="kw1">mov</span> <span class="kw3">cr0</span><span class="sy0">,</span> <span class="kw3">eax</span>
+&#160;
+	<span class="kw1">jmp</span> CS_KERNEL<span class="sy0">:</span><span class="br0">&#40;</span>start64<span class="sy0">-</span>KERNEL_VMA_BASE<span class="br0">&#41;</span>
+&#160;
+bits <span class="nu0">64</span>
+code64Jump<span class="sy0">:</span>
+	<span class="kw1">jmp</span> <span class="br0">&#40;</span>start64<span class="sy0">-</span>KERNEL_VMA_BASE<span class="br0">&#41;</span>
+&#160;
+&#160;
+&#160;
+&#160;
+<span class="co1">; Data Structures Follow</span>
+bits <span class="nu0">32</span>
+&#160;
+<span class="co1">; 32 bit gdt</span>
+&#160;
+<span class="kw4">align</span> <span class="nu0">4096</span>
+&#160;
+pGDT32<span class="sy0">:</span>
+	<span class="kw4">dw</span> GDT_END <span class="sy0">-</span> GDT_TABLE <span class="sy0">-</span> <span class="nu0">1</span>
+	<span class="kw4">dq</span> GDT_TABLE <span class="sy0">-</span> KERNEL_VMA_BASE
+&#160;
+GDT_TABLE<span class="sy0">:</span>
+&#160;
+	<span class="kw4">dq</span> <span class="nu0">0x0000000000000000</span>	<span class="co1">; Null Descriptor</span>
+	<span class="kw4">dq</span> <span class="nu0">0x00cf9a000000ffff</span>	<span class="co1">; CS_KERNEL32</span>
+	<span class="kw4">dq</span> <span class="nu0">0x00af9a000000ffff</span><span class="sy0">,</span><span class="nu0">0</span>	<span class="co1">; CS_KERNEL</span>
+	<span class="kw4">dq</span> <span class="nu0">0x00af93000000ffff</span><span class="sy0">,</span><span class="nu0">0</span>	<span class="co1">; DS_KERNEL</span>
+	<span class="kw4">dq</span> <span class="nu0">0x00affa000000ffff</span><span class="sy0">,</span><span class="nu0">0</span>	<span class="co1">; CS_USER</span>
+	<span class="kw4">dq</span> <span class="nu0">0x00aff3000000ffff</span><span class="sy0">,</span><span class="nu0">0</span>	<span class="co1">; DS_USER</span>
+	<span class="kw4">dq</span> <span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span>					<span class="co1">;</span>
+	<span class="kw4">dq</span> <span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span>					<span class="co1">;</span>
+	<span class="kw4">dq</span> <span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span>					<span class="co1">;</span>
+	<span class="kw4">dq</span> <span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span>					<span class="co1">;</span>
+&#160;
+	<span class="kw4">dq</span> <span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span>				<span class="co1">; Three TLS descriptors</span>
+	<span class="kw4">dq</span> <span class="nu0">0x0000f40000000000</span>	<span class="co1">;</span>
+&#160;
+GDT_END<span class="sy0">:</span>
+&#160;
+&#160;
+&#160;
+&#160;
+<span class="co1">; Temporary page tables</span>
+&#160;
+<span class="co1">; These assume linking to 0xFFFF800000000000</span>
+<span class="kw4">align</span> <span class="nu0">4096</span>
+pml4_base<span class="sy0">:</span>
+	<span class="kw4">dq</span> <span class="br0">&#40;</span>pml3_base <span class="sy0">+</span> <span class="nu0">0x7</span><span class="br0">&#41;</span>
+	times <span class="nu0">255</span> <span class="kw4">dq</span> <span class="nu0">0</span>
+	<span class="kw4">dq</span> <span class="br0">&#40;</span>pml3_base <span class="sy0">+</span> <span class="nu0">0x7</span><span class="br0">&#41;</span>
+	times <span class="nu0">255</span> <span class="kw4">dq</span> <span class="nu0">0</span>
+&#160;
+<span class="kw4">align</span> <span class="nu0">4096</span>
+pml3_base<span class="sy0">:</span>
+	<span class="kw4">dq</span> <span class="br0">&#40;</span>pml2_base <span class="sy0">+</span> <span class="nu0">0x7</span><span class="br0">&#41;</span>
+	times <span class="nu0">511</span> <span class="kw4">dq</span> <span class="nu0">0</span>
+&#160;
+<span class="kw4">align</span> <span class="nu0">4096</span>
+pml2_base<span class="sy0">:</span>
+	<span class="sy0">%</span>assign i <span class="nu0">0</span>
+	<span class="sy0">%</span><span class="kw1">rep</span> <span class="nu0">25</span>
+	<span class="kw4">dq</span> <span class="br0">&#40;</span>pml1_base <span class="sy0">+</span> i <span class="sy0">+</span> <span class="nu0">0x7</span><span class="br0">&#41;</span>
+	<span class="sy0">%</span>assign i i<span class="sy0">+</span><span class="nu0">4096</span>
+	<span class="sy0">%</span>endrep
+&#160;
+	times <span class="br0">&#40;</span><span class="nu0">512</span><span class="sy0">-</span><span class="nu0">25</span><span class="br0">&#41;</span> <span class="kw4">dq</span> <span class="nu0">0</span>
+&#160;
+<span class="kw4">align</span> <span class="nu0">4096</span>
+<span class="co1">; 15 tables are described here</span>
+<span class="co1">; this maps 40 MB from address 0x0</span>
+<span class="co1">; to an identity mapping</span>
+pml1_base<span class="sy0">:</span>
+	<span class="sy0">%</span>assign i <span class="nu0">0</span>
+	<span class="sy0">%</span><span class="kw1">rep</span> <span class="nu0">512</span><span class="sy0">*</span><span class="nu0">25</span>
+	<span class="kw4">dq</span> <span class="br0">&#40;</span>i &lt;&lt; <span class="nu0">12</span><span class="br0">&#41;</span> | <span class="nu0">0x087</span>
+	<span class="sy0">%</span>assign i i<span class="sy0">+</span><span class="nu0">1</span>
+	<span class="sy0">%</span>endrep</pre></div></div>
+<h3> <span class="mw-headline" id="load.s">load.s</span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">; load.s</span>
+&#160;
+<span class="co1">; entry is from boot.s</span>
+&#160;
+bits <span class="nu0">64</span>
+&#160;
+<span class="co1">; Everywhere you see some weird addition logic</span>
+<span class="co1">; This is to fit the addresses into 32 bit sizes</span>
+<span class="co1">; Note, they will sign extend!</span>
+&#160;
+section <span class="sy0">.</span>text
+&#160;
+<span class="co1">; include useful definitions</span>
+<span class="sy0">%</span><span class="kw4">include</span> <span class="st0">&quot;defines.mac&quot;</span>
+&#160;
+<span class="co1">; extern to kmain.d</span>
+<span class="kw4">extern</span> kmain
+&#160;
+global start64
+&#160;
+start64<span class="sy0">:</span>
+&#160;
+	<span class="co1">; Initialize the 64 bit stack pointer.</span>
+	<span class="kw1">mov</span> <span class="kw3">rsp</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">stack</span> <span class="sy0">-</span> KERNEL_VMA_BASE<span class="br0">&#41;</span> <span class="sy0">+</span> STACK_SIZE<span class="br0">&#41;</span>
+&#160;
+	<span class="co1">; Set up the stack for the return.</span>
+	<span class="kw1">push</span> CS_KERNEL
+&#160;
+	<span class="co1">; RAX - the address to return to</span>
+	<span class="kw1">mov</span> <span class="kw3">rax</span><span class="sy0">,</span> KERNEL_VMA_BASE &gt;&gt; <span class="nu0">32</span>
+	<span class="kw1">shl</span> <span class="kw3">rax</span><span class="sy0">,</span> <span class="nu0">32</span>
+	<span class="kw1">or</span> <span class="kw3">rax</span><span class="sy0">,</span> long_entry <span class="sy0">-</span> <span class="br0">&#40;</span>KERNEL_VMA_BASE &amp; <span class="nu0">0xffffffff00000000</span><span class="br0">&#41;</span>
+	<span class="kw1">push</span> <span class="kw3">rax</span>
+&#160;
+	<span class="co1">; Go into canonical higher half</span>
+	<span class="co1">; It uses a trick to update the program counter</span>
+	<span class="co1">;   across a 64 bit address space</span>
+	<span class="kw1">ret</span>
+&#160;
+long_entry<span class="sy0">:</span>
+&#160;
+	<span class="co1">; From here on out, we are running instructions</span>
+	<span class="co1">; within the higher half (0xffffffff80000000 ... )</span>
+&#160;
+	<span class="co1">; We can safely upmap the lower half, we do not</span>
+	<span class="co1">; need an identity mapping of this region</span>
+&#160;
+	<span class="co1">; set up a 64 bit virtual stack</span>
+	<span class="kw1">mov</span> <span class="kw3">rax</span><span class="sy0">,</span> KERNEL_VMA_BASE &gt;&gt; <span class="nu0">32</span>
+	<span class="kw1">shl</span> <span class="kw3">rax</span><span class="sy0">,</span> <span class="nu0">32</span>
+	<span class="kw1">or</span> <span class="kw3">rax</span><span class="sy0">,</span> <span class="kw4">stack</span> <span class="sy0">-</span> <span class="br0">&#40;</span>KERNEL_VMA_BASE &amp; <span class="nu0">0xffffffff00000000</span><span class="br0">&#41;</span>
+	<span class="kw1">mov</span> <span class="kw3">rsp</span><span class="sy0">,</span> <span class="kw3">rax</span>
+&#160;
+	<span class="co1">; set cpu flags</span>
+	<span class="kw1">push</span> <span class="nu0">0</span>
+	<span class="kw1">lss</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw3">rsp</span><span class="br0">&#93;</span>
+	<span class="kw1">popf</span>
+&#160;
+	<span class="co1">; set the input/output permission level to 3</span>
+	<span class="co1">; it will allow all access</span>
+&#160;
+	<span class="kw1">pushf</span>
+	<span class="kw1">pop</span> <span class="kw3">rax</span>
+	<span class="kw1">or</span> <span class="kw3">rax</span><span class="sy0">,</span> <span class="nu0">0x3000</span>
+	<span class="kw1">push</span> <span class="kw3">rax</span>
+	<span class="kw1">popf</span>
+&#160;
+	<span class="co1">; update the multiboot struct to point to a</span>
+	<span class="co1">; virtual address</span>
+	<span class="kw1">add</span> <span class="kw3">rsi</span><span class="sy0">,</span> <span class="br0">&#40;</span>KERNEL_VMA_BASE &amp; <span class="nu0">0xffffffff</span><span class="br0">&#41;</span>
+&#160;
+	<span class="co1">; push the parameters (just in case)</span>
+	<span class="kw1">push</span> <span class="kw3">rsi</span>
+	<span class="kw1">push</span> <span class="kw3">rdi</span>
+&#160;
+	<span class="co1">; call kmain</span>
+	<span class="kw1">call</span> kmain
+&#160;
+&#160;
+&#160;
+	<span class="co1">; we should not get here</span>
+&#160;
+haltloop<span class="sy0">:</span>
+&#160;
+	<span class="kw1">hlt</span>
+	<span class="kw1">jmp</span> haltloop
+	<span class="kw1">nop</span>
+	<span class="kw1">nop</span>
+	<span class="kw1">nop</span>
+&#160;
+&#160;
+&#160;
+<span class="co1">; stack space</span>
+global <span class="kw4">stack</span>
+<span class="kw4">align</span> <span class="nu0">4096</span>
+&#160;
+<span class="kw4">stack</span><span class="sy0">:</span>
+	<span class="sy0">%</span><span class="kw1">rep</span> STACK_SIZE
+	<span class="kw4">dd</span> <span class="nu0">0</span>
+	<span class="sy0">%</span>endrep</pre></div></div>
+<h3> <span class="mw-headline" id="defines.mac">defines.mac</span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">; multiboot definitions</span>
+<span class="sy0">%</span>define MULTIBOOT_HEADER_MAGIC	<span class="nu0">0x1BADB002</span>
+<span class="sy0">%</span>define MULTIBOOT_HEADER_FLAGS	<span class="nu0">0x00010003</span>
+&#160;
+<span class="co1">; where is the kernel?</span>
+<span class="sy0">%</span>define KERNEL_VMA_BASE			<span class="nu0">0xFFFF800000000000</span>
+<span class="sy0">%</span>define KERNEL_LMA_BASE			<span class="nu0">0x100000</span>
+&#160;
+<span class="co1">; the gdt entry to use for the kernel</span>
+<span class="sy0">%</span>define CS_KERNEL				<span class="nu0">0x10</span>
+<span class="sy0">%</span>define CS_KERNEL32				<span class="nu0">0x08</span>
+&#160;
+<span class="co1">; other definitions</span>
+&#160;
+<span class="sy0">%</span>define STACK_SIZE				<span class="nu0">0x4000</span></pre></div></div>
+<h3> <span class="mw-headline" id="kmain.d">kmain.d</span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="d source-d"><pre class="de1"><span class="kw2">module</span> kmaina<span class="sy0">;</span>
+<span class="kw2">extern</span><span class="br0">&#40;</span>C<span class="br0">&#41;</span> <span class="kw4">void</span> kmain<span class="br0">&#40;</span><span class="kw4">int</span> bootLoaderID<span class="sy0">,</span> <span class="kw4">void</span> <span class="sy0">*</span>data<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> ypos <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="co1">//Starting points of the cursor</span>
+	<span class="kw4">int</span> xpos <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+	<span class="kw4">const</span> <span class="kw4">uint</span> COLUMNS <span class="sy0">=</span> <span class="nu0">80</span><span class="sy0">;</span> <span class="co1">//Screensize</span>
+	<span class="kw4">const</span> <span class="kw4">uint</span> LINES <span class="sy0">=</span> <span class="nu0">24</span><span class="sy0">;</span>
+&#160;
+	<span class="kw4">ubyte</span><span class="sy0">*</span> vidmem <span class="sy0">=</span> <span class="kw2">cast</span><span class="br0">&#40;</span><span class="kw4">ubyte</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0xFFFF8000000B8000</span><span class="sy0">;</span> <span class="co1">//Video memory address</span>
+&#160;
+	<span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> COLUMNS <span class="sy0">*</span> LINES <span class="sy0">*</span> <span class="nu0">2</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="co1">//Loops through the screen and clears it</span>
+			<span class="sy0">*</span><span class="br0">&#40;</span>vidmem <span class="sy0">+</span> i<span class="br0">&#41;</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+&#160;
+	<span class="sy0">*</span><span class="br0">&#40;</span>vidmem <span class="sy0">+</span> <span class="br0">&#40;</span>xpos <span class="sy0">+</span> ypos <span class="sy0">*</span> COLUMNS<span class="br0">&#41;</span> <span class="sy0">*</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="sy0">=</span> <span class="st0">'D'</span> <span class="sy0">&amp;</span> <span class="nu12">0xFF</span><span class="sy0">;</span> <span class="co1">//Prints the letter D</span>
+	<span class="sy0">*</span><span class="br0">&#40;</span>vidmem <span class="sy0">+</span> <span class="br0">&#40;</span>xpos <span class="sy0">+</span> ypos <span class="sy0">*</span> COLUMNS<span class="br0">&#41;</span> <span class="sy0">*</span> <span class="nu0">2</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">=</span> <span class="nu12">0x07</span><span class="sy0">;</span> <span class="co1">//Sets the colour for D to be light grey (0x07)</span>
+&#160;
+	<span class="kw1">for</span> <span class="br0">&#40;</span><span class="sy0">;;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="co1">//Loop forever. You can add your kernel logic here</span>
+	<span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="kw2">extern</span><span class="br0">&#40;</span>C<span class="br0">&#41;</span> <span class="kw4">void</span><span class="sy0">*</span> _Dmodule_ref<span class="sy0">;</span></pre></div></div>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 87/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3292-0!*!*!!en!*!* and timestamp 20180121060310 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=D_barebone_with_ldc2&amp;oldid=20364">http://wiki.osdev.org/index.php?title=D_barebone_with_ldc2&amp;oldid=20364</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=D_barebone_with_ldc2" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="D_barebone_with_ldc2"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:D_barebone_with_ldc2&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="D_barebone_with_ldc2#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="D_barebone_with_ldc2" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=D_barebone_with_ldc2&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=D_barebone_with_ldc2&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="D_barebone_with_ldc2#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/D_barebone_with_ldc2" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/D_barebone_with_ldc2" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=D_barebone_with_ldc2&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=D_barebone_with_ldc2&amp;oldid=20364" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified onskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/D_barebone_with_ldc2" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/D_barebone_with_ldc2" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=D_barebone_with_ldc2&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=D_barebone_with_ldc2&amp;oldid=20364" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 12:27.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,521 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

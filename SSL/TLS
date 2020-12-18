@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>SSL/TLS - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "SSL/TLS", "wgTitle": "SSL/TLS", "wgCurRevisionId": 19323, "wgArticleId": 3902, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "Network Protocols"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-SSL_TLS action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">SSL/TLS</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="TLS#mw-head">navigation</a>,
+					<a href="TLS#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="../File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="../images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>SSL/TLS is a protocol used to ensure a secure connection in various standard networking protocols (HTTP, FTP, etc.). Even though people talk about SSL, this protocol has been since mostly replaced with TLS (versions 1.0, 1.1 or 1.2). SSL should not be used anymore as it is not considered secure.
+</p><p>In order to setup an HTTPS connection, SSL/TLS is used between TCP and HTTP. In other word, the HTTP command sent by the Web browser and the HTML returned by the server are encrypted using SSL/TLS.
+</p><p><b>WARNING</b>: implementing your own TLS layer is no guarantee of security. It is indeed recommended to never even write your own implementation of known, secure cryptographic algorithms as multiple attacks have been known to exploit some faults in the implementation. Writing your own TLS layer is however useful if you want to understand how SSL/TLS works and/or if you want to access Websites which are only available through HTTPS.
+</p><p>There are a few tools that can assist you when developing your own TLS layer. First of all, <a rel="nofollow" class="external text" href="http://www.wireshark.org">Wireshark</a> is a free tool that captures network traffic and explains in details how the different packets are composed, down to the signification of each byte (save the encrypted parts). Also, Python can be an invaluable tool to prototype and verify your cryptographic algorithms (you might want to write a prototype of a TLS connection in Python first). Python indeed natively supports operations over very large integers like 1024-bit integers, and it has several cryptography libraries such as <a rel="nofollow" class="external text" href="https://www.dlitz.net/software/pycrypto/">PyCrypto</a> or <a rel="nofollow" class="external text" href="https://pypi.python.org/pypi/scapy-ssl_tls/1.2.2">Scapy SSL</a> that allows you to forge SSL packets. These two tools can greatly help testing how TLS works.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="TLS#Cryptography_recap"><span class="tocnumber">1</span> <span class="toctext">Cryptography recap</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="TLS#Cipher_Suites"><span class="tocnumber">2</span> <span class="toctext">Cipher Suites</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="TLS#TLS_Packets"><span class="tocnumber">3</span> <span class="toctext">TLS Packets</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="TLS#Record_Types"><span class="tocnumber">3.1</span> <span class="toctext">Record Types</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="TLS#Handshake_Records"><span class="tocnumber">3.2</span> <span class="toctext">Handshake Records</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="TLS#TLS_Handshake"><span class="tocnumber">4</span> <span class="toctext">TLS Handshake</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="TLS#TLS_Encryption"><span class="tocnumber">5</span> <span class="toctext">TLS Encryption</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="TLS#Math_operations_on_large_integers"><span class="tocnumber">6</span> <span class="toctext">Math operations on large integers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="TLS#Mind_the_endian"><span class="tocnumber">6.1</span> <span class="toctext">Mind the endian</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="TLS#See_Also"><span class="tocnumber">7</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Cryptography_recap">Cryptography recap</span></h2>
+<p>Here are the main types of cryptographic algorithms:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th>
+</th>
+<th> Public/private key
+</th>
+<th> Secret key
+</th>
+<th> No key
+</th></tr>
+<tr>
+<th> Encryption
+</th>
+<td> Asymmetric encryption
+</td>
+<td> Symmetric encryption
+</td>
+<td>
+</td></tr>
+<tr>
+<th> Verification
+</th>
+<td> Signing
+</td>
+<td> Message Authentication Cipher
+</td>
+<td> Cryptographic hash
+</td></tr></table>
+<ul><li> Asymmetric encryption (e.g. RSA): one party generates a private/public key pair and makes the public key readily available. Anybody can encrypt data using that public key, but only the owner of the private key can decrypt it
+</li><li> Symmetric encryption (e.g. AES): both parties need to use a shared secret key to encrypt and decrypt data
+</li><li> Signing (e.g. RSA): one party generates a private/public key pair and makes the public key readily available. Only the owner of the private key can sign data, but anybody with the public key can verify that the signature matches the data
+</li><li> Message Authentication Cipher aka MAC (e.g. HMAC): generates a signature using a secret key
+</li><li> Cryptographic hash (e.g. SHA1, SHA256): generates a signature of some data, but it is very hard to find another data that would generate the same signature
+</li></ul>
+<h2> <span class="mw-headline" id="Cipher_Suites">Cipher Suites</span></h2>
+<p>A SSL/TLS connection is actually using a whole set of cryptographic algorithms called a cipher suite. On top of that, SSL/TLS does not support one but multiple cipher suites. An SSL/TLS connection might use a completely different cipher suite depending on what the client and server support. Fully supporting TLS would actually require to implement a whole series of cipher suites. Fortunately, implementing only a few popular cipher suites is enough for most cases.
+</p><p>You can get an exhaustive list of the cipher suites available <a rel="nofollow" class="external text" href="http://www.thesprawl.org/research/tls-and-ssl-cipher-suites/">here</a>, and use SSL Labs' <a rel="nofollow" class="external text" href="https://www.ssllabs.com/ssltest/">SSL test</a> to check what cipher suites are supported by various Web sites.
+</p><p>A TLS cipher suite is denoted as TLS_[key exchange protocol]_WITH_[encryption]_[authentication]. Because TLS is using symmetric encryption, the two parties first need to determine a common secret key over a non-secure connection. This is where the key exchange protocol is used. Then the data is encrypted. Last but not least, it is authenticated using a MAC, in order to make sure that data was not tampered with.
+</p><p>We will study how things work with TLS version 1.2 when the TLS_DHE_RSA_WITH_AES_128_CBC_SHA cipher suite is used. This cipher suite indicates the algorithms used for the key exchange (DHE, using RSA for verification), for the actual encryption/decryption (AES 128-bit in CBC mode) and verification (HMAC+SHA1). This cipher suite thus requires to implement the following:
+</p>
+<ul><li> The Diffie-Hellman Ephemeral (DHE) key exchange protocol. This protocols relies on <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Modular_exponentiation">modular exponentiation</a> over very large numbers, although it is possible to get past it if security is not your primary goal
+</li><li> Encryption and decryption using <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES</a> 128-bit in <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_Block_Chaining_.28CBC.29">CBC mode</a>
+</li><li> The <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/SHA-1">SHA1</a> and <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/SHA-2">SHA256</a> cryptographic hashing algorithm
+</li><li> <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code">HMAC</a>, a Message Authentication Code (MAC). A MAC is similar to a cryptographic hash function except that it requires a secret key
+</li><li> Optional: if you want to verify the server certificate, you will need to implement the RSA algorithm, which also relies on modular exponentiation as well as SHA1/SHA256/SHA384 (depending on the certificate chain)
+</li></ul>
+<p>Note that you can easily find on the Internet source code for AES, SHA1, SHA256 and HMAC.
+</p><p>This cipher suite is not the strongest available, but is still relatively popular and shows the key mechanisms of a secure TLS interaction. Another cipher suite useful to implement is TLS_RSA_WITH_AES_128_CBC_SHA. The only difference is that the key exchange is using RSA instead of Diffie-Hellman. People interested in implementing a stronger suite can look at TLS_ECDHE_RSA_WITH_AES_128_GCM which requires to implement the Elliptic Curve version of Diffie-Hellman as well as the Galois Counter Mode (GCM) instead of the easier-to-implement CBC mode.
+</p>
+<h2> <span class="mw-headline" id="TLS_Packets">TLS Packets</span></h2>
+<p>Any communication in TLS starts with a 5-byte TLS Record header:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>packed<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw4">uint8_t</span> content_type<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> version<span class="sy0">;</span>
+	<span class="kw4">uint16_t</span> length<span class="sy0">;</span>
+<span class="br0">&#125;</span> TLSRecordHeader<span class="sy0">;</span></pre></div></div>
+<p>This header may be followed by another TLS header, such as a TLS Handshake header or a TLS Application Data header.
+</p>
+<h3> <span class="mw-headline" id="Record_Types"> Record Types </span></h3>
+<table class="wikitable">
+
+<tr>
+<th> Value (Hex)
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0x14
+</td>
+<td> Change Cipher Spec
+</td></tr>
+<tr>
+<td> 0x15
+</td>
+<td> Alert
+</td></tr>
+<tr>
+<td> 0x16
+</td>
+<td> Handshake
+</td></tr>
+<tr>
+<td> 0x17
+</td>
+<td> Application Data
+</td></tr></table>
+<p><br />
+</p>
+<h3> <span class="mw-headline" id="Handshake_Records"> Handshake Records</span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>packed<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw4">uint8_t</span> handshake_type<span class="sy0">;</span>
+	<span class="kw4">uint8_t</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> length<span class="sy0">;</span>
+<span class="br0">&#125;</span> HandshakeRecordHeader<span class="sy0">;</span></pre></div></div>
+<table class="wikitable">
+
+<tr>
+<th> Value (Hex)
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0x00
+</td>
+<td> Hello Request
+</td></tr>
+<tr>
+<td> 0x01
+</td>
+<td> Client Hello
+</td></tr>
+<tr>
+<td> 0x02
+</td>
+<td> Server Hello
+</td></tr>
+<tr>
+<td> 0x0B
+</td>
+<td> Certificate
+</td></tr>
+<tr>
+<td> 0x0C
+</td>
+<td> Server Key Exchange
+</td></tr>
+<tr>
+<td> 0x0D
+</td>
+<td> Certificate Request
+</td></tr>
+<tr>
+<td> 0x0E
+</td>
+<td> Server Hello Done
+</td></tr>
+<tr>
+<td> 0x0F
+</td>
+<td> Certificate Verify
+</td></tr>
+<tr>
+<td> 0x10
+</td>
+<td> Client Key Exchange
+</td></tr>
+<tr>
+<td> 0x14
+</td>
+<td> Finished
+</td></tr></table>
+<h2> <span class="mw-headline" id="TLS_Handshake">TLS Handshake</span></h2>
+<p>Like for a TCP connection, a TLS connection starts with a handshake between the client and the server to establish the cipher suite used. See <a href="../TLS_Handshake" title="TLS Handshake">TLS Handshake</a> for more details.
+</p>
+<h2> <span class="mw-headline" id="TLS_Encryption">TLS Encryption</span></h2>
+<p>Once the handshake has completed, all data sent both way is encrypted using the algorithms and secret keys agreed upon during the TLS Handshake. See <a href="../TLS_Encryption" title="TLS Encryption">TLS Encryption</a> for more information.
+</p>
+<h2> <span class="mw-headline" id="Math_operations_on_large_integers">Math operations on large integers</span></h2>
+<p>Most cipher suites require to perform operations on large integers (e.g. 1024-bit integers) - something that low-level languages such as C/C++ do not handle out of the box. You can either port an existing library (such as <a rel="nofollow" class="external text" href="https://gmplib.org/">GMP</a>) to your operating system or write your own large integer library.
+</p><p>The most common operation (used among others by the RSA and Diffie-Hellman Ephemeral key exchange) is modular exponentiation i.e. computing a<sup>b</sup> mod c. This operation requires to implement multiplication, addition and modulo (which in turns requires to implement comparison, multiplication and subtraction) over large integers. You can find on Wikipedia an <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Modular_exponentiation#Right-to-left_binary_method">algorithm</a> for modular exponentiation which is quite efficient even when using large numbers.
+</p><p>For better performance, it is recommended to use the full power of 32 (or 64-bit) numbers instead of performing operations one bit at a time. Here is an example:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> <span class="br0">&#123;</span>
+	<span class="kw4">uint16_t</span> size<span class="sy0">;</span>  <span class="co1">// number of 32-bit words</span>
+	<span class="kw4">uint32_t</span> <span class="sy0">*</span>data<span class="sy0">;</span>
+<span class="br0">&#125;</span> LargeInt<span class="sy0">;</span>
+&#160;
+<span class="co1">// Adds a to b and stores the result in a</span>
+<span class="kw4">void</span> LargeInt_add<span class="br0">&#40;</span>LargeInt <span class="sy0">*</span>a<span class="sy0">,</span> LargeInt <span class="sy0">*</span>b<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw4">uint64_t</span> carry <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+	<span class="kw4">uint32_t</span> <span class="sy0">*</span>carry32 <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint32_t</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>carry<span class="sy0">;</span>
+	<span class="kw4">int</span> size<span class="sy0">;</span>
+	<span class="kw1">if</span> <span class="br0">&#40;</span>a<span class="sy0">-&gt;</span>size <span class="sy0">&gt;</span> b<span class="sy0">-&gt;</span>size<span class="br0">&#41;</span> size <span class="sy0">=</span> b<span class="sy0">-&gt;</span>size<span class="sy0">;</span>
+	<span class="kw1">else</span> size <span class="sy0">=</span> a<span class="sy0">-&gt;</span>size<span class="sy0">;</span>
+&#160;
+	<span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span> size<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+		carry <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span>a<span class="sy0">-&gt;</span>data<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span>b<span class="sy0">-&gt;</span>data<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">+</span> carry<span class="sy0">;</span>
+		a<span class="sy0">-&gt;</span>data<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> carry32<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+		carry <span class="sy0">&gt;&gt;=</span> <span class="nu0">32</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+&#160;
+	<span class="kw1">if</span> <span class="br0">&#40;</span>size<span class="sy0">+</span><span class="nu0">1</span> <span class="sy0">&lt;=</span> a<span class="sy0">-&gt;</span>size<span class="br0">&#41;</span>
+		a<span class="sy0">-&gt;</span>data<span class="br0">&#91;</span>size<span class="br0">&#93;</span> <span class="sy0">=</span> carry32<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>The same principle can be applied to multiplication: you can use the traditional <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Multiplication_algorithm#Long_multiplication">long multiplication algorithm</a>, but instead of multiplying decimal digits (or even worse, bits), you can instead 32-bit "digits" which drastically reduce the number of operations to perform.
+</p>
+<h3> <span class="mw-headline" id="Mind_the_endian">Mind the endian</span></h3>
+<p>Remember that the data sent across the network is in big endian, whereas x86 computers use little endian. Last but not least, the premaster_secret passed to the PRF should be in big endian. Don't forget to perform the necessary conversions.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="https://tools.ietf.org/html/rfc5246">The TLS 1.2 Specifications</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 89/1000000
+Post-expand include size: 509/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3902-0!*!0!!en!2!* and timestamp 20180121072025 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=SSL/TLS&amp;oldid=19323">http://wiki.osdev.org/index.php?title=SSL/TLS&amp;oldid=19323</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="../Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="../Category:Network_Protocols" title="Category:Network Protocols">Network Protocols</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=SSL%2FTLS" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="TLS"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:SSL/TLS&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="TLS#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="TLS" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=SSL/TLS&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=SSL/TLS&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="TLS#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="../Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	../skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="../Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="../Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="../Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="../OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="../OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="../OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/SSL/TLS" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/SSL/TLS" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=SSL/TLS&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=SSL/TLS&amp;oldid=19323" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 2 June 2016, at 21:20.</li>
+											<li id="footer-info-viewcount">This page has been accessed 3,924 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="../OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="../OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="../OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="../skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

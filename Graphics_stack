@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Graphics stack - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Graphics_stack", "wgTitle": "Graphics stack", "wgCurRevisionId": 20329, "wgArticleId": 4024, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Stubs"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Graphics_stack action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Graphics stack</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Graphics_stack#mw-head">navigation</a>,
+					<a href="Graphics_stack#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><i><b>[NOTE:</b> This article's original text was based on <a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?f=13&amp;t=31328">a post in the forum</a>. It needs further cleanup and review. --<a href="http://wiki.osdev.org/User:Schol-r-lea" title="User:Schol-r-lea">Schol-r-lea</a> 10:19, 4 February 2017 (CST)]</i>
+</p><p>There is no fixed way to implement video handling, and many hobby operating systems develop their UI as a unit, at least initially. However, for a number of practical reasons, most systems end up separating the details of communicating with the hardware from the process of rendering the image, and that in turn from the management of higher-level concerns such as window layout. In most systems, this leads to a layered approach that could be call the <i><b>graphics stack</b></i>, analogous to the networking stack.
+</p>
+<center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=Graphics_stack&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Graphics_stack#A_Generalized_Graphics_Stack"><span class="tocnumber">1</span> <span class="toctext">A Generalized Graphics Stack</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Graphics_stack#Display_Layers"><span class="tocnumber">1.1</span> <span class="toctext">Display Layers</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="Graphics_stack#Device_Driver_Layer"><span class="tocnumber">1.1.1</span> <span class="toctext">Device Driver Layer</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-4"><a href="Graphics_stack#Prsentation_Layers"><span class="tocnumber">1.2</span> <span class="toctext">Prsentation Layers</span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="Graphics_stack#Rendering_Layer"><span class="tocnumber">1.2.1</span> <span class="toctext">Rendering Layer</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="Graphics_stack#Widget_Toolkit_Layer"><span class="tocnumber">1.2.2</span> <span class="toctext">Widget Toolkit Layer</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="Graphics_stack#Compositing_Layer"><span class="tocnumber">1.2.3</span> <span class="toctext">Compositing Layer</span></a>
+<ul>
+<li class="toclevel-4 tocsection-8"><a href="Graphics_stack#Historical_Development"><span class="tocnumber">1.2.3.1</span> <span class="toctext">Historical Development</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-9"><a href="Graphics_stack#Interoperation_Layers"><span class="tocnumber">1.3</span> <span class="toctext">Interoperation Layers</span></a>
+<ul>
+<li class="toclevel-3 tocsection-10"><a href="Graphics_stack#Window_Management_Layer"><span class="tocnumber">1.3.1</span> <span class="toctext">Window Management Layer</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="Graphics_stack#Desktop_manager_Layer"><span class="tocnumber">1.3.2</span> <span class="toctext">Desktop manager Layer</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-12"><a href="Graphics_stack#Application_Layer"><span class="tocnumber">1.4</span> <span class="toctext">Application Layer</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="A_Generalized_Graphics_Stack"> A Generalized Graphics Stack </span></h2>
+<p>There is not fixed model for how to layer the graphics stack, though most are fairly similar. A general model for a graphics stack might look like this:
+</p>
+<ol><li> Application Layer
+</li><li> Interoperation Layers
+<ol><li> Desktop Management Layer
+</li><li> Window Management Layer
+</li></ol>
+</li><li> Presentation Layers
+<ol><li> Compositing Layer
+</li><li> Widget Toolkit Layer
+</li><li> Rendering Layer
+</li></ol>
+</li><li> Display Layers
+<ol><li> Device Driver Layer
+</li><li> Hardware Layer
+</li></ol>
+</li></ol>
+<p>This is close to most of the well-known graphics stacks, such as Microsoft Windows, MacOS, X Window System, and Wayland, though not identical to any of them. The order of layers may differ, some layers may be missing or merged together, and some may have additional layers or even multiple stacks (e.g., X Windows System has separate Client and Server Stacks, with their own Display Layers, and splits some aspects of the remaining stacks between the Server, which is the program requesting the display, and the Client actually doing the display - since the Client-Server relationship in X is potentially many-to-many, and even when it isn't different applications may need different degrees of control, several details cannot be specified to belong to either the Server or the Client.)
+</p><p>Furthermore, some layers may be more in parallel than sequential. Presentation, in particular, can involve some fairly complex relationships.
+</p><p>A more detailed review of these proposed layers is as follows:
+</p>
+<h3> <span class="mw-headline" id="Display_Layers"> Display Layers </span></h3>
+<h4> <span class="mw-headline" id="Device_Driver_Layer"> Device Driver Layer </span></h4>
+<p>At the lowest software level, we have the device drivers, which communicate with the actual hardware. These need to be able to work with either the specific display devices - the video memory, the GPU if any, the video signal generators, and even the monitor - or some common subset of it which it shares with disparate adapters. However, this does not mean that the driver must do all the work alone. The VESA VBE/Core defines a standard minimal interface to the hardware as an extension BIOS, which a complaint video adapter should provide as a way of interfacing with the hardware without needing any proprietary details of the adapter.
+</p><p>Somewhere here you would find things like the Mesa driver framework and the Xlib Direct Rendering Manager. This level doesn't have a formal name in most systems, at least not as far as I know of, which is a first abstraction layer which software system (not necessarily the operating system itself) provides to give a uniform model for drawing pixels on the screen, while still exposing the underlying hardware. The split between 2-D and 3-D often starts around here, as a 3-D renderer generally needs a lot more direct hardware access than a 2-D one.
+</p>
+<h3> <span class="mw-headline" id="Prsentation_Layers"> Prsentation Layers </span></h3>
+<h4> <span class="mw-headline" id="Rendering_Layer"> Rendering Layer </span></h4>
+<p>Then next level is the renderer, which is where . This is where you really see 3-D becoming a separate thing, as most systems prior to, say, 2007 would have used a strictly 2-D rendering for everything that didn't specifically require 3-D rendering, due to the need for hardware acceleration for practical real-time 3-D rendering at the time. As Brendan has pointed out before, right now the Cycle of Reincarnation for graphics rendering has been swinging towards CPU-driven rendering since the 2012 or so, though dedicated rendering hardware is still dominant at the moment. Note, however, that the graphics rendering Wheel of Incarnation has been rolling since the very first days of computer graphics in the early 1960s, so it is a good guess that this won't be the last word on the subject.
+</p><p>Anyway, Mesa proper started out in the 1990s as a software 3-D renderer, but currently is used to sort of abstract the rendering in a way that the software rendering is more of a fallback mode.
+</p><p>This is where you need to decide how you are going to handle the differences between rendering 2-D images such as basic windows and widgets, and the more impressive but also more processing-intensive 3-D rendering. While the fact that you can treat 2-D as a special case of 3-D, it is tempting to use 3-D for everything, but that approach has some significant down sides, especially on older hardware; you may need to consider where you can use less general 2-D rendering to avoid a lot of hardware crunching where possible.
+</p><p>You also need to look at how you separate different renderable elements such as glyphs (letters, digits, text symbols, etc.), widgets (window borders, menus, icons, the mouse pointer), 2-D images such as drawings and pictures, 3-D manipulatable objects, etc. This relates, and raises the issue in, the next layer of the stack, the compositor. However, before that I need to mention another part of this layer, the widget toolkit.
+</p>
+<h4> <span class="mw-headline" id="Widget_Toolkit_Layer"> Widget Toolkit Layer </span></h4>
+<p>The widget toolkit is the set of primitive widgets - window frames, menus, drawing spaces, textboxes, text areas, radio buttons, checkboxes, etc. - that a window manager uses. This is not a separate layer from the renderer, but side-by-side with it, and the widgets have to work together with the compositor.
+</p>
+<h4> <span class="mw-headline" id="Compositing_Layer"> Compositing Layer </span></h4>
+<p>The compositor is the part that combines the individual elements being rendered into the instantaneous display state, that is, the screen as it is at a given moment. In a 2-D design, this is usually done by the renderer directly, but 3-D UIs almost always have a separate compositor.
+</p>
+<h5> <span class="mw-headline" id="Historical_Development"> Historical Development </span></h5>
+<p>OK, quick history lesson. Early 2-D windowing systems generally composited in situ, that is, directly into the display. However, while this was feasible with the stroke-vector displays of the 1960s, or on raster displays that used fixed cells drawn from tables of glyphs such as PLATO and the majority of text-oriented terminals, this was problematic for bitmapped video systems even from the outset, as it meant that a large block of memory - often as much as 30% of system memory in the days of the Alto and 128K Macintosh had to be set aside for the video, and the timing of drawing had to be synced with the vertical refresh in order to avoid flicker.
+</p><p>While double buffering was part of the answer, it ran into issues with time - copying that much data would take longer than the vrefresh, so a workable double buffer needed to be done by hardware. You would have to dedicate two buffer's worth of memory in hardware (one to drive the video, and the other to draw to), and the display would need even more hardware to let it switch which of the video buffers was driving it in order to make it work. Pretty much every video system today supports this as a matter of course. However, this did nothing for when you have to copy a bitmapped image from general memory - something loaded from a file, say - into the drawing video buffer.
+</p><p>In order to cut the time further, they developed Bit BLT, which is a method in which a part of the image is prepared as a mask and only the mask is drawn to the video buffer. Other techniques, such as hardware sprites (which were drawn directly to the screen, bypassing the video buffer entirely) were also developed, but were mostly used in dedicated gaming and video editing systems.
+</p><p>I mention all this to get to compositing. Up until 2006 or so, the act of compositing for a window manager was done mainly as a 2-D action, and generally was focused a) determining what parts of the display have changed, b) determining which parts of the screen were observable, on blitting the observable sections of a window that were getting changed to the draw buffer. This was generally easier for a tiling window manager, as there was no z-scaling - no windows overlapped, so everything could be drawn, and you could divide the windows into those which had changed and those which hadn't. Layering windows managers were a little more complicated because some windows might obscure parts of others, but generally it wasn't too difficult. Even so, 2-D hardware acceleration was still very useful for this, even if it wasn't absolutely necessary.
+</p><p>With the introduction of 3-D layered UIs such as Aqua and Aero, the issue of combining things became much more complex, leading to the need for a separate compositor layer. Most major window managers today have a 3-D compositor, and for a time it was almost impossible to get good performance from one without a dedicated GPU, meaning software rendering was out of the question even for the basic GUI, leading to issues that previously were mostly seen in gaming.
+</p>
+<h3> <span class="mw-headline" id="Interoperation_Layers"> Interoperation Layers </span></h3>
+<h4> <span class="mw-headline" id="Window_Management_Layer"> Window Management Layer </span></h4>
+<p>Getting back on track, we now get to the window manager itself, which is the part that actually decided where to put each rendered component, sets things related to the way widgets interact, and just generally, well, manages the windows. This is what X Window System was from the outset, and it acts as the glue between the lower level aspects of the GUI and the more abstract parts such as the desktop manager.
+</p>
+<h4> <span class="mw-headline" id="Desktop_manager_Layer"> Desktop manager Layer </span></h4>
+<p>The next layer is the desktop manager, and this is what most people are actually thinking when they talk of a GUI, and of the differences between Windows, Mac, and the various Linux desktops such as KDE, Gnome, Unity, XFCE, Cinnamon, MATE, and so forth.
+</p>
+<h3> <span class="mw-headline" id="Application_Layer"> Application Layer </span></h3>
+<p>The Application Layer is the part which is internal to the program itself.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 69/1000000
+Post-expand include size: 468/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4024-0!*!0!!en!2!* and timestamp 20180121051342 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Graphics_stack&amp;oldid=20329">http://wiki.osdev.org/index.php?title=Graphics_stack&amp;oldid=20329</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Stubs" title="Category:Stubs">Stubs</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Graphics_stack" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Graphics_stack"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Graphics_stack&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Graphics_stack#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Graphics_stack" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Graphics_stack&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Graphics_stack&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Graphics_stack#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Graphics_stack" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Graphics_stack" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Graphics_stack&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Graphics_stack&amp;oldid=20329" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 February 2017, at 10:54.</li>
+											<li id="footer-info-viewcount">This page has been accessed 1,329 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script srskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Graphics_stack" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Graphics_stack" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Graphics_stack&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Graphics_stack&amp;oldid=20329" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 February 2017, at 10:54.</li>
+											<li id="footer-info-viewcount">This page has been accessed 1,329 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

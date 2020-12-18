@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Creating A Shell - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Creating_A_Shell", "wgTitle": "Creating A Shell", "wgCurRevisionId": 19431, "wgArticleId": 3617, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Creating_A_Shell action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Creating A Shell</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Creating_A_Shell#mw-head">navigation</a>,
+					<a href="Creating_A_Shell#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>Please note that the contents of this article may not be applicable to all operating system designs, and is modeled predominantly after the shells found on Windows and UNIX systems. All code in this article is based around a typical userspace API, using common or understandable names for the API functions.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Creating_A_Shell#What_is_a_shell.3F"><span class="tocnumber">1</span> <span class="toctext">What is a shell?</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Creating_A_Shell#Outline_of_shell"><span class="tocnumber">2</span> <span class="toctext">Outline of shell</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Creating_A_Shell#Implementation"><span class="tocnumber">3</span> <span class="toctext">Implementation</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Creating_A_Shell#TODO"><span class="tocnumber">4</span> <span class="toctext">TODO</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Creating_A_Shell#External_Links"><span class="tocnumber">5</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</td></tr></table>
+<h1> <span class="mw-headline" id="What_is_a_shell.3F">What is a shell?</span></h1>
+<p>A shell is a userspace application that provides a simple interface to an operating system kernel. The simplest shell performs the following tasks:
+</p>
+<ol><li> Execute other userspace binaries
+</li><li> Provide input data for the binaries executed
+</li><li> Provide a means for the executing binaries to output data
+</li></ol>
+<p>A shell may also offer other features depending on the operating system targeted, such as a means to set and use environment variables if such a concept exists in the kernel. The way that a shell is designed depends heavily on the operating system targeted, for example if the operating system has the concept of a "working directory" then the shell may want to maintain its own working directory which will become the working directory of any binaries executed (and provide commands to change the working directory, which may be a built-in command - a command handled by the shell itself, rather than an external binary - such as the <code>cd</code> command in the BASH shell).
+</p><p>Depending on the design of the kernel, the shell may provide input and output facilities through the "standard input" and "standard output" streams provided by the kernel to each executing binary. In this case, the shell will typically offer some form of output redirection, whereby input may be read from a file and output may be written to a file or passed as input to a second binary; unredirected input will typically be read from the shell's own "standard input" stream and unredirected output will typically be written to the shell's own "standard output" stream.
+</p><p>As a shell is a form of user interface, it will typically read input from the user (which may, as aforementioned, occur through its "standard input" stream) and display output to the user. It's important, however, to get the distinction between the physical hardware used to interact with the user and the shell's interface with the user. For example, the user may be working at a physical keyboard and monitor attached to the computer, or they may be connected over a network, or they may be using a serial console. A versatile shell should be able to work in all of these situations, reading input and sending output through whatever device the user is using (of course, this may not be possible in all operating systems, unless a concept analogous to the UNIX "standard input" and "standard output" is present in the kernel, or the kernel provides some other way of abstracting input devices or emulating one input device as another).
+</p><p>Typically, thus, a simple shell will do the following for each binary executed:
+</p>
+<ol><li> Read a command from the user, which becomes the name of the binary to execute plus any command-line arguments (if applicable)
+</li><li> Tell the kernel to execute the binary
+</li><li> Read input from the user and send it to the binary
+</li><li> Read output from the binary and send it to the user
+</li><li> Repeat steps 3 and 4 until the binary terminates
+</li></ol>
+<p>In order to do this, the shell will require the following:
+</p>
+<ol><li> A kernel with an API call for executing a binary
+</li><li> A way to get input from the user (typically, this requires a keyboard driver for the kernel and an API call for reading from the keyboard - may take the form of "standard input")
+</li><li> A way to send output to the user (typically, this requires a video driver for the kernel and an API call for printing text to the screen - may take the form of "standard output")
+</li></ol>
+<p>It's probably also desirable for the user to be able to edit their commands without having to type them all over again, so a set of string editing functions (ala GNU readline) are also preferable.
+</p>
+<h1> <span class="mw-headline" id="Outline_of_shell">Outline of shell</span></h1>
+<p>Based on the explanations above, here is the main function for a simple shell:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw4">int</span> argc<span class="sy0">,</span> <span class="kw4">char</span><span class="sy0">*</span> argv<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="co1">// edit as appropriate for your kernel</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span> <span class="co1">// you may want to provide a built-in &quot;exit&quot; command</span>
+    <span class="br0">&#123;</span>
+        <span class="kw4">char</span><span class="sy0">*</span> command<span class="sy0">;</span>
+        <span class="kw4">int</span> proc<span class="sy0">;</span>
+standard I<span class="sy0">/</span>O streams
+        output_prompt<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>               <span class="co1">// display a prompt</span>
+        command <span class="sy0">=</span> input_line<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>        <span class="co1">// get a line of input, which will become the command to execute</span>
+        proc <span class="sy0">=</span> process_start<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// start a process from the command</span>
+        <span class="kw3">free</span><span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+        <span class="kw1">while</span> <span class="br0">&#40;</span>process_executing<span class="br0">&#40;</span>proc<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>input_line_waiting<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw4">char</span><span class="sy0">*</span> line<span class="sy0">;</span>
+                line <span class="sy0">=</span> input_line<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>                 <span class="co1">// read input from user</span>
+                process_send_input_line<span class="br0">&#40;</span>proc<span class="sy0">,</span> line<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// send input to process</span>
+                <span class="kw3">free</span><span class="br0">&#40;</span>line<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>process_output_line_waiting<span class="br0">&#40;</span>proc<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw4">char</span><span class="sy0">*</span> output<span class="sy0">;</span>
+                output <span class="sy0">=</span> process_get_output_line<span class="br0">&#40;</span>proc<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// get output from process</span>
+                output_line<span class="br0">&#40;</span>output<span class="br0">&#41;</span><span class="sy0">;</span>                    <span class="co1">// write output to user</span>
+                <span class="kw3">free</span><span class="br0">&#40;</span>output<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h1> <span class="mw-headline" id="Implementation">Implementation</span></h1>
+<p>The implementation of the functions referred to in the above code snippet depends heavily on the design of your operating system, but here are some typical examples:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">static</span> <span class="kw4">void</span> output_prompt<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    output_line<span class="br0">&#40;</span><span class="st0">&quot;&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">void</span> output_line<span class="br0">&#40;</span><span class="kw4">char</span><span class="sy0">*</span> line<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw3">printf</span><span class="br0">&#40;</span><span class="st0">&quot;%s<span class="es1">\n</span>&quot;</span><span class="sy0">,</span> line<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">int</span> input_line_waiting<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// TODO: perhaps someone more familiar with the C library could write a better example?</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">char</span><span class="sy0">*</span> input_line<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// TODO: perhaps someone more familiar with the C library could write a better example?</span>
+    <span class="co1">// TODO: this function will allocate a char buffer containing the line read</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">int</span> process_start<span class="br0">&#40;</span><span class="kw4">char</span><span class="sy0">*</span> command<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    exec<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">// TODO: needs to return an int identifying this process</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">int</span> process_executing<span class="br0">&#40;</span><span class="kw4">int</span> proc<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// TODO: what would be a good example here?</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">void</span> process_send_input_line<span class="br0">&#40;</span><span class="kw4">int</span> proc<span class="sy0">,</span> <span class="kw4">char</span><span class="sy0">*</span> line<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// TODO: what would be a good example here?</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">int</span> process_output_line_waiting<span class="br0">&#40;</span><span class="kw4">int</span> proc<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// TODO: what would be a good example here?</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">static</span> <span class="kw4">char</span><span class="sy0">*</span> process_get_output_line<span class="br0">&#40;</span><span class="kw4">int</span> proc<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// TODO: what would be a good example here?</span>
+    <span class="co1">// TODO: this function will allocate a char buffer containing the line read</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h1> <span class="mw-headline" id="TODO">TODO</span></h1>
+<ul><li> Where to include string editing functions?
+</li><li> How to implement working directory, I/O redirection/piping, etc.?
+</li></ul>
+<h1> <span class="mw-headline" id="External_Links">External Links</span></h1>
+<ul><li> <a rel="nofollow" class="external free" href="http://stephen-brennan.com/2015/01/16/write-a-shell-in-c/">http://stephen-brennan.com/2015/01/16/write-a-shell-in-c/</a>
+</li></ul>
+<p><br />
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 46/1000000
+Post-expand include size: 347/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3617-0!*!*!!en!2!* and timestamp 20180121032233 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Creating_A_Shell&amp;oldid=19431">http://wiki.osdev.org/index.php?title=Creating_A_Shell&amp;oldid=19431</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Creating_A_Shell" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Creating_A_Shell"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Creating_A_Shell"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Creating_A_Shell#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Creating_A_Shell" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Creating_A_Shell&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Creating_A_Shell&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Creating_A_Shell#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Creating_A_Shell" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Creating_A_Shell" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Creating_A_Shell&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Creating_A_Shell&amp;oldid=19431" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 12 July 2016, at 02:20.</li>
+											<li id="footer-info-viewcount">This page has been accessed 14,354 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

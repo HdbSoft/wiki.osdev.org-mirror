@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Cygwin Issues - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Cygwin_Issues", "wgTitle": "Cygwin Issues", "wgCurRevisionId": 20193, "wgArticleId": 1880, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "Tools"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Cygwin_Issues action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Cygwin Issues</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Cygwin_Issues#mw-head">navigation</a>,
+					<a href="Cygwin_Issues#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>Known Issues for <a href="Cygwin" title="Cygwin">Cygwin</a>
+</p><p>Experimental blackboard to get it into the official docs then. Only a few hardcore developers will be able to verify these issues.
+</p><p>I found no document where missing POSIX functionality is listed
+and where other non-POSIX but expected typical UNIX functionality
+and/or behaviour are different or missing.
+The user guide is a bit short on that.
+</p><p>This should help UNIX developers and should go the the official cygwin user guide
+(or FAQ?) then. Unsolved issues (such as some Ghanshyam items) should go to bugzilla then.
+</p><p>Please fix add or fix as approriate.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Cygwin_Issues#Known_Issues"><span class="tocnumber">1</span> <span class="toctext">Known Issues</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Cygwin_Issues#Strictly_NON-POSIX"><span class="tocnumber">2</span> <span class="toctext">Strictly NON-POSIX</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Cygwin_Issues#Unexpected_Behaviour"><span class="tocnumber">3</span> <span class="toctext">Unexpected Behaviour</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="Cygwin_Issues#Filesystem_Related"><span class="tocnumber">3.1</span> <span class="toctext">Filesystem Related</span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="Cygwin_Issues#case-insensitive_search"><span class="tocnumber">3.1.1</span> <span class="toctext">case-insensitive search</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="Cygwin_Issues#pathname_resolution"><span class="tocnumber">3.1.2</span> <span class="toctext">pathname resolution</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-7"><a href="Cygwin_Issues#unlink.28.29"><span class="tocnumber">3.2</span> <span class="toctext">unlink()</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Cygwin_Issues#Passing_file_descriptors"><span class="tocnumber">3.3</span> <span class="toctext">Passing file descriptors</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Cygwin_Issues#Hardlinks"><span class="tocnumber">3.4</span> <span class="toctext">Hardlinks</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Cygwin_Issues#mount"><span class="tocnumber">3.5</span> <span class="toctext">mount</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="Cygwin_Issues#Device_limitations_TODO"><span class="tocnumber">3.6</span> <span class="toctext">Device limitations TODO</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="Cygwin_Issues#Special_filenames"><span class="tocnumber">3.7</span> <span class="toctext">Special filenames</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Cygwin_Issues#getfacl.2Fsetfacl"><span class="tocnumber">3.8</span> <span class="toctext">getfacl/setfacl</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="Cygwin_Issues#select.28.29"><span class="tocnumber">3.9</span> <span class="toctext">select()</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="Cygwin_Issues#sync.28.29"><span class="tocnumber">3.10</span> <span class="toctext">sync()</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="Cygwin_Issues#Security"><span class="tocnumber">4</span> <span class="toctext">Security</span></a>
+<ul>
+<li class="toclevel-2 tocsection-17"><a href="Cygwin_Issues#setuid.2Fsu.2Flogin.2Fcron"><span class="tocnumber">4.1</span> <span class="toctext">setuid/su/login/cron</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="Cygwin_Issues#Processes"><span class="tocnumber">5</span> <span class="toctext">Processes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-19"><a href="Cygwin_Issues#fork"><span class="tocnumber">5.1</span> <span class="toctext">fork</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="Cygwin_Issues#PID"><span class="tocnumber">5.2</span> <span class="toctext">PID</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="Cygwin_Issues#IPC"><span class="tocnumber">5.3</span> <span class="toctext">IPC</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="Cygwin_Issues#Threads"><span class="tocnumber">5.4</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-23"><a href="Cygwin_Issues#DLL"><span class="tocnumber">5.5</span> <span class="toctext">DLL</span></a></li>
+<li class="toclevel-2 tocsection-24"><a href="Cygwin_Issues#getloadavg.28.29_missing"><span class="tocnumber">5.6</span> <span class="toctext">getloadavg() missing</span></a></li>
+<li class="toclevel-2 tocsection-25"><a href="Cygwin_Issues#Console"><span class="tocnumber">5.7</span> <span class="toctext">Console</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-26"><a href="Cygwin_Issues#Other_magic_good_to_know"><span class="tocnumber">6</span> <span class="toctext">Other magic good to know</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Known_Issues"> Known Issues </span></h2>
+<p>First see the user-guide <a rel="nofollow" class="external free" href="http://cygwin.com/cygwin-ug-net/highlights.html">http://cygwin.com/cygwin-ug-net/highlights.html</a>
+and <a rel="nofollow" class="external free" href="http://cygwin.com/cygwin-ug-net/using.html">http://cygwin.com/cygwin-ug-net/using.html</a> ff. for the definitive answers.
+But some of these answers are known and verified to be outdated.
+</p>
+<h2> <span class="mw-headline" id="Strictly_NON-POSIX"> Strictly NON-POSIX </span></h2>
+<ul><li>fopen(): Ghanshyam listed several NON-POSIX issues starting with
+</li></ul>
+<dl><dd><a rel="nofollow" class="external free" href="http://www.cygwin.com/ml/cygwin/2004-03/msg00357.html">http://www.cygwin.com/ml/cygwin/2004-03/msg00357.html</a>
+</dd><dd>Note on "fopen is successful even if search permission is denied": this isn't a Cygwin issue. Windows disables access checks for directory traversal by default, by granting and enabling the ~SeChangeNotifyPrivilege privilege for all users. Revoke this privilege to your user or group if this is a problem.
+</dd><dd>Update: Since 1.3.14 cygwin honors directory traversal security as in POSIX. Turn it off via <tt>CYGWIN=notraversal</tt> to get back the Windows behaviour not to check all upper dirs for proper perms.
+</dd></dl>
+<ul><li>sysconf():
+</li></ul>
+<dl><dd><a rel="nofollow" class="external free" href="http://www.cygwin.com/ml/cygwin/2004-03/msg01193.html">http://www.cygwin.com/ml/cygwin/2004-03/msg01193.html</a>
+</dd></dl>
+<ul><li>strftime():
+</li></ul>
+<dl><dd><a rel="nofollow" class="external free" href="http://www.cygwin.com/ml/cygwin/2004-03/msg01192.html">http://www.cygwin.com/ml/cygwin/2004-03/msg01192.html</a>
+</dd></dl>
+<ul><li>sigaction():
+</li></ul>
+<dl><dd><a rel="nofollow" class="external free" href="http://www.cygwin.com/ml/cygwin/2004-03/msg01194.html">http://www.cygwin.com/ml/cygwin/2004-03/msg01194.html</a>
+</dd></dl>
+<ul><li>struct lconv *localeconv:
+</li></ul>
+<dl><dd><a rel="nofollow" class="external free" href="http://www.cygwin.com/ml/cygwin/2004-10/msg01164.html">http://www.cygwin.com/ml/cygwin/2004-10/msg01164.html</a>
+</dd></dl>
+<ul><li>clock_getres() missing though _POSIX_TIMERS is defined:
+</li></ul>
+<dl><dd><a rel="nofollow" class="external free" href="http://cygwin.com/ml/cygwin/2005-04/msg00336.html">http://cygwin.com/ml/cygwin/2005-04/msg00336.html</a>
+</dd></dl>
+<ul><li>symlink(2) is not atomic:
+</li></ul>
+<dl><dd><a rel="nofollow" class="external free" href="http://sourceware.org/ml/cygwin/2005-03/msg01024.html">http://sourceware.org/ml/cygwin/2005-03/msg01024.html</a>
+</dd></dl>
+<p>TODO: find and document more problems.
+</p>
+<h2> <span class="mw-headline" id="Unexpected_Behaviour"> Unexpected Behaviour </span></h2>
+<h3> <span class="mw-headline" id="Filesystem_Related"> Filesystem Related </span></h3>
+<h4> <span class="mw-headline" id="case-insensitive_search"> case-insensitive search </span></h4>
+<p>Windows filesystems are usually case-insensitive in search, but case-preservant (I know of 5 windows fs in general use, NTFS5 as
+best, a new one on the horizon). For POSIX compatibility there's no optional option or flag to restrict searches (open,fopen,readdir,unlink,rename,...) to be case-sensitive.
+You can only tell your filesystem to be case-sensitive (somewhere in the registry, which is not recommended and unrealistic), use
+special cygwin managed mounts (<code>mount -o managed</code>) or check case-sensitivity explicitly in your code. Best is to avoid such issues beforehand, not allowing only case-different filenames.
+</p>
+<dl><dd>But with user-created plugins it will get complicated.
+</dd></dl>
+<dl><dd>TimRobinson: it's possible to get Windows to use case-sensitive lookups
+</dd></dl>
+<p>at the kernel level, which is how psxss.exe and Interix work. But doing so
+can confuse Win32 apps, which clearly don't distinguish case.:
+</p>
+<dl><dd>Exercise: Get hold of the Windows Resource Kit. Create a two files file
+</dd></dl>
+<p>using the cat.exe included, whose names differ only by case. Delete them by
+name using the del command.
+</p>
+<h4> <span class="mw-headline" id="pathname_resolution"> pathname resolution </span></h4>
+<p>Cygwin is taking too much liberty when resolving paths with <tt>..</tt> in them, as of 1.5.14.
+POSIX requires that the pathname before the <tt>..</tt> exist, and if it is a symlink, that it
+is resolved, before going to the parent directory.
+Cygwin is blindly collapsing <tt>dir/..</tt> into nothing, without first verifying dir, in
+violation of POSIX. (<i>Eric Blake</i>) 
+It will probably keep this behaviour due to performance reasons. (<i>cgf</i>)
+<a rel="nofollow" class="external free" href="http://cygwin.com/ml/cygwin/2005-04/msg00380.html">http://cygwin.com/ml/cygwin/2005-04/msg00380.html</a>
+</p>
+<h3> <span class="mw-headline" id="unlink.28.29"> unlink() </span></h3>
+<ul><li> unlink isn't atomic (as on other platforms also)
+</li></ul>
+<dl><dd><code> while (!unlink(..) or end-of-waiting()) { sleep; } </code>
+</dd><dd>On cygwin <tt>unlink()</tt> is deferred to the end of the process, when unlink fails because of locks or delete on close    (<tt>ERROR_SHARING_VIOLATION</tt>).
+</dd></dl>
+<ul><li> unlink a file and subsequent creation of a new file in the same location is not supported.
+</li></ul>
+<ul><li> unlink(2) doesn't do traverse security checks:
+</li></ul>
+<dl><dd>cygwin unlink() still has the POSIX bug I reported earlier where calling unlink() on a file in a directory with no write permissions    still removes the file, thanks to the underlying Windows implementation. Worse, because the directory has no write permissions, you can't directly re-create a new file to replace the one that was erroneously deleted.  But Chris already argued that checking for write permissions on the parent directory as part of every unlink() call would slow down the common case. - EricBlake
+</dd><dd><a rel="nofollow" class="external free" href="http://sourceware.org/ml/cygwin/2005-04/msg00552.html">http://sourceware.org/ml/cygwin/2005-04/msg00552.html</a>
+</dd></dl>
+<ul><li> "delete on close" (unlinking an open file) is supported.
+</li></ul>
+<dl><dd>(definitive answer: =&gt; <i>pierre</i>)
+</dd></dl>
+<h3> <span class="mw-headline" id="Passing_file_descriptors"> Passing file descriptors </span></h3>
+<ul><li> You generally cannot pass file descriptors between seperate processes. See <a rel="nofollow" class="external free" href="http://www.cygwin.com/ml/cygwin-patches/2002-q3/msg00003.html">http://www.cygwin.com/ml/cygwin-patches/2002-q3/msg00003.html</a> for description and workarounds. Passing the handle via IPC, passing handles to ~MapViewOfFile, ...
+</li></ul>
+<h3> <span class="mw-headline" id="Hardlinks"> Hardlinks </span></h3>
+<ul><li> hardlinking directories is only available to the superuser
+</li></ul>
+<dl><dd><code>ln -d</code>, ...
+</dd></dl>
+<ul><li> *junctions* (NTFS4 directory mount points and NTFS5 volume mount points via Reparse Points) are almost equivalent to symlinks, but symlinks are implemented in cygwin differently and slower and do work on filenames and non-local volumes also.
+</li></ul>
+<h3> <span class="mw-headline" id="mount"> mount </span></h3>
+<ul><li> Mounting filesystems and devices are not supported.
+</li></ul>
+<dl><dd>The <tt>/usr/bin/mount</tt> syntax is similar but different to your favorite mount. See <tt>mount -m</tt>.
+</dd></dl>
+<ul><li> /etc/mtab is not linked to /proc/mounts. 
+</li></ul>
+<dl><dd>/proc/mount is not yet implemented, but a few other procfs files are:
+</dd></dl>
+<pre> $ ls /proc
+&lt;cyg-pids/...&gt;  cpuinfo  meminfo registry/ uptime loadavg  partitions  stat  version </pre>
+<h3> <span class="mw-headline" id="Device_limitations_TODO"> Device limitations TODO </span></h3>
+<p>Explain about our device mapping, special block/char devices, other magic devices like sockets, fifo's, ... /dev/dsp and other audio devices do work. Serial devices have some known limitations. Igor's /usr/sbin/create_devices.sh helper (ml-url?)
+</p>
+<h3> <span class="mw-headline" id="Special_filenames"> Special filenames </span></h3>
+<p>See <a rel="nofollow" class="external free" href="http://cygwin.com/cygwin-ug-net/using-specialnames.html">http://cygwin.com/cygwin-ug-net/using-specialnames.html</a>
+</p>
+<ul><li> using (esp. unlinking) <code>"NUL"</code> and other special filenames is problematic (see FAQ and windows-special <code>"\\.\"</code> and <code>"\??\"</code> path-prefixes on Windows).
+</li></ul>
+<dl><dd><code>"DEL \\.\c:\somedir\nul"</code>
+</dd><dd>There was a cygwin1.dll patch by Pierre which allows deleting such accidently created files.
+</dd></dl>
+<h3> <span class="mw-headline" id="getfacl.2Fsetfacl"> getfacl/setfacl </span></h3>
+<p>See user guide ( <a rel="nofollow" class="external free" href="http://www.cygwin.com/cygwin-ug-net/using-utils.html">http://www.cygwin.com/cygwin-ug-net/using-utils.html</a>&#160;: [ setfacl | <a rel="nofollow" class="external free" href="http://www.cygwin.com/cygwin-ug-net/using-utils.html#setfacl">http://www.cygwin.com/cygwin-ug-net/using-utils.html#setfacl</a> ] / [ getfacl | <a rel="nofollow" class="external free" href="http://www.cygwin.com/cygwin-ug-net/using-utils.html#getfacl">http://www.cygwin.com/cygwin-ug-net/using-utils.html#getfacl</a> ]  )
+</p>
+<dl><dd> cygwin ACL's are not 1:1 mapped to windows ACL's, esp. for inherited directory permissions. (?)
+</dd></dl>
+<p><b>TODO</b>
+</p>
+<dl><dd>(<i>definitive answer: =&gt; corrinna</i>)
+</dd></dl>
+<h3> <span class="mw-headline" id="select.28.29"> select() </span></h3>
+<ul><li> <a rel="nofollow" class="external free" href="http://cygwin.com/cygwin-ug-net/highlights.html#OV-HI-SELECT">http://cygwin.com/cygwin-ug-net/highlights.html#OV-HI-SELECT</a> is outdated. (cgf)
+</li><li> select with write-to-pipe fails sometimes (rsync). See <a rel="nofollow" class="external free" href="http://sourceware.org/bugzilla/show_bug.cgi?id=478">http://sourceware.org/bugzilla/show_bug.cgi?id=478</a>
+</li><li> <b>TODO</b> (<i>definitive answer: =&gt; cgf</i>)
+</li></ul>
+<h3> <span class="mw-headline" id="sync.28.29"> sync() </span></h3>
+<ul><li> sync() is a no-op (although it's possible on Windows, see <a rel="nofollow" class="external autonumber" href="http://msdn.microsoft.com/library/en-us/fileio/base/flushfilebuffers.asp">[1]</a> - the part beginning with "To flush all open files on a volume" - and <a rel="nofollow" class="external autonumber" href="http://www.sysinternals.com/ntw2k/source/misc.shtml#sync">[2]</a> for a tool that makes use of it), and as specified by the standard it's unclear whether it's even supposed to do anything (all cache managers eventually flush dirty pages...).
+</li><li> fsync() works as expected.
+</li></ul>
+<h2> <span class="mw-headline" id="Security"> Security </span></h2>
+<p>See <a rel="nofollow" class="external free" href="http://cygwin.com/cygwin-ug-net/ntsec.html">http://cygwin.com/cygwin-ug-net/ntsec.html</a>, <a rel="nofollow" class="external free" href="http://cygwin.com/faq/faq_3.html#SEC78">http://cygwin.com/faq/faq_3.html#SEC78</a>, sysbash, network shares, samba, windows profiles, ... Of course cygwin is entirely insecure.
+</p>
+<h3> <span class="mw-headline" id="setuid.2Fsu.2Flogin.2Fcron"> setuid/su/login/cron </span></h3>
+<ul><li> UNIX root uid is 0, Windows SYSTEM uid is 18.
+</li><li> cygwin cron usually runs as user SYSTEM and therefore ...
+</li></ul>
+<dl><dd>(network shares, file permissions, ...) TODO
+</dd></dl>
+<ul><li> TODO: setuid,setgid file permission flag and workarounds.
+</li><li> setuid()/setgid() process workarounds.
+</li></ul>
+<dl><dd>see <a rel="nofollow" class="external free" href="http://cygwin.com/cygwin-ug-net/ntsec.html#NTSEC-SETUID">http://cygwin.com/cygwin-ug-net/ntsec.html#NTSEC-SETUID</a>
+</dd></dl>
+<ul><li> TODO: setsid()/setpgid():&#160;??
+</li><li> TODO: su, sudo vs runas ...
+</li><li> TODO: login limitations
+</li></ul>
+<h2> <span class="mw-headline" id="Processes"> Processes </span></h2>
+<p>See the user-guide on fork, IPC, ... (<i>definitive answers: =&gt; cgf</i>)
+</p>
+<h3> <span class="mw-headline" id="fork"> fork </span></h3>
+<p>Works as expected.
+</p>
+<dl><dd>See <a rel="nofollow" class="external free" href="http://cygwin.com/faq/faq_3.html#SEC74">http://cygwin.com/faq/faq_3.html#SEC74</a> and <a rel="nofollow" class="external free" href="http://cygwin.com/cygwin-ug-net/highlights.html#OV-HI-PROCESS">http://cygwin.com/cygwin-ug-net/highlights.html#OV-HI-PROCESS</a>
+</dd></dl>
+<h3> <span class="mw-headline" id="PID"> PID </span></h3>
+<ul><li> Unfortunately cygwin must use seperate PID's than the underlying windows PID's.
+</li></ul>
+<dl><dd><a rel="nofollow" class="external free" href="http://cygwin.com/cygwin-ug-net/highlights.html#OV-HI-PROCESS">http://cygwin.com/cygwin-ug-net/highlights.html#OV-HI-PROCESS</a> is outdated. (cgf)
+</dd></dl>
+<h3> <span class="mw-headline" id="IPC"> IPC </span></h3>
+<ul><li> Requires the *cygserver* daemon (which requires the string "server" in $CYGWIN).
+</li></ul>
+<dl><dd>ipc-daemon2 is outdated and should be uninstalled.  Unless you still use postgresql 7.4.3 or other dependent packages.
+</dd></dl>
+<ul><li> IPC is not fully supported on Win95 yet, due to known cygserver problems.
+</li></ul>
+<dl><dd>TODO (fixed in which snapshot, when?)
+</dd></dl>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<p>1.5.11 was rather unstable compared to 1.5.10.
+</p>
+<ul><li> <code>-lpthread</code> is supported by cygwin1.dll, libpthread.a is just an import library.
+</li><li> PROCESS_SHARED objects may not work (?, R.Collins, April 2001)
+</li><li> pshared mutexs (?)
+</li><li> signals cannot interrupt semaphores: <code>semaphore::_trywait</code>
+</li><li> as always: The latest snapshot might have fixed it&#160;:)
+</li></ul>
+<h3> <span class="mw-headline" id="DLL"> DLL </span></h3>
+<p>See <a rel="nofollow" class="external free" href="http://cygwin.com/cygwin-ug-net/dll.html">http://cygwin.com/cygwin-ug-net/dll.html</a> and <a rel="nofollow" class="external free" href="http://cygwin.com/faq/faq_3.html#SEC108">http://cygwin.com/faq/faq_3.html#SEC108</a>
+</p><p>Use gcc -shared or libtool, or the older helpers dlltool, dllwrap.
+</p>
+<ul><li> All exported symbols must be relocatable and known at compile-time.
+</li></ul>
+<dl><dd>Unless on unix, where they will be resolved at load-time ("lazy").
+</dd></dl>
+<ul><li> Building a .dll might require more steps than building an .so
+</li></ul>
+<dl><dd>(unless you use the simple <tt>gcc -shared</tt> of course). Google for "Microsoft designers must have been on crack", might need special MSVC-like __declspec IMPORT/EXPORT declarations, but better use the linker methods.
+</dd><dd>We use specially named import libraries named like "lib&lt;package&gt;-version&gt;.dll.a", The shared libs like "cyg&lt;package&gt;-&lt;version&gt;.dll",  and must reside in the PATH!  
+</dd><dd>Most packagers just forget the required <code>-no-undefined</code> libtool switch.
+</dd><dd>DATA sections (structs, classes) to be exported from DLL's will best work with this linker switch: <code> -Wl,--enable-runtime-pseudo-reloc </code>
+</dd></dl>
+<ul><li> Importing symbols from .exe's will not work, unlike on linux or solaris.
+</li></ul>
+<dl><dd>you can only import from dll's.
+</dd><dd>See <a rel="nofollow" class="external free" href="http://cygwin.com/ml/cygwin/2002-11/msg00615.html">http://cygwin.com/ml/cygwin/2002-11/msg00615.html</a> and <a rel="nofollow" class="external free" href="http://cygwin.com/ml/cygwin/2004-10/msg00339.html">http://cygwin.com/ml/cygwin/2004-10/msg00339.html</a>
+</dd></dl>
+<ul><li> Lazy linking is not yet supported by GCC.
+</li></ul>
+<dl><dd>See wine and MSVC. (Info for windows folks only)
+</dd></dl>
+<h3> <span class="mw-headline" id="getloadavg.28.29_missing"> getloadavg() missing </span></h3>
+<ul><li> <code>getloadavg()</code> is still a noop on windows. No one came up with a comparable solution yet.
+</li></ul>
+<dl><dd>It is used by make, xemacs, top, ...
+</dd></dl>
+<h3> <span class="mw-headline" id="Console"> Console </span></h3>
+<p>/bin/sh really is ash (a smaller bourne shell). On linux it's usually /bin/bash. There are subtle syntax differences.
+</p>
+<ul><li> pty / tty issues: <a rel="nofollow" class="external free" href="http://www.khngai.com/emacs/tty.php">http://www.khngai.com/emacs/tty.php</a>
+</li><li> pipes TODO (known problems with text/binmode issues, which should have been fixed in a snapshot.)
+</li></ul>
+<dl><dd>See also select() above.
+</dd></dl>
+<ul><li> bash PID reuse problem was fixed by bash-2.05b-16. 
+</li></ul>
+<dl><dd>(TODO: ml-url)
+</dd></dl>
+<ul><li> Foreign characters support:
+</li></ul>
+<dl><dd>cygwin does NOT support UTF-8 nor UTF-16 yet, since newlib doesn't support it. Use better terms, CYGWIN="codepage:oem"
+</dd></dl>
+<h2> <span class="mw-headline" id="Other_magic_good_to_know"> Other magic good to know </span></h2>
+<ul><li> *winsock* requires the 'SYSTEMROOT' environment variable setting. CGI might fail. Fixed since 1.3.14.
+</li></ul>
+<dl><dd><a rel="nofollow" class="external free" href="http://article.gmane.org/gmane.os.cygwin/55115">http://article.gmane.org/gmane.os.cygwin/55115</a> Reason: cygwin uses the windows socket library.
+</dd></dl>
+<dl><dd>Workaround for Apache: ~SetEnv SYSTEMROOT "&lt;path-to-c-windows&gt;"
+</dd></dl>
+<ul><li> setup --help (as of v2.427) does print its options, but to ./setup.log not to STDOUT.
+</li></ul>
+<dl><dd>setup --help; tail setup.log
+</dd></dl>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 144/1000000
+Post-expand include size: 347/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1880-0!*!0!!en!2!* and timestamp 20180121080132 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Cygwin_Issues&amp;oldid=20193">http://wiki.osdev.org/index.php?title=Cygwin_Issues&amp;oldid=20193</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:Tools" title="Category:Tools">Tools</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Cygwin_Issues" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Cygwin_Issues"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Cygwin_Issues&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Cygwin_Issues#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Cygwin_Issues" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Cygwin_Issues&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Cygwin_Issues&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Cygwin_Issues#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Cygwin_Issues" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Cygwin_Issues" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Cygwin_Issues&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Cygwin_Issues&amp;oldid=20193" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 January 2017, at 15:35.</li>
+											<li id="footer-info-viewcount">This page has been accessed 16,583 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+									skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Cygwin_Issues" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Cygwin_Issues" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Cygwin_Issues&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Cygwin_Issues&amp;oldid=20193" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 January 2017, at 15:35.</li>
+											<li id="footer-info-viewcount">This page has been accessed 16,583 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.126 secs. -->
+	</body>
+</html>

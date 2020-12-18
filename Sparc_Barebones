@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Sparc Barebones - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Sparc_Barebones", "wgTitle": "Sparc Barebones", "wgCurRevisionId": 20567, "wgArticleId": 3023, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Sparc", "Bare bones tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Sparc_Barebones action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Sparc Barebones</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Sparc_Barebones#mw-head">navigation</a>,
+					<a href="Sparc_Barebones#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Sparc comes with a few oddities of its own, including a non-trivial bootsector implementation. The following code will provide you a running start on SPARC, but it is one big hack, it has not been written with extension in mind, and neither has it been tested on real hardware.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Sparc_Barebones#Tools"><span class="tocnumber">1</span> <span class="toctext">Tools</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Sparc_Barebones#Bootsector"><span class="tocnumber">2</span> <span class="toctext">Bootsector</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Sparc_Barebones#Building"><span class="tocnumber">3</span> <span class="toctext">Building</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Sparc_Barebones#Source_Code"><span class="tocnumber">4</span> <span class="toctext">Source Code</span></a></li>
+</ul>
+</td></tr></table>
+<h1> <span class="mw-headline" id="Tools"> Tools </span></h1>
+<p>You will need:
+</p>
+<ul><li> sparc-elf-as and sparc-elf-ld, just make a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">cross-toolchain</a> with the sparc-elf as target.
+</li><li> dd
+</li><li> mkisofs
+</li><li> qemu-system-sparc (get a recent version!)
+</li></ul>
+<p><a href="GCC" title="GCC">GCC</a> might come in handy later, but it is not used in this example
+</p>
+<h1> <span class="mw-headline" id="Bootsector"> Bootsector </span></h1>
+<p>OpenFirmware's boot sequence will try to load an application from either a generic partition or a platform-specific partition. That table is located in the first 512 bytes of the storage medium. Within that partition, it will try to look for a binary located from byte 512 to 8191. <a href="QEMU" title="QEMU">QEMU</a> will allow boot from a.out, ELF or a linux image, whereas Sun's implementation on actual hardware is said to only support a.out, so we will have to stick to that. The binary is parsed and loaded at some location in memory, so it also needs to be a position-independent implementation. After loading the file, it will jump to the start of the text section, and pass a pointer to the openfirmware client structure as the first argument (o0 register).
+</p><p>For demonstration purposes, we grab our load address, calculate a pointer offset and then issue a print call to the firmware.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="sy0">.</span>section <span class="sy0">.</span>text
+<span class="sy0">.</span><span class="kw4">align</span> <span class="nu0">16</span>
+<span class="sy0">.</span>global _start
+&#160;
+_start<span class="sy0">:</span>
+        <span class="kw1">call</span> <span class="nu0">1f</span>                     &#160;! put PC on the <span class="kw4">stack</span><span class="sy0">.</span>
+          <span class="kw1">mov</span> <span class="sy0">%</span>o7<span class="sy0">,</span> <span class="sy0">%</span>l0              &#160;! use the delay slot to grab it
+<span class="nu0">1</span><span class="sy0">:</span>      <span class="kw1">mov</span> <span class="nu0">0x60</span><span class="sy0">,</span> <span class="sy0">%</span>l3               &#160;! <span class="nu0">0x60</span> is the <span class="kw4">offset</span> to the putstr pointer
+        <span class="kw1">add</span> <span class="sy0">%</span>l3<span class="sy0">,</span> <span class="sy0">%</span>o0<span class="sy0">,</span> <span class="sy0">%</span>l3           &#160;! actual address holding the putstr pointer
+        ld <span class="br0">&#91;</span><span class="sy0">%</span>l3<span class="br0">&#93;</span><span class="sy0">,</span> <span class="sy0">%</span>l5               &#160;! address of function
+&#160;
+        <span class="kw1">mov</span> dataptr <span class="sy0">-</span> _start<span class="sy0">,</span> <span class="sy0">%</span>l4   &#160;! <span class="kw4">offset</span> to text to print
+        <span class="kw1">add</span> <span class="sy0">%</span>l4<span class="sy0">,</span> <span class="sy0">%</span>l0<span class="sy0">,</span> <span class="sy0">%</span>l4           &#160;! absolute address of text to print
+&#160;
+        <span class="kw1">mov</span> <span class="sy0">%</span>l4<span class="sy0">,</span> <span class="sy0">%</span>o0                &#160;! first argument is pointer
+        <span class="kw1">mov</span> <span class="nu0">0x0b</span><span class="sy0">,</span> <span class="sy0">%</span>o1               &#160;! second argument is number of characters
+        <span class="kw1">call</span> <span class="sy0">%</span>l5                    &#160;! <span class="kw1">call</span> function
+          <span class="kw1">nop</span>                       &#160;! waste the delay slot <span class="kw4">for</span> simplicity
+&#160;
+<span class="nu0">2</span><span class="sy0">:</span>      
+        <span class="kw1">call</span> 2b                     &#160;! <span class="kw1">loop</span> forever
+          <span class="kw1">nop</span>
+&#160;
+&#160;
+dataptr<span class="sy0">:</span>
+        <span class="sy0">.</span><span class="kw5">byte</span> <span class="st0">'H'</span><span class="sy0">,</span> <span class="st0">'e'</span><span class="sy0">,</span> <span class="st0">'l'</span><span class="sy0">,</span> <span class="st0">'l'</span><span class="sy0">,</span> <span class="st0">'o'</span><span class="sy0">,</span> <span class="st0">' '</span><span class="sy0">,</span> <span class="st0">'W'</span><span class="sy0">,</span> <span class="st0">'o'</span><span class="sy0">,</span> <span class="st0">'r'</span><span class="sy0">,</span> <span class="st0">'l'</span><span class="sy0">,</span> <span class="st0">'d'</span><span class="sy0">,</span> <span class="nu0">0</span></pre></div></div>
+<p>There's two problems now: binutils wants to make a demand-loaded binary by default, which is something qemu's default bios really does not like. Which means we have to work around that by setting the header type manually. Since a.out is such a dumb format, we only need 8 lines of code to have ld figure out the rest. We first tell it to kick out all headers, add the a.out signature we need, then the size of .text (no location needed, it comes directly after the header), followed by the size of the headers we are not using:
+</p>
+<pre>OUTPUT_FORMAT(binary)
+ENTRY(_start)
+ 
+SECTIONS
+{
+    . = 0x3980;
+    .main&#160;: 
+    {
+        LONG(0x01030107);
+	LONG(_boot_end - _boot_start);
+	LONG(0);
+	LONG(0);
+	LONG(0);
+	LONG(0);
+	LONG(0);
+        LONG(0);
+	_boot_start = .;
+	*(.text*)
+	*(.rodata*)
+	*(.data*)
+	*(.bss*)
+	_boot_end = .;
+    }
+}
+</pre>
+<h1> <span class="mw-headline" id="Building"> Building </span></h1>
+<p>The bootsector can then be made with the following commands:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">sparc-elf-as boot.S <span class="re5">-o</span> boot.o
+sparc-elf-ld boot.o <span class="re5">-o</span> boot.bin <span class="re5">-T</span> sparcboot.ld</pre></div></div>
+<p>SILO remarks that the firmware only really checks the partition offsets, and throws in a sector of zeroes so that it will always look at the start of the disk for the bootblock. This is a cheap way to boot off any custom medium if you don't care about any filesystem, but it is especially useful for the CD filesystem which don't put anything near that area and just filling it up with zeroes is correct as far as the standard goes:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">dd</span> <span class="re2">if</span>=<span class="sy0">/</span>dev<span class="sy0">/</span>zero <span class="re2">of</span>=bootblock.bin <span class="re2">bs</span>=<span class="nu0">2048</span> <span class="re2">count</span>=<span class="nu0">4</span>
+<span class="kw2">dd</span> <span class="re2">if</span>=boot.bin <span class="re2">of</span>=bootblock.bin <span class="re2">bs</span>=<span class="nu0">512</span> <span class="re2">seek</span>=<span class="nu0">1</span> <span class="re2">conv</span>=notrunc
+mkisofs <span class="re5">-o</span> helloworld.iso <span class="re5">-G</span> bootblock.bin <span class="sy0">/</span>path<span class="sy0">/</span>to<span class="sy0">/</span>other<span class="sy0">/</span>cd<span class="sy0">/</span>contents</pre></div></div>
+<p>Start QEMU afterwards:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">qemu-system-sparc <span class="re5">-cdrom</span> helloworld.iso</pre></div></div>
+<p>Which gives you the firmware prompt, after which entering
+</p>
+<pre>boot cdrom
+</pre>
+<p>will start the code.
+</p>
+<h1> <span class="mw-headline" id="Source_Code"> Source Code </span></h1>
+<p>There is source code and a Makefile available on github at <a rel="nofollow" class="external free" href="https://github.com/teverett/sparc_barebones">https://github.com/teverett/sparc_barebones</a>
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 71/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3023-0!*!0!!en!*!* and timestamp 20180121080027 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Sparc_Barebones&amp;oldid=20567">http://wiki.osdev.org/index.php?title=Sparc_Barebones&amp;oldid=20567</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Sparc" title="Category:Sparc">Sparc</a></li><li><a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Sparc_Barebones" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Sparc_Barebones"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Sparc_Barebones"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Sparc_Barebones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Sparc_Barebones" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Sparc_Barebones&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Sparc_Barebones&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Sparc_Barebones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit theskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Sparc_Barebones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Sparc_Barebones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Sparc_Barebones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Sparc_Barebones&amp;oldid=20567" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 8 March 2017, at 21:18.</li>
+											<li id="footer-info-viewcount">This page has been accessed 10,193 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.114 secs. -->
+	</body>
+</html>

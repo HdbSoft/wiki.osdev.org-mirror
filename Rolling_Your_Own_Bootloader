@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Rolling Your Own Bootloader - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Rolling_Your_Own_Bootloader", "wgTitle": "Rolling Your Own Bootloader", "wgCurRevisionId": 21112, "wgArticleId": 1878, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 2 Tutorials", "OS Development", "Tutorials", "Bootloaders"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Rolling_Your_Own_Bootloader action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Rolling Your Own Bootloader</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Rolling_Your_Own_Bootloader#mw-head">navigation</a>,
+					<a href="Rolling_Your_Own_Bootloader#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a><br />Medium</td></tr></table>
+<p>Some people prefer to use their own software for everything. This page attempts to describe what steps to take when you write your own bootloader. Before you start writing one, it is best that you know the background <a href="Bootloader" title="Bootloader">theory</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Rolling_Your_Own_Bootloader#What_and_Why"><span class="tocnumber">1</span> <span class="toctext">What and Why</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Rolling_Your_Own_Bootloader#Disclaimer"><span class="tocnumber">1.1</span> <span class="toctext">Disclaimer</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Rolling_Your_Own_Bootloader#What_you_need_to_do"><span class="tocnumber">1.2</span> <span class="toctext">What you need to do</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Rolling_Your_Own_Bootloader#What_you_could_wish_to_add"><span class="tocnumber">1.3</span> <span class="toctext">What you could wish to add</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Rolling_Your_Own_Bootloader#Loading..._Please_wait..."><span class="tocnumber">2</span> <span class="toctext">Loading... Please wait...</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Rolling_Your_Own_Bootloader#Where_will_you_load_your_kernel.3F"><span class="tocnumber">2.1</span> <span class="toctext">Where will you load your kernel?</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Rolling_Your_Own_Bootloader#How_will_you_find_your_kernel.3F"><span class="tocnumber">2.2</span> <span class="toctext">How will you find your kernel?</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Rolling_Your_Own_Bootloader#What_else_could_you_need_to_load.3F"><span class="tocnumber">2.3</span> <span class="toctext">What else could you need to load?</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Rolling_Your_Own_Bootloader#What_if_I_get_beyond_the_512_bytes_of_the_boot_sector.3F"><span class="tocnumber">2.4</span> <span class="toctext">What if I get beyond the 512 bytes of the boot sector?</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Rolling_Your_Own_Bootloader#What_if_I_wish_to_offer_the_user_the_option_to_boot_several_OSes.3F"><span class="tocnumber">2.5</span> <span class="toctext">What if I wish to offer the user the option to boot several OSes?</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="Rolling_Your_Own_Bootloader#How_do_I_actually_load_bytes"><span class="tocnumber">2.6</span> <span class="toctext">How do I actually load bytes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="Rolling_Your_Own_Bootloader#Loaded._Gathering_Information"><span class="tocnumber">3</span> <span class="toctext">Loaded. Gathering Information</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="Rolling_Your_Own_Bootloader#Ready._Entering_Protected_Mode_..."><span class="tocnumber">4</span> <span class="toctext">Ready. Entering Protected Mode ...</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="Rolling_Your_Own_Bootloader#You_have_long_way_to_continue..."><span class="tocnumber">5</span> <span class="toctext">You have long way to continue...</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="What_and_Why"> What and Why </span></h2>
+<h3> <span class="mw-headline" id="Disclaimer"> Disclaimer </span></h3>
+<p>Okay. We have <a href="GRUB" title="GRUB">GRUB</a> and <a href="Bare_bones" title="Bare bones" class="mw-redirect">Bare bones</a> but still people complain we don't have a page explaining how the bootloader can be coded.
+</p><p>I won't try to give you full code that works because if that was what you were looking for, you'd be using one of the <a href="Category:Bootloaders" title="Category:Bootloaders">premade bootloaders</a> instead. This page plans to tell you what is needed and what could be wished in a bootloader, and optionally points at parts of the FAQ that can help you achieving the goals.
+</p><p>Whether or not you'll use your own bootloader or reuse an existing tool is completely up to you. If you get the feeling you don't understand a thing, make sure you read our page about the <a href="Boot_Sequence" title="Boot Sequence">Boot Sequence</a> first.<br />
+A good reason to have a custom bootloader would be a custom filesystem.
+</p>
+<h3> <span class="mw-headline" id="What_you_need_to_do"> What you need to do </span></h3>
+<p>The bootloader ultimately has to bring the kernel (and all the kernel needs to bootstrap) in memory, switch to an environment that the kernel will like and then transfer control to the kernel.
+</p><p>As the scope of this article is protected mode C kernels, I'll assume that "an environment the kernel will like" means <a href="Protected_Mode" title="Protected Mode">Protected Mode</a>, with kernel and additional components being stored at their 'favorite', compile-time known locations, with a wide-enough stack ready and BSS section cleared.
+</p>
+<h3> <span class="mw-headline" id="What_you_could_wish_to_add"> What you could wish to add </span></h3>
+<p>Since the bootloader runs in <a href="Real_Mode" title="Real Mode">Real Mode</a>, it has easier access to BIOS resources and functions. Therefore it's a good place to perform <a href="How_Do_I_Determine_The_Amount_Of_RAM" title="How Do I Determine The Amount Of RAM" class="mw-redirect">memory map detection</a>, <a href="Getting_VBE_Mode_Info" title="Getting VBE Mode Info" class="mw-redirect">detecting available video modes</a>, loading additional files etc. The bootloader will collect this information and present it in a way the kernel will be able to understand
+</p>
+<h2> <span class="mw-headline" id="Loading..._Please_wait..."> Loading... Please wait... </span></h2>
+<h3> <span class="mw-headline" id="Where_will_you_load_your_kernel.3F"> Where will you load your kernel? </span></h3>
+<p>You will have to decide where in memory you are going to load your kernel. Your kernel generally depends on it.
+</p><p>In Real Mode, the easiest is to stay below the 1MB barrier, which means you practically have 512KB of memory to load things. You may wish the kernel to be loaded at a well-known position, say 0x10000 physical (es=0x1000, bx=0 when calling INT13h).
+</p><p>If your kernel is bigger (or is expected to grow bigger) than this, you'll probably prefer to have the kernel above the 1MB barrier, which means you need to activate <a href="A20_Line" title="A20 Line">A20 gate</a> and switch to <a href="Unreal_Mode" title="Unreal Mode">Unreal Mode</a> to load the kernel (with A20 alone, you cannot have more than 64K above 1MB).
+</p><p>Note that BIOS will still be unable to write to memory above 1MB, so you need to read stuff in a buffer below 1MB and then perform a rep movsd to place the data where they ultimately should go.
+</p>
+<h3> <span class="mw-headline" id="How_will_you_find_your_kernel.3F"> How will you find your kernel? </span></h3>
+<p>The bits of your kernel are somewhere on some disk (presumably the booting disk, but this is not mandatory). Question is: where on the disk? Is it a regular file on a <a href="FAT" title="FAT">FAT-formatted floppy</a>? is it a collection of consecutive sectors in the "reserved area" of the FAT12 floppy (in which case you may need a dedicated tool to format the disk and install the kernel on it)? Or is the floppy simply left unformatted and kernel pasted directly with a <a href="Disk_Images" title="Disk Images">disk image tool</a>.
+</p><p>All the above options are possible. Maybe the one I'd choose myself would be to reserve enough space on a FAT12 floppy to store the <i>list of sectors</i> used by the kernel file. The "advantage" of being fully-FAT12 is that you don't need to re-write the bootsector every time you rewrite the kernel.
+</p>
+<h3> <span class="mw-headline" id="What_else_could_you_need_to_load.3F"> What else could you need to load? </span></h3>
+<p>That mainly depends on what's in your kernel. Linux, for instance, requires an additional 'initrd' file that will contain the 'initialization process' (as user level). If your kernel is modular and if <a href="File_Systems" title="File Systems">File Systems</a> are understood by some modules, you need to load the modules along with the kernel. Same goes for 'microkernel services' like disk/files/memory services, etc.
+</p>
+<h3> <span class="mw-headline" id="What_if_I_get_beyond_the_512_bytes_of_the_boot_sector.3F"> What if I get beyond the 512 bytes of the boot sector? </span></h3>
+<p>Make sure the first 512 bytes are able to load the rest of your loader and you're safe. Some do this with a separate "second stage" loader, others by really inserting a '512-bytes' break in their ASM code, making sure the rest of the loader is put after the bootsector (that is, starting at 0x7e00).
+</p>
+<h3> <span class="mw-headline" id="What_if_I_wish_to_offer_the_user_the_option_to_boot_several_OSes.3F"> What if I wish to offer the user the option to boot several OSes? </span></h3>
+<p>The easiest way to boot another OS is a mechanism called <i>chainloading</i>. Windows stores something akin to a second-stage bootloader in the boot sector of the <i>partition</i> it was installed in. When installing Linux, writing e.g. LILO or GRUB to the <i>partition</i> boot sector instead of the MBR is also an option. Now, the thing your MBR bootsector can do is to <i>relocate</i> itself (copying from 0x0000:0x7c00 to, traditionally, 0x0060:0x0000), parse the partition table, display some kind of menu and let the user chose which partition to boot from. Then, your (relocated) MBR bootsector would load that <i>partition</i> boot sector to 0x0000:0x7c00, and jump there. The partition boot sector would be none the wiser that there already was a bootsector loaded <i>before</i>, and could actually load yet <i>another</i> bootsector - which is why it's called <i>chainloading</i>. It doesn't really matter where you decide to relocate the boot sector as long as you don't overwrite the <a href="IVT" title="IVT" class="mw-redirect">IVT</a> (if IF in EFLAGS is set), the <a href="Memory_Map_(x86)#BIOS_Data_Area_.28BDA.29" title="Memory Map (x86)">BDA</a> or the <a href="Memory_Map_(x86)#Extended_BIOS_Data_Area_.28EBDA.29" title="Memory Map (x86)">EBDA</a>.
+</p><p>You see that with displaying a menu in some intelligible way and accepting keystrokes, such a multi-option bootloader can get quite complex rather quickly. We didn't even touch the subject of booting from extended partitions, which would require sequentially reading and parsing multiple extended partition tables before printing the menu.
+</p><p>Taken to the extreme, boot managers like that can become as complex as a simple OS (much like GRUB is, which offers reading from various filesystems, booting <a href="Multiboot" title="Multiboot">Multiboot</a> kernels, chainloading, loading initrd ramdisks etc. etc. - such internals will not be addressed here.
+</p>
+<h3> <span class="mw-headline" id="How_do_I_actually_load_bytes"> How do I actually load bytes </span></h3>
+<p><a href="BIOS" title="BIOS">BIOS</a> interrupt 13h. Get info about it at <a href="Ralf_Brown's_Interrupt_List" title="Ralf Brown's Interrupt List">Ralf Brown's Interrupt List</a>, make sure you know floppies may fail one or two times, that you cannot read more than a track at once, and you're done. To read from the hard drive, you probably want int 13h, ah=0x42, drive number 0x80. Details in the interrupt list.
+</p><p>If you need guidance, feel free to check <a rel="nofollow" class="external text" href="http://clicker.cvs.sourceforge.net/clicker/c32-lxsdk/kernel/src/sosflppy/lowlevel.asm?view=log">lowlevel.asm</a>
+</p><p><br />
+Note also that most <a href="File_Systems" title="File Systems">File Systems</a> involve some conversion between allocation units (blocks/clusters) and physical "Cylinder:Head:Sector" values. Those conversions are simple once you know the <i>sectors-per-track</i> and <i>heads</i> counts. Check out <a rel="nofollow" class="external text" href="http://www.nondot.org/sabre/os/articles">OSRC</a> for additional info.
+</p>
+<pre>
+&gt; Does anyone have a formula for converting DOS Sectors to
+&gt; Physical Sectors (Head, Cylinder, Sector) such as used in
+&gt; INT 13h?
+
+DOS_sector_num = BIOS_sector_num - 1 + Head_num*Sectors_per_track
+		+ Track_num*Sectors_per_track*Total_heads
+
+BIOS_sector_num = 1 + (DOS_sector_num MOD Sectors_per_track)
+BIOS_Head_num   = (DOS_sector_num DIV Sectors_per_track) MOD Total_heads
+BIOS_Track_num  = (DOS_sector_num DIV Sectors_per_track) DIV Total_heads
+</pre>
+<p>If you're loading above 1MB, you should proceed in 2 steps: first using BIOS to load in the "conventional" area, and then performing a <tt>rep movsd</tt> to place the data where they ultimately should go.
+</p>
+<h2> <span class="mw-headline" id="Loaded._Gathering_Information"> Loaded. Gathering Information </span></h2>
+<p>The next step consist of collecting as much information as you can/need: <a href="How_Do_I_Determine_The_Amount_Of_RAM" title="How Do I Determine The Amount Of RAM" class="mw-redirect">amount of installed RAM</a>, available <a href="Getting_VBE_Mode_Info" title="Getting VBE Mode Info" class="mw-redirect">video modes</a> and things alike are easier to do in real mode, so better do them while in <a href="Real_Mode" title="Real Mode">Real Mode</a> than trying to come back to real mode for a trip later. Of course the exact requirements depend on your kernel.
+</p><p>A very simple solution here is to organize your information as a flat table (ala <a href="BIOS" title="BIOS">BIOS data area</a>). An alternative could be to add those information as a structured flow: you keep an index at a well-known address (or at some address you'll pass to the kernel when loaded) and that index gives for each "key" the address of the corresponding data structure. E.g.
+</p>
+<pre>
+  organization           lookup code (eax == signature)
+  +------+------+          mov esi, well_known_index_address
+  | RAM. | 1234 |        .loop:
+  | VBE. | 5678 |          cmp [esi],'END.'
+  | MODS | 9ABC |          je .notfound
+  | DISK | DEF0 |          add esi,8
+  | END. | ---- |          cmp [esi-4],eax
+  +------+------+          jne .loop
+                           mov eax,[esi]
+                           ret
+</pre>
+<h2> <span class="mw-headline" id="Ready._Entering_Protected_Mode_..."> Ready. Entering <a href="Protected_Mode" title="Protected Mode">Protected Mode</a> ... </span></h2>
+<p>To enter protected mode you should first disable interrupts and set global descriptor table. After it set PE bit of CR0:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="kw3">cr0</span>
+<span class="kw1">or</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="nu0">1</span>
+<span class="kw1">mov</span> <span class="kw3">cr0</span><span class="sy0">,</span><span class="kw3">eax</span></pre></div></div>
+<p>After it set registers and do a far jump to kernel.
+If data selector is 10h, code selector is 8 and kernel offset is 10000h do:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span><span class="nu0">10h</span>
+<span class="kw1">mov</span> <span class="kw3">ds</span><span class="sy0">,</span><span class="kw3">ax</span>
+<span class="kw1">mov</span> <span class="kw3">es</span><span class="sy0">,</span><span class="kw3">ax</span>
+<span class="kw1">mov</span> <span class="kw3">fs</span><span class="sy0">,</span><span class="kw3">ax</span>
+<span class="kw1">mov</span> <span class="kw3">gs</span><span class="sy0">,</span><span class="kw3">ax</span>
+<span class="kw1">mov</span> <span class="kw3">ss</span><span class="sy0">,</span><span class="kw3">ax</span>
+<span class="kw1">jmp</span> <span class="nu0">8</span><span class="sy0">:</span><span class="nu0">10000h</span></pre></div></div>
+<p>Notes:
+</p>
+<ul><li> that in this case, the GDT will be <i>temporary</i>. Indeed, the loader has no idea of what the kernel wants to do with the GDT, so all it can do is providing a minimal and let the kernel reload GDTR with an appropriate GDT later.
+</li><li> it's common for the loader to keep interrupts disabled (the kernel will enable them later when an IDT is properly set up)
+</li><li> give yourself the time about thinking whether you'll enable paging now or not. Keep in mind that debugging paging initialization code without the help of exception handlers may quickly become a nightmare!
+</li><li> it is possible to perform more initialization once protected mode is enabled and before kernel is loaded. This will, however, require that you mix 16 bits and 32bits code in a single object file, which can quickly become a nightmare too...
+</li></ul>
+<h2> <span class="mw-headline" id="You_have_long_way_to_continue..."> You have long way to continue... </span></h2>
+<p>Now, you are very distant from using extern and call function for C Code. You will need to enable <a href="A20" title="A20" class="mw-redirect">A20</a>, make something which reads images (so you can actually boot any .bin or .sys file), and so on.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 248/1000000
+Post-expand include size: 342/2097152 bytes
+Template argument size: 52/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1878-0!*!0!!en!2!* and timestamp 20180121034400 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Rolling_Your_Own_Bootloader&amp;oldid=21112">http://wiki.osdev.org/index.php?title=Rolling_Your_Own_Bootloader&amp;oldid=21112</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_2_Tutorials" title="Category:Level 2 Tutorials">Level 2 Tutorials</a></li><li><a href="Category:OS_Development" title="Category:OS Development">OS Development</a></li><li><a href="Category:Tutorials" title="Category:Tutorials">Tutorials</a></li><li><a href="Category:Bootloaders" title="Category:Bootloaders">Bootloaders</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Rolling_Your_Own_Bootloader" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Rolling_Your_Own_Bootloader"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Rolling_Your_Own_Bootloader"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Rolling_Your_Own_Bootloader#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Rolling_Your_Own_Bootloader" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Rolling_Your_Own_Bootloader&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Rolling_Your_Own_Bootloader&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Rolling_Your_Own_Bootloader#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Rolling_Your_Own_Bootloader" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchaskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Rolling_Your_Own_Bootloader" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Rolling_Your_Own_Bootloader" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Rolling_Your_Own_Bootloader&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Rolling_Your_Own_Bootloader&amp;oldid=21112" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Eigener_Bootloader" title="Eigener Bootloader">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 19 August 2017, at 13:13.</li>
+											<li id="footer-info-viewcount">This page has been accessed 167,671 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.039 secs. -->
+	</body>
+</html>

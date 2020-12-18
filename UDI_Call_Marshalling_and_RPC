@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>UDI Call Marshalling and RPC - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "UDI_Call_Marshalling_and_RPC", "wgTitle": "UDI Call Marshalling and RPC", "wgCurRevisionId": 16979, "wgArticleId": 3644, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Uniform Driver Interface", "Drivers", "Driver Interfaces"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-UDI_Call_Marshalling_and_RPC action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">UDI Call Marshalling and RPC</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="UDI_Call_Marshalling_and_RPC#mw-head">navigation</a>,
+					<a href="UDI_Call_Marshalling_and_RPC#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><br />
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="UDI_Call_Marshalling_and_RPC#Prerequisite_reading"><span class="tocnumber">1</span> <span class="toctext">Prerequisite reading</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="UDI_Call_Marshalling_and_RPC#UDI_Call_Marshalling"><span class="tocnumber">2</span> <span class="toctext">UDI Call Marshalling</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="UDI_Call_Marshalling_and_RPC#What_provisions_does_UDI_make_for_Call_Marshalling.3F"><span class="tocnumber">2.1</span> <span class="toctext">What provisions does UDI make for Call Marshalling?</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="UDI_Call_Marshalling_and_RPC#How_are_calls_to_be_marshalled_in_a_UDI_compliant_manner.3F"><span class="tocnumber">2.2</span> <span class="toctext">How are calls to be marshalled in a UDI compliant manner?</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="UDI_Call_Marshalling_and_RPC#Control_Block_Marshalling"><span class="tocnumber">2.3</span> <span class="toctext">Control Block Marshalling</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="UDI_Call_Marshalling_and_RPC#UDI_Layout_Descriptors"><span class="tocnumber">3</span> <span class="toctext">UDI Layout Descriptors</span></a></li>
+</ul>
+</td></tr></table>
+<h1> <span class="mw-headline" id="Prerequisite_reading"> Prerequisite reading </span></h1>
+<p>UDI Core Specification, Vol 1, Section 28.3: "Marshalling".
+UDI Core Specification, Vol 1, Section 28.4: "MEI Stubs".
+</p><p>Documentation for the following service call:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> udi_mei_call <span class="br0">&#40;</span>
+   udi_cb_t <span class="sy0">*</span>gcb<span class="sy0">,</span>
+   udi_mei_init_t <span class="sy0">*</span>meta_info<span class="sy0">,</span>
+   udi_index_t meta_ops_num<span class="sy0">,</span>
+   udi_index_t vec_idx<span class="sy0">,</span>
+   ... <span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>Documentation surrounding the following UDI abstract types:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> udi_ubit8_t udi_layout_t<span class="sy0">;</span>
+&#160;
+<span class="kw4">typedef</span> <span class="kw4">const</span> <span class="kw4">struct</span> <span class="br0">&#123;</span>
+	<span class="kw4">const</span> <span class="kw4">char</span> <span class="sy0">*</span>op_name<span class="sy0">;</span>
+	udi_ubit8_t op_category<span class="sy0">;</span>
+	udi_ubit8_t op_flags<span class="sy0">;</span>
+	udi_index_t meta_cb_num<span class="sy0">;</span>
+	udi_index_t completion_ops_num<span class="sy0">;</span>
+	udi_index_t completion_vec_idx<span class="sy0">;</span>
+	udi_index_t exception_ops_num<span class="sy0">;</span>
+	udi_index_t exception_vec_idx<span class="sy0">;</span>
+	udi_mei_direct_stub_t <span class="sy0">*</span>direct_stub<span class="sy0">;</span>
+	udi_mei_backend_stub_t <span class="sy0">*</span>backend_stub<span class="sy0">;</span>
+	udi_layout_t <span class="sy0">*</span>visible_layout<span class="sy0">;</span>
+	udi_layout_t <span class="sy0">*</span>marshal_layout<span class="sy0">;</span>
+<span class="br0">&#125;</span> udi_mei_op_template_t<span class="sy0">;</span></pre></div></div>
+<ul><li> <a rel="nofollow" class="external text" href="http://uw714doc.sco.com/en/man/html.3udi/udi_mei_op_template_t.3udi.html">udi_mei_op_template_t Online reference page</a>.
+</li><li> <a rel="nofollow" class="external text" href="http://uw714doc.sco.com/en/man/html.3udi/udi_layout_t.3udi.html">udi_layout_t Online reference page</a>.
+</li><li> <a rel="nofollow" class="external text" href="http://osr600doc.sco.com/en/man/html.UDI/udi_mei_call.UDI.html">udi_mei_call() Online reference page</a>.
+</li></ul>
+<p><i>Pay particular attention to the <tt>visible_layout</tt> and <tt>marshal_layout</tt> members of <tt>udi_mei_op_template_t</tt> for this article.</i>
+</p>
+<h1> <span class="mw-headline" id="UDI_Call_Marshalling"> UDI Call Marshalling </span></h1>
+<p>Call marshalling is the act of taking a function call from a caller, and packaging it such that it can cross one or more boundaries and remain intact and actionable by the callee when it eventually reaches the callee. That is, marshalling a call is the same as a Remote Procedure Call. It is the packaging of a function call such that it can be transported to a callee that is in a different logical environment from the caller. This concept is <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Marshalling_(computer_science)">not unique to UDI</a>, and a Google search will yield any number of results talking about the practice.
+</p><p>Reasons why one might need to marshal a UDI call could be:
+</p>
+<ul><li> Your kernel supports a very complex form of network-based compute clustering, and computers can share the devices on other computers, and use them as their own. In such a case, calls across machines may be very common.
+</li><li> Your drivers are separate-address-space, much like a microkernel's. You may need to send calls between drivers as messages which will have to cross between address spaces.
+</li></ul>
+<p>UDI recognizes the need for marshalling in microkernels and in distributed computing environments, and standardizes the call-marshalling approach for all UDI calls. <i>Marshalling is not usually needed by monolithic kernels since their drivers do not usually call across address spaces</i>.
+</p><p>For the most part, you will be able to ignore this feature and use it only for determining the total amount of memory required to marshal a call into a message for IPC. However, for very complex Operating Systems which may perform RPC over a network, this can be used to do very cool things, such as <b>endianness swapping</b> of integers and pointers, etc, for maximum portability. Such a scenario may be necessary if you are on a big-endian machine, and you are sending data to a little endian machine, for example. UDI's design extends gracefully and naturally to very large, high-scaling environments.
+</p>
+<h2> <span class="mw-headline" id="What_provisions_does_UDI_make_for_Call_Marshalling.3F"> What provisions does UDI make for Call Marshalling? </span></h2>
+<p>UDI standardizes the marshalling format for UDI Channel (aka, IPC) calls. In essence, the environment shall marshal calls according to the UDI specification if it expects to be sending channel calls across machines with Operating System software that does not match its own.
+</p><p>While it is best practice to use the UDI marshalling format for internal channel IPC between drivers within the same running Operating System, if you choose to use some other marshalling methodology, as long as your calls do not need to leave your own machine (and go across say, a distributed compute cluster), you should not encounter any problems -- but you'll have to do some extra work to call into the target driver on the callee side because of your choice. I will not be going into that in detail, because deviances from the specification are beyond the scope of the article.
+</p>
+<h2> <span class="mw-headline" id="How_are_calls_to_be_marshalled_in_a_UDI_compliant_manner.3F"> How are calls to be marshalled in a UDI compliant manner? </span></h2>
+<p>When a microkernel or distributed compute node is marshalling IPC or RPC, it should marshal them into a block of memory whose alignment matches <b>the natural data structure alignment of a C compiler</b>. The Generic Control Block is expected to be marshalled first; following this should be the Metalanguage-specific portion of the control block. Next, the function call arguments should be packed in after the completed control block, and finally any inline objects should come last.
+</p><p>If the receiving (callee) end of the IPC/RPC transaction is also UDI compliant, it will be able to successfully unpack the call and process it.
+</p>
+<h2> <span class="mw-headline" id="Control_Block_Marshalling"> Control Block Marshalling </span></h2>
+<p>If a function looks like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> udi_enumerate_ack<span class="br0">&#40;</span>
+	udi_enumerate_cb_t <span class="sy0">*</span>cb<span class="sy0">,</span>
+	udi_ubit8_t enumeration_result<span class="sy0">,</span>
+	udi_index_t ops_idx<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>And its control block looks like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> <span class="br0">&#123;</span>
+	udi_cb_t gcb<span class="sy0">;</span>
+	udi_ubit32_t child_ID<span class="sy0">;</span>
+	<span class="kw4">void</span> <span class="sy0">*</span>child_data<span class="sy0">;</span>
+	udi_instance_attr_list_t <span class="sy0">*</span>attr_list<span class="sy0">;</span>
+	udi_ubit8_t attr_valid_length<span class="sy0">;</span>
+	<span class="kw4">const</span> udi_filter_element_t <span class="sy0">*</span>filter_list<span class="sy0">;</span>
+	udi_ubit8_t filter_list_length<span class="sy0">;</span>
+	udi_ubit8_t parent_ID<span class="sy0">;</span>
+<span class="br0">&#125;</span> udi_enumerate_cb_t<span class="sy0">;</span></pre></div></div>
+<p>The Environment might marshal the call as follows: it would calculate the amount of memory required to hold all of the parameters for the IPC/RPC call, then allocate a block of memory, or an IPC message that could hold all of the parameters. The marshalled call would end up looking like this, if the environment that marshalled it is UDI compliant:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">struct</span>
+<span class="br0">&#123;</span>
+	udi_cb_t gcb<span class="sy0">;</span>
+	<span class="co1">// End of the Generic Control Block.</span>
+	udi_ubit32_t child_ID<span class="sy0">;</span>
+	<span class="kw4">void</span> <span class="sy0">*</span>child_data<span class="sy0">;</span>
+	udi_instance_attr_list_t <span class="sy0">*</span>attr_list<span class="sy0">;</span>
+	udi_ubit8_t attr_valid_length<span class="sy0">;</span>
+	<span class="kw4">const</span> udi_filter_element_t <span class="sy0">*</span>filter_list<span class="sy0">;</span>
+	udi_ubit8_t filter_list_length<span class="sy0">;</span>
+	udi_ubit8_t parent_ID<span class="sy0">;</span>
+	<span class="co1">// End of the METALANGUAGE VISIBLE portion of the control block.</span>
+	udi_ubit8_t enumeration_result<span class="sy0">,</span>
+	udi_index_t ops_idx<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* End of the function call arguments.
+	 *
+	 * From here on the environment will copy all of the data pointed to by
+	 * call. For example,
+	 *	udi_instance_attr_list_t *attr_list;
+	 *
+	 * This &quot;attr_list&quot; parameter points to an array of objects which will
+	 * need to be read by the callee. If this array is not also marshalled
+	 * and transmitted, the callee will be lacking a part of the call.
+	 * So following the function call arguments, we now begin marshalling
+	 * these &quot;inline objects&quot; that are pointed to by the procedure call.
+	 *
+	 * UDI refers to such objects as &quot;Inline objects&quot;, because they are
+	 * &quot;out of line&quot; with the rest of the procedure call, but pointed
+	 * to by pointers which are &quot;inline&quot; in the control block, and needed
+	 * by the callee.
+	 */</span>
+	<span class="sy0">&lt;</span>COPY HERE THE OBJECT POINTED TO BY <span class="st0">&quot;child_data&quot;</span><span class="sy0">&gt;</span>
+	<span class="sy0">&lt;</span>COPY HERE THE ARRAY FOR <span class="st0">&quot;attr_list&quot;</span><span class="sy0">&gt;</span>
+	<span class="co1">// End of &quot;attr_list&quot; array.</span>
+	<span class="sy0">&lt;</span>COPY HERE THE ARRAY FOR <span class="st0">&quot;filter_list&quot;</span><span class="sy0">&gt;</span>
+<span class="br0">&#125;</span> marshalled_udi_enumerate_ack_call<span class="sy0">;</span></pre></div></div>
+<h1> <span class="mw-headline" id="UDI_Layout_Descriptors"> UDI Layout Descriptors </span></h1>
+<p>The key UDI data type that will be discussed in this section is <a rel="nofollow" class="external text" href="http://uw714doc.sco.com/en/man/html.3udi/udi_layout_t.3udi.html">udi_layout_t</a>:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> udi_ubit8_t udi_layout_t<span class="sy0">;</span></pre></div></div>
+<p>The most obvious question that will be asked is, "How could the environment know how many arguments are in a function call? Or how large the data pointed to by it is?"
+</p><p>Because of the strictly defined interfaces in UDI, known as <a href="UDI_Metalanguages" title="UDI Metalanguages">Metalanguages</a>, all communications across UDI channels are well defined. And the Metalanguage libraries for each Metalanguage protocol also describe the function calls that are sent across them.
+</p><p>We will continue using the example from above, with the <tt>udi_enumerate_ack</tt> call. The <tt>udi_enumerate_ack</tt> call has:
+</p>
+<ul><li> A Generic Control Block (like every other function in UDI).
+</li><li> A set of Metalanguage <b>visible</b> members in its control block.
+</li><li> And function call arguments passed on the stack.
+</li></ul>
+<p>We saw how these were marshalled into the designated memory above. In the metalanguage library that defines the function "<tt>udi_enumerate_ack</tt>", there is an array of descriptors that gives the environment the layout of the parameters taken by <tt>udi_enumerate_ack</tt>. It looks something like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">static</span> udi_layout_t		udi_enumerate_ack_visible_layout<span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span>
+<span class="br0">&#123;</span>
+	UDI_DL_UBIT32_T<span class="sy0">,</span> UDI_DL_INLINE_UNTYPED<span class="sy0">,</span>
+	UDI_DL_MOVABLE_UNTYPED<span class="sy0">,</span> UDI_DL_UBIT8_T<span class="sy0">,</span>
+	UDI_DL_MOVABLE_UNTYPED<span class="sy0">,</span> UDI_DL_UBIT8_T<span class="sy0">,</span>
+	UDI_DL_UBIT8_T<span class="sy0">,</span>
+	UDI_DL_END
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&#160;
+<span class="kw4">const</span> <span class="kw4">static</span> udi_layout_t		udi_enumerate_ack_marshal_layout<span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span>
+	<span class="br0">&#123;</span> UDI_DL_UBIT8_T<span class="sy0">,</span> UDI_DL_INDEX_T<span class="sy0">,</span> UDI_DL_END <span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<p>The <tt>udi_enumerate_ack_<b>visible_layout</b></tt> describes the Metalanguage visible portion of the control block. The <tt>udi_enumerate_ack_<b>marshal_layout</b></tt> describes the stack arguments. <i>There are no descriptors anywhere for the Generic Control block portion of every call, because it is well known and never needs to be described. Generic Control Blocks have the same structure.</i>
+</p><p>In the real world, these two layout descriptors are found within the <tt><b>udi_mei_op_template_t</b></tt> entry for that function.
+</p><p>Each entry (UDI_DL_UBIT32_T, UDI_DL_INLINE_UNTYPED, etc) tells the environment how large the function parameter is expected to be. The entries are listed in order, so the ordering is also known to the environment. Using this information, the environment can safely marshal calls across various types of boundaries in a portable manner for any type of IPC or RPC operation.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 86/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3644-0!*!0!!en!*!* and timestamp 20180121041527 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=UDI_Call_Marshalling_and_RPC&amp;oldid=16979">http://wiki.osdev.org/index.php?title=UDI_Call_Marshalling_and_RPC&amp;oldid=16979</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Uniform_Driver_Interface" title="Category:Uniform Driver Interface">Uniform Driver Interface</a></li><li><a href="Category:Drivers" title="Category:Drivers">Drivers</a></li><li><a href="Category:Driver_Interfaces" title="Category:Driver Interfaces">Driver Interfaces</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=UDI_Call_Marshalling_and_RPC" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="UDI_Call_Marshalling_and_RPC"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:UDI_Call_Marshalling_and_RPC&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="UDI_Call_Marshalling_and_RPC#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="UDI_Call_Marshalling_and_RPC" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=UDI_Call_Marshalling_and_RPC&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=UDI_Call_Marshalling_and_RPC&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="UDI_Call_Marshalling_and_RPC#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/UDI_Call_Marshalling_and_RPC" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/UDI_Call_Marshalling_and_RPC" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=UDI_Call_Marshalling_and_RPC&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=UDI_Call_Marshalling_and_RPC&amp;oldid=16979" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 October 2014, at 04:23.</li>
+											<li id="footer-info-viewcount">This page has been accessed 2,820 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/UDI_Call_Marshalling_and_RPC" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/UDI_Call_Marshalling_and_RPC" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=UDI_Call_Marshalling_and_RPC&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=UDI_Call_Marshalling_and_RPC&amp;oldid=16979" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 October 2014, at 04:23.</li>
+											<li id="footer-info-viewcount">This page has been accessed 2,820 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

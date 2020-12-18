@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>TLS Encryption - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "TLS_Encryption", "wgTitle": "TLS Encryption", "wgCurRevisionId": 19263, "wgArticleId": 3913, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-python {line-height: normal;}
+.source-python li, .source-python pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for python
+ * CSS class: source-python, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.python.source-python .de1, .python.source-python .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.python.source-python  {font-family:monospace;}
+.python.source-python .imp {font-weight: bold; color: red;}
+.python.source-python li, .python.source-python .li1 {font-weight: normal; vertical-align:top;}
+.python.source-python .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.python.source-python .li2 {font-weight: bold; vertical-align:top;}
+.python.source-python .kw1 {color: #ff7700;font-weight:bold;}
+.python.source-python .kw2 {color: #008000;}
+.python.source-python .kw3 {color: #dc143c;}
+.python.source-python .kw4 {color: #0000cd;}
+.python.source-python .co1 {color: #808080; font-style: italic;}
+.python.source-python .coMULTI {color: #808080; font-style: italic;}
+.python.source-python .es0 {color: #000099; font-weight: bold;}
+.python.source-python .br0 {color: black;}
+.python.source-python .sy0 {color: #66cc66;}
+.python.source-python .st0 {color: #483d8b;}
+.python.source-python .nu0 {color: #ff4500;}
+.python.source-python .me1 {color: black;}
+.python.source-python .ln-xtra, .python.source-python li.ln-xtra, .python.source-python div.ln-xtra {background-color: #ffc;}
+.python.source-python span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-TLS_Encryption action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">TLS Encryption</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="TLS_Encryption#mw-head">navigation</a>,
+					<a href="TLS_Encryption#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>Once the <a href="TLS_Handshake" title="TLS Handshake">TLS Handshake</a> has been completed, the two parties can start communicating the way they would normally do. Only now, they do so by encrypting any message and sending a TLS Record instead. We will focus on this page about what happens when the TLS_DHE_RSA_WITH_AES_128_CBC_SHA cipher suite is used (see <a href="SSL/TLS" title="SSL/TLS">SSL/TLS</a> for more information about what this means)
+</p><p>At this point, any TLS packet -as sent on top of TCP- is of type Application Data (save TLS Alert messages) and looks like:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> __attribute__<span class="br0">&#40;</span><span class="br0">&#40;</span>packed<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	<span class="kw4">uint8_t</span> content_type<span class="sy0">;</span>  <span class="co1">// 0x17 for Application Data</span>
+	<span class="kw4">uint16_t</span> version<span class="sy0">;</span>      <span class="co1">// 0x0303 for TLS 1.2</span>
+	<span class="kw4">uint16_t</span> length<span class="sy0">;</span>       <span class="co1">// length of encrypted_data</span>
+        <span class="kw4">uint8_t</span> encrypted_data<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> TLSRecord<span class="sy0">;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Encrypting_.2F_Decrypting_data_with_AES_CBC">Encrypting / Decrypting data with AES CBC</span></h2>
+<p>Any encrypted data in this example is using AES 128-bit in CBC mode. AES encrypts 128-bit (16 bytes) blocks of data using a 128, 192 or 256-bit secret key. The CBC mode tells how to use AES to encrypt some plaintext which is not 16-bytes long (and no, you don't want to encrypt each 16-byte block <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Electronic_Codebook_.28ECB.29">independently</a>)
+</p><p>The following steps needs to be implemented:
+</p>
+<ul><li> Create an intermediary plaintext which concatenates:
+<ul><li> The 8-bytes sequence number. This number is 0 for handshake messages, 1 for the first application data message, 2 for the next application data message, etc.
+</li><li> The 1-byte content type (0x16 for a handshake message, 0x17 for an application data message)
+</li><li> The TLS version (0x0303)
+</li><li> The 2-bytes plaintext length
+</li><li> The original plaintext
+</li></ul>
+</li><li> Compute the MAC on that intermediary plaintext using HMAC+SHA1 and the client/server_write_MAC_key
+</li><li> The final plaintext will be the concatenation of [original plaintext] + [20-bytes MAC] + [CBC padding]. Because AES-CBC only encrypts data whose size is a multiple of 16, the CBC padding is composed of bytes to fill to 16 (16 full bytes if the plaintext size is already a multiple of 16). The value of each of those padding bytes is the length of the padding + 1. So in the case of a 16-bytes plaintext, the final plaintext would be [16-bytes plaintext] | [20 bytes MAC] | 0x0B0B0B0B0B0B0B0B0B0B0B0B
+</li><li> Come up with a random 16-bytes IV
+</li><li> Encrypt the final plaintext using the client/server_write_key and this IV
+</li><li> The ciphertext is the concatenation of IV + ciphertext
+</li></ul>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="python source-python"><pre class="de1"><span class="kw1">from</span> Crypto.<span class="me1">Hash</span> <span class="kw1">import</span> *
+<span class="kw1">from</span> Crypto.<span class="me1">Cipher</span> <span class="kw1">import</span> AES
+&#160;
+<span class="kw1">def</span> to_n_bytes<span class="br0">&#40;</span>number<span class="sy0">,</span> size<span class="br0">&#41;</span>:
+	h <span class="sy0">=</span> <span class="st0">'%x'</span>&#160;% number
+	s <span class="sy0">=</span> <span class="br0">&#40;</span><span class="st0">'0'</span>*<span class="br0">&#40;</span>size*<span class="nu0">2</span> - <span class="kw2">len</span><span class="br0">&#40;</span>h<span class="br0">&#41;</span><span class="br0">&#41;</span> + h<span class="br0">&#41;</span>.<span class="me1">decode</span><span class="br0">&#40;</span><span class="st0">'hex'</span><span class="br0">&#41;</span>
+	<span class="kw1">return</span> s
+&#160;
+<span class="kw1">def</span> encrypt<span class="br0">&#40;</span>plaintext<span class="sy0">,</span> iv<span class="sy0">,</span> key_AES<span class="sy0">,</span> key_MAC<span class="sy0">,</span> seq_num<span class="sy0">,</span> content_type<span class="br0">&#41;</span>:
+    <span class="kw3">hmac</span> <span class="sy0">=</span> HMAC.<span class="kw3">new</span><span class="br0">&#40;</span>key_MAC<span class="sy0">,</span> digestmod<span class="sy0">=</span>SHA<span class="br0">&#41;</span>
+    plaintext_to_mac <span class="sy0">=</span> to_n_bytes<span class="br0">&#40;</span>seq_num<span class="sy0">,</span> <span class="nu0">8</span><span class="br0">&#41;</span> + to_n_bytes<span class="br0">&#40;</span>content_type<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span> + <span class="st0">'<span class="es0">\x</span>03<span class="es0">\x</span>03'</span> + to_n_bytes<span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>plaintext<span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#41;</span> + plaintext
+    <span class="kw3">hmac</span>.<span class="me1">update</span><span class="br0">&#40;</span>plaintext_to_mac<span class="br0">&#41;</span>
+    mac_computed <span class="sy0">=</span> <span class="kw3">hmac</span>.<span class="me1">digest</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&#160;
+    cipher <span class="sy0">=</span> AES.<span class="kw3">new</span><span class="br0">&#40;</span>key_AES<span class="sy0">,</span> AES.<span class="me1">MODE_CBC</span><span class="sy0">,</span> iv<span class="br0">&#41;</span>
+    plaintext +<span class="sy0">=</span> mac_computed
+    padding_length <span class="sy0">=</span> <span class="nu0">16</span> - <span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>plaintext<span class="br0">&#41;</span>&#160;% <span class="nu0">16</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> padding_length <span class="sy0">==</span> <span class="nu0">0</span>:
+        padding_length <span class="sy0">=</span> <span class="nu0">16</span>
+&#160;
+    padding <span class="sy0">=</span> <span class="kw2">chr</span><span class="br0">&#40;</span>padding_length - <span class="nu0">1</span><span class="br0">&#41;</span> * padding_length
+    ciphertext <span class="sy0">=</span> cipher.<span class="me1">encrypt</span><span class="br0">&#40;</span>plaintext + padding<span class="br0">&#41;</span>
+&#160;
+    <span class="kw1">return</span> ciphertext
+&#160;
+<span class="kw1">def</span> decrypt<span class="br0">&#40;</span>message<span class="sy0">,</span> key_AES<span class="sy0">,</span> key_MAC<span class="sy0">,</span> seq_num<span class="sy0">,</span> content_type<span class="sy0">,</span> debug<span class="sy0">=</span><span class="kw2">False</span><span class="br0">&#41;</span>:
+    iv <span class="sy0">=</span> message<span class="br0">&#91;</span><span class="nu0">0</span>:<span class="nu0">16</span><span class="br0">&#93;</span>
+    cipher <span class="sy0">=</span> AES.<span class="kw3">new</span><span class="br0">&#40;</span>key_AES<span class="sy0">,</span> AES.<span class="me1">MODE_CBC</span><span class="sy0">,</span> iv<span class="br0">&#41;</span>
+    decoded <span class="sy0">=</span> cipher.<span class="me1">decrypt</span><span class="br0">&#40;</span>message<span class="br0">&#91;</span><span class="nu0">16</span>:<span class="br0">&#93;</span><span class="br0">&#41;</span>
+&#160;
+    padding <span class="sy0">=</span> to_int<span class="br0">&#40;</span>decoded<span class="br0">&#91;</span>-<span class="nu0">1</span>:<span class="br0">&#93;</span><span class="br0">&#41;</span> + <span class="nu0">1</span>
+    plaintext <span class="sy0">=</span> decoded<span class="br0">&#91;</span><span class="nu0">0</span>:-padding-<span class="nu0">20</span><span class="br0">&#93;</span>
+    mac_decrypted <span class="sy0">=</span> decoded<span class="br0">&#91;</span>-padding-<span class="nu0">20</span>:-padding<span class="br0">&#93;</span>
+&#160;
+    <span class="kw3">hmac</span> <span class="sy0">=</span> HMAC.<span class="kw3">new</span><span class="br0">&#40;</span>key_MAC<span class="sy0">,</span> digestmod<span class="sy0">=</span>SHA<span class="br0">&#41;</span>
+    plaintext_to_mac <span class="sy0">=</span> to_n_bytes<span class="br0">&#40;</span>seq_num<span class="sy0">,</span> <span class="nu0">8</span><span class="br0">&#41;</span> + to_n_bytes<span class="br0">&#40;</span>content_type<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span> + <span class="st0">'<span class="es0">\x</span>03<span class="es0">\x</span>03'</span> + to_n_bytes<span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>plaintext<span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#41;</span> + plaintext
+    <span class="kw3">hmac</span>.<span class="me1">update</span><span class="br0">&#40;</span>plaintext_to_mac<span class="br0">&#41;</span>
+    mac_computed <span class="sy0">=</span> <span class="kw3">hmac</span>.<span class="me1">digest</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&#160;
+    <span class="kw1">if</span> debug:
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'Decrypted: ['</span> + decoded.<span class="me1">encode</span><span class="br0">&#40;</span><span class="st0">'hex'</span><span class="br0">&#41;</span> + <span class="st0">']'</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'Plaintext: ['</span> + plaintext.<span class="me1">encode</span><span class="br0">&#40;</span><span class="st0">'hex'</span><span class="br0">&#41;</span> + <span class="st0">']'</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'MAC (decrypted): '</span> + to_hex<span class="br0">&#40;</span>mac_decrypted<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'MAC (computed):  '</span> + to_hex<span class="br0">&#40;</span>mac_computed<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">''</span><span class="br0">&#41;</span>
+&#160;
+    <span class="kw1">return</span> plaintext</pre></div></div>
+<h2> <span class="mw-headline" id="Another_Encryption:_AES_GCM_.28Optional.29">Another Encryption: AES GCM (Optional)</span></h2>
+<p>Another popular mode of operation used by TLS in conjunction with AES is the <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">Galois Counter Mode (GCM)</a>.
+</p><p>The Galois Counter Mode is basically the regular <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_.28CTR.29">Counter Mode</a> combined with its own authentication tag based on a Galois Field. As a result, GCM contains its own MAC (contrary to the CBC mode). The cryptographic hash mentioned in the cipher suite (e.g. SHA256 in TLS_DHE_RSA_WITH_AES_128_GCM_<b>SHA256</b>) is only used by the PRF and to generate the Encrypted Handshake Message.
+</p><p>As a result, the GCM does not require MAC keys, and needs less data from the key expansion:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="python source-python"><pre class="de1">keys <span class="sy0">=</span> PRF<span class="br0">&#40;</span>master_secret<span class="sy0">,</span> <span class="st0">&quot;key expansion&quot;</span><span class="sy0">,</span> server_random + client_random<span class="sy0">,</span> <span class="nu0">40</span><span class="br0">&#41;</span>
+&#160;
+<span class="co1"># We assume a 128-bit AES key</span>
+client_write_key <span class="sy0">=</span> keys<span class="br0">&#91;</span><span class="nu0">0</span>:<span class="nu0">16</span><span class="br0">&#93;</span>
+server_write_key <span class="sy0">=</span> keys<span class="br0">&#91;</span><span class="nu0">16</span>:<span class="nu0">32</span><span class="br0">&#93;</span>
+<span class="co1"># The IVs are only 4 bytes long</span>
+client_IV <span class="sy0">=</span> keys<span class="br0">&#91;</span><span class="nu0">32</span>:<span class="nu0">36</span><span class="br0">&#93;</span>
+server_IV <span class="sy0">=</span> keys<span class="br0">&#91;</span><span class="nu0">36</span>:<span class="nu0">40</span><span class="br0">&#93;</span></pre></div></div>
+<p>The GCM algorithm take as input an initialization vector (IV), the plaintext, an AES key as well as authenticated data. While those may vary depending on the use of GCM, TLS is using the following format:
+</p>
+<ul><li> The IV is a 12-bytes array composed of an implicit part and an explicit part
+<ul><li> The first four bytes (the implicit IV) are the client or server IV (depending on who's writing the message) which was derived from the master secret
+</li><li> The explicit IV is a 8-bytes random sequence
+</li></ul>
+</li><li> The Authenticated data is a concatenation of:
+<ul><li> The sequence number (8 bytes)
+</li><li> The content type (1 byte)
+</li><li> The TLS version (0x0303 for TLS 1.2)
+</li><li> The plaintext size (2 bytes) which should be the final encrypted message size minus 24 (8 for the IV, 16 for the MAC)
+</li></ul>
+</li></ul>
+<p>The output sent by TLS is the concatenation of:
+</p>
+<ul><li> The explicit IV (8 bytes). There is no need to send the implicit IV as both sides can derive it from the key expansion
+</li><li> The ciphertext, generated using the counter mode, and using the IV as an initial counter
+</li><li> The Authentication Tag (16 bytes), generated by a Galois Field operation (see below). If you technically do not need to verify the Authentication Tag for server messages, you need to compute the correct tag for encrypted data you send to the HTTPS server as it will verify it and ignore the communication if it is incorrect
+</li></ul>
+<p>Here is some pseudo Python code which encrypts a plaintext using the AES-CBC mode (you will need to implement your own GHASH function)
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="python source-python"><pre class="de1"><span class="kw1">def</span> encrypt<span class="br0">&#40;</span>plaintext<span class="sy0">,</span> key_AES<span class="sy0">,</span> seq_num<span class="sy0">,</span> content_type<span class="br0">&#41;</span>:
+    iv <span class="sy0">=</span> client_IV + <span class="kw3">os</span>.<span class="me1">urandom</span><span class="br0">&#40;</span><span class="nu0">8</span><span class="br0">&#41;</span>
+&#160;
+    <span class="co1"># Encrypts the plaintext</span>
+    plaintext_size <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>plaintext<span class="br0">&#41;</span>
+    counter <span class="sy0">=</span> Counter.<span class="kw3">new</span><span class="br0">&#40;</span>nbits<span class="sy0">=</span><span class="nu0">32</span><span class="sy0">,</span> prefix<span class="sy0">=</span>iv<span class="sy0">,</span> initial_value<span class="sy0">=</span><span class="nu0">2</span><span class="sy0">,</span> allow_wraparound<span class="sy0">=</span><span class="kw2">False</span><span class="br0">&#41;</span>
+    ciphertext <span class="sy0">=</span> AES.<span class="kw3">new</span><span class="br0">&#40;</span>AES_key<span class="sy0">,</span> AES.<span class="me1">MODE_CTR</span><span class="sy0">,</span> counter<span class="sy0">=</span>counter<span class="br0">&#41;</span>.<span class="me1">encrypt</span><span class="br0">&#40;</span>plaintext<span class="br0">&#41;</span>
+&#160;
+    <span class="co1"># Compute the Authentication Tag</span>
+    H <span class="sy0">=</span> to_int<span class="br0">&#40;</span>AES.<span class="kw3">new</span><span class="br0">&#40;</span>AES_key<span class="sy0">,</span> AES.<span class="me1">MODE_ECB</span><span class="br0">&#41;</span>.<span class="me1">encrypt</span><span class="br0">&#40;</span><span class="st0">'<span class="es0">\x</span>00'</span>*<span class="nu0">16</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    auth_data <span class="sy0">=</span> to_n_bytes<span class="br0">&#40;</span>seq_num<span class="sy0">,</span> <span class="nu0">8</span><span class="br0">&#41;</span> + to_n_bytes<span class="br0">&#40;</span>content_type<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span> + TLS_VERSION + to_n_bytes<span class="br0">&#40;</span>plaintext_size<span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+&#160;
+    auth_tag <span class="sy0">=</span> GHASH<span class="br0">&#40;</span>H<span class="sy0">,</span> auth_data<span class="sy0">,</span> ciphertext<span class="br0">&#41;</span>
+    auth_tag ^<span class="sy0">=</span> to_int<span class="br0">&#40;</span>AES.<span class="kw3">new</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">client_AES_key</span><span class="sy0">,</span> AES.<span class="me1">MODE_ECB</span><span class="br0">&#41;</span>.<span class="me1">encrypt</span><span class="br0">&#40;</span>iv + <span class="st0">'<span class="es0">\x</span>00'</span>*<span class="nu0">3</span> + <span class="st0">'<span class="es0">\x</span>01'</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    auth_tag <span class="sy0">=</span> to_bytes<span class="br0">&#40;</span>auth_tag<span class="br0">&#41;</span>
+&#160;
+    <span class="kw1">return</span> iv<span class="br0">&#91;</span><span class="nu0">4</span>:<span class="br0">&#93;</span> + ciphertext + auth_tag</pre></div></div>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 41/1000000
+Post-expand include size: 347/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3913-0!*!0!!*!2!* and timestamp 20180121080133 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=TLS_Encryption&amp;oldid=19263">http://wiki.osdev.org/index.php?title=TLS_Encryption&amp;oldid=19263</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=TLS_Encryption" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="TLS_Encryption"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:TLS_Encryption&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="TLS_Encryption#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="TLS_Encryption" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=TLS_Encryption&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=TLS_Encryption&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="TLS_Encryption#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/TLS_Encryption" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/TLS_Encryption" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=TLS_Encryption&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=TLS_Encryption&amp;oldid=19263" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 May 2016, at 16:57.</li>
+											<li id="footer-info-viewcount">This page has been accessed 1,443 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/TLS_Encryption" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/TLS_Encryption" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=TLS_Encryption&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=TLS_Encryption&amp;oldid=19263" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 May 2016, at 16:57.</li>
+											<li id="footer-info-viewcount">This page has been accessed 1,443 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.124 secs. -->
+	</body>
+</html>

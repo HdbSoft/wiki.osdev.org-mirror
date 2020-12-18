@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Optimizing - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Optimizing", "wgTitle": "Optimizing", "wgCurRevisionId": 21074, "wgArticleId": 2429, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Stubs"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Optimizing action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Optimizing</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Optimizing#mw-head">navigation</a>,
+					<a href="Optimizing#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><b>Optimization</b> is the practise of taking functioning code and modifying it in order to make it execute faster. Optimization is already discussed very thoroughly in other places for various userland problem domains, and below are a few areas that are important for operating system developers to consider.
+</p><p>Note that to fully understand the ideas on this page, it is important to have fairly good grasp of assembly (x86 examples will be used), and a thorough knowledge of the x86 architecture is a must. But you've already read the Intel CPU manuals, haven't you?
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Optimizing#When_and_What_to_Optimize"><span class="tocnumber">1</span> <span class="toctext">When and What to Optimize</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Optimizing#Things_to_Optimize"><span class="tocnumber">1.1</span> <span class="toctext">Things to Optimize</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Optimizing#Things_not_to_bother_Optimizing"><span class="tocnumber">1.2</span> <span class="toctext">Things not to bother Optimizing</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Optimizing#Things_not_to_Optimize"><span class="tocnumber">1.3</span> <span class="toctext">Things not to Optimize</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Optimizing#Compiler_Optimization"><span class="tocnumber">2</span> <span class="toctext">Compiler Optimization</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Optimizing#GCC"><span class="tocnumber">2.1</span> <span class="toctext">GCC</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Optimizing#Clang"><span class="tocnumber">2.2</span> <span class="toctext">Clang</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="Optimizing#Inline_Functions"><span class="tocnumber">3</span> <span class="toctext">Inline Functions</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Optimizing#The_Cache"><span class="tocnumber">4</span> <span class="toctext">The Cache</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Optimizing#CPU_Pipelines"><span class="tocnumber">5</span> <span class="toctext">CPU Pipelines</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Optimizing#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="Optimizing#Articles"><span class="tocnumber">6.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Optimizing#Threads"><span class="tocnumber">6.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="Optimizing#External_Links"><span class="tocnumber">6.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="When_and_What_to_Optimize">When and What to Optimize</span></h2>
+<p>Please take the following list with some common sense: your kernel might be different.
+</p>
+<h4> <span class="mw-headline" id="Things_to_Optimize">Things to Optimize</span></h4>
+<ul><li> <b>Deeply-nested loops.</b> If possible, try to eliminate some of the nesting of the loop. Any instruction taken out of a loop will have a <i>much</i> more significant speed impact than an instruction taken out of a general routine. If you run though a loop one million times, and there is just one "unnecessary line of code", then there is a significant portion of a second wasted, especially on slower computers. 
+</li><li> <b>Code that is run often.</b>
+</li><li> <b>Graphics code.</b>
+</li><li> <b>API code.</b>
+</li></ul>
+<h4> <span class="mw-headline" id="Things_not_to_bother_Optimizing">Things not to bother Optimizing</span></h4>
+<ul><li> <b>Boot code.</b> Code that only runs once (and doesn't take very long, such as loading an <a href="IDT" title="IDT" class="mw-redirect">IDT</a>), is not worth optimizing.
+</li></ul>
+<h4> <span class="mw-headline" id="Things_not_to_Optimize">Things not to Optimize</span></h4>
+<ul><li> <b>Untested or nonworking code.</b> If you try to prematurely optimize, you will almost certainly make any problems you might have worse. 'First make it run, then make it run fast.'
+</li><li> <b>Code that needs to retain clarity.</b> It is generally fairly hard to keep optimized code looking as neat and understandable as code that is designed to be easy to understand. Comments can help (and should be used anyway, especially to mark why optimizations were made).
+</li><li> <b>Crash recovery code.</b> This will depend on your personal stance. It may be a good idea to err on the side of caution and concentrate on stability of the recovery code, not speed.
+</li></ul>
+<h2> <span class="mw-headline" id="Compiler_Optimization">Compiler Optimization</span></h2>
+<p>Modern compilers (such as <a href="GCC" title="GCC">GCC</a>) provide inbuilt optimization logic, which is available to you without having to write (or remove) a single line of code. Enabling these compiler optimizations might seem to break previously functioning code; it is important to remember that this is because of bugs in your code that have been there all along, that are just exposed by the optimizations. One such example is when the <a href="Volatile_(keyword)" title="Volatile (keyword)">volatile</a> keyword is not used where necessary.
+</p><p>Another side-effect of optimization is that source-level debugging might not always produce the expected results, as variables or whole lines of code are optimized away.
+</p>
+<h3> <span class="mw-headline" id="GCC">GCC</span></h3>
+<p>To use compiler optimizations in GCC, simply add the -O(x) switch to the command line when compiling, where (x) is one of the following:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Switch
+</th>
+<th> Use
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> Disable optimization. (This is the default.)
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> Try to reduce code size and execution time, without performing any optimizations that take a great deal of compilation time.
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> Perform nearly all supported optimizations that do not involve a space-speed tradeoff.
+</td></tr>
+<tr>
+<td> 3 </td>
+<td> Perform nearly all supported optimizations <i>including</i> those involving a space-speed tradeoff.
+</td></tr>
+<tr>
+<td> s </td>
+<td> Optimize for size. This includes all optimizations from -O2 that do not typically increase code size, plus additional size-reducing optimizations.
+</td></tr>
+<tr>
+<td> g </td>
+<td> Turn on optimizations that do not interfere with debugging (see the <a rel="nofollow" class="external text" href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">GCC docs</a>). Available since 4.8.
+</td></tr></table>
+<p>Numerous sources suggest the existence of further optimization levels, like "-O4", "-O6" or "-O99"; but only -O0 through -O3 and -Os (and -Og since 4.8) are <i>documented</i> and can be relied on.
+</p><p>For more information, read the GCC manual; it lists the exact optimizations done at each level, plus some additional options not enabled at any of the above optimization levels.
+</p>
+<h3> <span class="mw-headline" id="Clang">Clang</span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Switch
+</th>
+<th> Use
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> Disable optimization. (This is the default.)
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> Try to reduce code size and execution time, without performing any optimizations that take a great deal of compilation time.
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> Perform nearly all supported optimizations that do not involve a space-speed tradeoff.
+</td></tr>
+<tr>
+<td> 3 </td>
+<td> Perform nearly all supported optimizations <i>including</i> those involving a space-speed tradeoff.
+</td></tr>
+<tr>
+<td> s </td>
+<td> Optimize for size. This includes all optimizations from -O2 that do not typically increase code size, plus additional size-reducing optimizations.
+</td></tr>
+<tr>
+<td> fast </td>
+<td> Optimize for speed. This includes all optimizations from -O3, as well as aggressive optimizations that may violate strict compliance with language standards.
+</td></tr>
+<tr>
+<td> z </td>
+<td> Optimize for size. Like -Os, but reduces code size even more.
+</td></tr></table>
+<p><b>ToDo: Describe Link-time optimizations.</b>
+</p>
+<h2> <span class="mw-headline" id="Inline_Functions">Inline Functions</span></h2>
+<p>The <b>inline</b> keyword is a way of requesting that the compiler insert the code instead of calling it. This means that if you create an inline function and then call it from another function, the compiler will try to replace your call with the function body (similar to a preprocessor define, but with none of its disadvantages). 
+</p><p>Inline functions save the clock cycles involved in actually calling a function (argument and return code pushes, call and return jump). Compared to preprocessor defines, they add type safety, and avoid side effects that make macros a hazard. Inlining can also be triggered on and off using compiler options so you can measure the size / speed tradeoff. On the downside, a normal function called from five different locations will only reside in memory once. If you inline that function, it will reside in memory five times. Your code becomes faster, but it also becomes bigger. It is important to note that the inline keyword is merely a request to the compiler, which the compiler can choose to ignore if it deems the size / speed tradeoff to be detrimental.
+</p><p>It is best to only use the <b>inline</b> keyword on small functions, where it is known to work best and to provide the largest speed boost. An example of small function is an accessor or a mutator inside a C++ class, or a function that simply sets the value. The inline keyword is simply specified before the function type, just like the <b>static</b> keyword:
+</p>
+<pre>
+inline int max_of_three(int x, int y, int z)
+{
+    if ( x &gt; y &amp;&amp; x &gt; z )
+        return x;
+    return ( y &gt; z )&#160;? y&#160;: z;
+}
+</pre>
+<h2> <span class="mw-headline" id="The_Cache">The Cache</span></h2>
+<dl><dd><i>Main article:</i> <a href="CPU_Caches" title="CPU Caches">CPU Caches</a>
+</dd></dl>
+<p>The CPU's cache contains a high-bandwidth store of currently used data. On a modern CPU, it usually takes 2 cycles to do a read or write from level 1 (L1) cache (compared with 1 cycle for a register), 5 cycles for level 2 (L2) cache, and perhaps around 30 cycle for main memory. As you can see, reading from memory is very expensive compared to reading from a register or cache. Unfortunately, this trade-off for speed comes at a size cost: L1 cache is only around 8KiB per processor core, with L2 cache sitting around 4MiB to 12MiB per Core 2 chip. For more information, see <a href="http://wikipedia.org/wiki/Memory_hierarchy" class="extiw" title="wikipedia:Memory hierarchy">this</a> Wikipedia entry.
+</p><p>Most processors try to keep the most recently used data in the two caches (though the method used can differ, check the manuals). For this reason, it pays to keep in mind what data is likely to be in the caches at any given time. If you, for example (and this is a very simplistic example), set your multitasking code to switch processes too fast, you'll waste a higher percentage of time going through cache 'flushes', refilling the cache with new data.
+</p>
+<h2> <span class="mw-headline" id="CPU_Pipelines">CPU Pipelines</span></h2>
+<center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=Optimizing&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles">Articles</span></h3>
+<ul><li> <a href="http://wiki.osdev.org/User:01000101/optlib/" title="User:01000101/optlib/">01000101's Optimized Library</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Threads">Threads</span></h3>
+<ul><li> <a href="http://forum.osdev.org/viewtopic.php?t=18119" class="extiw" title="topic:18119">01000101 asks about optimizing memcpy() and memset()</a>
+</li><li> <a href="http://forum.osdev.org/viewtopic.php?t=18063" class="extiw" title="topic:18063">A discussion on the best way to do multi-processor scheduling</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.eventhelix.com/realtimemantra/basics/optimizingcandcppcode.htm">Handy tips on optimizing C/C++ code.</a>
+</li><li> <a rel="nofollow" class="external text" href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">GCC Optimization Documentation.</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 114/1000000
+Post-expand include size: 813/2097152 bytes
+Template argument size: 10/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2429-0!*!0!!en!2!* and timestamp 20180121080131 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Optimizing&amp;oldid=21074">http://wiki.osdev.org/index.php?title=Optimizing&amp;oldid=21074</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Stubs" title="Category:Stubs">Stubs</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Optimizing" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Optimizing"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Optimizing"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Optimizing#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Optimizing" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Optimizing&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Optimizing&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Optimizing#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Optimizing" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Optimizing" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Optimizing&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Optimizing&amp;oldid=21074" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Codeoptimierung" title="Codeoptimierung">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 10 August 2017, at 06:15.</li>
+											<li id="footer-info-viewcount">This page has been accessed 16,963 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.080 secs. -->
+	</body>
+</html>

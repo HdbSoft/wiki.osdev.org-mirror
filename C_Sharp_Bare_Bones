@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>C Sharp Bare Bones - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "C_Sharp_Bare_Bones", "wgTitle": "C Sharp Bare Bones", "wgCurRevisionId": 19818, "wgArticleId": 3240, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 2 Tutorials", "Bare bones tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-csharp {line-height: normal;}
+.source-csharp li, .source-csharp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for csharp
+ * CSS class: source-csharp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.csharp.source-csharp .de1, .csharp.source-csharp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.csharp.source-csharp  {font-family:monospace;}
+.csharp.source-csharp .imp {font-weight: bold; color: red;}
+.csharp.source-csharp li, .csharp.source-csharp .li1 {font-weight: normal; vertical-align:top;}
+.csharp.source-csharp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.csharp.source-csharp .li2 {font-weight: bold; vertical-align:top;}
+.csharp.source-csharp .kw1 {color: #0600FF; font-weight: bold;}
+.csharp.source-csharp .kw2 {color: #FF8000; font-weight: bold;}
+.csharp.source-csharp .kw3 {color: #008000;}
+.csharp.source-csharp .kw4 {color: #6666cc; font-weight: bold;}
+.csharp.source-csharp .kw5 {color: #000000;}
+.csharp.source-csharp .co1 {color: #008080; font-style: italic;}
+.csharp.source-csharp .co2 {color: #008080;}
+.csharp.source-csharp .co3 {color: #008080;}
+.csharp.source-csharp .coMULTI {color: #008080; font-style: italic;}
+.csharp.source-csharp .es0 {color: #008080; font-weight: bold;}
+.csharp.source-csharp .es_h {color: #008080; font-weight: bold;}
+.csharp.source-csharp .br0 {color: #008000;}
+.csharp.source-csharp .sy0 {color: #008000;}
+.csharp.source-csharp .st0 {color: #666666;}
+.csharp.source-csharp .st_h {color: #666666;}
+.csharp.source-csharp .nu0 {color: #FF0000;}
+.csharp.source-csharp .me1 {color: #0000FF;}
+.csharp.source-csharp .me2 {color: #0000FF;}
+.csharp.source-csharp .ln-xtra, .csharp.source-csharp li.ln-xtra, .csharp.source-csharp div.ln-xtra {background-color: #ffc;}
+.csharp.source-csharp span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-text {line-height: normal;}
+.source-text li, .source-text pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for text
+ * CSS class: source-text, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.text.source-text .de1, .text.source-text .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.text.source-text  {font-family:monospace;}
+.text.source-text .imp {font-weight: bold; color: red;}
+.text.source-text li, .text.source-text .li1 {font-weight: normal; vertical-align:top;}
+.text.source-text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.text.source-text .li2 {font-weight: bold; vertical-align:top;}
+.text.source-text .ln-xtra, .text.source-text li.ln-xtra, .text.source-text div.ln-xtra {background-color: #ffc;}
+.text.source-text span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-C_Sharp_Bare_Bones action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">C Sharp Bare Bones</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="C_Sharp_Bare_Bones#mw-head">navigation</a>,
+					<a href="C_Sharp_Bare_Bones#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a><br />Medium</td></tr></table>
+<p>This tutorial is intended to help you write a simple 'Hello World' OS in <a href="C_Sharp" title="C Sharp"> C#</a> which you can then compile to machine code for the IA32 architecture and boot via <a href="GRUB" title="GRUB">GRUB</a>.  There are a number of tools for compiling C# to <a href="CIL" title="CIL">CIL</a>, including Microsoft's csc (distributed with <a rel="nofollow" class="external text" href="http://www.microsoft.com/net">Microsoft.NET</a>) and mcs/gmcs/dmcs (distributed with <a rel="nofollow" class="external text" href="http://www.mono-project.com">Mono</a>).  In addition there are a number of tools for compiling <a href="CIL" title="CIL">CIL</a> to native machine code in an ahead-of-time manner, including Microsoft's ngen, mono (with the --aot option), <a rel="nofollow" class="external text" href="http://gocosmos.org">Cosmos'</a> IL2CPU, mosacl from the <a rel="nofollow" class="external text" href="http://www.mosa-project.org/projects/mosa">MOSA project</a> and tysila from the <a rel="nofollow" class="external text" href="http://www.tysos.org/redmine/projects/tysos/">tysos</a> project.  Given the author's familiarity with tysos, that is what we will focus on here.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="C_Sharp_Bare_Bones#Prerequisites"><span class="tocnumber">1</span> <span class="toctext">Prerequisites</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="C_Sharp_Bare_Bones#Building_tysila"><span class="tocnumber">2</span> <span class="toctext">Building tysila</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="C_Sharp_Bare_Bones#Directory_layout"><span class="tocnumber">3</span> <span class="toctext">Directory layout</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="C_Sharp_Bare_Bones#loader.asm"><span class="tocnumber">3.1</span> <span class="toctext">loader.asm</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="C_Sharp_Bare_Bones#kernel.cs"><span class="tocnumber">3.2</span> <span class="toctext">kernel.cs</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="C_Sharp_Bare_Bones#linker.ld"><span class="tocnumber">3.3</span> <span class="toctext">linker.ld</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="C_Sharp_Bare_Bones#iso.2Fboot.2Fgrub.2Fgrub.cfg"><span class="tocnumber">3.4</span> <span class="toctext">iso/boot/grub/grub.cfg</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="C_Sharp_Bare_Bones#Building_it_all"><span class="tocnumber">4</span> <span class="toctext">Building it all</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Prerequisites">Prerequisites</span></h2>
+<p>You will need a binutils which can target the elf_i386 emulation, mono (for the gmcs compiler) or csc from .net, grub and its xorriso dependency (for generating iso images), <a href="NASM" title="NASM">NASM</a>/<a href="YASM" title="YASM">YASM</a>/something similar for the assembly stub and of course tysila.  For debian-based systems try sudo apt-get install nasm xorriso qemu mono-devel.
+</p><p>For tysila, you can download pre-compiled binaries from <a rel="nofollow" class="external free" href="http://www.tysos.org/files/tysila/tysila-latest.tar.bz2">http://www.tysos.org/files/tysila/tysila-latest.tar.bz2</a> and extract them to somewhere in your path.  Please note these binaries will not work on 64-bit Windows due to a bug in the current Microsoft CLR (see <a rel="nofollow" class="external text" href="http://connect.microsoft.com/VisualStudio/feedback/details/635365/runtimehelpers-initializearray-fails-on-64b-framework">here</a>) so instead you must build it from source.
+</p>
+<h2> <span class="mw-headline" id="Building_tysila">Building tysila</span></h2>
+<p>This is only required if you have not downloaded the pre-compiled binaries above.  Use subversion to get the latest sources 'svn co <a rel="nofollow" class="external free" href="http://www.tysos.org/svn/trunk">http://www.tysos.org/svn/trunk</a> tysos', or download the latest tar ball from <a rel="nofollow" class="external free" href="http://www.tysos.org/files/src/tysos-latest.tar.bz2">http://www.tysos.org/files/src/tysos-latest.tar.bz2</a>.  Tysos is a project developing a full OS kernel and drivers in C#, however we only want the compiler from it therefore we only want to compile part of the build tree.  Enter the tysos directory and run
+</p>
+<pre>
+cd tybuild &amp;&amp; make &amp;&amp; cd ..
+cd mono/corlib &amp;&amp; make mscorlib.dll &amp;&amp; cd ../..
+cd tysila2 &amp;&amp; make &amp;&amp; cd ..
+</pre>
+<p>You will need to put the mono/corlib/mscorlib.dll, tysila2/bin/Release/tysila2.exe, tysila2/bin/Release/libsupcs.dll, tysila2/bin/Release/libtysila.dll, tysila2/bin/Release/tydbfile.dll, tysila2/bin/Release/tydisasm.dll and tybuild/bin/Release/tybuild.exe files somewhere in your path.
+</p><p>You may need to enable binfmt_misc support for mono (if trying this on linux).  How to do this is outside the scope of this document but the answer is easily obtained via Google.
+</p>
+<h2> <span class="mw-headline" id="Directory_layout">Directory layout</span></h2>
+<p>We will create a directory to build our OS and ISO file in.  Something like mkdir -p barebones/iso/boot/grub should suffice.  Enter the barebones directory and start creating some files.
+</p>
+<h3> <span class="mw-headline" id="loader.asm">loader.asm</span></h3>
+<p>This is the assembly stub which will contain a Multiboot header.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">global sthrow
+&#160;
+<span class="kw4">extern</span> kmain
+&#160;
+MODULEALIGN      <span class="kw4"> equ</span>     <span class="nu0">1</span>&lt;&lt;<span class="nu0">0</span>
+MEMINFO          <span class="kw4"> equ</span>     <span class="nu0">1</span>&lt;&lt;<span class="nu0">1</span>
+FLAGS            <span class="kw4"> equ</span>     MODULEALIGN | MEMINFO
+MAGIC            <span class="kw4"> equ</span>     <span class="nu0">0x1BADB002</span>
+CHECKSUM         <span class="kw4"> equ</span>     <span class="sy0">-</span><span class="br0">&#40;</span>MAGIC <span class="sy0">+</span> FLAGS<span class="br0">&#41;</span>
+&#160;
+section <span class="sy0">.</span>text
+&#160;
+<span class="kw4">align</span> <span class="nu0">4</span>
+<span class="kw4">dd</span> MAGIC
+<span class="kw4">dd</span> FLAGS
+<span class="kw4">dd</span> CHECKSUM
+&#160;
+sthrow<span class="sy0">:</span>
+    <span class="kw1">hlt</span>
+    <span class="kw1">jmp</span> sthrow</pre></div></div>
+<h3> <span class="mw-headline" id="kernel.cs">kernel.cs</span></h3>
+<p>This is the actual simple kernel - it just prints a message to the screen.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="csharp source-csharp"><pre class="de1"><span class="kw1">namespace</span> BareBones
+<span class="br0">&#123;</span>
+    <span class="kw4">class</span> Program
+    <span class="br0">&#123;</span>
+        <span class="kw1">static</span> <span class="kw4">int</span> pos <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&#160;
+        <span class="kw1">unsafe</span> <span class="kw1">static</span> <span class="kw4">void</span> Main<span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            <span class="co1">// Clear the screen</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">80</span> <span class="sy0">*</span> <span class="nu0">25</span> <span class="sy0">*</span> <span class="nu0">2</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+                <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">byte</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>0xb8000 <span class="sy0">+</span> i<span class="br0">&#41;</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&#160;
+            <span class="co1">// Say hi</span>
+            Print<span class="br0">&#40;</span><span class="st0">&quot;Hello World!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&#160;
+        <span class="kw1">static</span> <span class="kw4">void</span> Print<span class="br0">&#40;</span><span class="kw4">string</span> s<span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            <span class="kw1">foreach</span><span class="br0">&#40;</span><span class="kw4">char</span> c <span class="kw1">in</span> s<span class="br0">&#41;</span>
+                Print<span class="br0">&#40;</span>c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&#160;
+        <span class="kw1">unsafe</span> <span class="kw1">static</span> <span class="kw4">void</span> Print<span class="br0">&#40;</span><span class="kw4">char</span> c<span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">byte</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>0xb8000 <span class="sy0">+</span> pos<span class="br0">&#41;</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">byte</span><span class="br0">&#41;</span>c<span class="sy0">;</span>
+            <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">byte</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>0xb8000 <span class="sy0">+</span> pos <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">=</span> 0x0f<span class="sy0">;</span>
+            pos <span class="sy0">+=</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="linker.ld">linker.ld</span></h3>
+<p>The linker script
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">ENTRY (_start)
+&#160;
+SECTIONS
+{
+    . = 0x00100000;
+&#160;
+    .text ALIGN(0x1000)&#160;:
+    {
+        *(.text)
+    }
+&#160;
+    .rodata ALIGN(0x1000)&#160;:
+    {
+        *(.rodata*)
+    }
+&#160;
+    .data ALIGN(0x1000)&#160;:
+    {
+        *(.data)
+    }
+&#160;
+    .bss ALIGN(0x1000)&#160;:
+    {
+        *(COMMON)
+        *(.bss)
+    }
+}</pre></div></div>
+<h3> <span class="mw-headline" id="iso.2Fboot.2Fgrub.2Fgrub.cfg">iso/boot/grub/grub.cfg</span></h3>
+<p>This is a short file to tell grub where to find our kernel
+</p>
+<pre>
+multiboot /kernel.bin
+boot
+</pre>
+<h2> <span class="mw-headline" id="Building_it_all">Building it all</span></h2>
+<p>The following commands should build your new C# kernel.  First, assemble the multiboot stub:
+</p>
+<pre>nasm -felf -o loader.o loader.asm</pre>
+<p>To compile the .cs file to a .exe you have a choice of three options (depending on your architecture):
+</p>
+<pre>
+gmcs /target:exe /out:kernel.exe /unsafe kernel.cs
+csc /target:exe /out:kernel.exe /unsafe kernel.cs
+tybuild.exe /unsafe kernel.cs
+</pre>
+<p>To compile kernel.exe to machine code we use tysila:
+</p>
+<pre>tysila2.exe --arch i586-elf-tysos -fno-rtti -o kernel.o kernel.exe</pre>
+<p>Here, the -fno-rtti switch disables run-time type information, support for which would greatly enlarge the size of your kernel and require you to provide a great number of run time functions to support this.
+</p><p>To link:
+</p>
+<pre>ld -m elf_i386 -T linker.ld -o iso/kernel.bin loader.o kernel.o</pre>
+<p>Then we make a bootable iso image with:
+</p>
+<pre>grub-mkrescue -o barebones.iso iso</pre>
+<p>And run it on qemu with:
+</p>
+<pre>qemu-system-i386 -cdrom barebones.iso</pre>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 204/1000000
+Post-expand include size: 342/2097152 bytes
+Template argument size: 52/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3240-0!*!0!!en!2!* and timestamp 20180121041351 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=C_Sharp_Bare_Bones&amp;oldid=19818">http://wiki.osdev.org/index.php?title=C_Sharp_Bare_Bones&amp;oldid=19818</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_2_Tutorials" title="Category:Level 2 Tutorials">Level 2 Tutorials</a></li><li><a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=C_Sharp_Bare_Bones" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="C_Sharp_Bare_Bones"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:C_Sharp_Bare_Bones"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="C_Sharp_Bare_Bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="C_Sharp_Bare_Bones" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=C_Sharp_Bare_Bones&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=C_Sharp_Bare_Bones&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="C_Sharp_Bare_Bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/C_Sharp_Bare_Bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/C_Sharp_Bare_Bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=C_Sharp_Bare_Bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=C_Sharp_Bare_Bones&amp;oldid=19818" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 15 September 2016, at 09:29.</li>
+											<li id="footer-info-viewcount">This page has been accessed 15,986 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scriptsskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/C_Sharp_Bare_Bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/C_Sharp_Bare_Bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=C_Sharp_Bare_Bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=C_Sharp_Bare_Bones&amp;oldid=19818" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 15 September 2016, at 09:29.</li>
+											<li id="footer-info-viewcount">This page has been accessed 15,986 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

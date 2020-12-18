@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Program Memory Allocation Types - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Program_Memory_Allocation_Types", "wgTitle": "Program Memory Allocation Types", "wgCurRevisionId": 21692, "wgArticleId": 4211, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Memory management"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Program_Memory_Allocation_Types action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Program Memory Allocation Types</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Program_Memory_Allocation_Types#mw-head">navigation</a>,
+					<a href="Program_Memory_Allocation_Types#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><b>NB:</b> <i>The original version of this was based on a <a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?f=13&amp;t=29829&amp;start=45%7Cforum">post</a> discussing automatic memory management.</i>
+</p><p>By it's nature, a program's thread of execution require a certain amount of memory for storing both code and data during its operation. While some of this memory usage can be determined statically when a program is compiled or assembled, most programs also have some memory use which cannot be until the program is loaded into memory, and in many cases, there is some whose size can only be determined over the course of the program execution. 
+</p><p>There are four general models of memory usage in most programs, including operating systems: <i>read-only memory</i>, <i>static global memory</i>, <i>lexically allocated memory</i>, and <i>dynamically allocated memory</i>. All programs use the first two to some degree, the overwhelming majority of programs use the third (and most programming languages are designed to apply it as a matter of course), and the fourth is used in a significant proportion of programs, including any program in a language which implements <a href="Garbage_collection" title="Garbage collection">Garbage collection</a> as a primary language feature.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Program_Memory_Allocation_Types#Read-Only_Memory"><span class="tocnumber">1</span> <span class="toctext">Read-Only Memory</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Program_Memory_Allocation_Types#Global_Memory"><span class="tocnumber">2</span> <span class="toctext">Global Memory</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Program_Memory_Allocation_Types#Lexically-allocated_memory"><span class="tocnumber">3</span> <span class="toctext">Lexically-allocated memory</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="Program_Memory_Allocation_Types#Stack_Allocation"><span class="tocnumber">3.1</span> <span class="toctext">Stack Allocation</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Program_Memory_Allocation_Types#Dynamically_Allocated_Memory"><span class="tocnumber">4</span> <span class="toctext">Dynamically Allocated Memory</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Read-Only_Memory"> Read-Only Memory </span></h2>
+<p>Read-only memory, as the name implies, is a region of memory in which constant values are stored; the program should never attempt to change the values of addresses in read-only memory. This includes the memory for the program code (often called the <i>.text section</i>), as well as data constants (the <i>.rodata section</i>). In some instances, a compiler may place constants representing program literals (e.g., quoted strings, hard-coded numeric values) in .rodata as well.
+</p><p>Most modern systems incorporate some form of hardware page or segment protection, to prevent read-only memory from be altered. Trying to change something in read-only memory on such systems will result in a memory protection fault of some kind. Management of read-only memory sections is by necessity a function of the operating system for both the system itself and for userspace applications.
+</p>
+<h2> <span class="mw-headline" id="Global_Memory"> Global Memory </span></h2>
+<p>Global memory is used for storing variables which are in scope to the entire program and whose size is known when a process is launched (in most cases, it can be determined at . This is a fixed amount of space given to the program when it starts, and cannot be increased or decreased. 
+</p><p>Some global memory may be initialized when the program starts, using values that are part of the executable image, but there may be a separate area of global memory (usually referred to as the <i>.bss section</i>) is simply an amount of memory that the loader clears when the program starts - the executable file just stores the size of the .bss section, to avoid having a large blob of useless empty memory in the file.
+</p>
+<h2> <span class="mw-headline" id="Lexically-allocated_memory">Lexically-allocated memory</span></h2>
+<p>Lexically-allocated memory, also called function local memory, is memory which is automatically allocated in a block when a function begins and deallocated when it returns. It can be seen as an area of 'scratch memory' which the program can use for temporary values whose lifespan is determined by the running time of the function which is using it, and can always be automatically reclaimed for reuse after the function exits.
+</p><p>In many cases, program is given a large, but fixed, block of memory for this purpose, whose size can generally be set when the program is launched; whether the program can request for additional memory for this block, and how, is a matter of OS design. While a process is in principle free to use this memory as it chooses, most operating systems and high-level languages impose standard conventions on the use to ensure the basic purpose - memory automatically allocated on function entry and automatically freed on function exit - is enforced, and many CPU instruction sets have hardware support for these conventions. 
+</p><p>The function's local memory is structured as an <i>activation record</i> or <i>activation frame</i>, which contains the function's local variables (or references to them), as well as means of accessing the function's arguments and the address which the function should return to when it exits. Most of the time, the size of an activation record is fixed at compile time, but some kinds of local variables (most notably strings) can be dynamically sized for a given function invocation in some languages, so long as it doesn't change once the activation record is created. 
+</p><p>Since functions may call other functions, or even call themselves recursively, in general each call to a function has to be provided with a separate activation record. This ensures that a given function has it's own versions of each of it's variables; this means that recursive calls do not overwrite the caller's variables. The variables are thus managed in a 'Last In, First Out' (LIFO) fashion, a fact which is used by most systems in implementing the activation records, as will be described below in the section on <i>stack allocation</i>.
+</p><p>The primary exception to this is when the last action a function performs is a call to another function, which is known as a <i>tail call</i>. In this instance, the compiler can reduce the short-term memory load by means of <i>Tail Call Optimization</i>, in which the existing activation record is reused for the function it is calling. Many compilers offer TCO as an optimization option, and some languages mandate it either as an default for all tail calls, or as something which can be specified through language pragmas.
+</p>
+<h3> <span class="mw-headline" id="Stack_Allocation"> Stack Allocation </span></h3>
+<p>Stack allocation is a widely used method for implementing lexically-scoped memory allocation. Because activation records are created and free in a 'LIFO' order, it is possible to push the activation records (or at least a reference to it) onto a stack data structure. This <i>program stack</i> has been near-ubiquitous for languages designed after the early 1960s, and many ISAs have either hardware support for the program stack, or a register convention that amounts to the same effect.
+</p><p>The general model for a register-based stack is to have a set of registers set aside as pointers that define both the total size of the stack, and it's current state. The mechanisms for sizing the <i>.stack section</i> vary, but the basic mechanism for manipulating them are more or less universal.
+</p><p>The stack's dynamic state is defined by a <i>stack pointer</i>, a counter which points to the address on the stack where the most recently added element is found. When a new element is <i>pushed</i> onto the stack, the stack pointer is decremented (for a stack that grows downward - for a variety of reasons, most hardware stacks grow down by default, so the rest of this discussion assume this direction), and the data for the new top of the stack is copied to the location addressed by the stack pointer.
+</p><p>When an element is <i>popped off</i> of the stack, the stack pointer is incremented by the same amount, which has the effect of freeing the memory used for the previous top element.
+</p><p>To manage an activation record on a stack, a second register, the  <i>base pointer</i> (also called a <i>frame pointer</i>), which points into the stack data, is used. 
+</p><p>When a function is to be called, the caller pushes the function's arguments onto the stack in an order defined by a <i><a href="Calling_Convention" title="Calling Convention" class="mw-redirect">Calling Convention</a></i>, which defines the order in which arguments and local variables are stored. Depending on the convention, saving the caller's own state (e.g., the registers it is actively using) may be the caller's responsibility, or that of the called function, or be some combination of the two (e.g., certain registers may be 'sacred' and have to be preserved by the called function, while others can be used freely by the function and it is up to the caller to save them before the call). 
+</p><p>The calling convention may also specify that some or all of the arguments be passed  in registers rather than on the stack, to reduce memory use and call overhead, which could affect what the caller needs to preserve for its own use. 
+</p><p>Once the arguments are pushed, the call to the function is made by pushing the address just past the current one (the one where the call is made from) as the <i>return address</i> for the function, and jumping to the <i>entry point</i> of the called function. Some ISAs have a special instruction for this purpose, which either pushed the value to the stack directly, or stores it into a return address register; for example, the <b>CALL</b> instruction on the Intel x86 instruction set. When a return-address register is used instead, the function would be responsible for saving it's own return address in its activation record explicitly, though this does allow a function that does no function calls of it's own to avoid the overhead of pushing the address.
+</p><p>When control is passed to the function, the function has to first save the current base pointer (the base pointer of the calling function). It then copies the current stack pointer to the base pointer, which can then be used as a base for offsets up into the arguments, or down into local variables. Finally, the stack is decremented by the sum total amount of memory needed for all of the function's local variables.
+</p><p>When a the function exits, the function copies it's base pointer back to the stack pointer, then pushes the caller's base to the base pointer, which has the effect of restoring the stack to the point of the function's entry. It then can return to the caller, often through a special instruction such <b>RET</b> on the x86 (which also removes the return address from the stack).
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="Dynamically_Allocated_Memory"> Dynamically Allocated Memory </span></h2>
+<p><i>Dynamic memory</i>, also called <i>Heap Memory</i>, is memory used for data when neither the size nor the lifespan of the variable is known beforehand. This a region of memory that can be allocated to programs in pieces, at run time, without being automatically reclaimed when the function that allocated it ends (some languages have a special means of reclaiming dynamic memory after it is no longer in use called garbage collection, but that's not relevant here). Most operating systems have a system call to allow the program to request that the system allocate enough memory to hold one or more values of a given type; it returns a pointer to the newly allocated memory space. There usually is a corresponding system call which allows the program to return the allocated memory to the system. In between allocation and release, the memory becomes available for use, so long as there is at least one pointer to the memory block; you can pass the address of that memory around from one pointer to another, treating it as if it were the same as a pointer to any other non-constant memory. However, once the system releases that memory, the pointers to the memory are all invalid, and should not be used - preferably, you should null them after releasing the memory they point to. When the process exits, the operating system (should) release the memory used, even if it wasn't deallocated, but as long as the program is running, the memory will still be allocated until freed.
+</p><p>There are just three rules to follow with dynamic memory: don't lose the starting address of the memory block, or you won't be able to deallocate later; always remember to deallocate it after you are done with it; and don't try to access the memory after it has been deallocated. These rules are trickier to follow than they sound, however, as it is easy to lose track of where the memory is and how you are using it at any given time. Failing to release memory when it is finished is a memory leak, while a pointer that points to a freed block i(or one that is invalid for some other reason) s a wild pointer.
+</p><p>So, if it is so complicated, why bother with dynamic memory? Because you can make arrays of arbitrary size without knowing how big it has to be beforehand. Also, you can use it to allocate structures with pointers in them, which can then point to other dynamically allocated memory, letting you chain the allocated memory into more complex data structures such as lists and trees. It simply wouldn't be practical to make these structures without dynamic allocation.
+</p><p>This brings us to application memory management. Most of the time, programs do not fetch a new block of memory each and every time they need one; the overhead of system calls is too high, and it potentially can slow the whole system down as the OS manages the allocations. So the usual practice is to allocate larger blocks of memory than is actually needed, and have use that as a kind of scratch space for allocating memory from. The allocations and frees are usually wrapped up in a pair of library functions corresponding to the system calls, and the program only calls the OS again if it needs more. The local allocator has to keep track of the local heap memory, but usually this isn't too complicated.
+</p><p>However, this leaves the programmer to keep track of the actual pointers to the memory, which can be very complicated indeed. For this reason, various approaches for automating memory management have been devised, with <a href="Garbage_collection" title="Garbage collection">Garbage collection</a> being the most common (though a related form called 'reference counting' is often used as well, and often confused with it). Basically, in garbage collection, the library functions require the program to get all pointer variables from the allocator, and a part of the program - the garbage collector - checks periodically to see if the blocks of allocated memory still have any pointers pointing at them. When a block has no pointers to it, the allocator frees it for the program, without any action on the part of the programmer. Older garbage collectors had to stop the program in order to do this, but some modern multithreaded ones can do so in parallel to the program's other threads.
+</p><p>While GC is most associated with interpreters, it is applicable to compiled code as well - it was originally developed for the original Lisp 1.5 compiler in 1961. It is possible to use a garbage collector as a library and requiring the programmer to follow the GC discipline, but it is far more common for it to be implemented in the language itself. It has a number of other advantages for both security and simplicity, especially in scripting languages - it allows the language translator to abstract away the allocation and deallocation of variable memory entirely - but there are distinct costs to it as well. There are endless variations on garbage collection meant to reduce the overhead of doing the collection, but a certain amount of overhead is inevitable when garbage collection is used.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 29/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4211-0!*!0!!en!*!* and timestamp 20180121055746 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Program_Memory_Allocation_Types&amp;oldid=21692">http://wiki.osdev.org/index.php?title=Program_Memory_Allocation_Types&amp;oldid=21692</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Memory_management" title="Category:Memory management">Memory management</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Program_Memory_Allocation_Types" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Program_Memory_Allocation_Types"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Program_Memory_Allocation_Types&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Program_Memory_Allocation_Types#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Program_Memory_Allocation_Types" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Program_Memory_Allocation_Types&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Program_Memory_Allocation_Types&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Program_Memory_Allocation_Types#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+	skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Program_Memory_Allocation_Types" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Program_Memory_Allocation_Types" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Program_Memory_Allocation_Types&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Program_Memory_Allocation_Types&amp;oldid=21692" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 18 November 2017, at 19:48.</li>
+											<li id="footer-info-viewcount">This page has been accessed 499 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.037 secs. -->
+	</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>AMD PCNET - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "AMD_PCNET", "wgTitle": "AMD PCNET", "wgCurRevisionId": 20775, "wgArticleId": 3177, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Network Hardware"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-AMD_PCNET action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">AMD PCNET</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="AMD_PCNET#mw-head">navigation</a>,
+					<a href="AMD_PCNET#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The <b>AMD PCNET</b> family of network interface chips are supported by most popular virtual machines and emulators, including QEMU, VMware and VirtualBox. While not as simple as the <a href="RTL8139" title="RTL8139">RTL8139</a> it is easier to test with an emulator, as the RTL8139 is only supported in QEMU, and getting QEMU's full network support running is sometimes difficult. This article will focus on the Am79C970A a.k.a. the AMD PCnet-PCI II in VirtualBox.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="AMD_PCNET#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="AMD_PCNET#Initialization_and_Register_Access"><span class="tocnumber">2</span> <span class="toctext">Initialization and Register Access</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="AMD_PCNET#PCI_Configuration"><span class="tocnumber">2.1</span> <span class="toctext">PCI Configuration</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="AMD_PCNET#Card_register_access"><span class="tocnumber">2.2</span> <span class="toctext">Card register access</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="AMD_PCNET#Interrupt_handling"><span class="tocnumber">2.3</span> <span class="toctext">Interrupt handling</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="AMD_PCNET#SWSTYLE"><span class="tocnumber">2.4</span> <span class="toctext">SWSTYLE</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="AMD_PCNET#ASEL"><span class="tocnumber">2.5</span> <span class="toctext">ASEL</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="AMD_PCNET#Ring_buffers"><span class="tocnumber">2.6</span> <span class="toctext">Ring buffers</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="AMD_PCNET#Card_registers_setup"><span class="tocnumber">2.7</span> <span class="toctext">Card registers setup</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="AMD_PCNET#Sending_packets"><span class="tocnumber">3</span> <span class="toctext">Sending packets</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="AMD_PCNET#Handling_interrupts_and_receiving_packets"><span class="tocnumber">4</span> <span class="toctext">Handling interrupts and receiving packets</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="AMD_PCNET#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="AMD_PCNET#External_Links"><span class="tocnumber">5.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Overview"> Overview </span></h2>
+<p>The PCnet-PCI II is a PCI network adapter.  It has built-in support for CRC checks and can automatically pad short packets to the minimum Ethernet length.
+</p><p>It supports PCI bus mastering and can operate in both 32-bit mode and a legacy 16-bit compatibility mode (this mode is from now on referred to as software style, or SWSTYLE).  Access to the card's registers are through an index/data register system in either IO port space or memory mapped IO.  Given that the MMIO access is sometimes absent on emulators or certain systems, this article will focus on the IO port access.  A final distinction is made between the actual accesses to the index/data registers, which can either be 16-bit or 32-bit.  The 32-bit mode is referred to as DWIO in the specifications (as it implies the DWIO bit is set in a particular register).  Note that any combination of DWIO and SWSTYLE can be selected.
+</p>
+<h2> <span class="mw-headline" id="Initialization_and_Register_Access"> Initialization and Register Access </span></h2>
+<h3> <span class="mw-headline" id="PCI_Configuration"> PCI Configuration </span></h3>
+<p>In the PCI configuration space, the card has vendor ID 0x1022 and device ID 0x2000.  A separate similar device (PCnet-PCI III and clones) has device ID 0x2001 and is programmed similarly.
+</p>
+The first task of the driver should be to enable the IO ports and bus mastering ability of the device in PCI configuration space.  This is done by setting bits 0 and 2 of the control register, e.g. <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">uint32_t</span> conf <span class="sy0">=</span> pciConfigReadDWord<span class="br0">&#40;</span>bus<span class="sy0">,</span> slot<span class="sy0">,</span> func<span class="sy0">,</span> offset<span class="br0">&#41;</span><span class="sy0">;</span>
+conf <span class="sy0">&amp;=</span> <span class="nu12">0xffff0000</span><span class="sy0">;</span> <span class="co1">// preserve status register, clear config register</span>
+conf <span class="sy0">|=</span> <span class="nu12">0x5</span><span class="sy0">;</span>        <span class="co1">// set bits 0 and 2</span>
+pciConfigWriteDWord<span class="br0">&#40;</span>bus<span class="sy0">,</span> slot<span class="sy0">,</span> func<span class="sy0">,</span> offset<span class="sy0">,</span> conf<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>You will then want to read the IO base address of the first BAR from configuration space.  We will assume this has the value io_base.
+</p>
+<h3> <span class="mw-headline" id="Card_register_access"> Card register access </span></h3>
+<p>As stated above, the card supports a index/data system of accessing its internal registers.  This means that the index of the register you wish to access is first written to an index port, followed by either writing a new value to or reading the old value from a data register.  To make things slightly more complex, however, the card splits its internal registers into two groups - Control and Status Registers (CSR) and Bus Control Registers (BCR).  Both share a common index port (called Register Address Port - RAP), but use separate data ports: the Register Data Port (RDP) for CSRs and the BCR Data Port (BDP) for BCRs.  During normal initialization and use of the cards, the CSRs are used exclusively.  A further important register exists in the IO space called the reset register.
+</p><p>A further complication exists in that the offsets of the RAP, Reset register and BDP (but not RDP) relative to io_base vary depending on the current value of DWIO:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th colspan="2"> DWIO = 0 (16-bit access)
+</th>
+<th colspan="2"> DWIO = 1 (32-bit access)
+</th>
+<th> Register
+</th></tr>
+<tr>
+<th> Offset
+</th>
+<th> Length
+</th>
+<th> Offset
+</th>
+<th> Length
+</th>
+<th>
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> 16 </td>
+<td> 0 </td>
+<td> 16 </td>
+<td> First 16 bytes of EPROM (the first 6 bytes are MAC address)
+</td></tr>
+<tr>
+<td> 0x10 </td>
+<td> 2 </td>
+<td> 0x10 </td>
+<td> 4 </td>
+<td> RDP - data register for CSRs
+</td></tr>
+<tr>
+<td> 0x12 </td>
+<td> 2 </td>
+<td> 0x14 </td>
+<td> 4 </td>
+<td> RAP - index register for both CSR and BCR access
+</td></tr>
+<tr>
+<td> 0x14 </td>
+<td> 2 </td>
+<td> 0x18 </td>
+<td> 4 </td>
+<td> Reset register
+</td></tr>
+<tr>
+<td> 0x16 </td>
+<td> 2 </td>
+<td> 0x1c </td>
+<td> 4 </td>
+<td> BDP - data register for BCRs
+</td></tr></table>
+In addition, the card requires different length data accesses to the registers depending on the setting of DWIO: if DWIO=0, then offsets 0x0 through 0xf are read as single bytes, all others read/written as 16-bit words; if DWIO=1, then all registers (including 0x0 through 0xf) are read/written as 32-bit double words (and with accesses aligned on 32-bit boundaries).  We can write functions to access the registers:<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> writeRAP32<span class="br0">&#40;</span><span class="kw4">uint32_t</span> val<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    outd<span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu12">0x14</span><span class="sy0">,</span> val<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> writeRAP16<span class="br0">&#40;</span><span class="kw4">uint16_t</span> val<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    outw<span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu12">0x12</span><span class="sy0">,</span> val<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">uint32_t</span> readCSR32<span class="br0">&#40;</span><span class="kw4">uint32_t</span> csr_no<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    writeRAP32<span class="br0">&#40;</span>csr_no<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> ind<span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu12">0x10</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">uint16_t</span> readCSR16<span class="br0">&#40;</span><span class="kw4">uint16_t</span> csr_no<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    writeRAP32<span class="br0">&#40;</span>csr_no<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> inw<span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu12">0x10</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> writeCSR32<span class="br0">&#40;</span><span class="kw4">uint32_t</span> csr_no<span class="sy0">,</span> <span class="kw4">uint32_t</span> val<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    writeRAP32<span class="br0">&#40;</span>csr_no<span class="br0">&#41;</span><span class="sy0">;</span>
+    outd<span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu12">0x10</span><span class="sy0">,</span> val<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> writeCSR16<span class="br0">&#40;</span><span class="kw4">uint16_t</span> csr_no<span class="sy0">,</span> <span class="kw4">uint16_t</span> val<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    writeRAP16<span class="br0">&#40;</span>csr_no<span class="br0">&#41;</span><span class="sy0">;</span>
+    outw<span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu12">0x10</span><span class="sy0">,</span> val<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>and similar functions for BCRs.
+</p>
+Unfortunately it is difficult to determine the current state of DWIO (and therefore know which state the card is in when the driver initializes) as the only way of reporting it is to read BCR18 bit 7, which in turn requires knowledge of the BDP, which requires knowledge of DWIO etc.  Fortunately, following a reset (either hard or soft), the card is in a known state with DWIO=0 (16-bit access).  Normally, therefore, when your driver takes control of the card, it would expect to assume it is in 16-bit mode.  However, it may be the case that firmware or a bootloader has already initialized the card into 32-bit mode, which you didn't know about.  You should, therefore, reset the card when your driver takes control.  This is accomplished by a read of the reset register:<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">ind<span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu12">0x18</span><span class="br0">&#41;</span><span class="sy0">;</span>
+inw<span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu12">0x14</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>Note this snippet reads first from the 32-bit reset register: if the card is in 32-bit mode this will trigger a reset, if in 16-bit mode it will simply read garbage without affecting the card.  It then reads from the 16-bit reset register: if the card was initially in 32-bit mode, it has since been reset and will now be reset again, otherwise it will reset for the first time.
+<p>You should now wait 1 microsecond for the reset to complete (using your OSs timing functions).
+</p>
+Then, if desired, you can program the card into 32-bit mode (the rest of this article assumes this, but you can easily substitute read/writeCSR32 with read/writeCSR16 if you like).  To do this, we simply need to perform a 32 bit write of 0 to the RDP.  After reset, RAP points to CSR0, so we are effectively writing 0 to CSR0.  This will not cause any harm as we completely reprogram CSR0 later anyway.<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">outd<span class="br0">&#40;</span>io_base <span class="sy0">+</span> <span class="nu12">0x10</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Interrupt_handling"> Interrupt handling </span></h3>
+<p>The next section will enable some interrupts on the card.  We will flesh out the interrupt handler later, but you should install the interrupt handler here as otherwise you will get crashes due to unhandled interrupts.  You need to parse <a href="ACPI" title="ACPI">ACPI</a> tables etc. to determine the proper interrupt routing for your device.
+</p>
+<h3> <span class="mw-headline" id="SWSTYLE"> SWSTYLE </span></h3>
+We now need to set the value of SWSTYLE to 2.  After reset, it defaults to 0 representing 16-bit legacy compatibility mode.  We want the card to be able to access all of the first 4 GiB of (physical) memory for its buffers, so need to set it to 32-bit mode.<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">uint32_t</span> csr58 <span class="sy0">=</span> readCSR32<span class="br0">&#40;</span><span class="nu0">58</span><span class="br0">&#41;</span><span class="sy0">;</span>
+csr58 <span class="sy0">&amp;=</span> <span class="nu12">0xfff0</span><span class="sy0">;</span>
+csr58 <span class="sy0">|=</span> <span class="nu0">2</span><span class="sy0">;</span>
+writeCSR32<span class="br0">&#40;</span><span class="nu0">58</span><span class="sy0">,</span> csr58<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<h3> <span class="mw-headline" id="ASEL"> ASEL </span></h3>
+The card has both 10/100baseT and coaxial outputs.  It has functionality to automatically select whichever is attached which is normally enabled by default.  This snippet simply ensures this functionality is enabled by setting the ASEL bit in BCR2 just in case firmware has altered this for some reason.<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">uint32_t</span> bcr2 <span class="sy0">=</span> readBCR32<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+bcr2 <span class="sy0">|=</span> <span class="nu12">0x2</span><span class="sy0">;</span>
+writeBCR32<span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">,</span> bcr2<span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Ring_buffers"> Ring buffers </span></h3>
+<p>The card uses two ring buffers to store packets: one for packets received and one for packets to be transmitted.  The actual ring buffers themselves are regions of physical memory containing a set number of descriptor entries (DEs) which are fixed 16 bytes in length (for SWSTYLE=2).  Each of these then contains a pointer to the actual physical address of the memory used for the packet.
+</p><p>For example, if you wise to define 32 receive buffers and 8 transmit buffers (similar to what the Linux driver does), then you would need to allocate 32 * 16 bytes for the receive DEs, 8 * 16 bytes for the transmit DEs, 32 * packet length (1544 is used in Linux, but we will use 1548 as it is a multiple of 16) for the actual receive buffers and 8 * packet length for the actual transmit buffers.
+</p><p>The DEs contain a number of important bits for sending/receiving packets, e.g. destination MAC address, error bits etc. but they also contain an important bit called the ownership bit (bit 7 of byte 7).  If this is cleared, it means the driver 'owns' that particular ring buffer entry.  If it is set, it means the card owns it (and the driver should not touch the entire entry).  The way this works is that the only party (driver or card) that can read/write the entry is the one that owns it, and particularly only the owning party can flip ownership back to the other party.  At initialization, you would want the card to 'own' all the receive buffers (so it can write new packets into them that it receives, then flip ownership to the driver), and the driver to 'own' all the transmit buffers (so it can write packets to be transmitted, then flip ownership to the driver).
+</p><p>You should also have a variable that stores the current 'pointer' into each buffer (i.e. what is the next one the driver expects to read/write).  The card maintains separate pointers internally.  You also need a simple way of incrementing the pointer (and wrapping back to the start if necessary).
+</p>
+Thus to initialize the ring buffers you'd want something like:<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> rx_buffer_ptr <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="kw4">int</span> tx_buffer_ptr <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>                 <span class="co1">// pointers to transmit/receive buffers</span>
+&#160;
+<span class="kw4">int</span> rx_buffer_count <span class="sy0">=</span> <span class="nu0">32</span><span class="sy0">;</span>              <span class="co1">// total number of receive buffers</span>
+<span class="kw4">int</span> tx_buffer_count <span class="sy0">=</span> <span class="nu0">8</span><span class="sy0">;</span>               <span class="co1">// total number of transmit buffers</span>
+&#160;
+<span class="kw4">const</span> <span class="kw4">int</span> buffer_size <span class="sy0">=</span> <span class="nu0">1548</span><span class="sy0">;</span>          <span class="co1">// length of each packet buffer</span>
+&#160;
+<span class="kw4">const</span> <span class="kw4">int</span> de_size <span class="sy0">=</span> <span class="nu0">16</span><span class="sy0">;</span>                <span class="co1">// length of descriptor entry</span>
+&#160;
+<span class="kw4">uint8_t</span> <span class="sy0">*</span>rdes<span class="sy0">;</span>                         <span class="co1">// pointer to ring buffer of receive DEs</span>
+<span class="kw4">uint8_t</span> <span class="sy0">*</span>tdes<span class="sy0">;</span>                         <span class="co1">// pointer to ring buffer of transmit DEs</span>
+&#160;
+<span class="kw4">uint32_t</span> rx_buffers<span class="sy0">;</span>                   <span class="co1">// physical address of actual receive buffers (&lt; 4 GiB)</span>
+<span class="kw4">uint32_t</span> tx_buffers<span class="sy0">;</span>                   <span class="co1">// physical address of actual transmit buffers (&lt; 4 GiB)</span>
+&#160;
+<span class="co1">// does the driver own the particular buffer?</span>
+<span class="kw4">int</span> driverOwns<span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span>des<span class="sy0">,</span> <span class="kw4">int</span> idx<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="br0">&#40;</span>des<span class="br0">&#91;</span>de_size <span class="sy0">*</span> idx <span class="sy0">+</span> <span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">&amp;</span> <span class="nu12">0x80</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co1">// get the next transmit buffer index</span>
+<span class="kw4">int</span> nextTxIdx<span class="br0">&#40;</span><span class="kw4">int</span> cur_tx_idx<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw4">int</span> ret <span class="sy0">=</span> cur_tx_idx <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>ret <span class="sy0">==</span> tx_buffer_count<span class="br0">&#41;</span>
+        ret <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw1">return</span> ret<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co1">// get the next receive buffer index</span>
+<span class="kw4">int</span> nextRxIdx<span class="br0">&#40;</span><span class="kw4">int</span> cur_rx_idx<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw4">int</span> ret <span class="sy0">=</span> cur_rx_idx <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>ret <span class="sy0">==</span> rx_buffer_count<span class="br0">&#41;</span>
+        ret <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw1">return</span> ret<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co1">// initialize a DE</span>
+<span class="kw4">void</span> initDE<span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span>des<span class="sy0">,</span> <span class="kw4">int</span> idx<span class="sy0">,</span> <span class="kw4">int</span> is_tx<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw3">memset</span><span class="br0">&#40;</span><span class="sy0">&amp;</span>des<span class="br0">&#91;</span>idx <span class="sy0">*</span> de_size<span class="br0">&#93;</span><span class="sy0">,</span> de_size<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// first 4 bytes are the physical address of the actual buffer</span>
+    <span class="kw4">uint32_t</span> buf_addr <span class="sy0">=</span> rx_buffers<span class="sy0">;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>is_tx<span class="br0">&#41;</span>
+        buf_addr <span class="sy0">=</span> tx_buffers<span class="sy0">;</span>
+    <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">uint32_t</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>des<span class="br0">&#91;</span>idx <span class="sy0">*</span> de_size<span class="br0">&#93;</span> <span class="sy0">=</span> buf_addr <span class="sy0">+</span> idx <span class="sy0">*</span> buffer_size<span class="sy0">;</span>
+&#160;
+    <span class="co1">// next 2 bytes are 0xf000 OR'd with the first 12 bits of the 2s complement of the length</span>
+    <span class="kw4">uint16_t</span> bcnt <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint16_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="sy0">-</span>buffer_size<span class="br0">&#41;</span><span class="sy0">;</span>
+    bcnt <span class="sy0">&amp;=</span> <span class="nu12">0x0fff</span><span class="sy0">;</span>
+    bcnt <span class="sy0">|=</span> <span class="nu12">0xf000</span><span class="sy0">;</span>
+    <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">uint16_t</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>des<span class="br0">&#91;</span>idx <span class="sy0">*</span> de_size <span class="sy0">+</span> <span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> bcnt<span class="sy0">;</span>
+&#160;
+    <span class="co1">// finally, set ownership bit - transmit buffers are owned by us, receive buffers by the card</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>is_tx<span class="br0">&#41;</span>
+        des<span class="br0">&#91;</span>idx <span class="sy0">*</span> de_size <span class="sy0">+</span> <span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu12">0x80</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Card_registers_setup"> Card registers setup </span></h3>
+<p>Finally, once all our ring buffers are set up, we need to give their addresses to the card.  There are two ways of setting up the card registers: we can either program them all directly, or set up a special initialization structure and then pass that to the card.  In this article we will use the latter.
+</p><p>You will need to allocate a 28 byte region of physical memory, aligned on a 32-bit boundary.  The members are:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (bytes)
+</th>
+<th> Byte 3
+</th>
+<th> Byte 2
+</th>
+<th> Byte 1
+</th>
+<th> Byte 0
+</th></tr>
+<tr>
+<td> 0 </td>
+<td> TLEN &lt;&lt; 4 </td>
+<td> RLEN &lt;&lt; 4 </td>
+<td colspan="2"> MODE
+</td></tr>
+<tr>
+<td> 4 </td>
+<td> MAC[3] </td>
+<td> MAC[2] </td>
+<td> MAC [1] </td>
+<td> MAC[0]
+</td></tr>
+<tr>
+<td> 8 </td>
+<td colspan="2"> Reserved (0) </td>
+<td> MAC[5] </td>
+<td> MAC[4]
+</td></tr>
+<tr>
+<td> 12 </td>
+<td> LADR[3] </td>
+<td> LADR[2] </td>
+<td> LADR[1] </td>
+<td> LADR[0]
+</td></tr>
+<tr>
+<td> 16 </td>
+<td> LADR[7] </td>
+<td> LADR[6] </td>
+<td> LADR[5] </td>
+<td> LADR[4]
+</td></tr>
+<tr>
+<td> 20 </td>
+<td colspan="4"> Physical address of first receive descriptor entry
+</td></tr>
+<tr>
+<td> 24 </td>
+<td colspan="4"> Physical address of first transmit descriptor entry
+</td></tr></table>
+<p>Note that TLEN and RLEN are the log2 of the number of transmit and receive descriptor entries respectively.  For example, if you have 8 transmit descriptor entries, TLEN would be 3 (as 2^3 = 8), which you then need to shift left by 4 bits, so the actual value to write to byte 3 would be 0x30.  The maximum value of TLEN and RLEN is 9 (i.e. 512 buffers).
+</p><p>MODE provides various functions to control how the card works with regards to sending and receiving packets, and running loopback tests.  You probably want to set it to zero (enable transmit and receive functionality, receive broadcast packets and those sent this physical address, disable promiscuous mode).  See the spec description of CSR15 for further details.
+</p><p>You also need to specify the physical address (MAC address) you want the card to use.  If you want to keep the current one, you will need to first read it from the EPROM of the card (it is exposed as the first 6 bytes of the IO space that the registers are in).
+</p><p>LADR is the logical address filter you want the card to use when deciding to accept Ethernet packets with logical addressing.  If you do not wish to use logical addressing (the default), then set these bytes to zero.
+</p><p>To actually set up the card registers, we provide it with the address of our initialization structure by writing the low 16-bits of its address to CSR1 and the high 16-bits to CSR2.
+</p><p>You can also set up other registers at this point, e.g. CSR3 (only interesting bits shown):
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bit number
+</th>
+<th> Functionality
+</th></tr>
+<tr>
+<td> 10 </td>
+<td> Receive interrupt mask - if set then incoming packets won't trigger an interrupt
+</td></tr>
+<tr>
+<td> 9 </td>
+<td> Transmit interrupt mask - if set then an interrupt won't be triggered when a packet has completed sending.  Depending on your design this may be preferable.
+</td></tr>
+<tr>
+<td> 8 </td>
+<td> Interrupt done mask - if set then you won't get an interrupt when the card has finished initializing.  You probably want this as it is far easier to poll for this situation (which only occurs once anyway).
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> Big endian enable - you will want to ensure this is cleared to zero
+</td></tr></table>
+<p>And you may want to set bit 11 of CSR4 which automatically pads Ethernet packets which are too short to be at least 64 bytes.
+</p><p>Once all the control registers are set up, you set bit 0 of CSR0, and then wait for initialization to be done.  You can do this by either waiting for an interrupt (if you didn't disable the initialization done interrupt in CSR3) or by polling until CSR0 bit 8 is set.  Note that if you want to wait for an interrupt you will also need to set bit 6 of CSR0 or interrupts won't be generated (you will need to enable this anyway to get notification of received packets, so it makes sense to set it at the same time as the initialization bit).
+</p><p>Once initialization has completed, you can finally start the card.  This is accomplished by clearing both the INIT bit (bit 0) and STOP bit (bit 2) in CSR0 and setting the STRT bit (bit 1) at the same time.
+</p>
+<h2> <span class="mw-headline" id="Sending_packets"> Sending packets </span></h2>
+<p>Sending packets involves simply writing the packet details to the next available transmit buffer, then flipping the ownership for the particular ring buffer entry to the card.  The card regularly scans all the transmit buffers looking for one it hasn't sent, and then will transmit those it finds.
+</p>
+For example:<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> sendPacket<span class="br0">&#40;</span><span class="kw4">void</span> <span class="sy0">*</span>packet<span class="sy0">,</span> <span class="kw4">size_t</span> len<span class="sy0">,</span> <span class="kw4">uint8_t</span> <span class="sy0">*</span>dest<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// the next available descriptor entry index is in tx_buffer_ptr</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>driverOwns<span class="br0">&#40;</span>tdes<span class="sy0">,</span> tx_buffer_ptr<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="co1">// we don't own the next buffer, this implies all the transmit</span>
+        <span class="co1">//  buffers are full and the card hasn't sent them yet.</span>
+        <span class="co1">// A fully functional driver would therefore add the packet to</span>
+        <span class="co1">//  a queue somewhere, and wait for the transmit done interrupt</span>
+        <span class="co1">//  then try again.  We simply fail and return.  You can set</span>
+        <span class="co1">//  bit 3 of CSR0 here to encourage the card to send all buffers.</span>
+        <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&#160;
+    <span class="co1">// copy the packet data to the transmit buffer.  An alternative would</span>
+    <span class="co1">//  be to update the appropriate transmit DE to point to 'packet', but</span>
+    <span class="co1">//  then you would need to ensure that packet is not invalidated before</span>
+    <span class="co1">//  the card has a chance to send the data.</span>
+    <span class="kw3">memcpy</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">void</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>tx_buffers <span class="sy0">+</span> tx_buffer_ptr <span class="sy0">*</span> buffer_size<span class="br0">&#41;</span><span class="sy0">,</span> packet<span class="sy0">,</span> len<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// set the STP bit in the descriptor entry (signals this is the first</span>
+    <span class="co1">//  frame in a split packet - we only support single frames)</span>
+    tdes<span class="br0">&#91;</span>tx_buffer_ptr <span class="sy0">*</span> de_size <span class="sy0">+</span> <span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">|=</span> <span class="nu12">0x2</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// similarly, set the ENP bit to state this is also the end of a packet</span>
+    tdes<span class="br0">&#91;</span>tx_buffer_ptr <span class="sy0">*</span> de_size <span class="sy0">+</span> <span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">|=</span> <span class="nu12">0x1</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// set the BCNT member to be 0xf000 OR'd with the first 12 bits of the</span>
+    <span class="co1">//  two's complement of the length of the packet</span>
+    <span class="kw4">uint16_t</span> bcnt <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint16_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="sy0">-</span>len<span class="br0">&#41;</span><span class="sy0">;</span>
+    bcnt <span class="sy0">&amp;=</span> <span class="nu12">0xfff</span><span class="sy0">;</span>
+    bcnt <span class="sy0">|=</span> <span class="nu12">0xf000</span><span class="sy0">;</span>
+    <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">uint16_t</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>tdes<span class="br0">&#91;</span>tx_buffer_ptr <span class="sy0">*</span> de_size <span class="sy0">+</span> <span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> bcnt<span class="sy0">;</span>
+&#160;
+    <span class="co1">// finally, flip the ownership bit back to the card</span>
+    tdes<span class="br0">&#91;</span>tx_buffer_ptr <span class="sy0">*</span> de_size <span class="sy0">+</span> <span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">|=</span> <span class="nu12">0x80</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// update the next transmit pointer</span>
+    tx_buffer_ptr <span class="sy0">=</span> nextTxIdx<span class="br0">&#40;</span>tx_buffer_ptr<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Handling_interrupts_and_receiving_packets"> Handling interrupts and receiving packets </span></h2>
+<p>Receiving packets is normally done in your interrupt handler - the card will signal an interrupt whenever it receives a packet and has written it to the receive buffer.
+</p><p>Note that interrupts can come from many sources (other than new packets).  If a new packet has been signalled then CSR0 bit 10 will be set.  There are other bits in CSR0 than can be set (depending on how you set up interrupt masks in CSR3) and additionally other bits in CSR4 that can signal interrupts (although these are usually masked out on reset).  After you have properly handled an interrupt, you will need to write a 1 back to the appropriate bit in CSR0 or CSR4 before sending EOI to you interrupt controller (or the interrupt will continue to be signalled).  ORing CSR0 with 0x7f00 and ORing CSR4 with 0x026a will reset all interrupts.
+</p>
+Once a receive packet interrupt has been received, you need to loop through the receive descriptor entries (starting at rx_buffer_ptr) handling each packet until you find an entry which the driver doesn't own, then stop.  e.g. <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> handleReceiveInterrupt<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">while</span><span class="br0">&#40;</span>driverOwns<span class="br0">&#40;</span>rdes<span class="sy0">,</span> rx_buffer_ptr<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="co1">// packet length is given by bytes 8 and 9 of the descriptor</span>
+        <span class="co1">//  (no need to negate it unlike BCNT above)</span>
+        <span class="kw4">uint16_t</span> plen <span class="sy0">=</span> <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">uint16_t</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="sy0">&amp;</span>rdes<span class="br0">&#91;</span>rx_buffer_ptr <span class="sy0">*</span> de_size <span class="sy0">+</span> <span class="nu0">8</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// the packet itself is written somewhere in the receive buffer</span>
+        <span class="kw4">void</span> <span class="sy0">*</span>pbuf <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">void</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span>rx_buffers <span class="sy0">+</span> rx_buffer_ptr <span class="sy0">*</span> buffer_size<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// do something with the packet (i.e. hand to the next layer in the</span>
+        <span class="co1">//  network stack).  You probably don't want to do any extensive</span>
+        <span class="co1">//  processing here (as this is within an interrupt handler) - just</span>
+        <span class="co1">//  copy the data somewhere to a queue and continue so that the</span>
+        <span class="co1">//  system is interrupted for as little time as possible</span>
+        handlePacket<span class="br0">&#40;</span>pbuf<span class="sy0">,</span> plen<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// hand the buffer back to the card</span>
+        rdes<span class="br0">&#91;</span>rx_buffer_ptr <span class="sy0">*</span> de_size <span class="sy0">+</span> <span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu12">0x80</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// increment rx_buffer_ptr;</span>
+        rx_buffer_ptr <span class="sy0">=</span> nextRxIdx<span class="br0">&#40;</span>rx_buffer_ptr<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&#160;
+    <span class="co1">// set interrupt as handled</span>
+    writeCSR32<span class="br0">&#40;</span>readCSR32<span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="nu12">0x0400</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="co1">// don't forget to send EOI</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.datasheetcatalog.org/datasheet/AdvancedMicroDevices/mXxsxv.pdf">Specification</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 161/1000000
+Post-expand include size: 486/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3177-0!*!0!!en!*!* and timestamp 20180121052019 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=AMD_PCNET&amp;oldid=20775">http://wiki.osdev.org/index.php?title=AMD_PCNET&amp;oldid=20775</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Network_Hardware" title="Category:Network Hardware">Network Hardware</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=AMD_PCNET" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="AMD_PCNET"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:AMD_PCNET&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="AMD_PCNET#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="AMD_PCNET" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=AMD_PCNET&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=AMD_PCNET&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="AMD_PCNET#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+			skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/AMD_PCNET" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/AMD_PCNET" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=AMD_PCNET&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=AMD_PCNET&amp;oldid=20775" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/AMD_PCnet" title="AMD PCnet">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 May 2017, at 04:55.</li>
+											<li id="footer-info-viewcount">This page has been accessed 9,644 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

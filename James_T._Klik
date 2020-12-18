@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>James T. Klik - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "James_T._Klik", "wgTitle": "James T. Klik", "wgCurRevisionId": 21597, "wgArticleId": 1580, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Developer Archetype", "Graphical UI"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-James_T_Klik action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">James T. Klik</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="James_T._Klik#mw-head">navigation</a>,
+					<a href="James_T._Klik#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Look through the window ... See that background with alpha-blending and my anti-aliased fonts? See the corner of the screen? That's Klik's Start Menu! Hmm, no. I have no 'programs' folder, as I can't load 'programs' for now, but here's a 16-items list of test cases for my WidgetToolKit. Or maybe you prefer a <a href="What_order_should_I_make_things_in" title="What order should I make things in">different style</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="James_T._Klik#Reaching_Klik.27s_level"><span class="tocnumber">1</span> <span class="toctext">Reaching Klik's level</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="James_T._Klik#Step_1:_Documenting_on_video"><span class="tocnumber">1.1</span> <span class="toctext">Step 1: Documenting on video</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="James_T._Klik#Step_2:_Getting_input"><span class="tocnumber">1.2</span> <span class="toctext">Step 2: Getting input</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="James_T._Klik#Step_3:_Populating_your_screen"><span class="tocnumber">1.3</span> <span class="toctext">Step 3: Populating your screen</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="James_T._Klik#Outrunning_James_T._Klik"><span class="tocnumber">2</span> <span class="toctext">Outrunning James T. Klik</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="James_T._Klik#Have_programs_loaded_in_memory"><span class="tocnumber">2.1</span> <span class="toctext">Have programs loaded in memory</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="James_T._Klik#Have_user-level_programs_executed_when_requested"><span class="tocnumber">2.2</span> <span class="toctext">Have user-level programs executed when requested</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="James_T._Klik#Have_the_kernel_access_hardware"><span class="tocnumber">2.3</span> <span class="toctext">Have the kernel access hardware</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="James_T._Klik#Build_the_menu_at_run_time"><span class="tocnumber">2.4</span> <span class="toctext">Build the menu at run time</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="James_T._Klik#James.27_Bookshelf"><span class="tocnumber">3</span> <span class="toctext">James' Bookshelf</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="James_T._Klik#James_T._Klik_opponents.27_position"><span class="tocnumber">4</span> <span class="toctext">James T. Klik opponents' position</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="James_T._Klik#People_and_OSes_related_to_James_T._Klik"><span class="tocnumber">5</span> <span class="toctext">People and OSes related to James T. Klik</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Reaching_Klik.27s_level"> Reaching Klik's level </span></h2>
+<h3> <span class="mw-headline" id="Step_1:_Documenting_on_video"> Step 1: Documenting on video </span></h3>
+<ol><li> Read about <a href="VGA_Resources" title="VGA Resources">VGA Resources</a> and <a href="GRUB" title="GRUB">GRUB</a>. You have the opportunity to let the bootloader switch to graphical mode for you before your kernel is started. A color depth of 32 will avoid you further headaches. <a href="Category:Video" title="Category:Video">Documents</a> about <a href="Accelerated_Graphic_Cards" title="Accelerated Graphic Cards">Accelerated Graphic Cards</a> are gifts from the gods for Klik, but they're rare.
+</li><li> Develop (or reuse) a small library to draw lines, fill areas, copy bitmaps and draw text <b>out</b> of your kernel, debug it, <b>then</b> integrate it in your OS.
+</li><li> Find a friend to make a neat logo, ask GRUB to load it as if it was a module, memcpy it to screen and voilà. You can release 0.1
+</li></ol>
+<p>Note that you'll need <a href="Inline_Assembly/Examples" title="Inline Assembly/Examples">inline assembly functions</a> like everybody else, and that you'll probably prefer to have a "sprintf" than a "printf" function.
+</p>
+<h3> <span class="mw-headline" id="Step_2:_Getting_input"> Step 2: Getting input </span></h3>
+<ol><li> Document about mouse control. Try to imagine a clean way of getting mouse clicks, position, events like drags, drops, slides, etc. A common engineering technique for this is the time-travelling-camera: move yourself in the future and imagine the user, then come back and draw on paper what you've seen.
+</li><li> Grab a <a rel="nofollow" class="external text" href="http://www.gamedev.net/">game developing tutorial</a> about sprites, and see how you can have a moving object like a cursor. The trick is that you have to keep a small snapshot of what was <b>under</b> the cursor so that you can <b>erase</b> the cursor when it moves.
+</li><li> Connect your cursor to your mouse and voilà. See it moving. By the same time, develop a small control widget that will report coordinates and events names (MouseDown, MouseOver, etc).
+</li></ol>
+<h3> <span class="mw-headline" id="Step_3:_Populating_your_screen"> Step 3: Populating your screen </span></h3>
+<p>It is time to draw small windows on screen. We had many discussion in the forum about how they can be moved efficiently and so on. Note that you'll <b>really</b> start to need a way of <a href="Memory_Management" title="Memory Management" class="mw-redirect">allocating and freeing memory</a> at this point, as you do <b>not</b> want to assume that there's a maximum of N buttons in the system ...
+</p>
+<ol><li> Collect tutorials about GUI programming, including <a rel="nofollow" class="external text" href="http://osdever.net/tutorials/GUI_tut.php?the_id=62">GUI Programming</a> at BonaFide.
+</li><li> Create a class that will be responsible for receiving event from the system, including the "repaint" event.
+</li><li> If you want 'windows', let there be a window manager that send them 'repaint' events when needed, handle window displacement and is in charge of "what's behind the window".
+</li><li> make sure you can add content to your window, and that you don't need to write a specific "repaint" function for each new content. Most WMs allow a window to be a container of widgets.
+</li></ol>
+<h2> <span class="mw-headline" id="Outrunning_James_T._Klik"> Outrunning James T. Klik </span></h2>
+<h3> <span class="mw-headline" id="Have_programs_loaded_in_memory"> Have programs loaded in memory </span></h3>
+<p>And provide a filesystem-approach to access them. It can be very easy if you use GRUB modules to map programs in memory: you just need to create a virtual directory service that will remember at which physical memory address the image of FILE.COM is located and return that address when we do open("file.com").
+</p>
+<h3> <span class="mw-headline" id="Have_user-level_programs_executed_when_requested"> Have user-level programs executed when requested </span></h3>
+<p>The easiest approach is to create a segment for the user's code and one for its data. Then return to the program. You can even not worry about multitasking and decide every kernel operation will occur when an interrupt arise (that's how DOS works), but you will at least have <b>1a. implement interrupts support</b> and <b>1b. implement basic segmentation support</b>. If you're fine with asm, load asm programs as a first step.
+</p>
+<h3> <span class="mw-headline" id="Have_the_kernel_access_hardware"> Have the kernel access hardware </span></h3>
+<p>It should at least be able to receive the keyboard data (and translate them), setup video display and read mouse events. The most simple GUI at kernel level would be get_video_segment(), set_mouse_buffer(), set_keyb_buffer(). The kernel should know then where it should put data. You can even protect your "start menu" from the user application by excluding the last lines of the display from the "video segment" you return to the application.
+</p><p>Required steps are <b>2a. video driver</b> (get a frame buffer), <b>2b. mouse driver</b> (have a cursor moving on screen) and <b>2c. keyboard reader</b> (have keystrokes translated and written to some memory area).
+</p>
+<h3> <span class="mw-headline" id="Build_the_menu_at_run_time"> Build the menu at run time </span></h3>
+<p>Read available programs from the virtual file system and build up the list of "start menu" with it. Ideally, this should be done by some programs external to the kernel, but let's say you do it in the kernel (at initialization) for now.
+</p><p>When the start menu is clicked, popup the list. When an item is selected, start the application and freeze the currently running one. When the task bar is clicked, unfreeze the selected application. When the "user area" is clicked, defer the click to the application (send it an event).
+</p><p>This requires <b>3a. Process control</b>: select which program is currently running and <b>3b. Process sleep &amp; wakeup</b>: let the application decide that it have nothing to do but waiting something to happen and let the kernel return to the application only when something occurred.
+</p><p>Note that this will only offer you something like Mac OS 1.0 and that you'll certainly find yourself in troubles as soon as you'll try to add something like modular design, networking or multitasking...
+</p>
+<h2> <span class="mw-headline" id="James.27_Bookshelf"> James' Bookshelf </span></h2>
+<p>Jumping right into graphics is frowned upon by many authors, and consequently he owns very few books on the subject. However, he does find some books like <a href="Books" title="Books">"Operating Systems Design and Implementation" by Andy Tanenbaum</a> interesting for some of the "prerequisites" of GUIs, like multitasking. Yet he did find some good documentation on the graphics systems, such as <a rel="nofollow" class="external text" href="http://www.amazon.com/Fundamentals-Interactive-Computer-Graphics-Programming/dp/0201144689">"Fundamentals of Interactive Computer Graphics" by James Foley</a> useful. And he has printed copies of all of VESA's VBE standards.
+</p>
+<h2> <span class="mw-headline" id="James_T._Klik_opponents.27_position"> James T. Klik opponents' position </span></h2>
+<p>If you're wondering how you'll implement the 'start button' and its menu right from the start, you're probably getting things by the wrong end... When you want to make a word processing program, you don't ask yourself how you will have icons for "save", "print", etc. in a bar that you can move across your window. You first ask yourself how you will represent text, how you will implement basic operations like extracting text from one paragraph and put text into another one, how you will deal with embedded objects like pictures, etc. or how you will store your text efficiently on a file. Basically, you'll work yourself like that slow horse in the pack if you don't have a good kernel with <a href="What_order_should_I_make_things_in" title="What order should I make things in">a different approach</a> up first.
+</p><p>Also, many proponents of <a href="Protected_mode" title="Protected mode" class="mw-redirect">protected mode</a> find VESA unattractive, since you need some sort of hook into the BIOS.
+</p>
+<h2> <span class="mw-headline" id="People_and_OSes_related_to_James_T._Klik"> People and OSes related to James T. Klik </span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://messiahandrw.netfast.org">MessiahAndrw</a>
+</li><li> <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a>
+</li><li> <a href="http://wiki.osdev.org/User:Novayoshi" title="User:Novayoshi">NovaYoshi</a>
+</li><li> <a href="http://wiki.osdev.org/index.php?title=User:Osdeverr&amp;action=edit&amp;redlink=1" class="new" title="User:Osdeverr (page does not exist)">osdeverr</a>: "Me back in 2015... Now I blame myself for that TBH."
+</li><li> <a rel="nofollow" class="external text" href="http://omarrx024.github.io">omarrx024</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.oby.ro/os/">Bogdan Ontanu, Solar_Os, GUI, Widget toolkit and running loaded PE from disk</a>
+</li><li> <i> insert your names here </i>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 80/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1580-0!*!0!!en!*!* and timestamp 20180121050634 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=James_T._Klik&amp;oldid=21597">http://wiki.osdev.org/index.php?title=James_T._Klik&amp;oldid=21597</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Developer_Archetype" title="Category:Developer Archetype">Developer Archetype</a></li><li><a href="Category:Graphical_UI" title="Category:Graphical UI">Graphical UI</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=James_T._Klik" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="James_T._Klik"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:James_T._Klik&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="James_T._Klik#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="James_T._Klik" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=James_T._Klik&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=James_T._Klik&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="James_T._Klik#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal"skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/James_T._Klik" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/James_T._Klik" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=James_T._Klik&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=James_T._Klik&amp;oldid=21597" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 October 2017, at 04:28.</li>
+											<li id="footer-info-viewcount">This page has been accessed 51,900 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

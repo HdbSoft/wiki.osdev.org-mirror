@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Uniform Driver Interface - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Uniform_Driver_Interface", "wgTitle": "Uniform Driver Interface", "wgCurRevisionId": 19808, "wgArticleId": 2747, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Uniform Driver Interface", "Drivers", "Driver Interfaces"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-text {line-height: normal;}
+.source-text li, .source-text pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for text
+ * CSS class: source-text, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.text.source-text .de1, .text.source-text .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.text.source-text  {font-family:monospace;}
+.text.source-text .imp {font-weight: bold; color: red;}
+.text.source-text li, .text.source-text .li1 {font-weight: normal; vertical-align:top;}
+.text.source-text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.text.source-text .li2 {font-weight: bold; vertical-align:top;}
+.text.source-text .ln-xtra, .text.source-text li.ln-xtra, .text.source-text div.ln-xtra {background-color: #ffc;}
+.text.source-text span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Uniform_Driver_Interface action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Uniform Driver Interface</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Uniform_Driver_Interface#mw-head">navigation</a>,
+					<a href="Uniform_Driver_Interface#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><div class="thumb tright"><div class="thumbinner" style="width:182px;"><a href="File:Udi_color_330x220.jpg" class="image"><img alt="Logo" src="images/thumb/f/fb/Udi_color_330x220.jpg/180px-Udi_color_330x220.jpg" width="180" height="120" class="thumbimage" /></a>  <div class="thumbcaption"><div class="magnify"><a href="File:Udi_color_330x220.jpg" class="internal" title="Enlarge"><img src="skins/common/images/magnify-clip.png" width="15" height="11" alt="" /></a></div>The official Project UDI logo</div></div></div>
+<p><b>The UDI revival effort maintains an IRC channel on Freenode (irc.freenode.net), called #udi</b>. Feel free to join and ask questions.
+</p><p>UDI stands for "Uniform Driver Interface". It is the specification of a framework and driver API / ABI that enables different operating systems (implementing the UDI framework) to use the same drivers. Conceived by several large industry corporations, it has fallen dormant, despite being functional and delivering on its promise.
+</p><p>UDI drivers are binary compatible across all UDI-compliant operating systems running on the same CPU family. They are also source compatible across all UDI-implementing operating systems. This means, a driver only has to be developed once.
+</p><p>While Microsoft Windows gets all the hardware drivers they want, and GNU discourages UDI for <a rel="nofollow" class="external text" href="http://www.gnu.org/philosophy/udi.html">philosophical reasons</a>, its advantages for hobbyist OS developers are obvious.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Uniform_Driver_Interface#Why_UDI.3F"><span class="tocnumber">1</span> <span class="toctext">Why UDI?</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Uniform_Driver_Interface#Advantages"><span class="tocnumber">1.1</span> <span class="toctext">Advantages</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Uniform_Driver_Interface#Disadvantages"><span class="tocnumber">1.2</span> <span class="toctext">Disadvantages</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="Uniform_Driver_Interface#Core_components_of_UDI_Drivers"><span class="tocnumber">2</span> <span class="toctext">Core components of UDI Drivers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Uniform_Driver_Interface#Modules"><span class="tocnumber">2.1</span> <span class="toctext">Modules</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Uniform_Driver_Interface#Regions"><span class="tocnumber">2.2</span> <span class="toctext">Regions</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Uniform_Driver_Interface#Channels"><span class="tocnumber">2.3</span> <span class="toctext">Channels</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Uniform_Driver_Interface#Metalanguages"><span class="tocnumber">2.4</span> <span class="toctext">Metalanguages</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="Uniform_Driver_Interface#Driver_configuration"><span class="tocnumber">3</span> <span class="toctext">Driver configuration</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Uniform_Driver_Interface#Programming_Model"><span class="tocnumber">4</span> <span class="toctext">Programming Model</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Uniform_Driver_Interface#Driver_failures"><span class="tocnumber">5</span> <span class="toctext">Driver failures</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="Uniform_Driver_Interface#See_also"><span class="tocnumber">6</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="Uniform_Driver_Interface#Existing_Implementations"><span class="tocnumber">7</span> <span class="toctext">Existing Implementations</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="Uniform_Driver_Interface#External_Links"><span class="tocnumber">8</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Why_UDI.3F">Why UDI?</span></h2>
+<p>The Uniform Driver Interface would, should it be widely adopted, provide a common driver framework for implementation across kernels and platforms, enabling drivers to be provided without respect to the target kernel, and to a large extent, the target hardware platform. UDI has several projected advantages over existing driver interfaces which may motivate the reader to adopt it:
+</p>
+<h3> <span class="mw-headline" id="Advantages">Advantages</span></h3>
+<ul><li> Portability (both cross-OS and cross-platform), which was mentioned in the above section, is perhaps the primary concern for which UDI was developed in the first place. All we can hope for is that enough operating systems will embrace the model so we can actually take advantage of it.
+</li><li> Performance is comparable or better than that of custom, native API drivers for a native UDI implementation. For environments where performance is critical, UDI does not inhibit service quality. UDI is explicitly designed to be non-blocking and lockless, featuring a synchronization model for increased MP scalability without locking and many other high-scalability focused features.
+</li><li> UDI can integrate seamlessly into existing kernel environments regardless of the OS architecture (<a href="Monolithic_Kernel" title="Monolithic Kernel">monolithic kernel</a> vs. <a href="Microkernel" title="Microkernel">microkernel</a>, POSIX vs. non-POSIX, etc.) with little or no extra performance overhead.
+</li><li> Reliability and stability have been explicitly provided for by the design. UDI tries to eliminate some categories of potential bugs, such as (but not limited to) resource leaks and deadlocks (all interfaces can potentially be implemented without any locking at all).
+</li><li> Flexibility is another thing UDI has been designed mind with: not only in the way the specification was conceived (i.e., to be extensible), but also in the sense that it permits system programmers to apply techniques such as driver isolation, shadow drivers, etc. if they see fit to do so.
+</li><li> The interface is fully asynchronous, in every respect; high scaling systems are becoming increasingly predominant and asynchronicity is slowly becoming an "expected" feature for modern kernels. UDI moves ahead of the herd to enable a compliant kernel to slowly adopt asynchronous interfaces without having to do major redesign later on.
+</li></ul>
+<h3> <span class="mw-headline" id="Disadvantages">Disadvantages</span></h3>
+<ul><li> Moderately complex, and it will generally take a while to understand the specification.
+</li><li> It cannot simply be ported to immature kernels. A kernel must have a certain minimum level of maturity to reasonably attempt to become UDI compliant.
+</li><li> Not at all viable for "casual" projects: requires a significant amount of foreknowledge and prior work.
+</li></ul>
+<h2> <span class="mw-headline" id="Core_components_of_UDI_Drivers">Core components of UDI Drivers</span></h2>
+<div class="thumb tleft"><div class="thumbinner" style="width:652px;"><a href="File:Core_spec-8.gif" class="image"><img alt="Environment" src="images/7/70/Core_spec-8.gif" width="650" height="380" class="thumbimage" /></a>  <div class="thumbcaption">High level view of UDI environments</div></div></div>
+<p>An implementation of the Uniform Driver Interface specification is known as a UDI Environment. There is a reference implementation available (see link below) which provides usable code for several existing kernels (Linux, BSD, Solaris), and it can be used the basis for a fresh implementation. Kernel environment implementations are responsible for providing the Service Call interfaces specified by the UDI Standard; a kernel may choose to implement these as native system calls, or via library extensions -- the decision is up to the implementer. There are two types of service calls recognized by the UDI paradigm: synchronous (which will return immediately to the caller - i.e., to the driver) and asynchronous (which work through a callback mechanism).
+</p><p>UDI drivers also actively take part in identifying their child devices and helping to build the host kernel's device tree. Bus drivers enumerate children, and so on. Each of these buses may have several controllers attached. UDI drivers for these devices will interact in a tree-like fashion just as the hardware does. Let's take a closer look at drivers themselves!
+</p><p>Drivers are split into one or more modules, and each module has at least once region. A driver that has been instantiated (executed, so to speak) uses IPC calls ("Channel operations") to communicate between modules and regions. If a driver is used to instantiate more than one device (say, a disk driver used to instantiate two separate disk devices), the choice of whether the actual driver code is mapped using Copy-on-Write, or duplicated in memory, etc is up to the environment.
+</p>
+<h3> <span class="mw-headline" id="Modules">Modules</span></h3>
+<p>A module is essentially a single executable code object. Specifically, drivers can be broken into multiple executables. A large driver that may only need to load certain components and may not need all of its code in memory all the time may be implemented as a multi-module driver. This partitioning of the driver code into modules is up to the driver vendor of course. Most UDI drivers are expected to be single-module drivers, but complex drivers such as graphics card drivers, etc may be best implemented as multi-module drivers. For example, if a graphics driver exports an OpenGL 3D API along with a Direct3D API, it is very likely that both front-ends have a lot of code behind them that would occupy a lot of memory should both be loaded. Most kernels will use <i>either</i> OpenGL <i>or</i> Direct3D, so if such a graphics driver was to split its OpenGL and Direct3D implementations into separate modules, this would enable kernels loading that driver to avoid allocating memory for the code and data for the API it isn't using.
+</p>
+<h3> <span class="mw-headline" id="Regions">Regions</span></h3>
+<p>Main article: <a href="http://wiki.osdev.org/User:Gravaera/UDI_Regions" title="User:Gravaera/UDI Regions" class="mw-redirect"> UDI Regions </a>
+</p><p>Regions are nothing more than blocks of related data. For example, a network card may have a set of register states that are specific to its send() function, and a different set of stats and variables specific to its receive() function. Data is explicitly separated into functionality regions in UDI. A region is nothing more than driver-allocated data for its state variables. The most intuitive way to split driver data is into functionality sub-components of the device in question. So a network card driver may choose to have a send region and a receive region. A graphics driver write may choose to partition the driver into a framebuffer writing region, a transformation region, etc, etc. Then IPC request messages can be sent over UDI IPC channels to each region based on the purpose of that region.
+</p><p>Regions also form the unit of concurrent execution in UDI. Since Regions are nothing more than data, they are also the units which must be synchronized against concurrent writes. Generally, this means making sure that no two threads can modify region data at once. The design of the UDI interfaces is perfectly capable of working without the use of locking, and it is left up to the host OS Environment to choose whether it will use lockless algorithms, spinlocks, waitqueues, or some other method to ensure that no two threads modify region data at the same time. See the main article for a detailed explanation of several practically usable UDI synchronization models.
+</p><p>Another attribute of UDI regions is that they are location- and instance-independent, meaning that they can be moved from one place to another without affecting any of the other regions because they share no common state. That is, a driver can be marshaled and moved from one NUMA node to another, or one physical machine to another over a network, or any other similar type of migration. This is particularly interesting in multiprocessor systems (esp. NUMA), and high-scaling compute clusters because an environment may separate regions due to performance and resource constraints. It's worth mentioning that, because of the separate states, the tasks performed by regions are mutually-exclusive (for instance a network driver might have one region that handles sending packets and another receiving). This is a potential area where host OSs can make huge optimizations to remove performance bottlenecks.
+</p>
+<h3> <span class="mw-headline" id="Channels">Channels</span></h3>
+<p>Main article: <a href="http://wiki.osdev.org/User:Gravaera/UDI_Channels" title="User:Gravaera/UDI Channels" class="mw-redirect"> UDI Channels </a>
+</p><p>The only way for regions to communicate is through channels. Channels are an IPC-agnostic abstraction of a bi-directional communication mechanism. Each of the two channel endpoints provide an ops vector, which is a set of entry points. They are referenced via handles of type udi_channel_t (check the definition of handles below). The channel operations along with the associated functionality is defined by metalanguages. Metalanguages are separately defined for each class of drivers, but we'll get to that soon.
+</p>
+<h3> <span class="mw-headline" id="Metalanguages">Metalanguages</span></h3>
+<p>Main article: <a href="http://wiki.osdev.org/User:Gravaera/UDI_Metalanguages" title="User:Gravaera/UDI Metalanguages" class="mw-redirect"> Metalanguages </a>
+</p><p>Metalanguages define extensions to the core specification for various purposes, and can also be used to define custom IPC protocol APIs between modules/regions. An example of a case where a custom protocol API may be needed is where, for example, a network card driver has a "<b>Control</b>" region which takes commands from the kernel for power management ("Go to sleep", "prepare to shutdown", etc), and then it has a <b>Send</b>() region and <b>Receive</b>() region, which handle its send() and receive() functions respectively.
+</p><p>It follows naturally that if the driver receives a "Go to sleep" command from the kernel on its Control region, it would need to send messages to its Send and Receive regions to cause them to cease operation. There is no generic IPC_Send() function defined for IPC across UDI channels -- all IPC must be done according to the protocols APIs defined by a Metalanguage, whether standardized by the UDI spec, or custom-defined. Thankfully, driver writers do not need to define custom protocols for every such case where they want to simply send custom messages between regions: the UDI Core specification defines a "<b>Generic I/O Metalanguage</b>" IPC protocol API which covers a wide range of generic IPC needs and can be extended with custom messages as desired.
+</p><p>Apart from APIs/IPC protocols, Metalanguages also cover extensions to the core specification. For example, the already-defined UDI Bus/Bridge Metalanguage can be extended to support new buses as needed; PCI bus drivers, ISA bus drivers, etc do not all need new Metalanguages, because UDI has defined a core UDI Bus/Bridge Metalanguage. This core UDI Bus/Bridge Metalanguage can be extended using Bus/Bridge Metalanguage extensions specific to each bus. This is a case where a Metalanguage is already defined by the UDI Standard, and that metalanguage itself is extended as needed for each bus.
+</p><p>Entirely new Metalanguages can also be created where necessary; for example, an SCSI Host Bus Adapter is not really a bus, but it is an I/O Microcontroller device that acts as a parent device to SCSI devices (mostly disks). It looks like a bus, but isn't really a bus, and is better handled with an IPC protocol and API of its own. So the UDI specification defines an SCSI Host Bus Adapter Metalanguage API which manages communication (IPC) between SCSI Peripheral Devices (disks) and SCSI Host Bus Adapters. On any given motherboard, a commonly seen arrangement may be as follows in the ASCII art below. The SCSI HBA is not a bus, and the IPC communication between SCSI disks and the SCSI HBA cannot be constrained to follow the same format as communication between a bus and its child devices. This is a case where a new Metalanguage API for communication is a good idea.
+</p><p>As an honourable mention, it would also have been possible to just use the UDI Generic I/O Metalanguage for communication between the SCSI disks and their parent SCSI HBA -- the Generic I/O Metalanguage is equally adequate for that purpose as well.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">RootNode
+|- PCI-Bus-0
+|  |- ...
+|  +- ...
+|
+|- PCI-Bus-1
+|  +- SCSI HBA
+|     |- SCSI-Peripheral-0 (disk)
+|     +- SCSI-Peripheral-1 (disk)
+|
++- PCI-Bus-2</pre></div></div>
+<p>Metalanguages are essentially UDI IPC Channel protocol definitions or API definitions, and definitions of extensions to the core specification. Hence the name: Meta-<i>LANGUAGES</i>.
+</p>
+<h2> <span class="mw-headline" id="Driver_configuration">Driver configuration</span></h2>
+<p>There's a special configuration method for static properties of UDI drivers using a file called udiprops.txt. This file is distributed independently in each driver package for source code distributions and linked into a special section (called .udiprops) for binary distributions.
+</p><p>The udiprops.txt file doesn't only allow for static configuration options, but is also used in the building process for UDI drivers since they do not use makefiles - not that it would be technically unfeasible. The UDI specification defines tools for building, packaging and installing UDI drivers for simplicity's sake since, unlike POSIX tools, they don't require operating systems to have any extra functionality (e.g., a VFS). Luckly, these tools are available in the reference implementation, all you need to do is build them.
+</p><p>Below you can see a sample udiprops.txt:
+</p>
+<pre>  properties_version 0x101
+  
+  message 1 Project UDI
+  message 2 <a rel="nofollow" class="external free" href="http://www.project-UDI.org/participants.html">http://www.project-UDI.org/participants.html</a>
+  message 3 Pseudo-Driver
+  message 4 Generic UDI Pseudo-Driver
+  release 3 1.01
+  
+  supplier	1
+  contact	2
+  name		3
+  shortname	pseudod
+  
+  ##
+  ## Interface dependencies
+  ##
+  requires udi	 	0x101
+  requires udi_gio 	0x101
+  
+  ##
+  ## Build instructions.
+  ##
+  
+  module pseudod
+  compile_options -DPSEUDO_GIO_META=1
+  source_files pseudo.c pseudo.h
+  region 0
+  
+  ##
+  ## Metalanguage usage
+  ##
+  
+  meta 1 udi_gio		# Generic I/O Metalanguage
+  
+  child_bind_ops 1 0 1		# GIO meta, primary region, ops_index 1
+  
+  # Orphan driver; no device line
+  
+  #
+  # Initialization, shutdown messages
+  #
+  message 1100  pseudod: devmgmt_req&#160;%d
+  message 1500  pseudod: final_cleanup_req
+</pre>
+<p>Of course, udiprops.txt can be a lot more complex than this, I only wanted you to see what one looks like. You should check the specification for all compile options, statements and configuration options.
+</p>
+<h2> <span class="mw-headline" id="Programming_Model">Programming Model</span></h2>
+<p>All UDI function calls are asynchronous in nature; this means that they implicitly do not block. A <i>compliant</i> UDI driver will always be implicitly non-blocking. Whether or not the <i>host kernel</i> supports non-blocking programming models is up to that kernel, and for any particular kernel, it may be necessary to use locking, mutexes and blocking. Naturally, for a kernel that fully supports a non-blocking, asynchronous model, UDI will simply scale seamlessly.
+</p><p>UDI drivers, because of their asynchronous nature, behave like servers to a large extent and they have very good throughput, owing to the fact that the driver itself will only block if the host kernel imposes a limitation on it. For a host kernel which does not have scaling limitations, UDI drivers will innately also scale without limitations -- the throughput of a <i>compliant</i> UDI driver is dependent solely on the limitations of the host kernel.
+</p><p>UDI drivers do not implicitly assume the use of locking, blocking, or any specific threading or synchronization model. They fit perfectly into any kind of host environment. As such, the UDI specification does not define any locking operations. It is completely possible for a host kernel to run UDI drivers locklessly.
+</p>
+<h2> <span class="mw-headline" id="Driver_failures">Driver failures</span></h2>
+<p>When illegal behavior is detected by the environment, the misbehaving region will usually be region-killed and all neighouring regions will be notified. All channels to that regions will be closed and all resources owned by that region will be freed.
+</p>
+<h2> <span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li> Combuster's effort on creating a <a href="http://wiki.osdev.org/User:Combuster/UDI_Graphics" title="User:Combuster/UDI Graphics">graphics metalanguage</a>
+</li><li> Love4Boobies' page for several other <a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">UDI drafts</a>
+</li></ul>
+<h2> <span class="mw-headline" id="Existing_Implementations">Existing Implementations</span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://projectudi.sf.net/">Reference implementation</a> - Mostly targeted at linux
+</li><li> <a rel="nofollow" class="external text" href="http://github.com/thepowersgang/acess2">Acess2</a> - Mostly complete implementation (with network support)
+</li><li> <a rel="nofollow" class="external text" href="http://www.d-rift.nl/combuster/mos3/">MOS3</a>
+</li></ul>
+<h2> <span class="mw-headline" id="External_Links">External Links</span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.projectudi.org/">Official website</a>
+</li><li> <a rel="nofollow" class="external text" href="http://projectudi.sf.net/">Reference implementation</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.ties.org/deven/udi.html">Deven Corzine's editorial</a>
+</li><li> <a rel="nofollow" class="external text" href="http://uw714doc.xinuos.com/en/UDI_dwg/dwg_code_top.html">UDI Driver Writer's Guide</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 102/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2747-0!*!0!!en!2!* and timestamp 20180121080020 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Uniform_Driver_Interface&amp;oldid=19808">http://wiki.osdev.org/index.php?title=Uniform_Driver_Interface&amp;oldid=19808</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Uniform_Driver_Interface" title="Category:Uniform Driver Interface">Uniform Driver Interface</a></li><li><a href="Category:Drivers" title="Category:Drivers">Drivers</a></li><li><a href="Category:Driver_Interfaces" title="Category:Driver Interfaces">Driver Interfaces</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Uniform_Driver_Interface" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Uniform_Driver_Interface"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Uniform_Driver_Interface&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Uniform_Driver_Interface#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Uniform_Driver_Interface" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Uniform_Driver_Interface&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Uniform_Driver_Interface&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Uniform_Driver_Interface#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Uniform_Driver_Interface" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Uniform_Driver_Interface" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Uniform_Driver_Interface" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Uniform_Driver_Interface&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Uniform_Driver_Interface&amp;oldid=19808" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 8 September 2016, at 16:35.</li>
+											<li id="footer-info-viewcount">This page has been accessed 32,987 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.099 secs. -->
+	</body>
+</html>

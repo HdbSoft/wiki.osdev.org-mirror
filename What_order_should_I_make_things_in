@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>What order should I make things in - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "What_order_should_I_make_things_in", "wgTitle": "What order should I make things in", "wgCurRevisionId": 20279, "wgArticleId": 1577, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["FAQ"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-What_order_should_I_make_things_in action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">What order should I make things in</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="What_order_should_I_make_things_in#mw-head">navigation</a>,
+					<a href="What_order_should_I_make_things_in#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>This is a question of style. You can start at the start and dig straight in, writing a bootsector, then a minimal kernel, and build from there. You could skip the bootsector, and use a ready-made bootloader like <a href="GRUB" title="GRUB">GRUB</a> (it's open for discussion whether <a href="Rolling_Your_Own_Bootloader" title="Rolling Your Own Bootloader">rolling your own bootloader</a> is a valuable experience or a waste of time). You can also write bits and pieces in no specific order, and just put them together at the very end. There is probably no right or wrong way to go about doing it. If you would like an overview of things that are handy to get working (and are practically a must for every OS), you can keep on reading.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="What_order_should_I_make_things_in#For_the_starter"><span class="tocnumber">1</span> <span class="toctext">For the starter</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="What_order_should_I_make_things_in#Style_Extremes"><span class="tocnumber">2</span> <span class="toctext">Style Extremes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="What_order_should_I_make_things_in#Lino_Commando"><span class="tocnumber">2.1</span> <span class="toctext">Lino Commando</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="What_order_should_I_make_things_in#Nick_Stacky"><span class="tocnumber">2.2</span> <span class="toctext">Nick Stacky</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="What_order_should_I_make_things_in#James_T._Klik"><span class="tocnumber">2.3</span> <span class="toctext">James T. Klik</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="What_order_should_I_make_things_in#Eleanore_Semaphore"><span class="tocnumber">2.4</span> <span class="toctext">Eleanore Semaphore</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="What_order_should_I_make_things_in#Alta_Lang"><span class="tocnumber">2.5</span> <span class="toctext">Alta Lang</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="What_order_should_I_make_things_in#Stan_Dard"><span class="tocnumber">2.6</span> <span class="toctext">Stan Dard</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="What_order_should_I_make_things_in#Richard_Theseus"><span class="tocnumber">2.7</span> <span class="toctext">Richard Theseus</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="What_order_should_I_make_things_in#Mister_Perfect"><span class="tocnumber">2.8</span> <span class="toctext">Mister Perfect</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="What_order_should_I_make_things_in#Ideas_for_new_Archetypes"><span class="tocnumber">2.9</span> <span class="toctext">Ideas for new Archetypes</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="What_order_should_I_make_things_in#Archetypes_to_avoid"><span class="tocnumber">2.10</span> <span class="toctext">Archetypes to avoid</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="For_the_starter"> For the starter </span></h2>
+<ol><li> Printing strings and integer numbers (both decimal and hex) on the screen is certainly a must. This is one of most basic ways of debugging, and virtually all of us have gone through a kprint() or kout in version 0.01.
+</li><li> Outputting to a serial port will save you a lot of debugging time. You don't have to fear losing information due to scrolling. You will be able to test your OS from a console, filter interesting debug messages, and automatize some tests.
+</li><li> Having a working and reliable interrupt/exception handling system that can dump the contents of the registers (and perhaps the address of the fault) will be very useful. 
+</li><li> Plan your memory map (virtual, and physical)&#160;: decide where you want the data to be
+</li><li> The heap: allocating memory at runtime (<b>malloc</b> and <b>free</b>) is almost impossible to go without. It should be implemented as soon as possible.
+</li></ol>
+<p>Once those steps are completed, whether you'll try to have a working GUI before you have a filesystem, multitasking or module-loading is completely up to you. Try to sketch out what is likely to depend on what, and do things in 'least dependent first' order.
+</p><p>For instance, the GUI could depend on the filesystem to load bitmaps or resources, but you don't necessarily need bitmaps in your very first GUI. Good advice in such a case is to design the interface of the filesystem first (be it open/close/read/write or something else), and then go on with whatever you prefer, respecting the interface on both sides.
+</p>
+<h2> <span class="mw-headline" id="Style_Extremes"> Style Extremes </span></h2>
+<p>OSDev seems to have "archetypes" among the OSDevvers (and the OS they develop). Of course, the idea that most people have of a "complete" kernel includes most (if not all) of the items listed below.
+</p>
+<h3> <span class="mw-headline" id="Lino_Commando"> Lino Commando </span></h3>
+<dl><dd><i>Main article:</i> <a href="Lino_Commando" title="Lino Commando">Lino Commando</a>
+</dd></dl>
+<p>He's been impressed by the "naked beauty" of DOS times. The first thing he wants to have is a blinking cursor after a "&gt;" symbol so that he can type commands. No matter if there's no way to start two programs at the same time: he just needs a text editor and a filesystem driver.
+</p>
+<h3> <span class="mw-headline" id="Nick_Stacky"> Nick Stacky </span></h3>
+<dl><dd><i>Main article:</i> <a href="Nick_Stacky" title="Nick Stacky">Nick Stacky</a>
+</dd></dl>
+<p>His test-machine has no keyboard and no screen (no one needs that). All he needs is NICs (Network Interface Cards)... plenty of NICs... and an Ethernet cable to see if his kernel responds to pings and routes packets correctly. His kernel has powerful multithreading and a complete TCP/IP stack, of course.
+</p>
+<h3> <span class="mw-headline" id="James_T._Klik"> James T. Klik </span></h3>
+<dl><dd><i>Main article:</i> <a href="James_T._Klik" title="James T. Klik">James T. Klik</a>
+</dd></dl>
+<p>Look through the window: see that background with alpha-blending and the anti-aliased fonts? See the corner of the screen? That's Klik's start menu! Hmm, no: I have no so-called 'programs' folder, as I can't load any applications for now, but here's a 16-items list of test cases for my WidgetToolKit.
+</p>
+<h3> <span class="mw-headline" id="Eleanore_Semaphore"> Eleanore Semaphore </span></h3>
+<dl><dd><i>Main article:</i> <a href="Eleanore_Semaphore" title="Eleanore Semaphore">Eleanore Semaphore</a>
+</dd></dl>
+<p>Works in a dark corner of a small room with listings all around. Her system has much evolved since last year, though all she can show you is still the same: bunches of A's and B's displayed in no obvious order on a text console that she controls with magic key combinations. You hear her talking about how she implemented component programming, auto-dependency-resolving and a virtual clock algorithm for her scheduler.
+</p>
+<h3> <span class="mw-headline" id="Alta_Lang"> Alta Lang </span></h3>
+<dl><dd><i>Main article:</i> <a href="Alta_Lang" title="Alta Lang">Alta Lang</a>
+</dd></dl>
+<p>Why would anyone want to write something as complex as an operating system in something as clunky and old as C? Alta wants something different for her system: a new language for a more elegant operating system. She spends at least as much time on language design as on system design, in the hopes that if she can design the language to be clean enough and powerful enough, the system will simply fall into place.
+</p>
+<h3> <span class="mw-headline" id="Stan_Dard"> Stan Dard </span></h3>
+<dl><dd><i>Main article:</i> <a href="Stan_Dard" title="Stan Dard">Stan Dard</a>
+</dd></dl>
+<p>Stan knows how things should be. It's all nicely written down in standards. He sees how they fit together to form a beautiful system, well, if you disregard all the parts where the standard is stupid. He has a reasonably complete implementation of the areas he knows about and not-terribly-impressive code for the areas he is unskilled in. 
+</p>
+<h3> <span class="mw-headline" id="Richard_Theseus"> Richard Theseus </span></h3>
+<dl><dd><i>Main article:</i> <a href="Richard_Theseus" title="Richard Theseus">Richard Theseus</a>
+</dd></dl>
+<p>Richard likes his current OS very much, except for one thing: it's not written by him. Bit by bit, he wants to replace the parts of his current OS with his own code. His ultimate aim is to have an identical copy of his host OS, but with his code.
+</p>
+<h3> <span class="mw-headline" id="Mister_Perfect"> Mister Perfect </span></h3>
+<dl><dd><i>Main article:</i> <a href="Mister_Perfect" title="Mister Perfect">Mister Perfect</a>
+</dd></dl>
+<p>Mister Perfect wants to write a perfect operating system, as he looks at all the flaws current operating systems have. He researches many design and implementation possibilities in order to decide what is better. He starts over multiple times in order to assure quality and perfectness.
+</p>
+<h3> <span class="mw-headline" id="Ideas_for_new_Archetypes"> Ideas for new Archetypes </span></h3>
+<ul><li> <b>Edward Scissorhands</b> - Sounds like something designed on paper to do everything but completely broken in practice, I see architecture astronauts rather doing vaporware (e.g. you'd never get to see the Scissorhanded implementation the architecture would require)
+</li><li> <b>Real Man</b> - Writes an entire operating system in Assembly, preferably in real mode. Abhors <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Real_Men_Don't_Eat_Quiche">Quiche Eaters</a> and <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Real_Programmers_Don%27t_Use_Pascal">Pascal</a>.
+</li><li> <b>Andy Microbaum</b> - Microkernel people.
+</li><li> <b>Vizier Studio</b> - Visual Studio people.
+</li><li> <b>Barry Pi</b> - ARM people.
+</li></ul>
+<h3> <span class="mw-headline" id="Archetypes_to_avoid"> Archetypes to avoid </span></h3>
+<ul><li> <b><a href="Duct_von_Tape" title="Duct von Tape">Duct von Tape</a></b> - Someone that reuses a lot of code and combines it into a horrible frankenstein of a project. Or perhaps <a href="Category:Lovecraftian" title="Category:Lovecraftian">lovecraftian</a>?
+</li><li> <b><a href="Bossy_Boots" title="Bossy Boots">Bossy Boots</a></b> - Someone that wants other people to fix their bootloader for them.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 112/1000000
+Post-expand include size: 286/2097152 bytes
+Template argument size: 102/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1577-0!*!0!!en!*!* and timestamp 20180121035900 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=What_order_should_I_make_things_in&amp;oldid=20279">http://wiki.osdev.org/index.php?title=What_order_should_I_make_things_in&amp;oldid=20279</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:FAQ" title="Category:FAQ">FAQ</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=What_order_should_I_make_things_in" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="What_order_should_I_make_things_in"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:What_order_should_I_make_things_in"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="What_order_should_I_make_things_in#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="What_order_should_I_make_things_in" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=What_order_should_I_make_things_in&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=What_order_should_I_make_things_in&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="What_order_should_I_make_things_in#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/What_order_should_I_make_things_in" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/What_order_should_I_make_things_in" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=What_order_should_I_make_things_in&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=What_order_should_I_make_things_in&amp;oldid=20279" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 January 2017, at 15:32.</li>
+											<li id="footer-info-viewcount">This page has been accessed 126,777 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/What_order_should_I_make_things_in" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/What_order_should_I_make_things_in" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=What_order_should_I_make_things_in&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=What_order_should_I_make_things_in&amp;oldid=20279" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 January 2017, at 15:32.</li>
+											<li id="footer-info-viewcount">This page has been accessed 126,777 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.047 secs. -->
+	</body>
+</html>

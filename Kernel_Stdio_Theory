@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Kernel Stdio Theory - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Kernel_Stdio_Theory", "wgTitle": "Kernel Stdio Theory", "wgCurRevisionId": 17811, "wgArticleId": 2701, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["OS theory"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Kernel_Stdio_Theory action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Kernel Stdio Theory</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Kernel_Stdio_Theory#mw-head">navigation</a>,
+					<a href="Kernel_Stdio_Theory#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Kernel_Stdio_Theory#Standard_Input.2FOutput_Theory"><span class="tocnumber">1</span> <span class="toctext">Standard Input/Output Theory</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Kernel_Stdio_Theory#What_is_Standard_Input.2FOutput.3F"><span class="tocnumber">1.1</span> <span class="toctext">What is Standard Input/Output?</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="Kernel_Stdio_Theory#How_can_I_implement_StdIO_in_my_kernel.3F"><span class="tocnumber">2</span> <span class="toctext">How can I implement StdIO in my kernel?</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="Kernel_Stdio_Theory#Short_Discourse_on_Design_Considerations"><span class="tocnumber">2.1</span> <span class="toctext">Short Discourse on Design Considerations</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Standard_Input.2FOutput_Theory">Standard Input/Output Theory</span></h2>
+<h3> <span class="mw-headline" id="What_is_Standard_Input.2FOutput.3F">What is Standard Input/Output?</span></h3>
+<p>Standard Input and Output, and Standard Error, are streams which are implemented as part of the C Standard Library. A stream is a read/write interface for access to a file, hardware resource, or another process.
+</p><p>On inclusion of the <tt>stdio.h</tt> header, three streams are auto created, and associated with the environment's Standard Input, standard Output and standard Error streams. It is conventional, and default in most cases, for the process's Standard Output and Standard Error to be tied to the terminal which opened it. And unless StdIn is redirected, the default source of Standard Input is taken to be the keyboard.
+</p><p>These effects are handled by the C Library, and they interface with an underlying OS to provide access to the stream resource. Stream resources may have the following properties:
+</p>
+<ul><li>Read/Write
+</li><li>Text/Binary
+</li><li>Buffered/Unbuffered
+</li></ul>
+<p>In most cases, by default, StdOut is buffered, while StdErr is unbuffered. This allows for data output on StdErr to be seen by the user immediately. Buffering may be either <i>line</i> buffered or <i>fully</i> buffered. The C Standard Library's intricacies are not the focus of this article, however.
+</p><p>A kernel must provide the underlying devices' API and present them to a running application. All applications, for purposes of this writing, are by default bound to Keyboard for StdIn, and the Console for StdOut.
+</p><p>Since C was used to develop the Unix kernel, and Unix provided abstraction of devices as files, which were no different from any other, a process could easily open a device as a resource stream, and connect its StdIO to the device for reading or writing. 
+</p><p>A classic example of some basic know-how of how the Unix's StdIO works is the terminal itself. Note well that provision of such abstraction does not need to be done via files. The Windows API provides abstraction via its API function calls. Programs may access StdIn, StdOut, and StdErr, but these are really only relevant when working in console mode. For GUI applications, StdIn, StdOut, and StdErr are substituted by the application developer with relevant API functionality. E.g: Alert Boxes for errors and warnings, etc.
+</p><p>In the Unix kernel, the default Standard Output is connected to the user's terminal device. (e.g: /dev/tty0). Try going into your Unix/Linux command prompt and typing <tt>who am i</tt>. This is the device that represents your current terminal's standard Output. On microcomputers (the one you're using right now) there are no terminals connected to huge mainframes, so the modern Linux/Unix microcomputers just create a terminal device anyway, and associate it with the Kernel's Standard Output.
+</p><p>Now: Try <tt>echo Hello from Std Output! &gt;file</tt>
+</p><p>This prints the string "Hello from Std Output" to a file called 'file', by redirecting the Standard Output of the program to the file. The program is given the handle of the file for its stdout device, and it writes, for all intents and purposes, to the file.
+</p><p>Go back and find out which terminal you are, by running either <tt>who am i</tt> or simply typing <tt>tty</tt>. Take the output from <tt>tty</tt> and place it at the end of the line, where 'file' was last time. My kernel reports my terminal as /dev/pts/1.
+</p><p>Now try: <tt>echo Hello from Std Output! &gt;/dev/pts/1</tt>
+</p><p>This time, you see the out put from 'echo' on the terminal. Why? You explicitly redirected the output of Stdout to your Stdout. /dev/pts/1 in my case, and whatever you got in yours, is synonymous with the standard output for the current user.
+</p><p>Interestingly, though, this file <i>also</i> acts as the Stdin device: reading from it causes all the characters you type at the keyboard to be reported to the program currently reading from it.
+</p><p>The unix <tt>cat</tt> command reads and outputs what it sees in a file. When you type at the keyboard, this is directed to Stdin, which applications may read from. To get a better understanding more quickly, try:
+</p><p><tt>cat /dev/pts/1</tt>
+</p><p>Now keep typing words and characters, and then press enter when you feel like it. The characters you typed at the terminal are sent to Stdin, which <tt>cat</tt> is reading from. When you press 'enter', the kernel stops reading from the keyboard, having reached the end of line for the current bit of input, and sends this line of keyboard input to the Standard Input, which, currently, <tt>cat</tt> is reading from. Cat, thinking that it is reading from an ordinary file, does what it's supposed to do: echo the contents of the file onto the terminal.
+</p><p>When you're done typing lines, press <i>Ctl+d</i>, which is a synonym in *nix for "No more input/End of input". When dealing with files, this is synonymous for "End of file". The kernel receives the indication that there is no more input, and forwards this to the Stdin, which gives it to <tt>cat</tt>. <tt>cat</tt> interprets the "no more data" signal to mean that the end of the file it is currently reading has been reached. Just like any other file, it stops reading from the kernel. This is something common to all Unices, in that they treat everything as if it's nothing more than a normal file.
+</p><p>But we can understand that the dynamic nature of this file the terminal StdIO file indicates that it is obviously not a normal file on disk, but a link to a kernel API which manages Stdin and Stdout.
+</p>
+<h2> <span class="mw-headline" id="How_can_I_implement_StdIO_in_my_kernel.3F">How can I implement StdIO in my kernel?</span></h2>
+<h3> <span class="mw-headline" id="Short_Discourse_on_Design_Considerations">Short Discourse on Design Considerations</span></h3>
+<p>Most early developers do not take into account the fact that their kernel should implement some form of Standard Input/Output for applications. Two of the most early drivers that most OS developers write are actually two drivers which should be part of a Standard Input/Output setup: The console driver, and the Keyboard Driver.
+</p><p>Note very well that Stdin and Stdout are <i>not</i> necessarily tied to the Keyboard device, or to a console screen, or other screen output. A program may open a file handle, and write to it as if it were a Std Output stream.
+</p><p>Now in most kernels, including the author's, implementing any form of Stdout at boot time is relatively pointless: there are no applications to use it except for the kernel. Not only that, but Stdout must be able to be tied to several streams which need kernel support.
+</p><p>(Todo: give examples of devices/resources (e.g. files) that can be tied to StdIO).
+</p><p>While the screen isn't the only device or resource to which StdOut can be tied, it is necessary to note that from all indications, all OSDev-ers write a driver that directly references the VGA text mode Framerbuffer while booting. This is not detrimental, or wrong. but when the kernel is able to run applications, there must be a resource available in the kernel to support writing to at least the console screen as a StdOut resource. Of course, after boot, when the Graphical side of the kernel must come into play, many <i>still</i> don't write a Stdout interface because of lack of proper design.
+</p><p>One can generally assume that Stdout is a read or write stream that an application may access.
+</p><p>Let's perform a neat experiment to understand what happens with the StdIO terminal file in *Nix:
+Open up two terminal windows under *Nix. On one terminal, type the command: <tt>cat /dev/pts/1</tt> (or whatever your current terminal device is. From now on when I type /dev/pts/1 that's what I'm referring to) and press enter. You will see that Cat has begun reading from the terminal.
+</p><p>On the second one, type <tt>echo &lt;Insert random phrase here&gt;</tt>. Note that when the shell is reading input from the keyboard, it allows you to send non-printable characters by escaping them. If you type 
+</p><p><tt>echo hello \&lt;enter&gt; Jane\&lt;enter&gt; I\'m glad to meet you&lt;enter&gt;</tt> 
+</p><p>You'll find that the <i>escaped</i> &lt;enter&gt; keypresses do not cause the <tt>echo</tt> command to be processed, but that the shell interprets that as a literal LineFeed character and continues to read what characters to send to <tt>echo</tt>. The Linefeed will be sent to <tt>echo</tt> just as any other character would. So you can type stuff on multiple lines, too.
+</p><p>What we have here is a setup where <tt>cat</tt> is reading from the terminal, and <tt>echo</tt> is writing to it. Keep the window with cat open, and keep sending <tt>echo</tt> commands to the terminal.
+</p><p>You'll find that the window with <tt>cat</tt> is showing nothing. Now modify your <tt>echo</tt> commands to write directly to the terminal: 
+</p><p><tt>echo &lt;insert random phrase here&gt; &gt;/dev/pts/1</tt>.
+</p><p>What happens now? Yes. <tt>cat</tt> reads the characters that <tt>echo</tt> sends. So why didn't cat get them before? Every application has its <i>own</i> Stdout, so <tt>echo</tt> was writing to <i>its</i> Stdout, and not to the Terminal/System Stdout.
+</p><p>Returning to where we were before, I was stating that every application should have its own Stdout. This article, as yet immature, will for now only take into account one of the basic StdIn devices: the keyboard. An efficient design for tying Stdin to the Keyboard would be:
+</p>
+<ul><li> Execute a task. Have a global variable to indicate which process is the currently active process, and therefore would be reading from the user's keyboard input. (Note that i didn't say which is the currently <i>executing</i> process, but the currently <i>active</i> process. I.e: the one the user has open in front of him, where the currently active cursor is.
+</li></ul>
+<ul><li> When the keyboard IRQ is raised, the Keyboard driver fetches the keystroke from the device, and appends it to the StdIn for the active process. The active process reads from StdIn, and gets the keys placed in <i>its</i> Stdin buffer. <b>Question</b>: But what about the other applications running in the background? Like if the user has a notepad open, and a Firefox where he is posting on a forum. The Firefox window is active.
+</li></ul>
+<p>Well, take some time to think about it a bit. The processor is constantly rotating timeslices between processes. Each process which needs to read from Stdin is, of course, reading from StdIn. The <i>default</i> Stdin resource is the keyboard, as long as the Process hasn't opened another handle, and specified another resource by its handle, all reads will be assumed to be from the keyboard. But currently Stdin is tied to the <i>Active</i> Application window process. So ONLY the <i>Active</i> process actually receives the keys entered at the keyboard, since the keyboard writes directly to the specific buffer of the <i>Active</i> process. Hmmm...well? What <i>about</i> the other process windows? Do they need to know what I'm typing in a textbox element on a webpage in Firefox? No. When I switch to <i>their</i> process, and <i>they</i> become the Active Process, then when they read from Stdin, then they'll receive the Keyboard's input, too.
+</p><p>Makes sense, right?
+</p><p>That's the basic rundown of a small part of the theory. Later additions should add more body, and even implementation details.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 19/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2701-0!*!*!!en!*!* and timestamp 20180121053414 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Kernel_Stdio_Theory&amp;oldid=17811">http://wiki.osdev.org/index.php?title=Kernel_Stdio_Theory&amp;oldid=17811</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:OS_theory" title="Category:OS theory">OS theory</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Kernel_Stdio_Theory" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Kernel_Stdio_Theory"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Kernel_Stdio_Theory"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Kernel_Stdio_Theory#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Kernel_Stdio_Theory" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Kernel_Stdio_Theory&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Kernel_Stdio_Theory&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Kernel_Stdio_Theory#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Kernel_Stdio_Theory" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Kernel_Stdio_Theory" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Kernel_Stdio_Theory&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Kernel_Stdio_Theory&amp;oldid=17811" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 17 March 2015, at 02:12.</li>
+											<li id="footer-info-viewcount">This page has been accessed 42,004 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.037 secs. -->
+	</body>
+</html>

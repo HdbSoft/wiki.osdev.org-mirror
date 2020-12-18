@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Talk:Bare Bones - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "Talk", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 1, "wgPageName": "Talk:Bare_Bones", "wgTitle": "Bare Bones", "wgCurRevisionId": 20998, "wgArticleId": 2131, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-1 ns-talk page-Talk_Bare_Bones action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Talk:Bare Bones</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Talk:Bare_Bones#mw-head">navigation</a>,
+					<a href="Talk:Bare_Bones#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Talk:Bare_Bones#Renaming"><span class="tocnumber">1</span> <span class="toctext">Renaming</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Talk:Bare_Bones#main_-.3E_kmain"><span class="tocnumber">2</span> <span class="toctext">main -&gt; kmain</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Talk:Bare_Bones#64_bits"><span class="tocnumber">3</span> <span class="toctext">64 bits</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Talk:Bare_Bones#Revert_of_-fno-leading-underscore"><span class="tocnumber">4</span> <span class="toctext">Revert of -fno-leading-underscore</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Talk:Bare_Bones#FPU_Support"><span class="tocnumber">5</span> <span class="toctext">FPU Support</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Talk:Bare_Bones#Disk_image"><span class="tocnumber">6</span> <span class="toctext">Disk image</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="Talk:Bare_Bones#Linkage"><span class="tocnumber">7</span> <span class="toctext">Linkage</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Talk:Bare_Bones#Stack_top_.26_bottom"><span class="tocnumber">8</span> <span class="toctext">Stack top &amp; bottom</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Talk:Bare_Bones#Comment_style"><span class="tocnumber">9</span> <span class="toctext">Comment style</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Renaming"> Renaming </span></h2>
+<p>Shouldn't this page get renamed?
+Because every other language's BareBone is called [Language Name] BareBone.
+Only the C/C++ BareBone site is called BareBone.
+I think it is reasonable, to rename it to C/C++ BareBone.
+Then we could use the BareBone page for other things, like explaining why there are BareBones and so on.
+<a href="http://wiki.osdev.org/User:Columbus" title="User:Columbus">Columbus</a> 08:50, 14 September 2014 (CDT)
+</p><p>I would've also thought that 'x86 Bare Bones' might also be more appropriate, since that is what you're actually building here. --<a href="http://wiki.osdev.org/User:Ajxs" title="User:Ajxs">Ajxs</a> 23:59, 23 April 2017 (CDT)
+</p>
+<h2> <span class="mw-headline" id="main_-.3E_kmain"> main -&gt; kmain </span></h2>
+<p>I was the one who originally decided to use main() as function name. I changed my mind, because of the possibility of brain-dead compiler option choices resulting in a main()-related linker error, which might be less confusing if the function in the code is called kmain() instead. <a href="http://wiki.osdev.org/User:Solar" title="User:Solar">Solar</a> 07:01, 27 February 2008 (CST)
+</p>
+<h2> <span class="mw-headline" id="64_bits"> 64 bits </span></h2>
+<p>Hello from a new user.
+</p><p>I tried to assemble stuff from this article, but it was no go:
+</p>
+<pre>loader.s:21: Error: suffix or operands invalid for `push'
+loader.s:22: Error: suffix or operands invalid for `push'
+</pre>
+<p>While browsing, I encountered indications it might be my architecture (64bit AMD). I know that cross-compiler would do the job (for 32 bit), but couldn't the code instead be written in such way, so that it is cross-architecture instead? That way, I'd have the solution for both architectures (no need for replacement code to this), and possibly wouldn't need to build a cross compiler at this point (very, very early).
+</p><p>Also, it would be very good if someone could explain, line by line, what's happening here.
+<br />In any case, looks like a small, but a very important rewrite is in order.
+</p><p><br />So, in short:
+</p>
+<ul><li>Is it architecture specific?
+</li><li>Any ideas about a workaround?
+</li><li>Can someone explain the (new!) code?
+</li></ul>
+<p>--<a href="http://wiki.osdev.org/index.php?title=User:Paxcoder&amp;action=edit&amp;redlink=1" class="new" title="User:Paxcoder (page does not exist)">Paxcoder</a> 21:57, 5 January 2009 (UTC)
+</p><p><br />
+</p><p>First of all, questions belong on the forum, not in some talkpage few people ever bother to read.
+</p><p>What you have is an assembler that defaults to 64-bit code, and assembly that is written for 32-bit code. To GAS those two are completely different architectures (i386 vs x86-64). There is however a command-line switch that would tell GAS to assemble for the correct architecture and as such needs no change in this code.
+- <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 22:45, 5 January 2009 (UTC)
+</p>
+<dl><dd><dl><dd>I hope you understand what you offered is not a solution. I want it to be able to run on 64 bit processors. Basically, you said very little. Nevermind. I'll use forum. --<a href="http://wiki.osdev.org/index.php?title=User:Paxcoder&amp;action=edit&amp;redlink=1" class="new" title="User:Paxcoder (page does not exist)">Paxcoder</a> 20:42, 6 January 2009 (UTC)
+</dd></dl>
+</dd></dl>
+<p><br />
+Added question at the bottom of the page with the options I use to build on my 64-bit Ubuntu 10.04 laptop. -- <a href="http://wiki.osdev.org/index.php?title=User:Mbrush&amp;action=edit&amp;redlink=1" class="new" title="User:Mbrush (page does not exist)">Mbrush</a> 03:04, 21 May 2010 (UTC)
+</p>
+<h2> <span class="mw-headline" id="Revert_of_-fno-leading-underscore"> Revert of -fno-leading-underscore </span></h2>
+<p>fixed minor mistake-meshounah
+</p>
+<dl><dd>Depending on the compiler, leading underscores are either required or wrong. Also, the summary field was designed for these messages - <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 17:42, 11 August 2007 (CDT)
+<dl><dd>We should add either <tt>-fleading-underscore</tt> or <tt>-fno-leading-underscore</tt> to the gcc command. I'd personally prefer <tt>-fno-leading-underscore</tt> and removing all underscores from the NASM and GAS code. Any opinions on the matter? -<a href="http://wiki.osdev.org/User:Jhawthorn" title="User:Jhawthorn">Jhawthorn</a> 19:04, 15 August 2007 (CDT)
+<dl><dd>I'd go for suggesting that a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">cross-compiler</a> is the only guarantee for success - it also fixes several other things one's system compiler might try to annoy the user (things commandline arguments won't fix). Since the crosscompiler described does not add leading underscores, and the use of having them is purely legacy, I'd go for no underscores anyway. - <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 04:34, 17 August 2007 (CDT)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<p>I reverted an edit from Hangin10 regarding -fno-leading-underscore. One of the advantages of the <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a> is that it makes any tweaks regarding this option unnecessary. IMHO, if we start "leaking" such tweaks into this tutorial, we end up with a "Bare bones for Windows" and a "Bare bones for Linux" again. Or has there been a reason for this edit that I am unaware of? -- <a href="http://wiki.osdev.org/User:Solar" title="User:Solar">Solar</a> 08:26, 19 January 2009 (UTC)
+</p>
+<dl><dd><b>Agreed</b> If you use a windows oriented compiler you get stuck with all its windows oriented dependencies. Better not to silently allow a timebomb to be constructed on a windows platform by disabling leading underscores, and just have everybody use the crosscompiler from day one. - <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 23:59, 19 January 2009 (UTC)
+</dd></dl>
+<h2> <span class="mw-headline" id="FPU_Support"> FPU Support </span></h2>
+<p>I reverted an edit from Hangin10 where the 'finit' instruction was added. IMO, FPU initialization doesn't belong in Bare Bones, and a single 'finit' doesn't even begin to touch on anything else that is needed for proper FPU support. - <a href="http://wiki.osdev.org/User:Quok" title="User:Quok">quok</a> 19:13, 29 September 2009 (UTC)
+</p>
+<h2> <span class="mw-headline" id="Disk_image"> Disk image </span></h2>
+<p>Why does this tutorial still use the kernel 200+18  method of loading?
+Wouldn't it be better to teach how to create a FAT/ext2 GrUB boot disk?, hence simplifying debugging (and allowing the same code to be expanded to load multiboot modules, and be accessed by the kernel)
+</p>
+<dl><dd>People may not want to implement either of these file systems. They may not even want file systems at all. I find the current approach to be more general. --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 01:06, 27 November 2010 (UTC)
+</dd></dl>
+<h2> <span class="mw-headline" id="Linkage"> Linkage </span></h2>
+<p>Is everyone comfortable with switching to external linkage rather than pushing things on the stack and then picking them up as arguments? The current way seems less natural, less readable, and is dependent on the calling convention. --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 04:17, 15 May 2012 (CDT)
+</p>
+<dl><dd>Back then, I thought it a good idea to show how stuff pushed by ASM can be popped by C. It was also closer to the example code provided by GRUB. But that was back when there <i>was</i> no x64 calling convention. In that light, I think external linkage <i>would</i> be better today. But then, try to make sure that you make the chance in <i>all</i> "Bare Bones" articles. We should strive to have them so things as similar as possible, the only differences being those demanded by the language. -- <a href="http://wiki.osdev.org/User:Solar" title="User:Solar">Solar</a> 07:21, 15 May 2012 (CDT)
+</dd></dl>
+<dl><dd><dl><dd>I have updated the C and C++ tutorials but I'd rather someone else take care of the Pascal and FreeBasic tutorials. It's been about 10 years since I've last used Pascal and FreeBasic I do not know at all. --<a href="http://wiki.osdev.org/User:Love4boobies" title="User:Love4boobies">Love4boobies</a> 05:06, 28 May 2012 (CDT)
+</dd></dl>
+</dd></dl>
+<h2> <span class="mw-headline" id="Stack_top_.26_bottom"> Stack top &amp; bottom </span></h2>
+<p>As far as I know, bottom of the stack is were the first element is added. In case of x86, it is the highest address. Compare with current content:
+</p>
+<ol><li> Currently the stack pointer register (esp) points at anything and using it may
+</li><li> cause massive harm. Instead, we'll provide our own stack. We will allocate
+</li><li> room for a small temporary stack by creating a symbol at the <b>bottom</b> of it,
+</li><li> then allocating 16384 bytes for it, and finally creating a symbol at the <b>top</b>.
+</li></ol>
+<p>.section .bootstrap_stack, "aw", @nobits
+stack_<b>bottom</b>:
+.skip 16384 # 16 KiB
+stack_<b>top</b>:
+</p><p>I think all these occurrences of words bottom and top should be swapped. Do I miss something?
+</p>
+<h2> <span class="mw-headline" id="Comment_style"> Comment style </span></h2>
+<p>I've changed the commenting style from the old # ones to the new C-style ones using <b>/*</b> and <b>*/</b>, hopefully this is OK, I thought it was a good idea since the # style is deprecated and is used to override line number / file name when errors are reported by the assembler. That said, if people can give a good reason as to why it should be changed back, by all means, go ahead, I'm just trying to help avoid headaches in the future. Also, I used my own commenting style (a single /* and */ before the first line and after the last line of a comment block), but I know people like other styles, so if you really feel strongly about one and think it helps readability, go ahead and use that. -- <a href="http://wiki.osdev.org/index.php?title=User:Mikumiku747&amp;action=edit&amp;redlink=1" class="new" title="User:Mikumiku747 (page does not exist)">Mikumiku747</a> 05:10, 19 July 2017 (CDT)
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 82/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2131-0!*!0!!en!*!* and timestamp 20180121080036 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Talk:Bare_Bones&amp;oldid=20998">http://wiki.osdev.org/index.php?title=Talk:Bare_Bones&amp;oldid=20998</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Talk%3ABare_Bones" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main"><span><a href="Bare_Bones"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="selected"><span><a href="Talk:Bare_Bones"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Talk:Bare_Bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Talk:Bare_Bones" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Bare_Bones&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Bare_Bones&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Talk:Bare_Bones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Talk:Bare_Bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Talk:Bare_Bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Talk:Bare_Bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.phpskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Talk:Bare_Bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Talk:Bare_Bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Talk:Bare_Bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Talk:Bare_Bones&amp;oldid=20998" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 19 July 2017, at 04:10.</li>
+											<li id="footer-info-viewcount">This page has been accessed 15,567 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.052 secs. -->
+	</body>
+</html>

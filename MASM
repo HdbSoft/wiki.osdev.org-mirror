@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>MASM - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "MASM", "wgTitle": "MASM", "wgCurRevisionId": 20359, "wgArticleId": 2100, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Assemblers"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-MASM action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">MASM</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="MASM#mw-head">navigation</a>,
+					<a href="MASM#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The <b>Microsoft Macro Assembler</b> is an x86 architecture assembler for MS-DOS and Microsoft Windows. While the name MASM has earlier usage as the Unisys OS 1100 Meta-Assembler, it is commonly understood in more recent years to refer to the Microsoft Macro Assembler. It is an archetypal MACRO assembler for the x86 PC market that is owned and maintained by a major operating system vendor and since the introduction of MASM version 6.0 in 1991 has had a powerful preprocessor that supports pseudo high level emulation of variety of high level constructions including loop code, conditional testing and has a semi-automated system of procedure creation and management available if required. Version 6.11d was 32 bit object module capable using a specialised linker available in the WinNT 3.5 SDK but with the introduction of binary patches that upgraded version 6.11d, all later versions were 32 bit Portable Executable console mode application that produced both OMF and COFF object modules for 32 bit code.
+</p><p><b>NOTE: Using MASM for operating system development is not prohibited in the license agreement although you may sometimes hear that. This is because people often confuse the MASM and MASM32 licenses; they are 2 unrelated projects.</b>
+</p><p>While recent versions of MASM only come with Visual Studio, its syntax is in widespread use in existing code and is also used as a guideline in the development of other assemblers, such as <a href="JWASM" title="JWASM" class="mw-redirect">JWASM</a> and Pelle's PoAsm assembler.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="MASM#History"><span class="tocnumber">1</span> <span class="toctext">History</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="MASM#Usage"><span class="tocnumber">2</span> <span class="toctext">Usage</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="MASM#Addressing_Notation"><span class="tocnumber">2.1</span> <span class="toctext">Addressing Notation</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="MASM#Square_Brackets"><span class="tocnumber">2.2</span> <span class="toctext">Square Brackets</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="MASM#Notation_Abreviation"><span class="tocnumber">2.3</span> <span class="toctext">Notation Abreviation</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="MASM#Limited_Type_Checking"><span class="tocnumber">2.4</span> <span class="toctext">Limited Type Checking</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="MASM#Calling_Conventions"><span class="tocnumber">2.5</span> <span class="toctext">Calling Conventions</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="MASM#Pseudo_High_Level_Emulation"><span class="tocnumber">2.6</span> <span class="toctext">Pseudo High Level Emulation</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="MASM#Pre-Processor"><span class="tocnumber">2.7</span> <span class="toctext">Pre-Processor</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="MASM#Object_Module_Compatibility"><span class="tocnumber">3</span> <span class="toctext">Object Module Compatibility</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="MASM#COFF_Object_Modules_Reference"><span class="tocnumber">3.1</span> <span class="toctext">COFF Object Modules Reference</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="MASM#Compatible_Linkers"><span class="tocnumber">4</span> <span class="toctext">Compatible Linkers</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="MASM#Microsoft_Reference_For_ML.EXE"><span class="tocnumber">5</span> <span class="toctext">Microsoft Reference For ML.EXE</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="MASM#Publication"><span class="tocnumber">5.1</span> <span class="toctext">Publication</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="MASM#Online"><span class="tocnumber">5.2</span> <span class="toctext">Online</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="MASM#Microsoft_Licence"><span class="tocnumber">6</span> <span class="toctext">Microsoft Licence</span></a></li>
+<li class="toclevel-1 tocsection-17"><a href="MASM#MASM_Compatible_Assemblers"><span class="tocnumber">7</span> <span class="toctext">MASM Compatible Assemblers</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="History"> History </span></h2>
+<p>The Microsoft Assembler has been in production since 1981 and is upgraded by Microsoft on a needs basis to reflect technology changes in both operating systems and processor hardware capacity. The copyright string from the 1991 version of ML.EXE is as follows.
+</p>
+<pre>   Microsoft (R) Macro Assembler Version 6.00
+   Copyright (C) Microsoft Corp <b>1981-1991</b>. All rights reserved.
+</pre>
+<p>The last freestanding commercial version of the Mirosoft assembler was version <b>6.11d</b> released in 1993 and retailed through the middle to late 1990s. With the release of 32 bit versions of Windows with both the OEM win95 and WinNT version 4.0, Microsoft developed ML.EXE mainly for internal use as an operating system vendor and it was mainly available only through MSDN subscription for the development of device drivers    but Microsoft developed patches for the last commercial version of ML.EXE that upgraded it from a 16 bit MZ executable to a proper 32 bit portable executable file that ran natively on the 32 bit Windows platforms. With the release of the 6.14 patch, ML.EXE became a very reliable tool that supported Intel opcodes up to the early SSE instruction set.
+</p><p>In middle 2000 Microsoft re-integrated ML.EXE back into their VC98 commercial software development package with the processor pack as the downloadable file VCPP5.EXE which was licenced so that licenced end users of VC98 could redistribute the processor pack to other licenced end users of VC98 (VCPP5.EXE EULA) and all versions of Microsoft Visual C and Visual Studios have contained ML.EXE as a component since that time. The ML.EXE version supplied in the VCPP5 pack was ML.EXE version 6.15 which added support for the SSE2 Intel instruction set. Successive versions of ML.EXE have been developed on a needs basis to include later Intel opcodes. Later in Visual C++ 2005, a seperate 64-bit version of MASM appeared under the file name <b>ml64.exe</b>.
+</p><p>Although MASM is no longer a freestanding commercial product, it has since 2000 been a component of the Microsoft commercial development environment Visual Studio but Microsoft have also made it availabe in many different packages for device development and more recently in the free downloadable versions of Visual Studio.
+</p><p>Version 7.0 was included with Visual C++ .NET 2002. Version 7.1 was included with Visual C++ .NET 2003. Version 8.0 was included with Visual C++ 2005 which also includes a version that can assemble x64 code. Version 9.0 is included with Visual C++ 2008. Some of the newer versions of MASM are also included in various Microsoft SDKs and DDKs.
+</p><p>ML.EXE is typically an internal usage industrial tool maintained by a major operating system vendor to serve their own purpose without the need to make it a particularly "user friendly" application as the vast majority of its users are experienced programmers who have used it for many years. Microsoft have tended to use assembler code in the very low levels of their operating systems where even the best C compilers do not deliver sufficiently optimised code for the intended purpose. This is evident for programmers with enough technical experience who have some need to disassemble occasional OS components for research and compatibility purposes like <b>NTOSKRNL.EXE</b> and <b>HAL.DLL</b> and the tell tale indication of code written by hand in ML.EXE is the use of the trailing LEAVE mnemonic at the end of a procedure with a stack frame.
+</p><p>The two current ML versions as of January 2010 are as follows,
+</p><p>2009 ML version copyright string
+</p>
+<pre>   Microsoft (R) Macro Assembler Version 9.00.30729.01
+   Copyright (C) Microsoft Corporation.  All rights reserved.
+</pre>
+<p>2009 ML64 version copyright string<br />
+</p>
+<pre>   Microsoft (R) Macro Assembler (x64) Version 9.00.30729.207
+   Copyright (C) Microsoft Corporation.  All rights reserved.
+</pre>
+<h2> <span class="mw-headline" id="Usage">Usage</span></h2>
+<p>The Microsoft assembler has been the main vehicle for preserving the earlier Intel assembler notation and it can still be written as a fully specified language, a format that many dis-assemblers produce. The most common notation of this type are the data size specifiers,
+</p>
+<pre>   <b>BYTE PTR</b>  The data size specifier for the target being 8 bit.
+   <b>WORD PTR</b>  The data size specifier for the target being 16 bit.
+   <b>DWORD PTR</b> The data size specifier for the target being 32 bit.
+</pre>
+<h3> <span class="mw-headline" id="Addressing_Notation">Addressing Notation</span></h3>
+<p>ML.EXE maintains the historical distinction between transient stack addressing and fixed data addressing by using the notation <b>OFFSET</b> to denote data in either the initialised or uninitialised data sections. Transient stack addressing is handled by a number of methods. With a procedure that uses a stack frame, named LOCAL variables are used for readability purposes and where the address of the variable is required it can be accessed eith by the <b>LEA</b> mnemonic or in an INVOKE call by the <b>ADDR</b> operator. The <b>LOCAL</b> variables are [EBP] stack addresses when used within a procedure. Procedures written without a stack frame are generally written purely in mnemonics using direct [ESP] based argument addressing. To maintain compatibility with the historical MASM method of pseudo high level notation, there is a notation to turn off the stack frame generation for the procedure on a needs basis.
+</p>
+<h3> <span class="mw-headline" id="Square_Brackets">Square Brackets</span></h3>
+<p>ML.EXE does not require the addition of square brackets around a named variable but will tolerate such notation deviation by ignoring the notation. This notation difference has at time been a source of confusion for programmers familiar with other assemblers that use the square brackets to denote an address.
+</p>
+<pre>   <b>mov eax, local_var</b>    &#160;; Standard ML.EXE notation
+   <b>mov eax, [local_var]</b>  &#160;; Square brackets are ignored by ML.EXE in this context.
+</pre>
+<p>There is no Intel mnemonic that will produce the extra level of indirection implied by placing un-necessary square brackets around a named variable and the practice leads to confusion of programmers who are experienced in using other x86 assemblers that use the square bracket notation differently. ML.EXE uses square brackets around direct mnemonic code to perform the dereferencing operation as in the following example.
+</p>
+<pre>   <b>lea eax, variable_name</b>  &#160;; load the address of a stack variable into the EAX register
+   <b>mov eax, [eax]</b>          &#160;; dereference the <b>CONTENT</b> of the variable and copy it into the EAX register
+</pre>
+<p>ML.EXE will allow the following.
+</p>
+<pre>   <b>mov eax, [eax+ebx]</b>
+   <b>mov eax, [eax][ebx]</b>
+</pre>
+<p>In this context the second pair of square brackets perform the <b>ADDITION</b> function within the complex addressing notation. It is a useful technique to use when writing procedures that do not have a stack frame as the second pair of brackets can be used to contain the stack displacement that changes with PUSH and POP mnemonics.
+</p>
+<h3> <span class="mw-headline" id="Notation_Abreviation">Notation Abreviation</span></h3>
+<p>Over a long period a form of shorthand notation developed as the parsers in early versions improved and generally if the assembler can determine the size of the data the data size specifier is not necessary although it still can be used. This shorthand has confused some users who have used other assemblers which are not by default data size specified tools. It can lead to problems when the user is not familiar with the default data size specifiers while using the shorthand notation.
+</p>
+<pre>   movzx eax, [esi]           &#160;; generates an error - data SIZE cannot be determined by the assembler
+   movzx eax, <b>BYTE PTR</b> [esi]  &#160;; zero extend a BYTE into the 32 bit EAX register
+</pre>
+<h3> <span class="mw-headline" id="Limited_Type_Checking">Limited Type Checking</span></h3>
+<p>From at least version 6.0, ML.EXE has supported a pseudo high level notation for creating procedures that perform argument size and count checking. It is part of a system using the <b>PROC ENDP PROTO</b> and <b>INVOKE</b> operators. The <b>PROTO</b> operator is used to define a function prototype that has a matching <b>PROC</b> that is terminated with the <b>ENDP</b> operator. The prototyped procedure can then be called with the <b>INVOKE</b> operator which is protected by the limited size and argument count checking. There is additional notation at a more advanced level for turning off the automatically generated stack frame for the procedure where stack overhead in the procedure call may have an effect with very small procedures. ML.EXE is also capable of being written completely free of the pseudo high level notation using only bare Intel mnemonics.
+</p><p>Using an example prototype from the 32 bit Windows API function set,
+</p>
+<pre>   SendMessage <b>PROTO</b> STDCALL&#160;:DWORD,:DWORD,:DWORD,:DWORD
+   SendMessage equ &lt;SendMessageA&gt;
+</pre>
+<p>The code to call this function using the <b>INVOKE</b> notation is as follows.
+</p>
+<pre>   <b>invoke SendMessage,hWin,WM_COMMAND,wParam,lParam</b>
+</pre>
+<p>Which is translated exactly to,
+</p>
+<pre>   <b>push lParam</b>
+   <b>push wParam</b>
+   <b>push WM_COMMAND</b>
+   <b>push hWin</b>
+   <b>call SendMessage</b>
+</pre>
+<p>The advantage of the <b>INVOKE</b> method is that it tests the size of the data types and the argument count and generates an assembly time error if the arguments do not match the prototype.
+</p><p>Note that ML64.EXE does not currently support the <b>INVOKE</b> notation and may not in the future. Based off Microsoft's history of updating earlier versions of ML.EXE on a needs basis for their own internal usage, this feature set may not be developed unless they have a need to add it for their own usage.
+</p>
+<h3> <span class="mw-headline" id="Calling_Conventions">Calling Conventions</span></h3>
+<p>ML.EXE supports a number of different calling conventions on both the 16 bit real mode DOS operating system, the 16 bit Windows versions and the later 32 bit versions. ML.EXE supports the <b>C</b>, <b>SYSCALL</b>, <b>STDCALL</b>, <b>BASIC</b>, <b>FORTRAN</b> and <b>PASCAL</b> calling conventions.
+</p>
+<h3> <span class="mw-headline" id="Pseudo_High_Level_Emulation">Pseudo High Level Emulation</span></h3>
+<p>ML.EXE provides a notation to emulate a variety of high level control and loop structures.<br />
+It supports the <b>.IF</b> block structure,
+</p>
+<pre> <b>.if</b>
+   -
+ <b>.elseif</b>
+   -
+ <b>.else</b>
+   -
+ <b>.endif</b>
+</pre>
+<p>It also supports the <b>.WHILE</b> loop structure,
+</p>
+<pre> <b>.while eax &gt; 0</b>
+   <b>sub eax, 1</b>
+ <b>.endw</b>
+</pre>
+<p>And the <b>.REPEAT</b> loop structure.
+</p>
+<pre> <b>.repeat</b>
+   <b>sub eax, 1</b>
+ <b>.until eax</b> &lt; 1
+</pre>
+<p>The high level emulation also supports C runtime comparison operators that work according to the same rules as Intel mnemonic comparisons. For the .IF block notation the distinction between SIGNED and UNSIGNED data is handles with a minor data type notation variation where the storage size <b>DWORD</b> which is by default UNSIGNED can also be specified as <b>SDWORD</b> for SIGNED comparison. This data type distinction is only appropriate for the pseudo high level notation as it is unused at the mnemonic level of code where the distinction is determined by the range of conditional evaluation techniques available in the Intel mnemonics.
+</p><p>The combined pseudo high level emulation allows MASM to more easily interface with the later current operating systems that use a C style application programming interface. Generally the pseudo high level interface is used for non-speed critical code where clarity and readability are the most important factors, speed critical code is usually written directly in mnemonics.
+</p><p>Note that ML64.EXE does not support all of the earlier pseudo high level notation and may not in the future. Based off Microsoft's history of updating earlier versions of ML.EXE on a needs basis for their own internal usage, this feature set may not be developed unless they have a need to add it for their own usage.
+</p>
+<h3> <span class="mw-headline" id="Pre-Processor"> Pre-Processor </span></h3>
+<p>The Microsoft assembler has a very powerful pre-processor that has considerable more functionality than modern C compilers which is consistent with its designation as a <b>macro assembler</b> and it has been designed from the introduction of ML.EXE version 6.0 with C style pseudo high level functionality for programmers who prefer to use this style of notation for not speed critical code. On the down side the pre-processor is an old design that is known to be quirky in its operation and reasonably difficult to use without a lot of experience when writing macros that are of a more complex nature.
+</p><p>At their simplest macros written for the ML.EXE pre-processor are useful for automating many different simple tasks.
+</p>
+<pre>  &#160;; ----------------------------
+  &#160;; memory to memory assignment
+  &#160;; ----------------------------
+     m2m MACRO M1, M2
+       push M2
+       pop  M1
+     ENDM
+</pre>
+<pre>  &#160;; --------------------------------------------------
+  &#160;; memory to memory assignment using the EAX register
+  &#160;; --------------------------------------------------
+     mrm MACRO m1, m2
+       mov eax, m2
+       mov m1, eax
+     ENDM
+</pre>
+<p>Using the <b>EXITM &lt;return item&gt;</b> notation a macro can return a value or register in a way that can used similar to a high level function call. Using a very simple example,
+</p>
+<pre>   addregs32 MACRO reg1, reg2
+     add reg1, reg2
+     EXITM &lt;reg1&gt;
+   ENDM
+</pre>
+<p>In the <b>.CODE</b> section.
+</p>
+<pre>   mov ecx, 16
+   mov edx, 8
+   
+   mov eax, addregs32(ecx, edx)
+</pre>
+<p>Which disassembles exactly to the following mnemonics.
+</p>
+<pre>   0040102B B910000000             mov     ecx,10h
+   00401030 BA08000000             mov     edx,8
+   00401035 03CA                   add     ecx,edx
+   00401037 8BC1                   mov     eax,ecx
+</pre>
+<p>At a slightly more complex level the pre-processor can be used to emulate higher level languages which allows non-critical code to be simplified for higher programming throughput.
+</p>
+<pre>   <b>fn</b> MessageBox,0,<b>str$</b>(eax),"Title",MB_OK
+</pre>
+<p>In this working example <b>fn</b> is a macro that encapsulates the INVOKE notation and adds functionality so that quoted text can be inserted directly into the API function call in much the same way as a high level language. The <b>str$()</b> macro is an emulation of traditional basic for converting numeric data as either a memory operand or a register into string data for display. The example is taken from the MASM32 Project main macro file.
+</p>
+<h2> <span class="mw-headline" id="Object_Module_Compatibility"> Object Module Compatibility </span></h2>
+<p>The 32 bit versions of ML.EXE introduced with the patches for the last commercial version onwards produce object modules in both the older OMF format and the Microsoft version of the <b>Portable Executable</b> specification COFF format. The object module format is compatible with modern Microsoft C compilers and object modules produced by either ML.EXE or CL.EXE can be routinely intermixed and linked into applications written either with ML.EXE or CL.EXE.
+</p>
+<h3> <span class="mw-headline" id="COFF_Object_Modules_Reference"> COFF Object Modules Reference </span></h3>
+<ul><li> <a rel="nofollow" class="external free" href="http://download.microsoft.com/download/e/b/a/eba1050f-a31d-436b-9281-92cdfeae4b45/pecoff.doc">http://download.microsoft.com/download/e/b/a/eba1050f-a31d-436b-9281-92cdfeae4b45/pecoff.doc</a>
+</li><li> <a rel="nofollow" class="external free" href="http://www.microsoft.com/whdc/system/platform/firmware/PECOFF.mspx">http://www.microsoft.com/whdc/system/platform/firmware/PECOFF.mspx</a>
+</li></ul>
+<h2> <span class="mw-headline" id="Compatible_Linkers"> Compatible Linkers </span></h2>
+<p>For building 16 bit MS-DOS applications a Microsoft OMF linker is required as the 32 bit linkers build 32 bit PE code. The original linkers provided with commercial versions of MASM work correctly and for later versions, Microsoft have had various links over time for their last OMF 16 bit linker that have been available on their website.
+</p>
+<h2> <span class="mw-headline" id="Microsoft_Reference_For_ML.EXE"> Microsoft Reference For ML.EXE </span></h2>
+<h3> <span class="mw-headline" id="Publication"> Publication </span></h3>
+<ul><li> Mirosoft Macro Assembler Programmerss Guide (c) 1991 The Microsoft Corporation. (Supplied with MASM version 6.0)
+</li><li> Programmer's Guide (c) 1992 The Microsoft Corporation. (Supplied with MASM version 6.1)
+</li></ul>
+<h3> <span class="mw-headline" id="Online"> Online </span></h3>
+<ul><li> <a rel="nofollow" class="external free" href="http://msdn.microsoft.com/en-us/library/afzk3475(VS.71).aspx">http://msdn.microsoft.com/en-us/library/afzk3475(VS.71).aspx</a>
+</li></ul>
+<h2> <span class="mw-headline" id="Microsoft_Licence"> Microsoft Licence </span></h2>
+<p>MASM has been available over a very long period and has been subject to a number of licencing methods over that time. The different licences break down into two different types, the commercial versions of MASM as either a seperate product or a later component of the Visual C development environment may be used for any purpose including developing non-Microsoft operating system components but almost exclusively the version made available from Microsoft at no cost are restricted to use on Microsoft operating systems and specifically exclude the production of <b>Open Source</b> code. With the wide range of different licences over the products lifetime the individual licence should be read in detail to determine what it can be used for and what if any restrictions apply in its usage.
+</p>
+<h2> <span class="mw-headline" id="MASM_Compatible_Assemblers"> MASM Compatible Assemblers </span></h2>
+<p>For assembler programmers who are unable to use the Microsoft assembler for licencing reasons there are two directly MASM compatible assemblers that can build almost all MASM code apart from the more complex macros developed under MASM.
+</p>
+<ul><li> <b>Pelle's Macro Assembler</b> is a component of the Pelles C development environment and comes complete with detailed documentation supplied with Pelles C. For the assembler language programmer, Pelles C comes with a compatible linker and resource compiler as well as a mature C compiler and an IDE that also contains its own resource editor. It is both mnemonic and operator compatible with MASM but diverges in its macro capacity. It is both 32 bit and 64 bit capable.
+</li><li> <a rel="nofollow" class="external free" href="http://www.smorgasbordet.com/pellesc/download.htm">http://www.smorgasbordet.com/pellesc/download.htm</a>
+</li></ul>
+<ul><li> <b>JWASM Macro Assembler</b> is a MASM clone that has a very high level of compatibility with the original Microsoft Macro Assembler. It is currently supplied as both source code and a working binary and it comes close to assembling almost all MASM code including the vast majority of MASM macros. It will build MASM code for 16, 32 and 64 bit platforms. It is burdened by having no supporting documentation and relies wholly on the availability of documentation from Microsoft for MASM. It is available under the Sybase Open Watcom EULA.
+</li><li> <a rel="nofollow" class="external free" href="http://www.japheth.de/JWasm.html">http://www.japheth.de/JWasm.html</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 89/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2100-0!*!0!!en!*!* and timestamp 20180121064116 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=MASM&amp;oldid=20359">http://wiki.osdev.org/index.php?title=MASM&amp;oldid=20359</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Assemblers" title="Category:Assemblers">Assemblers</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=MASM" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="MASM"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:MASM"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="MASM#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="MASM" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=MASM&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=MASM&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="MASM#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/MASM" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/MASM" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?titlskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/MASM" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/MASM" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=MASM&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=MASM&amp;oldid=20359" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 11:18.</li>
+											<li id="footer-info-viewcount">This page has been accessed 26,098 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

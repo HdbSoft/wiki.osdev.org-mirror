@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>M68k Overview - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "M68k_Overview", "wgTitle": "M68k Overview", "wgCurRevisionId": 10359, "wgArticleId": 2873, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "M68k"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-M68k_Overview action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">M68k Overview</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="M68k_Overview#mw-head">navigation</a>,
+					<a href="M68k_Overview#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>The Motorola 68000 family of processors were very popular in home computers from the late 1980s to the early 1990s. It was used in such well-known systems as the Amiga, Atari ST, and Macintosh, and was also the processor of choice in the majority of workstation-class Unix systems of the time. The architecture has also found a myriad of other, more recent, uses, such as the 68000 in the Sega Genesis, being present in a radiation-hardened form in the US space shuttle, and, in the form of the simplified DragonBall embedded processor, for Palm devices up until OS 4.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="M68k_Overview#Architecture_Overview"><span class="tocnumber">1</span> <span class="toctext">Architecture Overview</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="M68k_Overview#Registers"><span class="tocnumber">1.1</span> <span class="toctext">Registers</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="M68k_Overview#Addressing_Modes"><span class="tocnumber">1.2</span> <span class="toctext">Addressing Modes</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="M68k_Overview#Instruction_Set"><span class="tocnumber">1.3</span> <span class="toctext">Instruction Set</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="M68k_Overview#Architecture_Iterations"><span class="tocnumber">1.4</span> <span class="toctext">Architecture Iterations</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="M68k_Overview#68000"><span class="tocnumber">1.4.1</span> <span class="toctext">68000</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="M68k_Overview#68010"><span class="tocnumber">1.4.2</span> <span class="toctext">68010</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="M68k_Overview#68020"><span class="tocnumber">1.4.3</span> <span class="toctext">68020</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="M68k_Overview#68030"><span class="tocnumber">1.4.4</span> <span class="toctext">68030</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="M68k_Overview#68040"><span class="tocnumber">1.4.5</span> <span class="toctext">68040</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="M68k_Overview#68060"><span class="tocnumber">1.4.6</span> <span class="toctext">68060</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="M68k_Overview#DragonBall"><span class="tocnumber">1.4.7</span> <span class="toctext">DragonBall</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="M68k_Overview#ColdFire"><span class="tocnumber">1.4.8</span> <span class="toctext">ColdFire</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-14"><a href="M68k_Overview#References"><span class="tocnumber">2</span> <span class="toctext">References</span></a></li>
+</ul>
+</td></tr></table>
+<h1> <span class="mw-headline" id="Architecture_Overview">Architecture Overview</span></h1>
+<p>The 68k architecture was/is long lived, and has gone through many iterations. Most programmer-visible characteristics, however, stayed the same throughout the architecture's history. It is an internally 32 bit CISC design, from the 68000 used in the first Macintosh up until the 68060 used in the latest 68k Amiga accelerators made. Every 68k processor has exactly two privilege modes: supervisor and user.
+</p>
+<h2> <span class="mw-headline" id="Registers">Registers</span></h2>
+<p>There are 8 registers each of address and data registers, A0-A7 and D0-D7, the status register SR (analogous to the x86 FLAGS register), and the program counter PC (analogous to the x86 EIP register). All registers excepting SR, which is 16 bits, are 32-bit. All data registers are general purpose registers. The address registers are generally used as pointers, but can be used to store extra data with no ill effects. As defined by the architecture, only one address register, A7, has a predefined purpose. A7 is the stack register, and the stack opcodes (PEA, LINK, UNLK) do modify this register implicitly.
+</p>
+<h2> <span class="mw-headline" id="Addressing_Modes">Addressing Modes</span></h2>
+<p>The 68k instruction set is mostly orthogonal, with most instructions allowing all addressing modes with all operand sizes. The architecture allows for direct, immediate, address register indirect, and PC-relative addressing modes. The best description of the operation of these is in the 68k family programmers' reference manual, linked at the bottom of the article.
+</p>
+<h2> <span class="mw-headline" id="Instruction_Set">Instruction Set</span></h2>
+<p>Aside from the near-orthogonality, the 68k processor family presents a typical CISC instruction set. It uses dyadic instructions, as per x86, where, for most instructions, there is a source operand and a destination operand, where the operation is performed between the two and the result is stored in the destination.
+For example:
+<code>
+</p>
+<pre>    move.l #2, d0
+    addi.l #3, d0
+</pre>
+<p></code>
+This fragment would result in 5 being stored in register d0.
+</p>
+<h2> <span class="mw-headline" id="Architecture_Iterations">Architecture Iterations</span></h2>
+<h3> <span class="mw-headline" id="68000">68000</span></h3>
+<p>The original 68k processor. This processor had only 24-bit external addressing, allowing up to 16MB of memory to be directly addressable. It lacked an MMU or the ability to interface with one, so was incapable of memory protection or mapping, aside from some Unix workstations that hacked a solution up using two 68000s executing the same code in parallel. It was available as the 68000, with a 16-bit data bus (as used in the Lisa, Macintosh, Atari ST, and Amiga), or as the 68008, with an 8-bit data bus, meant to drop into 6800-based logic boards to reduce engineering costs (as used in the Sinclair QL).
+</p>
+<h3> <span class="mw-headline" id="68010">68010</span></h3>
+<p>This was a minor iteration that made MOVE from SR a privileged instruction, added the ability to recover from bus faults, making MMU interfacing a possibility, and made the interrupt vectors movable.
+</p>
+<h3> <span class="mw-headline" id="68020">68020</span></h3>
+<p>This iteration added a 32-bit ALU and added the option of 32-bit address and data buses (lacking in the EC model). It also added some NUMA multiprocessing support. It was marketed alongside the optional 68851 MMU and 68881/68882 FPUs.
+</p>
+<h3> <span class="mw-headline" id="68030">68030</span></h3>
+<p>This iteration simply added 256-byte instruction and data caches, and brought the 68851 MMU on-chip (lacking in the EC model). It was still marketed alongside the optional 68881/68882 FPUs.
+</p>
+<h3> <span class="mw-headline" id="68040">68040</span></h3>
+<p>The 68040 was a major upgrade. It brought both the FPU (lacking in the LC model) and MMU on-chip (both lacking in the EC model), added instruction pipelining, and larger (4k each), faster caches.
+</p>
+<h3> <span class="mw-headline" id="68060">68060</span></h3>
+<p>This processor was very similar to the '040. It added larger caches and dual pipelining.
+</p>
+<h3> <span class="mw-headline" id="DragonBall">DragonBall</span></h3>
+<p>These were embedded SoCs based on a 68000 core. They had color/greyscale LCD, PC speaker-style device, UART, UART bootstrap, RTC, and touchscreen controllers built in along with flash and RAM.
+</p>
+<h3> <span class="mw-headline" id="ColdFire">ColdFire</span></h3>
+<p>These are a departure from the rest of the line. They are based on a 68000 core, but have been simplified. Floating point intermediates are reduced from 80-bit to 64-bit, some uncommonly-used instructions and addressing modes are removed, and instruction word length has been regulated to only 16, 32, or 48-bit lengths.
+</p>
+<h1> <span class="mw-headline" id="References">References</span></h1>
+<p><a rel="nofollow" class="external text" href="http://www.freescale.com/files/archives/doc/ref_manual/M68000PRM.pdf">M68000 Family Programmer's Reference (Freescale)</a>
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 73/1000000
+Post-expand include size: 347/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2873-0!*!*!!en!2!* and timestamp 20180121080132 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=M68k_Overview&amp;oldid=10359">http://wiki.osdev.org/index.php?title=M68k_Overview&amp;oldid=10359</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:M68k" title="Category:M68k">M68k</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=M68k_Overview" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="M68k_Overview"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:M68k_Overview&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="M68k_Overview#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="M68k_Overview" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=M68k_Overview&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=M68k_Overview&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="M68k_Overview#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDeskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/M68k_Overview" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/M68k_Overview" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=M68k_Overview&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=M68k_Overview&amp;oldid=10359" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 24 May 2010, at 12:31.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,014 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.057 secs. -->
+	</body>
+</html>

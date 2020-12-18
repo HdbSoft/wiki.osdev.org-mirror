@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Talk:OS Specific Toolchain - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "Talk", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 1, "wgPageName": "Talk:OS_Specific_Toolchain", "wgTitle": "OS Specific Toolchain", "wgCurRevisionId": 16686, "wgArticleId": 2167, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-1 ns-talk page-Talk_OS_Specific_Toolchain action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Talk:OS Specific Toolchain</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Talk:OS_Specific_Toolchain#mw-head">navigation</a>,
+					<a href="Talk:OS_Specific_Toolchain#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><b>Excellent</b> work! As for how to continue with this... I was originally intending what is the GCC Cross-Compiler article today to become a multi-part tutorial, starting with the cross-compiler setup and ending with a self-supporting OS. You can see the stubs for the later steps in the article.
+Of course I would prefer that tutorial to include PDCLib instead of newlib, but newlib is available today. Maybe it's time to expand the cross-compiler tut. into the multi-part thing it was originally meant to be?
+Opinions? <a href="http://wiki.osdev.org/User:Solar" title="User:Solar">Solar</a> 06:21, 13 September 2007 (CDT)
+</p><p><br />
+</p>
+<dl><dd>I'm not familiar enough with the inner workings of gcc and binutils to say something meaningful about it, but I wonder to what extent a stage 2/3 cross-compiler would be buildable with a plain unmodified i586-elf target. If it is, this tutorial is just a sidestep for the geeks who see the uses of a specifically named toolchain (or just want gcc to be named after them) and the cross-compiler tutorial is mostly independent. 
+</dd><dd>On the other hand, the cross-compiler tutorial is for most people to just get a stage 1 compiler which is suitable for kernel development. It could be wise to use the crosscompiler page for just that, and build a stage 2/3 and stage 4 crosscompiler in separate articles (something like, <a href="http://wiki.osdev.org/User:Jnc100/OS_Specific_Toolchain" title="User:Jnc100/OS Specific Toolchain" class="mw-redirect">this article</a> and <a href="Porting_GCC" title="Porting GCC" class="mw-redirect">Porting GCC</a>).
+</dd><dd>I posted a PM to the author in the meantime in which I said that this article is very well suited for inclusion in the main namespace. Independent of what we are to do with it, I don't think we should withhold other uses from finding and using this article. At worst somebody discover errors, which isn't even too bad since we can fix that later.
+</dd><dd>@Solar: I tried once building a stage 2 gcc with PDCLib but it failed with conflicting types for size_t so I guess newlib is for now the way to go. 
+</dd><dd>- <a href="http://wiki.osdev.org/User:Combuster" title="User:Combuster">Combuster</a> 10:46, 13 September 2007 (CDT)
+</dd></dl>
+<p><br />
+</p>
+<dl><dd><dl><dd> Okay, its moved.  GCC and binutils are quite interlinked so should remain in the same section.  I don't, however, see any problem with splitting the newlib bit into a separate section (although then the overlap with <a href="Porting_Newlib" title="Porting Newlib">Porting Newlib</a> is quite apparent), so we could just have links at the bottom of the GCC/binutils bit to the newlib page and also to a (future) PDCLib page.  Unfortunately, I don't have much experience with PDCLib.  Originally, I tried with glibc (glutton for punishment) but eventually gave up trying to understand their definition of 'unix' and 'posix' (they implement some aspects of the Single Unix Specification, and you implement the rest.  Unfortunately, they don't explain anywhere what you are supposed to implement, and adding each function tended to require a complete rebuild, including reconfiguring every directory).  I chose newlib late one night because pcmattman had already demonstrated <a href="Porting_Newlib" title="Porting Newlib">proof-of-principle</a>.
+</dd><dd> I'm all for expanding the cross compiler tutorial, but have concerns that we might make it too complex beyond the level of instructing new visitors on the methods for building a cross compiler.  Basically, I don't want to fill up the forum with lots of simple questions from people not following the instructions precisely.  It should be made extremely clear that this article is not intended for beginners.
+</dd><dd> As I've now moved this article to the main namespace, I'll remove the 'Creating a new binutils target' which was my forerunner to this article and is really just a less-well written and designed version of the first section.
+</dd><dd> Many thanks for your kind comments. <a href="http://wiki.osdev.org/User:Jnc100" title="User:Jnc100">John</a> 12:39, 13 September 2007 (CDT)
+</dd></dl>
+</dd></dl>
+<dl><dd><dl><dd> Also, I'm adding this to the tutorials category, but think it might be wise to maybe create a subcategory on tutorials for creating user-space tools or something, because otherwise it might become one of the first ports of call for people looking for an 'OS development tutorial'.  I've made a comment to that effect on the <a href="Category_talk:Tutorials" title="Category talk:Tutorials">Tutorials talk page</a>. <a href="http://wiki.osdev.org/User:Jnc100" title="User:Jnc100">John</a> 12:44, 13 September 2007 (CDT)
+</dd></dl>
+</dd></dl>
+<p><br />
+</p>
+<dl><dd><dl><dd><dl><dd> If needs be, you can overwrite my version of the <a href="Porting_Newlib" title="Porting Newlib">Porting Newlib</a> article with your description, which is more in-depth than mine. Specifically, it covers adding a new system as your newlib target, which I couldn't find out how to do properly. I'll be referring to this tutorial later when I get around to porting the toolchain to my OS - it's really well done.
+</dd><dd> - <a href="http://wiki.osdev.org/User:Pcmattman" title="User:Pcmattman">Pcmattman</a> 23:30, 14 September 2007 (CDT)
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<p><br />
+</p>
+<dl><dd> I've spent a lot of time reading through the GCC source and various docs and think I have a very good understanding of how to 'properly' specify target specific behavior when adding a new OS target to both binutils and GCC. For now, I'm writing up some documentation on this offline, and will eventually post it under my user namespace. I'll post here (and on the forum) when I have that done. If this really is the proper place for that kind of document (there doesn't seem to be a consensus here), I'll happily post the 'finished' doc here, but right now I think that <a href="Porting_GCC" title="Porting GCC" class="mw-redirect">Porting GCC</a> is a more likely place for it.
+</dd><dd> --<a href="http://wiki.osdev.org/User:Quok" title="User:Quok">Quok</a> 06:08, 26 August 2008 (UTC)
+</dd></dl>
+<p><br />
+</p><p>I am working on some modifications to this guide that will allow initializers (_init and _fini) to work. Also I will be working on some stuff that will allow these initializers to work in the kernel.
+--<a href="http://wiki.osdev.org/index.php?title=User:Uglyoldbob&amp;action=edit&amp;redlink=1" class="new" title="User:Uglyoldbob (page does not exist)">uglyoldbob</a> 13 Oct 2008
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Talk:OS_Specific_Toolchain#Grid_of_Successful_Configurations"><span class="tocnumber">1</span> <span class="toctext">Grid of Successful Configurations</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Talk:OS_Specific_Toolchain#Implementation_notes"><span class="tocnumber">2</span> <span class="toctext">Implementation notes</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Talk:OS_Specific_Toolchain#Binutils_not_building_GNU_gold_linker"><span class="tocnumber">3</span> <span class="toctext">Binutils not building GNU gold linker</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Talk:OS_Specific_Toolchain#Newlib_sys.2Fmyos_Makefile.am_problem"><span class="tocnumber">4</span> <span class="toctext">Newlib sys/myos Makefile.am problem</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Grid_of_Successful_Configurations"> Grid of Successful Configurations </span></h2>
+<p>As suggested on <a rel="nofollow" class="external text" href="http://www.osdev.org/phpBB2/viewtopic.php?p=111217#111217">the forum</a>, I am submitting a successful configuration for following this tutorial. Perhaps once there are enough of these, we can sort out how to format the information. For my part:
+</p>
+<pre>cygwin-based:
+i586-pc-caracal - based strictly on the tutorial using binutils 2.18 and GCC (with g++) 4.2.2.
+x86_64-pc-caracal - same version of GCC and binutils using x86_64 as a template.
+                  - Extra emulation target added: i386 elf and coff.
+</pre>
+<p>Thanks for the excellent tutorial and help on the forum!
+</p><p>The following quokos targets now exist as patches in the QuokOS svn repo:
+</p>
+<pre> i[3-7]86-pc-quokos - Loosely based on this tutorial with other additions.
+   emulations: elf32_i386, efi_app_ia32
+   64-bit emulations: elf64_x86_64
+ x86_64-pc-quokos - Based on the above target, with the same additions plus x86_64 specific bits.
+   emulations: elf64_x86_64, efi_app_x86_64
+   32-bit emulations: elf32_i386, efi_app_ia32
+</pre>
+<p>The quokos target patchset was initially based on GCC 4.2.4 and Binutils 2.18, but has been applied
+to different versions and configurations of GCC from 4.0+ and Binutils 2.16, 2.17, and 2.18. For the
+GCC 4.2.4 / Binutils 2.18 combination specifically, the build succeeds on openSUSE 10.3, 11.0, Debian Etch,
+Cygwin, OSX 10.5, and OpenBSD 4.3.  If anyone wants the details of what else I changed, or wants the
+patches themselves for some reason, just PM me. --<a href="http://wiki.osdev.org/User:Quok" title="User:Quok">Quok</a> 06:08, 26 August 2008 (UTC)
+</p>
+<h2> <span class="mw-headline" id="Implementation_notes"> Implementation notes </span></h2>
+<p>This tutorial has worked for me with GCC 4.5.0 and Newlib 1.18.0. I came across two errors when compiling Newlib. The first was exactly the same as in [forum:17777 this thread], but this was because there were compilation errors in my system call stubs; my best guess is that Make would try to compile them, fail, abort the entire compile process, then continue onwards assuming that it had succeeded. The second error was when I ran 'make install'. /usr/bin/install couldn't stat newlib/libc/sys/myos/netinet/*.h. For lack of a better way to disable networking (I presume) functionality, I simply created the folder structure as indicated and created an empty file, Net.h. This could probably be done better, but for a quick and dirty hack it seems to work. --<a href="http://wiki.osdev.org/User:Computafreak" title="User:Computafreak">Computafreak</a> 09:41, 30 August 2010 (UTC)
+</p><p>I tried this with bleeding edge binutils-2.22, gcc-4.6.2 and newlib-1.20.0. I had a few issues, the most important one is that gettimeofday() syscall is wrong. Removing the row made it compile but should probably be changed. Also I had to add --without-headers and --with-newlib when running configure for gcc --<a href="http://wiki.osdev.org/User:Jezze" title="User:Jezze">Jezze</a> 22:27, 6 January 2012 (CST)
+</p>
+<h2> <span class="mw-headline" id="Binutils_not_building_GNU_gold_linker"> Binutils not building GNU gold linker </span></h2>
+<p>Even when adding <tt>--enable-gold --enable-lto --enable-plugins</tt> to the Binutils configure script, the gold linker is not being built. It is built for the target <tt>i686-pc-elf</tt>, but not <tt>i686-pc-myos</tt>. I'm not sure whether you have to enable gold for the <i>myos</i> target and where. It seems that <tt>$SRC/gold/configure.tgt</tt> does not require any changes. I just wanted to mention this. Using binutils-2.21. --<a href="http://wiki.osdev.org/User:Walling" title="User:Walling">Walling</a> 21:57, 7 April 2011 (UTC)
+</p>
+<dl><dd>I found the answer. You have to enable the gold linker for your target. It is easily done in the main configure.ac file. Look for <tt>Handle --enable-gold, --enable-ld</tt> and find the line <tt># Check for ELF target.</tt> Now add your target in the <tt>case "${target}"</tt>. I added <tt>*-*-myos*</tt> after <tt>*-*-irix6*</tt>, because there was some space left. Then run <tt>autoconf</tt> in the same directory as the configure.ac file. It will generate a new configure script. Now you're able to configure (in a build directory) and make. --<a href="http://wiki.osdev.org/User:Walling" title="User:Walling">Walling</a> 13:24, 8 April 2011 (UTC)
+</dd></dl>
+<h2> <span class="mw-headline" id="Newlib_sys.2Fmyos_Makefile.am_problem"> Newlib sys/myos Makefile.am problem </span></h2>
+<p>It appears that in newer versions of Newlib (I'm trying to use 2.1.0), if you create the Makefile.am for your system as suggested below:
+</p>
+<pre> if MAY_SUPPLY_SYSCALLS
+   extra_objs = syscalls.o
+ else
+   extra_objs = 
+ endif
+</pre>
+<p>than, the extra_objs assignment is added after the rest of the assignments in the actual Makefile. So, for example, in the Makefile (after configuration) it would look something like this:
+</p>
+<pre> lib_a_SOURCES =
+ lib_a_LIBADD = $(extra_objs)
+ EXTRA_lib_a_SOURCES = syscalls.c crt0.S
+ lib_a_DEPENDENCIES = $(extra_objs)
+ lib_a_CCASFLAGS = $(AM_CCASFLAGS)
+ lib_a_CFLAGS = $(AM_CFLAGS)
+ ... # A lot of other stuff, approximately 300 lines
+   extra_objs = syscalls.o
+ # extra_objs = 
+</pre>
+<p>This makes lib_a_LIBADD empty, and therefore never compiles your syscalls. The solution is to remove the conditional and make it simply:
+</p>
+<pre> extra_objs = syscalls.o
+</pre>
+<p>It was a rather annoying bug to track down. I'm not sure of the ramifications of ignoring the MAY_SUPPLY_SYSCALLS macro, but I am currently ignoring it and newlib is compiling happily. I assume this is happening because the configure script/automake makes two passes. First evaluating assignments and adding them all to the script, then second evaluating all conditionals and adding remaining assignments to the script. So on pass one, all the variables are dumped into the Makefile, then the if block is tested and extra_objs is placed inside the Makefile after all the other assignments (which in this case is a problem). --<a href="http://wiki.osdev.org/index.php?title=User:Caleb1994&amp;action=edit&amp;redlink=1" class="new" title="User:Caleb1994 (page does not exist)">Caleb1994</a> 17:11, 4 September 2014 (CDT)
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 58/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2167-0!*!0!!en!*!* and timestamp 20180121080139 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Talk:OS_Specific_Toolchain&amp;oldid=16686">http://wiki.osdev.org/index.php?title=Talk:OS_Specific_Toolchain&amp;oldid=16686</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Talk%3AOS_Specific_Toolchain" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main"><span><a href="OS_Specific_Toolchain"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="selected"><span><a href="Talk:OS_Specific_Toolchain"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Talk:OS_Specific_Toolchain#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Talk:OS_Specific_Toolchain" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Talk:OS_Specific_Toolchain&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Talk:OS_Specific_Toolchain&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Talk:OS_Specific_Toolchain#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Talk:OS_Specific_Toolchain" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Talk:OS_Specific_Toolchain" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Talk:OS_Specific_Toolchain&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Talk:OS_Specific_Toolchain&amp;oldid=16686" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 September 2014, at 16:11.</li>
+											<li id="footer-info-viewcount">This page has been accessed 13,390 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Talk:OS_Specific_Toolchain" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Talk:OS_Specific_Toolchain" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Talk:OS_Specific_Toolchain&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Talk:OS_Specific_Toolchain&amp;oldid=16686" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 September 2014, at 16:11.</li>
+											<li id="footer-info-viewcount">This page has been accessed 13,390 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.056 secs. -->
+	</body>
+</html>

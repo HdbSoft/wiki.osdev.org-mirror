@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>VFS - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "VFS", "wgTitle": "VFS", "wgCurRevisionId": 17749, "wgArticleId": 2258, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Filesystems"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-VFS action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">VFS</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="VFS#mw-head">navigation</a>,
+					<a href="VFS#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="File_Systems" title="File Systems">Filesystems</a></th></tr><tr><th>Virtual Filesystems</th></tr><tr><td><div>
+<p><strong class="selflink">VFS</strong><br />
+</p>
+</div></td></tr><tr><th>Disk Filesystems</th></tr><tr><td><div>
+<p><a href="FAT" title="FAT">FAT</a> <a href="FAT12" title="FAT12" class="mw-redirect">12</a>/<a href="FAT16" title="FAT16" class="mw-redirect">16</a>/<a href="FAT32" title="FAT32" class="mw-redirect">32</a>, <a href="VFAT" title="VFAT" class="mw-redirect">VFAT</a><br />
+<a href="Ext2" title="Ext2">Ext 2</a>/<a href="Ext3" title="Ext3">3</a>/<a href="Ext4" title="Ext4">4</a><br />
+<a href="LEAN" title="LEAN">LEAN</a><br />
+<a href="HPFS" title="HPFS">HPFS</a><br />
+<a href="NTFS" title="NTFS">NTFS</a><br />
+<a href="HFS" title="HFS">HFS</a><br />
+<a href="HFS+" title="HFS+">HFS+</a><br />
+<a href="MFS" title="MFS">MFS</a><br />
+<a href="ReiserFS" title="ReiserFS">ReiserFS</a><br />
+<a href="FFS_(Amiga)" title="FFS (Amiga)">FFS (Amiga)</a><br />
+<a href="FFS_(BSD)" title="FFS (BSD)" class="mw-redirect">FFS (BSD)</a>/<a href="UFS" title="UFS">UFS</a><br />
+<a href="BeFS" title="BeFS">BeFS</a><br />
+<a href="BFS" title="BFS">BFS</a><br />
+<a href="XFS" title="XFS">XFS</a><br />
+<a href="SFS" title="SFS">SFS</a><br />
+<a href="ZFS" title="ZFS">ZFS</a><br />
+<a href="USTAR" title="USTAR">USTAR</a><br />
+</p>
+</div></td></tr><tr><th>CD/DVD Filesystems</th></tr><tr><td><div>
+<p><a href="ISO_9660" title="ISO 9660">ISO 9660</a><br />
+<a href="Joliet" title="Joliet">Joliet</a><br />
+<a href="UDF" title="UDF">UDF</a><br />
+</p>
+</div></td></tr><tr><th><a href="Category:Network_Filesystems" title="Category:Network Filesystems">Network Filesystems</a></th></tr><tr><td><div>
+<p><a href="NFS" title="NFS">NFS</a><br />
+<a href="RFS" title="RFS">RFS</a><br />
+<a href="AFS" title="AFS">AFS</a><br />
+</p>
+</div></td></tr><tr><th>Flash Filesystems</th></tr><tr><td><div>
+<p><a href="JFFS2" title="JFFS2">JFFS2</a><br />
+<a href="YAFFS" title="YAFFS">YAFFS</a><br />
+</p>
+</div></td></tr></table>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="VFS#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="VFS#Disambiguation_of_the_underlying_semantics_of_a_VFS"><span class="tocnumber">1.1</span> <span class="toctext">Disambiguation of the underlying semantics of a VFS</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="VFS#VFS_Models"><span class="tocnumber">2</span> <span class="toctext">VFS Models</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="VFS#DOS.2FWindows"><span class="tocnumber">2.1</span> <span class="toctext">DOS/Windows</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="VFS#Mount_Point_List"><span class="tocnumber">2.2</span> <span class="toctext">Mount Point List</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="VFS#Node_Graph"><span class="tocnumber">2.3</span> <span class="toctext">Node Graph</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="VFS#Compromise"><span class="tocnumber">3</span> <span class="toctext">Compromise</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="VFS#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="VFS#External_Links"><span class="tocnumber">4.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction">Introduction</span></h2>
+<div class="thumb tright"><div class="thumbinner" style="width:199px;"><a href="File:Vfs_diagram.png" class="image"><img alt="" src="images/e/e5/Vfs_diagram.png" width="197" height="199" class="thumbimage" /></a>  <div class="thumbcaption">VFS in relation to kernel</div></div></div>
+<p>A <b>Virtual File System</b> (VFS) is not an on-disk file system, or a network file system. As such, it's neither a data structure (like ReiserFS, NTFS or FAT), nor a network protocol (like NFS). Actually, it's just an abstraction that many operating systems provide to applications, so don't let the name scare you.
+</p><p>Virtual file systems are used to separate the high-level interface to the file system from the low level interfaces that different implementations (FAT, ext3, etc) may require, thus providing transparent access to storage devices from applications. This allows for greater flexibility, specially if one wants to support several file systems.
+</p><p>The VFS sits between the higher level user space operations over the file system, and the file system drivers. Having a VFS interface implies having the idea of mount points. A mount point is a path inside the virtual file system tree that represents an in-use file system. This file system may be on a local device, in memory or stored on a networked device.
+</p>
+<h3> <span class="mw-headline" id="Disambiguation_of_the_underlying_semantics_of_a_VFS">Disambiguation of the underlying semantics of a VFS</span></h3>
+<p>A VFS, in concrete terms then, provides a uniform access path and subsystem for a group of file systems of the same type. To date, there are three common types of file system: <a href="Hierarchical_VFS_Theory" title="Hierarchical VFS Theory">Hierarchical</a> (the most common), tag-based and Database file systems.
+</p>
+<h2> <span class="mw-headline" id="VFS_Models"> VFS Models </span></h2>
+<h3> <span class="mw-headline" id="DOS.2FWindows"> DOS/Windows </span></h3>
+<p>The VFS model used in DOS and Microsoft Windows assigns a letter from the alphabet to each accessible file system on the machine. This type of VFS is the most simple to implement but is restricted to 26 mounted file systems and can get more and more complex as features are added.
+</p><p>When a file is requested the VFS checks what drive the file is on and then passes the request on to the relevant driver.
+</p>
+<h3> <span class="mw-headline" id="Mount_Point_List"> Mount Point List </span></h3>
+<p>A more complex model is that of a mount point list. This system maintains a list of mounted file systems and where they are mounted. When a file is requested the list is scanned to determine what file system the file is on. The rest of the path is then passed on to the file system driver to fetch the file. This design is a quite versatile one but suffers from speed problems when large amounts of mount points are used.
+</p>
+<h3> <span class="mw-headline" id="Node_Graph"> Node Graph </span></h3>
+<p>A VFS model that can be very efficient is the Node Graph. This model maintains a graph of file system nodes that can represent a file, folder, mount point or other type of file. A node graph can be faster to traverse than a list but suffers from complexity problems and, if a large amounts of nodes are needed, can take up large amounts of memory.
+</p><p>Each node in a node graph has the name, permissions and inode stored within a structure along with pointers to file IO functions like Read, Write, Read Dir and Find Dir.
+</p>
+<h2> <span class="mw-headline" id="Compromise"> Compromise </span></h2>
+<p>These models represent the basics for a VFS to be designed on, they have their problems however. Scanning through a list of mount points and then passing on to the file system the remainder of the path is usable for a simple OS but requires large amounts of repeated code as each driver must be able to parse a path reliably. A node graph on the other hand, requires a node for each file and directory on the system to present in memory at the same time, otherwise features like mount points would have to be constantly refreshed.
+</p><p>A compromise between these two systems would be to have a list of mounted file systems and use that to determine what mount point a file lies on and then use nodes that do not necessarily have to permanently reside in memory to store file information and methods.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<ul><li><a href="Symbolic_link" title="Symbolic link">Symbolic link</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> 2001 Linux VFS article <a rel="nofollow" class="external text" href="http://www.freeos.com/articles/3838/">part 1</a> and <a rel="nofollow" class="external text" href="http://www.freeos.com/articles/3851/">part 2</a> on <a rel="nofollow" class="external text" href="http://www.freeos.com/">FreeOS</a>
+</li><li> 1996 Linux VFS <a rel="nofollow" class="external text" href="http://tldp.org/LDP/khg/HyperNews/get/fs/vfstour.html">article</a> in the <a rel="nofollow" class="external text" href="http://tldp.org/LDP/khg/HyperNews/get/khg.html">Linux Kernel Hackers' Guide</a>
+</li><li> <a rel="nofollow" class="external text" href="http://doc.cat-v.org/plan_9/4th_edition/papers/names">The Use of Name Spaces in Plan 9</a> - Describes how Plan 9 takes advantage of both private namespaces and an VFS that matches <a rel="nofollow" class="external text" href="http://9p.cat-v.org">the 9P distributed file system protocol</a>.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 380/1000000
+Post-expand include size: 3186/2097152 bytes
+Template argument size: 2331/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2258-0!*!0!!en!2!* and timestamp 20180121080021 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=VFS&amp;oldid=17749">http://wiki.osdev.org/index.php?title=VFS&amp;oldid=17749</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Filesystems" title="Category:Filesystems">Filesystems</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=VFS" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="VFS"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:VFS&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="VFS#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="VFS" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=VFS&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=VFS&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="VFS#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/VFS" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/VFS" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=VFS&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=VFS&amp;oldid=17749" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 6 March 2015, at 06:07.</li>
+											<li id="footer-info-viewcount">This page has been accessed 32,071 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.100 secs. -->
+	</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Babystep5 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Babystep5", "wgTitle": "Babystep5", "wgCurRevisionId": 19962, "wgArticleId": 1775, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Babystep"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Babystep5 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Babystep5</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Babystep5#mw-head">navigation</a>,
+					<a href="Babystep5#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><br />
+</p>
+<table align="right" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; width: 30em; font-size: 90%; text-align: left;">
+<tr><td colspan="2" style="text-align: center; font-size: 130%; font-weight: bold;">
+<p>Babystep5
+</p>
+</td></tr>
+
+<tr><td colspan="2" style="text-align: center; font-size: 83%; font-weight: bold;">
+<h4> <span class="mw-headline" id="Tutorial"><a href="Category:Tutorials" title="Category:Tutorials">Tutorial</a></span></h4>
+</td></tr>
+<tr><td><b>Previous</b></td><td><b>Next</b></td></tr><tr><td><a href="Babystep4" title="Babystep4">Babystep4</a></td><td><a href="Babystep6" title="Babystep6">Babystep6</a></td></tr>
+</table>
+<h3> <span class="mw-headline" id="Interrupts"> Interrupts </span></h3>
+<p>This code is meant to show how the hardware <a href="Interrupts" title="Interrupts">interrupt</a> generated when you press a key can be handled by replacing the seg:offset specified in the <a href="Interrupt_Vector_Table" title="Interrupt Vector Table">IVT</a> (interrupt vector table). This normally points to a <a href="BIOS" title="BIOS">BIOS</a> routine. To find the entry in the IVT, multiply the interrupt number by 4 (which is the size of each entry).
+</p><p>This key handler just displays the scan code without conversion to <a href="ASCII" title="ASCII">ASCII</a>, buffering, or handling extended keys. The reason for doing this is to not muddle up the basic idea, which is to provide input, as well as output, in its most simple form.
+</p><p>I will not go into the hows and whys of reading the ports involved in a key press. Suffice it to say that you are communicating with actual chips (or parts of chips), not some software intermediary. I personally feel it is good to remember that, no matter what level of abstraction you work at, you are ultimately telling hardware what to do.
+</p><p>I will point out the turning the keyboard on/off through port 0x61 is given in its complete form, some of which might not be needed, depending on the system.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">;==========================================</span>
+<span class="co1">; nasmw boot.asm -f bin -o boot.bin</span>
+<span class="co1">; partcopy boot.bin 0 200 -f0</span>
+&#160;
+<span class="br0">&#91;</span><span class="kw4">ORG</span> <span class="nu0">0x7c00</span><span class="br0">&#93;</span>      <span class="co1">; add to offsets</span>
+   <span class="kw1">jmp</span> start
+&#160;
+   <span class="sy0">%</span><span class="kw4">include</span> <span class="st0">&quot;print.inc&quot;</span>
+&#160;
+start<span class="sy0">:</span>   <span class="kw1">xor</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="kw3">ax</span>   <span class="co1">; make it zero</span>
+   <span class="kw1">mov</span> <span class="kw3">ds</span><span class="sy0">,</span> <span class="kw3">ax</span>   <span class="co1">; DS=0</span>
+   <span class="kw1">mov</span> <span class="kw3">ss</span><span class="sy0">,</span> <span class="kw3">ax</span>   <span class="co1">; stack starts at 0</span>
+   <span class="kw1">mov</span> <span class="kw3">sp</span><span class="sy0">,</span> <span class="nu0">0x9c00</span>   <span class="co1">; 200h past code start</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="nu0">0xb800</span>   <span class="co1">; text video memory</span>
+   <span class="kw1">mov</span> <span class="kw3">es</span><span class="sy0">,</span> <span class="kw3">ax</span>
+&#160;
+   <span class="kw1">cli</span>      <span class="co1">;no interruptions</span>
+   <span class="kw1">mov</span> <span class="kw3">bx</span><span class="sy0">,</span> <span class="nu0">0x09</span>   <span class="co1">;hardware interrupt #</span>
+   <span class="kw1">shl</span> <span class="kw3">bx</span><span class="sy0">,</span> <span class="nu0">2</span>   <span class="co1">;multiply by 4</span>
+   <span class="kw1">xor</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="kw3">ax</span>
+   <span class="kw1">mov</span> <span class="kw3">gs</span><span class="sy0">,</span> <span class="kw3">ax</span>   <span class="co1">;start of memory</span>
+   <span class="kw1">mov</span> <span class="br0">&#91;</span><span class="kw3">gs</span><span class="sy0">:</span><span class="kw3">bx</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw5">word</span> keyhandler
+   <span class="kw1">mov</span> <span class="br0">&#91;</span><span class="kw3">gs</span><span class="sy0">:</span><span class="kw3">bx</span><span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">ds</span> <span class="co1">; segment</span>
+   <span class="kw1">sti</span>
+&#160;
+   <span class="kw1">jmp</span> $      <span class="co1">; loop forever</span>
+&#160;
+keyhandler<span class="sy0">:</span>
+   <span class="kw1">in</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x60</span>   <span class="co1">; get key data</span>
+   <span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="kw3">al</span>   <span class="co1">; save it</span>
+   <span class="kw1">mov</span> <span class="kw5">byte</span> <span class="br0">&#91;</span>port60<span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">al</span>
+&#160;
+   <span class="kw1">in</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x61</span>   <span class="co1">; keybrd control</span>
+   <span class="kw1">mov</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="kw3">al</span>
+   <span class="kw1">or</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x80</span>   <span class="co1">; disable bit 7</span>
+   <span class="kw1">out</span> <span class="nu0">0x61</span><span class="sy0">,</span> <span class="kw3">al</span>   <span class="co1">; send it back</span>
+   <span class="kw1">xchg</span> <span class="kw3">ah</span><span class="sy0">,</span> <span class="kw3">al</span>   <span class="co1">; get original</span>
+   <span class="kw1">out</span> <span class="nu0">0x61</span><span class="sy0">,</span> <span class="kw3">al</span>   <span class="co1">; send that back</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x20</span>   <span class="co1">; End of Interrupt</span>
+   <span class="kw1">out</span> <span class="nu0">0x20</span><span class="sy0">,</span> <span class="kw3">al</span>   <span class="co1">;</span>
+&#160;
+   <span class="kw1">and</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="nu0">0x80</span>   <span class="co1">; key released</span>
+   <span class="kw1">jnz</span> done   <span class="co1">; don't repeat</span>
+&#160;
+   <span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="br0">&#91;</span>port60<span class="br0">&#93;</span>
+   <span class="kw1">mov</span>  <span class="kw5">word</span> <span class="br0">&#91;</span>reg16<span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">ax</span>
+   <span class="kw1">call</span> printreg16
+&#160;
+done<span class="sy0">:</span>
+   <span class="kw1">iret</span>
+&#160;
+port60   <span class="kw4">dw</span> <span class="nu0">0</span>
+&#160;
+   times <span class="nu0">510</span><span class="sy0">-</span><span class="br0">&#40;</span>$<span class="sy0">-</span>$$<span class="br0">&#41;</span> <span class="kw4">db</span> <span class="nu0">0</span>  <span class="co1">; fill sector w/ 0's</span>
+   <span class="kw4">dw</span> <span class="nu0">0xAA55</span>        <span class="co1">; req'd by some BIOSes</span>
+<span class="co1">;==========================================</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li> hardware fun <a rel="nofollow" class="external free" href="http://chip.ms.mff.cuni.cz/pcguts/">http://chip.ms.mff.cuni.cz/pcguts/</a> (<a rel="nofollow" class="external free" href="https://web.archive.org/web/20020801235709/http://chip.ms.mff.cuni.cz/~pcguts/">https://web.archive.org/web/20020801235709/http://chip.ms.mff.cuni.cz/~pcguts/</a>)
+</li><li> Intel's Summer Reading List <a rel="nofollow" class="external free" href="http://developer.intel.com/vtune/cbts/refman.htm">http://developer.intel.com/vtune/cbts/refman.htm</a>
+</li><li> John Fine links to hardware programming <a rel="nofollow" class="external free" href="http://www.geocities.com/SiliconValley/Peaks/8600/device.html">http://www.geocities.com/SiliconValley/Peaks/8600/device.html</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 79/1000000
+Post-expand include size: 796/2097152 bytes
+Template argument size: 285/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1775-0!*!0!!*!*!* and timestamp 20180121041436 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Babystep5&amp;oldid=19962">http://wiki.osdev.org/index.php?title=Babystep5&amp;oldid=19962</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Babystep" title="Category:Babystep">Babystep</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Babystep5" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Babystep5"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Babystep5&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Babystep5#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Babystep5" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Babystep5&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Babystep5&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Babystep5#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Babystep5" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Babystep5" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Babystep5&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Babystep5&amp;oldid=19962" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 19 November 2016, at 01:45.</li>
+											<li id="footer-info-viewcount">This page has been accessed 49,751 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wikskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Babystep5" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Babystep5" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Babystep5&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Babystep5&amp;oldid=19962" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 19 November 2016, at 01:45.</li>
+											<li id="footer-info-viewcount">This page has been accessed 49,751 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

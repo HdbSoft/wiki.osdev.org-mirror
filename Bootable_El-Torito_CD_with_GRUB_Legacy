@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Bootable El-Torito CD with GRUB Legacy - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Bootable_El-Torito_CD_with_GRUB_Legacy", "wgTitle": "Bootable El-Torito CD with GRUB Legacy", "wgCurRevisionId": 20383, "wgArticleId": 2415, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 1 Tutorials", "Tutorials", "Bootloaders"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Bootable_El-Torito_CD_with_GRUB_Legacy action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Bootable El-Torito CD with GRUB Legacy</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Bootable_El-Torito_CD_with_GRUB_Legacy#mw-head">navigation</a>,
+					<a href="Bootable_El-Torito_CD_with_GRUB_Legacy#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a><br />Beginner</td></tr></table>
+<p>This tutorial guides you through making a bootable CD .iso image with GRUB Legacy. We are going to create an <a href="El-Torito" title="El-Torito">El-Torito</a> "no-emulation" bootable CD, which is different from a <a href="Bootable_CD" title="Bootable CD">bootable CD emulating a floppy disc</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Requirements"><span class="tocnumber">1</span> <span class="toctext">Requirements</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Ubuntu.2FDebian"><span class="tocnumber">1.1</span> <span class="toctext">Ubuntu/Debian</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Windows"><span class="tocnumber">1.2</span> <span class="toctext">Windows</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Install_a_kernel"><span class="tocnumber">2</span> <span class="toctext">Install a kernel</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Create_the_.iso_image"><span class="tocnumber">3</span> <span class="toctext">Create the .iso image</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Advanced_stuff"><span class="tocnumber">4</span> <span class="toctext">Advanced stuff</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Give_it_a_label"><span class="tocnumber">4.1</span> <span class="toctext">Give it a label</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Make_it_be_quiet"><span class="tocnumber">4.2</span> <span class="toctext">Make it be quiet</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Make_the_image_from_different_files_and_folders"><span class="tocnumber">4.3</span> <span class="toctext">Make the image from different files and folders</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Solving_problems"><span class="tocnumber">5</span> <span class="toctext">Solving problems</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#mkisofs_says_Uh_oh.2C_I_cant_find_the_boot_image"><span class="tocnumber">5.1</span> <span class="toctext">mkisofs says Uh oh, I cant find the boot image</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#I_get_a_permission_denied_error_in_Linux"><span class="tocnumber">5.2</span> <span class="toctext">I get a permission denied error in Linux</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Articles"><span class="tocnumber">6.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#Forum"><span class="tocnumber">6.2</span> <span class="toctext">Forum</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#External_Links"><span class="tocnumber">6.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Requirements"> Requirements </span></h2>
+<p>You will need the following:
+</p>
+<ul><li> <a href="Mkisofs" title="Mkisofs">mkisofs</a>, which is in fact superseeded by <a href="Genisoimage" title="Genisoimage" class="mw-redirect">genisoimage</a>.
+</li><li> A (Multiboot compliant) kernel that <a href="GRUB_Legacy" title="GRUB Legacy">GRUB Legacy</a> can boot.
+</li><li> The El-Torito GRUB Legacy stage2 file, called <tt>stage2_eltorito</tt>.
+</li></ul>
+<h3> <span class="mw-headline" id="Ubuntu.2FDebian"> Ubuntu/Debian </span></h3>
+<p>In Ubuntu or Debian you can install the required software like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get install</span> genisoimage grub</pre></div></div>
+<p>We need a place to store the files on the CD image:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw3">cd</span>                            <span class="co0"># Go to your home directory.</span>
+<span class="kw2">mkdir</span> <span class="re5">-p</span> isofiles<span class="sy0">/</span>boot<span class="sy0">/</span>grub</pre></div></div>
+<p>You now created an <tt>isofiles</tt> directory in your home folder and a <tt>boot/grub</tt> sub-folder inside that. We need the stage2 file. It is installed from the grub package. Just copy it:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">cp</span> <span class="sy0">/</span>usr<span class="sy0">/</span>lib<span class="sy0">/</span>grub<span class="sy0">/</span>i386-pc<span class="sy0">/</span>stage2_eltorito  ~<span class="sy0">/</span>isofiles<span class="sy0">/</span>boot<span class="sy0">/</span>grub<span class="sy0">/</span></pre></div></div>
+<h3> <span class="mw-headline" id="Windows"> Windows </span></h3>
+<p>Look at <a href="Mkisofs#Under_windows" title="Mkisofs">this article about how to install and use mkisofs</a>. We need a place to store the files on the CD image. Create a folder <tt>isofiles</tt>, which contains the sub-folder <tt>boot\grub</tt> needed by GRUB. We need the stage2 file. You can get it by <a rel="nofollow" class="external text" href="http://www.geocities.com/imulgrew/grub_files.tar.gz">downloading a package</a> and unpack it using your favourite unpacking application. Find the file <tt>stage2_eltorito</tt> and copy it to <tt>isofiles\boot\grub</tt>.
+</p>
+<h2> <span class="mw-headline" id="Install_a_kernel"> Install a kernel </span></h2>
+<p>Get a kernel of your own choosing and copy it to wherever you like inside the <tt>isofiles</tt> folder. Preferably it should be placed in the <tt>boot</tt> sub-folder. Now create a <tt>menu.lst</tt> file. This file controls what menu entries GRUB should provide and how the kernels are booted. It must be placed in the GRUB folder <tt>boot/grub</tt> and contain something like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">default <span class="nu0">0</span>
+<span class="co0">#timeout 30</span>
+&#160;
+<span class="co0">#title Boot from hard disk</span>
+<span class="co0">#chainloader (hd0)+1</span>
+&#160;
+title My kernel
+kernel <span class="sy0">/</span>boot<span class="sy0">/</span>kernel-file    <span class="co0"># Edit it to the filename of your kernel.</span></pre></div></div>
+<p>In GRUB there's a concept called root. It's the disk drive or partition where you access the files, like the kernel image and modules. When booting from CD using <tt>stage2_eltorito</tt> you don't need to set the root as it is already set to "<tt>(cd)</tt>".
+</p>
+<h2> <span class="mw-headline" id="Create_the_.iso_image"> Create the .iso image </span></h2>
+<p>In the following I use the command <tt>genisoimage</tt>, but you can change it to <tt>mkisofs</tt> if that is what its called on your system. Open a command prompt/terminal and go to where the <tt>isofiles</tt> folder is located. It is your home directory on Ubuntu. Issue the command:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">genisoimage <span class="re5">-R</span> <span class="re5">-b</span> boot<span class="sy0">/</span>grub<span class="sy0">/</span>stage2_eltorito <span class="re5">-no-emul-boot</span> <span class="re5">-boot-load-size</span> <span class="nu0">4</span>
+            <span class="re5">-boot-info-table</span> <span class="re5">-o</span> bootable.iso isofiles</pre></div></div>
+<p>Now you have a file called <tt>bootable.iso</tt>. Test it using your favourite emulator or burn it to a CD and test on a real computer. I will just explain the command line arguments we used for genisoimage:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td> -R
+</td>
+<td> Use the Rock Ridge protocol, which enables lower-case filenames on the CD. This is needed by GRUB.
+</td></tr>
+<tr>
+<td> -b <i>file</i>
+</td>
+<td> The file to boot (the filename is in the created <a href="ISO_9660" title="ISO 9660">ISO 9660</a> file system).
+</td></tr>
+<tr>
+<td> -no-emul-boot
+</td>
+<td> Enables no emulation El-Torito boot.
+</td></tr>
+<tr>
+<td> -boot-load-size 4
+</td>
+<td> Specifies the number of 512-bytes sectors to load. Four 512-byte sectors (2048 bytes) is one CD sector and is the number supported by most BIOS.
+</td></tr>
+<tr>
+<td> -boot-info-table
+</td>
+<td> Patches the boot file to contain info about the CD image. It's needed by GRUB.
+</td></tr>
+<tr>
+<td> -o bootable.iso
+</td>
+<td> The filename of the resulting .iso image.
+</td></tr>
+<tr>
+<td> isofiles
+</td>
+<td> Other arguments are the files and folders that should be included on the CD. In this case it's only the content of <i>isofiles</i>.
+</td></tr></table>
+<h2> <span class="mw-headline" id="Advanced_stuff"> Advanced stuff </span></h2>
+<h3> <span class="mw-headline" id="Give_it_a_label"> Give it a label </span></h3>
+<p>You want to label your CD image, so you can later recognize it when loading your CD. Just pass a <b>-V</b> command line argument to genisoimage followed by the name you want.
+</p>
+<h3> <span class="mw-headline" id="Make_it_be_quiet"> Make it be quiet </span></h3>
+<p>Some day you probably want to create an .iso image directly in your <a href="Makefile" title="Makefile">Makefile</a>. If you don't like the output that genisoimage creates, just pass the command line argument <b>-quiet</b>.
+</p><p>Sometimes you get a warning about the input character set used. If that is a problem just pass the argument <b>-input-charset ascii</b> (or utf8 if that is what you use on your filesystem).
+</p>
+<h3> <span class="mw-headline" id="Make_the_image_from_different_files_and_folders"> Make the image from different files and folders </span></h3>
+<p>When you are building your kernel the parts on the .iso image could be located at different paths. Imagine your project files are like this:
+</p>
+<pre>
+project/
+├── build/
+│   ├── modules/
+│   │   ├── iso9660.mod
+│   │   └── kbdrv.mod
+│   └── my-kernel.elf
+├── src/
+│   ├── grub/
+│   │   └── menu.lst
+│   └── ...
+├── thirdparty/
+│   └── grub/
+│       └── stage2_eltorito
+└── Makefile
+</pre>
+<p>You don't want to copy those files around in order to create the .iso image. Just use the <b>-graft-points</b> argument, like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">genisoimage <span class="re5">-graft-points</span> <span class="co0"># ...other arguments here...</span>
+            boot<span class="sy0">/</span>my-kernel.elf=build<span class="sy0">/</span>my-kernel.elf
+            boot<span class="sy0">/</span>grub<span class="sy0">/</span>menu.lst=src<span class="sy0">/</span>grub<span class="sy0">/</span>menu.lst
+            boot<span class="sy0">/</span>grub<span class="sy0">/</span><span class="re2">stage2_eltorito</span>=thirdparty<span class="sy0">/</span>grub<span class="sy0">/</span>stage2_eltorito
+            modules<span class="sy0">/</span>=build<span class="sy0">/</span>modules<span class="sy0">/</span></pre></div></div>
+<p>You can use both files and folders together with the -graft-points argument.
+</p>
+<h2> <span class="mw-headline" id="Solving_problems"> Solving problems </span></h2>
+<p>If you don't find a solution to your problem below, please ask in <a rel="nofollow" class="external text" href="http://forum.osdev.org/">the forums</a>.
+</p>
+<h3> <span class="mw-headline" id="mkisofs_says_Uh_oh.2C_I_cant_find_the_boot_image"> mkisofs says Uh oh, I cant find the boot image </span></h3>
+<p>The output of mkisofs looks like this:
+</p>
+<pre>
+mkisofs: Uh oh, I cant find the boot image 'isofiles/boot/grub/stage2_eltorito'&#160;!
+</pre>
+<p>This problem arises because mkisofs/genisoimage looks for its boot image as a subdirectory of the filesystem on the CD; make sure that the path you specify starts with 'boot/' rather than the name of your ISO directory ('isofiles/' in this example).
+</p><p>Source: <a href="http://forum.osdev.org/viewtopic.php?t=20102" class="extiw" title="topic:20102">this thread</a>
+</p>
+<h3> <span class="mw-headline" id="I_get_a_permission_denied_error_in_Linux"> I get a permission denied error in Linux </span></h3>
+<p>The output of genisoimage looks like this:
+</p>
+<pre>
+Size of boot image is 4 sectors -&gt; No emulation
+genisoimage: Permission denied. Error opening boot image file 'isofiles/boot/grub/stage2_eltorito' for update.
+</pre>
+<p>The problem is that the -boot-info-table command line argument patches the boot file to include information about the CD, but the boot file is not writable by genisoimage. GRUB needs the boot file to be patched in order to access the CD properly. The solution is to make it writable, like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">chown</span> myself isofiles<span class="sy0">/</span>boot<span class="sy0">/</span>grub<span class="sy0">/</span>stage2_eltorito    <span class="co0"># Make sure you are the owner of the file. Replace &quot;myself&quot;</span>
+                                                   <span class="co0"># with your username. Maybe you need to use sudo.</span>
+<span class="kw2">chmod</span> u+<span class="kw2">w</span> isofiles<span class="sy0">/</span>boot<span class="sy0">/</span>grub<span class="sy0">/</span>stage2_eltorito       <span class="co0"># Make the file writable for the owner of the file (you).</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Mkisofs" title="Mkisofs">mkisofs</a>
+</li><li> <a href="Bootable_CD" title="Bootable CD">Bootable CD</a> - using floppy disk emulation
+</li><li> <a href="GRUB" title="GRUB">GRUB</a> - for info on using GRUB 2 to make a bootable CD with modern GRUB
+</li></ul>
+<h3> <span class="mw-headline" id="Forum"> Forum </span></h3>
+<ul><li> <a href="http://forum.osdev.org/viewtopic.php?t=19050" class="extiw" title="topic:19050">Thread about making your own .iso image from scratch without tools</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.geocities.com/imulgrew/grub_files.tar.gz">Package containing the GRUB stages</a> (including <tt>stage2_eltorito</tt>)
+</li><li> <a rel="nofollow" class="external text" href="ftp://alpha.gnu.org/gnu/grub/grub-0.97.tar.gz">Source for GRUB Legacy</a> to build it yourself
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 266/1000000
+Post-expand include size: 502/2097152 bytes
+Template argument size: 44/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2415-0!*!0!!en!2!* and timestamp 20180121055814 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Bootable_El-Torito_CD_with_GRUB_Legacy&amp;oldid=20383">http://wiki.osdev.org/index.php?title=Bootable_El-Torito_CD_with_GRUB_Legacy&amp;oldid=20383</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_1_Tutorials" title="Category:Level 1 Tutorials">Level 1 Tutorials</a></li><li><a href="Category:Tutorials" title="Category:Tutorials">Tutorials</a></li><li><a href="Category:Bootloaders" title="Category:Bootloaders">Bootloaders</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Bootable_El-Torito_CD_with_GRUB_Legacy" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Bootable_El-Torito_CD_with_GRUB_Legacy"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Bootable_El-Torito_CD_with_GRUB_Legacy&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Bootable_El-Torito_CD_with_GRUB_Legacy" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Bootable_El-Torito_CD_with_GRUB_Legacy&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Bootable_El-Torito_CD_with_GRUB_Legacy&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Bootable_El-Torito_CD_with_GRUB_Legacy#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Bootable_El-Torito_CD_with_GRUB_Legacy" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Bootable_El-Torito_CD_with_GRUB_Legacy" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Bootable_El-Torito_CD_with_GRUB_Legacy&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Bootable_El-Torito_CD_with_GRUB_Legacy&amp;oldid=20383" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 14:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 65,297 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wikiskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Bootable_El-Torito_CD_with_GRUB_Legacy" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Bootable_El-Torito_CD_with_GRUB_Legacy" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Bootable_El-Torito_CD_with_GRUB_Legacy&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Bootable_El-Torito_CD_with_GRUB_Legacy&amp;oldid=20383" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 14:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 65,297 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

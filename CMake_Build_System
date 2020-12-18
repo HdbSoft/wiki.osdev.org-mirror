@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>CMake Build System - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "CMake_Build_System", "wgTitle": "CMake Build System", "wgCurRevisionId": 18264, "wgArticleId": 3187, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 1 Tutorials", "Tools"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-cmake {line-height: normal;}
+.source-cmake li, .source-cmake pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cmake
+ * CSS class: source-cmake, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cmake.source-cmake .de1, .cmake.source-cmake .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cmake.source-cmake  {font-family:monospace;}
+.cmake.source-cmake .imp {font-weight: bold; color: red;}
+.cmake.source-cmake li, .cmake.source-cmake .li1 {font-weight: normal; vertical-align:top;}
+.cmake.source-cmake .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cmake.source-cmake .li2 {font-weight: bold; vertical-align:top;}
+.cmake.source-cmake .kw1 {color: #1f3f81; font-style: bold;}
+.cmake.source-cmake .kw2 {color: #1f3f81;}
+.cmake.source-cmake .kw3 {color: #077807; font-sytle: italic;}
+.cmake.source-cmake .co1 {color: #666666; font-style: italic;}
+.cmake.source-cmake .es0 {color: #000099; font-weight: bold;}
+.cmake.source-cmake .es1 {color: #b08000;}
+.cmake.source-cmake .es2 {color: #0000cd;}
+.cmake.source-cmake .sy0 {color: #197d8b;}
+.cmake.source-cmake .st0 {color: #912f11;}
+.cmake.source-cmake .re0 {color: #b08000;}
+.cmake.source-cmake .re1 {color: #0000cd;}
+.cmake.source-cmake .ln-xtra, .cmake.source-cmake li.ln-xtra, .cmake.source-cmake div.ln-xtra {background-color: #ffc;}
+.cmake.source-cmake span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-CMake_Build_System action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">CMake Build System</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="CMake_Build_System#mw-head">navigation</a>,
+					<a href="CMake_Build_System#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a><br />Beginner</td></tr></table>
+<p>CMake is a cross-platform, multi-environment build system which can remove some of the headache from building your operating system. The aim of this page is to help the reader set up his or her build environment to use CMake.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="CMake_Build_System#About_CMake"><span class="tocnumber">1</span> <span class="toctext">About CMake</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="CMake_Build_System#Who_uses_CMake.3F"><span class="tocnumber">1.1</span> <span class="toctext">Who uses CMake?</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="CMake_Build_System#Getting_Started"><span class="tocnumber">2</span> <span class="toctext">Getting Started</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="CMake_Build_System#Design_Considerations"><span class="tocnumber">2.1</span> <span class="toctext">Design Considerations</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="CMake_Build_System#A_Simple_CMakeLists.txt"><span class="tocnumber">2.2</span> <span class="toctext">A Simple CMakeLists.txt</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="CMake_Build_System#Sub-Project_Isolation"><span class="tocnumber">2.3</span> <span class="toctext">Sub-Project Isolation</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="CMake_Build_System#Applying_CMake_to_your_Operating_System"><span class="tocnumber">3</span> <span class="toctext">Applying CMake to your Operating System</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="CMake_Build_System#Building_Assembly_Code"><span class="tocnumber">3.1</span> <span class="toctext">Building Assembly Code</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="CMake_Build_System#Setting_Appropriate_Build_Options"><span class="tocnumber">3.2</span> <span class="toctext">Setting Appropriate Build Options</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="CMake_Build_System#Build_Profile_Detection"><span class="tocnumber">3.3</span> <span class="toctext">Build Profile Detection</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="CMake_Build_System#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="CMake_Build_System#Articles"><span class="tocnumber">4.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="CMake_Build_System#External_Links"><span class="tocnumber">4.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="About_CMake"> About CMake </span></h2>
+<p>CMake is makefile generator that allows you to provide a description of your build environment, therefore affording the creation of toolchain-specific build files. It is an open-source project that is largely maintained by KitWare, Inc.
+</p>
+<h3> <span class="mw-headline" id="Who_uses_CMake.3F"> Who uses CMake? </span></h3>
+<p>Because CMake was developed by KitWare, it is closely associated with their software. However, momentum for CMake has steadily been increasing, and some fairly high-profile projects have switched over to it, including:
+</p>
+<ul><li> The K Desktop Environment
+</li><li> Second Life
+</li><li> Apache QPid
+</li><li> ReactOS
+</li></ul>
+<h2> <span class="mw-headline" id="Getting_Started"> Getting Started </span></h2>
+<h3> <span class="mw-headline" id="Design_Considerations"> Design Considerations </span></h3>
+<p>There are a variety of options at your disposal when you design your CMake project. It is possible to have CMake cater to some of your personal build preferences, and as a result, you should probably ask yourself a few questions:
+</p>
+<ul><li> Will my build be performed in-source or out-of-source?
+</li><li> How granular is the project? Will there be a bunch of small components I plan to link together?
+</li><li> What prerequisites am I considering for my build?
+</li><li> Will I be generating any code from templates?
+</li></ul>
+<p>The first question is largely one of preference. An <i>in-source</i> build means that the build output will be placed in the same directory as the project. This might be the root directory of the project or (assuming a heirarchical organization) subdirectories associated with the unit being compiled. However, the generated files mingling with sources can be an annoyance, especially when using version-control systems (CMake does not have a <code>cmake clean</code> command). Some people prefer to send the build output to a separate folder, perhaps named "build", or even multiple directories for debug and release builds. This sort of design is called an <i>out-of-source</i> build, and can make building for multiple targets easier and more flexible for all but the simplest projects.
+</p><p>Project directory structure is also worth strong consideration. In a quick academic exercise, a flat single-directory layout may be desirable. However, if you plan to go beyond this stage, it may be a good idea to consider leveraging the filesystem to your advantage. Consider the following layout, for instance:
+</p>
+<pre>
+src
+|
++----+ kernel
+|    |
+|    +----+ i386
+|    |    |
+|    |    +---- pc
+|    |
+|    +----+ arm
+|         |
+|         +---- rasberrypi
+|         +---- beagle
+|
++----+ libc
+     |
+     +---- ...
+</pre>
+<p>The above might be the natural way of organizing your source code and we can leverage a directory structure like this to our advantage. Consider the following advantages for this directory tree:
+</p>
+<ul><li> Sub-projects are neatly isolated from one another. Kernel and libc are definitely related, but we might prefer to think of them as separate projects.
+</li><li> ISA-dependent code can be isolated from common code or other ISA-dependent code.
+</li><li> Platform-dependent code (which may add further restrictions to ISA-dependent code) is separated from other platforms sharing the same ISA.
+</li></ul>
+<p>The chances are that if you're building an operating system, you won't have many library dependencies. Most of your dependencies will be related to the toolchain required to build the code. For instance, you will probably want a C compiler, and almost certainly an assembler to go with it. You may write your own tools to simplify the process of creating your operating system, and in that case, you may want to ensure support for other programming environments like Python or Perl. Fortunately, this part can be fairly forgiving: adding dependencies such as these is not terribly difficult, and if you change your mind, the change is easy to implement.
+</p>
+<h3> <span class="mw-headline" id="A_Simple_CMakeLists.txt"> A Simple CMakeLists.txt </span></h3>
+<p>One of the nice things about CMake is that it affords you several programming concepts that you are already familiar with. As one would expect, CMake lets you perform build configuration through variables, which are typically defined in user-provided files named CMakeLists.txt. The resulting values of these variables, after cmake processing, can conveniently be found in a file called CMakeCache.txt. CMakeCache.txt is generated when you first run CMake on a CMakeLists.txt file and can be tweaked to provide various special build options for your script. However, the preferred method is to use the <code>SET()</code> macro (and other macros) in a CMakeLists.txt file, which defines a variable name with its first argument and the variable's value using the rest of the argument(s).
+</p><p>Of course, variables aren't really enough, so CMake provides two kinds of procedures: macros and functions. Functions and macros are very subtly different: functions create their own environment so the variables defined in a function are limited to the scope of the callee and below by default. Macros, on the other hand, will place any variables defined within the macro in the parent's environment. The bulk of CMake is implemented using functions and macros; this permits code reuse that is far superior to the targets provided by make. Note that some of these builtin commands will automatically SET variables on our behalf. This is particularly useful when we want to deal with dependency resolution.
+</p><p>A useable CMakeLists.txt can have as little as two lines as code. One of the most important families of macros include <code>ADD_EXECUTABLE()</code> or <code>ADD_LIBRARY()</code>.
+Each of these macros take several parameters: the target name as the first parameter and the source file(s) on which the target depends on as the remaining parameter(s).
+</p><p>The <code>CMAKE_MINIMUM_REQUIRED()</code> function, which takes the version of CMake necessary to parse the CMakeList.txt file is also required, because that is how CMake can tell whether or not it meets the requirements to parse your script.
+</p><p>However, such a script has a key disadvantage: every time we add a new source file, we need to edit CMakeLists.txt to add it. Fortunately, CMake comes with a built in file manipulation interface. In this case, we could use the GLOB operator for the <code>FILE()</code> command, which lets us specify a file globbing pattern to collect all of our source files or file paths into one variable. The addition of this extra line of code can make CMake much more useful.
+</p><p>If you have dependencies you need to resolve, CMake can handle that too. The <code>FIND_PACKAGE()</code> command can handle a variety of different types of dependencies, including libraries (like Boost). <code>FIND_PACKAGE()</code> will also attempt to locate a script by the name of <code>Find<i>&lt;1st param&gt;</i>.cmake</code> and handle it appropriately. In instances where <code>FIND_PACKAGE()</code> is unable to resolve the package, it sets a special variable called <code><i>&lt;1st param&gt;</i>_NOTFOUND</code>, which you might use to detect optional dependencies. However, if a dependency is absolutely required, then you can simply supply <code>REQUIRED</code> as the second parameter. Failing to find the package will cause CMake to bail out.
+</p><p>You can emit messages back to the console using the <code>MESSAGE()</code> command. Note that this is only run at CMake time. You can use this command for debugging your CMake project. Alternately, if you supply <code>STATUS</code> as the first parameter to this command, it will print out a specialized status message for you.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cmake source-cmake"><pre class="de1"><span class="co1"># So CMake can tell whether or not it can process this file</span>
+<span class="kw1">CMAKE_MINIMUM_REQUIRED</span><span class="sy0">(</span><span class="kw3">VERSION</span> 2.8.0<span class="sy0">)</span>
+&#160;
+<span class="co1"># Require Perl (for whatever reason)</span>
+<span class="kw1">FIND_PACKAGE</span><span class="sy0">(</span>PERL REQUIRED<span class="sy0">)</span>
+&#160;
+<span class="kw1">MESSAGE</span><span class="sy0">(</span><span class="kw3">STATUS</span> <span class="st0">&quot;Hi!&quot;</span><span class="sy0">)</span>
+&#160;
+<span class="co1"># Grab all of the C files in src; store in C_SRCS</span>
+<span class="kw1">FILE</span><span class="sy0">(</span>GLOB C_SRCS src/*.c<span class="sy0">)</span>
+&#160;
+<span class="co1"># Note how we obtain this variable's value!</span>
+<span class="kw1">ADD_EXECUTABLE</span><span class="sy0">(</span>foo <span class="re0">${C_SRCS}</span><span class="sy0">)</span></pre></div></div>
+<p>This is enough for a small project to generate an executable. Creating the associated Makefile and starting the build is simple:
+</p>
+<pre>
+$ cd project/
+$ mkdir build
+$ cd build/
+$ cmake ../
+$ make
+</pre>
+<p>Note that if you chance CMakeLists.txt, you will need to run CMake again. In cases like these, CMake may need to update CMakeCache.txt, for instance. Particularly in the case where you use file globbing find your source files, it is imperative that you do this when you add or delete source files; otherwise, CMake will not pick up the changes, and havoc will break loose.
+</p>
+<h3> <span class="mw-headline" id="Sub-Project_Isolation"> Sub-Project Isolation </span></h3>
+<p>The previous section discussed a sort of "Hello World" implementation of CMakeLists.txt. Unfortunately, operating system development is rarely in the same class as "Hello World", and the chances are that you have advanced beyond intro computer science. If you're reading this, you more than likely have an idea of how you want to structure your project, and that probably means breaking it into manageable pieces. If you followed the advice from <a href="CMake_Build_System#Design_Considerations">Design Considerations</a>, then it is very likely that you have thought about this a great deal. The real question is how to put this into practice.
+</p><p>A common approach involves generating custom build scripts for each sub-project you create. Thus, we have a separate CMakeLists.txt for each sub-project we create, and we link them together in the CMakeLists.txt in the project root. If we adhere to our filesystem layout from above, for instance, we'd have 3 CMakeLists.txt files: one in /, one in /src/kernel, and one in /src/libc. We can link them together with the following:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cmake source-cmake"><pre class="de1"><span class="kw1">ADD_SUBDIRECTORY</span><span class="sy0">(</span>src/kernel<span class="sy0">)</span>
+<span class="kw1">ADD_SUBDIRECTORY</span><span class="sy0">(</span>src/libc<span class="sy0">)</span></pre></div></div>
+<p>Using the <code>ADD_SUBDIRECTORY()</code> command is analagous to recursively calling make, and in many cases, this is precisely what happens. Other generators may interpret this command differently: for instance, the MSVC generator might decide to turn these directories into multiple projects within a solution. In either case, the child CMakeLists.txt inherits the environment of the parent so variables are propagated. You can use this to your advantage by doing dependency resolution and setting up critical shared variables in the root CMakeLists.txt file.
+</p><p>Alternately, you can leverage the <code>INCLUDE()</code> command to directly insert CMake code into your CMakeLists.txt file at its point of invocation, which can be useful for important small snippets of code into your project. Note that there are some subtle differences between <code>INCLUDE()</code> and <code>ADD_SUBDIRECTORY()</code>:
+</p>
+<ul><li> You can use <code>INCLUDE()</code> to include any file as CMake code. <code>ADD_SUBDIRECTORY()</code> expects a CMakeLists.txt file in the directory you point it at.
+</li><li> <code>INCLUDE()</code> operates from the current working directory. <code>ADD_SUBDIRECTORY()</code> will change the current working directory to the supplied path before evaluating.
+</li></ul>
+<h2> <span class="mw-headline" id="Applying_CMake_to_your_Operating_System"> Applying CMake to your Operating System </span></h2>
+<h3> <span class="mw-headline" id="Building_Assembly_Code"> Building Assembly Code </span></h3>
+<p>Unless you intend to use somebody else's kernel and write your operating system completely from portable code, it is very likely that you will need an assembler. For the kinds of projects that CMake was designed for, this rarely comes up; as an operating system designer, such support is probably critical to your project. Fortunately, some work has been done to address this issue and in most cases you can get away with not only detecting an assembler, but even specifying the syntax it uses. By using the <code>ENABLE_LANGUAGE()</code> command it is possible to turn on support for assembly:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cmake source-cmake"><pre class="de1"><span class="co1"># We want an AT&amp;T Syntax Assembler</span>
+<span class="kw1">ENABLE_LANGUAGE</span><span class="sy0">(</span>ASM-ATT<span class="sy0">)</span>
+&#160;
+<span class="kw1">ADD_EXECUTABLE</span><span class="sy0">(</span>foo bar.s baz.s<span class="sy0">)</span></pre></div></div>
+<h3> <span class="mw-headline" id="Setting_Appropriate_Build_Options"> Setting Appropriate Build Options </span></h3>
+<p>Depending on your project the stock compiler options may be insufficient for your needs. You may need to supply switches to your toolchain that affect linking or object assembly. CMake provides a number of ways of doing this:
+</p>
+<ul><li> For C programs, you can use <code>CMAKE_C_FLAGS</code> in the same way you would use <code>$CFLAGS</code> in the context of make. <code>ADD_DEFINITIONS()</code> can also be used, but it is probably inadvisable to do so since a C flag variable exists by default.
+</li><li> For other languages, (including assembly) use <code>CMAKE_<i>&lt;lang&gt;</i>_COMPILE_OBJECT</code>. For instance, if ASM-ATT is enabled, one would modify <code>CMAKE_ASM-ATT_COMPILE_OJBECT</code>.
+</li><li> Link-time options can be set using <code>SET_TARGET_FLAGS(<i>target</i> PROPERTIES LINK_FLAGS "<i>flags</i>")</code>.
+</li></ul>
+<h3> <span class="mw-headline" id="Build_Profile_Detection"> Build Profile Detection </span></h3>
+<p>Remember how we made the claim that the directory structure could be leveraged in order to help make our lives easier? You might have gotten some idea from the directory structure of how this might be accomplished, at least on a conceptual level. Consider the example provided by <i>src/kernel</i>. Here, we have a well-defined hierarchy which allows us to narrow down on varying scopes of the actual kernel implementation. We can split our code into three directories, such that:
+</p>
+<ul><li> <code>/src/kernel/</code> contains the code for the kernel. (platform-indepdendent code might go into this directory).
+</li><li> <code>/src/kernel/isa/</code> contains code specifically for the instruction set architecture <i>isa</i> (e.g., i386).
+</li><li> <code>/src/kernel/isa/platform/</code> contains code for the <i>platform</i> which is implemented with <i>isa</i>.
+</li></ul>
+<p>Let's consider the ARM branch of our code. While the i386 may see limited usage outside of IBM-compatible PCs, the ARM conversely is found in a number of environments. Many of those environments have their own quirks, such as how the memory bus is physically mapped. Will the kernel binary for a BeagleBone run on a Raspberry Pi? It is possible, but unlikely. Even if it did, what if these two platforms are fundamentally incompatible at some level? We need to take that into consideration. What we need is a macro that does all of the dirty work for us.
+</p><p>We can take two approaches to this problem: we can either make the assumption platforms (and ISAs for that matter) share some things in common, or make the assumption that they don't. In the former approach, we might assume that the following is true of platforms:
+</p>
+<ul><li> Each platform provides a memory layout via a linker script.
+</li><li> Each platform provides a CMake file describing its own build flags.
+</li><li> Each platform provides a number of C or Assembly sources.
+</li></ul>
+<p>And likewise, we might say that each ISA provides:
+</p>
+<ul><li> A CMake file describing its own build flags.
+</li><li> A number of C or Assembly sources.
+</li></ul>
+<p>So far, so good. We can approach this by writing a function in order to handle loading the right profile. When you write a function, you delimit the function body between the <code>FUNCTION()</code> and <code>ENDFUNCTION()</code> commands. The first parameter to <code>FUNCTION()</code> shall be the name of the function you are defining, and those remaining are formal parameters to the function. 
+</p><p>However, there is a slight problem: we need a way to report our findings to the caller. Remember that variables defined in functions go out of scope as soon as the function ends. We could use a macro here at the risk of polluting the namespace but it would be much better if we could export variables to the parent scope. Fortunately, the <code>SET()</code> command accepts <code>PARENT_SCOPE</code> as an optional parameter. When this is used, it means that the variable being set should become part of the parent's environment. Let's write a small build profile function now:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cmake source-cmake"><pre class="de1"><span class="kw1">FUNCTION</span><span class="sy0">(</span>LOAD_PROFILE ISA PLATFORM<span class="sy0">)</span>
+  <span class="co1"># Obtain sources for the ISA</span>
+  <span class="kw1">FILE</span><span class="sy0">(</span>GLOB ISA_SRCS <span class="st0">&quot;<span class="es1">${ISA}</span>/*.c&quot;</span> <span class="st0">&quot;<span class="es1">${ISA}</span>/*.s&quot;</span><span class="sy0">)</span>
+  <span class="kw1">FILE</span><span class="sy0">(</span>GLOB PLATFORM_SRCS <span class="st0">&quot;<span class="es1">${ISA}</span>/<span class="es1">${PLATFORM}</span>/*.c&quot;</span> <span class="st0">&quot;<span class="es1">${ISA}</span>/<span class="es1">${PLATFORM}</span>/*.s&quot;</span><span class="sy0">)</span>
+&#160;
+  <span class="co1"># Load flags associated with ISA and Profile</span>
+  <span class="kw1">INCLUDE</span><span class="sy0">(</span><span class="st0">&quot;<span class="es1">${ISA}</span>/flags.cmake&quot;</span><span class="sy0">)</span>
+  <span class="kw1">INCLUDE</span><span class="sy0">(</span><span class="st0">&quot;<span class="es1">${ISA}</span>/<span class="es1">${PLATFORM}</span>/flags.cmake&quot;</span><span class="sy0">)</span>
+&#160;
+  <span class="co1"># Now export our output variables</span>
+  <span class="kw1">SET</span><span class="sy0">(</span>ISA_SRCS <span class="re0">${ISA_SRCS}</span> <span class="kw3">PARENT_SCOPE</span><span class="sy0">)</span>
+  <span class="kw1">SET</span><span class="sy0">(</span>PLATFORM_SRCS <span class="re0">${PLATFORM_SRCS}</span> <span class="kw3">PARENT_SCOPE</span><span class="sy0">)</span>
+  <span class="kw1">SET</span><span class="sy0">(</span>PLATFORM_LAYOUT <span class="st0">&quot;<span class="es1">${ISA}</span>/<span class="es1">${PLATFORM}</span>/layout.ld&quot;</span> <span class="kw3">PARENT_SCOPE</span><span class="sy0">)</span>
+&#160;
+  <span class="co1"># And specific flags</span>
+  <span class="kw1">SET</span><span class="sy0">(</span>ISA_C_FLAGS <span class="re0">${ISA_C_FLAGS}</span> <span class="kw3">PARENT_SCOPE</span><span class="sy0">)</span>
+  <span class="kw1">SET</span><span class="sy0">(</span>ISA_ASM_FLAGS <span class="re0">${ISA_ASM_FLAGS}</span> <span class="kw3">PARENT_SCOPE</span><span class="sy0">)</span>
+  <span class="co1"># ...</span>
+<span class="kw1">ENDFUNCTION</span><span class="sy0">(</span>LOAD_PROFILE<span class="sy0">)</span></pre></div></div>
+<p>Now, all we have to do is call <code>LOAD_PROFILE()</code> with the provided parameters, and we should be able to set up our build environment in a sane manner:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cmake source-cmake"><pre class="de1"><span class="kw1">FILE</span><span class="sy0">(</span>GLOB GENERIC_SRCS <span class="st0">&quot;*.c&quot;</span><span class="sy0">)</span>
+&#160;
+<span class="co1"># We could also use CMakeCache variables here!</span>
+LOAD_PROFILE<span class="sy0">(</span><span class="st0">&quot;arm&quot;</span> <span class="st0">&quot;raspberrypi&quot;</span><span class="sy0">)</span>
+&#160;
+&#160;
+<span class="co1"># Now set up our environment</span>
+<span class="kw1">ADD_EXECUTABLE</span><span class="sy0">(</span>kernel <span class="re0">${PLATFORM_SRCS}</span> <span class="re0">${ISA_SRCS}</span> <span class="re0">${GENERIC_SRCS}</span><span class="sy0">)</span>
+&#160;
+<span class="kw1">SET</span><span class="sy0">(</span>CMAKE_ASM-ATT_COMPILE_OBJECT 
+  <span class="st0">&quot;&lt;CMAKE_ASM-ATT_COMPILER&gt; <span class="es1">${ISA_ASM_FLAGS}</span> <span class="es1">${PLATFORM_ASM_FLAGS}</span> -o &lt;OBJECT&gt; &lt;SOURCE&gt;&quot;</span><span class="sy0">)</span>
+<span class="kw1">SET</span><span class="sy0">(</span>CMAKE_C_FLAGS <span class="st0">&quot;<span class="es1">${ISA_C_FLAGS}</span> <span class="es1">${PLATFORM_C_FLAGS}</span>&quot;</span><span class="sy0">)</span>
+<span class="kw1">SET_TARGET_PROPERTIES</span><span class="sy0">(</span>kernel PROPERTIES LINK_FLAGS 
+  <span class="st0">&quot;-T <span class="es1">${PLATFORM_LAYOUT}</span> -N <span class="es1">${ISA_LINKER_FLAGS}</span> <span class="es1">${PLATFORM_LINKER_FLAGS}</span>&quot;</span><span class="sy0">)</span></pre></div></div>
+<p>Here, we make a reasonable attempt to control the build order, but the truth is, we don't really know exactly what that order should be; it might
+be dependent on the platform. For instance, for i386/pc, we might want a multiboot header, which must come within the first 8K of the kernel image. In that case, we must somehow control the ordering. We could have a place <code>FIRST_SRCS()</code> variable present in the platform flags, then use the following loop to extract it from the list:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cmake source-cmake"><pre class="de1"><span class="kw1">FOREACH</span><span class="sy0">(</span>I <span class="re0">${FIRST_SRCS}</span><span class="sy0">)</span>
+  <span class="co1"># Assume path is relative to src/kernel</span>
+  <span class="kw1">LIST</span><span class="sy0">(</span><span class="kw3">APPEND</span> TMP_FIRST_SRCS <span class="st0">&quot;<span class="es1">${CMAKE_CURRENT_LIST_DIR}</span>/<span class="es1">${I}</span>&quot;</span>
+<span class="kw1">ENDFOREACH</span><span class="sy0">(</span>I<span class="sy0">)</span>
+&#160;
+<span class="co1"># Now remove any trace of these files from the other lists</span>
+<span class="kw1">LIST</span><span class="sy0">(</span><span class="kw3">REMOVE_ITEM</span> ISA_SRCS <span class="re0">${TMP_FIRST_SRCS}</span><span class="sy0">)</span>
+<span class="kw1">LIST</span><span class="sy0">(</span><span class="kw3">REMOVE_ITEM</span> PLATFORM_SRCS <span class="re0">${TMP_FIRST_SRCS}</span><span class="sy0">)</span>
+&#160;
+<span class="co1"># During exports:</span>
+<span class="kw1">SET</span><span class="sy0">(</span>FIRST_SRCS <span class="re0">${TMP_FIRST_SRCS}</span><span class="sy0">)</span></pre></div></div>
+<p>Now, all we have to do is put <code>${FIRST_SRCS}</code> at the head of the list, and we can control the order in which our code is linked.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Makefile" title="Makefile">Makefile</a> - One potential target for CMake. The tried and true method of build management.
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.cmake.org">CMake Offical Page</a> - Contains useful links, including how to download and documentation.
+</li><li> <a rel="nofollow" class="external text" href="http://www.cmake.org/Wiki/CMake_Useful_Variables">CMake Useful Variables</a> - Gives names and descriptions of common and useful variables used in CMake.
+</li><li> <a rel="nofollow" class="external text" href="http://www.cmake.org/cmake/help/v3.2">CMake Official Documentation</a> - Official documentation all about CMake.
+</li><li> <a rel="nofollow" class="external text" href="http://www.cmake.org/Wiki/CMake/Examples">CMake Examples</a> - Examples showing how to perform many common CMake procedures.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 204/1000000
+Post-expand include size: 340/2097152 bytes
+Template argument size: 44/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3187-0!*!0!!en!2!* and timestamp 20180121080030 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=CMake_Build_System&amp;oldid=18264">http://wiki.osdev.org/index.php?title=CMake_Build_System&amp;oldid=18264</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_1_Tutorials" title="Category:Level 1 Tutorials">Level 1 Tutorials</a></li><li><a href="Category:Tools" title="Category:Tools">Tools</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=CMake_Build_System" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="CMake_Build_System"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:CMake_Build_System&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="CMake_Build_System#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="CMake_Build_System" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=CMake_Build_System&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=CMake_Build_System&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="CMake_Build_System#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/CMake_Build_System" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/CMake_Build_System" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=CMake_Build_System&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=CMake_Build_System&amp;oldid=18264" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 27 July 2015, at 23:38.</li>
+											<li id="footer-info-viewcount">This page has been accessed 17,405 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":8skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/CMake_Build_System" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/CMake_Build_System" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=CMake_Build_System&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=CMake_Build_System&amp;oldid=18264" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 27 July 2015, at 23:38.</li>
+											<li id="footer-info-viewcount">This page has been accessed 17,405 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.119 secs. -->
+	</body>
+</html>

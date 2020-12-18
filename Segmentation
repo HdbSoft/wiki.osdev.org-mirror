@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Segmentation - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Segmentation", "wgTitle": "Segmentation", "wgCurRevisionId": 20340, "wgArticleId": 1488, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Memory management"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Segmentation action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Segmentation</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Segmentation#mw-head">navigation</a>,
+					<a href="Segmentation#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Segmentation#Real_mode"><span class="tocnumber">1</span> <span class="toctext">Real mode</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Segmentation#Operations_that_affect_segment_registers"><span class="tocnumber">1.1</span> <span class="toctext">Operations that affect segment registers</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="Segmentation#Far_Jump"><span class="tocnumber">1.1.1</span> <span class="toctext">Far Jump</span></a></li>
+<li class="toclevel-3 tocsection-4"><a href="Segmentation#Far_Call"><span class="tocnumber">1.1.2</span> <span class="toctext">Far Call</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="Segmentation#INT"><span class="tocnumber">1.1.3</span> <span class="toctext">INT</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="Segmentation#Far_Return"><span class="tocnumber">1.1.4</span> <span class="toctext">Far Return</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="Segmentation#IRET"><span class="tocnumber">1.1.5</span> <span class="toctext">IRET</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="Segmentation#Protected_Mode"><span class="tocnumber">2</span> <span class="toctext">Protected Mode</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="Segmentation#Notes"><span class="tocnumber">2.1</span> <span class="toctext">Notes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="Segmentation#Notes_Regarding_C"><span class="tocnumber">3</span> <span class="toctext">Notes Regarding C</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Segmentation#Notes_Regarding_Pascal.5BFPC.5D"><span class="tocnumber">4</span> <span class="toctext">Notes Regarding Pascal[FPC]</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="Segmentation#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="Segmentation#Articles"><span class="tocnumber">5.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="Segmentation#Threads"><span class="tocnumber">5.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="Segmentation#External_Links"><span class="tocnumber">5.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Real_mode">Real mode</span></h2>
+<p>In <a href="Real_Mode" title="Real Mode">Real Mode</a> you use a logical address in the form A:B to address memory. This is translated into a physical address using the equation:
+</p>
+<pre>Physical address = (A * 0x10) + B
+</pre>
+<p>The registers in pure real-mode are limited to 16 bits for addressing. 16 bits can represent any integer between 0 and 64k. This means that if we set A to be a fixed value and allow B to change we can address a 64k area of memory. This 64k area is called a segment.
+</p>
+<pre>A = A 64k segment B = Offset within the segment
+</pre>
+<p>The base address of a segment is the (A * 0x10) portion of the equation I showed. It should be obvious that segments can overlap.
+</p><p>Eg, the segment 0x1000 has a base address of 0x10000. This segment occupies the physical address range 0x10000 -&gt; 0x1FFFF, However the segment 0x1010 has a base address of 0x10100. This segment occupies the physical address range 0x10100 -&gt; 0x200FF
+</p><p>As you can see we could use either segment to reach physical addresses between 0x10100 and 0x1FFFF since the segments overlap.
+</p><p>The x86 line of computers have 6 segment registers (CS, DS, ES, FS, GS, SS). They are totally independent of one another.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th> CS
+</th>
+<td> Code Segment
+</td></tr>
+<tr>
+<th> DS
+</th>
+<td> Data Segment
+</td></tr>
+<tr>
+<th> SS
+</th>
+<td> <a href="Stack" title="Stack">Stack</a> Segment
+</td></tr>
+<tr>
+<th> ES
+</th>
+<td> Extra Segment
+</td></tr>
+<tr>
+<th> FS
+</th>
+<td rowspan="2"> General Purpose Segments
+</td></tr>
+<tr>
+<th> GS
+</th></tr></table>
+<p>DS, ES, FS, GS, SS are used to form addresses when you want to read/write to memory. They don't always have to be explicitly encoded, because some processor operations assume that certain segment registers will be used.
+</p><p>E.g.
+</p><p>MOV [SI], AX will write the word contained in ax to the address DS:SI
+</p><p>MOV ES:[DI], AX will write the word contained in ax to the address es:di
+</p><p>CMPSB will compare the byte at DS:SI to the byte at ES:DI, set the zero flag if they are equal and decrement/increment SI and DI according to the state of the direction flag.
+</p><p>As you can see, often the segment register being used is not contained in the instruction, but there is one being used. EVERY time you form an address on an x86 processor there will be a segment register involved.
+</p><p><br />
+</p>
+<h3> <span class="mw-headline" id="Operations_that_affect_segment_registers">Operations that affect segment registers</span></h3>
+<p>Beside CS, segment registers may be loaded with a general register (mov ds, ax) or with the top-of-stack (pop ds).
+</p><p>CS is the only Segment Register that cannot be directly altered. The only time (I'm sure I'm missing one) CS is altered is when the code switches execution into another segment. The only commands that can do this are:
+</p>
+<h4> <span class="mw-headline" id="Far_Jump">Far Jump</span></h4>
+<p>Here the new value for CS is encoded in the jump instruction. Eg JMP 0x10:0x100 says to load CS with segment 0x10 and IP with 0x100. CS:IP is the logical address of the instruction to be executed.
+</p>
+<h4> <span class="mw-headline" id="Far_Call">Far Call</span></h4>
+<p>This is exactly the same as a far jump, but the current values of CS/IP are pushed onto the <a href="Stack" title="Stack">stack</a> before executing at the new position.
+</p>
+<h4> <span class="mw-headline" id="INT">INT</span></h4>
+<p>The processor reads the new value of CS/IP from the Interrupt Vector Table and then executes what is effectively a far call after pushing EFLAGS onto the <a href="Stack" title="Stack">stack</a>.
+</p>
+<h4> <span class="mw-headline" id="Far_Return">Far Return</span></h4>
+<p>Here the processor pops the return segment/offset from the <a href="Stack" title="Stack">stack</a> into CS/IP and switches execution to that address.
+</p>
+<h4> <span class="mw-headline" id="IRET">IRET</span></h4>
+<p>This is exactly the same as a far return apart from the processor popping EFLAGS off the <a href="Stack" title="Stack">stack</a> in addition to CS/IP.
+</p><p>Apart from these cases no instruction alters the value of CS.
+</p>
+<h2> <span class="mw-headline" id="Protected_Mode">Protected Mode</span></h2>
+<dl><dd><i>Segmentation is considered obsolete memory protection technique in protected mode by both CPU manufacturers and most of programmers. It is no longer supported in long mode. The information here is required to get protected mode working; also 64 bit GDT is needed to enter long mode and segments are still used to jump from long mode to compatibility mode and the other way around. If you want to be serious about OS development, we strongly recommend using flat memory model and <a href="Paging" title="Paging">paging</a> as memory management technique. For more information, consult <a href="X86-64" title="X86-64">x86-64</a>.</i>
+</dd></dl>
+<dl><dd><i>Read more about <a href="Global_Descriptor_Table" title="Global Descriptor Table">Global Descriptor Table</a></i>
+</dd></dl>
+<p>In <a href="Protected_mode" title="Protected mode" class="mw-redirect">Protected mode</a> you use a logical address in the form A:B to address memory. As in <a href="Real_Mode" title="Real Mode">Real Mode</a>, A is the segment part and B is the offset within that segment. The registers in protected mode are limited to 32 bits. 32 bits can represent any integer between 0 and 4 GiB.
+</p><p>Because B can be any value between 0 and 4GiB our segments now have a maximum size of 4 GiB (Same reasoning as in real-mode).
+</p><p>Now for the difference.
+</p><p>In protected mode A is not an absolute value for the segment. In protected mode A is a selector. A selector represents an offset into a system table called the <a href="Global_Descriptor_Table" title="Global Descriptor Table">Global Descriptor Table</a> (GDT). The GDT contains a list of descriptors. Each of these descriptors contains information that describes the characteristics of a segment.
+</p><p>Each segment descriptor contains the following information:
+</p>
+<ul><li> The base address of the segment
+</li><li> The default operation size in the segment (16-bit/32-bit)
+</li><li> The privilege level of the descriptor (Ring 0 -&gt; Ring 3)
+</li><li> The granularity (Segment limit is in byte/4kb units)
+</li><li> The segment limit (The maximum legal offset within the segment)
+</li><li> The segment presence (Is it present or not)
+</li><li> The descriptor type (0 = system; 1 = code/data)
+</li><li> The segment type (Code/Data/Read/Write/Accessed/Conforming/Non-Conforming/Expand-Up/<a href="Expand_Down" title="Expand Down" class="mw-redirect">Expand-Down</a>)
+</li></ul>
+<p>For the purposes of this explanation I'm only interested in 3 things. The base address, the limit and the descriptor type.
+</p><p>If the descriptor type is clear (System type) then the descriptor isn't actually describing a segment, it's describing either one of the special gate mechanisms, where to find an LDT, or a TSS. These have nothing to do with general addressing, so I'll assume a descriptor type of 1 (code/data type) and leave you to read the Intel manuals for the rest.
+</p><p>The segment is described by its base address and limit. Remember in real-mode where the segment was a 64k area in memory? The only difference here is that the size of the segment isn't fixed. The base address supplied by the descriptor is the start of the segment, the limit is the maximum offset the processor will allow before producing an exception.
+</p><p>So the range of physical addresses in our protected mode segment is:
+</p>
+<pre> Segment Base -&gt; Segment Base + Segment Limit
+</pre>
+<p>Given a logical address A:B (Remember that A is a selector) we can determine the physical address it translates to using:
+</p>
+<pre> Physical address = Segment Base (Found from the descriptor GDT[A]) + B
+</pre>
+<p>All the other rules from real-mode still apply.
+</p>
+<h3> <span class="mw-headline" id="Notes">Notes</span></h3>
+<ul><li> Segments can overlap
+</li><li> CS,DS,ES,FS,GS,SS are independent of each other
+</li><li> CS cannot be changed directly
+</li></ul>
+<p>In protected mode CS can also be changed via the TSS or a gate.
+</p>
+<h2> <span class="mw-headline" id="Notes_Regarding_C">Notes Regarding C</span></h2>
+<ul><li>Most C compilers assume a flat-memory model.
+</li><li>In this model all the segments cover the full address space (Usually 0-&gt;4Gb on x86). In essence this means that we completely ignore the A part of our A:B logical address. The reason for this is that most processors don't actually have segmentation (Plus it's a hell of a lot easier for the compiler to optimize).
+</li><li>This leaves you with 2 descriptors per privilege level (Ring 0 and Ring 3 normally), one for code and one for data, which both describe precisely the same segment. The only difference being that the code descriptor is loaded into CS, and the data descriptor is used by all the other segment registers. The reason you need both a code and data descriptor is that the processor will not allow you to load CS with a data descriptor (This is to help with security when using a segmented memory model, and although useless in the flat-memory model it is still required because you can't turn off segmentation).
+</li><li>In general if you want to use the segmentation mechanism, by having the different segment registers represent segments with different base addresses, you won't be able to use a modern C compiler, and may very well be restricted to just Assembly.
+</li><li>So, if you're going to use C, do what the rest of the C world does, which is set up a flat-memory model, use paging, and ignore the fact that segmentation even exists.
+</li></ul>
+<h2> <span class="mw-headline" id="Notes_Regarding_Pascal.5BFPC.5D">Notes Regarding Pascal[FPC]</span></h2>
+<p>Above may apply in theory to FreePascal, however, in reality is ignored, if the compiler at all pays any attention to same.
+The twin segments for CODE and DATA are used, and as specified above,therefore, required.Size limits, however, are respected.(does NOT have to be 4GB in length)
+</p><p>"*In general if you want to use the segmentation mechanism, by having the different segment registers represent segments with different base addresses, you won't be able to use a modern C compiler, and may very well be restricted to just Assembly."
+</p><p>This is simply NOT true for Freepascal.
+</p><p>The 'A in A:B' is what allows 48 and 64 bit pointer references, not only with Pascal's NewFrontier unit, but FreePascal as well(Word:Longint Pointer reference).
+</p>
+<ul><li>Assumption of CODE and DATA occupying the same space, (at least with PAE NX bits and Paging units not used) allows ROGUE/virus like code in the first place to take advantage of the machine. INTEL Specs even say this. CODE and DATA must be KEPT separate. Microsoft still is plagued with this problem,despite having NX bits enabled even in the latest OSes.
+</li></ul>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<p><a href="Segment_Limits#Segmentation" title="Segment Limits">Segment Limits</a>
+</p>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://mirror.href.com/thestarman/asm/debug/Segments.html">Removing the Mystery from SEGMENT&#160;: OFFSET Addressing</a>
+</li><li><a rel="nofollow" class="external text" href="http://duartes.org/gustavo/blog/post/memory-translation-and-segmentation">Aug 2008: Memory Translation and Segmentation</a> by Gustavo Duarte
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 107/1000000
+Post-expand include size: 162/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1488-0!*!0!!en!*!* and timestamp 20180121035956 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Segmentation&amp;oldid=20340">http://wiki.osdev.org/index.php?title=Segmentation&amp;oldid=20340</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Memory_management" title="Category:Memory management">Memory management</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Segmentation" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Segmentation"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Segmentation&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Segmentation#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Segmentation" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Segmentation&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Segmentation&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Segmentation#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Segmentation" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Segmentation" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Segmentation&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Segmentation&amp;oldid=20340" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 08:02.</li>
+											<li id="footer-info-viewcount">This page has been accessed 118,800 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Segmentation" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Segmentation" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Segmentation&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Segmentation&amp;oldid=20340" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 08:02.</li>
+											<li id="footer-info-viewcount">This page has been accessed 118,800 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

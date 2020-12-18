@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Raspberry Pi Bare Bones - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="Raspberry_Pi_Bare_Bones" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Raspberry_Pi_Bare_Bones", "wgTitle": "Raspberry Pi Bare Bones", "wgCurRevisionId": 22048, "wgArticleId": 3316, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 1 Tutorials", "ARM", "ARM RaspberryPi", "Bare bones tutorials", "C", "C++"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-text {line-height: normal;}
+.source-text li, .source-text pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for text
+ * CSS class: source-text, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.text.source-text .de1, .text.source-text .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.text.source-text  {font-family:monospace;}
+.text.source-text .imp {font-weight: bold; color: red;}
+.text.source-text li, .text.source-text .li1 {font-weight: normal; vertical-align:top;}
+.text.source-text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.text.source-text .li2 {font-weight: bold; vertical-align:top;}
+.text.source-text .ln-xtra, .text.source-text li.ln-xtra, .text.source-text div.ln-xtra {background-color: #ffc;}
+.text.source-text span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-cpp {line-height: normal;}
+.source-cpp li, .source-cpp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cpp
+ * CSS class: source-cpp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cpp.source-cpp .de1, .cpp.source-cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp.source-cpp  {font-family:monospace;}
+.cpp.source-cpp .imp {font-weight: bold; color: red;}
+.cpp.source-cpp li, .cpp.source-cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp.source-cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp.source-cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp.source-cpp .kw1 {color: #0000ff;}
+.cpp.source-cpp .kw2 {color: #0000ff;}
+.cpp.source-cpp .kw3 {color: #0000dd;}
+.cpp.source-cpp .kw4 {color: #0000ff;}
+.cpp.source-cpp .co1 {color: #666666;}
+.cpp.source-cpp .co2 {color: #339900;}
+.cpp.source-cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp.source-cpp .es0 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es1 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es2 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es3 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es4 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es5 {color: #006699; font-weight: bold;}
+.cpp.source-cpp .br0 {color: #008000;}
+.cpp.source-cpp .sy0 {color: #008000;}
+.cpp.source-cpp .sy1 {color: #000080;}
+.cpp.source-cpp .sy2 {color: #000040;}
+.cpp.source-cpp .sy3 {color: #000040;}
+.cpp.source-cpp .sy4 {color: #008080;}
+.cpp.source-cpp .st0 {color: #FF0000;}
+.cpp.source-cpp .nu0 {color: #0000dd;}
+.cpp.source-cpp .nu6 {color: #208080;}
+.cpp.source-cpp .nu8 {color: #208080;}
+.cpp.source-cpp .nu12 {color: #208080;}
+.cpp.source-cpp .nu16 {color:#800080;}
+.cpp.source-cpp .nu17 {color:#800080;}
+.cpp.source-cpp .nu18 {color:#800080;}
+.cpp.source-cpp .nu19 {color:#800080;}
+.cpp.source-cpp .me1 {color: #007788;}
+.cpp.source-cpp .me2 {color: #007788;}
+.cpp.source-cpp .ln-xtra, .cpp.source-cpp li.ln-xtra, .cpp.source-cpp div.ln-xtra {background-color: #ffc;}
+.cpp.source-cpp span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Raspberry_Pi_Bare_Bones action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Raspberry Pi Bare Bones</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=ARM_RaspberryPi_Tutorial_C&amp;redirect=no" title="ARM RaspberryPi Tutorial C">ARM RaspberryPi Tutorial C</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ARM_RaspberryPi_Tutorial_C#mw-head">navigation</a>,
+					<a href="ARM_RaspberryPi_Tutorial_C#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_1.png" class="image"><img alt="Difficulty 1.png" src="images/d/d3/Difficulty_1.png" width="46" height="14" /></a><br />Beginner</td></tr></table><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="Kernels" title="Kernels" class="mw-redirect">Kernel Designs</a></th></tr><tr><th>Models</th></tr><tr><td><div>
+<p><a href="Monolithic_Kernel" title="Monolithic Kernel">Monolithic Kernel</a><br />
+<a href="Microkernel" title="Microkernel">Microkernel</a><br />
+<a href="Hybrid_Kernel" title="Hybrid Kernel">Hybrid Kernel</a><br />
+<a href="Exokernel" title="Exokernel">Exokernel</a><br />
+<a href="Nanokernel" title="Nanokernel" class="mw-redirect">Nano/Picokernel</a><br />
+<a href="Exokernel#Cache_Kernel" title="Exokernel">Cache Kernel</a><br />
+<a href="Exokernel#Virtualizing_Kernel" title="Exokernel">Virtualizing Kernel</a><br />
+<a href="Megalithic_Kernel" title="Megalithic Kernel">Megalithic Kernel</a><br />
+</p>
+</div></td></tr><tr><th>Other Concepts</th></tr><tr><td><div>
+<p><a href="Modular_Kernel" title="Modular Kernel">Modular Kernel</a><br />
+<a href="Higher_Half_Kernel" title="Higher Half Kernel">Higher Half Kernel</a><br />
+<a href="Creating_a_64-bit_kernel" title="Creating a 64-bit kernel">64-bit Kernel</a><br />
+</p>
+</div></td></tr></table>
+<p>This is a tutorial on operating systems development on the <a href="Raspberry_Pi" title="Raspberry Pi" class="mw-redirect">Raspberry Pi</a>. This tutorial is written specifically for the Raspberry Pi Model B Rev 2 because the author has no other hardware to test on. But so far the models are basically identical for the purpose of this tutorial (Rev 1 has 256MB ram, Model A has no ethernet) in every way other than the memory-mapped location of serial I/O. This will serve as an example of how to create a minimal system, but not as an example of how to properly structure your project.
+</p><p><big><b>WAIT! Have you read <a href="Getting_Started" title="Getting Started">Getting Started</a>, <a href="Beginner_Mistakes" title="Beginner Mistakes">Beginner Mistakes</a>, and some of the related <a href="Category:OS_theory" title="Category:OS theory">OS theory</a>?</b></big>
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="ARM_RaspberryPi_Tutorial_C#Prepare"><span class="tocnumber">1</span> <span class="toctext">Prepare</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="ARM_RaspberryPi_Tutorial_C#Building_a_Cross-Compiler"><span class="tocnumber">2</span> <span class="toctext">Building a Cross-Compiler</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="ARM_RaspberryPi_Tutorial_C#Overview"><span class="tocnumber">3</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="ARM_RaspberryPi_Tutorial_C#Booting_the_Operating_System"><span class="tocnumber">4</span> <span class="toctext">Booting the Operating System</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="ARM_RaspberryPi_Tutorial_C#Implementing_the_Kernel"><span class="tocnumber">5</span> <span class="toctext">Implementing the Kernel</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="ARM_RaspberryPi_Tutorial_C#Freestanding_and_Hosted_Environments"><span class="tocnumber">5.1</span> <span class="toctext">Freestanding and Hosted Environments</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="ARM_RaspberryPi_Tutorial_C#Writing_a_kernel_in_C"><span class="tocnumber">5.2</span> <span class="toctext">Writing a kernel in C</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="ARM_RaspberryPi_Tutorial_C#Linking_the_Kernel"><span class="tocnumber">6</span> <span class="toctext">Linking the Kernel</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="ARM_RaspberryPi_Tutorial_C#Booting_the_Kernel"><span class="tocnumber">7</span> <span class="toctext">Booting the Kernel</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="ARM_RaspberryPi_Tutorial_C#Testing_your_operating_system_.28Real_Hardware.29"><span class="tocnumber">7.1</span> <span class="toctext">Testing your operating system (Real Hardware)</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="ARM_RaspberryPi_Tutorial_C#Testing_your_operating_system_.28QEMU.29"><span class="tocnumber">7.2</span> <span class="toctext">Testing your operating system (QEMU)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="ARM_RaspberryPi_Tutorial_C#See_Also"><span class="tocnumber">8</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="ARM_RaspberryPi_Tutorial_C#External_Links"><span class="tocnumber">8.1</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Prepare"> Prepare </span></h2>
+<p>You are about to begin development of a new operating system. Perhaps one day, your new operating system can be developed under itself. This is a process known as bootstrapping or going self-hosted. However, that is way into the future. Today, we simply need to set up a system that can compile your operating system from an existing operating system. This is a process known as cross-compiling and this makes the first step in operating systems development.
+</p><p>This article assumes you are using a Unix-like operating system such as Linux which supports operating systems development well. Windows users should be able to complete it from a MinGW or Cygwin environment. 
+</p>
+<h2> <span class="mw-headline" id="Building_a_Cross-Compiler"> Building a Cross-Compiler </span></h2>
+<dl><dd><i>Main article: <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a>, <a href="Why_do_I_need_a_Cross_Compiler?" title="Why do I need a Cross Compiler?">Why do I need a Cross Compiler?</a></i>
+</dd></dl>
+<p>The first thing you should do is set up a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a> for <b>arm-none-eabi</b>. You have not yet modified your compiler to know about the existence of your operating system, so we use a generic target called arm-none-eabi, which provides you with a toolchain targeting the <a href="System_V_ABI" title="System V ABI">System V ABI</a>.
+You will <i>not</i> be able to correctly compile your operating system without a cross-compiler.
+</p>
+<h2> <span class="mw-headline" id="Overview"> Overview </span></h2>
+<p>By now, you should have set up your <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">cross-compiler</a> for arm-none-eabi (as described above). This tutorial provides a minimal solution for creating an operating system. It doesn't serve as a recommend skeleton for project structure, but rather as an example of a minimal kernel. In this simple case, we just need three input files:
+</p>
+<ul><li> boot.S - kernel entry point that sets up the processor environment
+</li><li> kernel.c - your actual kernel routines
+</li><li> linker.ld - for linking the above files
+</li></ul>
+<h2> <span class="mw-headline" id="Booting_the_Operating_System"> Booting the Operating System  </span></h2>
+<p>We will now create a file called boot.S and discuss its contents. In this example, we are using the GNU assembler, which is part of the cross-compiler toolchain you built earlier. This assembler integrates very well with the rest of the GNU toolchain. 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">// To keep this in the first portion of the binary.
+.section &quot;.text.boot&quot;
+&#160;
+// Make _start global.
+.globl _start
+&#160;
+// Entry point for the kernel.
+// r15 -&gt; should begin execution at 0x8000.
+// r0 -&gt; 0x00000000
+// r1 -&gt; 0x00000C42
+// r2 -&gt; 0x00000100 - start of ATAGS
+// preserve these registers as argument for kernel_main
+_start:
+	// Setup the stack.
+	mov sp, #0x8000
+&#160;
+	// Clear out bss.
+	ldr r4, =__bss_start
+	ldr r9, =__bss_end
+	mov r5, #0
+	mov r6, #0
+	mov r7, #0
+	mov r8, #0
+	b       2f
+&#160;
+1:
+	// store multiple at r4.
+	stmia r4!, {r5-r8}
+&#160;
+	// If we are still below bss_end, loop.
+2:
+	cmp r4, r9
+	blo 1b
+&#160;
+	// Call kernel_main
+	ldr r3, =kernel_main
+	blx r3
+&#160;
+	// halt
+halt:
+	wfe
+	b halt</pre></div></div>
+<p>The section ".text.boot" will be used in the linker script to place the boot.S as the very first thing in our kernel image. The code initializes a minimum C environment, which means having a stack and zeroing the BSS segment, before calling the kernel_main function. Note that the code avoids using r0-r2 so the remain valid for the kernel_main call.
+</p><p>You can then assemble boot.S using:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">arm-none-eabi-gcc <span class="re5">-mcpu</span>=arm1176jzf-s <span class="re5">-fpic</span> <span class="re5">-ffreestanding</span> <span class="re5">-c</span> boot.S <span class="re5">-o</span> boot.o</pre></div></div>
+<h2> <span class="mw-headline" id="Implementing_the_Kernel"> Implementing the Kernel </span></h2>
+<p>So far we have written the bootstrap assembly stub that sets up the processor such that high level languages such as C can be used. It is also possible to use other languages such as C++.
+</p>
+<h3> <span class="mw-headline" id="Freestanding_and_Hosted_Environments"> Freestanding and Hosted Environments </span></h3>
+<p>If you have done C or C++ programming in user-space, you have used a so-called Hosted Environment. Hosted means that there is a C standard library and other useful runtime features. Alternatively, there is the Freestanding version, which is what we are using here. Freestanding means that there is no C standard library, only what we provide ourselves. However, some header files are actually not part of the C standard library, but rather the compiler. These remain available even in freestanding C source code. In this case we use &lt;stddef.h&gt; to get size_t &amp; NULL and &lt;stdint.h&gt; to get the intx_t and uintx_t datatypes which are invaluable for operating systems development, where you need to make sure that the variable is of an exact size (if we used a short instead of uint16_t and the size of short changed, our VGA driver here would break!). Additionally you can access the &lt;float.h&gt;, &lt;iso646.h&gt;, &lt;limits.h&gt;, and &lt;stdarg.h&gt; headers, as they are also freestanding. GCC actually ships a few more headers, but these are special purpose.
+</p>
+<h3> <span class="mw-headline" id="Writing_a_kernel_in_C"> Writing a kernel in C </span></h3>
+<p>The following shows how to create a simple kernel in C. Please take a few moments to understand the code.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="cpp source-cpp"><pre class="de1"><span class="co2">#include &lt;stddef.h&gt;</span>
+<span class="co2">#include &lt;stdint.h&gt;</span>
+&#160;
+<span class="co1">// Memory-Mapped I/O output</span>
+<span class="kw4">static</span> <span class="kw2">inline</span> <span class="kw4">void</span> mmio_write<span class="br0">&#40;</span><span class="kw4">uint32_t</span> reg, <span class="kw4">uint32_t</span> data<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="sy2">*</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint32_t</span><span class="sy2">*</span><span class="br0">&#41;</span>reg <span class="sy1">=</span> data<span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co1">// Memory-Mapped I/O input</span>
+<span class="kw4">static</span> <span class="kw2">inline</span> <span class="kw4">uint32_t</span> mmio_read<span class="br0">&#40;</span><span class="kw4">uint32_t</span> reg<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw1">return</span> <span class="sy2">*</span><span class="br0">&#40;</span><span class="kw4">volatile</span> <span class="kw4">uint32_t</span><span class="sy2">*</span><span class="br0">&#41;</span>reg<span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co1">// Loop &lt;delay&gt; times in a way that the compiler won't optimize away</span>
+<span class="kw4">static</span> <span class="kw2">inline</span> <span class="kw4">void</span> delay<span class="br0">&#40;</span><span class="kw4">int32_t</span> count<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot;__delay_%=: subs&#160;%[count],&#160;%[count], #1; bne __delay_%=<span class="es1">\n</span>&quot;</span>
+		 <span class="sy4">:</span> <span class="st0">&quot;=r&quot;</span><span class="br0">&#40;</span>count<span class="br0">&#41;</span><span class="sy4">:</span> <span class="br0">&#91;</span>count<span class="br0">&#93;</span><span class="st0">&quot;0&quot;</span><span class="br0">&#40;</span>count<span class="br0">&#41;</span> <span class="sy4">:</span> <span class="st0">&quot;cc&quot;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw2">enum</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// The GPIO registers base address.</span>
+    GPIO_BASE <span class="sy1">=</span> <span class="nu12">0x3F200000</span>, <span class="co1">// for raspi2 &amp; 3, 0x20200000 for raspi1</span>
+&#160;
+    <span class="co1">// The offsets for reach register.</span>
+&#160;
+    <span class="co1">// Controls actuation of pull up/down to ALL GPIO pins.</span>
+    GPPUD <span class="sy1">=</span> <span class="br0">&#40;</span>GPIO_BASE <span class="sy2">+</span> <span class="nu12">0x94</span><span class="br0">&#41;</span>,
+&#160;
+    <span class="co1">// Controls actuation of pull up/down for specific GPIO pin.</span>
+    GPPUDCLK0 <span class="sy1">=</span> <span class="br0">&#40;</span>GPIO_BASE <span class="sy2">+</span> <span class="nu12">0x98</span><span class="br0">&#41;</span>,
+&#160;
+    <span class="co1">// The base address for UART.</span>
+    UART0_BASE <span class="sy1">=</span> <span class="nu12">0x3F201000</span>, <span class="co1">// for raspi2 &amp; 3, 0x20201000 for raspi1</span>
+&#160;
+    <span class="co1">// The offsets for reach register for the UART.</span>
+    UART0_DR     <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x00</span><span class="br0">&#41;</span>,
+    UART0_RSRECR <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x04</span><span class="br0">&#41;</span>,
+    UART0_FR     <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x18</span><span class="br0">&#41;</span>,
+    UART0_ILPR   <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x20</span><span class="br0">&#41;</span>,
+    UART0_IBRD   <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x24</span><span class="br0">&#41;</span>,
+    UART0_FBRD   <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x28</span><span class="br0">&#41;</span>,
+    UART0_LCRH   <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x2C</span><span class="br0">&#41;</span>,
+    UART0_CR     <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x30</span><span class="br0">&#41;</span>,
+    UART0_IFLS   <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x34</span><span class="br0">&#41;</span>,
+    UART0_IMSC   <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x38</span><span class="br0">&#41;</span>,
+    UART0_RIS    <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x3C</span><span class="br0">&#41;</span>,
+    UART0_MIS    <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x40</span><span class="br0">&#41;</span>,
+    UART0_ICR    <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x44</span><span class="br0">&#41;</span>,
+    UART0_DMACR  <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x48</span><span class="br0">&#41;</span>,
+    UART0_ITCR   <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x80</span><span class="br0">&#41;</span>,
+    UART0_ITIP   <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x84</span><span class="br0">&#41;</span>,
+    UART0_ITOP   <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x88</span><span class="br0">&#41;</span>,
+    UART0_TDR    <span class="sy1">=</span> <span class="br0">&#40;</span>UART0_BASE <span class="sy2">+</span> <span class="nu12">0x8C</span><span class="br0">&#41;</span>,
+<span class="br0">&#125;</span><span class="sy4">;</span>
+&#160;
+<span class="kw4">void</span> uart_init<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="co1">// Disable UART0.</span>
+	mmio_write<span class="br0">&#40;</span>UART0_CR, <span class="nu12">0x00000000</span><span class="br0">&#41;</span><span class="sy4">;</span>
+	<span class="co1">// Setup the GPIO pin 14 &amp;&amp; 15.</span>
+&#160;
+	<span class="co1">// Disable pull up/down for all GPIO pins &amp; delay for 150 cycles.</span>
+	mmio_write<span class="br0">&#40;</span>GPPUD, <span class="nu12">0x00000000</span><span class="br0">&#41;</span><span class="sy4">;</span>
+	delay<span class="br0">&#40;</span><span class="nu0">150</span><span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+	<span class="co1">// Disable pull up/down for pin 14,15 &amp; delay for 150 cycles.</span>
+	mmio_write<span class="br0">&#40;</span>GPPUDCLK0, <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">14</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+	delay<span class="br0">&#40;</span><span class="nu0">150</span><span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+	<span class="co1">// Write 0 to GPPUDCLK0 to make it take effect.</span>
+	mmio_write<span class="br0">&#40;</span>GPPUDCLK0, <span class="nu12">0x00000000</span><span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+	<span class="co1">// Clear pending interrupts.</span>
+	mmio_write<span class="br0">&#40;</span>UART0_ICR, <span class="nu12">0x7FF</span><span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+	<span class="co1">// Set integer &amp; fractional part of baud rate.</span>
+	<span class="co1">// Divider = UART_CLOCK/(16 * Baud)</span>
+	<span class="co1">// Fraction part register = (Fractional part * 64) + 0.5</span>
+	<span class="co1">// UART_CLOCK = 3000000; Baud = 115200.</span>
+&#160;
+	<span class="co1">// Divider = 3000000 / (16 * 115200) = 1.627 = ~1.</span>
+	mmio_write<span class="br0">&#40;</span>UART0_IBRD, <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy4">;</span>
+	<span class="co1">// Fractional part register = (.627 * 64) + 0.5 = 40.6 = ~40.</span>
+	mmio_write<span class="br0">&#40;</span>UART0_FBRD, <span class="nu0">40</span><span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+	<span class="co1">// Enable FIFO &amp; 8 bit data transmissio (1 stop bit, no parity).</span>
+	mmio_write<span class="br0">&#40;</span>UART0_LCRH, <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">5</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">6</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+	<span class="co1">// Mask all interrupts.</span>
+	mmio_write<span class="br0">&#40;</span>UART0_IMSC, <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">5</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">6</span><span class="br0">&#41;</span> <span class="sy3">|</span>
+	                       <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">7</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">9</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">10</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+	<span class="co1">// Enable UART0, receive &amp; transfer part of UART.</span>
+	mmio_write<span class="br0">&#40;</span>UART0_CR, <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy3">|</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">9</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> uart_putc<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">char</span> c<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="co1">// Wait for UART to become ready to transmit.</span>
+	<span class="kw1">while</span> <span class="br0">&#40;</span> mmio_read<span class="br0">&#40;</span>UART0_FR<span class="br0">&#41;</span> <span class="sy3">&amp;</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">5</span><span class="br0">&#41;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="br0">&#125;</span>
+	mmio_write<span class="br0">&#40;</span>UART0_DR, c<span class="br0">&#41;</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">unsigned</span> <span class="kw4">char</span> uart_getc<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="co1">// Wait for UART to have received something.</span>
+    <span class="kw1">while</span> <span class="br0">&#40;</span> mmio_read<span class="br0">&#40;</span>UART0_FR<span class="br0">&#41;</span> <span class="sy3">&amp;</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy1">&lt;&lt;</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="br0">&#125;</span>
+    <span class="kw1">return</span> mmio_read<span class="br0">&#40;</span>UART0_DR<span class="br0">&#41;</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> uart_puts<span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span><span class="sy2">*</span> str<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">size_t</span> i <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span> str<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy3">!</span><span class="sy1">=</span> <span class="st0">'<span class="es5">\0</span>'</span><span class="sy4">;</span> i <span class="sy2">++</span><span class="br0">&#41;</span>
+		uart_putc<span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">char</span><span class="br0">&#41;</span>str<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="co2">#if defined(__cplusplus)</span>
+<span class="kw4">extern</span> <span class="st0">&quot;C&quot;</span> <span class="coMULTI">/* Use C linkage for kernel_main. */</span>
+<span class="co2">#endif</span>
+<span class="kw4">void</span> kernel_main<span class="br0">&#40;</span><span class="kw4">uint32_t</span> r0, <span class="kw4">uint32_t</span> r1, <span class="kw4">uint32_t</span> atags<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="co1">// Declare as unused</span>
+	<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span> r0<span class="sy4">;</span>
+	<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span> r1<span class="sy4">;</span>
+	<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span> atags<span class="sy4">;</span>
+&#160;
+	uart_init<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+	uart_puts<span class="br0">&#40;</span><span class="st0">&quot;Hello, kernel World!<span class="es1">\r</span><span class="es1">\n</span>&quot;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+	<span class="kw1">while</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>
+		uart_putc<span class="br0">&#40;</span>uart_getc<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy4">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>The GPU bootloader passes arguments to the kernel via r0-r2 and the boot.S makes sure to preserve those 3 registers. They are the first 3 arguments in a C function call. The argument r0 contains a code for the device the RPi was booted from.  This is generally 0 but its actual value depends on the firmware of the board.  r1 contains the 'ARM Linux Machine Type' which for the RPi is 3138 (0xc42) identifying the BCM2708 CPU. A full list of ARM Machine Types is available from <a rel="nofollow" class="external text" href="http://www.arm.linux.org.uk/developer/machines/">here</a>.  r2 contains the address of the ATAGs.
+</p><p>Notice how we wish to use the common C function strlen, but this function is part of the C standard library that we don't have available. Instead, we rely on the freestanding header &lt;stddef.h&gt; to provide size_t and we simply declare our own implementation of strlen. You will have to do this for every function you wish to use (as the freestanding headers only provide macros and data types). 
+</p><p>The addresses for the GPIO and UART are offsets from the peripheral base address, which is 0x20000000 for Raspberry Pi 1 and 0x3F000000 for Raspberry Pi 2 and Raspberry Pi 3. You can find the addresses of registers and how to use them in the BCM2835 manual.
+</p><p>Compile using:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">arm-none-eabi-gcc <span class="re5">-mcpu</span>=arm1176jzf-s <span class="re5">-fpic</span> <span class="re5">-ffreestanding</span> <span class="re5">-std</span>=gnu99 <span class="re5">-c</span> kernel.c <span class="re5">-o</span> kernel.o <span class="re5">-O2</span> <span class="re5">-Wall</span> <span class="re5">-Wextra</span></pre></div></div>
+<p>Note that the above code uses a few extensions and hence we build as the GNU version of C99.
+</p>
+<h2> <span class="mw-headline" id="Linking_the_Kernel"> Linking the Kernel </span></h2>
+<p>To create the full and final kernel we will have to link these object files into the final kernel program. When developing user-space programs, your toolchain ships with default scripts for linking such programs. However, these are unsuitable for kernel development and we need to provide our own customized linker script.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">ENTRY(_start)
+&#160;
+SECTIONS
+{
+    /* Starts at LOADER_ADDR. */
+    . = 0x8000;
+    __start = .;
+    __text_start = .;
+    .text&#160;:
+    {
+        KEEP(*(.text.boot))
+        *(.text)
+    }
+    . = ALIGN(4096); /* align to page size */
+    __text_end = .;
+&#160;
+    __rodata_start = .;
+    .rodata&#160;:
+    {
+        *(.rodata)
+    }
+    . = ALIGN(4096); /* align to page size */
+    __rodata_end = .;
+&#160;
+    __data_start = .;
+    .data&#160;:
+    {
+        *(.data)
+    }
+    . = ALIGN(4096); /* align to page size */
+    __data_end = .;
+&#160;
+    __bss_start = .;
+    .bss&#160;:
+    {
+        bss = .;
+        *(.bss)
+    }
+    . = ALIGN(4096); /* align to page size */
+    __bss_end = .;
+    __end = .;
+}</pre></div></div>
+<p>There is a lot of text here but don't despair. The script is rather simple if you look at it bit by bit.
+</p><p>ENTRY(_start) declares the entry point for the kernel image. That symbol was declared in the boot.S file. Since we are actually booting a binary image, the entry is completely irrelevant, but it has to be there in the elf file we build as intermediate file.
+</p><p>SECTIONS declares sections. It decides where the bits and pieces of our code and data go and also sets a few symbols that help us track the size of each section.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">    . = 0x8000;
+    __start = .;</pre></div></div>
+<p>The "." denotes the current address so the first line tells the linker to set the current address to 0x8000, where the kernel starts. The current address is automatically incremented when the linker adds data. The second line then creates a symbol "__start" and sets it to the current address.
+</p><p>After that sections are defined for text (code), read-only data, read-write data and BSS (0 initialized memory). Other than the name the sections are identical so lets just look at one of them:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">    __text_start = .;
+    .text&#160;: {
+        KEEP(*(.text.boot))
+        *(.text)
+    }
+    . = ALIGN(4096); /* align to page size */
+    __text_end = .;</pre></div></div>
+<p>The first line creates a __text_start symbol for the section. The second line opens a .text section for the output file which gets closed in the fifth line. Lines 3 and 4 declare what sections from the input files will be placed inside the output .text section. In our case ".text.boot" is to be placed first followed by the more general ".text". ".text.boot" is only used in boot.S and ensures that it ends up at the beginning of the kernel image. ".text" then contains all the remaining code. Any data added by the linker automatically increments the current addrress ("."). In line 6 we explicitly increment it so that it is aligned to a 4096 byte boundary (which is the page size for the RPi). And last line 7 creates a __text_end symbol so we know where the section ends.
+</p><p>What are the __text_start and __text_end for and why use page alignment? The 2 symbols can be used in the kernel source and the linker will then place the correct addresses into the binary. As an example the __bss_start and __bss_end are used in boot.S. But you can also use the symbols from C by declaring them extern first. While not required I made all sections aligned to page size. This later allows mapping them in the page tables with executable, read-only and read-write permissions without having to handle overlaps (2 sections in one page).
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">    __end = .;</pre></div></div>
+<p>After all sections are declared the __end symbol is created. If you ever want to know how large your kernel is at runtime you can use __start and __end to find out.
+</p><p>With these components you can now actually build the final kernel. We use the compiler as the linker as it allows it greater control over the link process. Note that if your kernel is written in C++, you should use the C++ compiler instead.
+</p><p>You can then link your kernel using:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">arm-none-eabi-gcc <span class="re5">-T</span> linker.ld <span class="re5">-o</span> myos.elf <span class="re5">-ffreestanding</span> <span class="re5">-O2</span> <span class="re5">-nostdlib</span> boot.o kernel.o
+arm-none-eabi-objcopy myos.elf <span class="re5">-O</span> binary myos.bin</pre></div></div>
+<p><b>Note</b>: This kernel isn't currently linking with <a href="Libgcc" title="Libgcc">libgcc</a> as <a href="Bare_Bones" title="Bare Bones">Bare Bones</a> is and this may be a mistake.
+</p>
+<h2> <span class="mw-headline" id="Booting_the_Kernel"> Booting the Kernel </span></h2>
+<p>In a few moments, you will see your kernel in action. 
+</p>
+<h3> <span class="mw-headline" id="Testing_your_operating_system_.28Real_Hardware.29"> Testing your operating system (Real Hardware) </span></h3>
+<p>Do you still have the SD card with the original Raspbian image on it from when you where testing the hardware above? Great. So you already have a SD card with a boot partition and the required files. If not then download one of the original Raspberry boot images and copy them to the SD card.
+</p><p>Now mount the first partition from the SD card and look at it:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">bootcode.bin  fixup.dat     kernel.img            start.elf
+cmdline.txt   fixup_cd.dat  kernel_cutdown.img    start_cd.elf
+config.txt    issue.txt     kernel_emergency.img</pre></div></div>
+<p>Simplified when the RPi powers up the ARM CPU is halted and the GPU runs. The GPU loads the bootloader from ROM and executes it. That then finds the SD card and loads the bootcode.bin. The bootcode handles the config.txt and cmdline.txt (or does start.elf read that?) and then runs start.elf. start.elf loads the kernel.img and at last the ARM CPU is started running that kernel image.
+</p><p>So now we replace the original kernel.img with our own, umount, sync, stick the SD card into RPi and turn the power on.
+Your Minicom should then show the following:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">Hello World</pre></div></div>
+<h3> <span class="mw-headline" id="Testing_your_operating_system_.28QEMU.29"> Testing your operating system (QEMU) </span></h3>
+<p>QEMU supports emulating Raspberry Pi 2 with the machine type "raspi2". At the time of writing this feature is not available in most package managers but can be found in the latest QEMU source found here: <a rel="nofollow" class="external free" href="https://github.com/qemu/qemu">https://github.com/qemu/qemu</a>
+</p><p>Check that your QEMU install has qemu-system-arm and that it supports the option "-M raspi2". When testing in QEMU, be sure to use the raspi2 base addresses noted in the source code.
+</p><p>With QEMU you do not need to objcopy the kernel into a plain binary; QEMU also supports ELF kernels:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">$YOURINSTALLLOCATION/bin/qemu-system-arm -m 256 -M raspi2 -serial stdio -kernel kernel.elf</pre></div></div>
+<p>QEMU "raspi2" emulation may incorrectly load the kernel binaries at 0x10000 instead of 0x8000, so if you do not see any output, try adjusting the base address constant in the linker script.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.raspberrypi.org/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf">BCM2835 ARM Peripherals</a>
+</li><li> <a rel="nofollow" class="external text" href="http://infocenter.arm.com/help/topic/com.arm.doc.ddi0183g/DDI0183G_uart_pl011_r1p5_trm.pdf">PrimeCell UART (PL011) Technical Reference Manual</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 553/1000000
+Post-expand include size: 2552/2097152 bytes
+Template argument size: 2242/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3316-0!*!0!!en!2!* and timestamp 20180121031355 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Raspberry_Pi_Bare_Bones&amp;oldid=22048">http://wiki.osdev.org/index.php?title=Raspberry_Pi_Bare_Bones&amp;oldid=22048</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_1_Tutorials" title="Category:Level 1 Tutorials">Level 1 Tutorials</a></li><li><a href="Category:ARM" title="Category:ARM">ARM</a></li><li><a href="Category:ARM_RaspberryPi" title="Category:ARM RaspberryPi">ARM RaspberryPi</a></li><li><a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a></li><li><a href="Category:C" title="Category:C">C</a></li><li><a href="Category:C++" title="Category:C++">C++</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Raspberry_Pi_Bare_Bones" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Raspberry_Pi_Bare_Bones"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Raspberry_Pi_Bare_Bones"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ARM_RaspberryPi_Tutorial_C#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Raspberry_Pi_Bare_Bones" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Raspberry_Pi_Bare_Bones&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Raspberry_Pi_Bare_Bones&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ARM_RaspberryPi_Tutorial_C#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Raspberry_Pi_Bare_Bones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Raspberry_Pi_Bare_Bones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Raspberry_Pi_Bare_Bones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Raspberry_Pi_Bare_Bones&amp;oldid=22048" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 5 January 2018, at 16:41.</li>
+											<li id="footer-info-viewcount">This page has been accessed 130,999 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.035 secs. -->
+	</body>
+</html>

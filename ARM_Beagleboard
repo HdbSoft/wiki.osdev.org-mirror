@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ARM Beagleboard - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ARM_Beagleboard", "wgTitle": "ARM Beagleboard", "wgCurRevisionId": 20511, "wgArticleId": 3037, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["In Progress", "ARM"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ARM_Beagleboard action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ARM Beagleboard</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ARM_Beagleboard#mw-head">navigation</a>,
+					<a href="ARM_Beagleboard#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p><br />
+TODO: VERIFY THE TUTORIAL(S)!!!
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="ARM_Beagleboard#Intro"><span class="tocnumber">1</span> <span class="toctext">Intro</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="ARM_Beagleboard#Materials"><span class="tocnumber">1.1</span> <span class="toctext">Materials</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="ARM_Beagleboard#Getting_Started"><span class="tocnumber">2</span> <span class="toctext">Getting Started</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="ARM_Beagleboard#Testing_your_serial_port"><span class="tocnumber">2.1</span> <span class="toctext">Testing your serial port</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="ARM_Beagleboard#Testing_the_BeagleBoard"><span class="tocnumber">2.2</span> <span class="toctext">Testing the BeagleBoard</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="ARM_Beagleboard#Getting_an_assembler"><span class="tocnumber">2.3</span> <span class="toctext">Getting an assembler</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="ARM_Beagleboard#Writing_some_CODE.21"><span class="tocnumber">3</span> <span class="toctext">Writing some CODE!</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="ARM_Beagleboard#Linker_Script"><span class="tocnumber">3.1</span> <span class="toctext">Linker Script</span></a>
+<ul>
+<li class="toclevel-3 tocsection-9"><a href="ARM_Beagleboard#linker.ld"><span class="tocnumber">3.1.1</span> <span class="toctext">linker.ld</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-10"><a href="ARM_Beagleboard#Makefile"><span class="tocnumber">3.2</span> <span class="toctext">Makefile</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="ARM_Beagleboard#Assembly.21"><span class="tocnumber">3.3</span> <span class="toctext">Assembly!</span></a>
+<ul>
+<li class="toclevel-3 tocsection-12"><a href="ARM_Beagleboard#boot.asm"><span class="tocnumber">3.3.1</span> <span class="toctext">boot.asm</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-13"><a href="ARM_Beagleboard#.27Compiling.27_it"><span class="tocnumber">3.4</span> <span class="toctext">'Compiling' it</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-14"><a href="ARM_Beagleboard#Executing_code_on_the_device"><span class="tocnumber">4</span> <span class="toctext">Executing code on the device</span></a>
+<ul>
+<li class="toclevel-2 tocsection-15"><a href="ARM_Beagleboard#Introduction_to_u-boot"><span class="tocnumber">4.1</span> <span class="toctext">Introduction to u-boot</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="ARM_Beagleboard#Loading_code"><span class="tocnumber">4.2</span> <span class="toctext">Loading code</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="ARM_Beagleboard#Executing_Code"><span class="tocnumber">4.3</span> <span class="toctext">Executing Code</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="ARM_Beagleboard#What_to_do_now"><span class="tocnumber">5</span> <span class="toctext">What to do now</span></a></li>
+<li class="toclevel-1 tocsection-19"><a href="ARM_Beagleboard#Branching_to_C"><span class="tocnumber">6</span> <span class="toctext">Branching to C</span></a></li>
+<li class="toclevel-1 tocsection-20"><a href="ARM_Beagleboard#Help"><span class="tocnumber">7</span> <span class="toctext">Help</span></a></li>
+<li class="toclevel-1 tocsection-21"><a href="ARM_Beagleboard#See_also"><span class="tocnumber">8</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-22"><a href="ARM_Beagleboard#References"><span class="tocnumber">9</span> <span class="toctext">References</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Intro">Intro</span></h2>
+<p>This is a tutorial on bare-metal [OS] development on the Texas Instruments BeagleBoard. This tutorial is written specifically for the BeagleBoard-xM Rev C because the author has no other hardware to test on.
+</p><p>Experience in Linux/nix (<b>very</b> important) and at least one assembly language (<b>incredibly</b> important, or at least extensive C knowledge) is assumed and required. Please make sure you can figure out how to get a basic x86 OS (no copypaste!) to the booting stage before attempting this guide. No need to make much more than a "Hello World", since what you know about x86 won't really apply here.
+</p>
+<h3> <span class="mw-headline" id="Materials"> Materials </span></h3>
+<p>You will need a:
+</p>
+<ul><li> <b>BeagleBoard-xM Rev C</b>, or perhaps an older board, <i>with a serial port</i>.
+</li><li> An <b>RS-232</b> serial port. This is the kind of serial port on the back of your x86 PC, and on the BeagleBoard-xM. using TTL (5v) or lower voltage serial will damage something.
+</li><li> A serial cable that comes to <b>DB-9 Male</b> on at least one side (to connect to the BeagleBoard)
+</li><li> <b>Debian, or other *nix with arm-binutils</b> [guide will document installation for Debian]
+</li><li> <b>Power supply</b> for your BeagleBoard <i>(5v, at least 1A but I recommend/use 3A)</i>
+</li><li> <b>A copy of the ARM ARM (ARM Architecture Reference Manual) (download a PDF, make sure it's the new one, with ARMv7 stuff)</b>
+</li><li> <b>A copy of the OMAP35x/DM37x TRM (Technical Reference Manual)</b> &lt;-- ^ <i>THESE ARE INCREDIBLY IMPORTANT!</i>
+</li></ul>
+<dl><dd><ul><li> <b>Optional:</b> Various peripherals for the BeagleBoard. Be aware that <i>you</i> will need to write drivers for them. Welcome to OS Development ^_^.
+</li></ul>
+</dd></dl>
+<h2> <span class="mw-headline" id="Getting_Started">Getting Started</span></h2>
+<h3> <span class="mw-headline" id="Testing_your_serial_port">Testing your serial port</span></h3>
+<p>First things first, you're going to want to make sure all your hardware works. Set up your serial port, however yours works, and open up minicom. Make sure you have flow control turned off.
+Now jumper <b>PIN 2 (RX)</b> to <b>PIN 3 (TX)</b> on the DB-9 side. Just type some characters into minicom, and they should be echoed back.
+Ensure you can run at 115200 baud, 8N1, which is what you will use to connect to the BeagleBoard.
+</p><p>If you get 'Permission Denied' <b>do NOT become root!</b> This is unnecessary. Instead do:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">sudo adduser &lt;user&gt; dialout</pre></div></div>
+<p>This will let your user use serial ports without needing root.
+</p><p>Or do ls -l /dev/ttyS* to find out the group that own the device, then add you into that group under /etc/group (normally the group is uucp)
+</p>
+<h3> <span class="mw-headline" id="Testing_the_BeagleBoard">Testing the BeagleBoard</span></h3>
+<p>Follow the guide here <a rel="nofollow" class="external free" href="http://elinux.org/BeagleBoardDebian#Debian_armhf_port">http://elinux.org/BeagleBoardDebian#Debian_armhf_port</a> to install the Debian armhf image to a microSD card. We don't really need to boot Debian from it, but it's a nice simple <small>ghetto/lazy</small> way to get u-boot set up and working.
+</p><p>Connect the BeagleBoard up via serial, and make sure Minicom is running (on your PC). Put the microSD card in the BeagleBoard. Connect the BeagleBoard to its power supply. You should see some output on the serial port. If not, Google around to figure out why not. If a few bytes of garbage appear in Minicom only, make sure the microSD card is inserted and VALID. Also make sure you didn't press the 'user button'.
+</p><p>You should get some meaningful output. Unplug your BeagleBoard when you are done with it.
+</p>
+<h3> <span class="mw-headline" id="Getting_an_assembler">Getting an assembler</span></h3>
+<p>We will be using ARM development tools from the Emdebian project.
+</p><p>Append:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">deb http<span class="sy0">://</span>www<span class="sy0">.</span>emdebian<span class="sy0">.</span><span class="kw4">org</span><span class="sy0">/</span>debian<span class="sy0">/</span> squeeze main</pre></div></div>
+<p>to your /etc/apt/sources.list, changing 'squeeze' for your version of Debian - I'm running wheezy, for example.
+</p><p>now run:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">sudo aptitude update
+sudo aptitude install gcc<span class="sy0">-</span><span class="nu0">4.4</span><span class="sy0">-</span>arm<span class="sy0">-</span>linux<span class="sy0">-</span>gnueabi # check <span class="kw4">this</span>! it might be an older version <span class="kw4">for</span> non<span class="sy0">-</span>wheezy<span class="sy0">...</span></pre></div></div>
+<p>That will install a C compiler, and also install Binutils, which for this tutorial is really all we need, but you may later wish to write your code in C.
+</p>
+<h2> <span class="mw-headline" id="Writing_some_CODE.21">Writing some CODE!</span></h2>
+<p>Now that we have all the stuff we need, let's get to writing some code. Before we write an ASM source file, we should make a linker script and a Makefile.
+</p>
+<h3> <span class="mw-headline" id="Linker_Script">Linker Script</span></h3>
+<p>We'll basically take the one from the stackoverflow.com link, No.1 in the ref list, <i>with one change</i>. The linker script there uses 0x80300000 as the start address. This will work just fine, however the default load address of u-boot's 'loady' command loads things into 0x80200000. So there's one less thing we have to specify ^_^.
+</p>
+<h4> <span class="mw-headline" id="linker.ld">linker.ld</span></h4>
+<p>Take note of what it does. It's pretty simple. Refer to docs if necessary.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="sy0">/*</span> rammap <span class="sy0">*/</span>
+<span class="kw5">MEMORY</span>
+<span class="br0">&#123;</span>
+    ram <span class="sy0">:</span> ORIGIN = <span class="nu0">0x80200000</span><span class="sy0">,</span> <span class="kw4">LENGTH</span> = <span class="nu0">0x10000</span>
+<span class="br0">&#125;</span>
+&#160;
+SECTIONS
+<span class="br0">&#123;</span>
+    <span class="sy0">.</span>text <span class="sy0">:</span> <span class="br0">&#123;</span> <span class="sy0">*</span><span class="br0">&#40;</span><span class="sy0">.</span>text<span class="sy0">*</span><span class="br0">&#41;</span> <span class="br0">&#125;</span> &gt; ram
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Makefile">Makefile</span></h3>
+<p>This is the basic makefile I use. It's similar to the one on the stackoverflow link.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">ARMGNU = arm<span class="sy0">-</span>linux<span class="sy0">-</span>gnueabi
+&#160;
+AOPS = <span class="sy0">--</span>warn <span class="sy0">--</span>fatal<span class="sy0">-</span>warnings
+COPS = <span class="sy0">-</span>Wall <span class="sy0">-</span>Werror <span class="sy0">-</span>O2 <span class="sy0">-</span>nostdlib <span class="sy0">-</span>nostartfiles <span class="sy0">-</span>ffreestanding 
+&#160;
+boot<span class="sy0">.</span>bin<span class="sy0">:</span> boot<span class="sy0">.</span>asm
+	$<span class="br0">&#40;</span>ARMGNU<span class="br0">&#41;</span><span class="sy0">-</span>as boot<span class="sy0">.</span>asm <span class="sy0">-</span>o boot<span class="sy0">.</span>o
+	$<span class="br0">&#40;</span>ARMGNU<span class="br0">&#41;</span><span class="sy0">-</span>ld <span class="sy0">-</span>T linker<span class="sy0">.</span>ld boot<span class="sy0">.</span>o <span class="sy0">-</span>o boot<span class="sy0">.</span>elf
+	$<span class="br0">&#40;</span>ARMGNU<span class="br0">&#41;</span><span class="sy0">-</span>objdump <span class="sy0">-</span>D boot<span class="sy0">.</span>elf &gt; boot<span class="sy0">.</span><span class="kw4">list</span>
+	$<span class="br0">&#40;</span>ARMGNU<span class="br0">&#41;</span><span class="sy0">-</span>objcopy boot<span class="sy0">.</span>elf <span class="sy0">-</span>O srec boot<span class="sy0">.</span>srec
+	$<span class="br0">&#40;</span>ARMGNU<span class="br0">&#41;</span><span class="sy0">-</span>objcopy boot<span class="sy0">.</span>elf <span class="sy0">-</span>O binary boot<span class="sy0">.</span>bin</pre></div></div>
+<h3> <span class="mw-headline" id="Assembly.21">Assembly!</span></h3>
+<p>YAY! We can write some code now!
+</p><p>You are free to branch to C code after following this tutorial, but remember, you will need to write some things in ASM, just like on x86.
+</p>
+<h4> <span class="mw-headline" id="boot.asm">boot.asm</span></h4>
+<tt><div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">#UART base locations from the TRM
+<span class="sy0">.</span>equ UART1<span class="sy0">.</span>BASE<span class="sy0">,</span> 		<span class="nu0">0x4806A000</span>
+<span class="sy0">.</span>equ UART2<span class="sy0">.</span>BASE<span class="sy0">,</span> 		<span class="nu0">0x4806C000</span>
+#According to the Beagleboard<span class="sy0">-</span>xM System Reference Manual<span class="sy0">,</span> UART3 is connected to the serial port<span class="sy0">.</span>
+<span class="sy0">.</span>equ UART3<span class="sy0">.</span>BASE<span class="sy0">,</span> 		<span class="nu0">0x49020000</span>
+<span class="sy0">.</span>equ UART4<span class="sy0">.</span>BASE<span class="sy0">,</span> 		<span class="nu0">0x49042000</span>
+&#160;
+#We need to be <span class="kw1">in</span> ARM mode <span class="sy0">-</span> we may branch to Thumb mode later <span class="kw4">if</span> desired<span class="sy0">.</span>
+<span class="sy0">.</span>arm
+_start<span class="sy0">:</span>
+   # Thankfully<span class="sy0">,</span> U<span class="sy0">-</span>BOOT already <span class="kw1">sets</span> up serial <span class="kw4">for</span> us<span class="sy0">,</span> so we don<span class="st0">'t need to do all the reset crap.
+   # Just print a '</span>!<span class="st0">' symbol to the screen, and hang.
+   # Load the location of the transmit register (THR_REG) into r0. It'</span>s <span class="kw5">at</span> the UARTx<span class="sy0">.</span>BASE<span class="sy0">,</span> since it is <span class="kw4">offset</span> <span class="nu0">0x000</span><span class="sy0">.</span>
+   # <span class="br0">&#40;</span>load value pointed by the assembler <span class="br0">&#40;</span>immediate pointer<span class="br0">&#41;</span> <span class="kw1">into</span> r0<span class="br0">&#41;</span>
+   ldr r0<span class="sy0">,</span>=UART3<span class="sy0">.</span>BASE
+   # Move a <span class="st0">'!'</span> character <span class="kw1">into</span> r1
+   # <span class="br0">&#40;</span>move a character<span class="sy0">,</span> <span class="st0">'!'</span><span class="sy0">,</span> which is immediate<span class="sy0">,</span> <span class="kw1">into</span> r1<span class="br0">&#41;</span>
+   <span class="kw1">mov</span> r1<span class="sy0">,</span>#<span class="st0">'!'</span>
+   # According to the TRM<span class="sy0">,</span> we may only write bytes <span class="kw1">into</span> THR_REG<span class="sy0">,</span> <span class="kw4">else</span> we<span class="st0">'ll corrupt stuff.
+   # (store the least-significant-byte of r1 into the address pointed by r0)
+   strb r1,[r0]
+   # If we kept writing to the serial port, we'</span>d eventually overflow the <span class="nu0">64</span><span class="sy0">-</span><span class="kw5">byte</span> FIFO<span class="sy0">,</span> <span class="kw1">and</span> since we don<span class="st0">'t handle interrupts yet, we'</span>ll hang <span class="br0">&#40;</span>?<span class="br0">&#41;</span>
+   # <span class="kw1">In</span> ASM<span class="sy0">,</span> labels are like case<span class="sy0">:</span> statements <span class="kw1">in</span> <span class="kw5">C</span><span class="sy0">.</span> <span class="kw4">Code</span> flows <span class="kw1">into</span> them as <span class="kw4">if</span> they don<span class="st0">'t exist - because they don'</span>t<span class="sy0">.</span>
+_hang<span class="sy0">:</span>
+   # <span class="br0">&#40;</span>branch <span class="br0">&#40;</span>jump<span class="sy0">,</span> <span class="kw1">JMP</span><span class="br0">&#41;</span> to _hang<span class="br0">&#41;</span>
+   # b _hang</pre></div></div></tt>
+<h3> <span class="mw-headline" id=".27Compiling.27_it">'Compiling' it</span></h3>
+<p>Since it's ASM we technically don't 'compile' it, we 'assemble' (and 'link' it). But anyway, go to where you saved your files and type 'make'. This should progress without any errors.
+</p>
+<h2> <span class="mw-headline" id="Executing_code_on_the_device">Executing code on the device</span></h2>
+<p>Remember that Minicom window we almost forgot about? It's time to use it&#160;;).
+</p>
+<h3> <span class="mw-headline" id="Introduction_to_u-boot">Introduction to u-boot</span></h3>
+<p>Reset your BeagleBoard (hit the reset button).
+</p><p>You should see:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">U<span class="sy0">-</span>Boot <span class="nu0">2011.03</span><span class="sy0">-</span>rc1<span class="sy0">-</span><span class="nu0">00000</span><span class="sy0">-</span>g9a3cc57<span class="sy0">-</span>dirty <span class="br0">&#40;</span>Apr <span class="nu0">04</span> <span class="nu0">2011</span> <span class="sy0">-</span> <span class="nu0">12</span><span class="sy0">:</span><span class="nu0">36</span><span class="sy0">:</span><span class="nu0">16</span><span class="br0">&#41;</span>                
+&#160;
+OMAP36XX<span class="sy0">/</span>37XX<span class="sy0">-</span>GP ES2<span class="sy0">.</span>1<span class="sy0">,</span> <span class="kw5">CPU</span><span class="sy0">-</span>OPP2<span class="sy0">,</span> L3<span class="sy0">-</span>165MHz<span class="sy0">,</span> Max <span class="kw5">CPU</span> Clock <span class="nu0">1</span> Ghz                
+OMAP3 Beagle board <span class="sy0">+</span> LPDDR<span class="sy0">/</span>NAND                                                 
+I2C<span class="sy0">:</span>   ready                                                                    
+DRAM<span class="sy0">:</span>  <span class="nu0">512</span> MiB                                                                  
+NAND<span class="sy0">:</span>  <span class="nu0">0</span> MiB                                                                    
+MMC<span class="sy0">:</span>   OMAP SD<span class="sy0">/</span>MMC<span class="sy0">:</span> <span class="nu0">0</span>                                                           
+<span class="sy0">***</span> Warning <span class="sy0">-</span> readenv<span class="br0">&#40;</span><span class="br0">&#41;</span> failed<span class="sy0">,</span> using default environment                       
+&#160;
+<span class="kw1">In</span><span class="sy0">:</span>    serial                                                                   
+<span class="kw1">Out</span><span class="sy0">:</span>   serial                                                                   
+<span class="kw4">Err</span><span class="sy0">:</span>   serial                                                                   
+Beagle xM Rev <span class="kw5">C</span>                                                                 
+No EEPROM on expansion board                                                    
+Die ID #2e7000029ff80000016842c813020023                                        
+Hit any key to stop autoboot<span class="sy0">:</span>  <span class="nu0">3</span></pre></div></div>
+<p>Hit a key. Before Linux loads.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">OMAP3 beagleboard<span class="sy0">.</span><span class="kw4">org</span> #</pre></div></div>
+<p>Whee, a u-boot prompt.
+</p>
+<h3> <span class="mw-headline" id="Loading_code">Loading code</span></h3>
+<p>Now it's time to load our code into RAM. To do this, we will use 'loady' and the y-modem protocol. We can do all this from Minicom - that's why we needed Minicom and not GNU Screen. Hopefully you did what I asked&#160;;).
+</p><p>Just type 'loady'. Don't worry about being fast on your first go, you'll miss it anyway.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">OMAP3 beagleboard<span class="sy0">.</span><span class="kw4">org</span> # loady                                                   
+## Ready <span class="kw4">for</span> binary <span class="br0">&#40;</span>ymodem<span class="br0">&#41;</span> download to <span class="nu0">0x80200000</span> <span class="kw5">at</span> <span class="nu0">115200</span> bps<span class="sy0">...</span></pre></div></div>
+<p>Now hit Ctrl+A. A bar will appear at the bottom.
+</p><p>Press 'S'.
+</p><p>Select 'ymodem'.
+</p><p>Move across to '[Goto]'.
+</p><p>Type in the directory where you saved your code.
+</p><p>Move down to 'boot.bin' and hit 'Space', and then 'Enter'.
+</p><p>Ctrl+C out of the ymodem transfer window if nothing happens.
+</p><p>Reset your BeagleBoard and try again - now that the file is already selected, you can just hit enter twice in the file prompt window, preventing timeouts.
+</p><p>Be patient, ymodem can take a few seconds to 'sync'.
+</p><p>After the file is loaded into RAM,
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">READY<span class="sy0">:</span> Press any key<span class="sy0">.</span></pre></div></div>
+<p>and
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">Cm <span class="sy0">-</span> CRC mode<span class="sy0">,</span> <span class="nu0">9</span><span class="br0">&#40;</span>SOH<span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">0</span><span class="br0">&#40;</span>STX<span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">0</span><span class="br0">&#40;</span>CAN<span class="br0">&#41;</span> packets<span class="sy0">,</span> <span class="nu0">3</span> retries                          
+## Total <span class="kw4">Size</span>      = <span class="nu0">0x00000350</span> = <span class="nu0">848</span> Bytes                                     
+OMAP3 beagleboard<span class="sy0">.</span><span class="kw4">org</span> #</pre></div></div>
+<p>is printed (my file is bigger... don't worry about that), we just have to execute the code in memory!
+</p>
+<h3> <span class="mw-headline" id="Executing_Code">Executing Code</span></h3>
+<p>Execution is started from an address with 'go'. Our _start address is 0x80200000. So, we type:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">OMAP3 beagleboard<span class="sy0">.</span><span class="kw4">org</span> # go <span class="nu0">0x80200000</span></pre></div></div>
+<p>and we should get:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">## Starting application <span class="kw5">at</span> <span class="nu0">0x80200000</span> <span class="sy0">...</span>                                       
+!</pre></div></div>
+<p>If you get that, congratulations! You've just written an 'Operating' System (;)) for the BeagleBoard! The process will seem long winded at first, but it's not really at all.
+</p>
+<h2> <span class="mw-headline" id="What_to_do_now">What to do now</span></h2>
+<p>Read the ARM ARM.
+</p><p>Read the TRM.
+</p><p>Find out how to do push/pop and how to return from functions (and how to return using a pop) from example code and the ARM.
+</p><p>Write routines to print integers and strings.
+</p><p>Set up virtual memory.
+</p><p>Enable interrupts
+</p><p>Write some device drivers.
+</p><p>Write a scheduler
+</p><p>etc. Do all the stuff you would in an x86 OS.
+</p>
+<h2> <span class="mw-headline" id="Branching_to_C">Branching to C</span></h2>
+<p>TODO: Add this
+</p>
+<dl><dd>Dependencies of TODO: Care enough to want to branch to C.
+</dd></dl>
+<p>It's probably just a matter of linking in your C program and doing
+<code>
+</p>
+<pre>  bx _main
+</pre>
+<p></code>
+But I quite honestly haven't tried ^_^.
+</p>
+<h2> <span class="mw-headline" id="Help">Help</span></h2>
+<p>For help, you can try joining #Beagle (note the capital B!) on irc.freenode.net.
+</p>
+<h2> <span class="mw-headline" id="See_also"> See also </span></h2>
+<ul><li><a href="ARM_Integrator-CP_Bare_Bones" title="ARM Integrator-CP Bare Bones">ARM Integrator-CP Bare Bones</a>
+</li><li><a href="ARM_Overview" title="ARM Overview">ARM Overview</a>
+</li><li><a href="GameBoy_Advance_Barebones" title="GameBoy Advance Barebones">GameBoy Advance Barebones</a>
+</li><li><a href="GameBoy_Advance_Introduction" title="GameBoy Advance Introduction">GameBoy Advance Introduction</a>
+</li></ul>
+<h2> <span class="mw-headline" id="References"> References </span></h2>
+<ol><li><a rel="nofollow" class="external free" href="http://stackoverflow.com/questions/6870712/beagleboard-bare-metal-programming">http://stackoverflow.com/questions/6870712/beagleboard-bare-metal-programming</a>
+</li><li><a rel="nofollow" class="external free" href="http://sourceware.org/binutils/docs/as/">http://sourceware.org/binutils/docs/as/</a>
+</li></ol>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 240/1000000
+Post-expand include size: 347/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3037-0!*!0!!en!2!* and timestamp 20180121034656 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ARM_Beagleboard&amp;oldid=20511">http://wiki.osdev.org/index.php?title=ARM_Beagleboard&amp;oldid=20511</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:ARM" title="Category:ARM">ARM</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ARM_Beagleboard" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ARM_Beagleboard"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:ARM_Beagleboard&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ARM_Beagleboard#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ARM_Beagleboard" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ARM_Beagleboard&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ARM_Beagleboard&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ARM_Beagleboard#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/ARM_Beagleboard" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/ARM_Beagleboard" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=ARM_Beagleboard&amp;printable=yes" rel="alteskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ARM_Beagleboard" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ARM_Beagleboard" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ARM_Beagleboard&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ARM_Beagleboard&amp;oldid=20511" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 February 2017, at 07:03.</li>
+											<li id="footer-info-viewcount">This page has been accessed 36,801 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

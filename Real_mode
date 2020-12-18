@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Real Mode - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="Real_Mode" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Real_Mode", "wgTitle": "Real Mode", "wgCurRevisionId": 20953, "wgArticleId": 1712, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["X86 CPU", "Operating Modes"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Real_Mode action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Real Mode</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=Real_mode&amp;redirect=no" title="Real mode">Real mode</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Real_mode#mw-head">navigation</a>,
+					<a href="Real_mode#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><b>Real Mode</b> is a simplistic 16-bit mode that is present on all x86 processors. Real Mode was the first x86 mode design and was used by many early operating systems before the birth of <a href="Protected_Mode" title="Protected Mode">Protected Mode</a>. For compatibility purposes, all x86 processors <a href="Boot_Sequence" title="Boot Sequence">begin execution</a> in Real Mode.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Real_mode#Information"><span class="tocnumber">1</span> <span class="toctext">Information</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Real_mode#Cons"><span class="tocnumber">1.1</span> <span class="toctext">Cons</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Real_mode#Pros"><span class="tocnumber">1.2</span> <span class="toctext">Pros</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Real_mode#Common_Misconception"><span class="tocnumber">1.3</span> <span class="toctext">Common Misconception</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Real_mode#Memory_Addressing"><span class="tocnumber">2</span> <span class="toctext">Memory Addressing</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Real_mode#The_Stack"><span class="tocnumber">2.1</span> <span class="toctext">The Stack</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Real_mode#High_Memory_Area"><span class="tocnumber">2.2</span> <span class="toctext">High Memory Area</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Real_mode#Addressing_Modes"><span class="tocnumber">2.3</span> <span class="toctext">Addressing Modes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="Real_mode#Switching_from_Protected_Mode_to_Real_Mode"><span class="tocnumber">3</span> <span class="toctext">Switching from Protected Mode to Real Mode</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Real_mode#x86_Assembly_Example"><span class="tocnumber">4</span> <span class="toctext">x86 Assembly Example</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Real_mode#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="Real_mode#Articles"><span class="tocnumber">5.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="Real_mode#External_Links"><span class="tocnumber">5.2</span> <span class="toctext">External Links</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="Real_mode#References"><span class="tocnumber">5.3</span> <span class="toctext">References</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Information"> Information </span></h2>
+<p>All modern operating systems (Windows, Linux, ...) run in <a href="Protected_Mode" title="Protected Mode">Protected Mode</a>, due to the many limitations and problems that Real Mode
+presents (see below, and the <a href="Real_Mode_OS_Warning" title="Real Mode OS Warning">Real Mode OS Warning</a> page). Older operating systems (such as DOS) and programs ran in Real Mode because it was the only mode available at the time. For information on how to switch from Real Mode to <a href="Protected_Mode" title="Protected Mode">Protected Mode</a>, see the corresponding article.
+</p><p>Note: There is a mode called <a href="Virtual_8086_Mode" title="Virtual 8086 Mode">Virtual 8086 Mode</a> which allows operating systems running in Protected mode to emulate the Real Mode segmented model for individual applications. This can be used to allow a <a href="Protected_Mode" title="Protected Mode">Protected Mode</a> operating system to still have access to e.g. BIOS functions, whenever needed.
+</p><p>Below you'll find a list of cons and pros. These are mostly 'in comparison to <a href="Protected_Mode" title="Protected Mode">Protected Mode</a>'.
+</p>
+<h3> <span class="mw-headline" id="Cons"> Cons </span></h3>
+<ul><li> Less than 1 MB of RAM is available for use.
+</li><li> There is no hardware-based memory protection (GDT), nor virtual memory.
+</li><li> There is no built in security mechanisms to protect against buggy or malicious applications.
+</li><li> The default CPU operand length is only 16 bits.
+</li><li> The memory addressing modes provided are more restrictive than other CPU modes.
+</li><li> Accessing more than 64k requires the use of segment register that are difficult to work with.
+</li></ul>
+<h3> <span class="mw-headline" id="Pros"> Pros </span></h3>
+<ul><li> The <a href="BIOS" title="BIOS">BIOS</a> installs device drivers to control devices and handle interrupt.
+</li><li> <a href="BIOS#BIOS_functions" title="BIOS">BIOS functions</a> provide operating systems with a advanced collection of low level API functions.
+</li><li> Memory access is faster due to the lack of descriptor tables to check and smaller registers.
+</li></ul>
+<h3> <span class="mw-headline" id="Common_Misconception"> Common Misconception </span></h3>
+<p>Programmers often think that since Real Mode defaults to 16 bits, that the 32 bit registers are not
+accessible. This is not true.
+</p><p>All of the 32-bit registers (EAX, ...) are still usable, by simply adding the "Operand Size Override
+Prefix" (0x66) to the beginning of any instruction.  Your assembler is likely to do this for you, if
+you simply try to use a 32-bit register.
+</p>
+<h2> <span class="mw-headline" id="Memory_Addressing"> Memory Addressing </span></h2>
+<p>In Real Mode, there is a little over 1 MB of "addressable" memory (including the <a href="Real_mode#High_Memory_Area">High Memory Area</a>). See <a href="Detecting_Memory_(x86)" title="Detecting Memory (x86)">Detecting Memory (x86)</a> and <a href="Memory_Map_(x86)" title="Memory Map (x86)">Memory Map (x86)</a> to determine how much is actually <b>usable</b>. The usable amount will be much less than 1 MB. Memory access is done using <a href="Segmentation" title="Segmentation">Segmentation</a> via a segment:offset system.
+</p><p>There are six 16-bit segment registers: CS, DS, ES, FS, GS, and SS. When using segment registers, addresses are given with the following notation (where 'Segment' is a value in a segment register and 'Offset' is a value in an address register):
+</p>
+<pre>
+ 12F3 &#160;:  4B27
+   ^       ^
+Segment   Offset
+</pre>
+<p>Segments and Offsets are related to physical addresses by the equation:
+</p>
+<pre> PhysicalAddress = Segment * 16 + Offset
+</pre>
+<p>Thus, 12F3:4B27 corresponds to the physical address 0x17A57. Any physical address can be represented in multiple ways, with different segments and offsets. For example, physical address 0x210 can be 0020:0010, 0000:0210, or 0021:0000.
+</p>
+<h3> <span class="mw-headline" id="The_Stack"> The Stack </span></h3>
+<p>SS and SP are 16-bit segment:offset registers that specify a 20-bit physical address (described above), which is the current "top" of the stack. The stack stores 16-bit words, grows downwards, and must be aligned on a word (16-bit) boundary. It is used every time a program does a PUSH, POP, CALL, INT, or RET opcode and also when the BIOS handles any hardware interrupt.
+</p>
+<h3> <span class="mw-headline" id="High_Memory_Area"> High Memory Area </span></h3>
+<p>If you set DS (or any segment register) to a value of 0xFFFF, it points to an address that is 16 bytes below 1 MB. If you then use that segment register as a base, with an offset of 0x10 to 0xFFFF, you can access physical memory addresses from 0x100000 to 0x10FFEF. This (almost 64 kB) area above 1 MB is called the "High Memory Area" in Real Mode. Note that you have to have the <a href="A20" title="A20" class="mw-redirect">A20</a> address line activated for this to work.
+</p>
+<h3> <span class="mw-headline" id="Addressing_Modes"> Addressing Modes </span></h3>
+<p>Real Mode uses 16-bit addressing mode by default. Assembly programmers are typically familiar with the
+more common 32-bit addressing modes, and may want to make adjustments -- because the registers that are available
+in 16-bit addressing mode for use as "pointers" are much more limited. The typical programs that run
+in Real Mode are often limited in the number of bytes available, and it takes one extra byte in each
+opcode to use 32-bit addressing instead.
+</p><p>Note that you can still use 32-bit addressing modes in Real Mode, simply by adding the "Address Size
+Override Prefix" (0x67) to the beginning of any instruction. Your assembler is likely to do this for you, if
+you simply try to use a 32-bit addressing mode. But you are still constrained by the current "limit" for
+the segment that you use in each memory access (always 64K in Real Mode -- <a href="Unreal_Mode" title="Unreal Mode">Unreal Mode</a> can be bigger).
+</p>
+<ul><li> [BX + val]
+</li><li> [SI + val]
+</li><li> [DI + val]
+</li><li> [BP + val]
+</li><li> [BX + SI + val]
+</li><li> [BX + DI + val]
+</li><li> [BP + SI + val]
+</li><li> [BP + DI + val]
+</li><li> [address]
+</li></ul>
+<h2> <span class="mw-headline" id="Switching_from_Protected_Mode_to_Real_Mode"> Switching from <a href="Protected_Mode" title="Protected Mode">Protected Mode</a> to Real Mode </span></h2>
+<p>As noted above, it is possible for a Protected mode operating system to use <a href="Virtual_8086_Mode" title="Virtual 8086 Mode">Virtual 8086 Mode</a> mode to access BIOS functions. However, VM86 mode has its own complications and difficulties. Some OS designers think that it is simpler and cleaner to temporarily return to Real Mode on those occasions when it is necessary to access a BIOS function. This requires creating a special Ring 0 program, and placing it in a physical memory address that can be accessed in Real Mode.
+</p><p>The OS usually needs to pass an information packet about which BIOS function to execute.
+</p><p>The program needs to go through the following steps:
+</p>
+<ol><li> Disable the interrupts:
+<ul><li> Turn off maskable interrupts using CLI.
+</li><li> Disable <a href="NMI" title="NMI" class="mw-redirect">NMI</a> (optional).
+</li></ul>
+</li><li> Turn off <a href="Paging" title="Paging">paging</a>:
+<ul><li> Transfer control to a 1:1 page.
+</li><li> Ensure that the <a href="GDT" title="GDT" class="mw-redirect">GDT</a> and <a href="IDT" title="IDT" class="mw-redirect">IDT</a> are in a 1:1 page.
+</li><li> Clear the PG-flag in the zeroth control register.
+</li><li> Set the third control register to 0.
+</li></ul>
+</li><li> Use GDT with 16-bit tables (skip this step if one is already available):
+<ul><li> Create a new GDT with a 16-bit data and code segment:
+<ul><li> Limit: 0xFFFFF
+</li><li> Base: 0x0
+</li><li> 16-bit
+</li><li> Privilege level: 0
+</li><li> Granularity: 0
+</li><li> Read and Write: 1
+</li></ul>
+</li><li> Load new GDT ensuring that the currently used selectors will remain the same (index in cs/ds/ss will be copy of original segment in new GDT)
+</li></ul>
+</li><li> Far jump to 16-bit protected mode:
+<ul><li> Far jump to 16-bit protected mode with a 16-bit segment index.
+</li></ul>
+</li><li> Load data segment selectors with 16-bit indexes:
+<ul><li> Load ds, es, fs, gs, ss with a 16-bit data segment.
+</li></ul>
+</li><li> Load real mode IDT:
+<ul><li> Limit: 0x3FF
+</li><li> Base 0x0
+</li><li> Use lidt
+</li></ul>
+</li><li> Disable protected mode:
+<ul><li> Set PE bit in CR0 to false.
+</li></ul>
+</li><li> Far jump to real mode:
+<ul><li> Far jump to real mode with real mode segment selector (usually 0).
+</li></ul>
+</li><li> Reload data segment registers with real mode values:
+<ul><li> Load ds, es, fs, gs, ss with appropriate real mode values (usually 0).
+</li></ul>
+</li><li> Set stack pointer to appropriate value:
+<ul><li> Set sp to stack value that will not interfere with real mode program.
+</li></ul>
+</li><li> Enable interrupts:
+<ul><li> Enable maskable interrupts with STI.
+</li></ul>
+</li><li> Continue on in real mode with all bios interrupts.
+</li></ol>
+<h2> <span class="mw-headline" id="x86_Assembly_Example"> x86 Assembly Example </span></h2>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="br0">&#91;</span>bits <span class="nu0">16</span><span class="br0">&#93;</span>
+&#160;
+idt_real<span class="sy0">:</span>
+	<span class="kw4">dw</span> <span class="nu0">0x3ff</span>		<span class="co1">; 256 entries, 4b each = 1K</span>
+	<span class="kw4">dd</span> <span class="nu0">0</span>			<span class="co1">; Real Mode IVT @ 0x0000</span>
+&#160;
+savcr0<span class="sy0">:</span>
+	<span class="kw4">dd</span> <span class="nu0">0</span>			<span class="co1">; Storage location for pmode CR0.</span>
+&#160;
+Entry16<span class="sy0">:</span>
+        <span class="co1">; We are already in 16-bit mode here!</span>
+&#160;
+	<span class="kw1">cli</span>			<span class="co1">; Disable interrupts.</span>
+&#160;
+	<span class="co1">; Need 16-bit Protected Mode GDT entries!</span>
+	<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> DATASEL16	<span class="co1">; 16-bit Protected Mode data selector.</span>
+	<span class="kw1">mov</span> <span class="kw3">ds</span><span class="sy0">,</span> <span class="kw3">eax</span>
+	<span class="kw1">mov</span> <span class="kw3">es</span><span class="sy0">,</span> <span class="kw3">eax</span>
+	<span class="kw1">mov</span> <span class="kw3">fs</span><span class="sy0">,</span> <span class="kw3">eax</span>
+	<span class="kw1">mov</span> <span class="kw3">gs</span><span class="sy0">,</span> <span class="kw3">eax</span>
+	<span class="kw1">mov</span> <span class="kw3">ss</span><span class="sy0">,</span> <span class="kw3">eax</span>
+&#160;
+&#160;
+	<span class="co1">; Disable paging (we need everything to be 1:1 mapped).</span>
+	<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">cr0</span>
+	<span class="kw1">mov</span> <span class="br0">&#91;</span>savcr0<span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">eax</span>	<span class="co1">; save pmode CR0</span>
+	<span class="kw1">and</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0x7FFFFFFe</span>	<span class="co1">; Disable paging bit &amp; disable 16-bit pmode.</span>
+	<span class="kw1">mov</span> <span class="kw3">cr0</span><span class="sy0">,</span> <span class="kw3">eax</span>
+&#160;
+	<span class="kw1">jmp</span> <span class="nu0">0</span><span class="sy0">:</span>GoRMode		<span class="co1">; Perform Far jump to set CS.</span>
+&#160;
+GoRMode<span class="sy0">:</span>
+	<span class="kw1">mov</span> <span class="kw3">sp</span><span class="sy0">,</span> <span class="nu0">0x8000</span>		<span class="co1">; pick a stack pointer.</span>
+	<span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span> <span class="nu0">0</span>		<span class="co1">; Reset segment registers to 0.</span>
+	<span class="kw1">mov</span> <span class="kw3">ds</span><span class="sy0">,</span> <span class="kw3">ax</span>
+	<span class="kw1">mov</span> <span class="kw3">es</span><span class="sy0">,</span> <span class="kw3">ax</span>
+	<span class="kw1">mov</span> <span class="kw3">fs</span><span class="sy0">,</span> <span class="kw3">ax</span>
+	<span class="kw1">mov</span> <span class="kw3">gs</span><span class="sy0">,</span> <span class="kw3">ax</span>
+	<span class="kw1">mov</span> <span class="kw3">ss</span><span class="sy0">,</span> <span class="kw3">ax</span>
+	<span class="kw1">lidt</span> <span class="br0">&#91;</span>idt_real<span class="br0">&#93;</span>
+	<span class="kw1">sti</span>			<span class="co1">; Restore interrupts -- be careful, unhandled int's will kill it.</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="BIOS" title="BIOS">BIOS</a>
+</li><li> <a href="System_Initialization_(x86)" title="System Initialization (x86)">System Initialization (x86)</a>
+</li><li> <a href="Protected_Mode" title="Protected Mode">Protected Mode</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="https://web.archive.org/web/20130609073242/http://www.osdever.net/tutorials/rm_addressing.php?the_id=50">The Workings of: x86-16/32 Real Mode Addressing</a> (2003)
+</li><li> <a rel="nofollow" class="external text" href="http://therx.sourceforge.net/osdev/files/ia32_rm_addr.pdf">The workings of IA32 real mode addressing and the A20 line</a> (2004)
+</li></ul>
+<h3> <span class="mw-headline" id="References"> References </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.intel.com/products/processor/manuals/">Intel® 64 and IA-32 Architectures Software Developer's Manual</a> (2011)
+<ul><li> Volume 3A: System Programming Guide, Part 1,Chapter 20:8086 EMULATION,which is a detailed reference about real mode using 32-bit addressing mode
+</li></ul>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 138/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1712-0!*!0!!en!*!* and timestamp 20180121035619 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Real_Mode&amp;oldid=20953">http://wiki.osdev.org/index.php?title=Real_Mode&amp;oldid=20953</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:X86_CPU" title="Category:X86 CPU">X86 CPU</a></li><li><a href="Category:Operating_Modes" title="Category:Operating Modes">Operating Modes</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Real_Mode" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Real_Mode"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Real_Mode"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Real_mode#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Real_Mode" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Real_Mode&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Real_Mode&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Real_mode#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Real_Mode" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Real_Mode" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Real_Mode&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Real_Mode&amp;oldid=20953" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Real_Mode" title="Real Mode">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 June 2017, at 19:14.</li>
+											<li id="footer-info-viewcount">This page has been accessed 166,051 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-plaskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Real_Mode" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Real_Mode" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Real_Mode&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Real_Mode&amp;oldid=20953" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Real_Mode" title="Real Mode">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 June 2017, at 19:14.</li>
+											<li id="footer-info-viewcount">This page has been accessed 166,051 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

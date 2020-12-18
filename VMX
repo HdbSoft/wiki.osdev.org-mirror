@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>VMX - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "VMX", "wgTitle": "VMX", "wgCurRevisionId": 22083, "wgArticleId": 2598, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Stubs", "X86"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-VMX action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">VMX</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="VMX#mw-head">navigation</a>,
+					<a href="VMX#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="images/f/fe/Stub.png" width="50" height="50" /></a>
+This page or section is a <a href="Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=VMX&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p><b>Intel's Virtual-Machine Extensions</b> 
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="VMX#Programming"><span class="tocnumber">1</span> <span class="toctext">Programming</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="VMX#Discovering_support"><span class="tocnumber">1.1</span> <span class="toctext">Discovering support</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="VMX#Basic_environment"><span class="tocnumber">1.2</span> <span class="toctext">Basic environment</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="VMX#Executing_VMXON"><span class="tocnumber">1.3</span> <span class="toctext">Executing VMXON</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="VMX#VMX_instruction_error_checking"><span class="tocnumber">2</span> <span class="toctext">VMX instruction error checking</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="VMX#VMCS"><span class="tocnumber">3</span> <span class="toctext">VMCS</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="VMX#References"><span class="tocnumber">4</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="VMX#Other_examples"><span class="tocnumber">5</span> <span class="toctext">Other examples</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Programming"> Programming </span></h2>
+<h3> <span class="mw-headline" id="Discovering_support"> Discovering support </span></h3>
+<p>After enumerating the features from <a href="CPUID" title="CPUID">CPUID</a>, bit 5 in ECX will tell you if VMX is supported or not.  This is the first thing that should be checked!
+</p>
+<h3> <span class="mw-headline" id="Basic_environment"> Basic environment </span></h3>
+<p>Software should enable bit 13 of CR4 (CR4.VMXE) first.  Here are a few definitions of some used MSR's that we'll be dealing with: 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="co2">#define IA32_VMX_BASIC          0x480</span>
+ <span class="co2">#define IA32_VMX_CR0_FIXED0     0x486</span>
+ <span class="co2">#define IA32_VMX_CR0_FIXED1     0x487</span>
+ <span class="co2">#define IA32_VMX_CR4_FIXED0     0x488</span>
+ <span class="co2">#define IA32_VMX_CR4_FIXED1     0x489</span></pre></div></div>
+<p>In order to see what your OS needs to support, you need to read the lower 32-bits of IA32_VMX_CR0_FIXED0 and IA32_VMX_CR4_FIXED0.  The bits in those MSR's are what need to be set (and supported) in their corresponding control registers (CR0/CR4).  If any of those bits are not enabled, a GPF will occur.  Also, to see what extra bits can be set, check the IA32_VMX_CR0_FIXED1 and IA32_VMX_CR4_FIXED1.  It's basically a mask of bits, if a bit is set to 1, then it "can" be enabled, but if it's a 0, you may generate an exception if you enable the corresponding bit in the control registers. 
+</p><p>From my own hardware and emulator (bochs), I've found that you will most likely need to enable these bits: CR0.NE, CR4.VMXE, CR0.PG and CR0.PE. For 64-bit kernels, you need to have IA32_EFER.LMA set.
+</p>
+<h3> <span class="mw-headline" id="Executing_VMXON"> Executing VMXON </span></h3>
+<p>The main entry point for using VMX is through the VMXON instruction.  The instruction requires a single operand of a m64 region called the VMXON region.  The memory region needs to be 4096-byte aligned (bits 0-11 must be 0) and the only VMCS field that should be modified is the VMCS revision identification field.  This ID field should contain the value in bits 0-31 of MSR IA32_VMX_BASIC.  In order to prepare a memory address in 32-bit PMode for use as an m64, some modifications need to be made.  The upper 32-bits of the m64 on non long mode capable processors have to be 0 or an "invalid memory address" error will occur and a VMEXIT will be called.  
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> <span class="kw4">uint32_t</span> <span class="sy0">*</span> region <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint32_t</span> <span class="sy0">*</span><span class="br0">&#41;</span>allocate_4k_aligned<span class="br0">&#40;</span><span class="nu0">4096</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="kw4">uint64_t</span> region64 <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">uint64_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">size_t</span><span class="br0">&#41;</span><span class="br0">&#40;</span>region<span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xFFFFFFFF</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ asm <span class="kw4">volatile</span><span class="br0">&#40;</span><span class="st0">&quot;  vmxon&#160;%0; &quot;</span><span class="sy0">::</span><span class="st0">&quot;m&quot;</span> <span class="br0">&#40;</span>region64<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>This general process of taking a 32-bit memory address and turning it into a psuedo-64bit int (unsigned long long) will be used for all m64 operands later.  VMCLEAR is another example instruction that requires the upper 32-bits of a memory address to be 0.  
+</p><p>Long mode capable processors simply requires a 64-bit pointer to the region.  
+</p><p>Note: <b>The VMXON, VMCLEAR and VMPTRLD instruction must point to the physical address of their respective regions.</b>
+</p>
+<h2> <span class="mw-headline" id="VMX_instruction_error_checking"> VMX instruction error checking </span></h2>
+<p>VMX instructions have their own error reporting mechanism to indicate the success or failure of a given operation.
+</p><p>There are two flags used to signify the success or failure of a VM instruction.  The carry flag(CF) and the zero flag(ZF).
+</p><p>If both of these flags are clear after a VM instruction was executed then it succeeded.
+</p><p>If the carry flag is set then current VMCS pointer is invalid.
+</p><p>If the zero flag is set, it indicates that the VMCS pointer is valid but there is some other error specified in the VM-instruction error field (encoding 4400h).  Error numbers are listed in section 5.4 of the Intel SDM Volume 2B.
+</p><p>The following table represents the error numbers in the VM-instruction error field:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<th> Error Number </th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0x01 </td>
+<td> VMCALL executed in VMX root operation
+</td></tr>
+<tr>
+<td> 0x02 </td>
+<td> VMCLEAR with invalid physical address.
+</td></tr>
+<tr>
+<td> 0x03 </td>
+<td> VMCLEAR with VMXON pointer.
+</td></tr>
+<tr>
+<td> 0x04 </td>
+<td> VMLAUNCH with non-clear VMCS.
+</td></tr>
+<tr>
+<td> 0x05 </td>
+<td> VMRESUME with non-launched VMCS.
+</td></tr>
+<tr>
+<td> 0x06 </td>
+<td> VMRESUME with a corrupted VMCS. Indicates corruption of the current VMCS
+</td></tr>
+<tr>
+<td> 0x07 </td>
+<td> VM entry with invalid VMX-control field(s).
+</td></tr>
+<tr>
+<td> 0x08 </td>
+<td> VM entry with invalid host-state field(s).
+</td></tr>
+<tr>
+<td> 0x09 </td>
+<td> VMPTRLD with invalid physical address.
+</td></tr>
+<tr>
+<td> 0x0A </td>
+<td> VMPTRLD with VMXON pointer.
+</td></tr>
+<tr>
+<td> 0x0B </td>
+<td> VMPTRLD with incorrect VMCS revision identifier.
+</td></tr>
+<tr>
+<td> 0x0C </td>
+<td> VMREAD/VMWRITE from/to unsupported VMCS component.
+</td></tr>
+<tr>
+<td> 0x0D </td>
+<td> VMWRITE to read-only VMCS component.
+</td></tr>
+<tr>
+<td> 0x0F </td>
+<td> VMXON executed in VMX root operation.
+</td></tr>
+<tr>
+<td> 0x1A </td>
+<td> VM entry with events blocked by MOV SS.
+</td></tr></table>
+<h2> <span class="mw-headline" id="VMCS"> VMCS </span></h2>
+<p>The VMCS only has two relevant fields that can be accessed at this time, a 4-byte VMCS revision ID located at byte offset 0 and a 4-byte abort indicator field located at byte offset 4.  The rest of the VMCS is reserved for field data.
+</p><p>The revision field must be filled with the 32-bit revision Id stored in bits 0-31 of the IA32_VMX_BASIC MSR similar to the VMX region.
+</p><p>The abort field will simply contain a non-zero value if the VM abort occurs during a VMX exit, see section 23.7 in Intel's SDM 3B for error values.
+</p><p>A VMCS is loaded with the VMPTRLD instruction, which loads and activates a VMCS, and requires a 64-bit memory address as it's operand in the same format as VMXON/VMCLEAR.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"> asm <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;vmptrld&#160;%0; &quot;</span><span class="sy0">::</span> <span class="st0">&quot;m&quot;</span> <span class="br0">&#40;</span>vmcsRegion64<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div></div>
+<p>The structure of the VMCS is covered in detail in Chapter 20 of the Intel SDM volume 3B (see link below).  Field encodings for VMWRITE and VMREAD are covered in Appendix H of the same manual.
+</p>
+<h2> <span class="mw-headline" id="References"> References </span></h2>
+<p>Intel's SDM 3B: <a rel="nofollow" class="external free" href="http://www.intel.com/Assets/PDF/manual/253669.pdf">http://www.intel.com/Assets/PDF/manual/253669.pdf</a> 
+</p><p>Intel's SDM 2B: <a rel="nofollow" class="external free" href="http://www.intel.com/Assets/PDF/manual/253667.pdf">http://www.intel.com/Assets/PDF/manual/253667.pdf</a> 
+</p><p>KVM's VMX.c (GPLv2): <a rel="nofollow" class="external free" href="http://lxr.free-electrons.com/source/arch/x86/kvm/vmx.c">http://lxr.free-electrons.com/source/arch/x86/kvm/vmx.c</a> 
+</p><p>BOCHS's VMX.c (LGPLv2): <a rel="nofollow" class="external free" href="http://bochs.cvs.sourceforge.net/viewvc/bochs/bochs/cpu/vmx.cc">http://bochs.cvs.sourceforge.net/viewvc/bochs/bochs/cpu/vmx.cc</a> 
+</p>
+<h2> <span class="mw-headline" id="Other_examples"> Other examples </span></h2>
+<p>Vmx implementation in home made OS:
+<a rel="nofollow" class="external free" href="http://www.dumais.io/index.php?article=ac3267239dd3e34c061de6413203fb98">http://www.dumais.io/index.php?article=ac3267239dd3e34c061de6413203fb98</a>
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 80/1000000
+Post-expand include size: 597/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2598-0!*!0!!en!2!* and timestamp 20180121080132 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=VMX&amp;oldid=22083">http://wiki.osdev.org/index.php?title=VMX&amp;oldid=22083</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Stubs" title="Category:Stubs">Stubs</a></li><li><a href="Category:X86" title="Category:X86">X86</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=VMX" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="VMX"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:VMX&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="VMX#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="VMX" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=VMX&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=VMX&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="VMX#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [zskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/VMX" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/VMX" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=VMX&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=VMX&amp;oldid=22083" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 14 January 2018, at 07:48.</li>
+											<li id="footer-info-viewcount">This page has been accessed 21,333 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.088 secs. -->
+	</body>
+</html>

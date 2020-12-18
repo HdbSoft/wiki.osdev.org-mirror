@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>APIC timer - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "APIC_timer", "wgTitle": "APIC timer", "wgCurRevisionId": 21052, "wgArticleId": 3127, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Interrupts", "Time"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-APIC_timer action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">APIC timer</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="APIC_timer#mw-head">navigation</a>,
+					<a href="APIC_timer#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The great benefit of the Local <a href="APIC" title="APIC">APIC</a> timer is that it is hardwired to each CPU core, unlike the <a href="PIT" title="PIT" class="mw-redirect">Programmable Interval Timer</a> which is a separate circuit. Because of this, there is no need for any resource management, which makes things easier. The downside is that it's oscillating at (one of) the CPU's frequencies, which varies from machine to machine, while the PIT uses a standard frequency (1193182 Hz). To make use of it, you have to know how many interrupts/sec it's capable of.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="APIC_timer#APIC_Timer_Modes"><span class="tocnumber">1</span> <span class="toctext">APIC Timer Modes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="APIC_timer#Periodic_Mode"><span class="tocnumber">1.1</span> <span class="toctext">Periodic Mode</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="APIC_timer#One-Shot_Mode"><span class="tocnumber">1.2</span> <span class="toctext">One-Shot Mode</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="APIC_timer#TSC-Deadline_mode"><span class="tocnumber">1.3</span> <span class="toctext">TSC-Deadline mode</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="APIC_timer#Enabling_APIC_Timer"><span class="tocnumber">2</span> <span class="toctext">Enabling APIC Timer</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="APIC_timer#Initializing"><span class="tocnumber">3</span> <span class="toctext">Initializing</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="APIC_timer#Prerequisites"><span class="tocnumber">3.1</span> <span class="toctext">Prerequisites</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="APIC_timer#Example_code_in_ASM"><span class="tocnumber">3.2</span> <span class="toctext">Example code in ASM</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="APIC_timer#Example_code_in_C"><span class="tocnumber">3.3</span> <span class="toctext">Example code in C</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="APIC_timer#See_also"><span class="tocnumber">4</span> <span class="toctext">See also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="APIC_timer#Articles"><span class="tocnumber">4.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="APIC_timer#Threads"><span class="tocnumber">4.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="APIC_timer#External_Links"><span class="tocnumber">4.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="APIC_Timer_Modes"> APIC Timer Modes </span></h2>
+<p>The timer has 2 or 3 modes. The first 2 modes (periodic and one-shot) are supported by all local APICs. The third mode (TSC-Deadline mode) is an extension that is only supported on recent CPUs.
+</p>
+<h3> <span class="mw-headline" id="Periodic_Mode"> Periodic Mode </span></h3>
+<p>For periodic mode, software sets a "initial count" and the local APIC uses it for a "current count". The local APIC decrements the current count until it reaches zero, then generates a timer IRQ and resets the current count to the initial count and begins decrementing the current count again. In this way the local APIC generates IRQs at a fixed rate depending on the initial count. The current count is decremented at a rate that depends on the CPU's external frequency ("bus frequency") divided by the value in the local APIC's "Divide Configuration Register".
+</p><p>For example, for a 2.4 GHz CPU with an external/bus frequency of 800 MHz, if the Divide Configuration Register is set to "divide by 4" and the initial count is set to 123456; then the local APIC timer would decrement the count at a rate of 200 MHz and generate a timer IRQ every 617.28 us, giving a rate of IRQs of 1620.01 Hz.
+</p>
+<h3> <span class="mw-headline" id="One-Shot_Mode"> One-Shot Mode </span></h3>
+<p>For one-shot mode, the local APIC decrements the current count (and generates a timer IRQ when the count reaches zero) in the same way as in periodic mode; however it doesn't reset the current count to the initial count when the current count reaches zero. Instead, software has to set a new count each time if it wants more timer IRQs.
+</p><p>The advantage of this mode is that software can have precise control over when timer IRQs occur. For example, during task switches an OS could set the count to a value that depends on the new task's priority (so that some tasks run for a small amount of time and other tasks run for a larger amount of time), and there wouldn't be any unwanted IRQs. Some OSs use this approach to implement a generic high precision timer service, where the local APIC count is set to a value that depends on which event will happen soonest. For example, if the currently running task switch should be pre-empted in 1234 nanoseconds, a sleeping task needs to wake up in 333 nanoseconds and alarm signal has to be sent in 44444 nanoseconds, then the timer's count would be set to 333 nanoseconds (the earliest delay needed) and when the the timer IRQ occurs the OS knows that there's 901 nanoseconds remaining before the current task should be pre-empted and 441111 nanoseconds until the alarm signal needs to be sent (and would set the count to 901 nanoseconds for the next timer IRQ).
+</p><p>The disadvantages are that it's harder to track real-time with one-shot mode and special care needs to be taken to avoid race conditions; especially if a new count is set before the old count expires.
+</p>
+<h3> <span class="mw-headline" id="TSC-Deadline_mode"> TSC-Deadline mode </span></h3>
+<p>TSC-Deadline mode is very different to the other 2 modes. Instead of using the CPU's external/bus frequency to decrement a count, software sets a "deadline" and the local APIC generates a timer IRQ when the value of the CPU's time stamp counter is greater than or equal to the deadline.
+</p><p>Despite these differences, software would/could use it in the same way that one-shot mode would be used. The advantages (compared to one-shot mode) are that you get higher precision (because the CPU's time stamp counter runs at the CPU's (nominal) internal frequency rather than the CPU's external/bus frequency), and it's easier to avoid/handle race conditions.
+</p>
+<h2> <span class="mw-headline" id="Enabling_APIC_Timer"> Enabling APIC Timer </span></h2>
+<p>Before enabling the local APIC timer, you should setup the rest of the local APIC. This includes:
+</p>
+<ul><li> Determine the local APIC's physical address (via. ACPI tables or MultiProcessor Specification tables)
+</li><li> Specify a spurious interrupt and software enable the APIC
+</li><li> Make sure the TPR (Task Priority Register) is set (so it won't block/postpone lower priority IRQs)
+</li></ul>
+<p>Once that's done:
+</p>
+<ul><li> Set the local APIC timer's divide configuration register
+</li><li> Configure the local APIC timer's interrupt vector and unmask the timer's IRQ
+</li><li> Set the local APIC timer's initial count
+</li></ul>
+<p>Note: It's recommended to follow the order given above (especially setting the local APIC timer's initial count last). Doing things in a different order (e.g. setting the initial count, then enabling the timer) can lead to problems on some (real or virtual) machines (e.g. everything seems right and counter is decreasing, but IRQ is never sent).
+</p>
+<h2> <span class="mw-headline" id="Initializing"> Initializing </span></h2>
+<p>There are several ways to do this, but all of them use a different, CPU bus frequency independent clock source to do that. Examples: <a href="RTC" title="RTC">Real Time Clock</a>, <a href="TSC" title="TSC">TimeStamp Counter</a>, PIT or even polling <a href="CMOS#Getting_Current_Date_and_Time_from_RTC" title="CMOS">CMOS registers</a>. In this tutorial we will use the good old PIT, as it's the easiest. Steps need to be done:
+</p>
+<ul><li> Reset APIC to a well known state
+</li><li> Enable APIC timer
+</li><li> Reset APIC timer counter
+</li><li> Wait a specific amount of time measured by a different clock
+</li><li> Get number of ticks from APIC timer counter
+</li><li> Adjust it to a second
+</li><li> Divide it by the quantum of your choice (results X)
+</li><li> Make the APIC timer fire an interrupt at every X ticks
+</li></ul>
+<p>The APIC timer can be set to make a tick (decrease counter) at a given frequency, which is called "divide value". This means you have to multiply APIC timer counter ticks by this divide value to get the true CPU bus frequency. You could use value of 1 (ticks on every bus cycle) up to 128 (ticks on every 128th cycle). See Intel manual vol3A Chapter 9.5.4 on details. Note that according to my tests, Bochs seems not to handle divide value of 1 properly, so I will use 16.
+</p>
+<h3> <span class="mw-headline" id="Prerequisites"> Prerequisites </span></h3>
+<p>Before we start, let's define some constant and functions.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">apic		= the linear address where you have mapped the APIC registers
+&#160;
+APIC_APICID	= <span class="nu0">20h</span>
+APIC_APICVER	= <span class="nu0">30h</span>
+APIC_TASKPRIOR	= <span class="nu0">80h</span>
+APIC_EOI	= <span class="nu0">0B0h</span>
+APIC_LDR	= <span class="nu0">0D0h</span>
+APIC_DFR	= <span class="nu0">0E0h</span>
+APIC_SPURIOUS	= <span class="nu0">0F0h</span>
+APIC_ESR	= <span class="nu0">280h</span>
+APIC_ICRL	= <span class="nu0">300h</span>
+APIC_ICRH	= <span class="nu0">310h</span>
+APIC_LVT_TMR	= <span class="nu0">320h</span>
+APIC_LVT_PERF	= <span class="nu0">340h</span>
+APIC_LVT_LINT0	= <span class="nu0">350h</span>
+APIC_LVT_LINT1	= <span class="nu0">360h</span>
+APIC_LVT_ERR	= <span class="nu0">370h</span>
+APIC_TMRINITCNT	= <span class="nu0">380h</span>
+APIC_TMRCURRCNT	= <span class="nu0">390h</span>
+APIC_TMRDIV	= <span class="nu0">3E0h</span>
+APIC_LAST	= <span class="nu0">38Fh</span>
+APIC_DISABLE	= <span class="nu0">10000h</span>
+APIC_SW_ENABLE	= <span class="nu0">100h</span>
+APIC_CPUFOCUS	= <span class="nu0">200h</span>
+APIC_NMI	= <span class="br0">&#40;</span><span class="nu0">4</span>&lt;&lt;<span class="nu0">8</span><span class="br0">&#41;</span>
+TMR_PERIODIC	= <span class="nu0">20000h</span>
+TMR_BASEDIV	= <span class="br0">&#40;</span><span class="nu0">1</span>&lt;&lt;<span class="nu0">20</span><span class="br0">&#41;</span>
+&#160;
+		<span class="co1">;Interrupt Service Routines</span>
+isr_dummytmr<span class="sy0">:</span>	<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_EOI<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0</span>
+		<span class="kw1">iret</span>
+isr_spurious<span class="sy0">:</span>	<span class="kw1">iret</span>
+		<span class="co1">;function to set a specific interrupt gate in IDT</span>
+		<span class="co1">;al=interrupt</span>
+		<span class="co1">;ebx=isr entry point</span>
+writegate<span class="sy0">:</span>	<span class="sy0">...</span>
+		<span class="kw1">ret</span></pre></div></div>
+<p>I will also assume that you have a working <a href="IDT" title="IDT" class="mw-redirect">IDT</a>, and you have a function to write a gate for a specific interrupt: writegate(intnumber,israddress).
+Furthermore, to make things simple, I'll assume that you did not changed the default interrupt mapping found in almost every tutorial:
+</p>
+<ul><li> interrupt 0-31: exceptions
+</li><li> interrupt 32: timer, IRQ0
+</li><li> interrupt 39: spurious irq, IRQ7
+</li></ul>
+<p>If you've already changed this, modify accordingly.
+</p><p><br />
+</p>
+<h3> <span class="mw-headline" id="Example_code_in_ASM"> Example code in ASM </span></h3>
+<p>Here's a possible way to initialize APIC timer in fasm syntax assembly:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">		<span class="co1">;you should read MSR, get APIC base and map to &quot;apic&quot;</span>
+		<span class="co1">;you should have used lidt properly</span>
+&#160;
+		<span class="co1">;set up isrs</span>
+		<span class="kw1">mov</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">32</span>
+		<span class="kw1">mov</span>			<span class="kw3">ebx</span><span class="sy0">,</span> isr_dummytmr
+		<span class="kw1">call</span>			writegate
+		<span class="kw1">mov</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">39</span>
+		<span class="kw1">mov</span>			<span class="kw3">ebx</span><span class="sy0">,</span> isr_spurious
+		<span class="kw1">call</span>			writegate
+&#160;
+		<span class="co1">;initialize LAPIC to a well known state</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_DFR<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0FFFFFFFFh</span>
+		<span class="kw1">mov</span>			<span class="kw3">eax</span><span class="sy0">,</span> <span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_LDR<span class="br0">&#93;</span>
+		<span class="kw1">and</span>			<span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">00FFFFFFh</span>
+		<span class="kw1">or</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">1</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_LDR<span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">eax</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_LVT_TMR<span class="br0">&#93;</span><span class="sy0">,</span> APIC_DISABLE
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_LVT_PERF<span class="br0">&#93;</span><span class="sy0">,</span> APIC_NMI
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_LVT_LINT0<span class="br0">&#93;</span><span class="sy0">,</span> APIC_DISABLE
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_LVT_LINT1<span class="br0">&#93;</span><span class="sy0">,</span> APIC_DISABLE
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_TASKPRIOR<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0</span>
+		<span class="co1">;okay, now we can enable APIC</span>
+		<span class="co1">;global enable</span>
+		<span class="kw1">mov</span>			<span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">1bh</span>
+		<span class="kw1">rdmsr</span>
+		<span class="kw1">bts</span>			<span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">11</span>
+		<span class="kw1">wrmsr</span>
+		<span class="co1">;software enable, map spurious interrupt to dummy isr</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_SPURIOUS<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">39</span><span class="sy0">+</span>APIC_SW_ENABLE
+		<span class="co1">;map APIC timer to an interrupt, and by that enable it in one-shot mode</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_LVT_TMR<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">32</span>
+		<span class="co1">;set up divide value to 16</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_TMRDIV<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">03h</span>
+&#160;
+		<span class="co1">;ebx=0xFFFFFFFF;</span>
+		<span class="kw1">xor</span>			<span class="kw3">ebx</span><span class="sy0">,</span> <span class="kw3">ebx</span>
+		<span class="kw1">dec</span>			<span class="kw3">ebx</span>
+&#160;
+		<span class="co1">;initialize PIT Ch 2 in one-shot mode</span>
+		<span class="co1">;waiting 1 sec could slow down boot time considerably,</span>
+		<span class="co1">;so we'll wait 1/100 sec, and multiply the counted ticks</span>
+		<span class="kw1">mov</span>			<span class="kw3">dx</span><span class="sy0">,</span> <span class="nu0">61h</span>
+		<span class="kw1">in</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="kw3">dx</span>
+		<span class="kw1">and</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0fdh</span>
+		<span class="kw1">or</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">1</span>
+		<span class="kw1">out</span>			<span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+		<span class="kw1">mov</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">10110010b</span>
+		<span class="kw1">out</span>			<span class="nu0">43h</span><span class="sy0">,</span> <span class="kw3">al</span>
+		<span class="co1">;1193180/100 Hz = 11931 = 2e9bh</span>
+		<span class="kw1">mov</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">9bh</span>		<span class="co1">;LSB</span>
+		<span class="kw1">out</span>			<span class="nu0">42h</span><span class="sy0">,</span> <span class="kw3">al</span>
+		<span class="kw1">in</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">60h</span>		<span class="co1">;short delay</span>
+		<span class="kw1">mov</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">2eh</span>		<span class="co1">;MSB</span>
+		<span class="kw1">out</span>			<span class="nu0">42h</span><span class="sy0">,</span> <span class="kw3">al</span>
+		<span class="co1">;reset PIT one-shot counter (start counting)</span>
+		<span class="kw1">in</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="kw3">dx</span>
+		<span class="kw1">and</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0feh</span>
+		<span class="kw1">out</span>			<span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>		<span class="co1">;gate low</span>
+		<span class="kw1">or</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">1</span>
+		<span class="kw1">out</span>			<span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>		<span class="co1">;gate high</span>
+		<span class="co1">;reset APIC timer (set counter to -1)</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_TMRINITCNT<span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">ebx</span>
+		<span class="co1">;now wait until PIT counter reaches zero</span>
+@@<span class="sy0">:</span>		<span class="kw1">in</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="kw3">dx</span>
+		<span class="kw1">and</span>			<span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">20h</span>
+		<span class="kw1">jz</span>			<span class="kw5">@b</span>
+		<span class="co1">;stop APIC timer</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_LVT_TMR<span class="br0">&#93;</span><span class="sy0">,</span> APIC_DISABLE
+		<span class="co1">;now do the math...</span>
+		<span class="kw1">xor</span>			<span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">eax</span>
+		<span class="kw1">xor</span>			<span class="kw3">ebx</span><span class="sy0">,</span> <span class="kw3">ebx</span>
+		<span class="kw1">dec</span>			<span class="kw3">eax</span>
+		<span class="co1">;get current counter value</span>
+		<span class="kw1">mov</span>			<span class="kw3">ebx</span><span class="sy0">,</span> <span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_TMRCURRCNT<span class="br0">&#93;</span>
+		<span class="co1">;it is counted down from -1, make it positive</span>
+		<span class="kw1">sub</span>			<span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span>
+		<span class="kw1">inc</span>			<span class="kw3">eax</span>
+		<span class="co1">;we used divide value different than 1, so now we have to multiply the result by 16</span>
+		<span class="kw1">shl</span>			<span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">4</span>		<span class="co1">;*16</span>
+		<span class="kw1">xor</span>			<span class="kw3">edx</span><span class="sy0">,</span> <span class="kw3">edx</span>
+		<span class="co1">;moreover, PIT did not wait a whole sec, only a fraction, so multiply by that too</span>
+		<span class="kw1">mov</span>			<span class="kw3">ebx</span><span class="sy0">,</span> <span class="nu0">100</span>	<span class="co1">;*PITHz</span>
+		<span class="kw1">mul</span>			<span class="kw3">ebx</span>
+	<span class="co1">;-----edx:eax now holds the CPU bus frequency-----</span>
+		<span class="co1">;now calculate timer counter value of your choice</span>
+		<span class="co1">;this means that tasks will be preempted 1000 times in a second. 100 is popular too.</span>
+		<span class="kw1">mov</span>			<span class="kw3">ebx</span><span class="sy0">,</span> <span class="nu0">1000</span>
+		<span class="kw1">xor</span>			<span class="kw3">edx</span><span class="sy0">,</span> <span class="kw3">edx</span>
+		<span class="kw1">div</span>			<span class="kw3">ebx</span>
+		<span class="co1">;again, we did not use divide value of 1</span>
+		<span class="kw1">shr</span>			<span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">4</span>		<span class="co1">;/16</span>
+		<span class="co1">;sanity check, min 16</span>
+		<span class="kw1">cmp</span>			<span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">010h</span>
+		<span class="kw1">jae</span>			<span class="kw5">@f</span>
+		<span class="kw1">mov</span>			<span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">010h</span>
+		<span class="co1">;now eax holds appropriate number of ticks, use it as APIC timer counter initializer</span>
+@@<span class="sy0">:</span>		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_TMRINITCNT<span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">eax</span>
+		<span class="co1">;finally re-enable timer in periodic mode</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_LVT_TMR<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">32</span> <span class="kw1">or</span> TMR_PERIODIC
+		<span class="co1">;setting divide value register again not needed by the manuals</span>
+		<span class="co1">;although I have found buggy hardware that required it</span>
+		<span class="kw1">mov</span>			<span class="kw5">dword</span> <span class="br0">&#91;</span>apic<span class="sy0">+</span>APIC_TMRDIV<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">03h</span></pre></div></div>
+<h3> <span class="mw-headline" id="Example_code_in_C"> Example code in C </span></h3>
+<p>This code is an example of how to initialize the APIC timer so that it ticks every 10 milliseconds. This is done by letting the APIC timer run, waiting for 10ms using the PIT and then getting the number of ticks that were done from the APIC timer. It assumes that you have functions to "write"/"read" the APIC's registers and "pit_prepare_sleep"/"pit_perform_sleep" to perform an as accurate as possible measuring of the timers frequency.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> apic_start_timer<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// Tell APIC timer to use divider 16</span>
+        write<span class="br0">&#40;</span>APIC_REGISTER_TIMER_DIV<span class="sy0">,</span> <span class="nu12">0x3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// Prepare the PIT to sleep for 10ms (10000µs)</span>
+        pit_prepare_sleep<span class="br0">&#40;</span><span class="nu0">10000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// Set APIC init counter to -1</span>
+        write<span class="br0">&#40;</span>APIC_REGISTER_TIMER_INITCNT<span class="sy0">,</span> <span class="nu12">0xFFFFFFFF</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// Perform PIT-supported sleep</span>
+        pit_perform_sleep<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// Stop the APIC timer</span>
+        write<span class="br0">&#40;</span>APIC_REGISTER_LVT_TIMER<span class="sy0">,</span> APIC_LVT_INT_MASKED<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// Now we know how often the APIC timer has ticked in 10ms</span>
+        <span class="kw4">uint32_t</span> ticksIn10ms <span class="sy0">=</span> <span class="nu12">0xFFFFFFFF</span> <span class="sy0">-</span> read<span class="br0">&#40;</span>APIC_REGISTER_TIMER_CURRCNT<span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+        <span class="co1">// Start timer as periodic on IRQ 0, divider 16, with the number of ticks we counted</span>
+        write<span class="br0">&#40;</span>APIC_REGISTER_LVT_TIMER<span class="sy0">,</span> <span class="nu0">32</span> <span class="sy0">|</span> APIC_LVT_TIMER_MODE_PERIODIC<span class="br0">&#41;</span><span class="sy0">;</span>
+        write<span class="br0">&#40;</span>APIC_REGISTER_TIMER_DIV<span class="sy0">,</span> <span class="nu12">0x3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        write<span class="br0">&#40;</span>APIC_REGISTER_TIMER_INITCNT<span class="sy0">,</span> ticksIn10ms<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_also"> See also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="APIC" title="APIC">APIC</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.osdev.org/phpBB2/viewtopic.php?t=10686">APIC timer</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.intel.com/products/processor/manuals/">Volume 3A:System Programming Guide, Part 1,manuals has a chapter on the APIC</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.osdever.net/tutorials/pdf/apic.pdf">Advanced Programmable Interrupt Controller by Mike Rieker</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 106/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3127-0!*!0!!en!*!* and timestamp 20180121031913 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=APIC_timer&amp;oldid=21052">http://wiki.osdev.org/index.php?title=APIC_timer&amp;oldid=21052</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Interrupts" title="Category:Interrupts">Interrupts</a></li><li><a href="Category:Time" title="Category:Time">Time</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=APIC_timer" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="APIC_timer"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:APIC_timer"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="APIC_timer#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="APIC_timer" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=APIC_timer&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=APIC_timer&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="APIC_timer#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/APIC_timer" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/APIC_timer" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=APIC_timer&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=APIC_timer&amp;oldid=21052" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 6skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/APIC_timer" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/APIC_timer" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=APIC_timer&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=APIC_timer&amp;oldid=21052" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 6 August 2017, at 03:59.</li>
+											<li id="footer-info-viewcount">This page has been accessed 46,437 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.040 secs. -->
+	</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Accelerated Graphic Cards - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Accelerated_Graphic_Cards", "wgTitle": "Accelerated Graphic Cards", "wgCurRevisionId": 20067, "wgArticleId": 1854, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Video"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Accelerated_Graphic_Cards action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Accelerated Graphic Cards</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Accelerated_Graphic_Cards#mw-head">navigation</a>,
+					<a href="Accelerated_Graphic_Cards#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>While it is nice to have some graphics on the screen, it would be even nicer to have the video card do the dirty work. Beware though, things are not always as easy as they seem.
+Alternative <a href="VESA_BIOS_Extension/Accelerator_Functions" title="VESA BIOS Extension/Accelerator Functions">VESA BIOS Extension/Accelerator Functions</a>
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Accelerated_Graphic_Cards#Cards_with_documentation"><span class="tocnumber">1</span> <span class="toctext">Cards with documentation</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Accelerated_Graphic_Cards#3Dfx"><span class="tocnumber">1.1</span> <span class="toctext">3Dfx</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Accelerated_Graphic_Cards#Intel_Integrated_Graphics"><span class="tocnumber">1.2</span> <span class="toctext">Intel Integrated Graphics</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Accelerated_Graphic_Cards#ATI_.2F_AMD"><span class="tocnumber">1.3</span> <span class="toctext">ATI / AMD</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Accelerated_Graphic_Cards#NVIDIA"><span class="tocnumber">1.4</span> <span class="toctext">NVIDIA</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Accelerated_Graphic_Cards#VMWare_SVGA-II"><span class="tocnumber">1.5</span> <span class="toctext">VMWare SVGA-II</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="Accelerated_Graphic_Cards#Where_can_I_find_low-level_information_about_nVidia.2FMatrox.2FATI.2F..._3D_graphic_cards.3F"><span class="tocnumber">2</span> <span class="toctext">Where can I find low-level information about nVidia/Matrox/ATI/... 3D graphic cards?</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Accelerated_Graphic_Cards#What_can_2D_acceleration_do_for_me.3F"><span class="tocnumber">3</span> <span class="toctext">What can 2D acceleration do for me?</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Accelerated_Graphic_Cards#How_do_3D-accelerated_programs_talk_to_3D-accelerating_hardware.3F"><span class="tocnumber">4</span> <span class="toctext">How do 3D-accelerated programs talk to 3D-accelerating hardware?</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Accelerated_Graphic_Cards#External_links"><span class="tocnumber">5</span> <span class="toctext">External links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Cards_with_documentation"> Cards with documentation </span></h2>
+<h3> <span class="mw-headline" id="3Dfx"> 3Dfx </span></h3>
+<p>These are a sort of good news for 3dfx cards (those with a Voodoo chipset). These cards could be the only ones with relatively fast 3D support (Glide/OpenGL) and <a rel="nofollow" class="external text" href="http://darwin-3dfx.sourceforge.net/">open specifications</a>. Voodoo cards are still available from sources such as eBay.
+</p>
+<h3> <span class="mw-headline" id="Intel_Integrated_Graphics"> Intel Integrated Graphics </span></h3>
+<p>The Intel video chipsets also have open standards (see <a rel="nofollow" class="external text" href="http://www.intel.com">www.intel.com</a>). Some useful links:
+</p>
+<ul><li> <a rel="nofollow" class="external text" href="ftp://download.intel.com/support/graphics/intel740/29061902.pdf">Intel 740 Graphics Accelerator</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.x.org/docs/intel/">Intel Graphics Documentations on X.org</a>
+</li><li> <a rel="nofollow" class="external text" href="https://01.org/linuxgraphics/documentation/">Intel Graphics Documentation on the 01.org</a>
+</li></ul>
+<p>The intel-gpu-tools package mentioned on the 01.org page is recommended as it can be used to dump current register values for examination.
+</p>
+<h3> <span class="mw-headline" id="ATI_.2F_AMD"> ATI / AMD </span></h3>
+<p>AMD has <a href="http://forum.osdev.org/viewtopic.php?t=14887" class="extiw" title="topic:14887">recently started</a> to open up the specifications for their recent video cards. The ones regarding a R630 or M56 chip can be downloaded from <a rel="nofollow" class="external text" href="http://www.x.org/docs/AMD/">X.org</a>. Since early 2014 AMD maintains up to date open programming guides for all their GPUs, including an specific e-mail address for support <a rel="nofollow" class="external text" href="http://developer.amd.com/resources/documentation-articles/developer-guides-manuals/#open_gpu">as seen in their homepage</a>.
+</p>
+<h3> <span class="mw-headline" id="NVIDIA"> NVIDIA </span></h3>
+<p>NVidia doesn't provide official specifications, but a lot of community effort is spent in the <a rel="nofollow" class="external text" href="http://nouveau.freedesktop.org/wiki/">nouveau</a> project, which can be sourced for examples and documentation even though such reverse engineered specifications aren't complete nor guaranteed to be accurate. Marcin Kościelnicki has been writing down unofficial specs in his <a rel="nofollow" class="external text" href="http://0x04.net/cgit/cgit.cgi/envytools/tree/">envytools</a> repository. 
+Although having missing bits here and there, they are certainly an interesting resource for learning about the internals of these graphic cards. These docs cover the entire range of NVIDIA hardware, from the first to the latest card, and might prove sufficient to write a native driver.
+</p>
+<h3> <span class="mw-headline" id="VMWare_SVGA-II"> VMWare SVGA-II </span></h3>
+<p>Not exactly a card, but the SVGA-II device makes for a nice virtual machine device for some 3d acceleration. It is available on both VMWare and QEMU. A well documented and easy to port reference driver has also been made available by VMWare under the MIT license. Although it is deprecated, the device works perfectly fine under QEMU and is relatively simple to work with, thus it makes for a very good starting point for graphics acceleration. Reference driver available at <a rel="nofollow" class="external text" href="http://vmware-svga.sourceforge.net/index.old.html">the old vmware-svga page on sourceforge</a>.
+</p>
+<h2> <span class="mw-headline" id="Where_can_I_find_low-level_information_about_nVidia.2FMatrox.2FATI.2F..._3D_graphic_cards.3F"> Where can I find low-level information about nVidia/Matrox/ATI/... 3D graphic cards? </span></h2>
+<p>Good question. Unless you find something else, there is virtually no information publicly available (for free or otherwise) about the internal workings of current 3D graphics cards. There are only small bits that are relevant to game programmers but nothing an OS developer could use.
+</p><p>Now, if you have a VIA graphics chip, things may be better since they recently released an <a rel="nofollow" class="external text" href="http://www.viaarena.com/default.aspx?PageID=2&amp;Type=4">open source driver</a> for both 2D and 3D operations.
+</p><p>There are virtually no tutorials or datasheets for the 2D acceleration features either, but at least we have open-source code for them. Among other sources, the Xfree drivers, <a rel="nofollow" class="external text" href="http://cvs.sourceforge.net/viewcvs.py/open-beos/current/src/add-ons/accelerants/">BeOS accelerants</a> and <a rel="nofollow" class="external text" href="http://www.talula.demon.co.uk/freebe/">FreeBE/AF</a>. They may provide enough information to reverse-engineer and figure out a model that could be used to program/port for your environment. Some older cards with only 2D acceleration might be documented by the <a rel="nofollow" class="external text" href="http://pdos.csail.mit.edu/6.828/2008/readings/hardware/vgadoc/">VGADoc</a>.
+</p><p>Anyone who wishes to put time into that kind of research is welcome to post their results here.
+</p>
+<h2> <span class="mw-headline" id="What_can_2D_acceleration_do_for_me.3F"> What can 2D acceleration do for me? </span></h2>
+<ul><li> Hardware mouse cursor, drawn and managed (e.g. you provide coordinates, the card does the rest)
+</li><li> Bitblt (for "BIT BLock Transfer") can be used for screen-to-screen memory copy like windows moving, scrolling, etc. You provide from and to boxes and the card does the rest. Some might know this as the "rasterop" or remember the hardware "blitter" in Amiga computers.
+</li><li> Tiles. You enter a small NxN dataset (usually a bitmap of between 8x8 and 32x32), a foreground color and a mixing style plus some coordinates and the card "paints" the area with the given pattern. That can be handy to render Win95-like backgrounds (tiled ones) or even to draw fonts quickly.
+</li></ul>
+<h2> <span class="mw-headline" id="How_do_3D-accelerated_programs_talk_to_3D-accelerating_hardware.3F"> How do 3D-accelerated programs talk to 3D-accelerating hardware? </span></h2>
+<p>I'll be assuming that you have a strong knowledge of OpenGL etc and that you don't need it covered here. If you take the example of nVidia's 3D driver for linux (if you have a correctly configured nVidia card, you can see almost all this by a simple "strace" on a 3D program in linux), things are organized this way:
+</p>
+<ul><li> Two libraries libGL.so and libGLcore.so will be loaded by any program that wishes to do accelerated 3D operations. Upon startup, those libraries open "/dev/nvidiactl" and "/dev/nvidia0".
+</li><li> The kernel module is made of an "obscure" file nv-kernel.o which contains only "anonymized" symbols and an "open source" part that mainly glues the nv-kernel (which is actually almost system transparent) to the linux kernel.
+</li><li> The actual "conversation" between the library and the driver cannot be traced by conventional means: /dev/nvidia* only allows "ioctl" operations and mmap. The values you can observe in "/proc/XXXXX/maps" while the 3D program is running let me believe the driver actually exposes the hardware resources (e.g. texture space, vertex space, etc) directly to the library. Current linux kernels can however be compiled with the mmiotrace option which can then be used to log all individual accesses to mmapped space.
+</li></ul>
+<pre>l /proc/pci
+Bus  0, device   0, function  0:
+    Host bridge: VIA Technologies, Inc. VT82C693A/694x [Apollo PRO133x] (rev 196).
+      Prefetchable 32 bit memory at 0xfc000000 [0xfdffffff].
+
+Bus  1, device   0, function  0:
+    VGA compatible controller: nVidia Corporation RIVA TNT2 Model 64 (rev 21).
+      IRQ 11.
+      Master Capable.  Latency=248.  Min Gnt=5.Max Lat=1.
+      Non-prefetchable 32 bit memory at 0xf7000000 [0xf7ffffff].
+      Prefetchable 32 bit memory at 0xfa000000 [0xfbffffff].
+</pre>
+<pre>cat /proc/XXXXX/maps
+...
+40019000-40029000 rw-s f7810000 03:06 54934      /dev/nvidia0
+40029000-4002a000 rw-s 0ba98000 03:06 54934      /dev/nvidia0
+...
+40a9b000-42a9b000 rw-s fa000000 03:06 54934      /dev/nvidia0
+42a9b000-42b79000 rw-p 00000000 00:00 0
+42b79000-42c7a000 rw-s fc010000 03:06 54934      /dev/nvidia0
+42c7a000-42d7c000 rw-p 00000000 00:00 0
+42d7c000-42dfc000 rw-s fc111000 03:06 54934      /dev/nvidia0
+</pre>
+<h2> <span class="mw-headline" id="External_links"> External links </span></h2>
+<ul><li><a href="http://forum.osdev.org/viewtopic.php?t=23548" class="extiw" title="topic:23548">A topic on duplicating/reverse engineering existing driver code</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 54/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1854-0!*!0!!en!*!* and timestamp 20180121064135 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Accelerated_Graphic_Cards&amp;oldid=20067">http://wiki.osdev.org/index.php?title=Accelerated_Graphic_Cards&amp;oldid=20067</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Video" title="Category:Video">Video</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Accelerated_Graphic_Cards" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Accelerated_Graphic_Cards"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Accelerated_Graphic_Cards&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Accelerated_Graphic_Cards#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Accelerated_Graphic_Cards" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Accelerated_Graphic_Cards&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Accelerated_Graphic_Cards&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Accelerated_Graphic_Cards#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Accelerated_Graphic_Cards" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Accelerated_Graphic_Cards" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Accelerated_Graphic_Cards&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Accelerated_Graphic_Cards&amp;oldid=20067" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	<skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Accelerated_Graphic_Cards" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Accelerated_Graphic_Cards" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Accelerated_Graphic_Cards&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Accelerated_Graphic_Cards&amp;oldid=20067" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 December 2016, at 17:36.</li>
+											<li id="footer-info-viewcount">This page has been accessed 71,407 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.043 secs. -->
+	</body>
+</html>

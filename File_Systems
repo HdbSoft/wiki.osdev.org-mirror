@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>File Systems - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "File_Systems", "wgTitle": "File Systems", "wgCurRevisionId": 21546, "wgArticleId": 1505, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Tone", "In Progress", "OS theory", "Filesystems"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-File_Systems action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">File Systems</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="File_Systems#mw-head">navigation</a>,
+					<a href="File_Systems#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><center style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<p>This article's <b>tone or style</b> may not reflect the encyclopedic tone used throughout the wiki. See <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Wikipedia:Writing_better_articles#Tone">Wikipedia's article on tone</a> for suggestions.
+</p>
+</center>
+<table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px;&#160;;"><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><strong class="selflink">Filesystems</strong></th></tr><tr><th>Virtual Filesystems</th></tr><tr><td><div>
+<p><a href="VFS" title="VFS">VFS</a><br />
+</p>
+</div></td></tr><tr><th>Disk Filesystems</th></tr><tr><td><div>
+<p><a href="FAT" title="FAT">FAT</a> <a href="FAT12" title="FAT12" class="mw-redirect">12</a>/<a href="FAT16" title="FAT16" class="mw-redirect">16</a>/<a href="FAT32" title="FAT32" class="mw-redirect">32</a>, <a href="VFAT" title="VFAT" class="mw-redirect">VFAT</a><br />
+<a href="Ext2" title="Ext2">Ext 2</a>/<a href="Ext3" title="Ext3">3</a>/<a href="Ext4" title="Ext4">4</a><br />
+<a href="LEAN" title="LEAN">LEAN</a><br />
+<a href="HPFS" title="HPFS">HPFS</a><br />
+<a href="NTFS" title="NTFS">NTFS</a><br />
+<a href="HFS" title="HFS">HFS</a><br />
+<a href="HFS+" title="HFS+">HFS+</a><br />
+<a href="MFS" title="MFS">MFS</a><br />
+<a href="ReiserFS" title="ReiserFS">ReiserFS</a><br />
+<a href="FFS_(Amiga)" title="FFS (Amiga)">FFS (Amiga)</a><br />
+<a href="FFS_(BSD)" title="FFS (BSD)" class="mw-redirect">FFS (BSD)</a>/<a href="UFS" title="UFS">UFS</a><br />
+<a href="BeFS" title="BeFS">BeFS</a><br />
+<a href="BFS" title="BFS">BFS</a><br />
+<a href="XFS" title="XFS">XFS</a><br />
+<a href="SFS" title="SFS">SFS</a><br />
+<a href="ZFS" title="ZFS">ZFS</a><br />
+<a href="USTAR" title="USTAR">USTAR</a><br />
+</p>
+</div></td></tr><tr><th>CD/DVD Filesystems</th></tr><tr><td><div>
+<p><a href="ISO_9660" title="ISO 9660">ISO 9660</a><br />
+<a href="Joliet" title="Joliet">Joliet</a><br />
+<a href="UDF" title="UDF">UDF</a><br />
+</p>
+</div></td></tr><tr><th><a href="Category:Network_Filesystems" title="Category:Network Filesystems">Network Filesystems</a></th></tr><tr><td><div>
+<p><a href="NFS" title="NFS">NFS</a><br />
+<a href="RFS" title="RFS">RFS</a><br />
+<a href="AFS" title="AFS">AFS</a><br />
+</p>
+</div></td></tr><tr><th>Flash Filesystems</th></tr><tr><td><div>
+<p><a href="JFFS2" title="JFFS2">JFFS2</a><br />
+<a href="YAFFS" title="YAFFS">YAFFS</a><br />
+</p>
+</div></td></tr></table>
+<p>File systems are the machine's way of ordering your data on readable and/or writable media. They provide a logical way to access the stuff that you have down on disk so that you can read or modify it. Which file system you use depends upon what you want to do with it. For example, Windows uses the FAT32 or NTFS file system. If your disk is really huge, then there's no point using FAT32 because the FAT system was designed in the days when nobody had disks as big as we do now. At the same time, there's no point using a NTFS file system on a tiny disk, because it was designed to work with large volumes of data - the overhead would be pointless for, say, reading a 1.44 MB floppy disk.
+</p><p>For details on specific filesystems, browse <a href="Category:Filesystems" title="Category:Filesystems">this list</a> of filesystems.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="File_Systems#File_System_Theory"><span class="tocnumber">1</span> <span class="toctext">File System Theory</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="File_Systems#Indexing_Methods"><span class="tocnumber">1.1</span> <span class="toctext">Indexing Methods</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="File_Systems#inodes"><span class="tocnumber">1.1.1</span> <span class="toctext">inodes</span></a></li>
+<li class="toclevel-3 tocsection-4"><a href="File_Systems#FAT"><span class="tocnumber">1.1.2</span> <span class="toctext">FAT</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="File_Systems#Workings_of_File_Systems"><span class="tocnumber">2</span> <span class="toctext">Workings of File Systems</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="File_Systems#Allocation_Table"><span class="tocnumber">2.1</span> <span class="toctext">Allocation Table</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="File_Systems#Separate_file_and_system_areas"><span class="tocnumber">2.2</span> <span class="toctext">Separate file and system areas</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="File_Systems#Other_methods"><span class="tocnumber">2.3</span> <span class="toctext">Other methods</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="File_Systems#Network_File_Systems"><span class="tocnumber">3</span> <span class="toctext">Network File Systems</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="File_Systems#File_systems_for_OSDevers"><span class="tocnumber">4</span> <span class="toctext">File systems for OSDevers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="File_Systems#.22Beginners.22_filesystems"><span class="tocnumber">4.1</span> <span class="toctext">"Beginners" filesystems</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="File_Systems#Rolling_your_own"><span class="tocnumber">4.2</span> <span class="toctext">Rolling your own</span></a>
+<ul>
+<li class="toclevel-3 tocsection-13"><a href="File_Systems#Guidelines_if_you_do_decide_to_roll_your_own"><span class="tocnumber">4.2.1</span> <span class="toctext">Guidelines if you do decide to roll your own</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-14"><a href="File_Systems#Expert_filesystems"><span class="tocnumber">4.3</span> <span class="toctext">Expert filesystems</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="File_Systems#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-16"><a href="File_Systems#Wiki_Pages"><span class="tocnumber">5.1</span> <span class="toctext">Wiki Pages</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="File_System_Theory"> File System Theory </span></h2>
+<center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<p>A filesystem provides a generalized structure over persistent storage, allowing the low-level structure of the devices (e.g., disk, tape, flash memory storage) to be abstracted away. Generally speaking, the goal of a filesystem is allow logical groups of data to be organized into <i>files</i>, which can be manipulated as a unit. In order to do this, the filesystem must provide some sort of index of the locations of files in the actual secondary storage. The fundamental operations of any filesystem are:
+</p>
+<ul><li> Tracking the available storage space
+</li><li> Tracking which block or blocks of data belong to which files
+</li><li> Creating new files
+</li><li> Reading data from existing files into memory
+</li><li> Updating the data in the files
+</li><li> Deleting existing files
+</li></ul>
+<p>(Perceptive readers will note that the last four operations - Create, Read, Update, and Delete, or CRUD - are also applicable to many other data structures, and are fundamental to databases as well as filesystems.)
+</p><p>Additionally, there are other features which go along with a practical filesystem:
+</p>
+<ul><li> Assigning human-readable names to files, and renaming files after creation 
+</li><li> Allowing files to be divided among non-contiguous blocks in storage, and tracking the parts of files even when they are <i>fragmented</i> across the medium
+</li><li> Providing some form of hierarchical structure, allowing the files to be divided into <i>directories</i> or <i>folders</i>
+</li><li> Buffering reading and writing to reduce the number of actual operation on the physical medium
+</li><li> Caching frequently accessed files or parts of files to speed up access
+</li><li> Allowing files to be marked as 'read-only' to prevent unintentional corruption of critical data
+</li><li> Providing a mechanism for preventing unauthorized access to a user's files
+</li></ul>
+<p>Additional features may be found on some filesystems as well, such as automatic encryption, or journalling of read/write activity.
+</p>
+<h3> <span class="mw-headline" id="Indexing_Methods"> Indexing Methods </span></h3>
+<p>There are several methods of indexing the contents of files, with the most commonly used being <i>i-nodes</i> and <i>File Allocation Tables</i>.
+</p>
+<h4> <span class="mw-headline" id="inodes"> inodes </span></h4>
+<p>inodes (information nodes) are a crucial design element in most Unix file systems: Each file is made of data blocks (the sectors that contains your raw data bits), index blocks (containing pointers to data blocks so that you know which sector is the nth in the sequence), and one inode block.
+</p><p>The inode is the root of the index blocks, and can also be the sole index block if the file is small enough. Moreover, as Unix file systems support hard links (the same file may appear several times in the directory tree), inodes are a natural place to store Metadata such as file size, owner, creation/access/modification times, locks, etc.
+</p>
+<h4> <span class="mw-headline" id="FAT"> FAT </span></h4>
+<p>The File Allocation Table (<a href="FAT" title="FAT">FAT</a>) is the primary indexing mechanism for MS-DOS and it's descendants. There are several variants on FAT, but the general design is to have a table (actually a pair of tables, one serving as a backup for the first in case it is corrupted) which holds a list of blocks of a given size, which map to the whole capacity of the disk.
+</p>
+<h2> <span class="mw-headline" id="Workings_of_File_Systems"> Workings of File Systems </span></h2>
+<p>There are several common approaches to storing disk information. However, in comparison to <a href="Memory_Management" title="Memory Management" class="mw-redirect">memory management</a>, there are some key differences in managing disk media:
+</p>
+<ul><li> Data can only be written in fixed size chunks.
+</li><li> Access times are different for different locations on the disk. Seeking is usually a costly operation.
+</li><li> Data throughput is very small compared to RAM
+</li><li> Data commonly has to be maintained
+</li></ul>
+<p>Hence some file systems have specialized structures, algorithms, or combinations thereof to improve speed ratings.
+</p>
+<h3> <span class="mw-headline" id="Allocation_Table"> Allocation Table </span></h3>
+<p>The allocation table is comparable to the bitmap approach. However instead of just having a field free or occupied, it may contain other information. Advantage is that the use of this structure is simple, Disadvantage is that this approach is relatively slow, and a separate set of data is needed to define the which sections are used, and in which order.
+<a href="FAT" title="FAT">FAT</a> for example, combines a linked list and an allocation table in the same structure. 
+</p>
+<h3> <span class="mw-headline" id="Separate_file_and_system_areas"> Separate file and system areas </span></h3>
+<p>Some filesystems keep metadata and actual contents in separate areas on the disk. This makes specific sorts of data easy to find, as well as allowing for a special 'free' area. Downside is that you have to keep track of the boundary or boundaries between these areas, as the usage can differ and the disk has to adapt for that (big files: more data, less metadata; small files: less data, more metadata).
+This method is used prominently in <a href="SFS" title="SFS">SFS</a>.
+</p>
+<h3> <span class="mw-headline" id="Other_methods"> Other methods </span></h3>
+<center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><a href="File:Under_Construction.png" class="image" title="This page is under construction!"><img alt="This page is under construction!" src="images/1/14/Under_Construction.png" width="50" height="50" /></a>
+This page is a work in progress and may thus be incomplete. Its content may be changed in the near future.
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<h2> <span class="mw-headline" id="Network_File_Systems"> Network File Systems </span></h2>
+<p>All these file systems are a way to create a large, distributed storage system from a collection of "back end" systems. That means you cannot (for instance) format a disk in 'NFS' but you instead mount a 'virtual' NFS partition that will reflect what's on another machine. Note that a new generation of file systems is under heavy research, basing on latest P2P, cryptography and error correction techniques (such as the Ocean Store Project or Archival Intermemory.)
+</p><p>For details on various network file systems <a href="Category:Network_Filesystems" title="Category:Network Filesystems">look here</a>
+</p>
+<h2> <span class="mw-headline" id="File_systems_for_OSDevers"> File systems for OSDevers </span></h2>
+<p>While you could pick &lt;insert favorite filesystem here&gt; as your OS main filesystem, you might want to consider all options. Commonly, you'll want to have a filesystem that is operational very quickly so that you can concentrate on the rest before implementing a 'real filesystem'
+</p>
+<h3> <span class="mw-headline" id=".22Beginners.22_filesystems"> "Beginners" filesystems </span></h3>
+<p>There are only five filesystems that are both relatively easy to implement and worth to consider. There is no general recommendation as the choice depends largely on style and OS design. Instead you can read the comparison and make your own educated decision.
+</p><p><b><a href="FAT" title="FAT">FAT</a></b>
+</p>
+<ul><li> <code>+</code> Can be read and written by virtually all OSes
+</li><li> <code>+</code> The 'standard' for floppies
+</li><li> <code>+</code> Relatively easy to implement
+</li><li> <code>-</code> Part of it involving long filenames and compatibility is <a rel="nofollow" class="external text" href="http://en.swpat.org/wiki/Microsoft_FAT_patents">patented by Microsoft</a>
+</li><li> <code>-</code> Large overhead
+</li><li> <code>-</code> No support for large (&gt;4 GB) files
+</li><li> <code>-</code> No support for Unix permissions
+</li></ul>
+<p><br />
+<b><a href="Ext2" title="Ext2">Ext2</a></b>
+</p>
+<ul><li> <code>+</code> Supports large files (with an extension)
+</li><li> <code>+</code> Supports Unix permissions
+</li><li> <code>+</code> Can be put on floppies
+</li><li> <code>+</code> Can be read and written from Linux
+</li><li> <code>-</code> Can not natively be read and written from Windows (but <a rel="nofollow" class="external text" href="http://www.fs-driver.org/">drivers</a> are available)
+</li><li> <code>-</code> Very large overhead
+</li><li> <code>-</code> Of these beginner filesystems, this is the most complex
+</li></ul>
+<p><br />
+<b><a href="SFS" title="SFS">SFS</a></b>
+</p>
+<ul><li> <code>+</code> Supports large files
+</li><li> <code>+</code> By far the easiest to implement
+</li><li> <code>+</code> Can be put on floppies and harddisks
+</li><li> <code>+</code> Minimal overhead
+</li><li> <code>-</code> New, and therefore unsupported. The only operational utility is available for Windows.
+</li><li> <code>-</code> No support for fragmentation
+</li><li> <code>-</code> No support for Unix permissions
+</li></ul>
+<p><br />
+<b><a href="USTAR" title="USTAR">USTAR</a></b>
+</p>
+<ul><li> <code>+</code> Uses 512 byte sectors just like floppies and disks
+</li><li> <code>+</code> Incredibly simple, a sector with meta data followed by data sectors
+</li><li> <code>+</code> Widely used, utility to create tar images are available for every mainstream OS
+</li><li> <code>+</code> Supports special files (like devices and symlinks)
+</li><li> <code>+</code> Supports Unix permissions
+</li><li> <code>-</code> No support for fragmentation
+</li><li> <code>-</code> No standard partition type for it, you'll have to pick one on your own
+</li></ul>
+<p><br />
+<b><a href="ISO_9660" title="ISO 9660">ISO 9660</a></b>
+The defined standard for CDs. If you boot from CD then this is the way to go. If not, don't make it your first filesystem.
+</p>
+<h3> <span class="mw-headline" id="Rolling_your_own"> Rolling your own </span></h3>
+<p>There are many different kinds of filesystems around, from the well-known to the more obscure ones. The most unfortunate thing about filesystems is that every hobbyist OS programmer thinks that the filesystem they design is the ultimate technology, when in reality it's usually just a copy of FAT with a change here and there, perhaps because it is one of the easiest to implement. The world doesn't need another FAT-like filesystem. Investigate all the possibilities before you decide to roll your own.
+</p>
+<h4> <span class="mw-headline" id="Guidelines_if_you_do_decide_to_roll_your_own"> Guidelines if you do decide to roll your own </span></h4>
+<p><br />
+</p>
+<ul><li> Consider carefully what it will be used for.
+</li><li> Use a program to figure out the layout.  I recommend a spreadsheet.  The basic areas needed are:
+<ul><li> Bootsector.  Unless you are booting with UEFI, this is a must.  Even then, I'd recommend including it in the specs for compatibility with older file systems.  This section should contain at a minimum the disk size, location of the file table, hidden sectors for multiple partition disks, and a version number.  I'd leaving plenty of reserved space for features you don't think of.  Don't forget to leave space for a jmp instruction and the boot code!.
+</li><li> File table.  Don't think of this as just a simple table containing a list of files and their locations.  One idea I've had and never implemented is, instead of storing files, the system would store file parts, and the file table would list the parts in each file.  This would be useful for saving space if many files on the disk are the same or similar (for example, license agreements).
+</li><li> Data area.  Files will be stored here.
+</li></ul>
+</li><li> Create a program to read and write disk images with your filesystem.  Parts of this will be portable into the fs driver.
+</li><li> Implement the fs into your OS.
+</li></ul>
+<h3> <span class="mw-headline" id="Expert_filesystems">Expert filesystems</span></h3>
+<p>Once you have a beginner's file system under your belt you might want support for more advanced ones. Here are some:
+</p>
+<ul><li><a href="NTFS" title="NTFS">NTFS</a> - (Windows) New Technologies File System. It's hard to find documentation. Try <a rel="nofollow" class="external text" href="http://www.opensource.apple.com/source/ntfs/">Apple NTFS (open source)</a>.
+</li></ul>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Wiki_Pages"> Wiki Pages </span></h3>
+<p><a href="I_use_a_Custom_Filesystem_-_What_Bootloader_Solution_is_right_for_me?" title="I use a Custom Filesystem - What Bootloader Solution is right for me?">I use a Custom Filesystem - What Bootloader Solution is right for me?</a>
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 445/1000000
+Post-expand include size: 4257/2097152 bytes
+Template argument size: 2331/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1505-0!*!0!!en!2!* and timestamp 20180121034653 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=File_Systems&amp;oldid=21546">http://wiki.osdev.org/index.php?title=File_Systems&amp;oldid=21546</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Tone" title="Category:Tone">Tone</a></li><li><a href="Category:In_Progress" title="Category:In Progress">In Progress</a></li><li><a href="Category:OS_theory" title="Category:OS theory">OS theory</a></li><li><a href="Category:Filesystems" title="Category:Filesystems">Filesystems</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=File_Systems" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="File_Systems"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:File_Systems&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="File_Systems#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="File_Systems" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=File_Systems&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=File_Systems&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="File_Systems#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/File_Systems" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/File_Systems" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:Speciaskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/File_Systems" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/File_Systems" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=File_Systems&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=File_Systems&amp;oldid=21546" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 September 2017, at 10:12.</li>
+											<li id="footer-info-viewcount">This page has been accessed 110,030 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

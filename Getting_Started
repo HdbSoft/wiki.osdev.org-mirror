@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Getting Started - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Getting_Started", "wgTitle": "Getting Started", "wgCurRevisionId": 20281, "wgArticleId": 1748, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["OS Development"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Getting_Started action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Getting Started</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Getting_Started#mw-head">navigation</a>,
+					<a href="Getting_Started#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>First of all, developing an operating system is probably one of the most challenging things you can do on a computer (next to killing the final boss in Doom on Nightmare difficulty level). Composing an operating system requires a lot of knowledge about several complex areas within computer science. You need to understand how hardware works, be able to read and write the complex Assembly language, and also a higher level language (like for instance C, C++ or <a href="Pascal" title="Pascal">Pascal</a>). Your mind has to be able to wrap itself around abstract theory, and hold a myriad of thoughts. Feel discouraged yet? Don't fear! Because all of these things are also the things that makes OS programming fun and entertaining.
+</p><p>There is nothing like the feeling of accomplishment when you - finally - after hours of struggling solve the problem. And after some time you are able to look back and see all of the things you've created from scratch. Your handwritten system is able to boot, performs magic against the hardware, and gives the user a user interface and programs to play with.
+</p><p>There is no absolute path you have to take when creating an OS. Once you get your initial system up and running (and you do this by finding appropriate tutorials), you choose the path you want to take next. Your OS is exactly that - yours. You have ultimate control, and the sky is the limit!
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Getting_Started#The_Hard_Truth"><span class="tocnumber">1</span> <span class="toctext">The Hard Truth</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Getting_Started#Responsibility"><span class="tocnumber">2</span> <span class="toctext">Responsibility</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Getting_Started#Required_Knowledge"><span class="tocnumber">3</span> <span class="toctext">Required Knowledge</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Getting_Started#Organize_your_plans"><span class="tocnumber">4</span> <span class="toctext">Organize your plans</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Getting_Started#Choosing_your_development_environment"><span class="tocnumber">5</span> <span class="toctext">Choosing your development environment</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Getting_Started#Windows"><span class="tocnumber">5.1</span> <span class="toctext">Windows</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Getting_Started#GNU.2FLinux"><span class="tocnumber">5.2</span> <span class="toctext">GNU/Linux</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Getting_Started#Testing_your_operating_system"><span class="tocnumber">5.3</span> <span class="toctext">Testing your operating system</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="Getting_Started#Protecting_your_code"><span class="tocnumber">6</span> <span class="toctext">Protecting your code</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="Getting_Started#Common_starting_points"><span class="tocnumber">7</span> <span class="toctext">Common starting points</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Getting_Started#Attaining_further_knowledge"><span class="tocnumber">8</span> <span class="toctext">Attaining further knowledge</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="Getting_Started#See_Also"><span class="tocnumber">9</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="Getting_Started#Articles"><span class="tocnumber">9.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="Getting_Started#Threads"><span class="tocnumber">9.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="Getting_Started#External_Links"><span class="tocnumber">9.3</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="The_Hard_Truth">The Hard Truth</span></h2>
+<p>Hopefully the basic fact that operating system development is a complicated and on-going process does not discourage you. The truth is, operating system development is truly unparalleled since it requires the utmost amount of patience, careful code design and returns very little to no "instant gratification" you get from the development of things like games and web based scripting.
+</p><p>You have been fairly warned of the hard work ahead, but if you are still interested then proceed forward into the realm of the operating system programmer. Prepare yourself for occasional bouts of confusion, discouragement, and for some of us... temporary insanity. In time, and with enough dedication, you will find yourself among the elite few who have contributed to a working operating system. If you do get discouraged along the way, refresh yourself with the contents of this book, hopefully it will remind you of why you started such an insane journey in the first place.
+</p><p>At this stage, it would also pay to read the <a href="Beginner_Mistakes" title="Beginner Mistakes">Beginner Mistakes</a> page. Users on the forum have noticed a lot of these mistakes getting repeated over time, and avoiding them is a great way to not make a fool of yourself.
+</p>
+<h2> <span class="mw-headline" id="Responsibility">Responsibility</span></h2>
+<p>People tend to claim that it is OK to write inefficient software, stating that computer systems are so fast these days, that you won't see the impact. This type of mentality is dangerous in operating system design. It might be OK to write sloppy code when making a simple application, but when it comes to critical code that may get called thousands of times per second, you need to take out all the overhead you can. The operating system should supply the computer as a basic resource to the running application's, with as little complication, abstraction and overhead as possible.
+</p><p>People who design operating systems in this day and age tend to have the "everything but the kitchen sink" mentality. They take it upon themselves to account for everything, which of course is good, but it shouldn't be done in order to allow poorly written programs to flourish. There are many things that go on "under the hood" when program errors occur. Poorly written programs cost precious execution time, and involve task switches that are expensive in both memory and frequency. We encourage you to discourage poorly written software.
+</p>
+<h2> <span class="mw-headline" id="Required_Knowledge"> Required Knowledge </span></h2>
+<dl><dd><i>Main article:</i> <a href="Required_Knowledge" title="Required Knowledge">Required Knowledge</a>
+</dd></dl>
+<p><b>If you think you can skip this, it's just for you.</b>
+</p><p><i>This section has been <a href="Required_Knowledge" title="Required Knowledge"> moved to a separate page</a>, because it is referred to so often in forum discussions.</i>
+</p>
+<h2> <span class="mw-headline" id="Organize_your_plans">Organize your plans</span></h2>
+<p>Before proceeding, consider what it is you want to get out of writing an operating system. What are your motivations in taking on this project? There are many possible reasons for taking on a hobby OS project, and most os-devers have more than one. Even just saying, "I just want to" can be enough, though the more you consider and clarify your goals and motives, the more you can focus on what you really want.
+</p><p>Be honest with yourself, as well. There's no shame in having a larger ambitions for your project, even (or especially) if they aren't the primary objective. Try to acknowledge <i>all</i> of your goals, not just the one you think is your main purpose.
+</p><p>Try to settle on which aspects of OS design you are most interested in, or see a need to work on. Most of what goes into OS dev, especially early on, is kernel design and development, but the kernel itself is only a small part of most operating systems; if your primary interest is in UX, or networking, or driver programming, you should think about whether you really need (now or in the future) to write your own OS at all, or if you would be just as satisfied developing those things on an existing kernel. More than a few people have gone into OS dev when they really wanted to design a desktop environment, so this is a very important question to ask yourself.
+</p><p>Try to think of any non-OS projects you might want to take on first, or at the same time, especially ones which might serve as practice or preparation for the OS project. There's usually no need to work on the OS project <i>right now</i>, and the more you have prepared ahead of time, the better off you'll be (up to a point, at least - preparation is one thing, procrastination is something else).
+</p><p>Similarly, if you mean to work on forking an existing design to experiment with, or to modify for some specific purpose, focus on that rather than general development issues. Consider what part of the existing code base you will need, and which ones you want to change.
+</p><p>Try to work out some of your specific project goals, and be prepared to plan out separate projects if it helps to do so. If you are simply intending to putter around and see where it takes you, that's fine; if your intent is to overthrow Microsoft, that's fine (if probably unrealistic), too. Once you know what you want to do, you can break down the details of it into specific objectives, and work out what it would take to reach them. Don't try to force too many divergent objectives into one project - if you have different things you want to try with contradictory goals, split them into different projects.
+</p><p>It may help if you write out an overview of your planned OS design, with any specific requirements or details you feel are notable or which could clarify what you need help with, and add it to your public repository if you can. This not only will make it easier for others to help you, it will help organize and stabilize your plans, much like writing an outline for a story or paper. Be prepared to maintain it as your goals and plans change, but keep a copy of older versions (or better still, keep the document under version control) so you can see how your work develops over time.
+</p><p>Finally, review the time and resources which the project will require, and decide if they are feasible. If you know that you only have a certain amount of time to devote to the project, take that into account, and whatever you do, <i>don't</i> commit to an outside deadline even if you are certain you can reach it. OS dev takes time - a <b>lot</b> of time - and trying to finish a full OS project in a semester isn't realistic.
+</p>
+<h2> <span class="mw-headline" id="Choosing_your_development_environment">Choosing your development environment</span></h2>
+<p>You need a platform to develop your new system on. Following the trends of general computing, the two most popular are Windows and GNU/Linux. Developers using a GNU/Linux system have a slight advantage in availability of tools, but this can be solved on Windows using a system such as <a href="Cygwin" title="Cygwin">Cygwin</a>.
+</p>
+<ul><li> <b>Binutils</b>: Fundamental tools for manipulation of object files.
+</li><li> <b><a href="GCC" title="GCC">GCC</a></b>: The GNU Compiler Collection. GCC contains compilers for C, C++, Fortran and Ada, amongst others.
+</li><li> <b><a href="Makefile" title="Makefile">Make</a></b>: For automating the build process, which becomes really helpful once you have more than a handful of files.
+</li><li> <b>Grep</b> and <b>sed</b>: For doing more powerful searches and search and replaces (helpful when filling out tables with data).
+</li><li> <b>Diffutils</b>: Incredibly useful for showing the differences between two files.
+</li><li> <b><a href="http://wikipedia.org/wiki/Perl" class="extiw" title="wikipedia:Perl">Perl</a></b> or <b><a href="http://wikipedia.org/wiki/Python_(programming_language)" class="extiw" title="wikipedia:Python (programming language)">Python</a></b>: One of these two scripting languages should be installed. Useful for string manipulation, amongst other things. Perl used to be the recommendation, but Python is now quite mature, and is possibly easier to learn. Both have hundreds of packages/modules available for doing various tasks.
+</li><li> <b><a href="List_of_editors" title="List of editors">An editor</a></b>: For writing your Assembly, C and other (code) files.
+</li></ul>
+<p>You might not use all of these tools, but it is best to have them on hand "just in case", and know how to use them, even at a basic level. But if you decided to use another <a href="Languages" title="Languages"> language</a> then the tooling is mostly up to you and may be the list above just won't help you in any way. Below is the information mostly related to the C/C++ or Assembly developers.
+</p>
+<h3> <span class="mw-headline" id="Windows">Windows</span></h3>
+<p>In order to get the tools necessary, you should install the <a href="Cygwin" title="Cygwin">Cygwin</a> environment. <a href="MinGW" title="MinGW">MinGW</a> or <a href="DJGPP" title="DJGPP">DJGPP</a> are alternatives, but Cygwin is strongly suggested as it is the most complete and compatible environment.
+</p><p>Microsoft has recently (as of writing) released the Windows Subsystem for Linux as an optional feature for Windows 10. It is basically a real Ubuntu command line distribution running on top of Windows WITHOUT the use of a VM. The latest GCC and Binutils (6.1.0 and 2.27 as of writing) compile and work correctly in this environment. Using the Bash shell you can access your Windows hard disks through /mnt/&lt;drive letter&gt;. The advantage of this solution is that you can work with whichever Windows or Linux tools that you require, without having to find out if they work in Cygwin. Many of the needed tools can be installed using "apt-get".
+</p><p>For all of the above, it is strongly suggested to build a cross-compiler, not only because the default compilers target different <a href="Executable_Formats" title="Executable Formats">executable formats</a>, but because it's generally a good idea. Check the <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a> page for details and instructions.
+</p><p>You will also need an editor. Using Notepad will work, but it's easier if you have a more complete editor. For example, <a rel="nofollow" class="external text" href="http://notepad-plus.sourceforge.net/uk/site.htm">Notepad++</a> or <a rel="nofollow" class="external text" href="http://www.flos-freeware.ch/notepad2.html">Notepad2</a> can and are used by many people. If you are comfortable with Unix editors, you can pick one from the choice Cygwin provides (which includes e.g. Vim and Emacs, which take some getting-used-to but are very powerful).
+</p><p>It is also possible to use <a href="Visual_Studio" title="Visual Studio">Visual Studio</a>, or the freely downloadable <a rel="nofollow" class="external text" href="http://www.microsoft.com/express/">Visual C++ Express Edition</a>, to write and compile your operating system. You will require a special configuration file, and you will certainly be in the minority, but it does work quite well. You can even install the Windows SDK on top, enabling 64 bit development. The only pitfall is this doesn't support Inline Assembly.
+</p><p>Other tools such as <a href="Watcom" title="Watcom">Watcom</a> or <a href="http://wiki.osdev.org/index.php?title=Borland&amp;action=edit&amp;redlink=1" class="new" title="Borland (page does not exist)">Borland</a> can be used, too, but they each have specific requirements of their own, and are not widely used for this kind of work.
+</p>
+<h3> <span class="mw-headline" id="GNU.2FLinux">GNU/Linux</span></h3>
+<p>When using GNU/Linux, most of the GNU development tools are probably already present. If not, use your distribution's package management tools (APT, RPM, Portage) to install them as needed. Again, making a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler"> cross-compiler</a> is required, so as not to link in the development system's runtime files.
+</p><p>Common editors are <a href="http://wikipedia.org/wiki/Vim_(text_editor)" class="extiw" title="wikipedia:Vim (text editor)">Vim</a>, <a href="http://wikipedia.org/wiki/Emacs" class="extiw" title="wikipedia:Emacs">Emacs</a> and <a href="http://wikipedia.org/wiki/KDevelop" class="extiw" title="wikipedia:KDevelop">KDevelop</a>.
+</p>
+<h3> <span class="mw-headline" id="Testing_your_operating_system">Testing your operating system</span></h3>
+<dl><dd><i>Main article:</i> <a href="Testing" title="Testing">Testing</a>
+</dd></dl>
+<p>The above article goes into a lot of depth about choosing how to test your operating system and how to integrate that with your development process. Both physical and emulated testing environments are discussed.
+</p>
+<h2> <span class="mw-headline" id="Protecting_your_code">Protecting your code</span></h2>
+<p>During your code building you will write hundreds, even thousands, of lines of code. You'll spend an unmentionable number of hours, and sit up late at night coding when you really should go to bed. The last thing you need is a disk crash or a poorly written 'rm' or 'format' command throwing all your work away.
+</p><p>What you need is a <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Revision_control">version control system</a>. <a rel="nofollow" class="external text" href="http://www.nongnu.org/cvs/">CVS</a> has been used for a number of years, but has gotten a lot of competition from <a rel="nofollow" class="external text" href="http://subversion.tigris.org/">Subversion</a>, <a rel="nofollow" class="external text" href="http://bazaar-vcs.org/">Bazaar</a>, <a rel="nofollow" class="external text" href="http://mercurial.selenic.com/">Mercurial</a> and <a rel="nofollow" class="external text" href="http://git-scm.com/">Git</a> lately. If you can, you should set up a remote computer or server as a version control server, but if you do not have such a machine available you can also host the version control system on your local development computer. Just remember to backup your code to CD or FTP once in a while.
+</p><p>We cannot stress this point strongly enough: if you are not using source control already, you should start doing so immediately. You only need make a serious mistake in your code once to realize the importance of having your code securely versioned and easily retrievable. While it may seem like overkill for a small, private hobby project, once you get into the habit of using revision control, you'll wonder how you ever did without it.
+</p><p>For Git you can create your project on <a rel="nofollow" class="external text" href="https://github.com/">GitHub</a>. Keep in mind this does require your project to be open source. <a rel="nofollow" class="external text" href="https://bitbucket.org">Bitbucket</a> is also a good alternative as it supports both Git and Mercurial, and counts with free, private repositories.
+</p><p>An additional benefit of using version control on a network-accessible repository is that it makes it a lot easier to collaborate with and get help from others. This can be quite useful, especially in the forums, as it can avoid the need for constantly posting updated versions of your code to a message thread - you simply point the conversation towards your repository, and the others in the thread will have direct access to your most current changes. It is also crucial if, as the project grows, you begin to work with other developers on the project (just <a href="Beginner_Mistakes#Teamwork" title="Beginner Mistakes">don't expect that to happen overnight</a>).
+</p>
+<h2> <span class="mw-headline" id="Common_starting_points">Common starting points</span></h2>
+<p>The easiest way to get a "hello world" kernel going is the <a href="Bare_Bones" title="Bare Bones">Bare Bones</a> tutorial. A different approach would be to learn how the computer itself starts up, on the <a href="Boot_Sequence" title="Boot Sequence">Boot Sequence</a> page.
+</p><p>There are many other <a href="Tutorials" title="Tutorials">Tutorials</a> available, too.
+</p>
+<h2> <span class="mw-headline" id="Attaining_further_knowledge">Attaining further knowledge</span></h2>
+<p>There is an amazing amount of knowledge about operating system development available on the Internet today. It's just a matter of finding it. First of all, there is this wiki itself. Amongst others we have lots of <a href="Category:Tutorials" title="Category:Tutorials">Tutorials</a>. Since you're here, you've probably already found it. Also on this site is the <a rel="nofollow" class="external text" href="http://www.osdev.org/phpBB2/">forum</a>, where many developers hang out and can help you (but make sure you read <a href="How_To_Ask_Questions" title="How To Ask Questions">How To Ask Questions</a> first). Quite a few books on operating system development have been written. A number of these are featured on our <a href="Books" title="Books">Books</a> page, and more over at <a rel="nofollow" class="external text" href="http://www.osdever.net/books.php">osdever.net</a> as well.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a>
+</li><li> <a href="Resources" title="Resources">Resources</a>
+</li><li> <a href="What_order_should_I_make_things_in" title="What order should I make things in">What order should I make things in</a>?
+</li></ul>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.osdever.net/">Bona Fide OS Development</a> contains several tutorials and documentation.
+</li><li> <a rel="nofollow" class="external text" href="http://www.informit.com/articles/article.aspx?p=26396">Implementing an Operating System</a> by Andrew S. Tanenbaum.
+</li><li> <a rel="nofollow" class="external text" href="http://www.nondot.org/sabre/os/articles">OSRC: Operating System Resource Center</a> has good documentation.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 151/1000000
+Post-expand include size: 71/2097152 bytes
+Template argument size: 25/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1748-0!*!0!!en!*!* and timestamp 20180121031521 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Getting_Started&amp;oldid=20281">http://wiki.osdev.org/index.php?title=Getting_Started&amp;oldid=20281</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:OS_Development" title="Category:OS Development">OS Development</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Getting_Started" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Getting_Started"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Getting_Started"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Getting_Started#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Getting_Started" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Getting_Started&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Getting_Started&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Getting_Started#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Getting_Started" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Getting_Started" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Getting_Started&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Getting_Started&amp;oldid=20281" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 January 2017, at 15:40.</li>
+											<li id="footer-info-viewcount">This page has been accessed 454,864 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;mskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Getting_Started" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Getting_Started" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Getting_Started&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Getting_Started&amp;oldid=20281" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 January 2017, at 15:40.</li>
+											<li id="footer-info-viewcount">This page has been accessed 454,864 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

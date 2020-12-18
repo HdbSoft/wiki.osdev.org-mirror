@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Real Mode OS Warning - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Real_Mode_OS_Warning", "wgTitle": "Real Mode OS Warning", "wgCurRevisionId": 20708, "wgArticleId": 4020, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Real_Mode_OS_Warning action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Real Mode OS Warning</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Real_Mode_OS_Warning#mw-head">navigation</a>,
+					<a href="Real_Mode_OS_Warning#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Using BIOS functions (and "avoiding" the need to write drivers) can seem easier for beginners that don't know any better, however it makes everything much much harder in the long run. This makes it an alluring trap for the unwary.
+</p><p>The purpose of this page is to forewarn beginners so that they don't become unsuspecting victims of the trap. This page is not intended to prevent people who are familiar with all the pitfalls from intentionally deciding to walk into the trap.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Real_Mode_OS_Warning#BIOS_Is_Deprecated"><span class="tocnumber">1</span> <span class="toctext">BIOS Is Deprecated</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Real_Mode_OS_Warning#BIOS_Does_Not_Support_All_Devices"><span class="tocnumber">2</span> <span class="toctext">BIOS Does Not Support All Devices</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Real_Mode_OS_Warning#BIOS_Does_Not_Support_Any_Device_Well"><span class="tocnumber">3</span> <span class="toctext">BIOS Does Not Support Any Device Well</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="Real_Mode_OS_Warning#Time_And_Timers"><span class="tocnumber">3.1</span> <span class="toctext">Time And Timers</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Real_Mode_OS_Warning#Serial_Ports"><span class="tocnumber">3.2</span> <span class="toctext">Serial Ports</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Real_Mode_OS_Warning#Video"><span class="tocnumber">3.3</span> <span class="toctext">Video</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Real_Mode_OS_Warning#Keyboard"><span class="tocnumber">3.4</span> <span class="toctext">Keyboard</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Real_Mode_OS_Warning#Disk.2FStorage_Devices"><span class="tocnumber">3.5</span> <span class="toctext">Disk/Storage Devices</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Real_Mode_OS_Warning#CPUs"><span class="tocnumber">3.6</span> <span class="toctext">CPUs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="Real_Mode_OS_Warning#BIOS_Prevents_You_From_Doing_Anything_Right"><span class="tocnumber">4</span> <span class="toctext">BIOS Prevents You From Doing Anything Right</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="Real_Mode_OS_Warning#BIOS_Prevents_You_From_Learning_Anything_Useful"><span class="tocnumber">5</span> <span class="toctext">BIOS Prevents You From Learning Anything Useful</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="Real_Mode_OS_Warning#BIOS_Leads_You_To_Extremely_Poor_Design"><span class="tocnumber">6</span> <span class="toctext">BIOS Leads You To Extremely Poor Design</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="BIOS_Is_Deprecated"> BIOS Is Deprecated </span></h2>
+<p>Currently the entire industry (all "80x86 PC" manufacturers all OSs for "80x86 PC") are shifting to UEFI. At the end of this transition (at some point in the future) BIOS will cease to exist. Relying on the existence of BIOS functions is not a long term option. Temporarily relying on the existence of BIOS functions (for the short term) makes it much much harder to port the OS to UEFI later, and also makes it much much harder to port the OS to other platforms (ARM, SPARC, etc) because everything that the BIOS was used for has to be replaced.
+</p>
+<h2> <span class="mw-headline" id="BIOS_Does_Not_Support_All_Devices"> BIOS Does Not Support All Devices </span></h2>
+<p>BIOS doesn't provide support for sound, network cards (with the exception of one network card if and only if you booted with PXE), modern printers, scanners, (voice, data or fax) modems, GPUs (for hardware accelerated graphics and/or GPGPU), multiple monitors (one monitor only), various sensors (movement, light, location/GPS, etc) or some user input devices (mouse, joystick, steering wheel, head tracking in 3D helmets, motion sensing/Kinect, touch screens, tablets used with stylus, microphones, bar-code scanners, etc).
+</p><p>For any/all of these things, you will need to write your own drivers.
+</p>
+<h2> <span class="mw-headline" id="BIOS_Does_Not_Support_Any_Device_Well"> BIOS Does Not Support Any Device Well </span></h2>
+<p>Firmware (including BIOS and UEFI) are mostly only intended to provide minimal functionality needed to get an OS started; and for this reason (for devices that they do support) they don't support the devices well. Note that most of the problems apply to both BIOS and UEFI, and most of the problems apply even if you're writing a "single tasking real mode" OS.
+</p>
+<h3> <span class="mw-headline" id="Time_And_Timers"> Time And Timers </span></h3>
+<p>The "time of day" support only has 1 second precision (and not sub-second precision); and the alarm function is limited to the next 24 hours and also only has 1 second precision. The "elapsed time" support is based on the worst/slowest configuration of the PIT, giving it poor (~55 ms) precision without any support for "call my callback after duration". The BIOS function to obtain elapsed time is based on "ticks since midnight" and has various issues involving roll-over (e.g. trying to determine the amount of time between "just before midnight" and "just after midnight" is a little messy and will bite you if you don't take it into account; and you can't measure anything longer than 1 day without intermittent polling because you don't know how many midnights have passed between "start time" and "end time").
+</p>
+<h3> <span class="mw-headline" id="Serial_Ports"> Serial Ports </span></h3>
+<p>The BIOS serial port code uses polling to send and receive bytes (and there is no "FIFO buffers"). This means that it's almost impossible to use the BIOS functions for serial ports to receive data without losing data, and almost impossible to use the BIOS functions for serial ports to send data without huge performance problems.
+</p>
+<h3> <span class="mw-headline" id="Video"> Video </span></h3>
+<p>The BIOS functions for video (including VBE/VESA BIOS Extensions) don't allow anything other than switching video modes and writing to display memory (no fast bit-blits, no hardware mouse pointer, no vertical sync, etc). For video mode switching the number of modes is typically very limited, and often you can't even set the monitor's preferred/native resolution (leading to a blurry/bad image due to scaling done by the monitor). For writing to display memory the performance is intolerable (hundreds of cycles of extra bloat for every single pixel written).
+</p>
+<h3> <span class="mw-headline" id="Keyboard"> Keyboard </span></h3>
+<p>The BIOS keyboard support has a tiny buffer and uses polling, so if you don't poll often enough (and the user types fast enough) you lose key-presses. There is also no support for asking if a specific key is currently being held down or not, no support for the keyboard's LEDs, no support for different keyboard layouts, no way to do a reverse lookup (determine the name of the key from the scan code), no support for "non-ASCII" (needed for internationalisation), and no support for "hot-plug" (device removal/insertion, and old KVMs that use a mechanical switch).
+</p>
+<h3> <span class="mw-headline" id="Disk.2FStorage_Devices"> Disk/Storage Devices </span></h3>
+<p>BIOS support for these devices is synchronous; which causes severe performance problems. For example, if you want to decompress a file from one device and write the data to another device, you can't have a pipeline of buffers and read from one device while the CPU decompresses while writing decompressed data to the other device - you have to read from the first device (while the second device and CPU do nothing) then decompress (while both devices do nothing) then write to the other device (while the first device and CPU do nothing). You also can't pre-fetch data in the background or implement an effective "write-back" disk cache (where writes are done the background).
+</p><p>For removable media (floppy, CD, tape) there is no notification when media is inserted or removed. This can lead to data corruption - e.g. user removes one floppy disk and inserts another; but OS still thinks the first floppy disk is present and writes to it, accidentally corrupting the second floppy disk. While it is possible to try to avoid this (e.g. always check if first sector is different before doing any read or write) it causes more performance problems.
+</p><p>For hot-plug devices (all SATA disks, all USB devices, etc) there is no support for hot-plug. E.g. if the user unplugs a USB flash device (or SATA hard drive or...) there's no notification (read/writes to the device simply cause an error) and if the user plugs in a USB flash device (or SATA hard drive or...) there's no way for the OS to use it (the BIOS continues to pretend the device doesn't exist).
+</p><p>There is no concept of IO priorities and no way to cancel an "in progress" transfer. This means that if you need to tansfer data as soon as possible then that transfer has to wait until any less important "in progress" transfer completes.
+</p><p>There is no support for "trim" (for SSD and USB flash), no support for "secure erase", no support for "eject" (for CD drives), no support for monitoring the health of the device ("Self-Monitoring, Analysis and Reporting Technology"), no support for hard drives with 4 KiB sectors (determining if the drive has 4 KiB sectors or not), and no support for "write barriers" or determining if the data has actually been written to the media and not just buffered by the drive (needed to ensure power failures can't cause file system corruption).
+</p>
+<h3> <span class="mw-headline" id="CPUs"> CPUs </span></h3>
+<p>BIOS is only designed to handle single-CPU. You can use multiple CPUs, but you can't safely allow 2 or more CPUs to call BIOS functions at the same time and need a "BIOS lock" to ensure that doesn't happen. There's also a risk that calling BIOS from any CPU other than the BSP ("boot CPU") may cause problems (either due to BIOS bugs or for other reasons).
+</p>
+<h2> <span class="mw-headline" id="BIOS_Prevents_You_From_Doing_Anything_Right"> BIOS Prevents You From Doing Anything Right </span></h2>
+<p>The BIOS expects a variety of hardware devices (PIC, PIT, RTC, PS/2 controller, disk controllers, etc) to be in a certain default state. Some of this hardware is deprecated and replaced (and emulated) by more modern devices (PIC replaced with IO APIC, PIT replaced with HPET, etc). An OS can't use modern hardware without tampering with the default state of devices that the BIOS expects, and therefore can't use modern hardware without breaking BIOS.
+</p><p>This makes it extremely difficult for an OS to do anything right (including drivers for devices that the BIOS doesn't support) while still using the BIOS.
+</p>
+<h2> <span class="mw-headline" id="BIOS_Prevents_You_From_Learning_Anything_Useful"> BIOS Prevents You From Learning Anything Useful </span></h2>
+<p>Eventually (to write an OS that's actually useful, or to learn how to write an OS that's actually useful) an OS developer needs to learn various things; like how devices work, how interrupt controllers can be used, how IO can be done asynchronously, etc. Knowing about these things (even if your OS doesn't do them) is what makes you a good/better OS developer. You learn none of these things by relying on the BIOS.
+</p>
+<h2> <span class="mw-headline" id="BIOS_Leads_You_To_Extremely_Poor_Design"> BIOS Leads You To Extremely Poor Design </span></h2>
+<p>For beginners that use BIOS, it's natural (due to lack of experience/knowledge) for them to design their operating system's device driver interfaces to be similar to the interfaces provided by the BIOS, and then it's natural to design the interfaces/APIs for upper layers (e.g. file systems, etc) to suit the driver interfaces, and then it's natural to design the user-space interfaces/APIs to suit both the driver interfaces and the upper layers.
+</p><p>This means that there's an extreme risk of the (very bad and broken) design of the BIOS to permeate the entire OS; such that even if the OS developer manages to overcome all of the other problems caused by using BIOS (e.g. and replace all use of BIOS with their own native drivers, etc) they are still left with a crippled OS that is permanently scarred.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 60/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4020-0!*!*!!en!*!* and timestamp 20180121035718 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Real_Mode_OS_Warning&amp;oldid=20708">http://wiki.osdev.org/index.php?title=Real_Mode_OS_Warning&amp;oldid=20708</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Real_Mode_OS_Warning" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Real_Mode_OS_Warning"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Real_Mode_OS_Warning"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Real_Mode_OS_Warning#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Real_Mode_OS_Warning" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Real_Mode_OS_Warning&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Real_Mode_OS_Warning&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Real_Mode_OS_Warning#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<dskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Real_Mode_OS_Warning" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Real_Mode_OS_Warning" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Real_Mode_OS_Warning&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Real_Mode_OS_Warning&amp;oldid=20708" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 16 April 2017, at 14:08.</li>
+											<li id="footer-info-viewcount">This page has been accessed 3,919 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.030 secs. -->
+	</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Introduction - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Introduction", "wgTitle": "Introduction", "wgCurRevisionId": 20426, "wgArticleId": 1852, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["OS Development"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Introduction action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Introduction</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Introduction#mw-head">navigation</a>,
+					<a href="Introduction#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Introduction#Welcome"><span class="tocnumber">1</span> <span class="toctext">Welcome</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Introduction#What_is_an_Operating_System.3F"><span class="tocnumber">2</span> <span class="toctext">What is an Operating System?</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Introduction#What_is_a_kernel.3F"><span class="tocnumber">3</span> <span class="toctext">What is a kernel?</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Introduction#What_is_a_shell.3F"><span class="tocnumber">4</span> <span class="toctext">What is a shell?</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Introduction#What_is_a_GUI_about.3F"><span class="tocnumber">5</span> <span class="toctext">What is a GUI about?</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Introduction#Desktop_Environment.2C_Window_Manager.2C_Widget_Library"><span class="tocnumber">5.1</span> <span class="toctext">Desktop Environment, Window Manager, Widget Library</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Introduction#GUI-related_forum_threads"><span class="tocnumber">5.2</span> <span class="toctext">GUI-related forum threads</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="Introduction#Why_develop_an_OS.3F"><span class="tocnumber">6</span> <span class="toctext">Why develop an OS?</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Introduction#See_Also"><span class="tocnumber">7</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="Introduction#Articles"><span class="tocnumber">7.1</span> <span class="toctext">Articles</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Welcome"> Welcome </span></h2>
+<p>Welcome to Operating System development; the great frontier.
+</p><p>Not all "make it" in this field, many don't even pass the "Hello World" of OS development, but perhaps you will go further and create the next Linux? Or Windows? Or are your goals lower - MenuetOS? Or even CP/M?
+</p><p>Whatever your goals, OSDev'ing is the great pinnacle of programming. But, you're not alone. In fact, this entire website, including the <a rel="nofollow" class="external text" href="http://forum.osdev.org">forums</a> and this Wiki, are dedicated to OSDev'ing. This is not only about great programming skills, but is about community and developing friendships. Be those friendships between fellow forum members or IRQs and processes.
+</p><p>What do you need to succeed in OSDev'ing? You should read the <a href="Getting_Started" title="Getting Started">Getting Started</a> article. If you are going to use C/C++ as your language of choice, you are required to build a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a> first. And if you prefer to use other <a href="Languages" title="Languages">Languages</a> then it is important to have some similar tools (e.g. compiler) or if there's no such tools it is often only your efforts that can help you. But going along with your preferred language can add some motivation and excitement during your work.
+</p><p>Good luck!
+</p>
+<h2> <span class="mw-headline" id="What_is_an_Operating_System.3F"> What is an Operating System? </span></h2>
+<p>An operating system is a software controlling the operation of a computer system and its resources. Major functions of operating systems may include:
+</p>
+<ul><li> Managing memory and other system resources.
+</li><li> Imposing security and access policies.
+</li><li> Scheduling and multiplexing processes and threads.
+</li><li> Launching and closing user programs, and providing basic system services for them.
+</li><li> Providing a basic user interface and application programmer interface.
+</li></ul>
+<p>Not all operating systems provide all of these functions. Single-tasking systems like MS-DOS would not schedule processes, while embedded systems like eCOS may not have a user interface.
+</p><p>An operating system is <b>not</b>:
+</p>
+<ul><li> The computer hardware.
+</li><li> A specific application such as a word processor, web browser or game.
+</li><li> A suite of utilities (like the GNU tools, which are used in many Unix-derived systems).
+</li><li> A development environment (though some OSes, such as UCSD Pascal or Smalltalk-80, incorporate an interpreter and IDE).
+</li><li> A Graphical User interface (though many modern operating systems incorporate a GUI as part of the OS).
+</li></ul>
+<p>While most operating systems are distributed with such tools, they are not themselves a necessary part of the OS. Some operating systems, such as Linux, may come in several different packaged forms, called <i>distributions</i>, which may have different suites of applications and utilities, and may organize some aspects of the system differently. Nonetheless, they are all versions of the same basic OS, and should not be considered to be separate types of operating systems.
+</p>
+<h2> <span class="mw-headline" id="What_is_a_kernel.3F"> What is a kernel? </span></h2>
+<p>The kernel of an operating system is something you will never see. It basically enables any other programs to execute. It handles events generated by hardware (called <i>interrupts</i>) and software (called <i>system calls</i>), and manages access to resources.
+</p><p>The hardware event handlers (<i>interrupt handlers</i>) will for instance get the number of the key you just pressed, and convert it to the corresponding character stored in a buffer so some program can retrieve it.
+</p><p>The <i>system calls</i> are initiated by user-level programs, for opening files, starting other programs, etc. Each system call handler will have to check whether the arguments passed are valid, then perform the internal operation to complete the request.
+</p><p>Most user programs do not directly issue system calls (except for asm programs, for instance), but instead use a <i>standard library</i> which does the ugly job of formatting arguments as required by the kernel and generating the system call. (For example, the C function <i>fopen()</i> eventually calls a kernel function that actually opens the file.)
+</p><p>The kernel usually defines a few <i>abstractions</i> like files, processes, sockets, directories, etc. which correspond to an internal state it remembers about last operations, so that a program may issue a session of operation more efficiently.
+</p>
+<h2> <span class="mw-headline" id="What_is_a_shell.3F"> What is a shell? </span></h2>
+<p>A shell is a special program that is usually integrated in an OS distribution, and which offers humans an interface with the computer. The way it appears to users may vary from system to system (command line, file explorer, etc), but the concept is always the same:
+</p>
+<ul><li> Allow the user to select a program to be started, and optionally give it session-specific arguments.
+</li><li> Allow trivial operation on the local storage like listing the content of directories, moving and copying files across the system.
+</li></ul>
+<p>In order to complete those actions, the shell may have to issue numerous system calls, like "open file 'x'; open file 'y' and create it if it doesn't exist; read content from X, write into Y, close both files, write 'done' to standard output".
+</p><p>The shell may also be used by programs that want to start other programs but do not want to do this themselves (e.g. completing file patterns like "*.mp3", retrieving the exact path of the program, etc.).
+</p><p>Modern shells can also have various extra features, such as the following:
+</p>
+<ul><li> Auto-Completion: By pressing the TAB (or any preferred) key, the word the user is typing will be completed to a valid shell command, a file, directory, or something else. Pressing the auto-complete key multiple times cycles through other completion possibilities.
+</li><li> Character Insertion: The user can move around in what he or she entered by using the arrow keys. When typing new characters in the middle of a sentence, characters will get "inserted".
+</li><li> Shell History: By using the up and down arrow keys, the user can scroll through previous input.
+</li><li> Scrolling: When there are more lines than the console is high, save the output in a buffer and allow the user to scroll up and down in the console.
+</li><li> Scripting: Some shells have custom scripting languages. Examples of scripting languages are Bash or DOS batch.
+</li><li> ...
+</li></ul>
+<h2> <span class="mw-headline" id="What_is_a_GUI_about.3F"> What is a GUI about? </span></h2>
+<p>The Graphical User Interface is the most visible part of any operating system that has one. Its role goes beyond a simple drawing library; it must also be able to:
+</p>
+<ul><li> Catch user input events (keyboard, mouse, etc.) and dispatch them to the proper object.
+</li><li> Update the internal information of what is to be displayed where on the screen, determining which parts of the screen need to be redrawn.
+</li><li> Update the <i>visible</i> screen contents, redrawing the necessary parts.
+</li><li> Do so in a way that feels natural, intuitive, and responsive to the user.
+</li></ul>
+<h3> <span class="mw-headline" id="Desktop_Environment.2C_Window_Manager.2C_Widget_Library"> Desktop Environment, Window Manager, Widget Library </span></h3>
+<p>When you are launching into a KDE or Windows session, that is a <i>desktop environment</i>, i.e. a graphical shell providing the functional environment for all lower-level functions.
+</p><p>The part of the system responsible for organizing the windows of the various running programs, their resizing/closing gadgets, window borders, scrollbars etc. is the <i>Window Manager</i>.
+</p><p>Finally you have the subsystem that does the drawing of control elements, rendering documents on screen etc.; this is commonly called the <i>widget library</i>. However, there are alternatives to widget libraries, usually in the form of declarative languages (e.g., Mozilla's XUL, Qt's QML).
+</p>
+<h3> <span class="mw-headline" id="GUI-related_forum_threads"> GUI-related forum threads </span></h3>
+<ul><li> <a href="http://forum.osdev.org/viewtopic.php?t=8783" class="extiw" title="topic:8783">Will you implement a GUI?</a>
+</li><li> <a href="http://forum.osdev.org/viewtopic.php?t=9432" class="extiw" title="topic:9432">GUI design</a>
+</li><li> <a href="http://forum.osdev.org/viewtopic.php?t=9448" class="extiw" title="topic:9448">Handling input events in GUI</a>
+</li></ul>
+<h2> <span class="mw-headline" id="Why_develop_an_OS.3F"> Why develop an OS? </span></h2>
+<p>There are various reasons why people choose to develop an operating system. Each individual developer may have their own, but some reasons are common among some (if not most) developers:
+</p>
+<ul><li> Having complete control over the machine. When developing an application or other userspace program, the developer has to take the code written by others into consideration: the operating system, the libraries, other programs, etc. It is a powerful feeling for the only code to be running on a machine to be your own.
+</li></ul>
+<ul><li> Research. Quite a few operating system projects are started as homework or research projects. While starting an operating system as a homework assignment in a pre-tertiary or first-year environment is generally considered a bad idea (due to short deadlines), a long-term project is quite fine. Research projects are usually undertaken to improve on existing operating systems. A common beginner mistake, however, is to underestimate the time needed to write an operating system from scratch.
+</li></ul>
+<ul><li> To replace the currently available operating systems. Maybe they don't have a particular feature that the developer wants. Maybe they just generally suck (Linux is bloated, Windows is unstable, etc.). This may be for profit; although any returns are likely to be a long time away.
+</li></ul>
+<ul><li> Because it's fun. Low level programming is a fun and exciting task, because you have to do everything. This may seem more difficult (it is, don't worry) but by the same reasons more fun. You know how everything works, how it all fits, and the inner-most workings of your program.
+</li></ul>
+<p>Unfortunately, many operating system projects are undertaken for the wrong reasons. See <a href="Beginner_Mistakes" title="Beginner Mistakes">Beginner Mistakes</a> for a list.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="Required_Knowledge" title="Required Knowledge">Required Knowledge</a>
+</li><li> <a href="Beginner_Mistakes" title="Beginner Mistakes">Beginner Mistakes</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 63/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1852-0!*!0!!en!*!* and timestamp 20180121032512 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Introduction&amp;oldid=20426">http://wiki.osdev.org/index.php?title=Introduction&amp;oldid=20426</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:OS_Development" title="Category:OS Development">OS Development</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Introduction" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Introduction"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Introduction"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Introduction#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Introduction" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Introduction&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Introduction&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Introduction#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site">skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Introduction" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Introduction" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Introduction&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Introduction&amp;oldid=20426" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 14 February 2017, at 09:32.</li>
+											<li id="footer-info-viewcount">This page has been accessed 263,027 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.036 secs. -->
+	</body>
+</html>

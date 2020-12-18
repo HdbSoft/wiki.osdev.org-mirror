@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ACPICA - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ACPICA", "wgTitle": "ACPICA", "wgCurRevisionId": 21385, "wgArticleId": 2593, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["ACPI"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ACPICA action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ACPICA</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ACPICA#mw-head">navigation</a>,
+					<a href="ACPICA#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The ACPI Component Architecture <b>ACPICA</b> provides an operating system (OS)-independent reference implementation of the <a href="ACPI" title="ACPI">Advanced Configuration and Power Interface</a>. It can be adapted to any host OS. The ACPICA code is meant to be directly integrated into the host OS, as a kernel-resident subsystem. Hosting the ACPICA requires no changes to the core ACPICA code. However, it does require a small OS-specific interface layer, which must be written specifically for each host OS.
+</p><p>The complexity of the ACPI specification leads to a lengthy and difficult implementation in OS software. The purpose of the ACPI Component Architecture is to simplify ACPI implementations for operating system vendors (OSVs) by providing major portions of an ACPI implementation in OS-independent ACPI modules that can be easily integrated into any OS.
+</p><p>As said before you need to implement yourself a few functions that are part of the OS interface layer (OSL). Here are those functions:
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="ACPICA#OS_Layer"><span class="tocnumber">1</span> <span class="toctext">OS Layer</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="ACPICA#Environmental_and_ACPI_Tables"><span class="tocnumber">1.1</span> <span class="toctext">Environmental and ACPI Tables</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="ACPICA#AcpiOsInitialize"><span class="tocnumber">1.1.1</span> <span class="toctext">AcpiOsInitialize</span></a></li>
+<li class="toclevel-3 tocsection-4"><a href="ACPICA#AcpiOsTerminate"><span class="tocnumber">1.1.2</span> <span class="toctext">AcpiOsTerminate</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="ACPICA#AcpiOsGetRootPointer"><span class="tocnumber">1.1.3</span> <span class="toctext">AcpiOsGetRootPointer</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="ACPICA#AcpiOsPredefinedOverride"><span class="tocnumber">1.1.4</span> <span class="toctext">AcpiOsPredefinedOverride</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="ACPICA#AcpiOsTableOverride"><span class="tocnumber">1.1.5</span> <span class="toctext">AcpiOsTableOverride</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-8"><a href="ACPICA#Memory_Management"><span class="tocnumber">1.2</span> <span class="toctext">Memory Management</span></a>
+<ul>
+<li class="toclevel-3 tocsection-9"><a href="ACPICA#AcpiOsMapMemory"><span class="tocnumber">1.2.1</span> <span class="toctext">AcpiOsMapMemory</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="ACPICA#AcpiOsUnmapMemory"><span class="tocnumber">1.2.2</span> <span class="toctext">AcpiOsUnmapMemory</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="ACPICA#AcpiOsGetPhysicalAddress"><span class="tocnumber">1.2.3</span> <span class="toctext">AcpiOsGetPhysicalAddress</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="ACPICA#AcpiOsAllocate"><span class="tocnumber">1.2.4</span> <span class="toctext">AcpiOsAllocate</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="ACPICA#AcpiOsFree"><span class="tocnumber">1.2.5</span> <span class="toctext">AcpiOsFree</span></a></li>
+<li class="toclevel-3 tocsection-14"><a href="ACPICA#AcpiOsReadable"><span class="tocnumber">1.2.6</span> <span class="toctext">AcpiOsReadable</span></a></li>
+<li class="toclevel-3 tocsection-15"><a href="ACPICA#AcpiOsWritable"><span class="tocnumber">1.2.7</span> <span class="toctext">AcpiOsWritable</span></a></li>
+<li class="toclevel-3 tocsection-16"><a href="ACPICA#Caches"><span class="tocnumber">1.2.8</span> <span class="toctext">Caches</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-17"><a href="ACPICA#Multithreading_and_Scheduling_Services"><span class="tocnumber">1.3</span> <span class="toctext">Multithreading and Scheduling Services</span></a>
+<ul>
+<li class="toclevel-3 tocsection-18"><a href="ACPICA#AcpiOsGetThreadId"><span class="tocnumber">1.3.1</span> <span class="toctext">AcpiOsGetThreadId</span></a></li>
+<li class="toclevel-3 tocsection-19"><a href="ACPICA#AcpiOsExecute"><span class="tocnumber">1.3.2</span> <span class="toctext">AcpiOsExecute</span></a></li>
+<li class="toclevel-3 tocsection-20"><a href="ACPICA#AcpiOsSleep"><span class="tocnumber">1.3.3</span> <span class="toctext">AcpiOsSleep</span></a></li>
+<li class="toclevel-3 tocsection-21"><a href="ACPICA#AcpiOsStall"><span class="tocnumber">1.3.4</span> <span class="toctext">AcpiOsStall</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-22"><a href="ACPICA#Mutual_Exclusion_and_Synchronization"><span class="tocnumber">1.4</span> <span class="toctext">Mutual Exclusion and Synchronization</span></a>
+<ul>
+<li class="toclevel-3 tocsection-23"><a href="ACPICA#AcpiOsCreateMutex"><span class="tocnumber">1.4.1</span> <span class="toctext">AcpiOsCreateMutex</span></a></li>
+<li class="toclevel-3 tocsection-24"><a href="ACPICA#AcpiOsDeleteMutex"><span class="tocnumber">1.4.2</span> <span class="toctext">AcpiOsDeleteMutex</span></a></li>
+<li class="toclevel-3 tocsection-25"><a href="ACPICA#AcpiOsAcquireMutex"><span class="tocnumber">1.4.3</span> <span class="toctext">AcpiOsAcquireMutex</span></a></li>
+<li class="toclevel-3 tocsection-26"><a href="ACPICA#AcpiOsReleaseMutex"><span class="tocnumber">1.4.4</span> <span class="toctext">AcpiOsReleaseMutex</span></a></li>
+<li class="toclevel-3 tocsection-27"><a href="ACPICA#AcpiOsCreateSemaphore"><span class="tocnumber">1.4.5</span> <span class="toctext">AcpiOsCreateSemaphore</span></a></li>
+<li class="toclevel-3 tocsection-28"><a href="ACPICA#AcpiOsDeleteSemaphore"><span class="tocnumber">1.4.6</span> <span class="toctext">AcpiOsDeleteSemaphore</span></a></li>
+<li class="toclevel-3 tocsection-29"><a href="ACPICA#AcpiOsWaitSemaphore"><span class="tocnumber">1.4.7</span> <span class="toctext">AcpiOsWaitSemaphore</span></a></li>
+<li class="toclevel-3 tocsection-30"><a href="ACPICA#AcpiOsSignalSemaphore"><span class="tocnumber">1.4.8</span> <span class="toctext">AcpiOsSignalSemaphore</span></a></li>
+<li class="toclevel-3 tocsection-31"><a href="ACPICA#AcpiOsCreateLock"><span class="tocnumber">1.4.9</span> <span class="toctext">AcpiOsCreateLock</span></a></li>
+<li class="toclevel-3 tocsection-32"><a href="ACPICA#AcpiOsDeleteLock"><span class="tocnumber">1.4.10</span> <span class="toctext">AcpiOsDeleteLock</span></a></li>
+<li class="toclevel-3 tocsection-33"><a href="ACPICA#AcpiOsAcquireLock"><span class="tocnumber">1.4.11</span> <span class="toctext">AcpiOsAcquireLock</span></a></li>
+<li class="toclevel-3 tocsection-34"><a href="ACPICA#AcpiOsReleaseLock"><span class="tocnumber">1.4.12</span> <span class="toctext">AcpiOsReleaseLock</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-35"><a href="ACPICA#Interrupt_Handling"><span class="tocnumber">1.5</span> <span class="toctext">Interrupt Handling</span></a>
+<ul>
+<li class="toclevel-3 tocsection-36"><a href="ACPICA#AcpiOsInstallInterruptHandler"><span class="tocnumber">1.5.1</span> <span class="toctext">AcpiOsInstallInterruptHandler</span></a></li>
+<li class="toclevel-3 tocsection-37"><a href="ACPICA#AcpiOsRemoveInterruptHandler"><span class="tocnumber">1.5.2</span> <span class="toctext">AcpiOsRemoveInterruptHandler</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-38"><a href="ACPICA#Using_ACPICA_in_your_OS"><span class="tocnumber">2</span> <span class="toctext">Using ACPICA in your OS</span></a>
+<ul>
+<li class="toclevel-2 tocsection-39"><a href="ACPICA#Visual_Studio_experience"><span class="tocnumber">2.1</span> <span class="toctext">Visual Studio experience</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-40"><a href="ACPICA#Code_Examples"><span class="tocnumber">3</span> <span class="toctext">Code Examples</span></a>
+<ul>
+<li class="toclevel-2 tocsection-41"><a href="ACPICA#Power_Off"><span class="tocnumber">3.1</span> <span class="toctext">Power Off</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-42"><a href="ACPICA#External_links"><span class="tocnumber">4</span> <span class="toctext">External links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="OS_Layer"> OS Layer </span></h2>
+<p>There are at least 45 functions to be implemented (luckily most of them are really simple):
+</p>
+<h3> <span class="mw-headline" id="Environmental_and_ACPI_Tables"> Environmental and ACPI Tables </span></h3>
+<h4> <span class="mw-headline" id="AcpiOsInitialize"> AcpiOsInitialize </span></h4>
+<pre>ACPI_STATUS AcpiOsInitialize()
+</pre>
+<p>This is called during ACPICA Initialization. It gives the possibility to the OSL to initialize itself. Generally it should do nothing
+</p>
+<h4> <span class="mw-headline" id="AcpiOsTerminate"> AcpiOsTerminate </span></h4>
+<pre>ACPI_STATUS AcpiOsTerminate()
+</pre>
+<p>This is called during ACPICA Shutdown (which is not the computer shutdown, just the ACPI). Here you can free any memory which was allocated in AcpiOsInitialize.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsGetRootPointer"> AcpiOsGetRootPointer </span></h4>
+<pre>ACPI_PHYSICAL_ADDRESS AcpiOsGetRootPointer()
+</pre>
+<p>ACPICA leaves to you the job of finding the RSDP for platform compatibility. However, on x86 you can just do:
+</p>
+<pre>ACPI_PHYSICAL_ADDRESS AcpiOsGetRootPointer()
+{
+	ACPI_PHYSICAL_ADDRESS  Ret;
+	Ret = 0;
+	AcpiFindRootPointer(&amp;Ret);
+	return Ret;
+}
+</pre>
+<p>where AcpiFindRootPointer is part of ACPICA itself.
+</p><p>Note: The ACPI specification is highly portable specification, however, it has a static part which is generally non-portable: the location of the Root System Descriptor Pointer. This pointer may be found in many different ways depending on the chipset. On PC-compatible computers (without EFI) it is located in lower memory generally somewhere between 0x80000 and 0x100000. However, even within the PC compatible platform, an EFI-enabled board will export the RSDP to the OS on when it loads it through the EFI system tables. Other boards on server machines which are not PC-compatibles, like embedded and handheld devices which implement ACPI will again, not all be expected to position the RSDP in the same place as any other board. The RSDP is therefore located in a chipset-specific manner; From the time the OS has the RSDP, the rest of ACPI is completely portable. However, the way the RSDP is found is not. This would be the reason that the ACPICA code wouldn't try to provide routines to expressly find the RSDP in a portable manner. If your system uses EFI, locate it in the system tables or use Multiboot2 compliant loader, which provides the RSDP for you.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsPredefinedOverride"> AcpiOsPredefinedOverride </span></h4>
+<pre>ACPI_STATUS AcpiOsPredefinedOverride(const ACPI_PREDEFINED_NAMES *PredefinedObject, ACPI_STRING *NewValue)
+</pre>
+<p>This function allows the host to override the predefined objects in the ACPI namespace. It is called when a new object is found in the ACPI namespace. However you can just put NULL in *NewValue and return.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsTableOverride"> AcpiOsTableOverride </span></h4>
+<pre>ACPI_STATUS AcpiOsTableOverride(ACPI_TABLE_HEADER *ExistingTable, ACPI_TABLE_HEADER **NewTable)
+</pre>
+<p>The same of AcpiOsPredefinedOverride but for entire ACPI tables. You can replace them. Just put NULL in *NewTable and return.
+</p>
+<h3> <span class="mw-headline" id="Memory_Management"> Memory Management </span></h3>
+<h4> <span class="mw-headline" id="AcpiOsMapMemory"> AcpiOsMapMemory </span></h4>
+<pre>void *AcpiOsMapMemory(ACPI_PHYSICAL_ADDRESS PhysicalAddress, ACPI_SIZE Length)
+</pre>
+<p>This is not really easy. ACPICA is asking you to map a physical address in the virtual address space. If you don't use paging, just return PhysicalAddress. You need:
+</p>
+<ol><li> To round Length up to the size of a page (Length can be 2, 1024 for example)
+</li><li> Find a range of virtual addresses where map the physical frames.
+</li><li> Map the physical frames to the virtual addresses choosen.
+</li><li> Return the virtual address plus the page offset of the physical address. (Eg. If you where asked to map 0x40E you have to return 0xF000040E and not just 0xF0000000)
+</li></ol>
+<h4> <span class="mw-headline" id="AcpiOsUnmapMemory"> AcpiOsUnmapMemory </span></h4>
+<pre>void AcpiOsUnmapMemory(void *where, ACPI_SIZE length)
+</pre>
+<p>Unmap pages mapped using AcpiOsMapMemory. Where is the Virtual address returned in AcpiOsMapMemory and length is equal to the length of the same function. Just remove the virtual address form the page directory and set that virtual address as reusable.
+<b>Note:</b> for the last two functions you might need a separated heap.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsGetPhysicalAddress"> AcpiOsGetPhysicalAddress </span></h4>
+<pre>ACPI_STATUS AcpiOsGetPhysicalAddress(void *LogicalAddress, ACPI_PHYSICAL_ADDRESS *PhysicalAddress)
+</pre>
+<p>Get the physical address pointed by LogicalAddress and put it in *PhysicalAddress. If you do not use paging just put LogicalAddress in *PhysicalAddress
+</p>
+<h4> <span class="mw-headline" id="AcpiOsAllocate"> AcpiOsAllocate </span></h4>
+<pre>void *AcpiOsAllocate(ACPI_SIZE Size);
+</pre>
+<p>Dynamically allocate memory in the heap. Return NULL on error or end of memory. In other words:
+</p>
+<pre>return malloc(size)
+</pre>
+<h4> <span class="mw-headline" id="AcpiOsFree"> AcpiOsFree </span></h4>
+<pre>void AcpiOsFree(void *Memory);
+</pre>
+<p>Free previously dynamically allocated memory.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsReadable"> AcpiOsReadable </span></h4>
+<pre>BOOLEAN AcpiOsReadable(void *Memory, ACPI_SIZE Length)
+</pre>
+<p>Check that the memory from Memory to (Memory + Length) is readable. This is never used (at least i did never see it used). However it should (on x86(_64)) check that a the locations of memory are present in the paging structure.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsWritable"> AcpiOsWritable </span></h4>
+<pre>BOOLEAN AcpiOsWritable(void *Memory, ACPI_SIZE Length)
+</pre>
+<p>Check that the memory from Memory to (Memory + Length) is writable. This is never used (at least i did never see it used). However it should (on x86(_64)) check that a the locations of memory are present in the paging structure and that they have the Write flag set.
+</p>
+<h4> <span class="mw-headline" id="Caches"> Caches </span></h4>
+<p>ACPICA uses caches to make things faster. You can use your kernel's cache or just let ACPICA use its internal cache. To do so just define in your platform/ac<i>whatever</i>.h file
+</p>
+<pre>#define ACPI_CACHE_T                ACPI_MEMORY_LIST
+#define ACPI_USE_LOCAL_CACHE        1
+</pre>
+<h3> <span class="mw-headline" id="Multithreading_and_Scheduling_Services"> Multithreading and Scheduling Services </span></h3>
+<p>To use all the features of ACPICA you need Scheduling support too. ACPICA specifies Threads but if you have only processes, that should work too. If you don't have and don't plan to have a scheduler, you can only use the Table features of ACPICA.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsGetThreadId"> AcpiOsGetThreadId </span></h4>
+<pre>ACPI_THREAD_ID AcpiOsGetThreadId()
+</pre>
+<p>Return the unique ID of the running thread. In the Linux implementation:
+</p>
+<pre>return pthread_self();
+</pre>
+<h4> <span class="mw-headline" id="AcpiOsExecute"> AcpiOsExecute </span></h4>
+<pre>ACPI_STATUS AcpiOsExecute(ACPI_EXECUTE_TYPE Type, ACPI_OSD_EXEC_CALLBACK Function, void *Context)
+</pre>
+<p>Create a new Thread (or process) with entry point at <i>Function</i> using parameter <i>Context</i>. <i>Type</i> is not really useful. When the scheduler chooses this thread it has to put Context on the stack to have something like:
+</p>
+<pre>Function(Context);
+</pre>
+<h4> <span class="mw-headline" id="AcpiOsSleep"> AcpiOsSleep </span></h4>
+<pre>void AcpiOsSleep(UINT64 Milliseconds)
+</pre>
+<p>Put the current thread to sleep for <i>n</i> milliseconds.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsStall"> AcpiOsStall </span></h4>
+<pre>void AcpiOsStall(UINT32 Microseconds)
+</pre>
+<p>Stall the thread for <i>n</i> microseconds. Note: this should not put the thread in the sleep queue. The thread should keep on running. Just looping.
+</p>
+<h3> <span class="mw-headline" id="Mutual_Exclusion_and_Synchronization"> Mutual Exclusion and Synchronization </span></h3>
+<p>Yes, you need Spinlocks, Mutexes and Semaphores too. Nobody said it was easy.&#160;:)
+</p>
+<h4> <span class="mw-headline" id="AcpiOsCreateMutex"> AcpiOsCreateMutex </span></h4>
+<pre>ACPI_STATUS AcpiOsCreateMutex(ACPI_MUTEX *OutHandle)
+</pre>
+<p>Create space for a new Mutex using malloc (or eventually new) and put the address of the Mutex in *OutHandle, return AE_NO_MEMORY if malloc or new return NULL. Else return AE_OK like in most other functions.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsDeleteMutex"> AcpiOsDeleteMutex </span></h4>
+<pre>void AcpiOsDeleteMutex(ACPI_MUTEX Handle)
+</pre>
+<p>This is far too complex to be explained here, so I'll leave this to your imagination.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsAcquireMutex"> AcpiOsAcquireMutex </span></h4>
+<pre>ACPI_STATUS AcpiOsAcquireMutex(ACPI_MUTEX Handle, UINT16 Timeout)
+</pre>
+<p>This would be silly too if not for the Timeout parameter. Timeout can be one of:
+</p>
+<ul><li> 0: acquire the Mutex if it is free, but do not wait if it is not
+</li><li> 1 - +inf: acquire the Mutex if it is free, but wait for <i>Timeout</i> milliseconds if it is not
+</li><li> -1 (0xFFFF): acquire the Mutex if it is free, or wait until it became free, then return
+</li></ul>
+<h4> <span class="mw-headline" id="AcpiOsReleaseMutex"> AcpiOsReleaseMutex </span></h4>
+<pre>void AcpiOsReleaseMutex(ACPI_MUTEX Handle)
+</pre>
+<p>Do you need explaination?
+</p>
+<h4> <span class="mw-headline" id="AcpiOsCreateSemaphore"> AcpiOsCreateSemaphore </span></h4>
+<pre>ACPI_STATUS AcpiOsCreateSemaphore(UINT32 MaxUnits, UINT32 InitialUnits, ACPI_SEMAPHORE *OutHandle)
+</pre>
+<p>Create a new Semaphore with the counter initialized to <i>InitialUnits</i> and put its address in *OutHandle. I don't know how tu use MaxUnits. The spec says: The maximum number of units this Semaphore will be required to accept.<br /> However you should be ok if you ignore this.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsDeleteSemaphore"> AcpiOsDeleteSemaphore </span></h4>
+<pre>ACPI_STATUS AcpiOsDeleteSemaphore(ACPI_SEMAPHORE Handle)
+</pre>
+<p>-_-
+</p>
+<h4> <span class="mw-headline" id="AcpiOsWaitSemaphore"> AcpiOsWaitSemaphore </span></h4>
+<pre>ACPI_STATUS AcpiOsWaitSemaphore(ACPI_SEMAPHORE Handle, UINT32 Units, UINT16 Timeout)
+</pre>
+<p>Just like AcpiOsAcquireMutex, same logic for <i>Timeout</i>. Units isn't used in the linux implementation. However it <i>should</i> be the number of times you have to call sem_wait. I'm not sure about this. Someone should check
+</p>
+<h4> <span class="mw-headline" id="AcpiOsSignalSemaphore"> AcpiOsSignalSemaphore </span></h4>
+<pre>ACPI_STATUS AcpiOsSignalSemaphore(ACPI_SEMAPHORE Handle, UINT32 Units)
+</pre>
+<p>Opposite of Wait. <i>Units</i>: number of times you <i>should</i> call sem_post.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsCreateLock"> AcpiOsCreateLock </span></h4>
+<pre>ACPI_STATUS AcpiOsCreateLock(ACPI_SPINLOCK *OutHandle)
+</pre>
+<p>Create a new spinlock and put its address in *OutHandle. Spinlock should disable interrupts on the current CPU to avoid scheduling and make sure that no other CPU will access the reserved area.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsDeleteLock"> AcpiOsDeleteLock </span></h4>
+<pre>void AcpiOsDeleteLock(ACPI_HANDLE Handle)
+</pre>
+<h4> <span class="mw-headline" id="AcpiOsAcquireLock"> AcpiOsAcquireLock </span></h4>
+<pre>ACPI_CPU_FLAGS AcpiOsAcquireLock(ACPI_SPINLOCK Handle)
+</pre>
+<p>Lock the spinlock and return a value that will be used as parameter for ReleaseLock. It is mainly used for the status of interrupts before the lock was acquired.
+</p>
+<h4> <span class="mw-headline" id="AcpiOsReleaseLock"> AcpiOsReleaseLock </span></h4>
+<pre>void AcpiOsReleaseLock(ACPI_SPINLOCK Handle, ACPI_CPU_FLAGS Flags)
+</pre>
+<p>Release the lock. <i>Flags</i> is the return value of AcquireLock. If you used this to store the interrupt state, now is the moment to use it.
+</p>
+<h3> <span class="mw-headline" id="Interrupt_Handling"> Interrupt Handling </span></h3>
+<h4> <span class="mw-headline" id="AcpiOsInstallInterruptHandler"> AcpiOsInstallInterruptHandler </span></h4>
+<pre>ACPI_STATUS AcpiOsInstallInterruptHandler(UINT32 InterruptLevel, ACPI_OSD_HANDLER Handler, void *Context)
+</pre>
+<p>ACPI sometimes fires interrupt. ACPICA will take care of them. <i>InterruptLevel</i> is the IRQ number that ACPI will use. Handler is an internal function of ACPICA which handles interrupts. Context is the parameter to be past to the Handler.
+If you're lucky, your IRQ manager uses handlers of this form:
+</p>
+<pre>uint32_t handler(void *);
+</pre>
+<p>In this case just assign the handler to the IRQ number with that context. I wasn't as lucky so I did:
+</p>
+<pre>#include &lt;Irq.h&gt;
+ACPI_OSD_HANDLER ServiceRout;
+
+InterruptState *AcpiInt(InterruptState *ctx, void *Context)
+{
+	ServiceRout(Context);
+	return ctx;
+}
+
+UINT32 AcpiOsInstallInterruptHandler(UINT32 InterruptNumber, ACPI_OSD_HANDLER ServiceRoutine, void *Context)
+{
+	ServiceRout = ServiceRoutine;
+
+	RegisterIrq(InterruptNumber, AcpiInt, Contex);
+	return AE_OK;
+}
+</pre>
+<h4> <span class="mw-headline" id="AcpiOsRemoveInterruptHandler"> AcpiOsRemoveInterruptHandler </span></h4>
+<pre>ACPI_STATUS AcpiOsRemoveInterruptHandler(UINT32 InterruptNumber, ACPI_OSD_HANDLER Handler)
+</pre>
+<p>Just UnregisterIrq (InterruptNumber). Handler is provided in case you have an IRQ manager which can have many handlers for one IRQ. This would let you know which handler on that IRQ you have to remove.
+</p>
+<h2> <span class="mw-headline" id="Using_ACPICA_in_your_OS"> Using ACPICA in your OS </span></h2>
+<p>I didn't find any good description of integrating the ACPICA source code into an operating system, and the released package is basically just a bundle of C files with little organization.  This is what I ended up having to do:
+</p>
+<ol><li> I copied the C files from dispatcher/, events/, executer/, hardware/, parser/, namespace/, utilities/, tables/, and resources/ into a single acpi folder.
+</li><li> I copied the header files from include/
+</li><li> I created my own header file based on aclinux.h where I ripped out all of the userspace stuff, then I changed around the rest to be appropriate to my OS's definitions.
+</li><li> I edited the include/platform/acenv.h file to remove the inclusion of aclinux.h and included my header file instead.
+</li><li> I copied over acenv.h, acgcc.h, and my header file over to my include/platform/ folder.
+</li></ol>
+<p>This is in addition to writing an AcpiOs interface layer, and it is not well indicated by the reference manual that you have to actually edit header files.  Many of the macros defined in the headers are documented, though.
+</p>
+<h3> <span class="mw-headline" id="Visual_Studio_experience"> Visual Studio experience </span></h3>
+<p>From Visual Studio, although there is little organization in the files, it is relatively easy to port. In the provided/generate directory, there is a VC 9.0 solution. The only project required for integration is "AcpiSubsystem". Copy this project along with all the files listed (you can keep the old directory structure). #define's can be used to configure certain aspects of it, and perhaps changing #ifdef WIN32 to #ifdef X86 might be a good idea (Win64 -&gt; x64). Once this is done though the base of it is in place, and actypes.h is the only header file that needs any modification (that listed above). It might be an idea to change the option "Compile as C code" to default - it's all .c anyway. This allows you to add C++ to the project without problems. Once this is done, add OSL.c or OSLPP.cpp, write your OS layer and you are done.
+</p>
+<h2> <span class="mw-headline" id="Code_Examples"> Code Examples </span></h2>
+<p>Here are some examples of different operations that ACPICA can help with.
+</p>
+<h3> <span class="mw-headline" id="Power_Off"> Power Off </span></h3>
+<p>To power off the machine:
+</p>
+<pre>AcpiEnterSleepStatePrep(5);
+cli(); // disable interrupts
+AcpiEnterSleepState(5);
+panic("power off"); // in case it didn't work!
+</pre>
+<h2> <span class="mw-headline" id="External_links"> External links </span></h2>
+<ul><li><a rel="nofollow" class="external text" href="http://www.acpica.org/">ACPICA Website</a>
+</li><li><a rel="nofollow" class="external text" href="http://acpica.org/sites/acpica/files/acpica-reference_2.pdf">ACPICA Programmer Reference</a>. Explains how to integrate it in your OS.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 212/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2593-0!*!0!!en!*!* and timestamp 20180121063953 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ACPICA&amp;oldid=21385">http://wiki.osdev.org/index.php?title=ACPICA&amp;oldid=21385</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:ACPI" title="Category:ACPI">ACPI</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ACPICA" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ACPICA"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:ACPICA&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ACPICA#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ACPICA" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ACPICA&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ACPICA&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ACPICA#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ACPICA" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ACPICA" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ACPICA&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ACPICA&amp;oldid=21385" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 August 2017, at 00:41.</li>
+											<li id="footer-info-viewcount">This page has been accessed 24,894 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.039 secs. -->
+	</body>
+</html>

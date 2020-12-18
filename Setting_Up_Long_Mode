@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Setting Up Long Mode - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Setting_Up_Long_Mode", "wgTitle": "Setting Up Long Mode", "wgCurRevisionId": 21675, "wgArticleId": 2814, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Setting_Up_Long_Mode action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Setting Up Long Mode</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Setting_Up_Long_Mode#mw-head">navigation</a>,
+					<a href="Setting_Up_Long_Mode#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Setting_Up_Long_Mode#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Setting_Up_Long_Mode#Introduction"><span class="tocnumber">2</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Setting_Up_Long_Mode#Detecting_the_Presence_of_Long_Mode"><span class="tocnumber">3</span> <span class="toctext">Detecting the Presence of Long Mode</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="Setting_Up_Long_Mode#Detection_of_CPUID"><span class="tocnumber">3.1</span> <span class="toctext">Detection of CPUID</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Setting_Up_Long_Mode#x86_or_x86-64"><span class="tocnumber">3.2</span> <span class="toctext">x86 or x86-64</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="Setting_Up_Long_Mode#Entering_Long_Mode"><span class="tocnumber">4</span> <span class="toctext">Entering Long Mode</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="Setting_Up_Long_Mode#Setting_up_the_Paging"><span class="tocnumber">4.1</span> <span class="toctext">Setting up the Paging</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Setting_Up_Long_Mode#Future_of_x86-64_-_the_PML5"><span class="tocnumber">4.2</span> <span class="toctext">Future of x86-64 - the PML5</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="Setting_Up_Long_Mode#The_Switch_from_Real_Mode"><span class="tocnumber">4.3</span> <span class="toctext">The Switch from Real Mode</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Setting_Up_Long_Mode#The_Switch_from_Protected_Mode"><span class="tocnumber">4.4</span> <span class="toctext">The Switch from Protected Mode</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="Setting_Up_Long_Mode#Entering_the_64-bit_Submode"><span class="tocnumber">5</span> <span class="toctext">Entering the 64-bit Submode</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="Setting_Up_Long_Mode#Sample"><span class="tocnumber">5.1</span> <span class="toctext">Sample</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="Setting_Up_Long_Mode#See_also"><span class="tocnumber">6</span> <span class="toctext">See also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="Setting_Up_Long_Mode#Articles"><span class="tocnumber">6.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="Setting_Up_Long_Mode#Threads"><span class="tocnumber">6.2</span> <span class="toctext">Threads</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="Setting_Up_Long_Mode#Wikipedia"><span class="tocnumber">6.3</span> <span class="toctext">Wikipedia</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Overview"> Overview </span></h2>
+<ul><li>Covering long mode.
+</li><li>How to detect long mode (Recommended read: <a href="CPUID" title="CPUID">CPUID</a>).
+</li><li>How to set up paging for long mode (Recommended reads: <a href="Setting_Up_Paging" title="Setting Up Paging">Setting up Paging</a> and <a href="Setting_Up_Paging_With_PAE" title="Setting Up Paging With PAE">Setting up Paging using PAE</a>).
+</li><li>How to enter long mode.
+</li><li>How to set up the GDT for long mode (Recommended read: <a href="GDT" title="GDT" class="mw-redirect">GDT</a>).
+</li></ul>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>What is long mode and why set it up? Since the introduction of the x86-64 processors (AMD64, Intel 64 (a.k.a. EM64T), VIA Nano) a new mode has been introduced as well, which is called long mode. Long mode basically consists out of two sub modes which are the actual 64-bit mode and compatibility mode (32-bit, usually referred to as IA32e in the AMD64 manuals). What we are interested in is simply the 64-bit mode as this mode provides a lot of new features such as: registers being extended to 64-bit (rax, rcx, rdx, rbx, rsp, rbp, rip, etc.) and the introduction of eight new general-purpose registers (r8 - r15), but also the introduction of eight new multimedia registers (xmm8 - xmm15). 64-bit mode is basically a new world as it is almost completely void of the segmentation that was used on the 8086-processors and the <a href="GDT" title="GDT" class="mw-redirect">GDT</a>, the <a href="IDT" title="IDT" class="mw-redirect">IDT</a>, <a href="Paging" title="Paging">paging</a>, etc. are also kind of different compared to the old 32-bit mode (a.k.a. <a href="Protected_Mode" title="Protected Mode">protected mode</a>).
+</p>
+<h2> <span class="mw-headline" id="Detecting_the_Presence_of_Long_Mode"> Detecting the Presence of Long Mode </span></h2>
+<p>There are only three processor vendors so far who have made processors that are capable of entering and using long mode, they're: AMD, Intel and VIA. Basically Intel tried to get 64-bit processors on the market with EM64T, but failed to do so and now they use AMD's x86-64 architecture instead, which means using 64-bit on an Intel processor is (almost) identical to using 64-bit on an AMD processor (and VIA should be identical as well). We can detect the presence of long mode by using the <a href="CPUID" title="CPUID">CPUID-instruction</a>.
+</p>
+<h3> <span class="mw-headline" id="Detection_of_CPUID"> Detection of CPUID </span></h3>
+<p>Basically, detecting whether CPUID is supported by your processor is covered <a href="CPUID" title="CPUID">here</a>, but we will show how to do it here. CPUID is supported when the ID-bit in the FLAGS-register can be flipped. So let's try that, then:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="co1">; Check if CPUID is supported by attempting to flip the ID bit (bit 21) in</span>
+    <span class="co1">; the FLAGS register. If we can flip it, CPUID is available.</span>
+&#160;
+    <span class="co1">; Copy FLAGS in to EAX via stack</span>
+    <span class="kw1">pushfd</span>
+    <span class="kw1">pop</span> <span class="kw3">eax</span>
+&#160;
+    <span class="co1">; Copy to ECX as well for comparing later on</span>
+    <span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="kw3">eax</span>
+&#160;
+    <span class="co1">; Flip the ID bit</span>
+    <span class="kw1">xor</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">1</span> &lt;&lt; <span class="nu0">21</span>
+&#160;
+    <span class="co1">; Copy EAX to FLAGS via the stack</span>
+    <span class="kw1">push</span> <span class="kw3">eax</span>
+    <span class="kw1">popfd</span>
+&#160;
+    <span class="co1">; Copy FLAGS back to EAX (with the flipped bit if CPUID is supported)</span>
+    <span class="kw1">pushfd</span>
+    <span class="kw1">pop</span> <span class="kw3">eax</span>
+&#160;
+    <span class="co1">; Restore FLAGS from the old version stored in ECX (i.e. flipping the ID bit</span>
+    <span class="co1">; back if it was ever flipped).</span>
+    <span class="kw1">push</span> <span class="kw3">ecx</span>
+    <span class="kw1">popfd</span>
+&#160;
+    <span class="co1">; Compare EAX and ECX. If they are equal then that means the bit wasn't</span>
+    <span class="co1">; flipped, and CPUID isn't supported.</span>
+    <span class="kw1">xor</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ecx</span>
+    <span class="kw1">jz</span> <span class="sy0">.</span>NoCPUID
+    <span class="kw1">ret</span></pre></div></div>
+<h3> <span class="mw-headline" id="x86_or_x86-64"> x86 or x86-64 </span></h3>
+<p>Now that CPUID is available we have to check whether long mode can be used or not. Long mode can only be detected using the extended functions of CPUID (&gt; 0x80000000), so we have to check if the function that determines whether long mode is available or not is actually available:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0x80000000</span>    <span class="co1">; Set the A-register to 0x80000000.</span>
+    <span class="kw1">cpuid</span>                  <span class="co1">; CPU identification.</span>
+    <span class="kw1">cmp</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0x80000001</span>    <span class="co1">; Compare the A-register with 0x80000001.</span>
+    <span class="kw1">jb</span> <span class="sy0">.</span>NoLongMode         <span class="co1">; It is less, there is no long mode.</span></pre></div></div>
+<p>Now that we know that extended function is available we can use it to detect long mode:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0x80000001</span>    <span class="co1">; Set the A-register to 0x80000001.</span>
+    <span class="kw1">cpuid</span>                  <span class="co1">; CPU identification.</span>
+    <span class="kw1">test</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">1</span> &lt;&lt; <span class="nu0">29</span>      <span class="co1">; Test if the LM-bit, which is bit 29, is set in the D-register.</span>
+    <span class="kw1">jz</span> <span class="sy0">.</span>NoLongMode         <span class="co1">; They aren't, there is no long mode.</span></pre></div></div>
+<p>Now that we know if long mode is actually supported by the processor, we can actually use it.
+</p>
+<h2> <span class="mw-headline" id="Entering_Long_Mode"> Entering Long Mode </span></h2>
+<p>Entering long mode can be both done from real mode and protected mode, however only protected mode is covered in the Intel and AMD64 manuals. Early AMD documentation explains this process works from real mode as well.
+</p><p>Before anything, it is recommended that you enable the <a href="A20_Line" title="A20 Line">A20 Line</a>; otherwise only odd MiBs can be accessed.
+</p>
+<h3> <span class="mw-headline" id="Setting_up_the_Paging"> Setting up the Paging </span></h3>
+<p>Before we actually cover up the new paging used in x86-64 we should disable the old paging first (you can skip this if you never set up paging in protected mode) as this is required.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">cr0</span>                                   <span class="co1">; Set the A-register to control register 0.</span>
+    <span class="kw1">and</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">01111111111111111111111111111111b</span>     <span class="co1">; Clear the PG-bit, which is bit 31.</span>
+    <span class="kw1">mov</span> <span class="kw3">cr0</span><span class="sy0">,</span> <span class="kw3">eax</span>                                   <span class="co1">; Set control register 0 to the A-register.</span></pre></div></div>
+<p>Now that paging is disabled, we can actually take a look at how paging is set up in x86-64 (It's recommended to read Chapter 5.3 of the AMD64 Architecture Programmer's Manual, Volume 2). First of all, long mode uses PAE paging and therefore you have the page-directory pointer table (PDPT), the page-directory table (PDT) and the page table (PT). There's also another table which now forms the root (instead of the PDPT or the PDT) and that is page-map level-4 table (PML4T). In protected mode a page table entry was only four bytes long, so you had 1024 entries per table. In long mode, however, you only have 512 entries per table as each entry is eight bytes long. This means that one entry in a PT can address 4kB, one entry in a PDT can address 2MB, one entry in a PDPT can address 1GB and one entry in a PML4T can address 512GB. This means that only 256TB can be addressed. The way these tables work is that each entry in the PML4T point to a PDPT, each entry in a PDPT to a PDT and each entry in a PDT to a PT. Each entry in a PT then points to the physical address, that is, if it is marked as present. So how does the MMU/processor know which physical address should be used with which virtual address? Basically each table has 512 entries ranging from 0 to 511. These entries each refer to a specific domain of memory. Like index 0 of the PML4T refers to the first 512GB in virtual memory, index 1 refers to the next 512GB and so on. The same applies to the PDPT, PDT and the PT (except with smaller sizes; 1GB, 2MB and 4kB as seen above). The last gigabyte of virtual memory would be described in the table referred to by 511th index of the PDPT which is referred to by the 511th index of the PML4T or in psuedo-C:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">pagedir_t<span class="sy0">*</span> PDT <span class="sy0">=</span> PML4<span class="br0">&#91;</span><span class="nu0">511</span><span class="br0">&#93;</span><span class="sy0">-&gt;</span>PDPT<span class="br0">&#91;</span><span class="nu0">511</span><span class="br0">&#93;</span><span class="sy0">;</span></pre></div></div>
+<p>Basically, what pages you want to set up and how you want them to be set up is up to you, but I'd identity map the first megabyte and then map some high memory to the memory after the first megabyte, however, this may be pretty difficult to set up first. So let's identity map the first two megabytes. We'll set up four tables at 0x1000 (assuming that this is free to use): a PML4T, a PDPT, a PDT and a PT. Basically we want to identity map the first two megabytes so:
+</p>
+<ul><li>PML4T[0] -&gt; PDPT.
+</li><li>PDPT[0] -&gt; PDT.
+</li><li>PDT[0] -&gt; PT.
+</li><li>PT -&gt; 0x00000000 - 0x00200000.
+</li></ul>
+<p>First we will clear the tables:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">edi</span><span class="sy0">,</span> <span class="nu0">0x1000</span>    <span class="co1">; Set the destination index to 0x1000.</span>
+    <span class="kw1">mov</span> <span class="kw3">cr3</span><span class="sy0">,</span> <span class="kw3">edi</span>       <span class="co1">; Set control register 3 to the destination index.</span>
+    <span class="kw1">xor</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">eax</span>       <span class="co1">; Nullify the A-register.</span>
+    <span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">4096</span>      <span class="co1">; Set the C-register to 4096.</span>
+    <span class="kw1">rep</span> <span class="kw1">stosd</span>          <span class="co1">; Clear the memory.</span>
+    <span class="kw1">mov</span> <span class="kw3">edi</span><span class="sy0">,</span> <span class="kw3">cr3</span>       <span class="co1">; Set the destination index to control register 3.</span></pre></div></div>
+<p>Now that the page are clear we're going to set up the tables, the page tables are going to be located at these addresses:
+</p>
+<ul><li> PML4T - 0x1000.
+</li><li> PDPT - 0x2000.
+</li><li> PDT - 0x3000.
+</li><li> PT - 0x4000.
+</li></ul>
+<p>So lets make PML4T[0] point to the PDPT and so on:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw5">DWORD</span> <span class="br0">&#91;</span><span class="kw3">edi</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0x2003</span>      <span class="co1">; Set the uint32_t at the destination index to 0x2003.</span>
+    <span class="kw1">add</span> <span class="kw3">edi</span><span class="sy0">,</span> <span class="nu0">0x1000</span>              <span class="co1">; Add 0x1000 to the destination index.</span>
+    <span class="kw1">mov</span> <span class="kw5">DWORD</span> <span class="br0">&#91;</span><span class="kw3">edi</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0x3003</span>      <span class="co1">; Set the uint32_t at the destination index to 0x3003.</span>
+    <span class="kw1">add</span> <span class="kw3">edi</span><span class="sy0">,</span> <span class="nu0">0x1000</span>              <span class="co1">; Add 0x1000 to the destination index.</span>
+    <span class="kw1">mov</span> <span class="kw5">DWORD</span> <span class="br0">&#91;</span><span class="kw3">edi</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0x4003</span>      <span class="co1">; Set the uint32_t at the destination index to 0x4003.</span>
+    <span class="kw1">add</span> <span class="kw3">edi</span><span class="sy0">,</span> <span class="nu0">0x1000</span>              <span class="co1">; Add 0x1000 to the destination index.</span></pre></div></div>
+<p>If you haven't noticed already, I used a three. This simply means that the first two bits should be set. These bits indicate that the page is present and that it is readable as well as writable. Now all that's left to do is identity map the first two megabytes:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">ebx</span><span class="sy0">,</span> <span class="nu0">0x00000003</span>          <span class="co1">; Set the B-register to 0x00000003.</span>
+    <span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">512</span>                 <span class="co1">; Set the C-register to 512.</span>
+&#160;
+<span class="sy0">.</span>SetEntry<span class="sy0">:</span>
+    <span class="kw1">mov</span> <span class="kw5">DWORD</span> <span class="br0">&#91;</span><span class="kw3">edi</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw3">ebx</span>         <span class="co1">; Set the uint32_t at the destination index to the B-register.</span>
+    <span class="kw1">add</span> <span class="kw3">ebx</span><span class="sy0">,</span> <span class="nu0">0x1000</span>              <span class="co1">; Add 0x1000 to the B-register.</span>
+    <span class="kw1">add</span> <span class="kw3">edi</span><span class="sy0">,</span> <span class="nu0">8</span>                   <span class="co1">; Add eight to the destination index.</span>
+    <span class="kw1">loop</span> <span class="sy0">.</span>SetEntry               <span class="co1">; Set the next entry.</span></pre></div></div>
+<p>Now we should enable PAE-paging by setting the PAE-bit in the fourth control register:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> cr4                 <span class="co1">; Set the A-register to control register 4.</span>
+    <span class="kw1">or</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">1</span> &lt;&lt; <span class="nu0">5</span>               <span class="co1">; Set the PAE-bit, which is the 6th bit (bit 5).</span>
+    <span class="kw1">mov</span> cr4<span class="sy0">,</span> <span class="kw3">eax</span>                 <span class="co1">; Set control register 4 to the A-register.</span></pre></div></div>
+<p>Now paging is set up, but it isn't enabled yet.
+</p>
+<h3> <span class="mw-headline" id="Future_of_x86-64_-_the_PML5"> Future of x86-64 - the PML5 </span></h3>
+<p>While not yet in a production processor, or indeed the reference manual, Intel have already released a white paper <a rel="nofollow" class="external text" href="https://software.intel.com/sites/default/files/managed/2b/80/5-level_paging_white_paper.pdf">PML5 White Paper</a> about 5 level paging. These processors will support a 128PiB address space, and are furthermore expected to support up to 4PiB of physical memory (far above the current 256 TiB/64 TiB limits). Support for this is detected as follows:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">0x7</span>                 <span class="co1">; You might want to check for page 7 first!</span>
+    <span class="kw1">xor</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="kw3">ecx</span>
+    <span class="kw1">cpuid</span>
+    <span class="kw1">test</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">1</span>&lt;&lt;<span class="nu0">16</span><span class="br0">&#41;</span>
+    <span class="kw1">jnz</span> <span class="nu0">.5</span>_level_paging</pre></div></div>
+<p>The paging structures are identical to the 4 level versions, there's just an added layer of indirection. Your recursive address (if you use recursive mappings) will change.
+5 level paging is enabled if CR4.LA57=1, and EFER.LMA=1.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">BITS <span class="nu0">32</span>
+<span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> cr4
+<span class="kw1">or</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">1</span>&lt;&lt;<span class="nu0">12</span><span class="br0">&#41;</span> <span class="co1">;CR4.LA57</span>
+<span class="kw1">mov</span> cr4<span class="sy0">,</span> <span class="kw3">eax</span></pre></div></div>
+<p>Note that attempting to set CR4.LA57 while EFER.LMA=1 causes a #GP general protection fault. You therefore need to drop into protected mode or set up 5 level paging before entering long mode in the first place.
+</p>
+<h3> <span class="mw-headline" id="The_Switch_from_Real_Mode"> The Switch from Real Mode </span></h3>
+<p>There's not much left to do. We should set the long mode bit in the EFER MSR and then we should enable paging and protected mode and then we are in compatibility mode (which is part of long mode).
+</p><p>So we first set the LM-bit:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">0xC0000080</span>          <span class="co1">; Set the C-register to 0xC0000080, which is the EFER MSR.</span>
+    <span class="kw1">rdmsr</span>                        <span class="co1">; Read from the model-specific register.</span>
+    <span class="kw1">or</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">1</span> &lt;&lt; <span class="nu0">8</span>               <span class="co1">; Set the LM-bit which is the 9th bit (bit 8).</span>
+    <span class="kw1">wrmsr</span>                        <span class="co1">; Write to the model-specific register.</span></pre></div></div>
+<p>Enabling paging and protected mode:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">cr0</span>                 <span class="co1">; Set the A-register to control register 0.</span>
+    <span class="kw1">or</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">1</span> &lt;&lt; <span class="nu0">31</span> | <span class="nu0">1</span> &lt;&lt; <span class="nu0">0</span>     <span class="co1">; Set the PG-bit, which is the 31nd bit, and the PM-bit, which is the 0th bit.</span>
+    <span class="kw1">mov</span> <span class="kw3">cr0</span><span class="sy0">,</span> <span class="kw3">eax</span>                 <span class="co1">; Set control register 0 to the A-register.</span></pre></div></div>
+<p>Now we're in compatibility mode.
+</p>
+<h3> <span class="mw-headline" id="The_Switch_from_Protected_Mode"> The Switch from Protected Mode </span></h3>
+<p>There's not much left to do. We should set the long mode bit in the EFER MSR and then we should enable paging and then we are in compatibility mode (which is part of long mode).
+</p><p>So we first set the LM-bit:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">0xC0000080</span>          <span class="co1">; Set the C-register to 0xC0000080, which is the EFER MSR.</span>
+    <span class="kw1">rdmsr</span>                        <span class="co1">; Read from the model-specific register.</span>
+    <span class="kw1">or</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">1</span> &lt;&lt; <span class="nu0">8</span>               <span class="co1">; Set the LM-bit which is the 9th bit (bit 8).</span>
+    <span class="kw1">wrmsr</span>                        <span class="co1">; Write to the model-specific register.</span></pre></div></div>
+<p>Enabling paging:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">cr0</span>                 <span class="co1">; Set the A-register to control register 0.</span>
+    <span class="kw1">or</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">1</span> &lt;&lt; <span class="nu0">31</span>              <span class="co1">; Set the PG-bit, which is the 32nd bit (bit 31).</span>
+    <span class="kw1">mov</span> <span class="kw3">cr0</span><span class="sy0">,</span> <span class="kw3">eax</span>                 <span class="co1">; Set control register 0 to the A-register.</span></pre></div></div>
+<p>Now we're in compatibility mode.
+</p>
+<h2> <span class="mw-headline" id="Entering_the_64-bit_Submode"> Entering the 64-bit Submode </span></h2>
+<p>Now that we're in long mode, there's one issue left: we are in the 32-bit compatibility submode and we actually wanted to enter 64-bit long mode. This isn't a hard thing to do. We should load just load a GDT with the 64-bit flags set in the code and data selectors.
+</p><p>Our GDT (see chapter 4.8.1 and 4.8.2 of the AMD64 Architecture Programmer's Manual Volume 2) should look like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">GDT64<span class="sy0">:</span>                           <span class="co1">; Global Descriptor Table (64-bit).</span>
+    <span class="sy0">.</span>Null<span class="sy0">:</span><span class="kw4"> equ</span> $ <span class="sy0">-</span> GDT64         <span class="co1">; The null descriptor.</span>
+    <span class="kw4">dw</span> <span class="nu0">0</span>                         <span class="co1">; Limit (low).</span>
+    <span class="kw4">dw</span> <span class="nu0">0</span>                         <span class="co1">; Base (low).</span>
+    <span class="kw4">db</span> <span class="nu0">0</span>                         <span class="co1">; Base (middle)</span>
+    <span class="kw4">db</span> <span class="nu0">0</span>                         <span class="co1">; Access.</span>
+    <span class="kw4">db</span> <span class="nu0">0</span>                         <span class="co1">; Granularity.</span>
+    <span class="kw4">db</span> <span class="nu0">0</span>                         <span class="co1">; Base (high).</span>
+    <span class="kw4">.Code</span><span class="sy0">:</span><span class="kw4"> equ</span> $ <span class="sy0">-</span> GDT64         <span class="co1">; The code descriptor.</span>
+    <span class="kw4">dw</span> <span class="nu0">0</span>                         <span class="co1">; Limit (low).</span>
+    <span class="kw4">dw</span> <span class="nu0">0</span>                         <span class="co1">; Base (low).</span>
+    <span class="kw4">db</span> <span class="nu0">0</span>                         <span class="co1">; Base (middle)</span>
+    <span class="kw4">db</span> <span class="nu0">10011010b</span>                 <span class="co1">; Access (exec/read).</span>
+    <span class="kw4">db</span> <span class="nu0">00100000b</span>                 <span class="co1">; Granularity.</span>
+    <span class="kw4">db</span> <span class="nu0">0</span>                         <span class="co1">; Base (high).</span>
+    <span class="kw4">.Data</span><span class="sy0">:</span><span class="kw4"> equ</span> $ <span class="sy0">-</span> GDT64         <span class="co1">; The data descriptor.</span>
+    <span class="kw4">dw</span> <span class="nu0">0</span>                         <span class="co1">; Limit (low).</span>
+    <span class="kw4">dw</span> <span class="nu0">0</span>                         <span class="co1">; Base (low).</span>
+    <span class="kw4">db</span> <span class="nu0">0</span>                         <span class="co1">; Base (middle)</span>
+    <span class="kw4">db</span> <span class="nu0">10010010b</span>                 <span class="co1">; Access (read/write).</span>
+    <span class="kw4">db</span> <span class="nu0">00000000b</span>                 <span class="co1">; Granularity.</span>
+    <span class="kw4">db</span> <span class="nu0">0</span>                         <span class="co1">; Base (high).</span>
+    <span class="sy0">.</span>Pointer<span class="sy0">:</span>                    <span class="co1">; The GDT-pointer.</span>
+    <span class="kw4">dw</span> $ <span class="sy0">-</span> GDT64 <span class="sy0">-</span> <span class="nu0">1</span>             <span class="co1">; Limit.</span>
+    <span class="kw4">dq</span> GDT64                     <span class="co1">; Base.</span></pre></div></div>
+<p>Now the only thing left to do is load it and make the jump to 64-bit:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1">    <span class="kw1">lgdt</span> <span class="br0">&#91;</span>GDT64<span class="sy0">.</span>Pointer<span class="br0">&#93;</span>         <span class="co1">; Load the 64-bit global descriptor table.</span>
+    <span class="kw1">jmp</span> GDT64<span class="sy0">.</span><span class="kw4">Code</span><span class="sy0">:</span>Realm64       <span class="co1">; Set the code segment and enter 64-bit long mode.</span></pre></div></div>
+<h3> <span class="mw-headline" id="Sample"> Sample </span></h3>
+<p>Now that we're in 64-bit, we want to do something that is actually 64-bit. In this sample I'm just going with an ordinary clear the screen:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">; Use 64-bit.</span>
+<span class="br0">&#91;</span>BITS <span class="nu0">64</span><span class="br0">&#93;</span>
+&#160;
+Realm64<span class="sy0">:</span>
+    <span class="kw1">cli</span>                           <span class="co1">; Clear the interrupt flag.</span>
+    <span class="kw1">mov</span> <span class="kw3">ax</span><span class="sy0">,</span> GDT64<span class="sy0">.</span><span class="kw4">Data</span>            <span class="co1">; Set the A-register to the data descriptor.</span>
+    <span class="kw1">mov</span> <span class="kw3">ds</span><span class="sy0">,</span> <span class="kw3">ax</span>                    <span class="co1">; Set the data segment to the A-register.</span>
+    <span class="kw1">mov</span> <span class="kw3">es</span><span class="sy0">,</span> <span class="kw3">ax</span>                    <span class="co1">; Set the extra segment to the A-register.</span>
+    <span class="kw1">mov</span> <span class="kw3">fs</span><span class="sy0">,</span> <span class="kw3">ax</span>                    <span class="co1">; Set the F-segment to the A-register.</span>
+    <span class="kw1">mov</span> <span class="kw3">gs</span><span class="sy0">,</span> <span class="kw3">ax</span>                    <span class="co1">; Set the G-segment to the A-register.</span>
+    <span class="kw1">mov</span> <span class="kw3">ss</span><span class="sy0">,</span> <span class="kw3">ax</span>                    <span class="co1">; Set the stack segment to the A-register.</span>
+    <span class="kw1">mov</span> <span class="kw3">edi</span><span class="sy0">,</span> <span class="nu0">0xB8000</span>              <span class="co1">; Set the destination index to 0xB8000.</span>
+    <span class="kw1">mov</span> <span class="kw3">rax</span><span class="sy0">,</span> <span class="nu0">0x1F201F201F201F20</span>   <span class="co1">; Set the A-register to 0x1F201F201F201F20.</span>
+    <span class="kw1">mov</span> <span class="kw3">ecx</span><span class="sy0">,</span> <span class="nu0">500</span>                  <span class="co1">; Set the C-register to 500.</span>
+    <span class="kw1">rep</span> stosq                     <span class="co1">; Clear the screen.</span>
+    <span class="kw1">hlt</span>                           <span class="co1">; Halt the processor.</span></pre></div></div>
+<p>It is very important that you don't enable the interrupts (unless you have set up a 64-bit IDT of course).
+</p>
+<h2> <span class="mw-headline" id="See_also"> See also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="EM64T" title="EM64T">Intel EM64T</a>
+</li><li> <a href="X86-64" title="X86-64">X86-64</a>
+</li><li> <a href="Creating_a_64-bit_kernel" title="Creating a 64-bit kernel">Creating a 64-bit kernel</a>
+</li><li> <a href="Entering_Long_Mode_Directly" title="Entering Long Mode Directly">Entering Long Mode Directly</a>
+</li></ul>
+<h3> <span class="mw-headline" id="Threads"> Threads </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?f=8&amp;t=21601">Wrote a tutorial covering long mode</a> about this article.
+</li><li> <a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?f=1&amp;t=21748">Loading a higher-half kernel</a> on setting up long mode for a higher-half kernel.
+</li><li> <a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?f=1&amp;t=21772">Setting up the stack after the switch to long mode</a> on the stack segment note.
+</li></ul>
+<h3> <span class="mw-headline" id="Wikipedia"> Wikipedia </span></h3>
+<ul><li> <a href="http://wikipedia.org/wiki/AMD64" class="extiw" title="wikipedia:AMD64">AMD64</a>
+</li><li> <a href="http://wikipedia.org/wiki/64-bit" class="extiw" title="wikipedia:64-bit">64-bit</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 271/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2814-0!*!0!!en!*!* and timestamp 20180121040518 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Setting_Up_Long_Mode&amp;oldid=21675">http://wiki.osdev.org/index.php?title=Setting_Up_Long_Mode&amp;oldid=21675</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Setting_Up_Long_Mode" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Setting_Up_Long_Mode"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Setting_Up_Long_Mode"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Setting_Up_Long_Mode#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Setting_Up_Long_Mode" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Setting_Up_Long_Mode&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Setting_Up_Long_Mode&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Setting_Up_Long_Mode#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Setting_Up_Long_Mode" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Setting_Up_Long_Mode" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Setting_Up_Long_Mode&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Setting_Up_Long_Mode&amp;oldid=21675" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 10 November 2017, at 19:46.</li>
+											<li id="footer-info-viewcount">This page has been accessed 58,552 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Setting_Up_Long_Mode" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Setting_Up_Long_Mode" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Setting_Up_Long_Mode&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Setting_Up_Long_Mode&amp;oldid=21675" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 10 November 2017, at 19:46.</li>
+											<li id="footer-info-viewcount">This page has been accessed 58,552 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.028 secs. -->
+	</body>
+</html>

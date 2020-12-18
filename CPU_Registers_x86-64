@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>CPU Registers x86-64 - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "CPU_Registers_x86-64", "wgTitle": "CPU Registers x86-64", "wgCurRevisionId": 21978, "wgArticleId": 3774, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["CPU Registers", "Disputed Pages"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-CPU_Registers_x86-64 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">CPU Registers x86-64</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="CPU_Registers_x86-64#mw-head">navigation</a>,
+					<a href="CPU_Registers_x86-64#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><br />
+</p>
+<center>
+<table style="border: 1px solid #cfcfbf; padding: .0em .25em .0em; background-color: #f0f0ff; text-align: center;">
+<tr>
+<td>
+<p><font color="black">The factual accuracy of this article or section is <a href="Category:Disputed_Pages" title="Category:Disputed Pages">disputed</a>.</font><br /><small><font color="red">Please see the relevant discussion on the <a href="Talk:CPU_Registers_x86-64" title="Talk:CPU Registers x86-64">talk page</a>.</font></small>
+</p>
+</td>
+<td>
+</td></tr></table>
+</center>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="CPU_Registers_x86-64#General_Purpose_Registers"><span class="tocnumber">1</span> <span class="toctext">General Purpose Registers</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="CPU_Registers_x86-64#Index_Registers"><span class="tocnumber">2</span> <span class="toctext">Index Registers</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="CPU_Registers_x86-64#Pointer_Registers"><span class="tocnumber">3</span> <span class="toctext">Pointer Registers</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="CPU_Registers_x86-64#Segment_Registers"><span class="tocnumber">4</span> <span class="toctext">Segment Registers</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="CPU_Registers_x86-64#RFLAGS_Register"><span class="tocnumber">5</span> <span class="toctext">RFLAGS Register</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="CPU_Registers_x86-64#Control_Registers"><span class="tocnumber">6</span> <span class="toctext">Control Registers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="CPU_Registers_x86-64#CR0"><span class="tocnumber">6.1</span> <span class="toctext">CR0</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="CPU_Registers_x86-64#CR2"><span class="tocnumber">6.2</span> <span class="toctext">CR2</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="CPU_Registers_x86-64#CR3"><span class="tocnumber">6.3</span> <span class="toctext">CR3</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="CPU_Registers_x86-64#CR4"><span class="tocnumber">6.4</span> <span class="toctext">CR4</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="CPU_Registers_x86-64#CR8"><span class="tocnumber">6.5</span> <span class="toctext">CR8</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="CPU_Registers_x86-64#CR1.2C_CR5-7.2C_CR9-15"><span class="tocnumber">6.6</span> <span class="toctext">CR1, CR5-7, CR9-15</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="CPU_Registers_x86-64#MSRs"><span class="tocnumber">7</span> <span class="toctext">MSRs</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="CPU_Registers_x86-64#IA32_EFER"><span class="tocnumber">7.1</span> <span class="toctext">IA32_EFER</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="CPU_Registers_x86-64#Debug_Registers"><span class="tocnumber">8</span> <span class="toctext">Debug Registers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-16"><a href="CPU_Registers_x86-64#DR0_-_DR3"><span class="tocnumber">8.1</span> <span class="toctext">DR0 - DR3</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="CPU_Registers_x86-64#DR6"><span class="tocnumber">8.2</span> <span class="toctext">DR6</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="CPU_Registers_x86-64#DR7"><span class="tocnumber">8.3</span> <span class="toctext">DR7</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-19"><a href="CPU_Registers_x86-64#Test_Registers"><span class="tocnumber">9</span> <span class="toctext">Test Registers</span></a></li>
+<li class="toclevel-1 tocsection-20"><a href="CPU_Registers_x86-64#Protected_Mode_Registers"><span class="tocnumber">10</span> <span class="toctext">Protected Mode Registers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-21"><a href="CPU_Registers_x86-64#GDTR"><span class="tocnumber">10.1</span> <span class="toctext">GDTR</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="CPU_Registers_x86-64#LDTR"><span class="tocnumber">10.2</span> <span class="toctext">LDTR</span></a></li>
+<li class="toclevel-2 tocsection-23"><a href="CPU_Registers_x86-64#IDTR"><span class="tocnumber">10.3</span> <span class="toctext">IDTR</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="General_Purpose_Registers">General Purpose Registers</span></h2>
+<table class="wikitable" border="1">
+
+<tr>
+<th colspan="5"> Monikers
+</th>
+<th rowspan="2"> Description
+</th></tr>
+<tr>
+<th> 64-bit
+</th>
+<th> 32-bit
+</th>
+<th> 16-bit
+</th>
+<th> 8 high bits of lower 16 bits
+</th>
+<th> 8-bit
+</th></tr>
+<tr>
+<td> RAX
+</td>
+<td> EAX
+</td>
+<td> AX
+</td>
+<td> AH
+</td>
+<td> AL
+</td>
+<td> Accumulator
+</td></tr>
+<tr>
+<td> RBX
+</td>
+<td> EBX
+</td>
+<td> BX
+</td>
+<td> BH
+</td>
+<td> BL
+</td>
+<td> Base
+</td></tr>
+<tr>
+<td> RCX
+</td>
+<td> ECX
+</td>
+<td> CX
+</td>
+<td> CH
+</td>
+<td> CL
+</td>
+<td> Counter
+</td></tr>
+<tr>
+<td> RDX
+</td>
+<td> EDX
+</td>
+<td> DX
+</td>
+<td> DH
+</td>
+<td> DL
+</td>
+<td> Data (commonly extends the A register)
+</td></tr>
+<tr>
+<td> RBP
+</td>
+<td> EBP
+</td>
+<td> BP
+</td>
+<td>
+</td>
+<td> BPL
+</td>
+<td> Base Pointer (meant for stack frames)
+</td></tr>
+<tr>
+<td> R8
+</td>
+<td> R8D
+</td>
+<td> R8W
+</td>
+<td>
+</td>
+<td> R8B
+</td>
+<td>
+</td></tr>
+<tr>
+<td> R9
+</td>
+<td> R9D
+</td>
+<td> R9W
+</td>
+<td>
+</td>
+<td> R9B
+</td>
+<td>
+</td></tr>
+<tr>
+<td> R10
+</td>
+<td> R10D
+</td>
+<td> R10W
+</td>
+<td>
+</td>
+<td> R10B
+</td>
+<td>
+</td></tr>
+<tr>
+<td> R11
+</td>
+<td> R11D
+</td>
+<td> R11W
+</td>
+<td>
+</td>
+<td> R11B
+</td>
+<td>
+</td></tr>
+<tr>
+<td> R12
+</td>
+<td> R12D
+</td>
+<td> R12W
+</td>
+<td>
+</td>
+<td> R12B
+</td>
+<td>
+</td></tr>
+<tr>
+<td> R13
+</td>
+<td> R13D
+</td>
+<td> R13W
+</td>
+<td>
+</td>
+<td> R13B
+</td>
+<td>
+</td></tr>
+<tr>
+<td> R14
+</td>
+<td> R14D
+</td>
+<td> R14W
+</td>
+<td>
+</td>
+<td> R14B
+</td>
+<td>
+</td></tr>
+<tr>
+<td> R15
+</td>
+<td> R15D
+</td>
+<td> R15W
+</td>
+<td>
+</td>
+<td> R15B
+</td>
+<td>
+</td></tr></table>
+<p>Note: you cannot access <i>AH</i>, <i>BH</i>, <i>CH</i> and <i>DH</i> when using the REX.W instruction prefix.
+This prefix is added (automatically by assemblers) when an operand contains a 64-bit register.
+</p><p>The index registers and stack pointer below can also be used as general-purpose registers.
+</p>
+<h2> <span class="mw-headline" id="Index_Registers">Index Registers</span></h2>
+<table class="wikitable" border="1">
+
+<tr>
+<th colspan="4"> Monikers
+</th>
+<th rowspan="2"> Description
+</th></tr>
+<tr>
+<th> 64-bit
+</th>
+<th> 32-bit
+</th>
+<th> 16-bit
+</th>
+<th> 8-bit
+</th></tr>
+<tr>
+<td> RSI
+</td>
+<td> ESI
+</td>
+<td> SI
+</td>
+<td> SIL
+</td>
+<td> Source Index
+</td></tr>
+<tr>
+<td> RDI
+</td>
+<td> EDI
+</td>
+<td> DI
+</td>
+<td> DIL
+</td>
+<td> Destination Index
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Pointer_Registers">Pointer Registers</span></h2>
+<table class="wikitable" border="1">
+
+<tr>
+<th colspan="4"> Monikers
+</th>
+<th rowspan="2"> Description
+</th></tr>
+<tr>
+<th> 64-bit
+</th>
+<th> 32-bit
+</th>
+<th> 16-bit
+</th>
+<th> 8-bit
+</th></tr>
+<tr>
+<td> RSP
+</td>
+<td> ESP
+</td>
+<td> SP
+</td>
+<td> SPL
+</td>
+<td> Stack Pointer
+</td></tr>
+<tr>
+<td> RIP
+</td>
+<td> EIP
+</td>
+<td> IP
+</td>
+<td>
+</td>
+<td> Instruction Pointer
+</td></tr>
+</table>
+<p>Note: The instruction pointer can only be used in RIP-relative addressing, which was introduced with long mode.
+</p>
+<h2> <span class="mw-headline" id="Segment_Registers">Segment Registers</span></h2>
+<p>All these are 16 bits long.
+</p>
+<table class="wikitable" border="1">
+
+<tr>
+<th> Moniker
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> CS
+</td>
+<td> Code Segment
+</td></tr>
+<tr>
+<td> DS
+</td>
+<td> Data Segment
+</td></tr>
+<tr>
+<td> SS
+</td>
+<td> Stack Segment
+</td></tr>
+<tr>
+<td> ES
+</td>
+<td> Extra Segment (used for string operations)
+</td></tr>
+<tr>
+<td> FS
+</td>
+<td> General-purpose Segment
+</td></tr>
+<tr>
+<td> GS
+</td>
+<td> General-purpose Segment
+</td></tr>
+</table>
+<p>Segments of <i>CS</i>, <i>DS</i>, <i>ES</i>, and <i>SS</i> are treated as if their base was 0 no matter what the segment descriptors in the GDT say.
+Exceptions are <i>FS</i> and <i>GS</i> which have MSRs to change their base.
+</p><p>Limit checks are disabled for all segments.
+</p>
+<h2> <span class="mw-headline" id="RFLAGS_Register">RFLAGS Register</span></h2>
+<table class="wikitable" border="1">
+
+<tr>
+<th> Bit(s)
+</th>
+<th> Label
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0
+</td>
+<td> CF
+</td>
+<td> Carry Flag
+</td></tr>
+<tr>
+<td> 1
+</td>
+<td> 1
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 2
+</td>
+<td> PF
+</td>
+<td> Parity Flag
+</td></tr>
+<tr>
+<td> 3
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 4
+</td>
+<td> AF
+</td>
+<td> Auxiliary Carry Flag
+</td></tr>
+<tr>
+<td> 5
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 6
+</td>
+<td> ZF
+</td>
+<td> Zero Flag
+</td></tr>
+<tr>
+<td> 7
+</td>
+<td> SF
+</td>
+<td> Sign Flag
+</td></tr>
+<tr>
+<td> 8
+</td>
+<td> TF
+</td>
+<td> Trap Flag
+</td></tr>
+<tr>
+<td> 9
+</td>
+<td> IF
+</td>
+<td> Interrupt Enable Flag
+</td></tr>
+<tr>
+<td> 10
+</td>
+<td> DF
+</td>
+<td> Direction Flag
+</td></tr>
+<tr>
+<td> 11
+</td>
+<td> OF
+</td>
+<td> Overflow Flag
+</td></tr>
+<tr>
+<td> 12-13
+</td>
+<td> IOPL
+</td>
+<td> I/O Priviledge Level
+</td></tr>
+<tr>
+<td> 14
+</td>
+<td> NT
+</td>
+<td> Nested Task
+</td></tr>
+<tr>
+<td> 15
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 16
+</td>
+<td> RF
+</td>
+<td> Resume Flag
+</td></tr>
+<tr>
+<td> 17
+</td>
+<td> VM
+</td>
+<td> Virtual-8086 Mode
+</td></tr>
+<tr>
+<td> 18
+</td>
+<td> AC
+</td>
+<td> Alignment Check / Access Control
+</td></tr>
+<tr>
+<td> 19
+</td>
+<td> VIF
+</td>
+<td> Virtual Interrupt Flag
+</td></tr>
+<tr>
+<td> 20
+</td>
+<td> VIP
+</td>
+<td> Virtual Interrupt Pending
+</td></tr>
+<tr>
+<td> 21
+</td>
+<td> ID
+</td>
+<td> ID Flag
+</td></tr>
+<tr>
+<td> 22-63
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Control_Registers">Control Registers</span></h2>
+<h4> <span class="mw-headline" id="CR0">CR0</span></h4>
+<table class="wikitable" border="1">
+
+<tr>
+<th> Bit(s)
+</th>
+<th> Label
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0
+</td>
+<td> PE
+</td>
+<td> Protected Mode Enable
+</td></tr>
+<tr>
+<td> 1
+</td>
+<td> MP
+</td>
+<td> Monitor Co-Processor
+</td></tr>
+<tr>
+<td> 2
+</td>
+<td> EM
+</td>
+<td> Emulation
+</td></tr>
+<tr>
+<td> 3
+</td>
+<td> TS
+</td>
+<td> Task Switched
+</td></tr>
+<tr>
+<td> 4
+</td>
+<td> ET
+</td>
+<td> Extension Type
+</td></tr>
+<tr>
+<td> 5
+</td>
+<td> NE
+</td>
+<td> Numeric Error
+</td></tr>
+<tr>
+<td> 6-15
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 16
+</td>
+<td> WP
+</td>
+<td> Write Protect
+</td></tr>
+<tr>
+<td> 17
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 18
+</td>
+<td> AM
+</td>
+<td> Alignment Mask
+</td></tr>
+<tr>
+<td> 19-28
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 29
+</td>
+<td> NW
+</td>
+<td> Not-Write Through
+</td></tr>
+<tr>
+<td> 30
+</td>
+<td> CD
+</td>
+<td> Cache Disable
+</td></tr>
+<tr>
+<td> 31
+</td>
+<td> PG
+</td>
+<td> Paging
+</td></tr>
+<tr>
+<td> 32-63
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+</table>
+<p>NOTE that this register is the only control register that can be written and read via 2 ways unlike the other that can be accessed only via the MOV instruction
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">;way 1:</span>
+<span class="co1">;write:</span>
+<span class="kw1">mov</span> <span class="kw3">cr0</span><span class="sy0">,</span>reg32<span class="br0">&#40;</span><span class="nu0">64</span><span class="br0">&#41;</span>
+<span class="co1">;read:</span>
+<span class="kw1">mov</span> reg32<span class="br0">&#40;</span><span class="nu0">64</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">cr0</span> 
+<span class="co1">;----------------------</span>
+<span class="co1">;way 2:</span>
+<span class="co1">;write:</span>
+<span class="kw1">lmsw</span> reg16<span class="br0">&#40;</span><span class="nu0">32</span><span class="sy0">/</span><span class="nu0">64</span><span class="br0">&#41;</span> <span class="co1">; the 'w' in lms(w) stands for word size (16 bit) but the instruction itself can modify the upper 48 bit of cr0 using instruction overrides.</span>
+&#160;
+<span class="co1">;read:</span>
+<span class="kw1">smsw</span> reg16<span class="br0">&#40;</span><span class="nu0">32</span><span class="sy0">/</span><span class="nu0">64</span><span class="br0">&#41;</span> <span class="co1">; SAME as above</span></pre></div></div>
+<h4> <span class="mw-headline" id="CR2">CR2</span></h4>
+<p>This control register contains the linear (virtual) address which triggered a page fault, available in the page fault's interrupt handler.
+</p>
+<h4> <span class="mw-headline" id="CR3">CR3</span></h4>
+<table class="wikitable" border="1">
+
+<tr>
+<th colspan="2"> Bit(s)
+</th>
+<th> Label
+</th>
+<th> Description
+</th>
+<th> Condition
+</th></tr>
+<tr>
+<td rowspan="4"> 0-11
+</td>
+<td> 0-2
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td>
+<td rowspan="4"> CR4.PCIDE = 0
+</td></tr>
+<tr>
+<td> 3
+</td>
+<td> PWT
+</td>
+<td> Page-Level Write Through
+</td></tr>
+<tr>
+<td> 5
+</td>
+<td> PCD
+</td>
+<td> Page-Level Cache Disable
+</td></tr>
+<tr>
+<td> 5-11
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td colspan="2"> 0-11
+</td>
+<td colspan="2"> PCID
+</td>
+<td> CR4.PCIDE = 1
+</td></tr>
+<tr>
+<td colspan="2"> 12-63
+</td>
+<td colspan="2"> Physical Base Address of the PML4
+</td></tr>
+</table>
+<p>Note that this must be page aligned
+</p>
+<h4> <span class="mw-headline" id="CR4">CR4</span></h4>
+<table class="wikitable" border="1">
+
+<tr>
+<th> Bit(s)
+</th>
+<th> Label
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0
+</td>
+<td> VME
+</td>
+<td> Virtual-8086 Mode Extensions
+</td></tr>
+<tr>
+<td> 1
+</td>
+<td> PVI
+</td>
+<td> Protected Mode Virtual Interrupts
+</td></tr>
+<tr>
+<td> 2
+</td>
+<td> TSD
+</td>
+<td> Time Stamp enabled only in ring 0
+</td></tr>
+<tr>
+<td> 3
+</td>
+<td> DE
+</td>
+<td> Debugging Extensions
+</td></tr>
+<tr>
+<td> 4
+</td>
+<td> PSE
+</td>
+<td> Page Size Extension
+</td></tr>
+<tr>
+<td> 5
+</td>
+<td> PAE
+</td>
+<td> Physical Address Extension
+</td></tr>
+<tr>
+<td> 6
+</td>
+<td> MCE
+</td>
+<td> Machine Check Exception
+</td></tr>
+<tr>
+<td> 7
+</td>
+<td> PGE
+</td>
+<td> Page Global Enable
+</td></tr>
+<tr>
+<td> 8
+</td>
+<td> PCE
+</td>
+<td> Performance Monitoring Counter Enable
+</td></tr>
+<tr>
+<td> 9
+</td>
+<td> OSFXSR
+</td>
+<td> OS support for fxsave and fxrstor instructions
+</td></tr>
+<tr>
+<td> 10
+</td>
+<td> OSXMMEXCPT
+</td>
+<td> OS Support for unmasked simd floating point exceptions
+</td></tr>
+<tr>
+<td> 11
+</td>
+<td> UMIP
+</td>
+<td> User-Mode Instruction Prevention (SGDT, SIDT, SLDT, SMSW, and STR are disabled in user mode)
+</td></tr>
+<tr>
+<td> 12
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 13
+</td>
+<td> VMXE
+</td>
+<td> Virtual Machine Extensions Enable
+</td></tr>
+<tr>
+<td> 14
+</td>
+<td> SMXE
+</td>
+<td> Safer Mode Extensions Enable
+</td></tr>
+<tr>
+<td> 15
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 17
+</td>
+<td> PCIDE
+</td>
+<td> PCID Enable
+</td></tr>
+<tr>
+<td> 18
+</td>
+<td> OSXSAVE
+</td>
+<td> XSAVE And Processor Extended States Enable
+</td></tr>
+<tr>
+<td> 19
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 20
+</td>
+<td> SMEP
+</td>
+<td> Supervisor Mode Executions Protection Enable
+</td></tr>
+<tr>
+<td> 21
+</td>
+<td> SMAP
+</td>
+<td> Supervisor Mode Access Protection Enable
+</td></tr>
+<tr>
+<td> 22-63
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+</table>
+<h4> <span class="mw-headline" id="CR8">CR8</span></h4>
+<p>CR8 is a new register accessible in 64-bit mode using the REX prefix. CR8 is used to prioritize external <a href="Interrupts" title="Interrupts">interrupts</a> and is referred to as the task-priority register (TPR).
+</p><p>The AMD64 architecture allows software to define up to 15 external interrupt-priority classes. Priority classes are numbered from 1 to 15, with priority-class 1 being the lowest and priority-class 15 the highest. CR8 uses the four low-order bits for specifying a task priority and the remaining 60 bits are reserved and must be written with zeros.
+</p><p>System software can use the TPR register to temporarily block low-priority interrupts from interrupting a high-priority task. This is accomplished by loading TPR with a value corresponding to the highest-priority interrupt that is to be blocked. For example, loading TPR with a value of 9 (1001b) blocks all interrupts with a priority class of 9 or less, while allowing all interrupts with a priority class of 10 or more to be recognized. Loading TPR with 0 enables all external interrupts. Loading TPR with 15 (1111b) disables all external interrupts.
+</p><p>The TPR is cleared to 0 on reset.
+</p>
+<table class="wikitable" border="1">
+
+<tr>
+<th>Bit
+</th>
+<th>Purpose
+</th></tr>
+<tr>
+<td>0-3
+</td>
+<td>Priority
+</td></tr>
+<tr>
+<td>4-63
+</td>
+<td>Reserved
+</td></tr></table>
+<h4> <span class="mw-headline" id="CR1.2C_CR5-7.2C_CR9-15">CR1, CR5-7, CR9-15</span></h4>
+<p>Reserved, the cpu will throw a #ud exeption when trying to access them.
+</p>
+<h2> <span class="mw-headline" id="MSRs">MSRs</span></h2>
+<h4> <span class="mw-headline" id="IA32_EFER">IA32_EFER</span></h4>
+<p>Extended Feature Enable Register (EFER) is a <a href="MSR" title="MSR" class="mw-redirect">model-specific register</a> added in the AMD K6 processor, to allow enabling the SYSCALL/SYSRET instruction, and later for entering and exiting <a href="X86-64" title="X86-64">long mode</a>. This register becomes architectural in <a href="AMD64" title="AMD64" class="mw-redirect">AMD64</a> and has been adopted by Intel. Its MSR number is 0xC0000080.
+</p>
+<table class="wikitable" border="1">
+
+<tr>
+<th> Bit(s)
+</th>
+<th> Label
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0
+</td>
+<td> SCE
+</td>
+<td> System Call Extensions
+</td></tr>
+<tr>
+<td> 1-7
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+<tr>
+<td> 8
+</td>
+<td> LME
+</td>
+<td> Long Mode Enable
+</td></tr>
+<tr>
+<td> 10
+</td>
+<td> LMA
+</td>
+<td> Long Mode Active
+</td></tr>
+<tr>
+<td> 11
+</td>
+<td> NXE
+</td>
+<td> No-Execute Enable
+</td></tr>
+<tr>
+<td> 12
+</td>
+<td> SVME
+</td>
+<td> Secure Virtual Machine Enable
+</td></tr>
+<tr>
+<td> 13
+</td>
+<td> LMSLE
+</td>
+<td> Long Mode Segment Limit Enable
+</td></tr>
+<tr>
+<td> 14
+</td>
+<td> FFXSR
+</td>
+<td> Fast FXSAVE/FXRSTOR
+</td></tr>
+<tr>
+<td> 15
+</td>
+<td> TCE
+</td>
+<td> Translation Cache Extension
+</td></tr>
+<tr>
+<td> 16-63
+</td>
+<td> 0
+</td>
+<td> Reserved
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Debug_Registers">Debug Registers</span></h2>
+<h4> <span class="mw-headline" id="DR0_-_DR3">DR0 - DR3</span></h4>
+<p>Contain linear addresses of up to 4 breakpoints. If paging is enabled, they are translated to physical addresses.
+</p>
+<h4> <span class="mw-headline" id="DR6">DR6</span></h4>
+<p>It permits the debugger to determine which debug conditions have occured. When an enabled debug exception is enabled, low order bits 0-3 are set before entering debug exception handler.
+</p>
+<h4> <span class="mw-headline" id="DR7">DR7</span></h4>
+<table class="wikitable" border="1">
+
+<tr>
+<th> Bit
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 0
+</td>
+<td> Local DR0 Breakpoint
+</td></tr>
+<tr>
+<td> 1
+</td>
+<td> Global DR0 Breakpoint
+</td></tr>
+<tr>
+<td> 2
+</td>
+<td> Local DR1 Breakpoint
+</td></tr>
+<tr>
+<td> 3
+</td>
+<td> Global DR1 Breakpoint
+</td></tr>
+<tr>
+<td> 4
+</td>
+<td> Local DR2 Breakpoint
+</td></tr>
+<tr>
+<td> 5
+</td>
+<td> Global DR2 Breakpoint
+</td></tr>
+<tr>
+<td> 6
+</td>
+<td> Local DR3 Breakpoint
+</td></tr>
+<tr>
+<td> 7
+</td>
+<td> Global DR3 Breakpoint
+</td></tr>
+<tr>
+<td> 16-17
+</td>
+<td> Conditions for DR0
+</td></tr>
+<tr>
+<td> 18-19
+</td>
+<td> Size of DR0 Breakpoint
+</td></tr>
+<tr>
+<td> 20-21
+</td>
+<td> Conditions for DR1
+</td></tr>
+<tr>
+<td> 22-23
+</td>
+<td> Size of DR1 Breakpoint
+</td></tr>
+<tr>
+<td> 24-25
+</td>
+<td> Conditions for DR2
+</td></tr>
+<tr>
+<td> 26-27
+</td>
+<td> Size of DR2 Breakpoint
+</td></tr>
+<tr>
+<td> 28-29
+</td>
+<td> Conditions for DR3
+</td></tr>
+<tr>
+<td> 30-31
+</td>
+<td> Size of DR3 Breakpoint
+</td></tr>
+</table>
+<p>A local breakpoint bit deactivates on hardware task switches, while a global does not.<br />
+00b condition means execution break, 01b means a write watchpoint, and 11b means an R/W watchpoint. 10b is reserved for I/O R/W (unsupported).
+</p>
+<h2> <span class="mw-headline" id="Test_Registers">Test Registers</span></h2>
+<table class="wikitable" border="1">
+
+<tr>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> TR3 - TR5
+</td>
+<td> Undocumented
+</td></tr>
+<tr>
+<td> TR6
+</td>
+<td> Test Command Register
+</td></tr>
+<tr>
+<td> TR7
+</td>
+<td> Test Data Register
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Protected_Mode_Registers">Protected Mode Registers</span></h2>
+<h4> <span class="mw-headline" id="GDTR">GDTR</span></h4>
+<table class="wikitable" border="1">
+
+<tr>
+<th colspan="2"> Operand Size
+</th>
+<th rowspan="2"> Label
+</th>
+<th rowspan="2"> Description
+</th></tr>
+<tr>
+<th> 64-bit
+</th>
+<th> 32-bit
+</th></tr>
+<tr>
+<td colspan="2" style="text-align:center"> Bits 0-15
+</td>
+<td> Limit
+</td>
+<td> Size of <a href="GDT" title="GDT" class="mw-redirect">GDT</a>
+</td></tr>
+<tr>
+<td> Bits 16-79
+</td>
+<td> Bits 16-47
+</td>
+<td> Base
+</td>
+<td> Starting Address of GDT
+</td></tr>
+</table>
+<h4> <span class="mw-headline" id="LDTR">LDTR</span></h4>
+<p>Stores the segment selector of the <a href="LDT" title="LDT">LDT</a>.
+</p>
+<h4> <span class="mw-headline" id="IDTR">IDTR</span></h4>
+<table class="wikitable" border="1">
+<tr>
+<th colspan="2"> Operand Size
+</th>
+<th rowspan="2"> Label
+</th>
+<th rowspan="2"> Description
+</th></tr>
+<tr>
+<th> 64-bit
+</th>
+<th> 32-bit
+</th></tr>
+<tr>
+<td colspan="2" style="text-align:center"> Bits 0-15
+</td>
+<td> Limit
+</td>
+<td> Size of <a href="IDT" title="IDT" class="mw-redirect">IDT</a>
+</td></tr>
+<tr>
+<td> Bits 16-79
+</td>
+<td> Bits 16-47
+</td>
+<td> Base
+</td>
+<td> Starting Address of IDT
+</td></tr>
+</table>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 146/1000000
+Post-expand include size: 408/2097152 bytes
+Template argument size: 25/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3774-0!*!0!!en!*!* and timestamp 20180121044138 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=CPU_Registers_x86-64&amp;oldid=21978">http://wiki.osdev.org/index.php?title=CPU_Registers_x86-64&amp;oldid=21978</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:CPU_Registers" title="Category:CPU Registers">CPU Registers</a></li><li><a href="Category:Disputed_Pages" title="Category:Disputed Pages">Disputed Pages</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=CPU_Registers_x86-64" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="CPU_Registers_x86-64"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:CPU_Registers_x86-64"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="CPU_Registers_x86-64#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="CPU_Registers_x86-64" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=CPU_Registers_x86-64&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=CPU_Registers_x86-64&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="CPU_Registers_x86-64#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/CPU_Registers_x86-64" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/CPU_Registers_x86-64" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=CPU_Registers_x86-64&amp;printabskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/CPU_Registers_x86-64" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/CPU_Registers_x86-64" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=CPU_Registers_x86-64&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=CPU_Registers_x86-64&amp;oldid=21978" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 27 December 2017, at 10:33.</li>
+											<li id="footer-info-viewcount">This page has been accessed 19,139 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

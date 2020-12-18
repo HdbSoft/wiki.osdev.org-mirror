@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>User:Shukantpal/Silcos Kernel - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="http://wiki.osdev.org/User:Shukantpal/Silcos_Kernel" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "User", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 2, "wgPageName": "User:Shukantpal/Silcos_Kernel", "wgTitle": "Shukantpal/Silcos Kernel", "wgCurRevisionId": 22096, "wgArticleId": 4251, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-2 ns-subject page-User_Shukantpal_Silcos_Kernel action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">User:Shukantpal/Silcos Kernel</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"><span class="subpages">&lt; <a href="http://wiki.osdev.org/User:Shukantpal" title="User:Shukantpal">User:Shukantpal</a></span>(Redirected from <a href="http://wiki.osdev.org/index.php?title=Silcos_Kernel&amp;redirect=no" title="Silcos Kernel">Silcos Kernel</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Silcos_Kernel#mw-head">navigation</a>,
+					<a href="Silcos_Kernel#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Silcos_Kernel#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Silcos_Kernel#Supported_Architectures"><span class="tocnumber">1.1</span> <span class="toctext">Supported Architectures</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Silcos_Kernel#Overview"><span class="tocnumber">1.2</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Silcos_Kernel#Modules"><span class="tocnumber">1.3</span> <span class="toctext">Modules</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="Silcos_Kernel#KernelHost"><span class="tocnumber">2</span> <span class="toctext">KernelHost</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="Silcos_Kernel#Memory_Allocation_Techniques"><span class="tocnumber">2.1</span> <span class="toctext">Memory Allocation Techniques</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Silcos_Kernel#Object_Allocation"><span class="tocnumber">2.2</span> <span class="toctext">Object Allocation</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="Silcos_Kernel#Module_Loader"><span class="tocnumber">2.3</span> <span class="toctext">Module Loader</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="Silcos_Kernel#ExecutionManager"><span class="tocnumber">3</span> <span class="toctext">ExecutionManager</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="Silcos_Kernel#Task_Management"><span class="tocnumber">3.1</span> <span class="toctext">Task Management</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="Silcos_Kernel#Scheduler"><span class="tocnumber">3.2</span> <span class="toctext">Scheduler</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>The Silcos kernel is designed to build a portable and reliable software platform above it. It abstracts system services and policies within the kernel in a object-oriented and modular approach. It is built in C++, C, and intel-syntax assembly. It uses infrequent extended inline asm with GCC support. It has become a open-source project which can be further developed by the open-source community. It was first commited on GitHub on October 19, 2017 and is undergoing rapid development since then. It has become a fairly mature kernel waiting for becoming ripe and supporting user-level software. The Silcos kernel project is a part of the larger view of a open-source, modular and secure microkernel-based operating system. It incorporates several system services in the kernel space to reduce the amount of IPC overhead seen in traditional microkernels. But it keeps the drivers strictly outside the kernel, except interrupt-handlers and special cases, and also aims to implement the <b>Uniform Driver Interface</b>. It follows the key principles and techniques of other kernel-mode software (like LINUX) and aims to form a similar interface for user-level software, allowing them to be seamlessly ported to the Silcos application environment. At the same time, it incorporates a generic interface for most services allowing them to be <b>easily extended using loadable kernel modules</b>.
+</p>
+<h3> <span class="mw-headline" id="Supported_Architectures"> Supported Architectures </span></h3>
+<p>The kernel will eventually come to all major hardware architectures. It is currently being built for the Intel IA32 architecture and handles the most recent hardware developments. Right now, it doesn't focus on the older hardware bugs and is keen to run only on recent CPUs after 2010. It wants to be more compatible towards advanced hardware rather than being bloated with older-hardware compatibility software. Eventually it will support the following architectures -
+</p><p>1. IA32 and IA64
+</p><p>2. ARM
+</p><p>3. PowerPC
+</p>
+<h3> <span class="mw-headline" id="Overview"> Overview </span></h3>
+<p>The kernel source is stored online at [GitHub <a rel="nofollow" class="external free" href="https://github.com/SukantPal/Silcos-Kernel">https://github.com/SukantPal/Silcos-Kernel</a>]. The kernel is highly modular in terms of source code and binary interface. The whole kernel is divided into various modules which separates the highly-used code from low-priority code. This improves memory-locality and cache efficiency. All of the boot-time modules are stored in the first 2-MB huge page of the kernel-space (3GB higher-half space). This means only TLB entry is required to map all of the kernel boot-time modules.
+</p><p>The kernel boots with the help of the multiboot specification. It primarily is being developed with GRUB2 using grub-mkrescue on LINUX. The KernelHost module is the one which is loaded first and given control by the bootloader. Note that all modules are shared library in Silcos except for the KernelHost which is a <b>position-independent executable</b>. Right now, all modules are built with <b>undefined symbols allowed</b>. The KernelHost will print any linking error at runtime if the modules have any symbol mismatch. The kernel also takes benefits of memory locality by compiling two functions in more than one module. For example, SpinLock and SpinUnlock are implemented in KernelHost and the ExecutionManager. This is because the ExecutionManager contains the scheduler which will run the most and will fit into any 32KB L1 cache.
+</p>
+<h3> <span class="mw-headline" id="Modules"> Modules </span></h3>
+<p>The kernel currently divides itself into the following modules -
+</p><p>1. KernelHost
+</p><p>2. HAL
+</p><p>3. ModuleFramework
+</p><p>4. ObjectManager
+</p><p>5. ResourceManager
+</p><p>6. ExecutionManager (formerly the Microkernel which also comprised of KernelHost &amp; HAL but was split into three)
+</p><p>Each module is loaded at runtime by the bootloader and passing into the multiboot structure given to the kernel. The kernel host initializes itself - physical memory allocator, kernel-page allocator, object (slab) allocator, module-loader. After initializing itself, the KernelHost links the other kernel modules and if any, will show a linking error and stop. Otherwise, it will continue and call the initialization function of each module. This is in the form of __init functions in each module. This function can be utilized to setup any objects that have their own specific allocator (in slab allocation techniques).
+</p>
+<h2> <span class="mw-headline" id="KernelHost"> KernelHost </span></h2>
+<p>The KernelHost module is the one which is given control by the bootloader. It uses multiboot and expects protected mode with uniform segments. The first thing is does is load the defaultBootGDT and enable higher-half paging. Then it parses the multiboot table and calls the Main() function. This early-boot code is present in KernelHost/Source/Boot/IA32/InitRuntime.asm which co-operates with paging code. Then the Main() function is given control (after loading the ESP with a kernel boot stack of 4KB size).
+</p><p>KernelHost comprises of these following services -
+</p><p>1. Physical Memory Allocator (see Memory/KFrameManager.h)
+</p><p>2. Kernel Page Allocator (see Memory/KMemoryManager.h)
+</p><p>3. Slab Allocator (see Memory/KObjectManager.h)
+</p><p>4. Module Loader &amp; Linker (see ModuleLoader/*)
+</p>
+<h3> <span class="mw-headline" id="Memory_Allocation_Techniques"> Memory Allocation Techniques </span></h3>
+<p>The Silcos kernel uses the same technique for allocating kernel pages and page frames in physical memory. To save space, the kernel developer(s) have separated the algorithm from the actual allocator. This means that the page-frame allocator &amp; kernel-page allocator actually share the code which allocates their memory blocks. This technique saves binary file-size and improves memory-locality. The kernel uses the zone allocation algorithm to take blocks from individual memory zones, which relies on the buddy allocation technique to manage blocks in powers of 2 in each zones.
+</p><p><b>BuddyAllocator</b> - Memory/BuddyAllocator.hpp
+</p><p><b>ZoneAllocator</b> - Memory/ZoneAllocator.hpp
+</p><p><b>Buddy Allocator</b> - The buddy allocator uses a table of block descriptors provided by the actual allocator. These blocks are the smallest unit of allocation from the client allocator. In both cases, the page-frame allocator and kernel-page allocator pass a table of descriptors which hold information on 4KB blocks of page-frames &amp; kernel-pages. The allocator receives allocation in the form of pointer to the first block in the amount of memory allocator. For example, if at 64KB address 16KB is allocated then the block at 64KB will be returned. The allocator must convert the block to its address.
+</p><p>The Silcos kernel uses improvements over the traditional binary buddy allocator. It introduces the concept of super-blocks and lists for each (lowerOrder, upperOrder) pair of buddy blocks. It is explained in greater detail in the GitHub wiki.
+</p><p><b>Zone Allocator</b> - The zone allocator divides the memory into various zones which have fixed &amp; aligned boundaries. These boundaries are aligned to the maximum size of the block that can be allocated. For example, the page-frame allocator allows upto 2MB allocations so all zones are aligned by 2MB boundaries. A zone allocator configures itself from a global block descriptor table. In the page-frame allocator, for example, page-frames are represented by MMFRAME descriptors which are located at a fixed address in physical memory (depending on the architecture). The zone allocator will have separate buddy allocators for each memory zone. These buddy allocators will hold pointers to the table of blocks from which they will allocate.
+</p><p>The zone allocator also provides zone preferences. For example, the page-frame allocator provides multiple zones for kernel, code and data allocations. This reduces concurrent access to a zone in multiple-processor systems and reduces the overall synchronization overhead. But if the CODE zone is filled then allocating from DATA zone is okay and vice versa is also okay. Similar is for all three zones - kernel, data, and code. So all of these zones are of the same preference.
+</p><p>Zones of the same preference are kept in the same circular list. But each preference is given a separate list of zones and kept at a specific index in an array. For example, the DRIVER zone in 32-bit system is for 32-bit devices which use maximum 4GB addresses. So if DRIVER zone is fully used, then going to CODE zone above it is wrong essentially. Thus, it is of lower preference. Similar is for the DMA zone where the limit is 16MB. The page-frame allocator uses only three preferences - (DMA), (DRIVER), (CODE, DATA, KERNEL).
+</p><p>The kernel-page allocator has two zones with only one preference - (ZONE_KOBJECT, ZONE_KMODULE) for objects &amp; modules specifically.
+</p>
+<h3> <span class="mw-headline" id="Object_Allocation"> Object Allocation </span></h3>
+<p>The kernel uses a slab allocator for getting space for all kernel objects. Interfaces are provided for creating &amp; deleting object allocators at runtime. The allocator has a front-end and a back-end. The back-end allocates kernel-pages as 'slabs' and creates a slab-descriptor at the very end of that page. These slabs are just 4KB blocks of raw memory that are mapped to any arbitrary physical address which contain a descriptor at the end. Now, the maximum no. of objects are carved out of the slab and linked to the descriptor at the end in a stack. Whenever a object is allocated from the slab it is popped out of the stack and whenever a object is freed back to the slab it is pushed to that stack.
+</p><p>The allocator maintains two lists of slabs - partial and full list. The partial list contains those slabs which have some objects in their stacks and can be used for allocation. The full list contain slabs which are saturated and cannot be used for allocating fresh objects. A cache of one empty slab is maintained in the allocator too. This is to reduce slab-allocation overhead on small fluctuations in object requirement.
+</p>
+<h3> <span class="mw-headline" id="Module_Loader"> Module Loader </span></h3>
+<p>The module loader is a essential component of the kernel host. It is the main reason it is called the kernel host - it loads and manages the other modules. The module loader maintains records of other modules and their dynamic-link structs which contain information about their symbols. It unpacks the file-image of the module and forms segments in kernel-memory. This part of the KernelHost makes it bloated and large due to which the former Silcos microkernel was divided into KernelHost, HAL and ExecutionManager.
+</p><p>The module loader uses the Executable and Linkable Format as the basis of its ABI and module infrastructure. Each module is implemented as a shared library (other than the KernelHost itself, as earlier mentioned, it is a PIE).
+</p><p>Recent changes to the kernel have allowed the KernelHost to contain undefined symbols that actually link to other modules. This means memory-allocators can use features of other modules after a sign indicating that modules are linked changes.
+</p>
+<h2> <span class="mw-headline" id="ExecutionManager"> ExecutionManager </span></h2>
+<p>The kernel abstracts all execution-based services into this module. It controls critical aspects of the system which directly affect its performance &amp; reliability. All these services were packed into a single module that would fit into one 32-KB L1 cache. Scheduling and task management come under its jurisdictions.
+</p>
+<h3> <span class="mw-headline" id="Task_Management"> Task Management </span></h3>
+<p>The kernel manages tasks in a generic manner. Any task descriptor can refer to a thread-group, scheduler activation, or just a traditional thread. This generalization evolves the techniques of group scheduling and user-level scheduling. A task is more primitive than the thread and may or may not have a user stack (but a kernel stack is required). It is dispatched by a dispatcher function which can continue to execute the thread or jump to another scheduling context (which may be in user-space).
+</p>
+<h3> <span class="mw-headline" id="Scheduler"> Scheduler </span></h3>
+<p>The kernel generalizes the concept of scheduling by using the concept of scheduling class, which is already present in most modern kernels. Each processor has three scheduler task queues - which are abstracted in the (C++) class ScheduleRoller, which contains mostly pure virtual functions. All processor structs contains three pointers to unique ScheduleRollers which are actually child-classes of the ScheduleRoller at a fixed offset. This allows the size of the scheduler's task queue to changed effectively.
+</p><p>The kernel (will) provide these three scheduling classes -
+</p><p><b>1. RoundRobin</b>
+</p><p><b>2. CFS</b>
+</p><p><b>3. Soft Real-time Scheduling</b>
+</p><p><b>TODO:</b> Finish documentation on all other modules
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 54/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4251-0!*!*!!en!*!* and timestamp 20180121080108 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=User:Shukantpal/Silcos_Kernel&amp;oldid=22096">http://wiki.osdev.org/index.php?title=User:Shukantpal/Silcos_Kernel&amp;oldid=22096</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=User%3AShukantpal%2FSilcos_Kernel" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-user" class="selected"><span><a href="http://wiki.osdev.org/User:Shukantpal/Silcos_Kernel"  title="View the user page [c]" accesskey="c">User page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=User_talk:Shukantpal/Silcos_Kernel&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Silcos_Kernel#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="http://wiki.osdev.org/User:Shukantpal/Silcos_Kernel" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=User:Shukantpal/Silcos_Kernel&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=User:Shukantpal/Silcos_Kernel&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Silcos_Kernel#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/User:Shukantpal/Silcos_Kernel" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/User:Shukantpal/Silcos_Kernel" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-contributions"><a href="/Special:Contributions/Shukantpal" title="A list of contributions of this user">User contributions</a></li>
+			<li id="t-log"><a href="/index.php?title=Special:Log&amp;user=Shukantpal">Logs</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Useskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/User:Shukantpal/Silcos_Kernel" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/User:Shukantpal/Silcos_Kernel" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-contributions"><a href="http://wiki.osdev.org/Special:Contributions/Shukantpal" title="A list of contributions of this user">User contributions</a></li>
+			<li id="t-log"><a href="http://wiki.osdev.org/index.php?title=Special:Log&amp;user=Shukantpal">Logs</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=User:Shukantpal/Silcos_Kernel&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=User:Shukantpal/Silcos_Kernel&amp;oldid=22096" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 17 January 2018, at 06:20.</li>
+											<li id="footer-info-viewcount">This page has been accessed 147 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.049 secs. -->
+	</body>
+</html>

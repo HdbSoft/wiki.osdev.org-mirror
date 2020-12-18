@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Enhanced Host Controller Interface - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="Enhanced_Host_Controller_Interface" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Enhanced_Host_Controller_Interface", "wgTitle": "Enhanced Host Controller Interface", "wgCurRevisionId": 20857, "wgArticleId": 3303, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["USB"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Enhanced_Host_Controller_Interface action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Enhanced Host Controller Interface</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=EHCI&amp;redirect=no" title="EHCI">EHCI</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="EHCI#mw-head">navigation</a>,
+					<a href="EHCI#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>EHCI (Enhanced Host Controller Interface) is the <i>Single</i> method of interfacing with USB 2.0. This makes life a lot easier than with USB 1.0, where 2 incompatible standards both survived. This is because the USB-IF insisted on a single implementation, produced by Intel.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="EHCI#Interface"><span class="tocnumber">1</span> <span class="toctext">Interface</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="EHCI#Capability_Registers"><span class="tocnumber">2</span> <span class="toctext">Capability Registers</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="EHCI#Operation_Registers"><span class="tocnumber">3</span> <span class="toctext">Operation Registers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="EHCI#USB_Command_Register"><span class="tocnumber">3.1</span> <span class="toctext">USB Command Register</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="EHCI#USB_Status_Register"><span class="tocnumber">3.2</span> <span class="toctext">USB Status Register</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="EHCI#USB_Interrupt_Enable_Register"><span class="tocnumber">3.3</span> <span class="toctext">USB Interrupt Enable Register</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="EHCI#Port_Status.2FControl_Register"><span class="tocnumber">3.4</span> <span class="toctext">Port Status/Control Register</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="EHCI#Asynchronous_Queue_List"><span class="tocnumber">4</span> <span class="toctext">Asynchronous Queue List</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="EHCI#Queue_Head"><span class="tocnumber">4.1</span> <span class="toctext">Queue Head</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="EHCI#Horizontal_Link_Pointer"><span class="tocnumber">4.2</span> <span class="toctext">Horizontal Link Pointer</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="EHCI#Endpoint_Characteristics"><span class="tocnumber">4.3</span> <span class="toctext">Endpoint Characteristics</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="EHCI#Endpoint_Capabilities"><span class="tocnumber">4.4</span> <span class="toctext">Endpoint Capabilities</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="EHCI#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="EHCI#Articles"><span class="tocnumber">5.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="EHCI#External_Links"><span class="tocnumber">5.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Interface"> Interface </span></h2>
+<p>On a PC you will normally find the EHCI USB controller on the PCI bus - in fact it is the only access method specified in the specification. USB 2.0 supports interfacing with USB 1.0 devices. However, EHCI is NOT expected to support them. Instead, you will find an UHCI or OHCI <i>companion controller</i>. Therefore you must implement <a href="OHCI" title="OHCI" class="mw-redirect">OHCI</a> and <a href="UHCI" title="UHCI" class="mw-redirect">UHCI</a> as well. Note there are NOT companions of both types, it is one type or another.
+</p><p>The EHCI controller will always have a PCI Class ID of 0x0C, a Subclass ID of 0x03, and an Interface value of 0x20.  These values can be used to find the configuration space of the controller, which contains the memory mapped address of the EHCI registers.  The address information can be found in the BAR0 PCI configuration space register.
+</p>
+<h2> <span class="mw-headline" id="Capability_Registers"> Capability Registers </span></h2>
+<p>The capability registers can be found in memory at the address specified in the PCI configuration space BAR0 register.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (Hex)
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> CAPLENGTH </td>
+<td> Capability Register Length
+</td></tr>
+<tr>
+<td> 01 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 02 </td>
+<td> HCIVERSION </td>
+<td> Interface Version Number (BCD)
+</td></tr>
+<tr>
+<td> 04 </td>
+<td> HCSPARAMS </td>
+<td> Structural Parameters
+</td></tr>
+<tr>
+<td> 08 </td>
+<td> HCCPARAMS </td>
+<td> Capability Parameters
+</td></tr>
+<tr>
+<td> 0C </td>
+<td> HCSP-PORTROUTE </td>
+<td> Companion Port Route Description
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Operation_Registers"> Operation Registers </span></h2>
+<p>The operation registers can be found after the capability register area in memory.  Add the Capability Register Length value above to the BAR0 address to find the operation register base address.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (Hex)
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> USBCMD </td>
+<td> USB Command
+</td></tr>
+<tr>
+<td> 04 </td>
+<td> USBSTS </td>
+<td> USB Status
+</td></tr>
+<tr>
+<td> 08 </td>
+<td> USBINTR </td>
+<td> USB Interrupt Enable
+</td></tr>
+<tr>
+<td> 0C </td>
+<td> FRINDEX </td>
+<td> USB Frame Index
+</td></tr>
+<tr>
+<td> 10 </td>
+<td> CTRLDSSEGMENT </td>
+<td> 4G Segment Selector
+</td></tr>
+<tr>
+<td> 14 </td>
+<td> PERIODICLISTBASE </td>
+<td> Frame List Base Address
+</td></tr>
+<tr>
+<td> 18 </td>
+<td> ASYNCLISTADDR </td>
+<td> Next Asynchronous List Address
+</td></tr>
+<tr>
+<td> 40 </td>
+<td> CONFIGFLAG </td>
+<td> Configured Flag Register
+</td></tr>
+<tr>
+<td> 44 </td>
+<td> PORTSC[1-N_PORTS] </td>
+<td> Port Status/Control Register
+</td></tr>
+</table>
+<h3> <span class="mw-headline" id="USB_Command_Register"> USB Command Register </span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bits
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 31-24 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 23-16 </td>
+<td> Interrupt Threshold </td>
+<td> Number of micro frames to process between interrupts
+</td></tr>
+<tr>
+<td> 15-12 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 11 </td>
+<td> Async Schedule Park Mode Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 10 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 9-8 </td>
+<td> Async Schedule Park Mode Count </td>
+<td>
+</td></tr>
+<tr>
+<td> 7 </td>
+<td> Light Host Controller Reset </td>
+<td> Resets the controller without affecting connected devices
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> Interrupt On Async Advance Doorbell </td>
+<td> Allows software to trigger interrupt
+</td></tr>
+<tr>
+<td> 5 </td>
+<td> Async Schedule Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 4 </td>
+<td> Periodic Schedule Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 3-2 </td>
+<td> Programmable Frame List Size </td>
+<td>
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> Host Controller Reset </td>
+<td>
+</td></tr>
+<tr>
+<td> 0 </td>
+<td> Run </td>
+<td>
+</td></tr>
+</table>
+<p><br />
+</p>
+<h3> <span class="mw-headline" id="USB_Status_Register"> USB Status Register </span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bits
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 31-16 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 15 </td>
+<td> Async Schedule Status </td>
+<td>
+</td></tr>
+<tr>
+<td> 14 </td>
+<td> Periodic Schedule Status </td>
+<td>
+</td></tr>
+<tr>
+<td> 13 </td>
+<td> Reclamation </td>
+<td>
+</td></tr>
+<tr>
+<td> 12 </td>
+<td> Halted </td>
+<td>
+</td></tr>
+<tr>
+<td> 11-6 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 5 </td>
+<td> Doorbell Interrupt </td>
+<td>
+</td></tr>
+<tr>
+<td> 4 </td>
+<td> Host System Error </td>
+<td>
+</td></tr>
+<tr>
+<td> 3 </td>
+<td> Frame List Rollover </td>
+<td>
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> Port Change Detect </td>
+<td>
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> USB Error Interrupt </td>
+<td>
+</td></tr>
+<tr>
+<td> 0 </td>
+<td> USB Transfer Interrupt </td>
+<td>
+</td></tr>
+</table>
+<p><br />
+</p>
+<h3> <span class="mw-headline" id="USB_Interrupt_Enable_Register"> USB Interrupt Enable Register </span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bits
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 31-6 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 5 </td>
+<td> Async Advance Interrupt Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 4 </td>
+<td> Host System Error Interrupt Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 3 </td>
+<td> Frame List Rollover Interrupt Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> Port Change Interrupt Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> USB Error Interrupt Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 0 </td>
+<td> USB Transfer Interrupt Enable </td>
+<td>
+</td></tr>
+</table>
+<p><br />
+</p>
+<h3> <span class="mw-headline" id="Port_Status.2FControl_Register"> Port Status/Control Register </span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bits
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 31-23 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 22 </td>
+<td> Wake On Overcurrent Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 21 </td>
+<td> Wake On Disconnect Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 20 </td>
+<td> Wake On Connect Enable </td>
+<td>
+</td></tr>
+<tr>
+<td> 19-16 </td>
+<td> Port Test Control </td>
+<td>
+</td></tr>
+<tr>
+<td> 15-14 </td>
+<td> Port Indicator Control </td>
+<td> 0 = Off, 1 = Amber, 2 = Green
+</td></tr>
+<tr>
+<td> 13 </td>
+<td> Companion Port Control </td>
+<td> 0 = Local, 1 = Companion Host Controller
+</td></tr>
+<tr>
+<td> 12</td>
+<td> Port Power </td>
+<td>
+</td></tr>
+<tr>
+<td> 11-10 </td>
+<td> Line Status </td>
+<td>
+</td></tr>
+<tr>
+<td> 9 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 8 </td>
+<td> Port Reset </td>
+<td>
+</td></tr>
+<tr>
+<td> 7 </td>
+<td> Suspend </td>
+<td>
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> Force Port Resume </td>
+<td>
+</td></tr>
+<tr>
+<td> 5 </td>
+<td> Overcurrent Change </td>
+<td>
+</td></tr>
+<tr>
+<td> 4 </td>
+<td> Overcurrent </td>
+<td>
+</td></tr>
+<tr>
+<td> 3 </td>
+<td> Port Enabled Changed </td>
+<td>
+</td></tr>
+<tr>
+<td> 2 </td>
+<td> Port Enabled </td>
+<td>
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> Connect Changed </td>
+<td>
+</td></tr>
+<tr>
+<td> 0 </td>
+<td> Connected </td>
+<td>
+</td></tr>
+</table>
+<h2> <span class="mw-headline" id="Asynchronous_Queue_List"> Asynchronous Queue List </span></h2>
+<p>The asynchronous queue list is a ring of Queue Head records that point to the next Queue Head in the ring, and the first Transmit Descriptor in the queue.  As long as the Asynchronous Schedule flag is set in the Command register, the EHCI controller will start with the first Queue Head located at the address in the Next Asynchronous List Address register, and process all Queue Heads until it encounters a Queue Head with the Reclaim Head flag set.  The reclaim head flag is not checked on the very first Queue Head record, so you can set it's reclaim head flag, and the controller will process all Queue Heads until it reaches the first Queue Head again.
+</p><p>The Queue Head contains a copy of the current TD that the controller uses to process each Transfer Descriptor.  This area should initially contain the first TD of the queue in the Next TD field of the TD working area.
+</p>
+<h3> <span class="mw-headline" id="Queue_Head"> Queue Head </span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Offset (Hex)
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 00 </td>
+<td> Horizontal Link Pointer </td>
+<td>
+</td></tr>
+<tr>
+<td> 04 </td>
+<td> Endpoint Characteristics </td>
+<td>
+</td></tr>
+<tr>
+<td> 08 </td>
+<td> Endpoint Capabilities </td>
+<td>
+</td></tr>
+<tr>
+<td> 0C </td>
+<td> Current TD Address </td>
+<td>
+</td></tr>
+<tr>
+<td> 10 </td>
+<td> Current TD Working Area </td>
+<td> This area contains as copy of the current TD data.
+</td></tr>
+</table>
+<h3> <span class="mw-headline" id="Horizontal_Link_Pointer"> Horizontal Link Pointer </span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bits
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 31-5 </td>
+<td> Next Queue Head </td>
+<td> Address of the next Queue Head in the ring
+</td></tr>
+<tr>
+<td> 4-3 </td>
+<td> Reserved </td>
+<td>
+</td></tr>
+<tr>
+<td> 2-1 </td>
+<td> Next Queue Type </td>
+<td> 0 = Isochronous TD, 1 = Queue Head, 2 = Split Transaction Isochronous TD, 3 = Frame Span Traversal Node
+</td></tr>
+<tr>
+<td> 0 </td>
+<td> Terminate </td>
+<td> Set if this is the last Queue Head in a Periodic List.  Not used for Asynchronous List.
+</td></tr>
+</table>
+<h3> <span class="mw-headline" id="Endpoint_Characteristics"> Endpoint Characteristics </span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bits
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 31-28 </td>
+<td> NAK Reload</td>
+<td>
+</td></tr>
+<tr>
+<td> 27 </td>
+<td> Control Endpoint </td>
+<td> Not used for High Speed devices
+</td></tr>
+<tr>
+<td> 26-16 </td>
+<td> Maximum Packet Length</td>
+<td>
+</td></tr>
+<tr>
+<td> 15 </td>
+<td> Head of Reclamation List </td>
+<td> Set if this is the first Queue Head in an Asynchronous List
+</td></tr>
+<tr>
+<td> 14 </td>
+<td> Data Toggle Control </td>
+<td> Set if data toggle should use value from TD
+</td></tr>
+<tr>
+<td> 13-12 </td>
+<td> Endpoint Speed </td>
+<td> 0 = Full Speed, 1 = Low Speed, 2 = High Speed
+</td></tr>
+<tr>
+<td> 11-8 </td>
+<td> Endpoint Number </td>
+<td>
+</td></tr>
+<tr>
+<td> 7 </td>
+<td> Inactivate </td>
+<td> Only used in Periodic List
+</td></tr>
+<tr>
+<td> 6-0 </td>
+<td> Device Address </td>
+<td>
+</td></tr>
+</table>
+<h3> <span class="mw-headline" id="Endpoint_Capabilities"> Endpoint Capabilities </span></h3>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<th> Bits
+</th>
+<th> Name
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td> 31-30 </td>
+<td> High Bandwidth Pipe Multiplier </td>
+<td> Must be greater than zero
+</td></tr>
+<tr>
+<td> 29-23 </td>
+<td> Port Number </td>
+<td> Used for split transactions
+</td></tr>
+<tr>
+<td> 22-16 </td>
+<td> Hub Address </td>
+<td> Used for split transactions
+</td></tr>
+<tr>
+<td> 15-8 </td>
+<td> Split Completion Mask </td>
+<td> Used for split transactions
+</td></tr>
+<tr>
+<td> 7-0 </td>
+<td> Interrupt Schedule Mask </td>
+<td> Used for split transactions
+</td></tr>
+</table>
+<p><br />
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="USB" title="USB" class="mw-redirect">USB</a>
+</li><li> <a href="OHCI" title="OHCI" class="mw-redirect">OHCI</a>
+</li><li> <a href="UHCI" title="UHCI" class="mw-redirect">UHCI</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.intel.com/technology/usb/download/ehci-r10.pdf">EHCI Specification</a> + <a rel="nofollow" class="external text" href="http://download.intel.com/technology/usb/EHCIv1-1_Addendum.pdf">Addendum</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 117/1000000
+Post-expand include size: 1620/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3303-0!*!0!!en!*!* and timestamp 20180121080105 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Enhanced_Host_Controller_Interface&amp;oldid=20857">http://wiki.osdev.org/index.php?title=Enhanced_Host_Controller_Interface&amp;oldid=20857</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:USB" title="Category:USB">USB</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Enhanced_Host_Controller_Interface" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Enhanced_Host_Controller_Interface"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Enhanced_Host_Controller_Interface&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="EHCI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Enhanced_Host_Controller_Interface" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Enhanced_Host_Controller_Interface&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Enhanced_Host_Controller_Interface&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="EHCI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDeskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Enhanced_Host_Controller_Interface" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Enhanced_Host_Controller_Interface" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Enhanced_Host_Controller_Interface&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Enhanced_Host_Controller_Interface&amp;oldid=20857" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Enhanced_Host_Controller_Interface" title="Enhanced Host Controller Interface">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 4 June 2017, at 03:38.</li>
+											<li id="footer-info-viewcount">This page has been accessed 14,519 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.093 secs. -->
+	</body>
+</html>

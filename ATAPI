@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>ATAPI - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ATAPI", "wgTitle": "ATAPI", "wgCurRevisionId": 20358, "wgArticleId": 2246, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["ATA", "Storage"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ATAPI action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ATAPI</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="ATAPI#mw-head">navigation</a>,
+					<a href="ATAPI#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>ATAPI refers to devices that use the Packet Interface of the ATA6 (or higher) standard command set.
+It is basically a way to issue <a href="http://wiki.osdev.org/index.php?title=SCSI&amp;action=edit&amp;redlink=1" class="new" title="SCSI (page does not exist)">SCSI</a> commands to a CD-ROM, CD-RW, DVD, or tape drive, attached to the ATA bus.
+</p><p>ATAPI uses a very small number of ATA commands. The most important are the PACKET command (0xA0), and IDENTIFY PACKET DEVICE (0xA1).
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="ATAPI#Detecting"><span class="tocnumber">1</span> <span class="toctext">Detecting</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="ATAPI#PACKET_command_.280xA0.29"><span class="tocnumber">2</span> <span class="toctext">PACKET command (0xA0)</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="ATAPI#IDENTIFY_PACKET_DEVICE_command_.280xA1.29"><span class="tocnumber">3</span> <span class="toctext">IDENTIFY PACKET DEVICE command (0xA1)</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="ATAPI#Disc_Content"><span class="tocnumber">4</span> <span class="toctext">Disc Content</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="ATAPI#x86_Directions"><span class="tocnumber">5</span> <span class="toctext">x86 Directions</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="ATAPI#Complete_Command_Set"><span class="tocnumber">6</span> <span class="toctext">Complete Command Set</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="ATAPI#x86_Examples"><span class="tocnumber">7</span> <span class="toctext">x86 Examples</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="ATAPI#Detecting_a_Medium.27s_Capacity"><span class="tocnumber">8</span> <span class="toctext">Detecting a Medium's Capacity</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="ATAPI#Operating_Theory"><span class="tocnumber">9</span> <span class="toctext">Operating Theory</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="ATAPI#Comments"><span class="tocnumber">10</span> <span class="toctext">Comments</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="ATAPI#See_Also"><span class="tocnumber">11</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="ATAPI#Articles"><span class="tocnumber">11.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="ATAPI#External_Links"><span class="tocnumber">11.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Detecting">Detecting</span></h2>
+<p><i>From a draft copy of the ATA/ATAPI spec (T13 1410D rev 3b, page 365), works on qemu</i>
+</p><p>To detect if a ATA disk is a non-packet or packet device, you can use the presence of a signature stored in the "Sector Count" and "LBA Low,Mid,High" registers (registers 0x1F2-0x1F5 for ATA controllers).
+</p><p>If these registers contain 0x01, 0x01, 0x00, 0x00 - The connected device is a non-packet device, and `IDENTIFY DEVICE` (0xEC) should work.
+If they contain 0x01, 0x01, 0x14, 0xEB then the device is a packet device, and `IDENTIFY PACKET DEVICE` (0xA1) should be used.
+</p><p>This signature is set/reset when the device is powered on, reset, or receives the `EXECUTE DEVICE DIAGNOSTIC` command (for packet devices, `IDENTIFY DEVICE` also resets the signature)
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="PACKET_command_.280xA0.29">PACKET command (0xA0)</span></h2>
+<p>Each ATAPI command packet is made of a 'command byte' (from the SCSI command set -- see below for a partial list), followed by 11 'data' bytes.
+For instance, reading the table of contents is achieved by sending the following byte string to the device, as a "command".
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">uint8_t</span> atapi_readtoc<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">=</span>  <span class="br0">&#123;</span> <span class="nu12">0x43</span> <span class="coMULTI">/* ATAPI_READTOC */</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">12</span><span class="sy0">,</span> <span class="nu12">0x40</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#125;</span><span class="sy0">;</span></pre></div></div>
+<p>The ATA PACKET command works in three phases, in PIO mode.
+</p><p>Phase 1) Set up the standard ATA IO port registers with ATAPI specific values.
+Then Send the ATA PACKET command to the device exactly as you would with any other ATA command: outb (ATA Command Register, 0xA0)
+</p><p>Phase 2) Prepare to do a PIO data transfer, the normal way, to the device.
+When the device is ready (BSY clear, DRQ set) you send the ATAPI command string (like the one above) as a 6 word PIO transfer to the device.
+</p><p>Phase 3) Wait for an IRQ. When it arrives, you must read the LBA Mid and LBA High IO port registers. They tell you the packet byte count that the ATAPI drive will send to you, or must receive from you. In a loop, you transmit that number of bytes, then wait for the next IRQ.
+</p><p>In DMA mode, only the first two phases happen. The device handles the details of phase 3 itself, with the PCI drive controller.
+</p><p><br />
+</p>
+<h2> <span class="mw-headline" id="IDENTIFY_PACKET_DEVICE_command_.280xA1.29">IDENTIFY PACKET DEVICE command (0xA1)</span></h2>
+<p>This command is a "normal" ATA PIO mode command, used during initialization. It is an exact mirror of the ATA IDENTIFY command, except that it only returns information about ATAPI devices. Use it in exactly the same way as you use IDENTIFY, including the meanings of all the bits in all the 256 words of data returned.
+</p>
+<h2> <span class="mw-headline" id="Disc_Content">Disc Content</span></h2>
+<p>Optical media and drives are governed by the MMC part of SCSI specs.
+They are structured in sessions and tracks.
+The readable entities are called Logical Track. They are contiguous 
+strings of blocks. Some media types can bear several sessions with 
+several tracks each, others bear only one session with one track.
+</p><p>For more informations about assessing, reading and writing 
+optical media, see the section about
+<a href="Optical_Drive#Readable_Disc_Content" title="Optical Drive">Readable Disc Content</a>
+of article <a href="Optical_Drive" title="Optical Drive">Optical Drive</a>.
+</p>
+<h2> <span class="mw-headline" id="x86_Directions">x86 Directions</span></h2>
+<p>Important note: on the Primary bus, the standard set of ATA IO ports is 0x1F0 through 0x1F7. In much or all of the ATAPI documentation, you will see this set of IO ports called the "Task File". The term seems very confusing.
+</p><p>First, you need to have a buffer. If it is going to be a DMA buffer, it needs to follow the PRD rules (see the ATA/ATAPI using DMA article). If it is going to be a PIO buffer, then you need to know the size of the buffer. Call this size "maxByteCount". It must be an unsigned word, and 0 is illegal for PIO mode. A value of zero is <b>mandatory</b> for DMA mode, no matter what size the PRD buffers are.
+</p><p>Assume that the command is in words Command1 through Command6. Device is the Primary slave. Select the target device by setting the master/slave bit in the Device Select Register. There are no other bits needed.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">outb <span class="br0">&#40;</span><span class="nu12">0x1F6</span><span class="sy0">,</span> slavebit<span class="sy0">&lt;&lt;</span><span class="nu0">4</span><span class="br0">&#41;</span></pre></div></div>
+<p>If the command is going to use DMA, set the Features Register to 1, otherwise 0 for PIO.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">outb <span class="br0">&#40;</span><span class="nu12">0x1F1</span><span class="sy0">,</span> isDMA<span class="br0">&#41;</span></pre></div></div>
+<p>The Sectorcount Register and LBA Low Register are unused currently. Send maxByteCount in LBA Mid and LBA High Registers.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">outb <span class="br0">&#40;</span><span class="nu12">0x1F4</span><span class="sy0">,</span> <span class="br0">&#40;</span>maxByteCount <span class="sy0">&amp;</span> <span class="nu12">0xff</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+outb <span class="br0">&#40;</span><span class="nu12">0x1F5</span><span class="sy0">,</span> <span class="br0">&#40;</span>maxByteCount <span class="sy0">&gt;&gt;</span> <span class="nu0">8</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre></div></div>
+<p>Send the ATAPI PACKET command to the Command Register
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">outb <span class="br0">&#40;</span><span class="nu12">0x1F7</span><span class="sy0">,</span> <span class="nu12">0xA0</span><span class="br0">&#41;</span></pre></div></div>
+<p>Wait for an IRQ, or poll for BSY to clear and DRQ to set.
+</p><p>Then send the ATAPI command as 6 words, to the data port.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">outw <span class="br0">&#40;</span><span class="nu12">0x1F0</span><span class="sy0">,</span> Command1<span class="br0">&#41;</span>
+outw <span class="br0">&#40;</span><span class="nu12">0x1F0</span><span class="sy0">,</span> Command2<span class="br0">&#41;</span>
+outw <span class="br0">&#40;</span><span class="nu12">0x1F0</span><span class="sy0">,</span> Command3<span class="br0">&#41;</span>
+outw <span class="br0">&#40;</span><span class="nu12">0x1F0</span><span class="sy0">,</span> Command4<span class="br0">&#41;</span>
+outw <span class="br0">&#40;</span><span class="nu12">0x1F0</span><span class="sy0">,</span> Command5<span class="br0">&#41;</span>
+outw <span class="br0">&#40;</span><span class="nu12">0x1F0</span><span class="sy0">,</span> Command6<span class="br0">&#41;</span></pre></div></div>
+<p>Then wait for another IRQ. You cannot poll.
+</p><p><br />
+If this was a DMA command (isDMA == 1), then you are done. When the IRQ arrives, the transfer is complete.
+</p><p>If it was a PIO command, when the IRQ arrives, read the LBA Mid and LBA High Registers. This is vital. You told the drive the <i>maximum</i> amount of data to transfer at one time. Now the drive has to tell you the <b>actual</b> transfer size.
+</p><p>Once you have the transfer size (bytecount = LBA High &lt;&lt; 8 | LBA Mid), do the PIO transfer.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">wordcount <span class="sy0">=</span> bytecount<span class="sy0">/</span><span class="nu0">2</span><span class="sy0">;</span></pre></div></div>
+<p>loop on inw(0x1F0) or outw(0x1f0) wordcount times.
+</p><p>If the transfer is complete, BSY and DRQ will clear. Otherwise, wait for the next IRQ, and read or write the same number of words again.
+</p><p>Notes: there is a possible future change planned to increase the length of ATAPI command strings to 8 words. Check the two bottom bits of ATAPI Identify word 0 to verify 6 or 8 word command size.
+</p><p>Once again, if you use polling to check BSY, DRQ, and ERR after sending the PACKET command, then you should probably ignore the ERR bit for the first four loops. (ATAPI calls this the "CHECK" bit, instead of ERR, but it means the same thing.)
+</p>
+<h2> <span class="mw-headline" id="Complete_Command_Set">Complete Command Set</span></h2>
+<table border="1">
+
+<tr>
+<th>  SCSI Command Name
+</th>
+<th>  Command Byte (OpCode)
+</th></tr>
+<tr>
+<td>  TEST UNIT READY
+</td>
+<td>  0x00
+</td></tr>
+<tr>
+<td>  REQUEST SENSE
+</td>
+<td>  0x03
+</td></tr>
+<tr>
+<td>  FORMAT UNIT
+</td>
+<td>  0x04
+</td></tr>
+<tr>
+<td>  INQUIRY
+</td>
+<td>  0x12
+</td></tr>
+<tr>
+<td>  START STOP UNIT
+</td>
+<td>  0x1B
+</td></tr>
+<tr>
+<td>  PREVENT ALLOW MEDIUM REMOVAL
+</td>
+<td>  0x1E
+</td></tr>
+<tr>
+<td>  READ FORMAT CAPACITIES
+</td>
+<td>  0x23
+</td></tr>
+<tr>
+<td>  READ CAPACITY
+</td>
+<td>  0x25
+</td></tr>
+<tr>
+<td>  READ (10)
+</td>
+<td>  0x28
+</td></tr>
+<tr>
+<td>  WRITE (10)
+</td>
+<td>  0x2A
+</td></tr>
+<tr>
+<td>  SEEK (10)
+</td>
+<td>  0x2B
+</td></tr>
+<tr>
+<td>  WRITE AND VERIFY (10)
+</td>
+<td>  0x2E
+</td></tr>
+<tr>
+<td>  VERIFY (10)
+</td>
+<td>  0x2F
+</td></tr>
+<tr>
+<td>  SYNCHRONIZE CACHE
+</td>
+<td>  0x35
+</td></tr>
+<tr>
+<td>  WRITE BUFFER
+</td>
+<td>  0x3B
+</td></tr>
+<tr>
+<td>  READ BUFFER
+</td>
+<td>  0x3C
+</td></tr>
+<tr>
+<td>  READ TOC/PMA/ATIP
+</td>
+<td>  0x43
+</td></tr>
+<tr>
+<td>  GET CONFIGURATION
+</td>
+<td>  0x46
+</td></tr>
+<tr>
+<td>  GET EVENT STATUS NOTIFICATION
+</td>
+<td>  0x4A
+</td></tr>
+<tr>
+<td>  READ DISC INFORMATION
+</td>
+<td>  0x51
+</td></tr>
+<tr>
+<td>  READ TRACK INFORMATION
+</td>
+<td>  0x52
+</td></tr>
+<tr>
+<td>  RESERVE TRACK
+</td>
+<td>  0x53
+</td></tr>
+<tr>
+<td>  SEND OPC INFORMATION
+</td>
+<td>  0x54
+</td></tr>
+<tr>
+<td>  MODE SELECT (10)
+</td>
+<td>  0x55
+</td></tr>
+<tr>
+<td>  REPAIR TRACK
+</td>
+<td>  0x58
+</td></tr>
+<tr>
+<td>  MODE SENSE (10)
+</td>
+<td>  0x5A
+</td></tr>
+<tr>
+<td>  CLOSE TRACK SESSION
+</td>
+<td>  0x5B
+</td></tr>
+<tr>
+<td>  READ BUFFER CAPACITY
+</td>
+<td>  0x5C
+</td></tr>
+<tr>
+<td>  SEND CUE SHEET
+</td>
+<td>  0x5D
+</td></tr>
+<tr>
+<td>  REPORT LUNS
+</td>
+<td>  0xA0
+</td></tr>
+<tr>
+<td>  BLANK
+</td>
+<td>  0xA1
+</td></tr>
+<tr>
+<td>  SECURITY PROTOCOL IN
+</td>
+<td>  0xA2
+</td></tr>
+<tr>
+<td>  SEND KEY
+</td>
+<td>  0xA3
+</td></tr>
+<tr>
+<td>  REPORT KEY
+</td>
+<td>  0xA4
+</td></tr>
+<tr>
+<td>  LOAD/UNLOAD MEDIUM
+</td>
+<td>  0xA6
+</td></tr>
+<tr>
+<td>  SET READ AHEAD
+</td>
+<td>  0xA7
+</td></tr>
+<tr>
+<td>  READ (12)
+</td>
+<td>  0xA8
+</td></tr>
+<tr>
+<td>  WRITE (12)
+</td>
+<td>  0xAA
+</td></tr>
+<tr>
+<td>  READ MEDIA SERIAL NUMBER / SERVICE ACTION IN (12)
+</td>
+<td>  0xAB / 0x01
+</td></tr>
+<tr>
+<td>  GET PERFORMANCE
+</td>
+<td>  0xAC
+</td></tr>
+<tr>
+<td>  READ DISC STRUCTURE
+</td>
+<td>  0xAD
+</td></tr>
+<tr>
+<td>  SECURITY PROTOCOL OUT
+</td>
+<td>  0xB5
+</td></tr>
+<tr>
+<td>  SET STREAMING
+</td>
+<td>  0xB6
+</td></tr>
+<tr>
+<td>  READ CD MSF
+</td>
+<td>  0xB9
+</td></tr>
+<tr>
+<td>  SET CD SPEED
+</td>
+<td>  0xBB
+</td></tr>
+<tr>
+<td>  MECHANISM STATUS
+</td>
+<td>  0xBD
+</td></tr>
+<tr>
+<td>  READ CD
+</td>
+<td>  0xBE
+</td></tr>
+<tr>
+<td>  SEND DISC STRUCTURE
+</td>
+<td>  0xBF
+</td></tr></table>
+<h2> <span class="mw-headline" id="x86_Examples">x86 Examples</span></h2>
+<p>Here is an example adapted from a working driver implementation.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="coMULTI">/* The default and seemingly universal sector size for CD-ROMs. */</span>
+<span class="co2">#define ATAPI_SECTOR_SIZE 2048</span>
+&#160;
+<span class="coMULTI">/* The default ISA IRQ numbers of the ATA controllers. */</span>
+<span class="co2">#define ATA_IRQ_PRIMARY     0x0E</span>
+<span class="co2">#define ATA_IRQ_SECONDARY   0x0F</span>
+&#160;
+<span class="coMULTI">/* The necessary I/O ports, indexed by &quot;bus&quot;. */</span>
+<span class="co2">#define ATA_DATA(x)         (x)</span>
+<span class="co2">#define ATA_FEATURES(x)     (x+1)</span>
+<span class="co2">#define ATA_SECTOR_COUNT(x) (x+2)</span>
+<span class="co2">#define ATA_ADDRESS1(x)     (x+3)</span>
+<span class="co2">#define ATA_ADDRESS2(x)     (x+4)</span>
+<span class="co2">#define ATA_ADDRESS3(x)     (x+5)</span>
+<span class="co2">#define ATA_DRIVE_SELECT(x) (x+6)</span>
+<span class="co2">#define ATA_COMMAND(x)      (x+7)</span>
+<span class="co2">#define ATA_DCR(x)          (x+0x206)   /* device control register */</span>
+&#160;
+<span class="coMULTI">/* valid values for &quot;bus&quot; */</span>
+<span class="co2">#define ATA_BUS_PRIMARY     0x1F0</span>
+<span class="co2">#define ATA_BUS_SECONDARY   0x170</span>
+<span class="coMULTI">/* valid values for &quot;drive&quot; */</span>
+<span class="co2">#define ATA_DRIVE_MASTER    0xA0</span>
+<span class="co2">#define ATA_DRIVE_SLAVE     0xB0</span>
+&#160;
+<span class="coMULTI">/* ATA specifies a 400ns delay after drive switching -- often
+ * implemented as 4 Alternative Status queries. */</span>
+<span class="co2">#define ATA_SELECT_DELAY(bus) \
+  {inb(ATA_DCR(bus));inb(ATA_DCR(bus));inb(ATA_DCR(bus));inb(ATA_DCR(bus));}</span>
+&#160;
+<span class="coMULTI">/* Use the ATAPI protocol to read a single sector from the given
+ * bus/drive into the buffer using logical block address lba. */</span>
+<span class="kw4">int</span>
+atapi_drive_read_sector <span class="br0">&#40;</span><span class="kw4">uint32_t</span> bus<span class="sy0">,</span> <span class="kw4">uint32_t</span> drive<span class="sy0">,</span> <span class="kw4">uint32_t</span> lba<span class="sy0">,</span> <span class="kw4">uint8_t</span> <span class="sy0">*</span>buffer<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+	<span class="coMULTI">/* 0xA8 is READ SECTORS command byte. */</span>
+	<span class="kw4">uint8_t</span> read_cmd<span class="br0">&#91;</span><span class="nu0">12</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#123;</span> <span class="nu12">0xA8</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+	<span class="kw4">uint8_t</span> status<span class="sy0">;</span>
+	<span class="kw4">int</span> size<span class="sy0">;</span>
+	<span class="coMULTI">/* Tell the scheduler that this process is using the ATA subsystem. */</span>
+	ata_grab <span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* Select drive (only the slave-bit is set) */</span>
+	outb <span class="br0">&#40;</span>drive <span class="sy0">&amp;</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">,</span> ATA_DRIVE_SELECT <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>      
+	ATA_SELECT_DELAY <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="sy0">;</span>       <span class="coMULTI">/* 400ns delay */</span>
+	outb <span class="br0">&#40;</span><span class="nu12">0x0</span><span class="sy0">,</span> ATA_FEATURES <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="coMULTI">/* PIO mode */</span>
+	outb <span class="br0">&#40;</span>ATAPI_SECTOR_SIZE <span class="sy0">&amp;</span> <span class="nu12">0xFF</span><span class="sy0">,</span> ATA_ADDRESS2 <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	outb <span class="br0">&#40;</span>ATAPI_SECTOR_SIZE <span class="sy0">&gt;&gt;</span> <span class="nu0">8</span><span class="sy0">,</span> ATA_ADDRESS3 <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	outb <span class="br0">&#40;</span><span class="nu12">0xA0</span><span class="sy0">,</span> ATA_COMMAND <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="coMULTI">/* ATA PACKET command */</span>
+	<span class="kw1">while</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>status <span class="sy0">=</span> inb <span class="br0">&#40;</span>ATA_COMMAND <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0x80</span><span class="br0">&#41;</span>     <span class="coMULTI">/* BUSY */</span>
+	asm <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;pause&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="kw1">while</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="br0">&#40;</span><span class="br0">&#40;</span>status <span class="sy0">=</span> inb <span class="br0">&#40;</span>ATA_COMMAND <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0x8</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span> <span class="sy0">!</span><span class="br0">&#40;</span>status <span class="sy0">&amp;</span> <span class="nu12">0x1</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+	asm <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;pause&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* DRQ or ERROR set */</span>
+	<span class="kw1">if</span> <span class="br0">&#40;</span>status <span class="sy0">&amp;</span> <span class="nu12">0x1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+	size <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+	<span class="kw1">goto</span> cleanup<span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+	read_cmd<span class="br0">&#91;</span><span class="nu0">9</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>              <span class="coMULTI">/* 1 sector */</span>
+	read_cmd<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>lba <span class="sy0">&gt;&gt;</span> <span class="nu12">0x18</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xFF</span><span class="sy0">;</span>   <span class="coMULTI">/* most sig. byte of LBA */</span>
+	read_cmd<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>lba <span class="sy0">&gt;&gt;</span> <span class="nu12">0x10</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xFF</span><span class="sy0">;</span>
+	read_cmd<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>lba <span class="sy0">&gt;&gt;</span> <span class="nu12">0x08</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xFF</span><span class="sy0">;</span>
+	read_cmd<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>lba <span class="sy0">&gt;&gt;</span> <span class="nu12">0x00</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0xFF</span><span class="sy0">;</span>   <span class="coMULTI">/* least sig. byte of LBA */</span>
+	<span class="coMULTI">/* Send ATAPI/SCSI command */</span>
+	outsw <span class="br0">&#40;</span>ATA_DATA <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw4">uint16_t</span> <span class="sy0">*</span><span class="br0">&#41;</span> read_cmd<span class="sy0">,</span> <span class="nu0">6</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* Wait for IRQ that says the data is ready. */</span>
+	schedule <span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* Read actual size */</span>
+	size <span class="sy0">=</span>
+	<span class="br0">&#40;</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> inb <span class="br0">&#40;</span>ATA_ADDRESS3 <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&lt;&lt;</span> <span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy0">|</span>
+	<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>inb <span class="br0">&#40;</span>ATA_ADDRESS2 <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* This example code only supports the case where the data transfer
+	* of one sector is done in one step. */</span>
+	ASSERT <span class="br0">&#40;</span>size <span class="sy0">==</span> ATAPI_SECTOR_SIZE<span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* Read data. */</span>
+	insw <span class="br0">&#40;</span>ATA_DATA <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="sy0">,</span> buffer<span class="sy0">,</span> size <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* The controller will send another IRQ even though we've read all
+	* the data we want.  Wait for it -- so it doesn't interfere with
+	* subsequent operations: */</span>
+	schedule <span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="coMULTI">/* Wait for BSY and DRQ to clear, indicating Command Finished */</span>
+	<span class="kw1">while</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>status <span class="sy0">=</span> inb <span class="br0">&#40;</span>ATA_COMMAND <span class="br0">&#40;</span>bus<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu12">0x88</span><span class="br0">&#41;</span> 
+	asm <span class="kw4">volatile</span> <span class="br0">&#40;</span><span class="st0">&quot;pause&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	cleanup<span class="sy0">:</span>
+	<span class="coMULTI">/* Exit the ATA subsystem */</span>
+	ata_release <span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+	<span class="kw1">return</span> size<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Detecting_a_Medium.27s_Capacity">Detecting a Medium's Capacity</span></h2>
+<p>A medium is any media inserted in the ATAPI Drive, like a CD or a DVD. By using the 'SCSI Read Capacity' command, you can read the last LBA of the medium, then you calculate the medium's capacity using this relationship:
+</p><p>Capacity = (Last LBA + 1) * Block Size;
+</p><p>Last LBA and Block Size are returned after processing the command. Almost all CDs and DVDs use blocks with size of 2KB each.
+</p><p>Processing this command goes in the following algorithm:
+</p>
+<ul><li> Selecting the Drive [Master/Slave].
+</li><li> Waiting 400ns for select to complete.
+</li><li> Setting FEATURES Register to 0 [PIO Mode].
+</li><li> Setting LBA1 and LBA2 Registers to 0x0008 [Number of Bytes will be returned].
+</li><li> Sending Packet Command, then Polling.
+</li><li> Sending the ATAPI Packet, then polling.  ATAPI packet must be 6 words long (12 bytes).
+</li><li> If there isn't an error, reading 4 Words [8 bytes] from the DATA Register.
+</li></ul>
+<p>The ATAPI packet should be in this formulation:
+</p><p><br />
+</p>
+<table border="1">
+
+<tr>
+<th> bit→<br />↓byte
+</th>
+<th width="50"> 7
+</th>
+<th width="50"> 6
+</th>
+<th width="50"> 5
+</th>
+<th width="50"> 4
+</th>
+<th width="50"> 3
+</th>
+<th width="50"> 2
+</th>
+<th width="50"> 1
+</th>
+<th width="50"> 0
+</th></tr>
+<tr>
+<th> 0
+</th>
+<td colspan="8" align="center"> Operation code = 25h
+</td></tr>
+<tr>
+<th> 1
+</th>
+<td colspan="3" align="center"> <b>LUN</b>
+</td>
+<td colspan="4" align="center"> Reserved
+</td>
+<td align="center"> <b>RelAdr</b>
+</td></tr>
+<tr>
+<th> 2
+</th>
+<td rowspan="4" colspan="8" align="center"> <b>LBA</b> (MSB) <br /><br /><br /><br /> <b>LBA</b> (LSB)
+</td></tr>
+<tr>
+<th> 3
+</th></tr>
+<tr>
+<th> 4
+</th></tr>
+<tr>
+<th> 5
+</th></tr>
+<tr>
+<th> 6
+</th>
+<td colspan="8" align="center"> Reserved
+</td></tr>
+<tr>
+<th> 7
+</th>
+<td colspan="8" align="center"> Reserved
+</td></tr>
+<tr>
+<th> 8
+</th>
+<td colspan="7" align="center"> Reserved
+</td>
+<td align="center"> <b>PMI</b>
+</td></tr>
+<tr>
+<th> 9
+</th>
+<td colspan="8" align="center"> Control
+</td></tr>
+<tr>
+<th> 10
+</th>
+<td colspan="8" align="center"> Reserved*
+</td></tr>
+<tr>
+<th> 11
+</th>
+<td colspan="8" align="center"> Reserved*
+</td></tr></table>
+<p>Note: The last two reserved fields are ATAPI specific.  They are not part of the SCSI command packet version.
+</p><p>The special control fields in the CDB have the following meaning:
+</p>
+<ul><li><b>RelAdr</b> - indicates that the logical block address (LBA) value is relative (only used with <a href="http://wiki.osdev.org/index.php?title=SCSI_Linked_Commands&amp;action=edit&amp;redlink=1" class="new" title="SCSI Linked Commands (page does not exist)">linked commands</a>).
+</li><li><b>PMI</b> - partial medium indicator:
+<ul><li>0 - return value for the last LBA  
+</li><li>1 - return value for the last LBA after which a substantial delay in data transfer will be encountered (e.g., the current track or cylinder)
+</li></ul>
+</li></ul>
+<p>The target will return capacity data structured as follows:
+</p>
+<table border="1">
+
+<tr>
+<th> bit→<br />↓byte
+</th>
+<th width="50"> 7
+</th>
+<th width="50"> 6
+</th>
+<th width="50"> 5
+</th>
+<th width="50"> 4
+</th>
+<th width="50"> 3
+</th>
+<th width="50"> 2
+</th>
+<th width="50"> 1
+</th>
+<th width="50"> 0
+</th></tr>
+<tr>
+<th> 0–3
+</th>
+<td colspan="8" align="center"> Returned LBA
+</td></tr>
+<tr>
+<th> 4–7
+</th>
+<td colspan="8" align="center"> Block length in bytes
+</td></tr></table>
+<p>If there is an error after polling, there may be no medium inserted, so this command may be also used to detect whether there is a medium or not, and if there is a medium, its capacity is read.
+</p>
+<h2> <span class="mw-headline" id="Operating_Theory">Operating Theory</span></h2>
+<p>Quoting <a rel="nofollow" class="external text" href="http://suif.stanford.edu/~csapuntz/ide.html">The Guide to ATA/ATAPI documentation (stanford.edu)</a>
+</p>
+<blockquote>
+<i>Hosts control ATAPI devices using SCSI command packets. The SCSI command packets are transported over the ATA interface, instead of the parallel SCSI bus. This cool hack is described in ATA/ATAPI-6.</i>
+The set of SCSI command packets applicable to all SCSI devices is described in the <a rel="nofollow" class="external text" href="ftp://ftp.t10.org/t10/drafts/spc/spc-r11a.pdf">SCSI-3 Primary Commands PDF</a>. Again, ATAPI devices don't implement all of these, so it's best to consult the associated ATAPI spec for a device.
+CD-ROM command packets were originally described in <a rel="nofollow" class="external text" href="http://suif.stanford.edu/~csapuntz/specs/INF-8020.PDF">INF-8020 PDF</a>. This document contains many inaccuracies in its description of the ATA bus interface, so please double check any statements against ATA/ATAPI-6. (Unfortunately, some of those inaccuracies were implemented!)
+</blockquote>
+<h2> <span class="mw-headline" id="Comments">Comments</span></h2>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3> <span class="mw-headline" id="Articles">Articles</span></h3>
+<ul><li> <a href="ATA/ATAPI_Power_Management" title="ATA/ATAPI Power Management">ATA/ATAPI Power Management</a>
+</li><li> <a href="ATA/ATAPI_using_DMA" title="ATA/ATAPI using DMA">ATA/ATAPI using DMA</a>
+</li><li> <a href="Optical_Drive" title="Optical Drive">Optical Drive</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links">External Links</span></h3>
+<ul><li> <a rel="nofollow" class="external free" href="http://www.t10.org/">http://www.t10.org/</a> -- T10, the group that creates the SCSI (and therefore ATAPI) command set.
+</li><li> <a rel="nofollow" class="external free" href="http://www.t10.org/ftp/x3t9.2/document.87/87-106r0.txt">http://www.t10.org/ftp/x3t9.2/document.87/87-106r0.txt</a> -- Direct link to 1987 documentation of SCSI commands related to CD-ROMS. Old but useful.
+</li><li> <a rel="nofollow" class="external free" href="http://www.ata-atapi.com">http://www.ata-atapi.com</a> -- Public Domain C driver sourcecode, including SATA, Busmatering DMA, ATAPI -- not perfect, but good.
+</li><li> <a rel="nofollow" class="external text" href="http://suif.stanford.edu/~csapuntz/ide.html">The Guide to ATA/ATAPI documentation</a>
+</li><li> <a rel="nofollow" class="external text" href="http://suif.stanford.edu/~csapuntz/blackmagic.html">Old document about ATA/ATAPI errata</a>
+</li><li> <a rel="nofollow" class="external text" href="http://suif.stanford.edu/~csapuntz/specs/INF-8020.PDF">Beta release of original ATAPI spec (PDF)</a> Has partial list of CD-ROM ATAPI commands. <b>MANY</b> errors. If something in this document looks wrong to you, it <b>IS</b> wrong. It is still very informative.
+</li><li> <a rel="nofollow" class="external free" href="http://www.osta.org/specs/pdf/udf201.pdf">http://www.osta.org/specs/pdf/udf201.pdf</a> -- UDF filesystem format PDF
+</li><li> <a rel="nofollow" class="external free" href="http://www.osdever.net/downloads/docs/iso9660.zip">http://www.osdever.net/downloads/docs/iso9660.zip</a> -- ISO 9660 filesystem format
+</li><li> <a rel="nofollow" class="external free" href="http://bmrc.berkeley.edu/people/chaffee/jolspec.html">http://bmrc.berkeley.edu/people/chaffee/jolspec.html</a> -- Joliet filesystem specification
+</li><li> <a rel="nofollow" class="external free" href="http://www.osdever.net/downloads/docs/susp112.zip">http://www.osdever.net/downloads/docs/susp112.zip</a> -- Rock Ridge Filesystem Sharing Protocol (POSIX)
+</li><li> <a rel="nofollow" class="external free" href="http://www.osdever.net/downloads/docs/rrip112.zip">http://www.osdever.net/downloads/docs/rrip112.zip</a> -- Rock Ridge Interchange specification (POSIX)
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 155/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2246-0!*!0!!en!*!* and timestamp 20180121064139 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ATAPI&amp;oldid=20358">http://wiki.osdev.org/index.php?title=ATAPI&amp;oldid=20358</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:ATA" title="Category:ATA">ATA</a></li><li><a href="Category:Storage" title="Category:Storage">Storage</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ATAPI" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="ATAPI"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:ATAPI"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="ATAPI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="ATAPI" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ATAPI&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ATAPI&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="ATAPI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+	skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ATAPI" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ATAPI" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ATAPI&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ATAPI&amp;oldid=20358" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 11 February 2017, at 11:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 80,034 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.044 secs. -->
+	</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>C-- - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "C--", "wgTitle": "C--", "wgCurRevisionId": 18404, "wgArticleId": 2364, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Languages"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-C-- action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">C--</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="C--#mw-head">navigation</a>,
+					<a href="C--#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>This page is about Sphinx Full C--, not about <a rel="nofollow" class="external text" href="http://www.cminusminus.org/index.html">C--</a>, the portable assembly language.
+</p><p>Sphinx Full C-- language is in between the <a href="C" title="C">C language</a> and x86-assembly. It is a very neat computer language and the Sphinx Full C-- compiler allows to produce (and mix) 16 bit and 32 bit code for real and protected modes. 
+</p><p>It was originally developed by Peter Cellik in Canada and then has been extended for several years by Michael Sheker in Russia. 
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="C--#Pros"><span class="tocnumber">1</span> <span class="toctext">Pros</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="C--#Cons"><span class="tocnumber">2</span> <span class="toctext">Cons</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="C--#Examples"><span class="tocnumber">3</span> <span class="toctext">Examples</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="C--#Take_over_interrupt"><span class="tocnumber">3.1</span> <span class="toctext">Take over interrupt</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="C--#read.2C_write"><span class="tocnumber">3.2</span> <span class="toctext">read, write</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="C--#Disk_IO"><span class="tocnumber">3.3</span> <span class="toctext">Disk IO</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="C--#Enable_Protected_Mode"><span class="tocnumber">3.4</span> <span class="toctext">Enable Protected Mode</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="C--#References"><span class="tocnumber">4</span> <span class="toctext">References</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Pros">Pros</span></h2>
+<ul><li> compiles very small executables;
+</li><li> good for writing real mode x86 operating systems;
+</li><li> good for writing TSR programs for DOS;
+</li><li> supports many executable formats: COM, EXE, SYS (DOS drivers), ROM-BIOS, Windows PE-Coff, Windows DLL, 32bit DOS flat or DPMI, MenuetOS;
+</li><li> good for writing x86-related parts of an operating system in a structured and easily readable and easier debuggable way related to structured languages like C and Pascal;
+</li><li> very good (because of the structured form) for writing small toy programs which are close to the hardware;
+</li><li> very good for writing bootsectors in;
+</li><li> the code can be either low level (assembly-like), medium level (C like) or very easily mixed;
+</li><li> has almost as good control over all the small details of the output binaries as assembly languages provide, but is much more maintainable thanks to structuring; people develop who develop OSes in pure assembly do not need the high-level structures and portability of C and C++, so this means that for many developers, the lack of these high level structures and portability in C-- may not be an issue;
+</li><li> relatively easy to port from and to C-with-assembly.
+</li></ul>
+<h2> <span class="mw-headline" id="Cons">Cons</span></h2>
+<ul><li> not portable; it is very closely tied to the x86 assembly;
+</li><li> is developed by few developers, the community is small; has less users than gcc so may have more bugs;
+</li><li> in order to be low-level, many limitations are in place: for example, array subscripts (like in x= myArr[<b>subscript</b>]) are limited to simple expressions (like myArr[10], myArr[ESI]; but myArr[myArr[1]] is not allowed);
+</li><li> it can not output 64bit code.
+</li></ul>
+<p>Early versions of <a href="http://wiki.osdev.org/index.php?title=User:Adek336&amp;action=edit&amp;redlink=1" class="new" title="User:Adek336 (page does not exist)">panaLiX</a> used Sphinx Full C--. The Panalix website is <a rel="nofollow" class="external text" href="http://panalix.sourceforge.net/">here</a> but there is no Sphinx C-- code currently available.
+</p>
+<h2> <span class="mw-headline" id="Examples">Examples</span></h2>
+<pre>    byte x = 0b01001;
+    word y;
+    dword z;
+    #define THIS_A_DEFINITION 123
+</pre>
+<h3> <span class="mw-headline" id="Take_over_interrupt">Take over interrupt</span></h3>
+<pre>dword old0x21 = {};
+interrupt int0x21()
+{
+    $PUSH DS
+    $PUSH ES
+    $PUSHA
+    $PUSH FS
+    //
+    DS = CS;
+    FS = 0xb800;
+    FSBYTE[1682] = '!';
+    //
+    $POP FS
+    $POPA
+    $POP ES
+    $POP DS
+}
+...
+int registerInterrupt0x21()
+{
+    FS = 0;
+    old0x21 = FSDWORD[0x21 * 4];
+    FSWORD[0x21 * 4] = #int0x21;
+    FSWORD[0x21 * 4 + 2] = CS;
+    Log(3, "0x21 registered", 0);
+}
+</pre>
+<pre>    ESBYTE[0x1b8003]= 'z';
+    //
+    $ CLI
+    kb_cmd(0xad);
+    kb_cmd(0xd0);
+    kb_read();
+    tepx=AL;
+    kb_cmd(0xd1);
+    $ MOV AL, tepx
+    $ OR AL, 2
+    $ MOV tepx, AL
+    kb_write(tepx);
+    kb_cmd(0xae);
+    $ STI
+    //
+    ESBYTE[0x1b8005]= 127;
+</pre>
+<h3> <span class="mw-headline" id="read.2C_write">read, write</span></h3>
+<pre>void PRINTF()
+{
+    BX = 0x0007;
+    $ PUSH SI
+    SI = AX;
+    AH = 0xE;
+ UP:
+    $ LODSB
+    $ CMP AL,0
+    $ JZ DOWN
+    $ INT 0x10
+    $ JMP SHORT UP
+ DOWN:
+    $ POP SI
+}
+void readStr()
+int tr;
+byte b1; word ln;
+{
+ tr = 0; ln = 0;
+ do
+  {
+   tr = 0;
+   b1 = wait_key();
+   if (b1 == 13) tr = 1;
+   if (scanCd == 14)
+    {
+     tr = 2;
+     if (ln &gt; 0)
+      {
+       putch(b1); putch(' '); putch(b1);
+       ln--;
+      }
+    }
+   if (tr == 0) if (ln &lt; 255) if (b1 &gt;= 32)
+    {
+     putch(b1);
+     BX = ln;
+     st1[BX] = b1;
+     ln++;
+    };
+  } while (tr &lt;&gt; 1);
+ BX = ln;
+ st1[BX] = 0;
+}
+</pre>
+<pre>: void kbrSpeed(byte sped, dly)
+  {
+   AH = 3;
+   AL = 5;
+   BL = sped; // 0x00 - 0x1f
+   BH = dly;  // 0 - 3
+   $ INT 0x16
+  }
+</pre>
+<h3> <span class="mw-headline" id="Disk_IO">Disk IO</span></h3>
+<pre>byte readDisk(byte drive, head, sector, track, howmany; word segm, offs)
+int err;
+{
+ err = 0;
+ lab1:
+ $ MOV AH, 0
+ $ MOV DL, drive
+ $ INT 0x13
+ $ MOV AX, segm
+ $ MOV ES, AX
+ $ MOV BX, offs
+ $ MOV DL, drive
+ $ MOV DH, head
+ $ MOV CL, sector
+ $ MOV CH, track
+ $ MOV AL, howmany
+ $ MOV AH, 2
+ $ INT 0x13
+ AL = 0;
+ if (CARRYFLAG)
+  {
+   err++;
+   if (err &lt; maxDiskErrors) $jmp lab1;
+   return(AH);
+  }
+ return(0);
+}
+byte readSector(byte drive; word sector; byte howmany;word segm, offs)
+word a, b, c, d;
+{
+ a = sector - 1;
+ c = a&#160;% 36;
+ d = c&#160;% 18;
+ c = c - d;
+ c = c / 18;
+ b = a&#160;% 18 + 1;
+ d = a&#160;% 36;
+ a = a - d;
+ a = a / 36;
+ AL = readDisk(drive, c, b, a, howmany, segm,offs);
+}
+byte readCluster(byte drive; word clnum; byte howmany; word segm, offs)
+{
+ AL = readSector(drive, clnum+32, howmany, segm, offs);
+}
+int fileCluster(word tstart)
+byte fbuf[512];
+byte fname[11];
+int n1, n2, n3, n4, w5;
+byte b1;
+byte f[11];
+{
+ $ PUSH AX
+ $ PUSH BX
+ $ PUSH CX
+ $ PUSH SI
+ lastSize = 0;
+ w5 = 0;
+ SI = tstart;
+ n1 = 11;
+ loop (n1)
+  {
+   $ LODSB
+   CX = #fname +11 - n1;
+   BX = CX;
+   DSBYTE[BX] = AL;
+  }
+ $ POP SI
+ n3 = -1;
+ n1 = 20;
+ do
+  {
+   n2 = 0;
+   if (w5 == 0) w5 = - readSector(0, n1, 1, DS, #fbuf);
+   if (w5 &lt;&gt; 0) n1 = 35;
+   if (w5 == 0)
+   do
+    {
+     n3 = 0;
+     n4 = 0;
+     do
+      {
+       AX = 32 * n2 + #fbuf + n3;
+       BX = AX;
+       b1 = DSBYTE[BX];
+       AX = #fname + n3;
+       BX = AX;
+       if (DSBYTE[BX] &lt;&gt; b1) n4 = 1;
+       n3++;
+      } while (n3 &lt;= 10);
+     AX = n2 * 32 + #fbuf + 28;
+     BX = AX;
+     if (n4 == 0) lastSize = DSDWORD[BX];
+     AX = n2 * 32 + #fbuf + 26;
+     BX = AX;
+     if (n4 == 0) w5=DSWORD[BX];
+     n2++;
+    } while (n2 &lt;=15);
+   n1++;
+  } while (n1 &lt;= 33);
+ $ POP CX
+ $ POP BX
+ $ POP AX
+ AX = w5;
+}
+</pre>
+<h3> <span class="mw-headline" id="Enable_Protected_Mode">Enable Protected Mode</span></h3>
+<pre> ...
+&#160;?code32 false
+ ...
+ DSWORD[#gdtr] = #gdt_end - #gdt0;
+ DSWORD[#gdtr] = DSWORD[#gdtr] - 1;
+ DSDWORD[#gdtr + 2] = START + #gdt0;
+//
+ DSWORD[#idtr] = #idt_end - #idt;
+ DSWORD[#idtr] = DSWORD[#idtr] - 1;
+ DSDWORD[#idtr + 2] = START + #idt;
+//lgdt bx
+ BX = #gdtr;
+ $ db 0x3e, 0x0f, 0x01, 0x17
+//lidt bx
+ BX = #idtr;
+ $ db 0x3e, 0x0f, 0x01, 0x1f
+//
+ $ MOV EAX, CR0
+ $ OR AL, 1
+ $ MOV CR0, EAX
+//
+jump_pm32:
+ $ db 0xEA
+ $ dw 0
+ $ dw 0x10
+ }
+?code32 TRUE
+void _1()
+{
+do_pm32:
+//
+ $ MOV AX, 0x18
+ $ MOV DS, AX
+ $ MOV SS, AX
+//
+ $ MOV AX, 0x08
+ $ MOV ES, AX
+//
+ @setup_pic(0x20, 0x28);
+ ...
+</pre>
+<p>These snippets may seem a bit spaghetti code, but not because of some language defficiency but because I didn't look very far for them snippets.
+</p>
+<h2> <span class="mw-headline" id="References">References</span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://c--sphinx.narod.ru/indexe.htm">The compilers website</a>
+</li><li> <a rel="nofollow" class="external text" href="http://www.dev0.de/cmm/indexe.htm">Mirror of the compilers website</a>
+</li><li> <a rel="nofollow" class="external text" href="https://github.com/jossk/c--sphinx">Github site with all the files plus source for Sphinx C--</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 44/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2364-0!*!0!!en!*!* and timestamp 20180121080135 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=C--&amp;oldid=18404">http://wiki.osdev.org/index.php?title=C--&amp;oldid=18404</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Languages" title="Category:Languages">Languages</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=C--" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="C--"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:C--&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="C--#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="C--" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=C--&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=C--&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="C--#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/C--" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/C--" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=C--&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=C--&amp;oldid=18404" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 October 2015, at 10:16.</li>
+											<li id="footer-info-viewcount">This page has been accessed 30,464 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.050 secs. -->
+	</body>
+</html>

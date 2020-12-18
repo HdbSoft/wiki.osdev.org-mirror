@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>QEMU and GDB in long mode - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "QEMU_and_GDB_in_long_mode", "wgTitle": "QEMU and GDB in long mode", "wgCurRevisionId": 20721, "wgArticleId": 3895, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Troubleshooting", "FAQ"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-text {line-height: normal;}
+.source-text li, .source-text pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for text
+ * CSS class: source-text, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.text.source-text .de1, .text.source-text .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.text.source-text  {font-family:monospace;}
+.text.source-text .imp {font-weight: bold; color: red;}
+.text.source-text li, .text.source-text .li1 {font-weight: normal; vertical-align:top;}
+.text.source-text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.text.source-text .li2 {font-weight: bold; vertical-align:top;}
+.text.source-text .ln-xtra, .text.source-text li.ln-xtra, .text.source-text div.ln-xtra {background-color: #ffc;}
+.text.source-text span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-diff {line-height: normal;}
+.source-diff li, .source-diff pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for diff
+ * CSS class: source-diff, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.diff.source-diff .de1, .diff.source-diff .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.diff.source-diff  {font-family:monospace;}
+.diff.source-diff .imp {font-weight: bold; color: red;}
+.diff.source-diff li, .diff.source-diff .li1 {font-weight: normal; vertical-align:top;}
+.diff.source-diff .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.diff.source-diff .li2 {font-weight: bold; vertical-align:top;}
+.diff.source-diff .kw1 {color: #aaaaaa; font-style: italic;}
+.diff.source-diff .re0 {color: #440088;}
+.diff.source-diff .re1 {color: #991111;}
+.diff.source-diff .re2 {color: #00b000;}
+.diff.source-diff .re3 {color: #888822;}
+.diff.source-diff .re4 {color: #888822;}
+.diff.source-diff .re5 {color: #0011dd;}
+.diff.source-diff .re6 {color: #440088;}
+.diff.source-diff .re7 {color: #991111;}
+.diff.source-diff .re8 {color: #00b000;}
+.diff.source-diff .re9 {color: #888822;}
+.diff.source-diff .ln-xtra, .diff.source-diff li.ln-xtra, .diff.source-diff div.ln-xtra {background-color: #ffc;}
+.diff.source-diff span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-QEMU_and_GDB_in_long_mode action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">QEMU and GDB in long mode</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="QEMU_and_GDB_in_long_mode#mw-head">navigation</a>,
+					<a href="QEMU_and_GDB_in_long_mode#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>If you're running in <a href="Long_Mode" title="Long Mode" class="mw-redirect">Long Mode</a> and using <a href="QEMU" title="QEMU">QEMU</a> as your emulator you'll likely encounter the following error trying to use <a href="QEMU#GDB-stub" title="QEMU">QEMU's gdb-stub</a>:
+</p>
+<pre>Remote 'g' packet reply is too long: ...</pre>
+<p>This happens error when QEMU has switched to long mode. There are two workarounds for this: you can either disconnect and reconnect to force GDB to use the x86_64 architecture or patch GDB to switch the architecture on the fly.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="QEMU_and_GDB_in_long_mode#Workaround_1:_Reconnecting"><span class="tocnumber">1</span> <span class="toctext">Workaround 1: Reconnecting</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="QEMU_and_GDB_in_long_mode#Workaround_2:_Patching_GDB"><span class="tocnumber">2</span> <span class="toctext">Workaround 2: Patching GDB</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="QEMU_and_GDB_in_long_mode#Other_issues"><span class="tocnumber">3</span> <span class="toctext">Other issues</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="QEMU_and_GDB_in_long_mode#See_also"><span class="tocnumber">4</span> <span class="toctext">See also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="QEMU_and_GDB_in_long_mode#Threads"><span class="tocnumber">4.1</span> <span class="toctext">Threads</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Workaround_1:_Reconnecting">Workaround 1: Reconnecting</span></h2>
+<p>When you start GDB, connect to QEMU with these commands:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">$ gdb
+(gdb) set arch i386:x86-64:intel
+(gdb) target remote localhost:1234
+(gdb) symbol-file YOUR_KERNEL_FILE
+(gdb) break SOME_FUNCTION_IN_LONG_MODE
+(gdb) continue</pre></div></div>
+<p>When the break point is hit and the "packet reply is too long" happens, run the following:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">(gdb) disconnect
+(gdb) set arch i386:x86-64
+(gdb) target remote localhost:1234</pre></div></div>
+<p>Note that you must use different architecture names in those two "set arch" commands.
+</p>
+<h2> <span class="mw-headline" id="Workaround_2:_Patching_GDB">Workaround 2: Patching GDB</span></h2>
+<p>This is a slightly modified version of the patch posted in <a href="http://forum.osdev.org/viewtopic.php?t=28262" class="extiw" title="topic:28262">this thread</a>. As a bonus, this patch produces a warning when it suspects that the mode switch happened.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="diff source-diff"><pre class="de1"><span class="re3">--- gdb/remote.c  	2016-04-14 11:13:49.962628700 +0300</span>
+<span class="re4">+++ gdb/remote.c	2016-04-14 11:15:38.257783400 +0300</span>
+<span class="re6">@@ -7181,8 +7181,28 @@</span>
+   buf_len = strlen <span class="br0">&#40;</span>rs-&gt;buf<span class="br0">&#41;</span>;
+&#160;
+   /* Further sanity checks, with knowledge of the architecture.  */
+<span class="re8">+// HACKFIX for changing architectures for qemu. It's ugly. Don't use, unless you have to.</span>
+<span class="re8">+  // Just a tiny modification of the patch of Matias Vara <span class="br0">&#40;</span>http://forum.osdev.org/viewtopic.php?f=13&amp;p=177644<span class="br0">&#41;</span></span>
+   if <span class="br0">&#40;</span>buf_len &gt; <span class="nu0">2</span> * rsa-&gt;sizeof_g_packet<span class="br0">&#41;</span>
+<span class="re7">-    error <span class="br0">&#40;</span>_<span class="br0">&#40;</span>&quot;Remote 'g' packet reply is too long:&#160;%s&quot;<span class="br0">&#41;</span>, rs-&gt;buf<span class="br0">&#41;</span>;</span>
+<span class="re8">+    <span class="br0">&#123;</span></span>
+<span class="re8">+      warning <span class="br0">&#40;</span>_<span class="br0">&#40;</span>&quot;Assuming long-mode change. <span class="br0">&#91;</span>Remote 'g' packet reply is too long:&#160;%s<span class="br0">&#93;</span>&quot;<span class="br0">&#41;</span>, rs-&gt;buf<span class="br0">&#41;</span>;</span>
+<span class="re8">+      rsa-&gt;sizeof_g_packet = buf_len&#160;;</span>
+<span class="re8">+</span>
+<span class="re8">+      for <span class="br0">&#40;</span>i = <span class="nu0">0</span>; i &lt; gdbarch_num_regs <span class="br0">&#40;</span>gdbarch<span class="br0">&#41;</span>; i++<span class="br0">&#41;</span></span>
+<span class="re8">+        <span class="br0">&#123;</span></span>
+<span class="re8">+          if <span class="br0">&#40;</span>rsa-&gt;regs<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.pnum == -1<span class="br0">&#41;</span></span>
+<span class="re8">+            continue;</span>
+<span class="re8">+</span>
+<span class="re8">+          if <span class="br0">&#40;</span>rsa-&gt;regs<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.offset &gt;= rsa-&gt;sizeof_g_packet<span class="br0">&#41;</span></span>
+<span class="re8">+            rsa-&gt;regs<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.in_g_packet = <span class="nu0">0</span>;</span>
+<span class="re8">+          else</span>
+<span class="re8">+            rsa-&gt;regs<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.in_g_packet = <span class="nu0">1</span>;</span>
+<span class="re8">+        <span class="br0">&#125;</span></span>
+<span class="re8">+</span>
+<span class="re8">+      // HACKFIX: Make sure at least the lower half of EIP is set correctly, so the proper</span>
+<span class="re8">+      // breakpoint is recognized <span class="br0">&#40;</span>and triggered<span class="br0">&#41;</span>.</span>
+<span class="re8">+      rsa-&gt;regs<span class="br0">&#91;</span><span class="nu0">8</span><span class="br0">&#93;</span>.offset = <span class="nu0">16</span>*<span class="nu0">8</span>;</span>
+<span class="re8">+    <span class="br0">&#125;</span></span>
+&#160;
+   /* Save the size of the packet sent to us by the target.  It is used
+      as a heuristic when determining the max size of packets that the</pre></div></div>
+<p>The patched GDB emits the error as a warning but continues to function across the mode change. This patch has been tested with gdb 7.11 and 7.12.
+</p><p>Alternatively, you can patch QEMU so that you can use gdb unpatched. Be warned, this probably breaks support for debugging 32-bit code (also, compiling QEMU is hour-long task). In order to do this, replace each occurence of <code>if (TARGET_LONG_BITS == 64 &amp;&amp; env-&gt;hflags &amp; HF_CS64_MASK) {</code> in the file gdbstub.c with <code>if (TARGET_LONG_BITS == 64) {</code>. However, this method originates from <a href="http://forum.osdev.org/viewtopic.php?t=21836" class="extiw" title="topic:21836">a thread back in 2011</a>, and is untested since.
+</p>
+<h2> <span class="mw-headline" id="Other_issues">Other issues</span></h2>
+<p>Some have experienced <a href="http://forum.osdev.org/viewtopic.php?t=26224" class="extiw" title="topic:26224">issues with breakpoints</a> (using the <code>break</code> command) not firing. Use <code>hbreak</code> instead.
+</p>
+<h2> <span class="mw-headline" id="See_also">See also</span></h2>
+<h3> <span class="mw-headline" id="Threads">Threads</span></h3>
+<ul><li> <a href="http://forum.osdev.org/viewtopic.php?t=28262" class="extiw" title="topic:28262">Emulator for Mac OS X</a> - Dealing with issues on macOS
+</li><li> <a href="http://forum.osdev.org/viewtopic.php?t=30285" class="extiw" title="topic:30285">Debugging long mode kernel (gdb + qemu)?</a> - workaround without patching gdb
+</li><li> <a href="http://forum.osdev.org/viewtopic.php?t=21836" class="extiw" title="topic:21836">GDB and QEMU on Win64</a> - patches for either gdb or qemu
+</li><li> <a href="http://forum.osdev.org/viewtopic.php?t=26224" class="extiw" title="topic:26224">GDB not breaking at my breakpoints</a> - dealing with 'skipped' breakpoints
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 73/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:3895-0!*!0!!en!*!* and timestamp 20180121045631 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=QEMU_and_GDB_in_long_mode&amp;oldid=20721">http://wiki.osdev.org/index.php?title=QEMU_and_GDB_in_long_mode&amp;oldid=20721</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Troubleshooting" title="Category:Troubleshooting">Troubleshooting</a></li><li><a href="Category:FAQ" title="Category:FAQ">FAQ</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=QEMU_and_GDB_in_long_mode" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="QEMU_and_GDB_in_long_mode"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:QEMU_and_GDB_in_long_mode&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="QEMU_and_GDB_in_long_mode#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="QEMU_and_GDB_in_long_mode" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=QEMU_and_GDB_in_long_mode&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=QEMU_and_GDB_in_long_mode&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="QEMU_and_GDB_in_long_mode#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/QEMU_and_GDB_in_long_mode" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/QEMU_and_GDB_in_long_mode" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=QEMU_and_GDB_in_long_mode&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Qskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/QEMU_and_GDB_in_long_mode" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/QEMU_and_GDB_in_long_mode" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=QEMU_and_GDB_in_long_mode&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=QEMU_and_GDB_in_long_mode&amp;oldid=20721" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 18 April 2017, at 01:10.</li>
+											<li id="footer-info-viewcount">This page has been accessed 4,388 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>System Initialization (x86) - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "System_Initialization_(x86)", "wgTitle": "System Initialization (x86)", "wgCurRevisionId": 10895, "wgArticleId": 1840, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["X86"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-System_Initialization_x86 action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">System Initialization (x86)</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="System_Initialization_(x86)#mw-head">navigation</a>,
+					<a href="System_Initialization_(x86)#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>When an x86-based computer is turned on (assuming that it turns on successfully), it begins a complex path to get to the stage
+where control is transferred to your kernel's "main()" routine. The exact sequence of steps depends on what kind of device the computer
+decides to boot from, and whether it uses the legacy <a href="BIOS" title="BIOS">BIOS</a> boot method, or the new <a href="UEFI" title="UEFI">UEFI</a> method. The new UEFI method completely
+changes the entire boot process, and is covered in <a href="UEFI" title="UEFI">another article</a>. The intention is that the UEFI boot process will someday
+completely replace the BIOS method in all new computers, but it may not succeed.
+</p><p>Described below is the traditional BIOS-based system initialization process.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="System_Initialization_(x86)#BIOS_initialization"><span class="tocnumber">1</span> <span class="toctext">BIOS initialization</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="System_Initialization_(x86)#Transfer_of_Control_to_Bootsector"><span class="tocnumber">2</span> <span class="toctext">Transfer of Control to Bootsector</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="System_Initialization_(x86)#System_.22Environment.22"><span class="tocnumber">2.1</span> <span class="toctext">System "Environment"</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="System_Initialization_(x86)#OS-specific_Bootloaders"><span class="tocnumber">2.2</span> <span class="toctext">OS-specific Bootloaders</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="System_Initialization_(x86)#MBR_Bootsectors"><span class="tocnumber">2.3</span> <span class="toctext">MBR Bootsectors</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="System_Initialization_(x86)#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="System_Initialization_(x86)#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="BIOS_initialization">BIOS initialization</span></h2>
+<p>The very first thing that happens when the machine is turned on, is that the CPU starts trying to run a program at the very end of the
+4Gb memory area. At that location must be some ROM which contains a BIOS initialization program. The initialization
+code can be large, and the ROM may be as large as 256Kb in size. An OS programmer cannot modify or control this stage of the process in any way.
+</p>
+<ul><li> RAM detection -- the BIOS must use some RAM in order to perform its functions. To use the RAM, the BIOS must first detect the type and quantity of RAM chips installed. This can only be done (using chipset-specific methods) while the CPU is running code that is stored in <b>ROM</b>, specifically. Once the RAM has been detected, the BIOS may perform a simple memory test on it, and then the BIOS loads data and code into several memory areas in RAM: the <a href="Memory_Map_(x86)#BIOS_Data_Area_.28BDA.29" title="Memory Map (x86)">BDA</a>, the <a href="Memory_Map_(x86)#Extended_BIOS_Data_Area_.28EBDA.29" title="Memory Map (x86)">EBDA</a>, and the 64K "BIOS area" at physical address 0xF0000 to 0xFFFFF. The BIOS also sets up a tiny stack somewhere in memory, and sets up the Real Mode IVT from physical address 0 to 0x3FF. Some of the physical memory between address 0xA0000 and 0xFFFFF is then set to "read only" mode using chipset-specific methods.
+</li></ul>
+<ul><li> Hardware detection/Initialization -- the BIOS detects, enumerates, configures, and initializes every bus, and almost every piece of hardware on the system, using values that the BIOS chooses. It stores a great deal of information about all of this hardware, for the OS to later parse. If the BIOS finds any ROM chips on any hardware, they are mapped (not loaded) into physical memory at addresses that the BIOS chooses. It is important to note that many BIOSes do a rather bad job of configuring, sometimes. An OS may well need to reconfigure the <a href="MTRR" title="MTRR">MTRRs</a>, or the <a href="PCI" title="PCI">PCI</a> bus, or the mapping of some PCI devices. The BIOS is supposed to always bring all the hardware into a functional state, but that state may not be optimal, or even technically "legal" according to the specs.
+</li></ul>
+<ul><li> "Boot sequence" -- at this point, the BIOS is done with its initialization. Now it tries to transfer control to the next stage of the bootloader process; so the BIOS must choose the "boot device". There is a list stored in <a href="CMOS" title="CMOS">CMOS</a>, called the "boot sequence", that tells the BIOS which devices to test, and in what order, to see if they exist and are bootable. The BIOS may try to boot from a floppy disk, hard disk "C:", a USB flash memory device, a CD, a network, or something else. All of these devices can have some type of "bootsector", and there is a flag that the BIOS can check to see if the bootsector is valid. The BIOS will transfer control to the first valid bootsector that it finds, as it searches through the boot sequence. If the BIOS never finds a valid bootsector, it will lock up with an error message.
+</li></ul>
+<p>The BIOS transfers 512 bytes of data from each device that exists, into physical memory starting at address 0x7c00. If the last two bytes
+transferred are 0x55, and then 0xAA, then the BIOS considers this to be a valid bootsector, and starts running the code that now begins at 0x7c00.
+</p>
+<h2> <span class="mw-headline" id="Transfer_of_Control_to_Bootsector">Transfer of Control to Bootsector</span></h2>
+<p>In most circumstances (except for CDs/DVDs) the bootsector will be LBA 0 of the device (or equivalently, CHS 0,0,1) -- see the specs of the
+particular device to find out what addressing mode it uses. For CDs/DVDs, the bootsector is LBA 17. Traditionally, there is one additional
+complication. Hard disks have been standardized as having "partitioning". That is, all operating systems allow you to subdivide a hard disk
+into smaller "partitions" or "volumes". The way this is done is by adding an additional "layer" of standardized bootsectors, called MBRs
+(Master Boot Records).
+</p><p>What this means in reality is that the BIOS boots some devices directly into your OS-specific bootloader, and the BIOS boots other
+devices (any hard disk, or anything emulating a hard disk) into an MBR -- which in turn boots your OS-specific bootloader. So the
+system always ends up running your OS-specific bootloader -- but it may happen directly, or there may be an intervening step.
+</p><p>This has implications if you want to write your own bootloader, and/or if you want to write your own MBR.
+</p>
+<h3> <span class="mw-headline" id="System_.22Environment.22">System "Environment"</span></h3>
+<p>There are very few things that are standardized about the state of the system, when the BIOS transfers control to the bootsector. The only things
+that are (nearly) certain are that the bootsector code is loaded and running at physical address 0x7c00, the CPU is in 16-bit <a href="Real_Mode" title="Real Mode">Real Mode</a>, the
+CPU register called DL contains the "drive number", and that only 512 bytes of the bootsector have been loaded.
+</p><p>Note: there are apparently a tiny number of ancient BIOSes that actually put the system in Protected Mode, instead of Real Mode.
+The recommendation is: do not support those BIOSes.
+</p>
+<h3> <span class="mw-headline" id="OS-specific_Bootloaders">OS-specific Bootloaders</span></h3>
+<p>Every OS is expected to have its own bootloader, stored on the media with the kernel. The bootloader is expected to be stored at a
+particular location, so that the BIOS or MBR can find it, load it, and run it. If the boot device is a hard disk (or something else
+emulating a hard disk) then the bootloader is expected to be stored as the very first "block" of the partition. As said above, for
+all other types of devices, the bootloader is stored at LBA 0, CHS 0,0,1, or LBA 17 (for CDs and DVDs).
+</p><p>The main function of these bootloaders is to find the kernel, wherever it is on the media, load it, and run it. Additionally, the
+bootloaders need to set up a known environment for the kernel (which often includes switching to <a href="Protected_Mode" title="Protected Mode">Protected Mode</a>). The bootloaders
+also might collect some system data for the kernel to use (some data is much easier to get while the sysetm is still in Real Mode).
+</p><p>For more bootloader "theory" see the <a href="Bootloader" title="Bootloader">bootloader</a> article.
+</p><p>There are <a href="Category:Bootloaders" title="Category:Bootloaders">generic bootloaders</a> available, or you can <a href="Rolling_Your_Own_Bootloader" title="Rolling Your Own Bootloader">create your own</a>.
+</p><p>Either way, however, the OS-specific bootloader completes the process of system initialization.
+</p>
+<h3> <span class="mw-headline" id="MBR_Bootsectors">MBR Bootsectors</span></h3>
+<p>Bootsectors for devices that can have multiple partitions have a standard <a href="MBR_(x86)" title="MBR (x86)">format</a>.
+Such devices always include hard disks, and can include USB Flash drives, or remote Network drives. The MBR bootsector is
+created on the drive when the drive is partitioned by partitioning software (such as FDISK, under DOS/Windows).
+</p><p>The BIOS loads the entire MBR (both the Partition Table and Bootstrap code), and executes the bootstrap code. (See <a href="System_Initialization_(x86)#System_.22Environment.22">System "Environment"</a>
+above for additional details.)
+</p><p>The function of the <a href="MBR_(x86)#MBR_Bootstrap" title="MBR (x86)">MBR Bootstrap</a> code is (usually) to search the <a href="Partition_Table" title="Partition Table">Partition Table</a> for the partition marked with an "active" flag
+(flag byte equals 0x80), then load and run the bootsector (that is, the OS-specific Bootloader) of that partition (the very first sector).
+This is what "generic" MBR Bootstraps do, such as the one that FDISK writes to a newly partitioned disk. The bootstrap code is expected to
+pass a pointer (in DS:SI) to a memory copy of the booted partition table entry, to the OS-specific bootloader -- as well as reproduce the
+above System "Environment" that the OS-specific bootloader expects to see.
+</p><p>Fancier MBR bootstraps can perform "Dual Booting". That is, they present a choice of disk drives and disk partitions to the user, and allow the
+user to select a particular partition to boot -- rather than just automatically choosing the "active partition". These fancy MBR bootstraps often
+use tricks to overcome that fact that they are limited to a little over 400 bytes of code.
+</p><p>See the <a href="MBR_(x86)" title="MBR (x86)">MBR (x86)</a> article for information on writing your own MBR.
+</p>
+<h2> <span class="mw-headline" id="Notes">Notes</span></h2>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 71/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1840-0!*!0!!en!*!* and timestamp 20180121064403 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=System_Initialization_(x86)&amp;oldid=10895">http://wiki.osdev.org/index.php?title=System_Initialization_(x86)&amp;oldid=10895</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:X86" title="Category:X86">X86</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=System_Initialization_%28x86%29" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="System_Initialization_(x86)"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:System_Initialization_(x86)&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="System_Initialization_(x86)#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="System_Initialization_(x86)" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=System_Initialization_(x86)&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=System_Initialization_(x86)&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="System_Initialization_(x86)#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/System_Initialization_(x86)" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/System_Initialization_(x86)" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=System_Initialization_(x86)&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=System_Initialization_(x86)&amp;oldid=10895" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/System_Initialization_(x86)" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/System_Initialization_(x86)" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=System_Initialization_(x86)&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=System_Initialization_(x86)&amp;oldid=10895" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 23 October 2010, at 07:18.</li>
+											<li id="footer-info-viewcount">This page has been accessed 45,467 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.037 secs. -->
+	</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Why do I need a Cross Compiler? - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Why_do_I_need_a_Cross_Compiler?", "wgTitle": "Why do I need a Cross Compiler?", "wgCurRevisionId": 21642, "wgArticleId": 2923, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["FAQ", "OS Development", "OS theory"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Why_do_I_need_a_Cross_Compiler action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Why do I need a Cross Compiler?</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Why_do_I_need_a_Cross_Compiler?#mw-head">navigation</a>,
+					<a href="Why_do_I_need_a_Cross_Compiler?#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>You need to use a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">cross-compiler</a> <i>unless</i> you are developing on your own operating system. The compiler <i>must</i> know the correct <a href="Target_Triplet" title="Target Triplet">target platform</a> (CPU, operating system), otherwise you will run into trouble. You may be able to use the compiler that comes with your system if you pass a number of options to beat it into submission, but this will create a lot of completely imaginary problems.
+</p><p>It is possible ask your compiler what target platform it is currently using by calling the command:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"> <span class="kw2">gcc</span> <span class="re5">-dumpmachine</span></pre></div></div>
+<p>If you are developing on 64-bit Linux, then you will get a response such as 'x86_64-unknown-linux-gnu'. This means that the compiler thinks it is creating code for Linux. If you use this GCC to build your kernel, it will use your system libraries, headers, the Linux <a href="Libgcc" title="Libgcc">libgcc</a>, and it will make a lot of problematic Linux assumptions. If you use a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">cross-compiler</a> such as i686-elf-gcc, then you get a response back such as 'i686-elf' that means the compiler knows it is doing something else and you can avoid a lot of problems easily and properly.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Why_do_I_need_a_Cross_Compiler?#How_to_build_a_Cross-Compiler"><span class="tocnumber">1</span> <span class="toctext">How to build a Cross-Compiler</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Why_do_I_need_a_Cross_Compiler?#Transitioning_to_a_Cross-Compiler"><span class="tocnumber">2</span> <span class="toctext">Transitioning to a Cross-Compiler</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="Why_do_I_need_a_Cross_Compiler?#Linking_with_your_compiler_rather_than_ld"><span class="tocnumber">2.1</span> <span class="toctext">Linking with your compiler rather than ld</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Why_do_I_need_a_Cross_Compiler?#Using_cross-tools"><span class="tocnumber">2.2</span> <span class="toctext">Using cross-tools</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="Why_do_I_need_a_Cross_Compiler?#Options_that_you_should_pass_to_your_Compiler"><span class="tocnumber">2.3</span> <span class="toctext">Options that you should pass to your Compiler</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="Why_do_I_need_a_Cross_Compiler?#-ffreestanding"><span class="tocnumber">2.3.1</span> <span class="toctext">-ffreestanding</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="Why_do_I_need_a_Cross_Compiler?#-mno-red-zone_.28x86_64_only.29"><span class="tocnumber">2.3.2</span> <span class="toctext">-mno-red-zone (x86_64 only)</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="Why_do_I_need_a_Cross_Compiler?#-fno-exceptions.2C_-fno-rtti_.28C.2B.2B.29"><span class="tocnumber">2.3.3</span> <span class="toctext">-fno-exceptions, -fno-rtti (C++)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-9"><a href="Why_do_I_need_a_Cross_Compiler?#Options_you_should_link_with"><span class="tocnumber">2.4</span> <span class="toctext">Options you should link with</span></a>
+<ul>
+<li class="toclevel-3 tocsection-10"><a href="Why_do_I_need_a_Cross_Compiler?#-nostdlib_.28same_as_both_-nostartfiles_-nodefaultlibs.29"><span class="tocnumber">2.4.1</span> <span class="toctext">-nostdlib (same as both -nostartfiles -nodefaultlibs)</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="Why_do_I_need_a_Cross_Compiler?#-lgcc"><span class="tocnumber">2.4.2</span> <span class="toctext">-lgcc</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-12"><a href="Why_do_I_need_a_Cross_Compiler?#Options_that_you_shouldn.27t_pass_to_your_Compiler"><span class="tocnumber">2.5</span> <span class="toctext">Options that you shouldn't pass to your Compiler</span></a>
+<ul>
+<li class="toclevel-3 tocsection-13"><a href="Why_do_I_need_a_Cross_Compiler?#-m32.2C_-m64_.28compiler.29"><span class="tocnumber">2.5.1</span> <span class="toctext">-m32, -m64 (compiler)</span></a></li>
+<li class="toclevel-3 tocsection-14"><a href="Why_do_I_need_a_Cross_Compiler?#-melf_i386.2C_-melf_x86_64_.28linker.29"><span class="tocnumber">2.5.2</span> <span class="toctext">-melf_i386, -melf_x86_64 (linker)</span></a></li>
+<li class="toclevel-3 tocsection-15"><a href="Why_do_I_need_a_Cross_Compiler?#-32.2C_-64_.28assembler.29"><span class="tocnumber">2.5.3</span> <span class="toctext">-32, -64 (assembler)</span></a></li>
+<li class="toclevel-3 tocsection-16"><a href="Why_do_I_need_a_Cross_Compiler?#-nostdinc"><span class="tocnumber">2.5.4</span> <span class="toctext">-nostdinc</span></a></li>
+<li class="toclevel-3 tocsection-17"><a href="Why_do_I_need_a_Cross_Compiler?#-fno-builtin"><span class="tocnumber">2.5.5</span> <span class="toctext">-fno-builtin</span></a></li>
+<li class="toclevel-3 tocsection-18"><a href="Why_do_I_need_a_Cross_Compiler?#-fno-stack-protector"><span class="tocnumber">2.5.6</span> <span class="toctext">-fno-stack-protector</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-19"><a href="Why_do_I_need_a_Cross_Compiler?#Problems_that_occur_without_a_Cross-Compiler"><span class="tocnumber">3</span> <span class="toctext">Problems that occur without a Cross-Compiler</span></a>
+<ul>
+<li class="toclevel-2 tocsection-20"><a href="Why_do_I_need_a_Cross_Compiler?#More_complicated_compilation_commands"><span class="tocnumber">3.1</span> <span class="toctext">More complicated compilation commands</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="Why_do_I_need_a_Cross_Compiler?#Reimplementing_libgcc"><span class="tocnumber">3.2</span> <span class="toctext">Reimplementing libgcc</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="Why_do_I_need_a_Cross_Compiler?#Rewriting_freestanding_headers_.28often_incorrectly.29"><span class="tocnumber">3.3</span> <span class="toctext">Rewriting freestanding headers (often incorrectly)</span></a></li>
+<li class="toclevel-2 tocsection-23"><a href="Why_do_I_need_a_Cross_Compiler?#Complicated_compiling_user-space_programs"><span class="tocnumber">3.4</span> <span class="toctext">Complicated compiling user-space programs</span></a></li>
+<li class="toclevel-2 tocsection-24"><a href="Why_do_I_need_a_Cross_Compiler?#Compiler_releases_break_your_OS"><span class="tocnumber">3.5</span> <span class="toctext">Compiler releases break your OS</span></a></li>
+<li class="toclevel-2 tocsection-25"><a href="Why_do_I_need_a_Cross_Compiler?#Support"><span class="tocnumber">3.6</span> <span class="toctext">Support</span></a></li>
+<li class="toclevel-2 tocsection-26"><a href="Why_do_I_need_a_Cross_Compiler?#And_so_on"><span class="tocnumber">3.7</span> <span class="toctext">And so on</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-27"><a href="Why_do_I_need_a_Cross_Compiler?#Background_information"><span class="tocnumber">4</span> <span class="toctext">Background information</span></a>
+<ul>
+<li class="toclevel-2 tocsection-28"><a href="Why_do_I_need_a_Cross_Compiler?#Where_did_the_idea_of_cross_compiling_come_from.3F"><span class="tocnumber">4.1</span> <span class="toctext">Where did the idea of cross compiling come from?</span></a></li>
+<li class="toclevel-2 tocsection-29"><a href="Why_do_I_need_a_Cross_Compiler?#What_are_the_basics_of_cross_compiling.3F"><span class="tocnumber">4.2</span> <span class="toctext">What are the basics of cross compiling?</span></a></li>
+<li class="toclevel-2 tocsection-30"><a href="Why_do_I_need_a_Cross_Compiler?#An_example_to_concrete_things"><span class="tocnumber">4.3</span> <span class="toctext">An example to concrete things</span></a></li>
+<li class="toclevel-2 tocsection-31"><a href="Why_do_I_need_a_Cross_Compiler?#When_do_I_not_need_a_cross-compiler.3F"><span class="tocnumber">4.4</span> <span class="toctext">When do I not need a cross-compiler?</span></a></li>
+<li class="toclevel-2 tocsection-32"><a href="Why_do_I_need_a_Cross_Compiler?#A_concrete_example"><span class="tocnumber">4.5</span> <span class="toctext">A concrete example</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-33"><a href="Why_do_I_need_a_Cross_Compiler?#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-34"><a href="Why_do_I_need_a_Cross_Compiler?#Articles"><span class="tocnumber">5.1</span> <span class="toctext">Articles</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="How_to_build_a_Cross-Compiler"> How to build a Cross-Compiler </span></h2>
+<dl><dd><i>Main article:</i> <a href="GCC_Cross_Compiler" title="GCC Cross Compiler" class="mw-redirect">GCC Cross Compiler</a>
+</dd></dl>
+<p>It is easy and takes a few moments to <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">build a cross-compiler</a> that targets your operating system. It may take a while to build it on slower computers, but you only need to do it once, and you save all the time you would otherwise spend on "fixing" the completely imaginary problems you would encounter otherwise. Later on, when you start building a user-space for your operating system, it is worth creating an <a href="OS_Specific_Toolchain" title="OS Specific Toolchain">OS Specific Toolchain</a> for absolute control of the compiler and to easy compiling user-space programs.
+</p>
+<h2> <span class="mw-headline" id="Transitioning_to_a_Cross-Compiler"> Transitioning to a Cross-Compiler </span></h2>
+<p>Perhaps you have not been using a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">cross-compiler</a> until now, in which case you are likely doing a lot of things wrong. Unfortunately, a lot of kernel tutorials suggest passing certain options and doing things in a manner that potentially causes a lot of trouble. This section documents some of the things you should watch out for. Please read this section carefully and point others to it if you see them using troublesome options.
+</p>
+<h3> <span class="mw-headline" id="Linking_with_your_compiler_rather_than_ld"> Linking with your compiler rather than ld </span></h3>
+<p>You shouldn't be invoking ld directly. Your cross-compiler is able to work as a linker and using it as the linker allows it control at the linking stage. This control includes expanding the <tt>-lgcc</tt> to the full path of <a href="Libgcc" title="Libgcc">libgcc</a> that only the compiler knows about. If you get weird errors during compilation, use your cross-compiler for linking and it may go away. If you do need ld, be sure to use the cross-linker (i686-elf-ld) rather than the system linker.
+</p>
+<h3> <span class="mw-headline" id="Using_cross-tools"> Using cross-tools </span></h3>
+<p>You get a lot of useful programs when you build your cross-binutils. For instance, you get i686-elf-readelf, i686-elf-as, i686-elf-objdump, i686-elf-objcopy, and more. These programs know about your operating system and handle everything correctly. You can use some of the programs that come with your local operating system instead (readelf, objcopy, objdump) if they know about the file format of your operating system, but it is in general best to use your cross tools instead. These tools all consistently have the prefix 'i686-elf-' if the platform of your OS is i686-elf.
+</p>
+<h3> <span class="mw-headline" id="Options_that_you_should_pass_to_your_Compiler"> Options that you should pass to your Compiler </span></h3>
+<p>You need to pass some special options to your compiler to tell it it isn't building user-space programs.
+</p>
+<h4> <span class="mw-headline" id="-ffreestanding"> -ffreestanding </span></h4>
+<p>This is important as it lets the compiler know it is building a kernel rather than user-space program. The documentation for GCC says you are required to implement the functions memset, memcpy, memcmp and memmove yourself in freestanding mode.
+</p>
+<h4> <span class="mw-headline" id="-mno-red-zone_.28x86_64_only.29"> -mno-red-zone (x86_64 only) </span></h4>
+<p>You need to pass this on x86_64 or interrupts will corrupt the stack. The red zone is a x86_64 ABI feature that means that signals happen 128 bytes further down the stack. Functions that use less than that amount of memory is allowed to not increment the stack pointer. This means that CPU interrupts in the kernel will corrupt the stack. Be sure to pass enable this for all x86_64 kernel code.
+</p>
+<h4> <span class="mw-headline" id="-fno-exceptions.2C_-fno-rtti_.28C.2B.2B.29"> -fno-exceptions, -fno-rtti (C++) </span></h4>
+<p>It is wise to disable C++ features that don't work out-of-the-box in kernels. You need to supply a C++ support library to the kernel (in addition to libgcc) to make all C++ features work. If you don't use these C++ features, it should be sufficient to pass these options.
+</p>
+<h3> <span class="mw-headline" id="Options_you_should_link_with"> Options you should link with </span></h3>
+<p>These options only make sense when linking (not when compiling) and you should use them. You should pass the compilation options as well when linking, as some compilation options (such as <tt>-mno-red-zone</tt> control the ABI and this needs to be known at link time as well).
+</p>
+<h4> <span class="mw-headline" id="-nostdlib_.28same_as_both_-nostartfiles_-nodefaultlibs.29"> -nostdlib (same as both -nostartfiles -nodefaultlibs) </span></h4>
+<p>The -nostdlib option is the same as passing both the -nostartfiles -nodefaultlibs options. You don't want the start files (crt0.o, crti.o, crtn.o) in the kernel as they only used for user-space programs. You don't want the default libraries such as libc, because the user-space versions are not suitable for kernel use. You should only pass -nostdlib, as it is the same as passing the two latter options.
+</p>
+<h4> <span class="mw-headline" id="-lgcc"> -lgcc </span></h4>
+<p>You disable the important <a href="Libgcc" title="Libgcc">libgcc</a> library when you pass -nodefaultlibs (implied by -nostdlib). The compiler needs this library for many operations that it cannot do itself or that is more efficient to put into a shared function. You must pass this library at the end of the link line, after all the other object files and libraries, or the linker won't use it and you get strange linker errors. This is due to the classic static linking model where an object file from a static library is only pulled in if it is used by a previous object file. Linking with <a href="Libgcc" title="Libgcc">libgcc</a> must come after all the object files that might use it.
+</p>
+<h3> <span class="mw-headline" id="Options_that_you_shouldn.27t_pass_to_your_Compiler"> Options that you shouldn't pass to your Compiler </span></h3>
+<p>There is a number of options you normally shouldn't pass to your cross-compler when building a kernel. Unfortunately, a lot of kernel tutorials suggest you use these. Please do not pass a option without understanding why it is needed and don't suggest to people that they use them. Often, these options are used by those that don't use cross-compilers to cover up other problems.
+</p>
+<h4> <span class="mw-headline" id="-m32.2C_-m64_.28compiler.29"> -m32, -m64 (compiler) </span></h4>
+<p>If you build a cross-compiler such as i686-elf-gcc, then you don't need to tell it to make a 32-bit executable. Likewise, you don't need to pass -m64 to x86_64-elf-gcc. This will make your Makefiles much simpler as you can simply select the correct compiler and things will work. You can use x86_64-elf-gcc to build a 32-bit kernel, but it's much easier to just build two cross-compilers and use them. In addition, using a cross-compiler for every CPU you target will make it easy to port third-party software without tricking them into passing -m32 as well.
+</p>
+<h4> <span class="mw-headline" id="-melf_i386.2C_-melf_x86_64_.28linker.29"> -melf_i386, -melf_x86_64 (linker) </span></h4>
+<p>You don't need to pass these for the same reason as -m32 and -m64. Additionally, these options are for ld, and you shouldn't be invoking ld directly in the first place, but rather linking with your cross-compiler.
+</p>
+<h4> <span class="mw-headline" id="-32.2C_-64_.28assembler.29"> -32, -64 (assembler) </span></h4>
+<p>The cross-assembler (i686-elf-as) defaults to the platform you specified when building binutils, and so you don't need to repeat the choice here. You can use the cross-compiler as an assembler, but it is okay to call the assembler directly.
+</p>
+<h4> <span class="mw-headline" id="-nostdinc"> -nostdinc </span></h4>
+<p>You shouldn't pass this option as it disables the standard header include directories. However, you do want to use these headers as they contain many useful declarations. The cross-compiler comes with a bunch of useful headers such as stddef.h, stdint.h, stdarg.h, and more.
+</p><p>If you don't use a cross-compiler, you get the headers for your host platform (such as Linux) which are unsuitable for your operating system. For that reason, most people that don't use a cross-compiler use this option and then have to reimplement stddef.h, stdint.h, stdarg.h and more themselves. People often implement those files incorrectly as you need compiler magic to implement features such as stdarg.h.
+</p>
+<h4> <span class="mw-headline" id="-fno-builtin"> -fno-builtin </span></h4>
+<p>This option is implied by <tt>-ffreestanding</tt> and there is no reason to pass it yourself. The compiler defaults to -fbuiltin that enables builtins, but -fno-builtin disables them. Builtins mean that the compiler knows about standard features and can optimize their use. If the compiler sees a function called 'strlen', it normally assumes it is the C standard 'strlen' function and it is able to optimize the expression strlen("foo") into 3 at compile time, instead of calling the function. This option has value if you are creating some really non-standard environment in which common C functions don't have their usual semantics. It is possible to enable builtins again with <tt>-fbuiltin</tt> following <tt>-ffreestanding</tt> but this can lead to surprising problems down the road, such as the implementation of calloc (malloc + memset) being optimized into a call to calloc itself.
+</p>
+<h4> <span class="mw-headline" id="-fno-stack-protector"> -fno-stack-protector </span></h4>
+<p>The <a href="Stack_Smashing_Protector" title="Stack Smashing Protector">Stack Smashing Protector</a> is a feature that stores a random value on the stack of selected functions and verifies the value is intact upon return. This statistically prevents stack buffer overflows overwriting the return pointer on the stack, which would subvert control flow. Adversaries are often able to exploit such faults, and this feature requires the adversary to correctly guess a 32-bit value (32-bit systems) or a 64-bit value (64-bit systems). This security feature requires <a href="Stack_Smashing_Protector" title="Stack Smashing Protector">runtime support</a>. Compilers from many operating system vendors enable this feature by having <tt>-fstack-protector</tt> be the default. This breaks kernels that don't use a cross-compiler, if they don't have the runtime support. Cross-compilers such as the <tt>*-elf</tt> targets have the stack protector disabled by default and there's no reason to disable it yourself. You may want to change the default to enabling it when you add support for it to your kernel (and user-space), which would make it automatically used by your kernel because you didn't pass this option.
+</p>
+<h2> <span class="mw-headline" id="Problems_that_occur_without_a_Cross-Compiler"> Problems that occur without a Cross-Compiler </span></h2>
+<p>You need to overcome a lot of imaginary problems to use your system gcc to build your kernel. You don't need to deal with these problems if you use a cross-compiler.
+</p>
+<h3> <span class="mw-headline" id="More_complicated_compilation_commands"> More complicated compilation commands </span></h3>
+<p>The compiler assumes it is targetting your local system, so you need a lot of options to make it behave. A trimmed down command sequence for compiling a kernel without a cross-compiler could look like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"> <span class="kw2">as</span> <span class="re5">-32</span> boot.s <span class="re5">-o</span> boot.o
+ <span class="kw2">gcc</span> <span class="re5">-m32</span> kernel.c <span class="re5">-o</span> kernel.o <span class="re5">-ffreestanding</span> <span class="re5">-nostdinc</span>
+ <span class="kw2">gcc</span> <span class="re5">-m32</span> my-libgcc-reimplemenation.c <span class="re5">-o</span> my-libgcc-reimplemenation.o <span class="re5">-ffreestanding</span>
+ <span class="kw2">gcc</span> <span class="re5">-m32</span> <span class="re5">-T</span> link.ld boot.o kernel.o my-libgcc-reimplemenation.o <span class="re5">-o</span> kernel.bin <span class="re5">-nostdlib</span> <span class="re5">-ffreestanding</span></pre></div></div>
+<p>Actually, the average case is worse. People tend to add many more problematic or redundant options. With a real cross-compiler, the command sequence could look this this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"> i686-elf-as boot.s <span class="re5">-o</span> boot.o
+ i686-elf-gcc kernel.c <span class="re5">-o</span> kernel.o <span class="re5">-ffreestanding</span>
+ i686-elf-gcc <span class="re5">-T</span> link.ld boot.o kernel.o <span class="re5">-o</span> kernel.bin <span class="re5">-nostdlib</span> <span class="re5">-ffreestanding</span> <span class="re5">-lgcc</span></pre></div></div>
+<h3> <span class="mw-headline" id="Reimplementing_libgcc"> Reimplementing libgcc </span></h3>
+<p>You cannot use the host <a href="Libgcc" title="Libgcc">libgcc</a> when building a kernel. The Linux <a href="Libgcc" title="Libgcc">libgcc</a> has some nasty dependencies last timed I checked. The common case newbies run into is 64-bit integer division on 32-bit systems, but the compiler may generate such calls in many cases. You will often end up rewriting <a href="Libgcc" title="Libgcc">libgcc</a> when you should have been using the real thing in the first place.
+</p>
+<h3> <span class="mw-headline" id="Rewriting_freestanding_headers_.28often_incorrectly.29"> Rewriting freestanding headers (often incorrectly) </span></h3>
+<p>If you don't pass -nostdinc you get the target system headers (which is your local system if not using a cross-compiler), and that will cause a lot of problems in the non-cross-compiler case. You will end up rewriting the standard freestanding headers such as stdarg.h, stddef.h, stdint.h. and more. Unfortunately, as mentioned above, these headers need a bit of compiler magic to get just right. If you use a cross-compiler, all these freestanding headers can be used out of the box with no effort.
+</p>
+<h3> <span class="mw-headline" id="Complicated_compiling_user-space_programs"> Complicated compiling user-space programs </span></h3>
+<p>You need to pass even more options to the command lines that build programs for your operating systems. You need a -Ipath/to/myos/include and -Lpath/to/myos/lib to use the C library, and more. If you set up an <a href="OS_Specific_Toolchain" title="OS Specific Toolchain">OS Specific Toolchain</a>, you just need
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"> i686-myos-gcc hello.c <span class="re5">-o</span> hello</pre></div></div>
+<p>to cross-compile the hello world program to your operating system.
+</p>
+<h3> <span class="mw-headline" id="Compiler_releases_break_your_OS"> Compiler releases break your OS </span></h3>
+<p>Not everyone is using the same gcc as you are, which means that people on other operating systems (even versions, or compiler releases) will have trouble building your operating system correctly. If you use a cross-compiler, then everyone is using the same compiler version and assumptions about the host system won't make it into your operating system.
+</p>
+<h3> <span class="mw-headline" id="Support"> Support </span></h3>
+<p>You will have a much easier time getting support from the operating system development community. Properly using a cross-compiler shows that you have followed instructions and are at the same level as everyone else, and that your local system compiler isn't causing trouble.
+</p>
+<h3> <span class="mw-headline" id="And_so_on"> And so on </span></h3>
+<p>As the project grows in size, it becomes much more complicated to maintain your operating system without a real cross-compiler. Even if your ABI is very much like Linux, your operating system isn't Linux. Porting third party software is near impossible without a cross-compiler. If you set up a real <a href="OS_Specific_Toolchain" title="OS Specific Toolchain">OS Specific Toolchain</a> and a <a href="Sysroot" title="Sysroot" class="mw-redirect">sysroot</a> of your OS, you can compile software just by giving --host=i686-myos to ./configure. With a cross-compiler you can <a href="Cross-Porting_Software" title="Cross-Porting Software">port software</a> in the standard manner.
+</p>
+<h2> <span class="mw-headline" id="Background_information"> Background information </span></h2>
+<h3> <span class="mw-headline" id="Where_did_the_idea_of_cross_compiling_come_from.3F"> Where did the idea of cross compiling come from?</span></h3>
+<p>With GNU software, since most of it has a long history of being ported from one UNIX implementation to another, they came up with a simple set of rules: You have a build machine, a host machine, and a target machine.
+</p>
+<h3> <span class="mw-headline" id="What_are_the_basics_of_cross_compiling.3F"> What are the basics of cross compiling? </span></h3>
+<p>The "build" machine is the machine you're compiling the software on. This software being compiled may be compiled to run on some other type of machine. See, you may be building on an x86-based machine, and wishing for the software to run on a SPARC based machine. The build machine is implicit and will usually be auto-detected by the configure script for the software. Its only real purpose is so that, if the software being compiled chooses to keep the configure arguments used to configure it somewhere in the built package, the people to whom the package is distributed will know what machine the package was built on. The name of the build machine may be used to configure to package to use workarounds as well if the build machine is universally known to have certain problems building that software.
+</p><p>The "host" machine is the machine on which the software must run. So in the previous example, the "build" machine is an i686-elf-yourBuildOs machine, and the host is a sparc32-elf-unix4 machine.
+</p><p>In the example, you must then, have a sparc32-elf-unix4 cross compiler, which can run on the i686-elf-yourBuildOs machine, and spit out (target) your host machine. A cross compiler is usually named after the host it targets, and not after the host it runs on, so by looking at the name of a compiler, you can usually tell what machine it targets.
+</p><p>The "target" only matters when compiling software that is used to build other software. That is, when compiling compilers, linkers, assemblers and the like. They need to be told what machine they will themselves target. When compiling something like a movie player, or other non-building software, the "target" does not matter. In other words, "target" is used to tell a compiler or other development software being compiled what host it, the compiler being compiled, should target.
+</p><p>For most software, like a text editor, if you're compiling it, you only need to specify host (and usually not even that). Specifying a host causes the software to be built using a compiler on the build machine which is a cross compiler that targets that host. This way, since the software was compiled using that host's targeting cross compiler, the software will be able to run on that host, even though it was built on a (potentially) different built machine.
+</p>
+<h3> <span class="mw-headline" id="An_example_to_concrete_things"> An example to concrete things </span></h3>
+<p>Your distribution comes equipped with a compiler that targets yourMachineArch-distributionNativeExecFormat-distribution, and that runs on the same yourMachineArch-distributionNativeExecFormat-distribution machine. It was built on some machine (could have been built on m68k-macho-osx or some other colourful machine like that), with a cross compiler that targeted yourMachineArch-distributionNativeExecFormat-distribution, and while it was being built, its own "target" was set to yourMachineArch-distributionNativeExecFormat-distribution, so that it now both runs on, and spits out executables for yourMachineArch-distributionNativeExecFormat-distribution.
+</p><p>A cross compiler is useful for completely unambiguously targeting a specific machine. When you begin developing for a machine separate from your native distribution's stock compiler, you'll need a cross compiler. Actually, you already *do* target a machine that's different from your native machine from the very first time you begin trying to produce completely standalone executables (that is, when you're doing OSDev).
+</p><p>Your native compiler targets yourMachineArch-distributionNativeExecFormat-distribution. But you want to target yourOsTargetArch-yourChosenFormat-none; where "none" as the OS-name represents a machine with no system libraries. When you compile your kernel, you want to build with a compiler that does not know of any system libraries for your target machine. The kernel must be standalone completely. Everything the kernel needs must be in its source tree so that no implicit system libraries are needed (or linked in without your knowledge).
+</p><p>Later on, when you have a userspace and a set of system libraries for your programs to link to, you'll then build a compiler that targets: yourOsTargetArch-yourChosenFormat-yourOs while keeping the compiler that targets yourOsTargetArch-yourChosenFormat-none. The difference between the two is that the "none" OS targeting compiler does not have any libraries in its /lib directory, and has no system libraries to link in. It is therefore impossible for any software you compile using this "bare metal" targeting compiler to have unknown dependencies. The "yourOS" targeting cross compiler is where you would place your own system libraries, (in its /lib directory), such that when it builds software, it will link them against those system libraries, thus linking them against your kernel API. You would continue to use the "bare bones" targeting compiler to build the kernel, and whenever you build programs on your development machine which are expected to run on your kernel's target machine, you would use the yourOsTargetArch-yourChosenFormat-yourOs compiler, which has a /include and /lib directories full of your own OS's native system includes and libraries.
+</p><p>Later still, when you're confident that you can both develop and use your kernel, from within your kernel, you'll want to stop building all your programs on a separate "development" machine. More specifically, at this point, you want to have your "build" machine be the same as your test machine such that you build programs that run on your OS, from within your OS. At this point, it's time to take the final step, and, from your separate "development" machine, build a compiler that will run on your OS (host = yourOsTargetArch-yourChosenFormat-yourOs), and target your OS (target = yourOsTargetArch-yourChosenFormat-yourOs). This cross compiler, the canadian cross, will allow you to natively compile other programs while running on your own OS's userspace. It is essentially a "distribution native compiler", like the one that comes with your distro. From that point on, having a compiler that runs on and targets your OS, you can essentially more freely port programs, and allow people to do the same while running your OS, assuming you package that native compiler with your OS.
+</p>
+<h3> <span class="mw-headline" id="When_do_I_not_need_a_cross-compiler.3F"> When do I not need a cross-compiler? </span></h3>
+<p>If you create a real operating system and manage to port gcc to it, that gcc will produce the very same code as i686-myos-gcc. That means that you don't need a cross-compiler on your own operating system, because the gcc there will already do the right thing. This is why the Linux kernel is built with the Linux gcc, instead of a Linux cross-compiler.
+</p>
+<h3> <span class="mw-headline" id="A_concrete_example"> A concrete example </span></h3>
+<ul><li>gcc -v* from my Ubuntu machine gives:
+</li></ul>
+<pre>
+gravaera@gravaera-laptop:/void/cygwin/osdev/zbz$ gcc -v
+Using built-in specs.
+Target: i486-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.4.3-4ubuntu5' \
+--with-bugurl=file:///usr/share/doc/gcc-4.4/README.Bugs --enable-languages=c,c++,fortran,objc,obj-c++ \
+--prefix=/usr --enable-shared --enable-multiarch --enable-linker-build-id --with-system-zlib \
+--libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.4 \
+--program-suffix=-4.4 --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-plugin --enable-objc-gc \
+--enable-targets=all --disable-werror --with-arch-32=i486 --with-tune=generic --enable-checking=release \
+--build=i486-linux-gnu --host=i486-linux-gnu --target=i486-linux-gnu
+Thread model: posix
+gcc version 4.4.3 (Ubuntu 4.4.3-4ubuntu5)
+</pre>
+<p>The person who built the compiler that runs on my machine built it on a machine just like mine, an 'i486-linux-gnu' (build), and intended for it to run on a machine like his/mine: the same i486-linux-gnu (host), and he meant for this compiler he was building for me, to emit executables that targeted my very machine, so that when I compile programs, they will be able to run on a host that is i486-linux-gnu. Therefore he made the compiler target i486-linux-gnu.
+</p>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a>
+</li><li> <a href="Cross-Porting_Software" title="Cross-Porting Software">Cross-Porting Software</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 259/1000000
+Post-expand include size: 41/2097152 bytes
+Template argument size: 18/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2923-0!*!0!!en!*!* and timestamp 20180121041853 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Why_do_I_need_a_Cross_Compiler%3F&amp;oldid=21642">http://wiki.osdev.org/index.php?title=Why_do_I_need_a_Cross_Compiler%3F&amp;oldid=21642</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:FAQ" title="Category:FAQ">FAQ</a></li><li><a href="Category:OS_Development" title="Category:OS Development">OS Development</a></li><li><a href="Category:OS_theory" title="Category:OS theory">OS theory</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Why_do_I_need_a_Cross_Compiler%3F" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Why_do_I_need_a_Cross_Compiler?"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Why_do_I_need_a_Cross_Compiler?"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Why_do_I_need_a_Cross_Compiler?#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Why_do_I_need_a_Cross_Compiler?" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Why_do_I_need_a_Cross_Compiler%3F&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Why_do_I_need_a_Cross_Compiler%3F&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Why_do_I_need_a_Cross_Compiler?#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a>skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Why_do_I_need_a_Cross_Compiler%3F" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Why_do_I_need_a_Cross_Compiler%3F" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Why_do_I_need_a_Cross_Compiler%3F&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Why_do_I_need_a_Cross_Compiler%3F&amp;oldid=21642" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 21 October 2017, at 14:38.</li>
+											<li id="footer-info-viewcount">This page has been accessed 50,018 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

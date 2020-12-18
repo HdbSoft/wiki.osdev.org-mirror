@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Bochs VBE Extensions - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="Bochs_VBE_Extensions" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Bochs_VBE_Extensions", "wgTitle": "Bochs VBE Extensions", "wgCurRevisionId": 20136, "wgArticleId": 2231, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Video", "VGA"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Bochs_VBE_Extensions action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Bochs VBE Extensions</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=BGA&amp;redirect=no" title="BGA">BGA</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="BGA#mw-head">navigation</a>,
+					<a href="BGA#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>The <a href="Bochs" title="Bochs">Bochs</a> VGA BIOS supports, to an extent, the <a href="VBE" title="VBE" class="mw-redirect">VBE</a> specification. Since Bochs only emulates a VGA card down to the hardware level (and a Cirrus graphics card if you enable it, but that is not tied in with the Bochs VBE extensions), it emulates very simple graphics hardware that the VBE BIOS can drive. The advantage of this is that if you are running your OS in Bochs (or QEMU, which uses the Bochs VGA BIOS, or even VirtualBox), you can use this emulated hardware to directly set video modes without using VBE (which would require real mode or v86).
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="BGA#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="BGA#BGA_versions"><span class="tocnumber">2</span> <span class="toctext">BGA versions</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="BGA#Programming_the_BGA"><span class="tocnumber">3</span> <span class="toctext">Programming the BGA</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="BGA#Writing_registers"><span class="tocnumber">3.1</span> <span class="toctext">Writing registers</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="BGA#Reading_registers"><span class="tocnumber">3.2</span> <span class="toctext">Reading registers</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="BGA#Checking_availability"><span class="tocnumber">3.3</span> <span class="toctext">Checking availability</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="BGA#Setting_display_resolution_and_bit_depth"><span class="tocnumber">3.4</span> <span class="toctext">Setting display resolution and bit depth</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="BGA#Memory_layout_of_video_modes"><span class="tocnumber">3.5</span> <span class="toctext">Memory layout of video modes</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="BGA#Using_banked_mode"><span class="tocnumber">3.6</span> <span class="toctext">Using banked mode</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="BGA#Using_a_linear_frame_buffer_.28LFB.29"><span class="tocnumber">3.7</span> <span class="toctext">Using a linear frame buffer (LFB)</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="BGA#Clearing_display_memory"><span class="tocnumber">3.8</span> <span class="toctext">Clearing display memory</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="BGA#Finding_out_capabilities"><span class="tocnumber">3.9</span> <span class="toctext">Finding out capabilities</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="BGA#8-bit_DAC"><span class="tocnumber">3.10</span> <span class="toctext">8-bit DAC</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="BGA#Virtual_display"><span class="tocnumber">3.11</span> <span class="toctext">Virtual display</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="BGA#Example_code"><span class="tocnumber">3.12</span> <span class="toctext">Example code</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="BGA#External_Links"><span class="tocnumber">4</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Overview"> Overview </span></h2>
+<p>The Bochs emulated graphics hardware (henceforth called BGA for Bochs Graphics Adaptor) is accessed via two 16-bit IO-ports. The first one is an index port, the second one a data port (comparable to how the VGA handles its sets of registers). Via these ports it is possible to enable or disable the VBE extensions, change the screen resolution and bit depth, and manage a larger virtual screen. There are six versions of the BGA (0xB0C0 through 0xB0C5), but if you use the latest version of Bochs you only need to concern yourself with the latest one (0xB0C5). QEMU (with the -std-vga command line argument) also uses the latest version.
+</p><p>The Bochs sources define in vga.h, located in the subdirectory iodev/, a number of defines that are useful for programming the BGA. The names of these defines all start with VBE_DISPI. They are used in the sections below, with their numerical value between parentheses.
+</p>
+<h2> <span class="mw-headline" id="BGA_versions"> BGA versions </span></h2>
+<p>As Bochs has evolved, so has the BGA. Six versions of the BGA have existed, of which 0xB0C5 is the current version (as of 2009, Bochs version 2.4). The main features of each version:
+</p>
+<ul><li> 0xB0C0 - setting X and Y resolution and bit depth (8 BPP only), banked mode
+</li><li> 0xB0C1 - virtual width and height, X and Y offset
+</li><li> 0xB0C2 - 15, 16, 24 and 32 BPP modes, support for linear frame buffer, support for retaining memory contents on mode switching
+</li><li> 0xB0C3 - support for getting capabilities, support for using 8 bit DAC
+</li><li> 0xB0C4 - VRAM increased to 8 MB
+</li><li> 0xB0C5 - <a rel="nofollow" class="external text" href="http://marc.info/?l=bochs-cvs&amp;m=123287460501516">VRAM increased to 16 MB?</a> [TODO: verify and check for other changes]
+</li></ul>
+<p>[TODO: if and when 4BPP modes are supported]
+[TODO: if and when VGA attribute controller (AC) is supported]
+</p>
+<h2> <span class="mw-headline" id="Programming_the_BGA"> Programming the BGA </span></h2>
+<h3> <span class="mw-headline" id="Writing_registers"> Writing registers </span></h3>
+<p>To write an index/data pair to one of the BGA registers, first write its index value to the 16-bit IO-port VBE_DISPI_IOPORT_INDEX (0x01CE), followed by writing the data value to the 16-bit IO-port VBE_DISPI_IOPORT_DATA (0x01CF). The BGA supports 10 different index values (0 through 9):
+</p>
+<ul><li> VBE_DISPI_INDEX_ID (0)
+</li><li> VBE_DISPI_INDEX_XRES (1)
+</li><li> VBE_DISPI_INDEX_YRES (2)
+</li><li> VBE_DISPI_INDEX_BPP (3)
+</li><li> VBE_DISPI_INDEX_ENABLE (4)
+</li><li> VBE_DISPI_INDEX_BANK (5)
+</li><li> VBE_DISPI_INDEX_VIRT_WIDTH (6)
+</li><li> VBE_DISPI_INDEX_VIRT_HEIGHT (7)
+</li><li> VBE_DISPI_INDEX_X_OFFSET (8)
+</li><li> VBE_DISPI_INDEX_Y_OFFSET (9)
+</li></ul>
+<p>In order to change the contents of registers 1-3 (VBE_DISPI_INDEX_XRES, VBE_DISPI_INDEX_YRES, VBE_DISPI_INDEX_BPP) the VBE extensions must be disabled first. To do so, write the value VBE_DISPI_DISABLED (0x00) to VBE_DISPI_INDEX_ENABLE (4). The changes are not visible until the VBE extensions are enabled again. To do so, write the value VBE_DISPI_ENABLED (0x01) to the same register (see also note below on enabling the LFB).
+</p>
+<h3> <span class="mw-headline" id="Reading_registers"> Reading registers </span></h3>
+<p>To read a register, first write the index value to VBE_DISPI_IOPORT_INDEX (0x01CE), then read the 16-bit value from VBE_DISPI_IOPORT_DATA (0x01CF). The value returned depends on the specific register that is queried. [TODO: check and describe, especially _ID and _ENABLE, others seem trivial]
+</p>
+<h3> <span class="mw-headline" id="Checking_availability"> Checking availability </span></h3>
+<p>To check whether the BGA is available, read the value from VBE_DISPI_INDEX_ID (0). If it equals VBE_DISPI_ID5 (0xB0C5) the latest version of the BGA is present. If it returns a value of 0xB0C0 through 0xB0C3, you have an old version of Bochs and/or the Bochs VGA BIOS.
+</p><p>If for some reason you want Bochs to emulate an older version of the BGA, you can write the desired version to VBE_DISPI_INDEX_ID (0). If succesful, reading the register again will return the value just set. This is used by the Bochs VGA BIOS to ensure it is run with the right version of Bochs. If done from an application (or your OS), this will break compatibility with the Bochs VBE BIOS, which expects the latest version.
+</p>
+<h3> <span class="mw-headline" id="Setting_display_resolution_and_bit_depth"> Setting display resolution and bit depth </span></h3>
+<p>Most likely, setting the display resolution and bit depth is all you need. To do so, disable the VBE extensions (see above), write the X resolution, Y resolution and BPP to their respective registers (VBE_DISPI_INDEX_XRES (1), VBE_DISPI_INDEX_YRES (2) and VBE_DISPI_INDEX_BPP (3)) and enable the VBE extensions. Since the BGA is not real hardware, X and Y resolutions can be set at will up to a maximum horizontal resolution (depending on your version of Bochs) of either 1024 or 1600 (VBE_DISPI_MAX_XRES) and a maximum vertical resolution of either 768 or 1200 (VBE_DISPI_MAX_YRES). It seems that both Bochs and QEMU can use about any resolutions with a few restrictions. In QEMU the X resolution must be divisible by 8. [TODO: Describe how Bochs handle different X resolutions. It can crash with segmentation fault on various X resolutions, so it is difficult to test]. The Y resolution can be any number from 1 to maximum in both Bochs and QEMU. The bit depth needs to be one of the following:
+</p>
+<ul><li> VBE_DISPI_BPP_4 (0x04)
+</li><li> VBE_DISPI_BPP_8 (0x08)
+</li><li> VBE_DISPI_BPP_15 (0x0F)
+</li><li> VBE_DISPI_BPP_16 (0x10)
+</li><li> VBE_DISPI_BPP_24 (0x18)
+</li><li> VBE_DISPI_BPP_32 (0x20)
+</li></ul>
+<p>If you try to set an invalid resolution (greater than the maximum or an irregular X resolution) or bit depth, usually nothing happens. The current video mode is preserved. In some cases Bochs will crash with a segmentation fault if you set an invalid X resolution, so only use standard ones. [TODO: Check latest CVS version of Bochs and search their bug tracker]. You can always read the current resolution and bit depth from their respective registers. When you have set a resolution it is a good idea to read it back and check whether your new resolution is really set. You should do that before you enable the BGA to minimize the chance of your emulator crashing. [TODO: Check what happens when the first resolution you set is invalid.]
+</p>
+<h3> <span class="mw-headline" id="Memory_layout_of_video_modes"> Memory layout of video modes </span></h3>
+<p>In all modes the first byte represents the top left of the screen. A formula to calculate the video memory offset from a pixel coordinate is: <tt>offset = (Y * X-resolution + X) * &lt;some-factor&gt;</tt>. The factor varies using the different bit depths. The 4 and 8 BPP modes are palette modes. Read more about programming the attribute controller and DAC palettes in <a href="Category:VGA" title="Category:VGA">VGA documents</a>. The other modes are using the colour value directly.
+</p><p>In 4 BPP you have 16 colours. The pixel colour is used an index to the attribute controller, which again points to the DAC, which in turn gives an 18 bit colour (6 bits each for red, green and blue) that is shown. The memory is layout like this: The first byte is the colour bit 0 of pixels 0-7. The second byte is the colour bit 1 of pixels 0-7, and so forth. You can access 8 pixels at a time using longwords (32 bits).
+</p><p><a href="File:Linear_video_memory_layout_4bpp.png" class="image"><img alt="Linear video memory layout 4bpp.png" src="images/8/84/Linear_video_memory_layout_4bpp.png" width="400" height="60" /></a>
+</p><p>In 8 BPP you have 256 colours. The pixel colour is sent to the DAC, which gives an 18 bit colour that is shown. The memory layout is very simple. Each pixel is exactly one byte.
+</p><p><a href="File:Linear_video_memory_layout_8bpp.png" class="image"><img alt="Linear video memory layout 8bpp.png" src="images/2/26/Linear_video_memory_layout_8bpp.png" width="400" height="30" /></a>
+</p><p>In 15 BPP each pixel is easiest accessed as words (16 bits). There are 5 bits each colour component and the last bit is ignored.
+</p><p><a href="File:Linear_video_memory_layout_15bpp.png" class="image"><img alt="Linear video memory layout 15bpp.png" src="images/5/52/Linear_video_memory_layout_15bpp.png" width="380" height="30" /></a>
+</p><p>In 16 BPP each pixel is easiest accessed as words (16 bits). There are 5 bits for the red and blue components and 6 bits for green. This makes sense, because the human eye is more sensitive to green colours.
+</p><p><a href="File:Linear_video_memory_layout_16bpp.png" class="image"><img alt="Linear video memory layout 16bpp.png" src="images/e/ea/Linear_video_memory_layout_16bpp.png" width="380" height="30" /></a>
+</p><p>In 24 BPP each pixel is 3 bytes. There is one byte for each component. The colour components is blue first, then green, then red.
+</p><p><a href="File:Linear_video_memory_layout_24bpp.png" class="image"><img alt="Linear video memory layout 24bpp.png" src="images/e/e4/Linear_video_memory_layout_24bpp.png" width="400" height="30" /></a>
+</p><p>In 32 BPP each pixel is 4 bytes and easiest accessed as longwords (32 bits). The fourth byte is ignored. The colour components is layout like in 24 BPP. Accessing pixels as longwords the colour should be defined as 0x00RRGGBB.
+</p><p><a href="File:Linear_video_memory_layout_32bpp.png" class="image"><img alt="Linear video memory layout 32bpp.png" src="images/6/65/Linear_video_memory_layout_32bpp.png" width="400" height="30" /></a>
+</p>
+<h3> <span class="mw-headline" id="Using_banked_mode"> Using banked mode </span></h3>
+<p>When using banked mode, the BGA uses a 64Kb bank size (VBE_DISPI_BANK_SIZE_KB) starting at address 0xA0000 (VBE_DISPI_BANK_ADDRESS). Banked mode is the default mode, so when enabling the VBE extensions without explicitly telling the BGA to use a linear frame buffer, the BGA enables banked mode. To set the bank to use, write the bank number to the bank register (VBE_DISPI_INDEX_BANK (5)). 
+</p>
+<h3> <span class="mw-headline" id="Using_a_linear_frame_buffer_.28LFB.29"> Using a linear frame buffer (LFB) </span></h3>
+<p>When using a linear framebuffer, the BGA exposes all of the video memory in a single linearly addressable section of memory. The address of the framebuffer is not fixed, and must be read from the first <a href="PCI" title="PCI">PCI</a> base address register (BAR 0 of device 0x1234:0x1111). To enable the linear framebuffer, use the VBE_DISPI_LFB_ENABLED flag (0x40) when enabling the BGA in conjunction with the VBE_DISPI_ENABLED flag. 
+</p><p>Unlike Bochs, QEMU does not necessarily pay attention to the VBE_DISPI_LFB_ENABLED flag with respect to banked memory access, allowing both the linear framebuffer and banked memory to be used at all times. Bochs will not honour requests to change the memory bank when the linear framebuffer is enabled, and it will similarly ignore any writes made to the memory bank.
+</p><p><b>Note:</b> In older versions of Bochs and QEMU, the framebuffer was fixed at 0xE0000000, and modern versions will use that address when emulating ISA-only systems. <b>It is highly inadvisable to make assumptions about the address of the linear framebuffer.</b> It should always be read from the BGA's PCI BAR0.
+</p>
+<h3> <span class="mw-headline" id="Clearing_display_memory"> Clearing display memory </span></h3>
+<p>When enabling the VBE extensions, Bochs clears the video memory (i.e. sets all bytes to 0). To prevent this from happening, use the VBE_DISPI_NOCLEARMEM flag (0x80) when enabling the VBE extensions (so write a value of VBE_DISPI_ENABLED | VBE_DISPI_NOCLEARMEM (0x81) for banked mode and VBE_DISPI_ENABLED | VBE_DISPI_LFB_ENABLED | VBE_DISPI_NOCLEARMEM (0xC1) for LFB).
+</p>
+<h3> <span class="mw-headline" id="Finding_out_capabilities"> Finding out capabilities </span></h3>
+<p>Based on source code examination for Bochs (iodev/vga.cc) setting VBE_DISPI_GETCAPS in VBE_DISPI_INDEX_ENABLE makes the VBE_DISPI_INDEX_ (XRES / YRES / BPP) fields return their maximum values when read instead of the current values.
+</p>
+<h3> <span class="mw-headline" id="8-bit_DAC"> 8-bit DAC </span></h3>
+<p>The default palette DAC is a 3x6 bit dac; it returns a value between 0 and 63 for each color. Setting the VBE_DISPI_8BIT_DAC bit in VBE_DISPI_INDEX_ENABLE changes this to a 3x8 bit dac and converts the palette to the appropriate values. Resetting the bit moves them back again.
+</p>
+<h3> <span class="mw-headline" id="Virtual_display"> Virtual display </span></h3>
+<p>The Bochs adapter allows a virtual display that is larger than the physical one. The video memory is normally your screen width wide and at least as high as your vertical screen size, the height. The actual video memory is larger and the remainder is seen as a vertical extension.
+</p><p>Having this as a horizontal extension can be very useful. You can use this to make horizontal and vertical scrolling effects very cheap. You can also make a virtual display, double buffering and lots of other ideas.
+</p><p>The mechanism is used that the memory is a virtual display starting at location (0,0) with a size specified by the virtual width. The height is implicitly as large as it can be within the video memory. Suppose you set the virtual width to be 1024 in a 32-bpp mode (4 bytes per pixel) on a 16-meg Bochs card. That makes the vertical height 4096.
+</p><p>You can then specify where the video card should start reading the memory using the X and Y offset. 
+</p><p>The variables taking care of this:
+</p>
+<ul><li> VBE_DISPI_INDEX_VIRT_WIDTH is the virtual width.
+</li><li> VBE_DISPI_INDEX_VIRT_HEIGHT is the virtual height, currently not implemented. Reasoning is above.
+</li><li> VBE_DISPI_INDEX_X_OFFSET is the X offset for displaying.
+</li><li> VBE_DISPI_INDEX_Y_OFFSET is the Y offset for displaying.
+</li></ul>
+<h3> <span class="mw-headline" id="Example_code"> Example code </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">void</span> BgaWriteRegister<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">short</span> IndexValue<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">short</span> DataValue<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    outpw<span class="br0">&#40;</span>VBE_DISPI_IOPORT_INDEX<span class="sy0">,</span> IndexValue<span class="br0">&#41;</span><span class="sy0">;</span>
+    outpw<span class="br0">&#40;</span>VBE_DISPI_IOPORT_DATA<span class="sy0">,</span> DataValue<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">unsigned</span> <span class="kw4">short</span> BgaReadRegister<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">short</span> IndexValue<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    outpw<span class="br0">&#40;</span>VBE_DISPI_IOPORT_INDEX<span class="sy0">,</span> IndexValue<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> inpw<span class="br0">&#40;</span>VBE_DISPI_IOPORT_DATA<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">int</span> BgaIsAvailable<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="br0">&#40;</span>BgaReadRegister<span class="br0">&#40;</span>VBE_DISPI_INDEX_ID<span class="br0">&#41;</span> <span class="sy0">==</span> VBE_DISPI_ID4<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> BgaSetVideoMode<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">int</span> Width<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">int</span> Height<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">int</span> BitDepth<span class="sy0">,</span> <span class="kw4">int</span> UseLinearFrameBuffer<span class="sy0">,</span> <span class="kw4">int</span> ClearVideoMemory<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    BgaWriteRegister<span class="br0">&#40;</span>VBE_DISPI_INDEX_ENABLE<span class="sy0">,</span> VBE_DISPI_DISABLED<span class="br0">&#41;</span><span class="sy0">;</span>
+    BgaWriteRegister<span class="br0">&#40;</span>VBE_DISPI_INDEX_XRES<span class="sy0">,</span> Width<span class="br0">&#41;</span><span class="sy0">;</span>
+    BgaWriteRegister<span class="br0">&#40;</span>VBE_DISPI_INDEX_YRES<span class="sy0">,</span> Height<span class="br0">&#41;</span><span class="sy0">;</span>
+    BgaWriteRegister<span class="br0">&#40;</span>VBE_DISPI_INDEX_BPP<span class="sy0">,</span> BitDepth<span class="br0">&#41;</span><span class="sy0">;</span>
+    BgaWriteRegister<span class="br0">&#40;</span>VBE_DISPI_INDEX_ENABLE<span class="sy0">,</span> VBE_DISPI_ENABLED <span class="sy0">|</span>
+        <span class="br0">&#40;</span>UseLinearFrameBuffer <span class="sy0">?</span> VBE_DISPI_LFB_ENABLED <span class="sy0">:</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="sy0">|</span>
+        <span class="br0">&#40;</span>ClearVideoMemory <span class="sy0">?</span> <span class="nu0">0</span> <span class="sy0">:</span> VBE_DISPI_NOCLEARMEM<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> BgaSetBank<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">short</span> BankNumber<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    BgaWriteRegister<span class="br0">&#40;</span>VBE_DISPI_INDEX_BANK<span class="sy0">,</span> BankNumber<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="External_Links">External Links</span></h2>
+<p><a rel="nofollow" class="external text" href="http://cvs.savannah.nongnu.org/viewvc/*checkout*/vgabios/vgabios/vbe_display_api.txt?revision=1.14">Specification</a>
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 113/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2231-0!*!0!!en!2!* and timestamp 20180121064138 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Bochs_VBE_Extensions&amp;oldid=20136">http://wiki.osdev.org/index.php?title=Bochs_VBE_Extensions&amp;oldid=20136</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Video" title="Category:Video">Video</a></li><li><a href="Category:VGA" title="Category:VGA">VGA</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Bochs_VBE_Extensions" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Bochs_VBE_Extensions"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Bochs_VBE_Extensions"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="BGA#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Bochs_VBE_Extensions" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Bochs_VBE_Extensions&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Bochs_VBE_Extensions&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="BGA#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Bochs_VBE_Extensions" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Bochs_VBE_Extensions" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Bochs_VBE_Extensions" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Bochs_VBE_Extensions&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Bochs_VBE_Extensions&amp;oldid=20136" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 9 January 2017, at 23:18.</li>
+											<li id="footer-info-viewcount">This page has been accessed 101,186 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.036 secs. -->
+	</body>
+</html>

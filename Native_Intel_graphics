@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Native Intel graphics - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Native_Intel_graphics", "wgTitle": "Native Intel graphics", "wgCurRevisionId": 20487, "wgArticleId": 4026, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Video"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Native_Intel_graphics action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Native Intel graphics</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Native_Intel_graphics#mw-head">navigation</a>,
+					<a href="Native_Intel_graphics#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Native_Intel_graphics#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Native_Intel_graphics#Prerequisites"><span class="tocnumber">1.1</span> <span class="toctext">Prerequisites</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="Native_Intel_graphics#Getting_EDID_via_DDC"><span class="tocnumber">2</span> <span class="toctext">Getting EDID via DDC</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Native_Intel_graphics#Generation_4_GMA_desktop_chips_.28aka_Intel_G45.29"><span class="tocnumber">3</span> <span class="toctext">Generation 4 GMA desktop chips (aka Intel G45)</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Native_Intel_graphics#Architecture_overview"><span class="tocnumber">3.1</span> <span class="toctext">Architecture overview</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Native_Intel_graphics#Documentation"><span class="tocnumber">3.2</span> <span class="toctext">Documentation</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Native_Intel_graphics#Mode_setting"><span class="tocnumber">3.3</span> <span class="toctext">Mode setting</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="Native_Intel_graphics#Programming_the_DPLL"><span class="tocnumber">3.3.1</span> <span class="toctext">Programming the DPLL</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="Native_Intel_graphics#Programming_the_display_pipes"><span class="tocnumber">3.3.2</span> <span class="toctext">Programming the display pipes</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="Native_Intel_graphics#Handling_planes"><span class="tocnumber">3.3.3</span> <span class="toctext">Handling planes</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="Native_Intel_graphics#Enabling_and_disabling_connectors"><span class="tocnumber">3.3.4</span> <span class="toctext">Enabling and disabling connectors</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="Native_Intel_graphics#Disabling_the_legacy_VGA_emulation"><span class="tocnumber">3.3.5</span> <span class="toctext">Disabling the legacy VGA emulation</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="Native_Intel_graphics#Debugging_tips"><span class="tocnumber">4</span> <span class="toctext">Debugging tips</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="Native_Intel_graphics#Implementations_in_hobby_OSs"><span class="tocnumber">5</span> <span class="toctext">Implementations in hobby OSs</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>Intel has produced a number of graphics chips that are integrated into their chipsets and processors.
+Most notably modern Intel processors often come with Intel HD graphics chips.
+Wikipedia contains <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units">a list</a> of all those chips.
+This page explains how to drive a subset of those cards. In particular it explains how to change the graphics resolution
+and how to manage the hardware provided frame buffers. It does not yet explain how the GPU can be used to accelerate
+2D and 3D graphics operations via shader programs.
+</p>
+<h3> <span class="mw-headline" id="Prerequisites">Prerequisites</span></h3>
+<p>Before trying to implement a native driver for your OS make sure to understand the basics first.
+</p>
+<ul><li> Read the <a href="VGA_Hardware" title="VGA Hardware">VGA Hardware</a> page. Especially the part about display timings is still relevant for modern graphics cards. You should know what horizontal/vertical active, total, sync start/end and blanking start/end values mean. You also need to know what a pixel clock is.
+</li><li> You need to be able to access <a href="PCI" title="PCI">PCI</a> configuration space and find MMIO regions that are determined by BARs.
+</li></ul>
+<h2> <span class="mw-headline" id="Getting_EDID_via_DDC">Getting EDID via DDC</span></h2>
+<p>In order to determine the graphics modes that are supported on a connected monitor it is necessary to parse the monitor's <a href="EDID" title="EDID">EDID</a> information. EDID is obtained via <a href="http://wiki.osdev.org/index.php?title=DDC&amp;action=edit&amp;redlink=1" class="new" title="DDC (page does not exist)">DDC</a> which is a simple protocol over <a href="http://wiki.osdev.org/index.php?title=I%C2%B2C&amp;action=edit&amp;redlink=1" class="new" title="I²C (page does not exist)">I²C</a>. Intel graphics chips provide a relative straightforward way to interact with the I²C bus.
+</p><p>Before using the I²C bus a connector has to be selected in the <code>GMBUS0</code> register. This register also sets the bus rate. 100 kHz is a conservative default choice.
+</p><p>In order to send a packet to the bus the following steps suffice:
+</p>
+<ul><li> Write the first 4 bytes of data to the <code>GMBUS3</code> register.
+</li><li> Write the destination address, the byte count and the software-ready bit to the <code>GMBUS1</code> register. The simplest way to use the bus is to program the bus cycle selects bits so that no index or STOP is generated and the bus just enters a wait state after the packet is transferred.
+</li><li> Wait until the hardware-ready bit in <code>GMBUS2</code> is set. Optionally an IRQ can be enabled to avoid busy waiting.
+</li><li> Write the next 4 bytes to <code>GMBUS3</code> and wait for hardware-ready in <code>GMBUS2</code>. Repeat this last step until all data is transferred.
+</li></ul>
+<p>Receiving a packet works as follows:
+</p>
+<ul><li> Write the destination address, the byte count, the software-ready bit and the direction bit to the <code>GMBUS1</code> register.
+</li><li> Wait for hardware-ready in <code>GMBUS2</code>. Read 4 bytes of data from <code>GMBUS3</code>. Repeat this last step until all data is transferred.
+</li></ul>
+<p>After a packet was sent or received the driver should wait until the bus enters a wait state by checking for the wait-phase bit in <code>GMBUS2</code>. If the transaction (possibly consisting of multiple packets) is complete a STOP condition should be generated via the bus cycle select bit in <code>GMBUS1</code>.
+</p>
+<h2> <span class="mw-headline" id="Generation_4_GMA_desktop_chips_.28aka_Intel_G45.29">Generation 4 GMA desktop chips (aka Intel G45)</span></h2>
+<p>The G45 is a PCI-Express based graphics chip that was introduced by Intel in 2008.
+</p>
+<h3> <span class="mw-headline" id="Architecture_overview">Architecture overview</span></h3>
+<p>G45 chips appear as devices on the PCI bus. They are identified a vendor ID of 0x8086 and a model-specific device ID. The PCI configuration space is used to access two BARs: BAR 0 points to a MMIO region that contains all registers of the card. BAR 2 allows access to the graphics memory.
+</p><p>The chip supports two independent graphics pipelines. Each pipeline is made of the following:
+</p>
+<ul><li> A DPLL (digital phase-locked loop) that generates the pixel clock.
+</li><li> A display pipe that is responsible for setting the display timings.
+</li><li> A primary plane and secondary planes. The primary plane supplies the primary framebuffer to the display pipe. Secondary planes are mostly used to implement hardware mouse cursors.
+</li></ul>
+<p>Both pipelines share a set of connectors that are used to attach monitors to the card. G45 supports DAC (digital-to-analog converter, i.e. CRTs via the usual VGA plug) connectors, SDVO (serial digital video out) connectors, LVDS (low-voltage differential signaling) connectors and TV output. SDVO is an internal bus that is usually transcoded to HDMI or DisplayPort. LVDS is used to connect integrated flat panels to the graphics chip of laptops.
+</p>
+<h3> <span class="mw-headline" id="Documentation">Documentation</span></h3>
+<p>The G45's registers are documented by Intel. However Intel's functional descriptions are quite sparse. The Linux kernel's i915 driver is often a good reference.
+</p>
+<ul><li> Intel's documentation is available <a rel="nofollow" class="external text" href="https://01.org/linuxgraphics/documentation/hardware-specification-prms">here</a>. We are primarily interested in the <a rel="nofollow" class="external text" href="https://01.org/sites/default/files/documentation/g45_vol_3_register_0_0.pdf">G45: Volume Three: Display Register</a> that describes the display registers. <a rel="nofollow" class="external text" href="https://01.org/sites/default/files/documentation/g45_vol_1a_core_updated.pdf">G45: Volume 1a Graphics Core</a> documents the graphics memory interface and the PCI configuration space. The <a rel="nofollow" class="external text" href="https://01.org/sites/default/files/documentation/965_g35_vol_3_display_registers_updated.pdf">G35: Volume Three: Display Registers</a> contains a few registers that are undocumented in the G45 manual but still must be programmed by the driver.
+</li><li> The <a rel="nofollow" class="external text" href="http://lxr.free-electrons.com/source/drivers/gpu/drm/i915">i915 driver</a> of the Linux kernel. Almost all of the mode setting logic is in <a rel="nofollow" class="external text" href="http://lxr.free-electrons.com/source/drivers/gpu/drm/i915/intel_display.c">intel_display.c</a>.
+</li></ul>
+<h3> <span class="mw-headline" id="Mode_setting">Mode setting</span></h3>
+<p>Mode setting proceeds in two phases: First the display hardware needs to be deactivated. After that it can be reprogrammed and enabled again in another mode.
+</p><p>More specifically disabling the display hardware consists of the following steps:
+</p>
+<ul><li> Disable all output connectors.
+</li><li> Disable all planes. This includes the primary plane and cursor planes.
+</li><li> Disable the display pipe.
+</li><li> Disable the DPLL.
+</li><li> Disable the legacy VGA emulation.
+</li></ul>
+<p>Enabling the display reverses this sequence:
+</p>
+<ul><li> Program the DPLL to generate a suitable pixel clock and enable it. Wait for the clock to stabilize.
+</li><li> Setup the display timings of your desired mode and enable the display pipe.
+</li><li> Set a framebuffer address and stride and enable the primary plane and all secondary planes that you wish to use.
+</li><li> Enable the output connectors.
+</li></ul>
+<h4> <span class="mw-headline" id="Programming_the_DPLL">Programming the DPLL</span></h4>
+<p>Before a display pipe can be enabled its DPLL has to be programmed to generate a suitable pixel clock for the desired graphics mode.
+The DPLL clock is determined by five integer variables called N, M1, M2, P1 and P2. The relation between the DPLL clock and those variables is given by the formula:
+</p><p><code>DPLL = (reference frequency * (5 * (M1 - 2) + (M2 - 2)) / N) / (P1 * P2)</code>
+</p><p>There are limits on various terms of this formula. Let <code>M = 5 * (M1 - 2) + (M2 - 2)</code>, <code>P = P1 * P2</code> and <code>VCO = reference frequency * (5 * (M1 - 2) + (M2 - 2)) / N</code>. Then M1 and M2 need to be chosen so that <code>M1 &lt; M2</code>. The following table lists the G45's limits on DPLL variables:
+</p>
+<table class="wikitable">
+
+<tr>
+<th scope="row"> Variable
+</th>
+<td> DPLL
+</td>
+<td> VCO
+</td>
+<td> N
+</td>
+<td> M
+</td>
+<td> M1
+</td>
+<td> M2
+</td>
+<td> P
+</td>
+<td> P1
+</td>
+<td> P2
+</td></tr>
+<tr>
+<th scope="row"> Min
+</th>
+<td style="text-align:right;"> 25,000 kHz
+</td>
+<td style="text-align:right;"> 1,750,000 kHz
+</td>
+<td style="text-align:right;"> 1
+</td>
+<td style="text-align:right;"> 104
+</td>
+<td style="text-align:right;"> 17
+</td>
+<td style="text-align:right;"> 5
+</td>
+<td style="text-align:right;"> 10
+</td>
+<td style="text-align:right;"> 1
+</td>
+<td style="text-align:right;"> 10
+</td></tr>
+<tr>
+<th scope="row"> Max
+</th>
+<td style="text-align:right;"> 270,000 kHz
+</td>
+<td style="text-align:right;"> 3,500,000 kHz
+</td>
+<td style="text-align:right;"> 4
+</td>
+<td style="text-align:right;"> 138
+</td>
+<td style="text-align:right;"> 23
+</td>
+<td style="text-align:right;"> 11
+</td>
+<td style="text-align:right;"> 30
+</td>
+<td style="text-align:right;"> 3
+</td>
+<td style="text-align:right;"> 10
+</td></tr></table>
+<p>The reference frequency is 96,000 kHz for DAC and SDVO output.
+</p><p>The resulting pixel clock is the quotient between the DPLL clock and a pixel multiplier. The pixel multiplier inserts padding into the SDVO output to ensure that its DPLL always operates at a frequency between 100 MHz and 200 MHz. Note that the pixel multiplier also applies to DAC output.
+</p><p>In order to determine the DPLL parameters one has to:
+</p>
+<ul><li> Take the desired pixel clock as input.
+</li><li> Chose a pixel multiplier so that the pixel clock times this multiplier is in the 100 MHz to 200 MHz range. This value is the required DPLL clock.
+</li><li> Compute N, M1, M2, P1 and P2 from the DPLL clock. This can be done by iterating over all possible N, M1, M2, P1 and P2 values and checking if each combination falls into the allowed limits.
+</li></ul>
+<p>After that the DPLL can be programmed. This is done by programming the N, M1 and M2 values in <code>FPA0</code> register and programming the P1 and P2 values and enabling the DPLL in the <code>DPLLA_CTRL</code> register. Ensure to set the VGA disable bit and select SDVO/DAC mode. The driver should issue a 150μs delay after enabling the DPLL to allow the clock to stabilize.
+</p>
+<div class="toccolours mw-collapsible mw-collapsed">
+<p><b>Reference implementations</b>
+</p>
+<div class="mw-collapsible-content">
+<ul><li> Linux i915 driver (version 4.9): <code>g4x_find_best_dpll()</code> in <a rel="nofollow" class="external text" href="http://lxr.free-electrons.com/source/drivers/gpu/drm/i915/intel_display.c">intel_display.c</a> computes the N, M1, M2, P1 and P2 values for a given DPLL clock. <code>i9xx_compute_dpll()</code> determines the DPLL register values. <code>i9xx_set_pll_dividers()</code> and <code>i9xx_enable_pll()</code> write those values to the registers.
+</li></ul>
+</div></div>
+<h4> <span class="mw-headline" id="Programming_the_display_pipes">Programming the display pipes</span></h4>
+<p>Before a display pipe can be enabled the display timings have to be programmed in the <code>HTOTAL_A</code>, <code>VTOTAL_A</code>, <code>HBLANK_A</code>, <code>VBLANK_A</code>, <code>HSYNC_A</code>, <code>VSYNC_A</code> and <code>PIPEASRC</code> registers. The values of the <code>PIPEASRC</code> register should usually match the horizontal and vertical active values.
+</p><p>Display pipes can be enabled and disabled via their <code>PIPEACONF</code> registers.
+</p><p>Pipes should only be enabled while their DPLLs are enabled and warmed up.
+</p>
+<div class="toccolours mw-collapsible mw-collapsed">
+<p><b>Reference implementations</b>
+</p>
+<div class="mw-collapsible-content">
+<ul><li> Linux i915 driver (version 4.9): <code>intel_set_pipe_timings()</code> and <code>intel_set_pipe_src_size()</code> in <a rel="nofollow" class="external text" href="http://lxr.free-electrons.com/source/drivers/gpu/drm/i915/intel_display.c">intel_display.c</a> program the display timings. <code>i9xx_set_pipeconf()</code> and <code>intel_enable_pipe()</code> enable the pipe.
+</li></ul>
+</div></div>
+<h4> <span class="mw-headline" id="Handling_planes">Handling planes</span></h4>
+<p>The <code>DSPASURF</code> register control the address of the primary framebuffer. The stride of the buffer has to be programmed in the <code>DSPASTRIDE</code> register. G45 requires strides to be multiples of 64. The <code>DSPALINOFF</code> register is usually set to zero.
+</p><p>The primary plane can be enabled and disabled via the <code>DSPACNTR</code> register. This register also sets the pixel format.
+</p><p>Planes should only be enabled while the pipes they are assigned to are enabled.
+</p>
+<h4> <span class="mw-headline" id="Enabling_and_disabling_connectors">Enabling and disabling connectors</span></h4>
+<p>The analog output connector can be enabled and disabled via the <code>ADPA</code> register. This register also specifies the pipe that the connector uses.
+</p><p>Note that connectors must only be enabled or disabled while their respective pipes are enabled.
+</p>
+<h4> <span class="mw-headline" id="Disabling_the_legacy_VGA_emulation">Disabling the legacy VGA emulation</span></h4>
+<p>The VGA emulation is controlled via the <code>VGACNTRL</code> register. For non-VGA modes the <code>VGA Display Disable</code> bit should be set. Likewise the <code>VGA Centering Enable</code> bits should be set to 0.
+</p>
+<h2> <span class="mw-headline" id="Debugging_tips">Debugging tips</span></h2>
+<ul><li> While debugging a display driver logging messages to the screen is often not possible. Use <a href="Serial_Ports" title="Serial Ports">Serial Ports</a> instead.
+</li><li> Because there are no emulators that emulate Intel graphics cards you have to test your driver on a physical machine. Make sure that you can recompile your driver and reboot your test machine with little effort. Things like <a href="PXE" title="PXE">PXE</a> might help with that.
+</li><li> Read the initial values of each register and ensure you understand them before you try to change the registers.
+</li></ul>
+<h2> <span class="mw-headline" id="Implementations_in_hobby_OSs">Implementations in hobby OSs</span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="https://github.com/avdgrinten/managarm">managarm</a> (as of commit 0e9d37c) has a G45 mode setting driver in <a rel="nofollow" class="external text" href="https://github.com/avdgrinten/managarm/blob/master/drivers/gfx/intel/src/main.cpp">drivers/gfx/intel</a>. Note that the code makes heavy use of C++ features, particularly operator overloading of the register classes.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 87/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4026-0!*!0!!en!*!* and timestamp 20180121063826 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Native_Intel_graphics&amp;oldid=20487">http://wiki.osdev.org/index.php?title=Native_Intel_graphics&amp;oldid=20487</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Video" title="Category:Video">Video</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Native_Intel_graphics" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Native_Intel_graphics"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Native_Intel_graphics&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Native_Intel_graphics#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Native_Intel_graphics" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Native_Intel_graphics&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Native_Intel_graphics&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Native_Intel_graphics#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Native_Intel_graphics" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Native_Intel_graphics" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Native_Intel_graphics&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Native_Intel_graphics&amp;oldid=20487" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 16 February 2017, at 11:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,966 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="/load.php?debug=false&amp;lang=en&amp;modules=site&amp;oskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Native_Intel_graphics" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Native_Intel_graphics" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Native_Intel_graphics&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Native_Intel_graphics&amp;oldid=20487" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 16 February 2017, at 11:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,966 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

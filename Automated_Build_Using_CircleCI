@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Automated Build Using CircleCI - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Automated_Build_Using_CircleCI", "wgTitle": "Automated Build Using CircleCI", "wgCurRevisionId": 20119, "wgArticleId": 4016, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Level 2 Tutorials", "Automated Builds"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-yaml {line-height: normal;}
+.source-yaml li, .source-yaml pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for yaml
+ * CSS class: source-yaml, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.yaml.source-yaml .de1, .yaml.source-yaml .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.yaml.source-yaml  {font-family:monospace;}
+.yaml.source-yaml .imp {font-weight: bold; color: red;}
+.yaml.source-yaml li, .yaml.source-yaml .li1 {font-weight: normal; vertical-align:top;}
+.yaml.source-yaml .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.yaml.source-yaml .li2 {font-weight: bold; vertical-align:top;}
+.yaml.source-yaml .kw1 {font-weight: bold;}
+.yaml.source-yaml .co0 {color: #303050;background-color: #F5F5F5}
+.yaml.source-yaml .co1 {color: blue;}
+.yaml.source-yaml .co2 {font-weight: bold; color: red;}
+.yaml.source-yaml .co3 {color: green;}
+.yaml.source-yaml .co4 {color: #007F45;}
+.yaml.source-yaml .co5 {color: #7f7fFF;}
+.yaml.source-yaml .co6 {color: #FF7000;}
+.yaml.source-yaml .co7 {color: #FF45C0;}
+.yaml.source-yaml .co8 {font-weight: bold; color: #005F5F;}
+.yaml.source-yaml .sy1 {color: cyan;}
+.yaml.source-yaml .sy2 {font-weight: bold; color: brown;}
+.yaml.source-yaml .st0 {color: #CF00CF;}
+.yaml.source-yaml .ln-xtra, .yaml.source-yaml li.ln-xtra, .yaml.source-yaml div.ln-xtra {background-color: #ffc;}
+.yaml.source-yaml span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Automated_Build_Using_CircleCI action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Automated Build Using CircleCI</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Automated_Build_Using_CircleCI#mw-head">navigation</a>,
+					<a href="Automated_Build_Using_CircleCI#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear:right; border:1px solid #aaaaaa; background:#eee; text-align:center;;"><tr><th>Difficulty level</th></tr><tr><td><a href="File:Difficulty_2.png" class="image"><img alt="Difficulty 2.png" src="images/a/a1/Difficulty_2.png" width="46" height="14" /></a><br />Medium</td></tr></table>
+<p>This tutorial will show you how to set up an automated build environment using <a rel="nofollow" class="external text" href="https://circleci.com/">CircleCI</a>, which will automatically build your project on every push to a repository, and make the resulting files available on the web. In the tutorial it is assumed that your kernel / operating system project is hosted at <a rel="nofollow" class="external text" href="https://github.com/">GitHub</a>, from where it can be cloned and built using a freestanding <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a> toolchain.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Automated_Build_Using_CircleCI#Setting_up_your_project_on_CircleCI"><span class="tocnumber">1</span> <span class="toctext">Setting up your project on CircleCI</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Automated_Build_Using_CircleCI#Add_a_build_script_for_the_toolchain"><span class="tocnumber">2</span> <span class="toctext">Add a build script for the toolchain</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Automated_Build_Using_CircleCI#Set_up_the_build"><span class="tocnumber">3</span> <span class="toctext">Set up the build</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Automated_Build_Using_CircleCI#Publish_outputs_on_the_web"><span class="tocnumber">4</span> <span class="toctext">Publish outputs on the web</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Automated_Build_Using_CircleCI#Links"><span class="tocnumber">5</span> <span class="toctext">Links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Setting_up_your_project_on_CircleCI"> Setting up your project on CircleCI </span></h2>
+<p>First you will need to sign up at <a rel="nofollow" class="external text" href="https://circleci.com/">CircleCI</a>. Navigate to their homepage and sign in. You will then have the possibility to connect with your GitHub account. GitHub will ask you whether you would like to grant CircleCI access to your account. Once you have confirmed, you can enter your CircleCI settings. Choose a project to build to enable automated builds whenever you push to that project.
+</p>
+<h2> <span class="mw-headline" id="Add_a_build_script_for_the_toolchain"> Add a build script for the toolchain </span></h2>
+<p>The first step towards building your project should be building the toolchain, and thus in particular a <a href="GCC_Cross-Compiler" title="GCC Cross-Compiler">GCC Cross-Compiler</a>. The most convenient way to do this is to create a small script that will download the sources for binutils and gcc (and optionally additional sources, such as newlib or gdb), configure them for your chosen target and build the tools. The following script is an example, which builds a toolchain suitable for using a subset of C++ (only the freestanding part):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="co0">#!/bin/sh</span>
+<span class="kw1">set</span> <span class="re5">-e</span>
+&#160;
+<span class="co0"># Set the versions we will be using.</span>
+<span class="re2">binutils_version</span>=<span class="st0">&quot;2.27&quot;</span>
+<span class="re2">gcc_version</span>=<span class="st0">&quot;6.3.0&quot;</span>
+<span class="re2">newlib_version</span>=<span class="st0">&quot;2.4.0&quot;</span>
+&#160;
+<span class="co0"># This script expects the target triplet (e.g. i786-pc-elf) as command line argument.</span>
+<span class="re2">target</span>=<span class="re4">$1</span>
+&#160;
+<span class="co0"># The tools will be installed in ~/cross/$target.</span>
+<span class="re2">prefix</span>=~<span class="sy0">/</span>cross<span class="sy0">/</span><span class="re1">$target</span>
+&#160;
+<span class="co0"># First check whether the toolchain was already built on a previous run of this script.</span>
+<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="sy0">!</span> <span class="re5">-d</span> <span class="re1">$prefix</span> <span class="br0">&#93;</span>
+<span class="kw1">then</span>
+	<span class="kw2">mkdir</span> <span class="re5">-p</span> <span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain
+	<span class="kw3">cd</span> <span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain
+&#160;
+	<span class="co0"># Download gcc sources if they are not yet downloaded.</span>
+	<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="sy0">!</span> <span class="re5">-f</span> gcc-<span class="re1">$gcc_version</span>.tar.bz2 <span class="br0">&#93;</span>
+	<span class="kw1">then</span>
+		<span class="kw2">wget</span> <span class="re5">-c</span> <span class="re5">-O</span> gcc-<span class="re1">$gcc_version</span>.tar.bz2 ftp:<span class="sy0">//</span>ftp.gnu.org<span class="sy0">/</span>gnu<span class="sy0">/</span>gcc<span class="sy0">/</span>gcc-<span class="re1">$gcc_version</span><span class="sy0">/</span>gcc-<span class="re1">$gcc_version</span>.tar.bz2
+		<span class="kw2">tar</span> <span class="re5">-xf</span> gcc-<span class="re1">$gcc_version</span>.tar.bz2
+	<span class="kw1">fi</span>
+&#160;
+	<span class="co0"># Download binutils sources if they are not yet downloaded.</span>
+	<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="sy0">!</span> <span class="re5">-f</span> binutils-<span class="re1">$binutils_version</span>.tar.bz2 <span class="br0">&#93;</span>
+	<span class="kw1">then</span>
+		<span class="kw2">wget</span> <span class="re5">-c</span> <span class="re5">-O</span> binutils-<span class="re1">$binutils_version</span>.tar.bz2 ftp:<span class="sy0">//</span>ftp.gnu.org<span class="sy0">/</span>gnu<span class="sy0">/</span>binutils<span class="sy0">/</span>binutils-<span class="re1">$binutils_version</span>.tar.bz2
+		<span class="kw2">tar</span> <span class="re5">-xf</span> binutils-<span class="re1">$binutils_version</span>.tar.bz2
+	<span class="kw1">fi</span>
+&#160;
+	<span class="co0"># Optional: download newlib sources if they are not yet downloaded.</span>
+	<span class="kw1">if</span> <span class="br0">&#91;</span> <span class="sy0">!</span> <span class="re5">-f</span> newlib-<span class="re1">$newlib_version</span>.tar.gz <span class="br0">&#93;</span>
+	<span class="kw1">then</span>
+		<span class="kw2">wget</span> <span class="re5">-c</span> <span class="re5">-O</span> newlib-<span class="re1">$newlib_version</span>.tar.gz ftp:<span class="sy0">//</span>sources.redhat.com<span class="sy0">/</span>pub<span class="sy0">/</span>newlib<span class="sy0">/</span>newlib-<span class="re1">$newlib_version</span>.tar.gz
+		<span class="kw2">tar</span> <span class="re5">-xf</span> newlib-<span class="re1">$newlib_version</span>.tar.gz
+	<span class="kw1">fi</span>
+&#160;
+	<span class="co0"># Create build paths.</span>
+	<span class="kw2">mkdir</span> <span class="re5">-p</span> <span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>build-binutils
+	<span class="kw2">mkdir</span> <span class="re5">-p</span> <span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>build-gcc
+	<span class="kw2">mkdir</span> <span class="re5">-p</span> <span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>build-newlib
+&#160;
+	<span class="co0"># Build binutils.</span>
+	<span class="kw3">cd</span> <span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>build-binutils
+	<span class="kw2">sudo</span> <span class="kw2">rm</span> <span class="re5">-rf</span> <span class="sy0">*</span>
+	<span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>binutils-<span class="re1">$binutils_version</span><span class="sy0">/</span>configure <span class="re5">--target</span>=<span class="re1">$target</span> <span class="re5">--prefix</span>=<span class="re1">$prefix</span> <span class="re5">--disable-nls</span> <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> all <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> <span class="kw2">install</span> <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">sudo</span> <span class="kw2">rm</span> <span class="re5">-rf</span> <span class="sy0">*</span>
+&#160;
+	<span class="co0"># Build gcc and libgcc.</span>
+	<span class="kw3">cd</span> <span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>build-gcc
+	<span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>gcc-<span class="re1">$gcc_version</span><span class="sy0">/</span>configure <span class="re5">--target</span>=<span class="re1">$target</span> <span class="re5">--prefix</span>=<span class="re1">$prefix</span> <span class="re5">--disable-nls</span> <span class="re5">--enable-languages</span>=c,<span class="kw2">c++</span> <span class="re5">--enable-libstdcxx</span> <span class="re5">--without-headers</span> <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> all-gcc <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> install-gcc <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> all-target-libgcc <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> install-target-libgcc <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+&#160;
+	<span class="co0"># Make sure that our cross compiler will be found by creating links.</span>
+	<span class="co0"># Alternative: Add the $prefix/bin directory to your $PATH.</span>
+	<span class="kw2">sudo</span> <span class="kw2">ln</span> <span class="re5">-s</span> <span class="re5">-f</span> <span class="re1">$prefix</span><span class="sy0">/</span>bin<span class="sy0">/*</span> <span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span>
+&#160;
+	<span class="co0"># Optional: Build newlib. This is necessary only for the next, also optional build step.</span>
+	<span class="kw3">cd</span> <span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>build-newlib
+	<span class="kw2">sudo</span> <span class="kw2">rm</span> <span class="re5">-rf</span> <span class="sy0">*</span>
+	<span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>newlib-<span class="re1">$newlib_version</span><span class="sy0">/</span>configure <span class="re5">--target</span>=<span class="re1">$target</span> <span class="re5">--prefix</span>=<span class="re1">$prefix</span> <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> all <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> <span class="kw2">install</span> <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">sudo</span> <span class="kw2">rm</span> <span class="re5">-rf</span> <span class="sy0">*</span>
+&#160;
+	<span class="co0"># Optional: Build libstdc++. This is done in order to install the freestanding headers for using the C++11, C++14, C++17 standards.</span>
+	<span class="kw3">cd</span> <span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>build-gcc
+	<span class="sy0">/</span>tmp<span class="sy0">/</span>toolchain<span class="sy0">/</span>gcc-<span class="re1">$gcc_version</span><span class="sy0">/</span>configure <span class="re5">--target</span>=<span class="re1">$target</span> <span class="re5">--prefix</span>=<span class="re1">$prefix</span> <span class="re5">--disable-nls</span> <span class="re5">--enable-languages</span>=c,<span class="kw2">c++</span> <span class="re5">--enable-libstdcxx</span> <span class="re5">--without-headers</span> <span class="re5">--with-newlib</span> <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> all-target-libstdc++-v3 <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">make</span> install-target-libstdc++-v3 <span class="nu0">2</span><span class="sy0">&gt;&amp;</span><span class="nu0">1</span>
+	<span class="kw2">sudo</span> <span class="kw2">rm</span> <span class="re5">-rf</span> <span class="sy0">*</span>
+<span class="kw1">fi</span>
+&#160;
+<span class="co0"># Also if the cross compiler has not been freshly build, link it so that it will be found.</span>
+<span class="kw2">sudo</span> <span class="kw2">ln</span> <span class="re5">-s</span> <span class="re5">-f</span> <span class="re1">$prefix</span><span class="sy0">/</span>bin<span class="sy0">/*</span> <span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>bin<span class="sy0">/</span></pre></div></div>
+<p>Note that this is only an example script. You will most likely have to modify it according to your needs. Also you should test locally whether it actually works and generates the compiler you will use later. Once you have done this, add it to your source repository. Here we will assume that you have created a directory called <b>ci</b> in the root of your repository, and placed your script as a file named <b>toolchain.sh</b> in this folder.
+</p>
+<h2> <span class="mw-headline" id="Set_up_the_build"> Set up the build </span></h2>
+<p>Now we need to tell CircleCI which actions it should perform when you push to your repository. By default, CircleCI uses a virtual machine running Ubuntu 14.04 for your build. This is configured using a file called <b>circle.yml</b> in the root of your repository. The following example explains the sections in this file.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="yaml source-yaml"><pre class="de1"><span class="co4">dependencies</span>:<span class="co4">
+    pre</span><span class="sy2">:
+</span>        <span class="co1"># Install a few packages which will be needed for building the cross compiler.</span>
+        - sudo apt-get update
+        - sudo apt-get install grub-pc
+        - sudo apt-get install libgmp3-dev
+        - sudo apt-get install libmpfr-dev
+        - sudo apt-get install libmpc-dev
+        - sudo apt-get install texinfo
+        - sudo apt-get install libisl-dev
+        - sudo apt-get install libcloog-isl-dev
+&#160;
+        <span class="co1"># Build the cross compiler for your chosen target (replace i786-pc-elf if necessary).</span>
+        - bash ci/toolchain.sh i786-pc-elf
+<span class="co4">
+    cache_directories</span><span class="sy2">:
+</span>        <span class="co1"># Add the folder with our cross compiler to the cache. This way it will be kept between builds.</span>
+        - ~/cross
+<span class="co4">
+compile</span>:<span class="co4">
+    override</span><span class="sy2">:
+</span>        <span class="co1"># Place here whatever commands are necessary to build your project.</span>
+        - bash your_build_script.sh
+&#160;
+        <span class="co1"># Copy any files you want to keep to the folder $CIRCLE_ARTIFACTS.</span>
+        - cp my_kernel my_image.iso $CIRCLE_ARTIFACTS/
+<span class="co4">
+test</span>:<span class="co4">
+    override</span><span class="sy2">:
+</span>        <span class="co1"># Place here any automated test you would like to run after the build (unit tests, boot up a VM and collect output...)</span>
+        - bash your_test_suite.sh
+&#160;
+        <span class="co1"># You must place something here, even it it's just testing whether the output exists.</span>
+        - test -f $CIRCLE_ARTIFACTS/my_kernel
+        - test -f $CIRCLE_ARTIFACTS/my_image.iso</pre></div></div>
+<p>Ones you have created a custom file of this type, save it as <b>circle.yml</b> in the root of your repository, commit and push. Now CircleCI should start building your cross compiler, go on with building your project, collect the output files, check for success and inform you whether the build succeeded. The next time you push, all cached directories (and thus your cross compiler) will be restored before the build starts (and so your cross compiler will not be built again on every push).
+</p>
+<h2> <span class="mw-headline" id="Publish_outputs_on_the_web"> Publish outputs on the web </span></h2>
+<p>Both on CircleCI and on the commits page or your GitHub project you should now see whether your build was successful. If you would also like to show the build status on your project homepage, you can use a link of one of these forms:
+</p>
+<pre>https://circleci.com/gh/&lt;your_user_name&gt;/&lt;your_project_name&gt;.svg?style=svg
+https://circleci.com/gh/&lt;your_user_name&gt;/&lt;your_project_name&gt;.svg?style=shield</pre>
+<p>You can also create links to the files you save in the $CIRCLE_ARTIFACTS folder in your build. Here the link should look like this:
+</p>
+<pre>https://circleci.com/api/v1/project/&lt;your_user_name&gt;/&lt;your_project_name&gt;/latest/artifacts/0/$CIRCLE_ARTIFACTS/&lt;your_file_name&gt;</pre>
+<p>This will always link to the latest generated files.
+</p>
+<h2> <span class="mw-headline" id="Links"> Links </span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="https://circleci.com/docs/configuration/">Configuring CircleCI</a>
+</li><li> <a rel="nofollow" class="external text" href="https://circleci.com/docs/status-badges/">CircleCI build status badges</a>
+</li><li> <a rel="nofollow" class="external text" href="https://circleci.com/docs/build-artifacts/">CircleCI build artifacts</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 154/1000000
+Post-expand include size: 342/2097152 bytes
+Template argument size: 52/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:4016-0!*!0!!en!2!* and timestamp 20180121075937 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Automated_Build_Using_CircleCI&amp;oldid=20119">http://wiki.osdev.org/index.php?title=Automated_Build_Using_CircleCI&amp;oldid=20119</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Level_2_Tutorials" title="Category:Level 2 Tutorials">Level 2 Tutorials</a></li><li><a href="http://wiki.osdev.org/index.php?title=Category:Automated_Builds&amp;action=edit&amp;redlink=1" class="new" title="Category:Automated Builds (page does not exist)">Automated Builds</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Automated_Build_Using_CircleCI" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Automated_Build_Using_CircleCI"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Automated_Build_Using_CircleCI&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Automated_Build_Using_CircleCI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Automated_Build_Using_CircleCI" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Automated_Build_Using_CircleCI&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Automated_Build_Using_CircleCI&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Automated_Build_Using_CircleCI#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Automated_Build_Using_CircleCI" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Automated_Build_Using_CircleCI" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Automated_Build_Using_CircleCI&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Automated_Build_Using_CircleCI&amp;oldid=20119" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 January 2017, at 13:29.</li>
+											<li id="footer-info-viewcount">This page hskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Automated_Build_Using_CircleCI" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Automated_Build_Using_CircleCI" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Automated_Build_Using_CircleCI&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Automated_Build_Using_CircleCI&amp;oldid=20119" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 January 2017, at 13:29.</li>
+											<li id="footer-info-viewcount">This page has been accessed 1,149 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.032 secs. -->
+	</body>
+</html>

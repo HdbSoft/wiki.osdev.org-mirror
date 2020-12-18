@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Chip Numbers, Acronyms and Things - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="canonical" href="Chip_Numbers,_Acronyms_and_Things" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Chip_Numbers,_Acronyms_and_Things", "wgTitle": "Chip Numbers, Acronyms and Things", "wgCurRevisionId": 17416, "wgArticleId": 1825, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Resources"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Chip_Numbers_Acronyms_and_Things action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Chip Numbers, Acronyms and Things</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub">(Redirected from <a href="http://wiki.osdev.org/index.php?title=Definitions&amp;redirect=no" title="Definitions">Definitions</a>)</div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Definitions#mw-head">navigation</a>,
+					<a href="Definitions#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><dl><dt>6845</dt><dd>Graphics controller chip used in many many graphic adaptors
+</dd><dt>8042</dt><dd>Controller chip in the AT keyboard
+</dd><dt>8048</dt><dd>Controller chip in the XT keyboard
+</dd><dt>82072A</dt><dd>Controller chip in the AT floppy disk drive
+</dd><dt>82077</dt><dd>Controller chip in PS/2 floppy disk drive. Successor to the 82072A
+</dd><dt>82284</dt><dd>The 80286 clock generator
+</dd><dt>82288</dt><dd>The 80286 bus controller chip
+</dd><dt>8237A</dt><dd>An 8=bit DMA controller in the XT. Two chips in the AT and beyond, with four DMA channels per chip. Chips can be cascaded.
+</dd><dt>16450</dt><dd>UART chip in the AT, successor to the 8250.
+</dd><dt>82489DX</dt><dd>The original Advanced Programmable Interrupt Controller (APIC) used in 486 and early Pentium multiprocessor systems. Later Pentiums integrate the local APIC onto the processor itself. The successor to the 8259A PIC.
+</dd><dt>8253</dt><dd>Programmable Interval Timer (<a href="PIT" title="PIT" class="mw-redirect">PIT</a>) chip in the XT. Has three independent timers.
+</dd><dt>8254</dt><dd>Programmable Interval Timer (<a href="PIT" title="PIT" class="mw-redirect">PIT</a>). Used in AT's and EISA/MCA machines. Just an improved version of the 8253.
+</dd><dt>8259A</dt><dd>Programmable Interrupt Controller (<a href="PIC" title="PIC" class="mw-redirect">PIC</a>) used in all non-SMP PC's that predate the Pentium III/Athlon (current systems still include it for backward compatibility). Each chip has 8 interrupt lines. AT and beyond have two chips.
+</dd><dt>8284</dt><dd>Clock generator in the 8088/8086/80186
+</dd><dt>8288</dt><dd>Bus controller in the 8088/8086/80186
+</dd><dt>8741</dt><dd>Common controller chip in AT keyboards
+</dd><dt>8742</dt><dd>Controller chip in PS/2 keyboards
+</dd><dt>ABIOS</dt><dd>Advanced BIOS. PS/2 BIOS that can be called in both Protected Mode and Real Mode.
+</dd><dt>ARLL</dt><dd>Advanced RLL. Method used in Hard Disks. MFM, RLL, etc.
+</dd><dt>ASPI</dt><dd>Advanced SCSI Programming Interface. An Adaptec thing, its a common interface for programming SCSI devices.
+</dd><dt>ATA</dt><dd>AT Attachment. A bus standard for connecting hard disks and CD-ROMs.
+</dd><dt>BIST</dt><dd>Built-in Self Test.
+</dd><dt>Booting</dt><dd>The loading of the BIOS and kicking in the bootsector to bootstrap an OS loader.
+</dd><dt>Bootstrap</dt><dd>The bootstrap is a small program that loads an operating system. (Usually synonymous with the bootsector/MBR). Also used to describe the process of setting up a compiler on a new system not having one already.
+</dd><dt>Bus Master</dt><dd>Where a device can control the BUS autonomously. Examples of this are the CPU and DMA chips. Other controller chips can also do this (ala some PCI devices, etc).
+</dd><dt>Call Gate</dt><dd>Much like an software driven interrupt, a call gate allows access to other code from a different privilege level.
+</dd><dt>Combicontroller</dt><dd>Combine a Floppy disk controller chip and a Hard disk controller chip and you have a combicontroller. It is not limited to just floppy+hard drive chips. Usually meant to refer to the actual plug-in card where you have two floppy and two hd IDE ports.
+</dd><dt>CPL</dt><dd>Current privilege level. The current <a href="Protected_Mode" title="Protected Mode">ring</a> in which code is being executed.
+</dd><dt>Descriptor</dt><dd>An 8 byte structure that describes a segment/gate/task in protected mode.
+</dd><dt>DMA</dt><dd><a href="DMA" title="DMA" class="mw-redirect">Direct Memory Access</a>. Allows peripheral devices to access main memory directly, bypassing the CPU.
+</dd><dt>DPL</dt><dd>Descriptor privilege level. The privilege needed to use a descriptor in the <a href="GDT" title="GDT" class="mw-redirect">GDT</a> or <a href="IDT" title="IDT" class="mw-redirect">IDT</a>
+</dd><dt>EISA</dt><dd>Extended ISA. Basically extends the ISA bus from being 16-bit to being 32-bit. Designed for 386 + 486 systems.
+</dd><dt>ESDI</dt><dd>Enhanced Small Device Interface. A hard disk controlling mechanism. Successor to the ST506/412 interface. Can handle pumping data out at 24mbits (3mb a second)
+</dd><dt>Exception</dt><dd>CPU error. Usually hardware triggered, but can also be software triggered (some debug breakpoints, etc)
+</dd><dt>Expanded Memory</dt><dd>Memory used by an EMS driver. Located beyond 1mb mark.
+</dd><dt>Extended Memory</dt><dd>Memory used by an XMS driver. Located beyond the 1mb mark. The first 64kb of XMS is known as HMA (High Memory Area).
+</dd><dt>Fault</dt><dd>An exception that is recognized by the processor before the CPU executes the code. eg: trying to access memory swapped out to disk triggers a fault BEFORE the memory is accessed so it can be swapped into memory.
+</dd><dt>FDC</dt><dd>Floppy Disk Controller
+</dd><dt>FIFO</dt><dd>First In First Out. FIFO buffers are common in newer UART chips for communications (16550A)
+</dd><dt>GDT</dt><dd>Global Descriptor Table. This table contains descriptors that are potentially available to all programs in protected mode.
+</dd><dt>HAL</dt><dd>Hardware Abstraction Layer. Used by Windows NT and some other operating systems.
+</dd><dt>HDC</dt><dd>Hard Disk Controller
+</dd><dt>IDE</dt><dd>Intelligent Drive Electronics. Another name for ATA.
+</dd><dt>IDT</dt><dd>Interrupt Descriptor Table. Table of 8-byte entries that describe interrupts, traps, exceptions and fault handlers to the CPU.
+</dd><dt>Interrupt</dt><dd>Interrupts can be software or hardware generated. When an interrupt occurs, the CPU jumps to code assigned to be ran whenever that interrupt is triggered.
+</dd><dt>Interrupt Gate</dt><dd>A descriptor for calling an interrupt.
+</dd><dt>IRQ</dt><dd>Interrupt Request. Hardware signal to the CPU from an external peripheral.
+</dd><dt>ISA</dt><dd>Industry Standard Architecture. The defined bus standard for AT's.
+</dd><dt>LDT</dt><dd>Local Descriptor Table. A table of descriptors that can only be accessed by the task that owns the LDT and none other.
+</dd><dt>MC146818</dt><dd>CMOS RAM and Real Time Clock chip in the AT.
+</dd><dt>MMU</dt><dd>Memory Management Unit. The MMU is often contained within the CPU but can be external to the CPU. eg: old 68k CPU's did not have an MMU but one could be attached externally. The MMU is responsible for doing things like address segmentation translation and paging.
+</dd><dt>PD765</dt><dd>The floppy controller chip in the XT
+</dd><dt>Multitasking</dt><dd>Where the CPU 'appears' to be running several tasks all at the same time.
+</dd><dt>Nibble,Nybble</dt><dd>Group of 4 bits. Half a byte.
+</dd><dt>NMI</dt><dd><a href="Non_Maskable_Interrupt" title="Non Maskable Interrupt">Non Maskable Interrupt</a>. An interrupt request sent to the CPU that must be dealt with immediately.
+</dd><dt>Page</dt><dd>Section of memory that is classed as a single entity. eg: x86 in pmode has pages of 1byte, 4kb and 4mb in size.
+</dd><dt>Page Directory</dt><dd>Holds the entries for the paging table mechanism. Unlike Page Tables, the Page Directory can't be swapped out of memory.
+</dd><dt>PCI</dt><dd>Peripheral Component Interconnect. A Local Bus standard running at 32bits at 33mhz (can go higher). PCI has replaced ISA as the most common bus interface for desktop computers.
+</dd><dt>PCMCIA</dt><dd>Personal Computer Memory Card International Association. Small credit card sized units that plug into portable computer PCMCIA slot and provide things like extra memory, modems, etc.
+</dd><dt>PIC</dt><dd>Programmable Interrupt Controller. The PIC manages hardware interrupts.
+</dd><dt>PIT</dt><dd>Programmable Interval Timer. The PIT is like a stopwatch with periodic alarm...
+</dd><dt>POST</dt><dd>Power On Self Test. Your computer does this when you turn it on in order to assess that its 100% A-OK and can boot up without error.
+</dd><dt>RPL</dt><dd>Requested Privilege Level. Used in <a href="Protected_Mode" title="Protected Mode">Protected Mode</a> to pretend running at a lower privilege level for accessing a descriptor.
+</dd><dt>RTC</dt><dd>Real Time Clock
+</dd><dt>SCSI</dt><dd>Small Computer Systems Interface. A different method from ATA/IDE for connecting devices to your computer.
+</dd><dt>Selector</dt><dd>An index into a descriptor table.
+</dd><dt>ST506/412</dt><dd>Physical interface between a hard disk and computer.
+</dd><dt>Task</dt><dd>AKA a process or job. A task is just another program.
+</dd><dt>Task Switch</dt><dd>Changing from one task to another in an multi-tasking operating system.
+</dd><dt>Trap</dt><dd>An exception which occurs AFTER the error has occurred instead of before (see Fault).
+</dd><dt>TSS</dt><dd>Task State Segment. A data structure that holds the state of the CPU when for that task. Used by multitasking OS.
+</dd><dt>VESA Local Bus (VLB)</dt><dd>Bus system for 486 machines. CPU speed specific.
+</dd></dl>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 1/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1825-0!*!0!*!*!*!* and timestamp 20180121035256 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Chip_Numbers,_Acronyms_and_Things&amp;oldid=17416">http://wiki.osdev.org/index.php?title=Chip_Numbers,_Acronyms_and_Things&amp;oldid=17416</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Resources" title="Category:Resources">Resources</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Chip_Numbers%2C_Acronyms_and_Things" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Chip_Numbers,_Acronyms_and_Things"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:Chip_Numbers,_Acronyms_and_Things"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Definitions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Chip_Numbers,_Acronyms_and_Things" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Chip_Numbers,_Acronyms_and_Things&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Chip_Numbers,_Acronyms_and_Things&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Definitions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the projectskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Chip_Numbers,_Acronyms_and_Things" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Chip_Numbers,_Acronyms_and_Things" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Chip_Numbers,_Acronyms_and_Things&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Chip_Numbers,_Acronyms_and_Things&amp;oldid=17416" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 1 January 2015, at 13:25.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,945 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>

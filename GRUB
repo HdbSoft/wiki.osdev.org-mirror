@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>GRUB - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "GRUB", "wgTitle": "GRUB", "wgCurRevisionId": 20910, "wgArticleId": 2803, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Bootloaders"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-text {line-height: normal;}
+.source-text li, .source-text pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for text
+ * CSS class: source-text, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.text.source-text .de1, .text.source-text .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.text.source-text  {font-family:monospace;}
+.text.source-text .imp {font-weight: bold; color: red;}
+.text.source-text li, .text.source-text .li1 {font-weight: normal; vertical-align:top;}
+.text.source-text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.text.source-text .li2 {font-weight: bold; vertical-align:top;}
+.text.source-text .ln-xtra, .text.source-text li.ln-xtra, .text.source-text div.ln-xtra {background-color: #ffc;}
+.text.source-text span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-GRUB action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">GRUB</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="GRUB#mw-head">navigation</a>,
+					<a href="GRUB#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><b>GRUB</b> is the GNU project's bootloader. The current version 2 series have a more complete feature set than <a href="GRUB_Legacy" title="GRUB Legacy">GRUB 0.97</a> (commonly referred to as "GRUB Legacy"). 
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="GRUB#History"><span class="tocnumber">1</span> <span class="toctext">History</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="GRUB#Features"><span class="tocnumber">2</span> <span class="toctext">Features</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="GRUB#Upgrading_from_GRUB_Legacy"><span class="tocnumber">3</span> <span class="toctext">Upgrading from GRUB Legacy</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="GRUB#ISO_instructions"><span class="tocnumber">3.1</span> <span class="toctext">ISO instructions</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="GRUB#Floppy_instructions"><span class="tocnumber">3.2</span> <span class="toctext">Floppy instructions</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="GRUB#Explanation"><span class="tocnumber">3.2.1</span> <span class="toctext">Explanation</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-7"><a href="GRUB#USB_instructions"><span class="tocnumber">3.3</span> <span class="toctext">USB instructions</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="GRUB#Disk_image_instructions"><span class="tocnumber">3.4</span> <span class="toctext">Disk image instructions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="GRUB#HDD_Image_Instructions_for_OS_X_users"><span class="tocnumber">4</span> <span class="toctext">HDD Image Instructions for OS X users</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="GRUB#Additional_useful_options"><span class="tocnumber">4.1</span> <span class="toctext">Additional useful options</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="GRUB#Multiboot"><span class="tocnumber">5</span> <span class="toctext">Multiboot</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="GRUB#Header"><span class="tocnumber">5.1</span> <span class="toctext">Header</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="GRUB#Installing_GRUB_2_on_OS_X"><span class="tocnumber">6</span> <span class="toctext">Installing GRUB 2 on OS X</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="GRUB#GRUB_for_UEFI"><span class="tocnumber">7</span> <span class="toctext">GRUB for UEFI</span></a>
+<ul>
+<li class="toclevel-2 tocsection-15"><a href="GRUB#Compiling_GRUB"><span class="tocnumber">7.1</span> <span class="toctext">Compiling GRUB</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="GRUB#Building_a_GRUB_UEFI_binary_.28BOOTX64.EFI.29"><span class="tocnumber">7.2</span> <span class="toctext">Building a GRUB UEFI binary (BOOTX64.EFI)</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="GRUB#Blessing_the_binary_on_macOS"><span class="tocnumber">7.3</span> <span class="toctext">Blessing the binary on macOS</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="GRUB#See_Also"><span class="tocnumber">8</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-19"><a href="GRUB#Articles"><span class="tocnumber">8.1</span> <span class="toctext">Articles</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="GRUB#External_Links"><span class="tocnumber">8.2</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="History"> History </span></h2>
+<p>GRUB version 2 started its life as the <a rel="nofollow" class="external text" href="http://www.nongnu.org/pupa/">PUPA</a> (note the pun) research project and was rewritten from the ground up. Since then GRUB 2 (actually at time of update 1.97) has grown more stable and even hobby operating systems use of the new bootloader instead of GRUB Legacy.
+</p>
+<h2> <span class="mw-headline" id="Features"> Features </span></h2>
+<ul><li> Basic scripting support
+</li><li> GUI (better bootsplash support, custom colors, custom themes, ...)
+</li><li> Memory management
+</li><li> Cleaner design
+</li><li> Better portability
+</li><li> Internationalization
+</li><li> Rescue mode
+</li></ul>
+<h2> <span class="mw-headline" id="Upgrading_from_GRUB_Legacy"> Upgrading from GRUB Legacy </span></h2>
+<p><i>WARNING: These steps have not been tested very well yet. Use at your own risk!</i>
+</p><p>Since modern GRUB 2 is very different from GRUB Legacy, the directions for getting your kernel up and running are different. Modern GRUB differs from GRUB Legacy in that to implement all but the most basic functionality, the user must load so-called "modules": little bits of code that add components (e.g. a different file system or a VGA font). This section gives you an overview of the process you need to go through when you want to have GRUB 2 load your kernel. It's actually rather simple to create a GRUB 2 image (assuming you have GRUB 2 either built or installed):
+</p>
+<h3> <span class="mw-headline" id="ISO_instructions"> ISO instructions </span></h3>
+<p>There have been a lot of tries to make Grub2 work good with ISOs, but mostly failed. The only combination of commands that seems to work is the following.
+</p><p>First create a directory tree called "iso", where you put your kernel (and any other needed files) somewhere. Then in the boot/grub subdirectory create the grub.cfg file which is your configuration.
+</p><p>Now run:
+</p>
+<pre>grub-mkrescue -o bootable.iso iso
+</pre>
+<p>Be sure that your grub.cfg is syntactically correct. A common mistake is to put the menuentry brace on newline. It <b>must</b> be like:
+</p>
+<pre>menuentry "Place your os name here" {
+}
+</pre>
+<p>grub-mkrescue depends on program <b>xorriso</b> with version <b>0.5.6 or higher</b>.
+</p><p>If you cannot get it as binary (possibly from a package named "libisoburn")
+then get the all-in-one source tarball from <a rel="nofollow" class="external text" href="http://www.gnu.org/software/xorriso/#download">GNU xorriso homepage</a>.
+GNU xorriso can be used where it gets built, without further installation:
+</p>
+<pre> grub-mkrescue --xorriso=/...full.path.../xorriso/xorriso -o bootable.iso iso
+</pre>
+<h3> <span class="mw-headline" id="Floppy_instructions"> Floppy instructions </span></h3>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">mkdir</span> tmp
+grub-mkimage <span class="re5">-p</span> <span class="sy0">/</span>boot <span class="re5">-o</span> tmp<span class="sy0">/</span>core.img multiboot <span class="kw2">sh</span> fat <span class="co0"># This should work... I hope&#160;:D</span></pre></div></div>
+<h4> <span class="mw-headline" id="Explanation"> Explanation </span></h4>
+<p>Let's go through those <tt>grub-mkimage</tt> options:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td> <b>-p</b>
+</td>
+<td> By default, GRUB 2 looks in <tt>/boot/grub</tt> for its configuration file. <b>-p</b> changes this.
+</td></tr>
+<tr>
+<td> <b>-o</b>
+</td>
+<td> Like so many other GNU tools, <tt>grub-mkimage</tt> uses <b>-o</b> to set the output file. By default, it's <tt>stdout</tt>.
+</td></tr>
+<tr>
+<td> <b>multiboot</b>
+</td>
+<td> This module is required to load multiboot-compliant kernels.
+</td></tr>
+<tr>
+<td> <b>biosdisk</b>
+</td>
+<td> This module is required for GRUB 2 to be able to boot from a LiveCD.
+</td></tr>
+<tr>
+<td> <b>iso9660/fat</b>
+</td>
+<td> Allows GRUB 2 to look on the image for different files.
+</td></tr>
+<tr>
+<td><b>sh</b>
+</td>
+<td> This module allows GRUB to parse the configuration file.
+</td></tr></table>
+<p>GRUB 2, like GRUB Legacy, needs a configuration file to find your kernel. In GRUB Legacy it's called <b>menu.lst</b>, but in GRUB2, it's called <b>grub.cfg</b>. The syntax for the configuration file is also a bit different.
+</p><p>Here's a sample configuration file (NOTE: This file should be placed into the <tt>/boot/grub</tt> folder of your disk image, and be named <b>grub.cfg</b>):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw1">set</span> <span class="re2">timeout</span>=<span class="nu0">15</span>
+<span class="kw1">set</span> <span class="re2">default</span>=<span class="nu0">0</span> <span class="co0"># Set the default menu entry</span>
+&#160;
+menuentry <span class="st0">&quot;OS Name&quot;</span> <span class="br0">&#123;</span>
+   multiboot <span class="sy0">/</span>boot<span class="sy0">/</span>kernel-file   <span class="co0"># The multiboot command replaces the kernel command</span>
+   boot
+<span class="br0">&#125;</span></pre></div></div>
+<p>That's basically it. Copy these files to a disk image, pop it in an emulator, and you're done!
+</p><p>Double check that you put the brace on the same line of "menuentry". It can't be on a new line. This is not C.
+</p>
+<h3> <span class="mw-headline" id="USB_instructions"> USB instructions </span></h3>
+<p>Fewer and fewer systems have a floppy disc controller these days, but USB ports are found on all. Modern BIOSes can boot from a USB device, usually by pressing some special key during startup.
+</p><p>Putting GRUB 2 on a bootable USB storage device is a nice way to experiment with your OS on different computers. Here's how you set this up (using Linux):
+</p><p>1. Create a FAT32-formatted USB disk, without partitions:
+</p><p><b>Warning: the following command uses superuser privileges (sudo). E.g. just typing the wrong character for X could cause severe troubles for your current system</b>
+</p>
+<pre>sudo mkfs.vfat -F 32 -n YourLabel -I /dev/sdX</pre> (where sdX is your USB device)
+<p>The "-I" option is needed because we are targeting a partition-less device
+</p><p>2. Remove your USB device, and plug it back in. The auto-mounter on your OS should detect it now.
+</p><p>3. Invoke grub-install (on some systems this command is called grub2-install, located under /usr/sbin or /usr/local/sbin)
+</p>
+<pre>sudo grub-install --root-directory=/media/YourLabel --no-floppy --recheck --force /dev/sdX</pre>
+<p>It is important to do this as root (or sudo), else the generated device.map listing available boot devices can be empty.
+/media/YourLabel is the mount point under Fedora 16, it may be different for other distributions.
+</p><p>4. Create a grub.cfg for your kernel (see above), and copy it to your new bootable USB disk
+</p>
+<h3> <span class="mw-headline" id="Disk_image_instructions"> Disk image instructions </span></h3>
+<p>Hobby operating systems don't have to use real devices when running on virtual machines (although it may be, and it usually is faster). Creating bootable GRUB disk image is similar to installing it on USB devices, but here you're working with image itself and partition device at once. 
+</p><p>1. Create new disk image file
+</p>
+<pre>$ dd if=/dev/zero of=disk.img bs=512 count=131072
+131072+0 records in
+131072+0 records out
+67108864 bytes (67 MB) copied, 0.349436 s, 192 MB/s
+</pre>
+<p>2. Create new DOS partition table with bootable entry for your filesystem
+</p>
+<pre>$ fdisk disk.img</pre>
+<p>Add new partition, starting at 1MB (2048th sector). This is more space than GRUB actually needs.
+</p>
+<pre>
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1): 1
+First sector (2048-131071, default 2048): 
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-131071, default 131071): 
+Using default value 131071
+</pre>
+<p>Make it bootable
+</p>
+<pre>
+Command (m for help): a 
+Partition number (1-4): 1
+</pre>
+<p>Write the new partition table to disk
+</p>
+<pre>
+Command (m for help): w
+The partition table has been altered!
+
+Syncing disks.
+</pre>
+<p>3. Setup two loop devices. One will be used for writing GRUB and its additional codes to MBR, and the second will be used for mounting filesystem of your operating system. 
+</p>
+<pre>
+$ sudo losetup /dev/loop0 disk.img
+$ sudo losetup /dev/loop1 disk.img -o 1048576
+</pre>
+<p><i>-o</i> option defines offset from start of the file. Number <i>1048576</i> is actually <i>1024^2 = 1MB</i> and that's the start of your partition.
+</p><p>4. Format your partition
+You can simply use [<a rel="nofollow" class="external text" href="http://www.gnu.org/software/grub/manual/grub.html#Features">any supported filesystem</a>] like ext2 or FAT32.
+</p>
+<pre>$ sudo mke2fs /dev/loop1</pre>
+<pre>$ sudo mkdosfs -F32 -f 2 /dev/loop1</pre>
+<p>5. Mount your newly formatted partition
+</p>
+<pre>$ sudo mount /dev/loop1 /mnt</pre>
+<p>Note that if you tried to mount your first loop device which doesn't have any offset set, you would be requested to specify filesystem and even if you did it, you wouldn't get the expected result.
+</p><p>7. Install GRUB using <i>grub-install</i>
+</p>
+<pre>sudo grub-install --root-directory=/mnt --no-floppy --modules=&quot;normal part_msdos ext2 multiboot biosdev&quot; /dev/loop0</pre>
+<p>If you mistyped <i>/dev/loop1</i> (pointing on your partition) instead of <i>/dev/loop0</i> (pointing on your MBR), you would receive message that <i>grub-install</i> can't use 'embedding' (because there's no space for it) and that it would like to use 'block lists', which are not recomended.
+</p><p>Don't forget to flush the filesystem buffers when manipulating with files on mounted disk image. On a Unix-like system, this can be simply done by executing the <tt>sync</tt> program in your shell.
+</p>
+<h2> <span class="mw-headline" id="HDD_Image_Instructions_for_OS_X_users"> HDD Image Instructions for OS X users</span></h2>
+<p>It might be useful to create an image file for a HDD; The following instructions help you create a HDD with an MBR partition map.
+Based on information from &lt;palk&gt; on #osdev, it is slightly more complicated to create a HDD image than you'd expect.
+</p><p>This information might not be applicable to Linux users, who will most probably want to use a loopback device. This is for developers on OS X, which doesn't
+have a loopback device and has a finicky image mounter.
+</p><p>1. First, create a blank, raw image with DD, with the required size. Here, I'll make a 80MB image -- 163840 sectors of 512 bytes.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">dd</span> <span class="re2">if</span>=<span class="sy0">/</span>dev<span class="sy0">/</span>zero <span class="re2">of</span>=disk.img <span class="re2">count</span>=<span class="nu0">163840</span> <span class="re2">bs</span>=<span class="nu0">512</span></pre></div></div>
+<p>2. Next, calculate the CHS values for the disk and have them at hand. TODO: Explain this.
+</p>
+<pre>   Here, it's a 80MB disk, so the CHS values are 78, 32 and 63 respectively.
+</pre>
+<p>3. Fire up FDISK (or your tool of choice) -- I'm using the OS X version here, so commands may differ. The concept is essentially identical.
+</p><p>What will show on your screen (in OS X anyway) is on the left, what you enter is on the right.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">fdisk <span class="re5">-e</span> disk.img
+&#160;
+&#160;
+The signature <span class="kw1">for</span> this MBR is invalid.
+Would you like to initialize the partition table? <span class="br0">&#91;</span>y<span class="br0">&#93;</span>           Yes
+fdisk:<span class="sy0">*</span><span class="nu0">1</span><span class="sy0">&gt;</span>                                                       disk
+Disk: disk.img	geometry: <span class="nu0">650</span><span class="sy0">/</span><span class="nu0">4</span><span class="sy0">/</span><span class="nu0">63</span> <span class="br0">&#91;</span><span class="nu0">16340</span> sectors<span class="br0">&#93;</span>
+Change disk geometry? <span class="br0">&#91;</span>n<span class="br0">&#93;</span>                                       No
+&#160;
+&#160;
+&#160;
+fdisk:<span class="sy0">*</span><span class="nu0">1</span><span class="sy0">&gt;</span>                                                       edit <span class="nu0">1</span>
+Partition <span class="kw2">id</span> <span class="br0">&#40;</span><span class="st_h">'0'</span> to disable<span class="br0">&#41;</span>  <span class="br0">&#91;</span><span class="nu0">0</span> - FF<span class="br0">&#93;</span>: <span class="br0">&#91;</span>B<span class="br0">&#93;</span> <span class="br0">&#40;</span>? <span class="kw1">for</span> <span class="kw3">help</span><span class="br0">&#41;</span>       0B
+Do you wish to edit <span class="kw1">in</span> CHS mode? <span class="br0">&#91;</span>n<span class="br0">&#93;</span>                            No
+Partition offset <span class="br0">&#91;</span><span class="nu0">0</span> - <span class="nu0">163840</span><span class="br0">&#93;</span>: <span class="br0">&#91;</span><span class="nu0">63</span><span class="br0">&#93;</span>                             <span class="nu0">2047</span>
+Partition <span class="kw2">size</span> <span class="br0">&#91;</span><span class="nu0">1</span> - <span class="nu0">161793</span><span class="br0">&#93;</span>: <span class="br0">&#91;</span><span class="nu0">161793</span><span class="br0">&#93;</span>                           <span class="sy0">&lt;</span>Enter<span class="sy0">&gt;</span>
+&#160;
+&#160;
+fdisk:<span class="sy0">*</span><span class="nu0">1</span><span class="sy0">&gt;</span>                                                       <span class="kw2">write</span>
+fdisk:<span class="sy0">*</span><span class="nu0">1</span><span class="sy0">&gt;</span>                                                       quit</pre></div></div>
+<p>4. Now that the MBR Partition Table is initialised, you'll want to make a Filesystem on the disk. But first.
+</p>
+<pre>   Here, we separate the MBR bit, and the actual FS bit.
+</pre>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">dd</span> <span class="re2">if</span>=disk.img <span class="re2">of</span>=mbr.img <span class="re2">bs</span>=<span class="nu0">512</span> <span class="re2">count</span>=<span class="nu0">2047</span>
+<span class="kw2">dd</span> <span class="re2">if</span>=disk.img <span class="re2">of</span>=fs.img <span class="re2">bs</span>=<span class="nu0">512</span> <span class="re2">skip</span>=<span class="nu0">2047</span></pre></div></div>
+<p>5. Because we're on OS X, we need to attach the disk image first, without actually mounting it.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">hdiutil attach <span class="re5">-nomount</span> fs.img</pre></div></div>
+<p>6. Use 'diskutil list' to find out which device your image is, use that below.
+</p><p>7. Now, make a FAT12/16/32 filesystem on the FS.img disk. Remember, use FS.img -- not disk.img
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">newfs_msdos <span class="re5">-F</span> <span class="nu0">32</span> <span class="sy0">/</span>dev<span class="sy0">/</span>diskX</pre></div></div>
+<p>8. Now you'll want to unmount it, then recombine the two images, then install GRUB.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">hdiutil detach <span class="sy0">/</span>dev<span class="sy0">/</span>diskX
+<span class="kw2">cat</span> mbr.img fs.img <span class="sy0">&gt;</span> disk.img
+&#160;
+hdiutil attach disk.img
+<span class="co0"># note the mount point here (/Volumes/NO NAME, probably)</span>
+&#160;
+grub-install <span class="re5">--modules</span>=<span class="st0">&quot;part_msdos biosdisk fat multiboot configfile&quot;</span> <span class="re5">--root-directory</span>=<span class="st0">&quot;/Volumes/NO NAME&quot;</span> disk.img
+Installation finished. No error reported.</pre></div></div>
+<p>And there it is! You know have a disk.img, that will have GRUB 2 installed, ready to go. It should be mountable in OS X simply by double clicking (or with the mount command).
+Enjoy!
+</p>
+<h3> <span class="mw-headline" id="Additional_useful_options"> Additional useful options </span></h3>
+<p>Whatever device you are using, you may want to have a PC partition table and create a partition you format in one of the filesystems supported by GRUB. If you do, be sure to add the following option the grub-install arguments:
+</p>
+<pre>--modules="part_msdos"
+</pre>
+<p>In general, if GRUB 2 happens to fail to do what you want and you suspect that it needs some missing functionality, just try to add a module name you believe has the functionality you need to the --modules argument. The module files generally are in /boot/grub/i386-pc/.
+</p>
+<h2> <span class="mw-headline" id="Multiboot"> Multiboot </span></h2>
+<p>Some versions of GRUB 2 like to put Multiboot modules in relatively high physical memory addresses, in contrast to GRUB-legacy which loaded them into low memory.  Be careful when making your kernel work with GRUB 2 that it is not making any assumptions about where the Multiboot modules will appear.
+</p><p>When your kernel gets control, the machine state is defined as follows: <a rel="nofollow" class="external text" href="http://www.gnu.org/software/grub/manual/multiboot/html_node/Machine-state.html">Multiboot machine state</a>. Your code should have minimal dependency on this initial state; for example, define your own GDT instead of relying on the GDT setup by GRUB.
+</p>
+<h3> <span class="mw-headline" id="Header"> Header </span></h3>
+<p>As the GRUB 2 manual puts it:
+</p>
+<blockquote style="margin-bottom: 10px; padding: 5px 10px; margin-left: 15px; border-left: 10px solid #eeeeee;">
+The primary requirement for GRUB is that it be compliant with the <i>Multiboot Specification</i>.
+</blockquote>
+<p>But the Multiboot header as used by older versions of GRUB 2 (field is present in GRUB 1.99 and newer) did <i>not</i> include the <i>header_length</i> field that is specified in the <a rel="nofollow" class="external text" href="http://nongnu.askapache.com/grub/phcoder/multiboot.pdf">Multiboot 1.6 specification</a>.
+</p><p>GRUB 2 also supports the old <a rel="nofollow" class="external text" href="https://www.gnu.org/software/grub/manual/multiboot/multiboot.html">Multiboot 0.6.96 specification</a>. It is possible to include both headers.
+</p>
+<h2> <span class="mw-headline" id="Installing_GRUB_2_on_OS_X"> Installing GRUB 2 on OS X </span></h2>
+<p>The installation of GRUB 2 on OS X is a little tricky. The latest released version 2.00 (as of 7th of October, 2014) doesn't seem to work with any configuration. The developer team fixed this in the newer revisions.
+</p><p><b>Important:</b> To build GRUB 2 so that it can produce a bootloader for your output target you need to have a compiler for that target. So for example, if you want a bootloader for i386-elf (as suggested in the bare bones) you'll need Binutils + a compiler for that target. This is required on OS X because the built-in LLVM doesn't know how to make i386-elf binaries. So you can either <a rel="nofollow" class="external text" href="GCC_Cross-Compiler">build a cross-compiler</a> or <a rel="nofollow" class="external text" href="OS_Specific_Toolchain">create an OS-specific toolchain</a> (recommended) for your target platform.
+<b>You will need the cross-versions of GCC, objcopy, strip, nm and ranlib in step 4.</b>
+</p><p><b>1.</b> Clone the developer version of the sources:
+</p>
+ <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1"><span class="kw2">git clone</span> git:<span class="sy0">//</span>git.savannah.gnu.org<span class="sy0">/</span>grub.git</pre></div></div>
+<p>(This was tested on revision: 77063f4cb672f423272db7e21ca448cf3de98dcf)
+</p><p><b>2.</b> A tool named <b>objconv</b> is required, get it from:
+</p>
+<pre><a rel="nofollow" class="external free" href="https://github.com/vertis/objconv">https://github.com/vertis/objconv</a>
+</pre>
+<p>Download sources, compile (see website for details) and make available in your PATH.
+</p><p><b>3.</b> Run "autogen.sh" in the GRUB sources folder
+</p><p><b>4.</b> Create a seperate build directory, switch to it, and run GRUB's configure script <i>(insert your target-specific tools!)</i>:
+</p>
+<pre>../grub/configure --disable-werror TARGET_CC=i386-elf-gcc TARGET_OBJCOPY=i386-elf-objcopy \
+TARGET_STRIP=i386-elf-strip TARGET_NM=i386-elf-nm TARGET_RANLIB=i386-elf-ranlib --target=i386-elf
+</pre>
+<p><b>5.</b> Run "make" and "make install"
+</p><p>Now you have a working GRUB 2 that has the required files to build an image that boots on i386 platforms.
+</p>
+<h2> <span class="mw-headline" id="GRUB_for_UEFI">GRUB for UEFI</span></h2>
+<h3> <span class="mw-headline" id="Compiling_GRUB">Compiling GRUB</span></h3>
+<p>Older GRUB versions are riddled with nasty bugs. As this probably includes the version from your package management, you should be compiling GRUB from source. As we're compiling for UEFI, you should pass the appropriate flags to configure. An example invocation might look something like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">../grub-2.02~rc2/configure --prefix=&quot;$HOME/opt/grub&quot; --target=x86_64 --with-platform=efi</pre></div></div>
+<p>After completing the build, GRUB refused to do anything as it was missing a font file. To fix this, run
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">bin/grub-mkfont -o share/grub/unicode.pf2 /usr/share/fonts/truetype/unifont/unifont.ttf</pre></div></div>
+<p>GRUB might warn you about share/locale/ missing. To solution is to create the missing directory.
+</p>
+<h3> <span class="mw-headline" id="Building_a_GRUB_UEFI_binary_.28BOOTX64.EFI.29">Building a GRUB UEFI binary (BOOTX64.EFI)</span></h3>
+<p>This method builds a standalone GRUB binary you can copy to a FAT partition. However, note that some UEFI implementations assume that it is located at <code>/EFI/BOOT/BOOTX64.EFI</code> for x86_64 platforms.
+</p><p>Generally, all compiled modules are included in this binary; if you want to cut down on its size, you can specify what modules to include.
+</p><p>This method uses two separate configuration files; this is needed as all GRUB data is located within the binary, but we'll be working around that. The binary contains a memdisk, which also serves as the prefix. As far as I'm aware, there's no way of working around this fact directly. We can, however, use the memdisk grub.cfg to load a configuration file from the disk. This way, we don't have to recreate the binary for every configuration change.
+</p><p>Start off with creating the memdisk grub.cfg. I saved it at build/grub.cfg (we'll need this path later on):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">insmod part_msdos
+configfile (hd0,msdos1)/boot/grub/grub.cfg</pre></div></div>
+<p>All this does is loading the module for reading the disk partitions (line 1) and loading the configuration file from the disk (line 2). Note that it doesn't have to be located at /boot/grub/grub.cfg; you can change this path on the disk to whatever you like, just remember to apply the changes to the memdisk grub.cfg.
+</p><p>The second grub.cfg (the one on the disk) is pretty much up to you, except that you have to load the part_msdos module and set the root (which by default is memdisk):
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">insmod part_msdos
+set root=(hd0,msdos1)</pre></div></div>
+<p>Add your regular GRUB2 configuration below the <code>set root</code> line.
+</p><p>Finally, all that's left is to create the binary. Note that you have to specify what file to include at what path in the memdisk:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">bin/grub-mkstandalone -O x86_64-efi -o BOOTX64.EFI &quot;boot/grub/grub.cfg=build/grub.cfg&quot;</pre></div></div>
+<h3> <span class="mw-headline" id="Blessing_the_binary_on_macOS">Blessing the binary on macOS</span></h3>
+<p>Macs require bootable binaries to be 'blessed' by a utility:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="text source-text"><pre class="de1">bless --verbose --folder=/Volumes/EFI --file=/Volumes/EFI/EFI/BOOT/BOOTX64.EFI --setBoot</pre></div></div>
+<h2> <span class="mw-headline" id="See_Also"> See Also </span></h2>
+<h3> <span class="mw-headline" id="Articles"> Articles </span></h3>
+<ul><li> <strong class="selflink">GRUB Legacy</strong>
+</li><li> <a href="Bootable_El-Torito_CD_with_GRUB_Legacy" title="Bootable El-Torito CD with GRUB Legacy">Bootable El-Torito CD with GRUB Legacy</a>
+</li><li> <a href="Multiboot" title="Multiboot">Multiboot</a>
+</li></ul>
+<h3> <span class="mw-headline" id="External_Links"> External Links </span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://www.gnu.org/software/grub/">GRUB 2 Homepage</a>
+</li><li> <a rel="nofollow" class="external text" href="http://grub.enbug.org/">GRUB 2 Wiki</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 365/1000000
+Post-expand include size: 383/2097152 bytes
+Template argument size: 94/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2803-0!*!0!!en!*!* and timestamp 20180121035624 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=GRUB&amp;oldid=20910">http://wiki.osdev.org/index.php?title=GRUB&amp;oldid=20910</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Bootloaders" title="Category:Bootloaders">Bootloaders</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=GRUB" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="GRUB"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk"><span><a href="Talk:GRUB"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="GRUB#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="GRUB" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=GRUB&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=GRUB&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="GRUB#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a>skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/GRUB" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/GRUB" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=GRUB&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=GRUB&amp;oldid=20910" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>In other languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-de"><a href="http://www.lowlevel.eu/wiki/Grand_Unified_Bootloader" title="Grand Unified Bootloader">Deutsch</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 15 June 2017, at 14:30.</li>
+											<li id="footer-info-viewcount">This page has been accessed 121,824 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.038 secs. -->
+	</body>
+</html>

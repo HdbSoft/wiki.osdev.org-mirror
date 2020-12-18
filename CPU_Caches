@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>CPU Caches - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "CPU_Caches", "wgTitle": "CPU Caches", "wgCurRevisionId": 19437, "wgArticleId": 2699, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Memory management"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-CPU_Caches action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">CPU Caches</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="CPU_Caches#mw-head">navigation</a>,
+					<a href="CPU_Caches#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="CPU_Caches#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="CPU_Caches#Caches_In_Systems_With_Multiple_CPUs"><span class="tocnumber">2</span> <span class="toctext">Caches In Systems With Multiple CPUs</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="CPU_Caches#Cache_Organization"><span class="tocnumber">3</span> <span class="toctext">Cache Organization</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="CPU_Caches#Optimizing_Cache_Efficiency"><span class="tocnumber">4</span> <span class="toctext">Optimizing Cache Efficiency</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="CPU_Caches#Cache_Blocking"><span class="tocnumber">4.1</span> <span class="toctext">Cache Blocking</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="CPU_Caches#Page_Colouring"><span class="tocnumber">4.2</span> <span class="toctext">Page Colouring</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="CPU_Caches#Preventing_Unnecessary_Caching"><span class="tocnumber">4.3</span> <span class="toctext">Preventing Unnecessary Caching</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="CPU_Caches#Prefetching"><span class="tocnumber">4.4</span> <span class="toctext">Prefetching</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="CPU_Caches#Scheduling_With_Multiple_CPUs"><span class="tocnumber">4.5</span> <span class="toctext">Scheduling With Multiple CPUs</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>Originally, memory was as fast as CPUs. Over time CPUs got faster and faster. Memory got faster too, but didn't keep up with the increasing speed of CPUs, which means that CPUs needed to spend more and more time waiting for data to come from RAM (which can have a serious effect on performance).
+</p><p>As a work-around for the speed difference between CPUs and RAM, CPU manufacturers started including caches. The basic idea is to have an small area of RAM that the CPU can access really fast, that's used to store a copy of data in RAM (to reduce the time the CPU spends waiting to access slower RAM).
+</p><p>Over time the difference in speed between CPUs and RAM got even worse, so CPU manufacturers increased the size of the caches; but (due to limitations in semiconductor design) the larger a cache is the slower it is (or, the higher the latency of the cache is). To improve performance more, CPU manufacturers started having large caches with smaller/faster caches on top.
+</p><p>For a current/modern CPU there can be up to 3 layers of caches - extremely fast but relatively small "layer 1" (or L1) caches close to the CPU, fairly fast medium sized "layer 2" (or L2) caches, then relatively large "layer 3" (or L3) caches close to the system bus or RAM.
+</p><p>Of course the amount of RAM used in computers has grown too; and even a very large L3 cache can't cache everything. For example, a computer might have 4 GiB of RAM but only 12 MiB of L3 cache. To improve performance CPU manufacturers want to cache the RAM that is most likely to be used in future. However, it's extremely difficult to predict the future, so CPU manufacturers usually use a "least recently used" algorithm for caches, as something that was used recently is (usually) likely to be used again.
+</p><p>Fortunately, except for a few cases (testing for RAM faults, RAM bandwidth benchmarks) a programmer doesn't have to worry about the caches. However, caches play an important role in the overall performance of a system, and it is possible for programmers to get significant performance improvements by paying attention to cache efficiency.
+</p><p>In general the "least recently used" algorithm can work quite well, but there are cases where it causes poor efficiency. One example of this is called "cache pollution", where the CPU accesses a lot of data that won't be needed in the future; which causes data that is more likely to be needed soon to be pushed out of the cache to make room for the (more recently used) data that won't be needed soon. Another example is called "cache thrashing", where you repeatedly access an amount of data that is larger than the size of the cache (e.g. repeatedly accessing each item in a 10 MiB array when the CPUs cache is only 8 MiB). In this case, even though a piece of data will be used again it will be pushed out of the cache by more recent data accesses before it's used again.
+</p><p>There's several techniques for managing these cache efficiency problems. One technique CPU manufacturers use is to have separate caches for separate things. For example, a CPU might have an L1 cache for instructions and another L1 cache for data, so that problems with L1 data cache efficiency don't effect L1 instruction cache efficiency. This also helps with the "larger caches have worse latency" problem.
+</p><p>Modern CPUs also have instructions that programmers can use to help avoid "least recently used" cache efficiency problems; including instructions that can be used to prefetch data into the caches (useful when you know that data will be used soon), instructions to explicitly remove/flush data from the cache (useful when you know data that you've used recently won't be used again soon), and instructions to write data directly to RAM and bypass the cache (which is similar to writing data normally and then flushing that data from the cache).
+</p><p>There are situations where software needs to process a large amount of data, but can process this data in blocks (for example, decompression often falls into this category). In these cases, it can be desirable (to avoid "cache thrashing") to detect how large the caches are, and to make sure that each block fits inside the cache. For example, if the CPU's cache is 4 MiB and you want to process 100 MiB of data, then processing 50 blocks that are 2 MiB each can give a lot better performance than processing 20 blocks that are 5 MiB each. For this reason, it can be a good idea for an OS to detect the size of CPU caches and provide a way for software (e.g. applications) to easily obtain this information.
+</p>
+<h2> <span class="mw-headline" id="Caches_In_Systems_With_Multiple_CPUs"> Caches In Systems With Multiple CPUs </span></h2>
+<p>When there's multiple CPUs directly connected to memory (without caches), everything works correctly (but slowly). When there's multiple CPUs with their own caches connected to memory, then data stored in RAM can be stale/obsolete data because the current version of that data may still be in one of the CPU's caches. In most systems caches are meant to be transparent (e.g. it's meant to be safe for software to forget that caching is being done), and having caches in each CPU creates problems because it's no longer safe for programmers to forget that caching is being done. The hardware in most computers use special protocols to ensure that these problems don't happen - for example, when a CPU accesses memory it accesses the current version of the data regardless of whether the current version of the data is in RAM or in another CPU's cache. This is called "cache coherency".
+</p><p>Some computer systems are not cache coherent; and it's the programmers responsibility to avoid accessing stale data. In general these systems can be a nightmare to program for, and it can be easier to treat each CPU like a separate system (e.g. pretend that a computer with 2 GiB of RAM and 2 CPUs is actually 2 separate computers with 1 GiB of RAM and 1 CPU each). Fortunately non-cache coherent systems are rare, especially for desktop/server computers.
+</p><p>For systems with multiple CPUs (especially for multi-core), it's possible for several CPUs to share the same caches. For example, for a computer with a pair of quad core CPUs you might have a total of 8 CPUs, where each CPU has it's own L1 caches, pairs of CPUs share L2 caches, and 4 CPUs share each L3 cache. This can complicate "cache efficiency" optimizations for operating system software (e.g. in schedulers and memory management) and applications.
+</p>
+<h2> <span class="mw-headline" id="Cache_Organization"> Cache Organization </span></h2>
+<p>Normally a cache is split up into many cache lines, where a cache line is the minimum amount of data that can be stored in the cache. For example, a 4 MiB cache might have 65536 entries to hold up to 65536 cache lines, where each cache line in 64 bytes. When data is transferred between the cache and RAM (or between the cache at one level and another cache at a different level) all 64 bytes are transferred. For a given cache line size, a larger cache has more entries.
+</p><p>The CPU needs to be able to find an entry in a cache that corresponds to a specific address. To do this each entry has a "tag", which says what is in that entry (e.g. if the entry is being used or not, and if it is being used which address the data corresponds to). For a very simple cache, this means that the CPU needs to look at every single tag just to find some data in the cache. This has obvious problems (it's slow).
+</p><p>To make the cache faster, CPU manufacturers tend to use sets of cache lines, where the data for a specific address can only be in one place in each set. The number of sets is called "associativity", and a cache designed like this is called an "N-way set associative cache". For example, a 4 MiB cache that is 4-way set associative would have 1 MiB per set, the data for a specific address can only be in one of 4 places, and the CPU only needs to look at 4 tags to find some data in the cache.
+</p><p>To work out which tags to look at in each set of cache lines, the CPU uses some of the bits of the address. For example, for the address 0x12345678, with 64 bytes per cache line the lowest 6 bits don't matter, and (if each set is 1 MiB) the next 14 bits determine the position in each set that the data could be. This also means that for a 32-bit address the tag only needs to store the highest 12 bits of the address (which helps to make the tag smaller).
+</p><p>A cache where the data for any address can be anywhere in the cache (the simple/slower cache mentioned above) is called "fully associative", which is effectively the same as having infinite associativity. A cache where the data for any address can only be in one place in the cache is called "direct mapped", which is effectively the same as "1-way associative".
+</p><p>For a direct mapped cache and for caches with low associativity, information in the cache can be found faster because there's less places in the cache that it could be; but because there's a limited number of places it also increases the chance of cache misses. For example, with 1 MiB direct mapped cache, data from the addresses 0x00000000, 0x00100000, 0x00200000, 0x00300000, etc must share the same place in the cache; and data from 0x00000000 will cause data from 0x00100000 to be evicted from the cache, even if other entries in the cache are unused, and even if the data from 0x00100000 is used frequently. This can cause excessive cache misses. Therefore the design of a cache is a compromise between low associativity (fast lookup times) and high associativity (reduced cache misses).
+</p><p>For most modern CPUs, caches are either 2-way associative, 4-way associative or 8-way associative. For more associativity, the overhead of finding entries in the cache outweigh the benefits of slightly less chance of cache misses.
+</p>
+<h2> <span class="mw-headline" id="Optimizing_Cache_Efficiency"> Optimizing Cache Efficiency </span></h2>
+<p>For modern computers, CPUs are very fast and RAM is only "fast". Caches help performance a lot if software uses the cache efficiently, but if software doesn't use the caches efficiently then caches won't help performance much. There are several techniques that can be used when trying to use caches more efficiently.
+</p>
+<h3> <span class="mw-headline" id="Cache_Blocking"> Cache Blocking </span></h3>
+<p>The first technique is already mentioned in the introduction - if you can, split large amounts of data up into smaller blocks that fit inside the cache to avoid cache thrashing. For this to work you need to know how large the cache/s are and how many CPUs are sharing the cache/s.
+</p>
+<h3> <span class="mw-headline" id="Page_Colouring"> Page Colouring </span></h3>
+<p>The next technique is called "page colouring" or "cache colouring". Systems that use paging can choose pages to minimize the chance of cache misses caused by low associativity. Consider a 4 MiB 4-way associative cache, where a process is extremely unlucky and every page it's using happens to correspond to the same locations in each set in the cache. In this case the process would only be able to use 16 KiB of the cache and the remaining 99.6% of the cache would be wasted. Of course this is an extremely unlikely worst case used for illustration purposes - in practice it's likely that this problem will only cause a small decrease in cache efficiency. The point is that without page colouring an OS relies on probability and hopes that cache efficiency isn't too badly effected. Also note that this can cause non-deterministic performance (e.g. how fast software runs depends on luck), which may be undesirable (especially in real time systems).
+</p><p>The idea behind page colouring is to make sure that pages are allocated in a way that minimizes the chance of cache efficiency being effected. To do this an OS determines which bits in an physical address effect where the cache lines will go in each set in the cache; and then makes sure that these bits in the virtual address of a page is the same as the corresponding bits in the physical address of the page. However, this can create an extra problem: typically some virtual addresses are used more often than others (for example, an OS might load all processes at the virtual address 0x00001000); which means that an OS might run out of physical pages that match the more frequently used virtual page addresses. To avoid this extra problem an OS can add an offset a process' virtual addresses before deciding which physical pages are suitable, and make this offset different for different processes.
+</p><p>For page colouring to work you need to know the size of each set in the cache. This can be determined by dividing the total size of the cache by the cache's associativity.
+</p>
+<h3> <span class="mw-headline" id="Preventing_Unnecessary_Caching"> Preventing Unnecessary Caching </span></h3>
+<p>In some situations software might access a lot of data, and the programmer knows that this data either won't be used again or won't be used again soon. In these cases you can improve cache efficiency by explicitly flushing cache lines (for example, the 80x86 "CLFLUSH" instruction) to free entries in the cache for more important data.
+</p><p>Some CPUs allow caching to be disabled on a per page basis. This feature can be used to avoid the need for software to explicitly flush cache lines in some situations.
+</p>
+<h3> <span class="mw-headline" id="Prefetching"> Prefetching </span></h3>
+<p>In some situations it's easy to predict which cache lines will be needed soon. In these cases, some CPUs allow programmers to explicitly request that the data is loaded into the cache (prefetched) to avoid cache misses.
+</p><p>Also, some CPUs will detect certain access patterns (e.g. accesses to sequentially increasing and sequentially decreasing addresses), and will automatically prefetch cache lines.
+</p>
+<h3> <span class="mw-headline" id="Scheduling_With_Multiple_CPUs"> Scheduling With Multiple CPUs </span></h3>
+<p>For computers with more than one CPU, when a task runs it's code and data will end up in the cache/s of the CPU that it was running on. The next time that the scheduler gives the task CPU time it's possible for some of the task's code and data to still be in a CPU's cache, and some cache misses can be avoided by making the task run on the same CPU that it was running on last time. It isn't a good idea to always do this because an OS's scheduler may also take into account many other things (for performance, power management and other reasons) - it's better to think of this optimization as a scheduling hint.
+</p><p>For more complex systems with several layers of caching, where different caches are shared by different CPUs; if the scheduler can't schedule the task on the CPU that the task used last time then a CPU that shares cache/s with the previously used CPU may be more preferable than other CPUs that don't share cache/s with the previously used CPU.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 44/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2699-0!*!*!!en!*!* and timestamp 20180121080050 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=CPU_Caches&amp;oldid=19437">http://wiki.osdev.org/index.php?title=CPU_Caches&amp;oldid=19437</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Memory_management" title="Category:Memory management">Memory management</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=CPU_Caches" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="CPU_Caches"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:CPU_Caches&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="CPU_Caches#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="CPU_Caches" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=CPU_Caches&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=CPU_Caches&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="CPU_Caches#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li idskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/CPU_Caches" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/CPU_Caches" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=CPU_Caches&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=CPU_Caches&amp;oldid=19437" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 12 July 2016, at 11:15.</li>
+											<li id="footer-info-viewcount">This page has been accessed 18,080 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.052 secs. -->
+	</body>
+</html>

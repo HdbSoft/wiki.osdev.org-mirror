@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Drawing In Protected Mode - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Drawing_In_Protected_Mode", "wgTitle": "Drawing In Protected Mode", "wgCurRevisionId": 20679, "wgArticleId": 1934, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Video", "Graphical UI"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Drawing_In_Protected_Mode action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Drawing In Protected Mode</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Drawing_In_Protected_Mode#mw-head">navigation</a>,
+					<a href="Drawing_In_Protected_Mode#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Now that you know how you can easily write text to the screen using Hardware VGA support, you might be wondering how you'll be able to display nice images, windows, menus, icons, fancy cursors and buttons, etc.
+</p><p>Well, to quote Curufir, "Switch to a graphical mode and write directly in video memory".
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Drawing_In_Protected_Mode#Graphics_Modes"><span class="tocnumber">1</span> <span class="toctext">Graphics Modes</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Drawing_In_Protected_Mode#Switching"><span class="tocnumber">2</span> <span class="toctext">Switching</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Drawing_In_Protected_Mode#Locating_Video_Memory"><span class="tocnumber">3</span> <span class="toctext">Locating Video Memory</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Drawing_In_Protected_Mode#Plotting_Pixels"><span class="tocnumber">4</span> <span class="toctext">Plotting Pixels</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="Drawing_In_Protected_Mode#Location"><span class="tocnumber">4.1</span> <span class="toctext">Location</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="Drawing_In_Protected_Mode#Color"><span class="tocnumber">4.2</span> <span class="toctext">Color</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="Drawing_In_Protected_Mode#Optimizations"><span class="tocnumber">4.3</span> <span class="toctext">Optimizations</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="Drawing_In_Protected_Mode#Drawing_Text"><span class="tocnumber">5</span> <span class="toctext">Drawing Text</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="Drawing_In_Protected_Mode#Font_Encoding"><span class="tocnumber">5.1</span> <span class="toctext">Font Encoding</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="Drawing_In_Protected_Mode#Optimizations_2"><span class="tocnumber">5.2</span> <span class="toctext">Optimizations</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="Drawing_In_Protected_Mode#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Graphics_Modes">Graphics Modes</span></h2>
+<dl><dd><i>Main article:</i> <a href="Getting_VBE_Mode_Info" title="Getting VBE Mode Info" class="mw-redirect">Getting VBE Mode Info</a>
+</dd></dl>
+<p>Well the VGA (And VESA) modes can be selected using the standard BIOS interrupt 0x10. <a rel="nofollow" class="external text" href="http://www.ctyme.com/intr/int-10.htm">Int 0x10</a> seems like a decent enough reference for int 0x10 (No VESA extension) while <a rel="nofollow" class="external text" href="http://www.vesa.org/">VESA</a> contains the various VESA standards.
+</p><p>Vga is limited to a 640x480x16, VESA (Depending on your card) can present much higher resolutions.
+</p>
+<h2> <span class="mw-headline" id="Switching">Switching</span></h2>
+<p>The cleanest way to set up your video mode is to go through the video BIOS. It can be performed through the regular <tt>Int 0x10</tt> interface, or through the (optional) <a href="Protected_mode" title="Protected mode" class="mw-redirect">Protected mode</a> interface offered by VBE3. As you can guess, <tt>Int 0x10</tt> requires a 16-bit environment, so you can only use it in <a href="Real_Mode" title="Real Mode">Real Mode</a> or <a href="Virtual_8086_Mode" title="Virtual 8086 Mode">Virtual 8086 Mode</a>
+</p><p>Practically, the options are (in order of difficulty):
+</p>
+<ul><li>You set up the mode you want at early stage (in the bootloader) before entering protected mode.
+<ul><li>You develop on a <a href="UEFI" title="UEFI">UEFI</a> system, and get a framebuffer at boot-time.
+</li><li>You let <a href="GRUB" title="GRUB">GRUB</a> do the switch for you.
+</li></ul>
+</li><li>You switch back to <a href="Real_Mode" title="Real Mode">Real Mode</a> or <a href="Unreal_Mode" title="Unreal Mode">Unreal Mode</a> for setting the proper video mode (Napalm at <a rel="nofollow" class="external text" href="http://www.rohitab.com/discuss/topic/35103-switch-between-real-mode-and-protected-mode/">rohitab.com</a> has a neat little function for reference.)
+</li><li>You write a <a href="VGA_Hardware" title="VGA Hardware">VGA driver</a> that can do low-resolution modes on practically all hardware
+</li><li>You use the PMID from VBE3, if present
+</li><li>You set up a <a href="Virtual_8086_Mode" title="Virtual 8086 Mode">V8086</a> <a href="Virtual_Monitor" title="Virtual Monitor">monitor</a> that will execute the mode-switching code
+</li><li>You run some software code translation tool to produce pmode code out of bios rmode code. (<a rel="nofollow" class="external text" href="http://www.osdev.org/phpBB2/viewtopic.php?t=10321">SANiK is on the catch</a>)
+</li><li>You write a driver for your specific <a href="Category:Video" title="Category:Video">graphics card</a>
+</li></ul>
+<h2> <span class="mw-headline" id="Locating_Video_Memory">Locating Video Memory</span></h2>
+<p>For standard VGA video modes the video memory will either be at address <tt>0xA0000</tt> or <tt>0xB8000</tt>. To find out which one look at the following table (quoting <a rel="nofollow" class="external free" href="http://www.uv.tietgen.dk/staff/mlha/PC/Prog/ASM/INT/INT10.htm">http://www.uv.tietgen.dk/staff/mlha/PC/Prog/ASM/INT/INT10.htm</a>):
+"text" means <tt>0xB8000</tt>, CGA graphics modes are also at <tt>0xB8000</tt>, and VGA/EGA is at <tt>0xA0000</tt>. Note that most EGA modes (and high res VGA modes) use several bit planes so you won't be able to use all the colors by simply writing to video memory.
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+
+<tr>
+<td> 00
+</td>
+<td> text 40*25 16 color (mono)
+</td></tr>
+<tr>
+<td> 01
+</td>
+<td> text 40*25 16 color
+</td></tr>
+<tr>
+<td> 02
+</td>
+<td> text 80*25 16 color (mono)
+</td></tr>
+<tr>
+<td> 03
+</td>
+<td> text 80*25 16 color
+</td></tr>
+<tr>
+<td> 04
+</td>
+<td> CGA 320*200 4 color
+</td></tr>
+<tr>
+<td> 05
+</td>
+<td> CGA 320*200 4 color (m)
+</td></tr>
+<tr>
+<td> 06
+</td>
+<td> CGA 640*200 2 color
+</td></tr>
+<tr>
+<td> 07
+</td>
+<td> MDA monochrome text 80*25
+</td></tr>
+<tr>
+<td> 08
+</td>
+<td> PCjr
+</td></tr>
+<tr>
+<td> 09
+</td>
+<td> PCjr
+</td></tr>
+<tr>
+<td> 0A
+</td>
+<td> PCjr
+</td></tr>
+<tr>
+<td> 0B
+</td>
+<td> <i>reserved</i>
+</td></tr>
+<tr>
+<td> 0C
+</td>
+<td> <i>reserved</i>
+</td></tr>
+<tr>
+<td> 0D
+</td>
+<td> EGA 320*200 16 color
+</td></tr>
+<tr>
+<td> 0E
+</td>
+<td> EGA 640*200 16 color
+</td></tr>
+<tr>
+<td> 0F
+</td>
+<td> EGA 640*350 mono
+</td></tr>
+<tr>
+<td> 10
+</td>
+<td> EGA 640*350 16 color
+</td></tr>
+<tr>
+<td> 11
+</td>
+<td> VGA 640*480 mono
+</td></tr>
+<tr>
+<td> 12
+</td>
+<td> VGA 640*480 16 color
+</td></tr>
+<tr>
+<td> 13
+</td>
+<td> VGA 320*200 256 color
+</td></tr>
+</table>
+<p>For VESA modes, the framebuffer address is stored in the <a href="Getting_VBE_Mode_Info" title="Getting VBE Mode Info" class="mw-redirect">mode info block</a>. This is the <b>physical</b> address of the linear framebuffer (it's not a 16-bit far pointer but a 32-bit linear pointer)&#160;: if you use paging, you have to map it somewhere to use it.
+</p>
+<h2> <span class="mw-headline" id="Plotting_Pixels"> Plotting Pixels </span></h2>
+<h3> <span class="mw-headline" id="Location"> Location </span></h3>
+<p>Let's say you want to plot a pixel in red in the middle of your screen. The first thing you have to know is <b>where</b> the middle of the screen is. In 320x200x8 (mode 13), this will be at 100x320+160 = 32160. In general, your screen can be described by:
+</p>
+<table border="2" cellpadding="4" cellspacing="0" style="margin-top:1em; margin-bottom:1em; background:#f9f9f9; border:1px #aaa solid; border-collapse:collapse; &#123;&#123;&#123;1}}}">
+<tr>
+<td> width
+</td>
+<td> how many pixels you have on a horizontal line
+</td></tr>
+<tr>
+<td> height
+</td>
+<td> how many horizontal lines of pixels are present
+</td></tr>
+<tr>
+<td> pitch
+</td>
+<td> how many <i>bytes</i> of VRAM you should skip to go one pixel down
+</td></tr>
+<tr>
+<td> depth
+</td>
+<td> how many <i>bits</i> of color you have
+</td></tr>
+<tr>
+<td> "pixelwidth"
+</td>
+<td> how many bytes of VRAM you should skip to go one pixel right.
+</td></tr></table>
+<p>"pitch" and "width" may seem redundant at first sight but they aren't. It's not rare once you go to higher (and exotic) resolutions to have e.g. 8K bytes per line while your screen is actually 1500 pixels wide (32-bits per pixel). The good news is that it allows smooth horizontal scrolling (which is mainly useful for 2D games&#160;:P )
+</p><p>Pitch and pixel width are usually announced by VESA mode info. Once you know them, you can calculate the place where you plot your pixel as:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">unsigned</span> <span class="kw4">char</span> <span class="sy0">*</span>pixel <span class="sy0">=</span> vram <span class="sy0">+</span> y<span class="sy0">*</span>pitch <span class="sy0">+</span> x<span class="sy0">*</span>pixelwidth<span class="sy0">;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Color"> Color </span></h3>
+<p>The second thing to know is what value you should write for "red". This depends on your screen setup, again. In EGA mode, you have a fixed palette featuring dark-red (color 4) and light-red (color 12). Yet, EGA requires you to plot each bit of that on different pixel plane, so refer to EGA programming tutorials if you <b>really</b> want such modes supported.
+In conventional 320x200x8 VGA mode, you have the same colours 4 and 12 as in EGA so you would plot your red pixel with
+</p>
+<pre>*pixel = 4;
+</pre>
+<p>Yet, in VGA, the palette is reprogrammable (as you can learn in FreeVGA documents), so virtually any value between 0..255 could be 'red' if you program the palette so&#160;:P
+</p><p>Finally, in VESA modes, you usually have truecolor or hicolor, and in both of them, you have to give independent red, green and blue values for each pixel. modeinfo will (again) instruct you of how the RGB components are organized in the pixel bits. E.g. you will have <tt>xRRRRRGGGGGBBBBB</tt> for 15-bits mode, meaning that #ff0000 red is there <tt>0x7800</tt>, and #808080 grey is <tt>0x4210</tt> (pickup pencil, draw the bits and see by yourself)
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="coMULTI">/* only valid for 800x600x16M */</span>
+<span class="kw4">static</span> <span class="kw4">void</span> putpixel<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">char</span><span class="sy0">*</span> screen<span class="sy0">,</span> <span class="kw4">int</span> x<span class="sy0">,</span><span class="kw4">int</span> y<span class="sy0">,</span> <span class="kw4">int</span> color<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw4">unsigned</span> where <span class="sy0">=</span> x<span class="sy0">*</span><span class="nu0">3</span> <span class="sy0">+</span> y<span class="sy0">*</span><span class="nu0">2400</span><span class="sy0">;</span>
+    screen<span class="br0">&#91;</span>where<span class="br0">&#93;</span> <span class="sy0">=</span> color <span class="sy0">&amp;</span> <span class="nu0">255</span><span class="sy0">;</span>              <span class="co1">// BLUE</span>
+    screen<span class="br0">&#91;</span>where <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>color <span class="sy0">&gt;&gt;</span> <span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu0">255</span><span class="sy0">;</span>   <span class="co1">// GREEN</span>
+    screen<span class="br0">&#91;</span>where <span class="sy0">+</span> <span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>color <span class="sy0">&gt;&gt;</span> <span class="nu0">16</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu0">255</span><span class="sy0">;</span>  <span class="co1">// RED</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="coMULTI">/* only valid for 800x600x32bpp */</span>
+<span class="kw4">static</span> <span class="kw4">void</span> putpixel<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">char</span><span class="sy0">*</span> screen<span class="sy0">,</span> <span class="kw4">int</span> x<span class="sy0">,</span><span class="kw4">int</span> y<span class="sy0">,</span> <span class="kw4">int</span> color<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw4">unsigned</span> where <span class="sy0">=</span> x<span class="sy0">*</span><span class="nu0">4</span> <span class="sy0">+</span> y<span class="sy0">*</span><span class="nu0">3200</span><span class="sy0">;</span>
+    screen<span class="br0">&#91;</span>where<span class="br0">&#93;</span> <span class="sy0">=</span> color <span class="sy0">&amp;</span> <span class="nu0">255</span><span class="sy0">;</span>              <span class="co1">// BLUE</span>
+    screen<span class="br0">&#91;</span>where <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>color <span class="sy0">&gt;&gt;</span> <span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu0">255</span><span class="sy0">;</span>   <span class="co1">// GREEN</span>
+    screen<span class="br0">&#91;</span>where <span class="sy0">+</span> <span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>color <span class="sy0">&gt;&gt;</span> <span class="nu0">16</span><span class="br0">&#41;</span> <span class="sy0">&amp;</span> <span class="nu0">255</span><span class="sy0">;</span>  <span class="co1">// RED</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Optimizations"> Optimizations </span></h3>
+<p>It can be tempting from here to write fill_rect, draw_hline, draw_vline, etc. from calls to putpixel ... don't. Drawing a filled rectangle means you access successive pixels and then advance by "pitch - rect_width" to fill the next line. If you do a "for(y=100;y&lt;200;y++) for(x=100;x&lt;200;x++) putpixel (screen,x,y,RED);" loop, you'll recompute 'where' about 10,000 times. Even if the compiler has done good job to translate y*3200 into adds and shifts instead of multiplication, it's silly to run that so much time while you could do
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">static</span> <span class="kw4">void</span> fillrect<span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">char</span> <span class="sy0">*</span>vram<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">char</span> r<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">char</span> g<span class="sy0">,</span> <span class="kw4">unsigned</span>   <span class="kw4">char</span> b<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">char</span> w<span class="sy0">,</span> <span class="kw4">unsigned</span> <span class="kw4">char</span> h<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw4">unsigned</span> <span class="kw4">char</span> <span class="sy0">*</span>where <span class="sy0">=</span> vram<span class="sy0">;</span>
+    <span class="kw4">int</span> i<span class="sy0">,</span> j<span class="sy0">;</span>
+&#160;
+    <span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> w<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> j <span class="sy0">&lt;</span> h<span class="sy0">;</span> j<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="co1">//putpixel(vram, 64 + j, 64 + i, (r &lt;&lt; 16) + (g &lt;&lt; 8) + b);</span>
+            where<span class="br0">&#91;</span>j<span class="sy0">*</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> r<span class="sy0">;</span>
+            where<span class="br0">&#91;</span>j<span class="sy0">*</span><span class="nu0">4</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> g<span class="sy0">;</span>
+            where<span class="br0">&#91;</span>j<span class="sy0">*</span><span class="nu0">4</span> <span class="sy0">+</span> <span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> b<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        where<span class="sy0">+=</span><span class="nu0">3200</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<p>That should be enough to get you started coding (or googling for) a decent video library.
+</p>
+<h2> <span class="mw-headline" id="Drawing_Text"> Drawing Text </span></h2>
+<p>Once in graphic mode, you no longer have the BIOS or the hardware to draw fonts for you. The basic idea is to have font data for each character and use it to plot (or not to plot) pixels. There are plenty of ways to store those fonts depending on whether they have multiple colors or not, alpha channel or not etc. What you will basically have, however is:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co1">// holding what you need for every character of the set</span>
+font_char<span class="sy0">*</span> font_data<span class="br0">&#91;</span>CHARS<span class="br0">&#93;</span><span class="sy0">;</span>
+&#160;
+<span class="co1">// rendering one of the character, given its font_data</span>
+<span class="kw4">void</span> draw_char<span class="br0">&#40;</span>screen<span class="sy0">,</span> where<span class="sy0">,</span> font_char<span class="sy0">*</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+<span class="kw4">void</span> draw_string<span class="br0">&#40;</span>screen<span class="sy0">,</span> where<span class="sy0">,</span> <span class="kw4">char</span><span class="sy0">*</span> input<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">while</span><span class="br0">&#40;</span><span class="sy0">*</span>input<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        draw_char<span class="br0">&#40;</span>screen<span class="sy0">,</span>where<span class="sy0">,</span>font_data<span class="br0">&#91;</span>input<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        where <span class="sy0">+=</span> char_width<span class="sy0">;</span>
+        input<span class="sy0">++;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> draw_char<span class="br0">&#40;</span>screen<span class="sy0">,</span> where<span class="sy0">,</span> font_char<span class="sy0">*</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span>l <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> l <span class="sy0">&lt;</span> <span class="nu0">8</span><span class="sy0">;</span> l<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">8</span><span class="sy0">;</span> i <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">--</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            j<span class="sy0">++;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>font_char<span class="br0">&#91;</span>l<span class="br0">&#93;</span> <span class="sy0">&amp;</span> <span class="br0">&#40;</span><span class="nu0">1</span> <span class="sy0">&lt;&lt;</span> i<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                c <span class="sy0">=</span> c1<span class="sy0">;</span>
+                put_pixel<span class="br0">&#40;</span>j<span class="sy0">,</span> h<span class="sy0">,</span> c<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        h<span class="sy0">++;</span>
+        j <span class="sy0">=</span> x<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h3> <span class="mw-headline" id="Font_Encoding"> Font Encoding </span></h3>
+<p>The most common encoding that allows you not to overwrite the background over which you draw your text is the <i>font bitmap</i>, that is, an "A" character will e.g. be encoded as (. is 0 in binary and X is 1)
+</p>
+<pre>...XX... = 0*128+0*64+0*32+1*16+1*8+0*4+0*2+0*1 = 0x18
+..XXXX.. = 0x3C
+.XX..XX. = 0x66
+.XXXXXX. = 0x7E
+.XX..XX. = 0x66
+.XX..XX. = 0x66
+........ = 0x00
+........ = 0x00
+</pre>
+<p>In which case you test each bit of the font data to tell whether it's 1 or 0 and only put the pixel if it's 1.
+For larger fonts you might want to use RLE encoding instead, for instance. Finally, state-of-the-art true-type fonts will require you to support the "freetype" library.
+</p>
+<h3> <span class="mw-headline" id="Optimizations_2"> Optimizations </span></h3>
+<p>Use of a "put_pixel()" function is almost always a performance problem. For an 8 x 8 character you can find out the address of the first (top left) pixel and increment it to get the address of the next pixel in the row, and add the number of bytes per line to get the address of the next row. This is much faster than calculating "address = video_address + y * horizontal_resolution + x" 64 times (per character).
+</p><p>However, it's even faster to work on more than one pixel at a time. If you look at the font encoding above you'll notice that there's an 8-bit number for each row of the character. This 8-bit number can be used as the index in a lookup table containing masks. For example, for 8 bits per pixel you could do 8 pixels at a time, like this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">uint32_t</span> font_data_lookup_table<span class="br0">&#91;</span><span class="nu0">16</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+    <span class="nu12">0x00000000</span><span class="sy0">,</span>
+    <span class="nu12">0x000000FF</span><span class="sy0">,</span>
+    <span class="nu12">0x0000FF00</span><span class="sy0">,</span>
+    <span class="nu12">0x0000FFFF</span><span class="sy0">,</span>
+    <span class="nu12">0x00FF0000</span><span class="sy0">,</span>
+    <span class="nu12">0x00FF00FF</span><span class="sy0">,</span>
+    <span class="nu12">0x00FFFF00</span><span class="sy0">,</span>
+    <span class="nu12">0x00FFFFFF</span><span class="sy0">,</span>
+    <span class="nu12">0xFF000000</span><span class="sy0">,</span>
+    <span class="nu12">0xFF0000FF</span><span class="sy0">,</span>
+    <span class="nu12">0xFF00FF00</span><span class="sy0">,</span>
+    <span class="nu12">0xFF00FFFF</span><span class="sy0">,</span>
+    <span class="nu12">0xFFFF0000</span><span class="sy0">,</span>
+    <span class="nu12">0xFFFF00FF</span><span class="sy0">,</span>
+    <span class="nu12">0xFFFFFF00</span><span class="sy0">,</span>
+    <span class="nu12">0xFFFFFFFF</span>
+<span class="br0">&#125;</span>
+&#160;
+<span class="kw4">void</span> draw_char<span class="br0">&#40;</span><span class="kw4">uint8_t</span> <span class="sy0">*</span>where<span class="sy0">,</span> <span class="kw4">uint32_t</span> character<span class="sy0">,</span> <span class="kw4">uint8_t</span> foreground_colour<span class="sy0">,</span> <span class="kw4">uint8_t</span> background_colour<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw4">int</span> row<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> row_data<span class="sy0">;</span>
+    <span class="kw4">uint32_t</span> mask1<span class="sy0">,</span> mask2<span class="sy0">;</span>
+    <span class="kw4">uint8_t</span> <span class="sy0">*</span>font_data_for_char <span class="sy0">=</span> <span class="sy0">&amp;</span>system_font_data_address<span class="br0">&#91;</span>character <span class="sy0">*</span> <span class="nu0">8</span><span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw4">uint32_t</span> packed_foreground <span class="sy0">=</span> <span class="br0">&#40;</span>foreground <span class="sy0">&lt;&lt;</span> <span class="nu0">24</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span>foreground <span class="sy0">&lt;&lt;</span> <span class="nu0">16</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span>foreground <span class="sy0">&lt;&lt;</span> <span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy0">|</span> foreground<span class="sy0">;</span>
+    <span class="kw4">uint32_t</span> packed_background <span class="sy0">=</span> <span class="br0">&#40;</span>background <span class="sy0">&lt;&lt;</span> <span class="nu0">24</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span>background <span class="sy0">&lt;&lt;</span> <span class="nu0">16</span><span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span>background <span class="sy0">&lt;&lt;</span> <span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy0">|</span> background<span class="sy0">;</span>
+&#160;
+    <span class="kw1">for</span> <span class="br0">&#40;</span>row <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> row <span class="sy0">&lt;</span> <span class="nu0">8</span><span class="sy0">;</span> row<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        row_data <span class="sy0">=</span> font_data_for_char<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="sy0">;</span>
+        mask1 <span class="sy0">=</span> font_data_lookup_table<span class="br0">&#91;</span>row_data <span class="sy0">&gt;&gt;</span> <span class="nu0">16</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        mask2 <span class="sy0">=</span> font_data_lookup_table<span class="br0">&#91;</span>row_data <span class="sy0">&amp;</span> <span class="nu12">0x0F</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">uint32_t</span> <span class="sy0">*</span><span class="br0">&#41;</span>where <span class="sy0">=</span> <span class="br0">&#40;</span>packed_foreground <span class="sy0">&amp;</span> mask1<span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span>packed_background <span class="sy0">&amp;</span> ~mask1<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">uint32_t</span> <span class="sy0">*</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="sy0">&amp;</span>where<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>packed_foreground <span class="sy0">&amp;</span> mask2<span class="br0">&#41;</span> <span class="sy0">|</span> <span class="br0">&#40;</span>packed_background <span class="sy0">&amp;</span> ~mask2<span class="br0">&#41;</span><span class="sy0">;</span>
+        where <span class="sy0">+=</span> bytes_per_line<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="How_do_I_set_a_graphics_mode" title="How do I set a graphics mode">Extra Notes</a>
+</li><li><a rel="nofollow" class="external text" href="http://bos.asmhackers.net/forum/viewtopic.php?id=65">Covers basically the same, and is ASM-oriented.</a>
+</li><li><a href="3D_Renderer_Basics" title="3D Renderer Basics">3D Renderer Basics</a>
+</li><li><a rel="nofollow" class="external text" href="https://thecool1james.github.io/tutorials/2016/10/13/osdev-font.html">A Tutorial on Encoding Fonts</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 138/1000000
+Post-expand include size: 368/2097152 bytes
+Template argument size: 21/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1934-0!*!0!!en!*!* and timestamp 20180121050404 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Drawing_In_Protected_Mode&amp;oldid=20679">http://wiki.osdev.org/index.php?title=Drawing_In_Protected_Mode&amp;oldid=20679</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:Video" title="Category:Video">Video</a></li><li><a href="Category:Graphical_UI" title="Category:Graphical UI">Graphical UI</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Drawing_In_Protected_Mode" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Drawing_In_Protected_Mode"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Drawing_In_Protected_Mode&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Drawing_In_Protected_Mode#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Drawing_In_Protected_Mode" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Drawing_In_Protected_Mode&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Drawing_In_Protected_Mode&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Drawing_In_Protected_Mode#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Drawing_In_Protected_Mode" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Drawing_In_Protected_Mode" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Drawing_In_Protected_Mode&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Drawing_In_Protected_Mode" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Drawing_In_Protected_Mode" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Drawing_In_Protected_Mode&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Drawing_In_Protected_Mode&amp;oldid=20679" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 10 April 2017, at 02:19.</li>
+											<li id="footer-info-viewcount">This page has been accessed 116,112 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.031 secs. -->
+	</body>
+</html>

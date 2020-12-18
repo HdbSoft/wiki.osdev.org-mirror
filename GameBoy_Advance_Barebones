@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>GameBoy Advance Barebones - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "GameBoy_Advance_Barebones", "wgTitle": "GameBoy Advance Barebones", "wgCurRevisionId": 11313, "wgArticleId": 2894, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["ARM", "Gameboy Advance", "Bare bones tutorials"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .co4 {color: #666666;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "http://wiki.osdev.org/index.php?title=MediaWiki:Geshi.css&amp;usemsgcache=yes&amp;action=raw&amp;ctype=text/css&amp;smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-GameBoy_Advance_Barebones action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">GameBoy Advance Barebones</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="GameBoy_Advance_Barebones#mw-head">navigation</a>,
+					<a href="GameBoy_Advance_Barebones#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p><i>Finally what you were expecting is going to be real. I'm going to show you the GameBoy Advance barebones.</i>
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="GameBoy_Advance_Barebones#Requirements"><span class="tocnumber">1</span> <span class="toctext">Requirements</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="GameBoy_Advance_Barebones#The_Screen"><span class="tocnumber">2</span> <span class="toctext">The Screen</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="GameBoy_Advance_Barebones#Let.27s_Code"><span class="tocnumber">3</span> <span class="toctext">Let's Code</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="GameBoy_Advance_Barebones#Compiling"><span class="tocnumber">4</span> <span class="toctext">Compiling</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="GameBoy_Advance_Barebones#Explanation"><span class="tocnumber">5</span> <span class="toctext">Explanation</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="GameBoy_Advance_Barebones#Links"><span class="tocnumber">6</span> <span class="toctext">Links</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Requirements"> Requirements </span></h2>
+<ul><li> Some C/ARM Assembly knowledge
+</li><li> A GameBoy Advance Emulator - <a rel="nofollow" class="external text" href="http://vba.ngemu.com/">VisualBoy Advance</a> is a good one
+</li><li> <a rel="nofollow" class="external text" href="http://www.devkitpro.org/">DevkitPro</a> Toolchain
+</li></ul>
+<h2> <span class="mw-headline" id="The_Screen"> The Screen </span></h2>
+<p>The Nintendo GameBoy Advance screen, is an LCD with 240x160 resolution, that is entirely refreshed every 60th of a second. After a scanline has been drawn (the HDraw period, 240 pixels), there is a pause (HBlank, 68 pixels) before it starts drawing the next scanline. Likewise, after the 160 scanlines (VDraw) is a 68 scanline blank (VBlank) before it starts over again. To avoid tearing, positional data is usually updated at the VBlank. This is why most games run at 60 or 30 FPS.
+</p>
+<div class="thumb tright"><div class="thumbinner" style="width:192px;"><a href="File:Gba_screen_specs.png" class="image"><img alt="" src="images/c/c3/Gba_screen_specs.png" width="190" height="142" class="thumbimage" /></a>  <div class="thumbcaption">The diagram of the GameBoy Advance Display</div></div></div>
+<table>
+<tr>
+<th> Subject
+</th>
+<th> Length
+</th>
+<th> Cycles
+</th></tr>
+<tr>
+<th style="color:green">Pixel
+</th>
+<td> 1
+</td>
+<td> 4
+</td></tr>
+<tr>
+<th style="color:green">HDraw
+</th>
+<td> 240px
+</td>
+<td> 960
+</td></tr>
+<tr>
+<th style="color:green">HBlank
+</th>
+<td> 68px
+</td>
+<td> 272
+</td></tr>
+<tr>
+<th style="color:green">Scanline
+</th>
+<td> HDraw+HBlank
+</td>
+<td> 1232
+</td></tr>
+<tr>
+<th style="color:green">VDraw
+</th>
+<td> 160*Scanline
+</td>
+<td> 197120
+</td></tr>
+<tr>
+<th style="color:green">VBlank
+</th>
+<td> 68*Scanline
+</td>
+<td> 83776
+</td></tr>
+<tr>
+<th style="color:green">Refresh
+</th>
+<td> VDraw+VBlank
+</td>
+<td> 280896
+</td></tr></table>
+<h2> <span class="mw-headline" id="Let.27s_Code"> Let's Code </span></h2>
+<p>Here I'm going to show you two ways to do it: One using Assembly(that it's better to begin with it, because you understand better how the machine works) and the second one using C. But it will be just a simple pixel-plotting at the time. Later I will add more tutorials about other things.
+</p><p><b>ARM Assembly</b>
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="sy0">.</span>arm
+<span class="sy0">.</span>text
+<span class="sy0">.</span>global main
+&#160;
+<span class="sy0">.</span><span class="kw4">macro</span> plot_pixel x<span class="sy0">,</span> y<span class="sy0">,</span> color
+    <span class="kw1">mov</span> r0<span class="sy0">,</span> #<span class="nu0">0x6000000</span>
+    <span class="kw1">mov</span> r1<span class="sy0">,</span> \color
+    ldr r2<span class="sy0">,</span> =<span class="br0">&#40;</span>\x<span class="sy0">+</span>\y<span class="sy0">*</span><span class="nu0">240</span><span class="br0">&#41;</span><span class="sy0">*</span><span class="nu0">2</span>
+    <span class="kw1">str</span> r1<span class="sy0">,</span> <span class="br0">&#91;</span>r0<span class="sy0">,</span> r2<span class="br0">&#93;</span>
+<span class="sy0">.</span><span class="kw4">endm</span>
+&#160;
+main<span class="sy0">:</span>
+    <span class="kw1">mov</span> r0<span class="sy0">,</span> #<span class="nu0">0x4000000</span>
+    <span class="kw1">mov</span> r1<span class="sy0">,</span> #<span class="nu0">0x400</span>
+    <span class="kw1">add</span> r1<span class="sy0">,</span> r1<span class="sy0">,</span> #<span class="nu0">3</span>
+    <span class="kw1">str</span> r1<span class="sy0">,</span> <span class="br0">&#91;</span>r0<span class="br0">&#93;</span>
+&#160;
+    plot_pixel <span class="nu0">115</span><span class="sy0">,</span> <span class="nu0">80</span><span class="sy0">,</span> #<span class="nu0">0x1F</span>
+    plot_pixel <span class="nu0">120</span><span class="sy0">,</span> <span class="nu0">80</span><span class="sy0">,</span> #<span class="nu0">0x03E0</span>
+    plot_pixel <span class="nu0">125</span><span class="sy0">,</span> <span class="nu0">80</span><span class="sy0">,</span> #<span class="nu0">0x7C00</span>
+&#160;
+infin<span class="sy0">:</span>
+    b infin</pre></div></div>
+<p><br />
+<b>C</b>
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <span class="sy0">*</span><span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">int</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x04000000</span> <span class="sy0">=</span> <span class="nu12">0x0403</span><span class="sy0">;</span>
+&#160;
+    <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">short</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x06000000</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">115</span><span class="sy0">+</span><span class="nu0">80</span><span class="sy0">*</span><span class="nu0">240</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu12">0x001F</span><span class="sy0">;</span>
+    <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">short</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x06000000</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">120</span><span class="sy0">+</span><span class="nu0">80</span><span class="sy0">*</span><span class="nu0">240</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu12">0x03E0</span><span class="sy0">;</span>
+    <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">unsigned</span> <span class="kw4">short</span><span class="sy0">*</span><span class="br0">&#41;</span><span class="nu12">0x06000000</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">125</span><span class="sy0">+</span><span class="nu0">80</span><span class="sy0">*</span><span class="nu0">240</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu12">0x7C00</span><span class="sy0">;</span>
+&#160;
+    <span class="kw1">while</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&#160;
+    <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Compiling"> Compiling </span></h2>
+<p>To compile the Assembly source code, you just need to do this:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">arm-elf-gcc <span class="re5">-mthumb-interwork</span> <span class="re5">-specs</span>=gba.specs kernel.S
+arm-elf-objcopy <span class="re5">-O</span> binary a.out a.gba</pre></div></div>
+<p>To compile the C source, just use this Makefile:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="bash source-bash"><pre class="de1">PATH&#160;:= $<span class="br0">&#40;</span>DEVKITARM<span class="br0">&#41;</span><span class="sy0">/</span>bin:$<span class="br0">&#40;</span>PATH<span class="br0">&#41;</span>
+&#160;
+<span class="co0"># --- Project details -------------------------------------------------</span>
+&#160;
+PROJ   &#160;:= first
+TARGET &#160;:= $<span class="br0">&#40;</span>PROJ<span class="br0">&#41;</span>
+&#160;
+OBJS   &#160;:= $<span class="br0">&#40;</span>PROJ<span class="br0">&#41;</span>.o
+&#160;
+<span class="co0"># --- Build defines ---------------------------------------------------</span>
+&#160;
+PREFIX &#160;:= arm-eabi-
+CC     &#160;:= $<span class="br0">&#40;</span>PREFIX<span class="br0">&#41;</span><span class="kw2">gcc</span>
+LD     &#160;:= $<span class="br0">&#40;</span>PREFIX<span class="br0">&#41;</span><span class="kw2">gcc</span>
+OBJCOPY&#160;:= $<span class="br0">&#40;</span>PREFIX<span class="br0">&#41;</span>objcopy
+&#160;
+ARCH   &#160;:= <span class="re5">-mthumb-interwork</span> <span class="re5">-mthumb</span>
+SPECS  &#160;:= <span class="re5">-specs</span>=gba.specs
+&#160;
+CFLAGS &#160;:= $<span class="br0">&#40;</span>ARCH<span class="br0">&#41;</span> <span class="re5">-O2</span> <span class="re5">-Wall</span> <span class="re5">-fno-strict-aliasing</span>
+LDFLAGS&#160;:= $<span class="br0">&#40;</span>ARCH<span class="br0">&#41;</span> $<span class="br0">&#40;</span>SPECS<span class="br0">&#41;</span>
+&#160;
+&#160;
+.PHONY&#160;: build clean
+&#160;
+<span class="co0"># --- Build -----------------------------------------------------------</span>
+<span class="co0"># Build process starts here!</span>
+build: $<span class="br0">&#40;</span>TARGET<span class="br0">&#41;</span>.gba
+&#160;
+<span class="co0"># Strip and fix header (step 3,4)</span>
+$<span class="br0">&#40;</span>TARGET<span class="br0">&#41;</span>.gba&#160;: $<span class="br0">&#40;</span>TARGET<span class="br0">&#41;</span>.elf
+	$<span class="br0">&#40;</span>OBJCOPY<span class="br0">&#41;</span> <span class="re5">-v</span> <span class="re5">-O</span> binary $<span class="sy0">&lt;</span> $<span class="sy0">@</span>
+	-<span class="sy0">@</span>gbafix $<span class="sy0">@</span>
+&#160;
+<span class="co0"># Link (step 2)</span>
+$<span class="br0">&#40;</span>TARGET<span class="br0">&#41;</span>.elf&#160;: $<span class="br0">&#40;</span>OBJS<span class="br0">&#41;</span>
+	$<span class="br0">&#40;</span>LD<span class="br0">&#41;</span> $^ $<span class="br0">&#40;</span>LDFLAGS<span class="br0">&#41;</span> <span class="re5">-o</span> $<span class="sy0">@</span>
+&#160;
+<span class="co0"># Compile (step 1)</span>
+$<span class="br0">&#40;</span>OBJS<span class="br0">&#41;</span>&#160;: <span class="sy0">%</span>.o&#160;: <span class="sy0">%</span>.c
+	$<span class="br0">&#40;</span>CC<span class="br0">&#41;</span> <span class="re5">-c</span> $<span class="sy0">&lt;</span> $<span class="br0">&#40;</span>CFLAGS<span class="br0">&#41;</span> <span class="re5">-o</span> $<span class="sy0">@</span>
+&#160;
+<span class="co0"># --- Clean -----------------------------------------------------------</span>
+&#160;
+clean&#160;: 
+	<span class="sy0">@</span><span class="kw2">rm</span> <span class="re5">-fv</span> <span class="sy0">*</span>.gba
+	<span class="sy0">@</span><span class="kw2">rm</span> <span class="re5">-fv</span> <span class="sy0">*</span>.elf
+	<span class="sy0">@</span><span class="kw2">rm</span> <span class="re5">-fv</span> <span class="sy0">*</span>.o
+&#160;
+<span class="co0">#EOF</span></pre></div></div>
+<h2> <span class="mw-headline" id="Explanation"> Explanation </span></h2>
+<p>This is a quick and dirty explanation of the earlier code. Those previously mentioned warped minds for whom this section is intended will probably prefer it that way. A more detailed discussion will be given later. 
+</p><p>As I said, GBA programming is low-level programming and sometimes goes right down to the bit. The <i>0x04000000</i> and <i>0x06000000</i> are parts of the accessible memory sections. These numbers themselves don't mean much, by the way; they just refer to different sections. There aren't really <i>0x02000000</i> between these two sections. As you can see in the memory map, these two sections are for the IO registers and VRAM, respectively. 
+</p><p>To work with these sections in C, we have to make pointers out of them, which is what the <i>unsigned int*</i> and <i>unsigned short*</i> do. The types used here are almost arbitrary; almost, because some of them are more convenient than others. For example, the GBA has a number of different video modes, and in modes 3 and 5 VRAM is used to store 16-bit colors, so in that case casting it to halfword pointers is a good idea. Again, it is not required to do so, and in some cases different people will use different types of pointers. If you're using someone else's code, be sure to note the datatypes of the pointers used, not just the names. 
+</p><p>The word at <i>0400:0000</i> contains the main bits for the display control. By writing 0x0403 into it, we tell the GBA to use video mode 3 and activate background 2. What this actually means will be explained in the video and bitmap mode chapters. 
+</p><p>In mode 3, VRAM is a 16-bit bitmap; when we make a halfword pointer for it, each entry is a pixel. This bitmap itself is the same size as the screen(240x160) and because of the way bitmaps and C matrices work, by using something of the form <i>array[y*width + x]</i> are the contents of coordinates(x, y) on screen. That gives us our 3 pixel locations. We fill these with three 16-bit numbers that happen to be full red, green and blue in 5.5.5 BGR format. Or is that RGB, I always forget. In any case, that's what makes the pixels appear. After that there is one more important line, which is the infinite loop. Normally, infinite loops are things to be avoided, but in this case what happens after <i>main()</i> returns is rather undefined because there's little to return to, so it's best to avoid that possibility.
+</p>
+<h2> <span class="mw-headline" id="Links"> Links </span></h2>
+<ul><li><a rel="nofollow" class="external text" href="http://nocash.emubase.de/gbatek.htm#gbalcdvideocontroller">GBA LCD Video Controller</a>
+</li><li><a rel="nofollow" class="external text" href="http://gbadev.org/download.php?section=documentation&amp;ID=7">GBA Reference Document</a>
+</li><li><a rel="nofollow" class="external text" href="http://gbadev.org/download.php?section=documentation&amp;ID=4">GBA Quick Reference Guide Rev. 2</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 68/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2894-0!*!*!!en!2!* and timestamp 20180121080027 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=GameBoy_Advance_Barebones&amp;oldid=11313">http://wiki.osdev.org/index.php?title=GameBoy_Advance_Barebones&amp;oldid=11313</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:ARM" title="Category:ARM">ARM</a></li><li><a href="Category:Gameboy_Advance" title="Category:Gameboy Advance">Gameboy Advance</a></li><li><a href="Category:Bare_bones_tutorials" title="Category:Bare bones tutorials">Bare bones tutorials</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=GameBoy_Advance_Barebones" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="GameBoy_Advance_Barebones"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:GameBoy_Advance_Barebones&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="GameBoy_Advance_Barebones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="GameBoy_Advance_Barebones" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=GameBoy_Advance_Barebones&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=GameBoy_Advance_Barebones&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="GameBoy_Advance_Barebones#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/GameBoy_Advance_Barebones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/GameBoy_Advance_Barebones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=GameBoy_Advance_Barebones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=GameBoy_Advance_Barebones&amp;oldid=11313" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 March 2011, at 10:40.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,565 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mwskins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/GameBoy_Advance_Barebones" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/GameBoy_Advance_Barebones" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=GameBoy_Advance_Barebones&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=GameBoy_Advance_Barebones&amp;oldid=11313" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 March 2011, at 10:40.</li>
+											<li id="footer-info-viewcount">This page has been accessed 29,565 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.118 secs. -->
+	</body>
+</html>

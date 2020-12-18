@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Hierarchical VFS Theory - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Hierarchical_VFS_Theory", "wgTitle": "Hierarchical VFS Theory", "wgCurRevisionId": 12561, "wgArticleId": 2957, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Filesystems"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Hierarchical_VFS_Theory action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Hierarchical VFS Theory</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Hierarchical_VFS_Theory#mw-head">navigation</a>,
+					<a href="Hierarchical_VFS_Theory#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Hierarchical_VFS_Theory#Purpose_of_this_article"><span class="tocnumber">1</span> <span class="toctext">Purpose of this article</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="Hierarchical_VFS_Theory#What_is_a_hierarchical_VFS.3F"><span class="tocnumber">2</span> <span class="toctext">What is a hierarchical VFS?</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="Hierarchical_VFS_Theory#Conventional_tree_caching_format"><span class="tocnumber">3</span> <span class="toctext">Conventional tree caching format</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="Hierarchical_VFS_Theory#Tag_node_cache"><span class="tocnumber">4</span> <span class="toctext">Tag node cache</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="Hierarchical_VFS_Theory#Support_for_file-system_links"><span class="tocnumber">5</span> <span class="toctext">Support for file-system links</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="Hierarchical_VFS_Theory#Thoughts_on_linking_the_Inode-based_VFS_to_concrete_hierarchical_filesystems_which_do_not_use_an_inode_structure"><span class="tocnumber">6</span> <span class="toctext">Thoughts on linking the Inode-based VFS to concrete hierarchical filesystems which do not use an inode structure</span></a></li>
+</ul>
+</td></tr></table>
+<h3> <span class="mw-headline" id="Purpose_of_this_article">Purpose of this article</span></h3>
+<p>This article was written in order to explain the basic concepts behind a hierarchical VFS. Articles about tag-based VFSs and DB-VFSs are proposed for a later date. This article does not seek to explain how to code or implement a VFS: it explains the structure and justification behind conventional VFS design. Do not look here for "code examples".
+</p>
+<h3> <span class="mw-headline" id="What_is_a_hierarchical_VFS.3F">What is a hierarchical VFS?</span></h3>
+<p>In contrast with a tag-based VFS or a DB-VFS, a hierarchical VFS is concerned with caching folder-hierarchies on a set of concrete filesystems. A tag-based VFS would for example, be a tag indexer which would be most efficiently implemented (for a UTF-8 based kernel) with an array of 256 "top layer" character indexes, with each of those array indexed pointing to a further array of 256 indexes. You would then parse tag addresses (as opposed to file paths) by quickly indexing into the top level array using the first letter of the tag, then into the sub array with the second letter of the tag. From there, you would have a B-tree under each sub-index which points to a list of all tags with the same two first letters.
+</p><p>Tag based VFSs are generally not concerned with hierarchy, but intersection. So a tag-based address would be similar to: "Shaniqua:music:Jazz". Those three tags may individually have about 100 files each in their listings; but the intersection of each listing set incrementally will give the sum of the files which pertain to all three. An empty set is taken to be homologous to an "empty folder" in a hierarchical file-system.
+</p><p>Hierarchical file-systems do not work by intersection, but by iterative sub-levelling. So for a hierarchical VFS, your aim would be to quickly index paths and their subfiles by name. This would make for easy parsing of hierarchical filesystem paths. A tree-structure is usually taken to be the most efficient method of handling a hierarchical VFS.
+</p>
+<h3> <span class="mw-headline" id="Conventional_tree_caching_format">Conventional tree caching format</span></h3>
+<p>Keep in mind always that a VFS is nothing more than a structural cache of the layout of the underlying concrete filesystems mounted on it; You cache the folder hierarchy as you go deeper into it.
+</p><p>The main distinction that must be made when designing VFS tree caching is the one between tnodes and inodes, where "t-node" stands for "tag-node" and "i-node" stands for "info-node". In conventional UNIX kernels (and in NT as well, though the facility is used by the kernel and a software based ".lnk" format is employed for userspace), a single filesystem node may point to the same file <b>data</b> as another file system node. That is, you may have two, three, four, or more "files", all which may be in different folders, which would show up in a directory listing of their respective folders, which may point to the same file data. Writing to the data from one of those files' perspective would produce a change in contents from the other files' point of view since they all point to the same data.
+</p><p>These are called file-system <i>links</i>. That is, file-data is to be treated separately from a tag-node which points to it. A tag-node gives collection of bytes (file data) a name. An info-node <i>describes</i> file data. A tag-node does nothing more than assign a name and point to the i-node which describes the data to which the file-name is associated.
+</p><p>Info nodes are then expected to state information such as: creation date of the file, last modification date, last access date, size of the file data, and any unique ID number which identifies that file on the underlying concrete file-system. Please keep starkly in mind that virtual file systems are not the only ones that use the t-node/i-node arrangement: many concrete file systems do as well. As a result, hereafter, this article will refer to VFS inodes as "VFS inodes" and to inodes on a concrete filesystem as "concrete inodes".
+</p>
+<h3> <span class="mw-headline" id="Tag_node_cache">Tag node cache</span></h3>
+<p>Whenever the VFS parses a file path, it sequentially descends down the tree from the VFS root, looking at sub-folder names until it reaches the last part of the file path; at that point, it will check to see if it finds the last component of the file path as a subfolder. If it turns out not to be a sub-folder, then the VFS will see if it's a sub-file. If that fails, or if the descent failed at an earlier conponent, then the VFS assumes the path to be invalid.
+</p><p>A corollary of this is that the VFS must be able to quickly descend from the root node, through a list of t-nodes which give the file-name of each sub-file or folder.
+</p><p>A process of logic reveals that: A file, or folder t-node only contains the name of the file or folder, and a pointer to the inode for that file or folder. Where then, would the VFS cache file-listings for a cached folder? In that folder's VFS inode. Specifically, the folder t-node would point to a folder VFS inode. To search the the subfolders or subfiles of a folder t-node, you would dereference the t-node's VFs inode pointer, and read the list of sub-files and folders from that VFS inode.
+</p><p>What is the list of files and folders really, then? It is a list of t-nodes. So:
+</p><p>t-node -&gt; inode with sub-file and folder list (which is really just a list of more tnodes) -&gt; search tnodes -&gt; find next path component match -&gt; tnode -&gt; inode with subfile and folder list (which are tnodes) -&gt; search tnodes -&gt; find next path component -&gt; tnode -&gt; and so on and so forth.
+</p><p>That is essentially the structure of a hierarchical VFS.
+</p>
+<pre>
+Folder or file t-node:
++-----------------------------------------------------------------------------+-----------------------+
+| &lt;file or folder name&gt;         ...                                           | pointer to inode      |
++-----------------------------------------------------------------------------+-----------------------+
+
+Folder i-node:
++-------------------------------------------+
+| Pointer to list of tnodes for sub-folders |
++-------------------------------------------+
+| Pointer to list of tnodes for sub-files   |
++-------------------------------------------+
+| int  num_subfolders; | int num_subfiles   |
++-------------------------------------------+
+| concrete FS inode number                  |
++-------------------------------------------+
+
+File i-node:
++-------------------------------------------+
+| Creation date | Date of last modification |
++-------------------------------------------+
+| File size                                 |
++-------------------------------------------+
+| [Optional] Lock | [Optional] State flags  |
++-------------------------------------------+
+| Concrete FS inode number                  |
++-------------------------------------------+
+| Other things you think are necessary      |
++-------------------------------------------+
+</pre>
+<h3> <span class="mw-headline" id="Support_for_file-system_links">Support for file-system links</span></h3>
+<p>Two unique t-nodes in the tree which point to the same inode are said to be "links" to that inode, and by extension, will cause a read or write to that t-node (file-name) to update the same file. There is no extra work required: just treat them as t-nodes which point to the same inode. You can also set flags to identify them as links, although it makes no real difference to the VFS proper. The only thing you need to note about links is that even though your VFS unifies all mounted concrete file systems under one tree, links can only be local to a single concrete file-system: this is only common sense. Remember, links point to the same inode. If there is a link on one concrete file-system which points to an inode on another concrete filesystem (in other words, on another disk), how can it then be pointing to the same file data?
+</p>
+<h3> <span class="mw-headline" id="Thoughts_on_linking_the_Inode-based_VFS_to_concrete_hierarchical_filesystems_which_do_not_use_an_inode_structure">Thoughts on linking the Inode-based VFS to concrete hierarchical filesystems which do not use an inode structure</span></h3>
+<p>Most recent concrete filesystems use an inode based approach to identifying file data within their represented disk. Each unique entity of data set is given a unique inode ID within that disk's filesystem. So every file's data is uniquely identified on that disk by means of its filesystem's unique inode as given to that file's data. If you wanted to create a generic filesystem driver interface that simplified file system interfacing for all filesystems, and you chose to use the "inode" concept, you would have no problem doing so with for example, the EXT class of filesystems, which use inodes.
+</p><p>When your kernel requests a folder listing, the filesystem driver would return tag-nodes for the names of all sub-files and folders, and inodes that are related to each tag node, and you would ensure you stored the concrete filesystem's inode ID for that file as given on the concrete filesystem; If later on, the user renamed a file within a folder, you would simply find that folder in your cached VFS hierarchy, and tell the filesystem driver to rename the file named "foo" on folder inode X within that driver's represented filesystem to "bar", as the user requested: there is a direct mapping between your VFS and the inodes on the underlying filesystem.
+</p><p>What if you wish to write a driver for your kernel for say, one of the FAT filesystems? FAT does not use inodes to uniquely identify file data. If you were to pass a request for an FAT driver to rename tag node "foo" on folder inode X to "bar", you'd fail naturally since first of all, the FAT driver would not have returned a concrete FS inode ID to you when it was giving you that folder's file listing.
+</p><p>A plausible solution would be to force all drivers to <i>create</i> file data -&gt; inode mappings. So, in such a case, when the driver is initialized, it initializes a counter from which it will pull fake inodes to hand the kernel when it gives over file listings. It will just pass these out on the fly, creating new inodes as it gives the kernel new file listings, and it would maintain a table of the mappings between the inodes it handed out, and whatever format it uses to uniquely identify file data. It would of course, ensure that these inode IDs it hands out on the fly would be unique across mounts.
+</p><p>In that case, when the kernel requests a file listing, of a folder, the driver would pass the kernel the folder's inode information, and assign it, as it gives it over, a new inode ID and record this in a table. Later on, the kernel, unaware that there is translation work being done behind the scenes in the driver would pass a request for file "foo" on inode X (an inode the kernel does not know has been created on the fly) to be renamed to "bar".
+</p><p>The driver now looks at the inode mapping table, and sees that it assigned file data group Y the inode ID X when it was passing it to the kernel. The filesystem will now go and rename the file as appropriate, and things go on as usual, with the kernel unaware of that mapping activity beign done in the driver to make it conform to your dirver interface which requires inodes to uniquely identify files within a single conrete filsystem.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 38/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2957-0!*!*!!en!*!* and timestamp 20180121080102 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Hierarchical_VFS_Theory&amp;oldid=12561">http://wiki.osdev.org/index.php?title=Hierarchical_VFS_Theory&amp;oldid=12561</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="Category:Filesystems" title="Category:Filesystems">Filesystems</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Hierarchical_VFS_Theory" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Hierarchical_VFS_Theory"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Hierarchical_VFS_Theory&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Hierarchical_VFS_Theory#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Hierarchical_VFS_Theory" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Hierarchical_VFS_Theory&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Hierarchical_VFS_Theory&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Hierarchical_VFS_Theory#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Hierarchical_VFS_Theory" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Hierarchical_VFS_Theory" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Hierarchical_VFS_Theory&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Hierarchical_VFS_Theory&amp;oldid=12561" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 6 February 2012, at 12:04.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,714 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.052 secs. -->
+	</body>
+</html>

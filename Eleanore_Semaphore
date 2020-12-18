@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Eleanore Semaphore - OSDev Wiki</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.0" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd" />
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Eleanore_Semaphore", "wgTitle": "Eleanore Semaphore", "wgCurRevisionId": 20223, "wgArticleId": 1578, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["IPC", "Developer Archetype"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Eleanore_Semaphore action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Eleanore Semaphore</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="Eleanore_Semaphore#mw-head">navigation</a>,
+					<a href="Eleanore_Semaphore#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Eleanore Semaphore works in a darky corner of a small room with listings all around. Her system has evolved greatly since last year, though all she can show you is still the same: bunches of A and B displayed in no-obvious-order on a text console and that she controls with magic key combos. Hear her talking about how she implemented components programming, auto-dependencies resolving and virtual clock algorithm for her scheduler. Maybe you prefer a <a href="What_order_should_I_make_things_in" title="What order should I make things in">different style</a>.
+</p>
+<table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="Eleanore_Semaphore#The_foundation_of_a_kernel"><span class="tocnumber">1</span> <span class="toctext">The foundation of a kernel</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="Eleanore_Semaphore#Threads.2C_and_maybe_processes"><span class="tocnumber">1.1</span> <span class="toctext">Threads, and maybe processes</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="Eleanore_Semaphore#Synchronization"><span class="tocnumber">1.2</span> <span class="toctext">Synchronization</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="Eleanore_Semaphore#Userspace"><span class="tocnumber">1.3</span> <span class="toctext">Userspace</span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="Eleanore_Semaphore#Virtual_memory_management"><span class="tocnumber">1.3.1</span> <span class="toctext">Virtual memory management</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="Eleanore_Semaphore#How_can_my_processes_talk_to_each_other.3F"><span class="tocnumber">1.3.2</span> <span class="toctext">How can my processes talk to each other?</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="Eleanore_Semaphore#Eleanore.27s_Bookshelf"><span class="tocnumber">2</span> <span class="toctext">Eleanore's Bookshelf</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="Eleanore_Semaphore#Eleanore_Semaphore.27s_opponents_position"><span class="tocnumber">3</span> <span class="toctext">Eleanore Semaphore's opponents position</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="Eleanore_Semaphore#People_and_OSes_related_to_Eleanore_Semaphore"><span class="tocnumber">4</span> <span class="toctext">People and OSes related to Eleanore Semaphore</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="The_foundation_of_a_kernel"> The foundation of a kernel </span></h2>
+<p>Ok, so you know what a <a href="Semaphore" title="Semaphore">semaphore</a> is? Or maybe <a href="http://wiki.osdev.org/index.php?title=Monitor&amp;action=edit&amp;redlink=1" class="new" title="Monitor (page does not exist)">monitors</a> or just plain <a href="Message_Passing" title="Message Passing">message passing</a> would be a better way to synchronize? 'Cos I guess we want to synchronize our processes. You want to write a <a href="Microkernel" title="Microkernel">µ-kernel</a> don't you, even if you actually wanted to run some tasks in the kernel for performance later?
+</p><p>Honestly, if you are like Eleanore, you probably have a pretty good idea of what you want the "big picture" to feel like, but little idea of how to get there. In fact, you'll probably be reading research papers pretty soon, so maybe the real answer hasn't been invented yet? And whether you are going to write just a barebones microkernel with the most simple possible <a href="http://wiki.osdev.org/index.php?title=IPC&amp;action=edit&amp;redlink=1" class="new" title="IPC (page does not exist)">IPC</a> system, or a sophisticated distributed <a href="RPC" title="RPC" class="mw-redirect">RPC</a> model with <a href="http://wiki.osdev.org/index.php?title=Garbage_Collector&amp;action=edit&amp;redlink=1" class="new" title="Garbage Collector (page does not exist)">garbage collected</a> components, you are going to need some basics first.
+</p><p>And we are going to dive straight into the theory, but I guess that won't scare you, right?
+</p>
+<h3> <span class="mw-headline" id="Threads.2C_and_maybe_processes"> Threads, and maybe processes </span></h3>
+<p>We are going to be multi-threading, right? So we need <a href="Thread" title="Thread">threads</a>. Personally I'd start from the basic threads, because lots of ofter stuff depends on them. You don't need to actually do any multi-threading in your kernel, but that might be the easiest thing. In any case, you probably want some kind of <a href="Scheduler" title="Scheduler" class="mw-redirect">scheduler</a> in your kernel. At least enough that you can tell a blocked thread from a ready-to-run thread.
+</p><p>Whether you really want processes at this point depends. The simple thing to do is to make them just some dummy object at this point, and flesh them out when <a href="Memory_Management" title="Memory Management" class="mw-redirect">virtual memory management</a> is implemented.
+</p>
+<h3> <span class="mw-headline" id="Synchronization"> Synchronization </span></h3>
+<p>You will then need some kind of syncronization primitives; probably at least some kind of semaphores. And while you can definitely get <a href="Mutual_Exclusion" title="Mutual Exclusion">mutual exclusion</a> with nothing but <a href="Spinlock" title="Spinlock">spinlocks</a>, you need a scheduler so that you can make your threads blocked, so you don't need to busy-loop.
+</p><p>And once we have synchronization in place, we are ready to start printing As and Bs in a predictable order, right?
+</p>
+<h3> <span class="mw-headline" id="Userspace"> Userspace </span></h3>
+<p>Since a µ-kernel is nothing without userspace processes, you probably want to go into userspace relatively early. You could simulate them in kernel of course, and you can load them using GRUB or whatever you load your kernel with. But for real userspace you need two things. And you could do them in any order really.
+</p><p>And really, if you are like me, then you probably agree that these two are what makes an operating system different.
+</p>
+<h4> <span class="mw-headline" id="Virtual_memory_management"> Virtual memory management </span></h4>
+<p>You probably need a manager for virtual memory and this is a good moment to design one. You have several options, like always:
+</p>
+<ul><li> write a normal VMM in kernel
+</li><li> write only the minimum in kernel, and support either:
+<ul><li> separate pagers in userspace, or
+</li><li> self-paging
+</li></ul>
+</li></ul>
+<p>If you are going to support some kinds of userspace management (and even if you don't), you should probably consider how your IPC and VMM will interact before you start writing any high-level management code. But then again, most existing systems seem to be quite happy with a "regular" VMM.
+</p><p>Existing virtual memory management schemes that you might find useful include those in Unix, including <a rel="nofollow" class="external text" href="http://www.google.com/search?ie=utf-8&amp;oe=utf-8&amp;q=linux%20memory%20management">Linux</a>, FreeBSD and others, VMS, <a rel="nofollow" class="external text" href="http://msdn.microsoft.com/library/en-us/dngenlib/html/msdn_ntvmm.asp">Windows NT</a> (and <a rel="nofollow" class="external text" href="http://www.winntmag.com/Windows/Articles/ArticleID/4494/pg/1/1.html">VMS and NT similarities</a>), <a rel="nofollow" class="external text" href="http://citeseer.ist.psu.edu/rashid87machineindependent.html">Mach</a> (and <a rel="nofollow" class="external text" href="http://developer.apple.com/documentation/Darwin/Conceptual/KernelProgramming/Mach/chapter_6_section_5.html">Darwin</a>), <a rel="nofollow" class="external text" href="http://os.inf.tu-dresden.de/L4/doc.html">L4</a>, <a rel="nofollow" class="external text" href="http://www.cl.cam.ac.uk/Research/SRG/netos/old-projects/pegasus/publications/osdi99/paper.html">Nemesis</a> (<a rel="nofollow" class="external text" href="http://www.usenix.org/publications/library/proceedings/osdi99/full_papers/hand/hand.pdf">PDF</a>).
+</p><p>ToDo: should this stuff go to a separate "Virtual Memory" page?
+</p>
+<h4> <span class="mw-headline" id="How_can_my_processes_talk_to_each_other.3F"> How can my processes talk to each other? </span></h4>
+<p>For any future processes to be able to talk to each other (and eventually outside world) one needs some facilities for communication. What kind of you are going to have, depends on what exactly do you want your system to feel like, but you definitely want something. Some of the alternatives available are
+</p>
+<ul><li> Unix style: <a href="Unix_Pipes" title="Unix Pipes">pipes</a>, <a href="Socket" title="Socket">sockets</a>, <a href="http://wiki.osdev.org/index.php?title=File&amp;action=edit&amp;redlink=1" class="new" title="File (page does not exist)">files</a>, <a href="Select" title="Select">select</a>
+</li><li> <a href="Message_Passing" title="Message Passing">Message Passing</a>, or maybe <a href="RPC" title="RPC" class="mw-redirect">Remote Procedure Calls</a>
+</li><li> <a href="Shared_Memory" title="Shared Memory">Shared Memory</a>
+</li><li> maybe something totally new?
+</li></ul>
+<p>There are almost endless number of different possibilities and several variations of each.
+</p>
+<h2> <span class="mw-headline" id="Eleanore.27s_Bookshelf"> Eleanore's Bookshelf </span></h2>
+<p>Well, most of these aren't books, actually. More likely the proceedings of USENIX or Hot Topics in Operating Systems, stacks of printed articles from various universities ... She also has most of Andy's writings and will brew him a cup of fresh coffee when Linus comes back for the debates.
+</p>
+<h2> <span class="mw-headline" id="Eleanore_Semaphore.27s_opponents_position"> Eleanore Semaphore's opponents position </span></h2>
+<p>A sophisticated IPC model and component objects are great, but what good are they if one can't communicate with the outside world? And what good is a sophisticated scheduler if all it can do is affect the order some As and Bs are printed on screen? And how can distributed systems be useful, if there is no working network? It's good to research things, but do you guys ever produce anything practical?
+</p>
+<h2> <span class="mw-headline" id="People_and_OSes_related_to_Eleanore_Semaphore"> People and OSes related to Eleanore Semaphore </span></h2>
+<ul><li> Brendan (BCOS)?
+</li><li> Love4Boobies (Simplexity)
+</li><li> <i> "do I qualify, I wrote the original article" -- <a href="http://wiki.osdev.org/index.php?title=User:Mystran&amp;action=edit&amp;redlink=1" class="new" title="User:Mystran (page does not exist)">Mystran</a> 12:57, 1 April 2007 (CDT)</i>
+</li><li> gravaera
+</li><li> ethereal (Sydi)
+</li><li> <i> insert your names here </i>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 87/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1578-0!*!0!!en!*!* and timestamp 20180121063619 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=Eleanore_Semaphore&amp;oldid=20223">http://wiki.osdev.org/index.php?title=Eleanore_Semaphore&amp;oldid=20223</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category:IPC" title="Category:IPC">IPC</a></li><li><a href="Category:Developer_Archetype" title="Category:Developer Archetype">Developer Archetype</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=Eleanore_Semaphore" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="Eleanore_Semaphore"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+					<li  id="ca-talk" class="new"><span><a href="http://wiki.osdev.org/index.php?title=Talk:Eleanore_Semaphore&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="Eleanore_Semaphore#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="Eleanore_Semaphore" >Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=Eleanore_Semaphore&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=Eleanore_Semaphore&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="Eleanore_Semaphore#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search OSDev Wiki [f]" accesskey="f" id="searchInput" />		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/Eleanore_Semaphore" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/Eleanore_Semaphore" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="/index.php?title=Eleanore_Semaphore&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="/index.php?title=Eleanore_Semaphore&amp;oldid=20223" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 January 2017, at 18:15.</li>
+											<li id="footer-info-viewcount">This page has been accessed 32,452 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											skins/common/images/osdev.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id='p-about'>
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/Eleanore_Semaphore" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/Eleanore_Semaphore" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=Eleanore_Semaphore&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=Eleanore_Semaphore&amp;oldid=20223" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 22 January 2017, at 18:15.</li>
+											<li id="footer-info-viewcount">This page has been accessed 32,452 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script src="http://wiki.osdev.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.033 secs. -->
+	</body>
+</html>
